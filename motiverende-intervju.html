@@ -17,6 +17,24 @@
     --push-soft: #fbeee0;
     --border: #dfe7e3;
     --shadow: 0 1px 3px rgba(31, 45, 43, 0.08), 0 1px 2px rgba(31, 45, 43, 0.06);
+    --stage-1: #64748b;
+    --stage-2: #d1a13c;
+    --stage-3: #e0824f;
+    --stage-4: #cf5f45;
+    --stage-5: #4f9e6b;
+    --stage-6: #9b6bb5;
+    --sleep-accent: #2f7d6b;
+    --sleep-accent-dark: #235c50;
+    --sleep-soft: #e3f1ec;
+    --activity-accent: #c1573a;
+    --activity-accent-dark: #9c4229;
+    --activity-soft: #f7e3dc;
+    --food-accent: #b8862f;
+    --food-accent-dark: #8f6620;
+    --food-soft: #f5ecd9;
+    --weight-accent: #4a6fa5;
+    --weight-accent-dark: #35507d;
+    --weight-soft: #e2e9f3;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -32,6 +50,24 @@
       --push-soft: #33291c;
       --border: #2b3a37;
       --shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+      --stage-1: #8b9bb0;
+      --stage-2: #e8bd5c;
+      --stage-3: #f0a06c;
+      --stage-4: #e8836a;
+      --stage-5: #6cc28f;
+      --stage-6: #b98ed1;
+      --sleep-accent: #5cbfa4;
+      --sleep-accent-dark: #8fd7c1;
+      --sleep-soft: #223531;
+      --activity-accent: #e8846a;
+      --activity-accent-dark: #f2ab95;
+      --activity-soft: #3a2a22;
+      --food-accent: #d9ab5c;
+      --food-accent-dark: #ecc98c;
+      --food-soft: #35301f;
+      --weight-accent: #7ea0d6;
+      --weight-accent-dark: #a8c2e8;
+      --weight-soft: #232c3a;
     }
   }
 
@@ -47,6 +83,24 @@
     --push-soft: #33291c;
     --border: #2b3a37;
     --shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+    --stage-1: #8b9bb0;
+    --stage-2: #e8bd5c;
+    --stage-3: #f0a06c;
+    --stage-4: #e8836a;
+    --stage-5: #6cc28f;
+    --stage-6: #b98ed1;
+    --sleep-accent: #5cbfa4;
+    --sleep-accent-dark: #8fd7c1;
+    --sleep-soft: #223531;
+    --activity-accent: #e8846a;
+    --activity-accent-dark: #f2ab95;
+    --activity-soft: #3a2a22;
+    --food-accent: #d9ab5c;
+    --food-accent-dark: #ecc98c;
+    --food-soft: #35301f;
+    --weight-accent: #7ea0d6;
+    --weight-accent-dark: #a8c2e8;
+    --weight-soft: #232c3a;
   }
 
   :root[data-theme="light"] {
@@ -61,6 +115,24 @@
     --push-soft: #fbeee0;
     --border: #dfe7e3;
     --shadow: 0 1px 3px rgba(31, 45, 43, 0.08), 0 1px 2px rgba(31, 45, 43, 0.06);
+    --stage-1: #64748b;
+    --stage-2: #d1a13c;
+    --stage-3: #e0824f;
+    --stage-4: #cf5f45;
+    --stage-5: #4f9e6b;
+    --stage-6: #9b6bb5;
+    --sleep-accent: #2f7d6b;
+    --sleep-accent-dark: #235c50;
+    --sleep-soft: #e3f1ec;
+    --activity-accent: #c1573a;
+    --activity-accent-dark: #9c4229;
+    --activity-soft: #f7e3dc;
+    --food-accent: #b8862f;
+    --food-accent-dark: #8f6620;
+    --food-soft: #f5ecd9;
+    --weight-accent: #4a6fa5;
+    --weight-accent-dark: #35507d;
+    --weight-soft: #e2e9f3;
   }
 
   * { box-sizing: border-box; }
@@ -156,6 +228,99 @@
   .pull-push-note .pull { background: var(--accent-soft); }
   .pull-push-note .push { background: var(--push-soft); }
 
+  section.model {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem 1.35rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  section.model h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent-dark);
+  }
+
+  .model-intro {
+    margin: 0 0 1rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .wheel-wrap {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .wheel {
+    flex: 0 0 200px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: relative;
+    margin: 0 auto;
+    background: conic-gradient(
+      var(--stage-1) 0deg 60deg,
+      var(--stage-2) 60deg 120deg,
+      var(--stage-3) 120deg 180deg,
+      var(--stage-4) 180deg 240deg,
+      var(--stage-5) 240deg 300deg,
+      var(--stage-6) 300deg 360deg
+    );
+  }
+
+  .wheel-hub {
+    position: absolute;
+    inset: 22%;
+    background: var(--card);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  .wheel-hub span {
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--muted);
+  }
+
+  .wheel-legend {
+    flex: 1 1 260px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .wheel-legend li {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    margin-bottom: 0.55rem;
+    font-size: 0.92rem;
+  }
+
+  .wheel-legend .dot {
+    flex-shrink: 0;
+    width: 0.8rem;
+    height: 0.8rem;
+    margin-top: 0.28rem;
+    border-radius: 50%;
+    background: var(--dot-color);
+  }
+
+  .wheel-legend strong {
+    color: var(--ink);
+  }
+
   .controls {
     display: flex;
     justify-content: flex-end;
@@ -177,9 +342,15 @@
     background: var(--accent-soft);
   }
 
+  .topic-sleep { --tc: var(--sleep-accent); --tcd: var(--sleep-accent-dark); --ts: var(--sleep-soft); }
+  .topic-activity { --tc: var(--activity-accent); --tcd: var(--activity-accent-dark); --ts: var(--activity-soft); }
+  .topic-food { --tc: var(--food-accent); --tcd: var(--food-accent-dark); --ts: var(--food-soft); }
+  .topic-weight { --tc: var(--weight-accent); --tcd: var(--weight-accent-dark); --ts: var(--weight-soft); }
+
   .topic {
     background: var(--card);
     border: 1px solid var(--border);
+    border-left: 4px solid var(--tc);
     border-radius: 12px;
     margin-bottom: 0.9rem;
     box-shadow: var(--shadow);
@@ -192,7 +363,7 @@
     padding: 1rem 1.25rem;
     font-size: 1.15rem;
     font-weight: 600;
-    color: var(--accent-dark);
+    color: var(--tcd);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -204,7 +375,7 @@
 
   .topic > summary .chevron {
     transition: transform 0.15s ease;
-    color: var(--accent);
+    color: var(--tc);
     font-size: 1rem;
   }
 
@@ -213,7 +384,7 @@
   }
 
   .topic > summary:hover {
-    background: var(--accent-soft);
+    background: var(--ts);
   }
 
   .topic-body {
@@ -237,16 +408,16 @@
     margin-bottom: 0.45rem;
   }
 
-  .topic-body .pull-list li::marker { color: var(--accent); }
+  .topic-body .pull-list li::marker { color: var(--tc); }
   .topic-body .push-list li::marker { color: var(--push); }
 
   .affirmation {
-    background: var(--accent-soft);
+    background: var(--ts);
     border-radius: 8px;
     padding: 0.7rem 0.9rem;
     font-size: 0.95rem;
     font-style: italic;
-    color: var(--accent-dark);
+    color: var(--tcd);
   }
 
   .dialogue {
@@ -263,7 +434,7 @@
 
   .dialogue .speaker {
     font-weight: 600;
-    color: var(--accent-dark);
+    color: var(--tcd);
   }
 
   footer.closing {
@@ -312,13 +483,31 @@
     </div>
   </section>
 
+  <section class="model">
+    <h2>Endringshjulet — modell for endring</h2>
+    <p class="model-intro">De fleste beveger seg frem og tilbake gjennom disse fasene, ikke rett fram. Modellen hjelper deg å kjenne igjen hvor pasienten er nå, slik at du kan velge spørsmål som passer.</p>
+    <div class="wheel-wrap">
+      <div class="wheel" role="img" aria-label="Endringshjulet: seks faser i en sirkel — se listen til høyre for detaljer">
+        <div class="wheel-hub"><span>Endrings&#8209;hjulet</span></div>
+      </div>
+      <ol class="wheel-legend">
+        <li><span class="dot" style="--dot-color: var(--stage-1);"></span><span><strong>1. Føroverveielse</strong> — kjenner ikke selv på noe problem ennå. Lytt, ikke overtal.</span></li>
+        <li><span class="dot" style="--dot-color: var(--stage-2);"></span><span><strong>2. Overveielse</strong> — kjenner på ambivalens. Utforsk begge sider uten å ta parti.</span></li>
+        <li><span class="dot" style="--dot-color: var(--stage-3);"></span><span><strong>3. Forberedelse</strong> — har bestemt seg. Hjelp til å konkretisere et lite steg.</span></li>
+        <li><span class="dot" style="--dot-color: var(--stage-4);"></span><span><strong>4. Handling</strong> — prøver ut nye vaner. Bekreft innsatsen, ikke bare resultatet.</span></li>
+        <li><span class="dot" style="--dot-color: var(--stage-5);"></span><span><strong>5. Vedlikehold</strong> — vanen begynner å sitte. Still spørsmål som styrker det som fungerer.</span></li>
+        <li><span class="dot" style="--dot-color: var(--stage-6);"></span><span><strong>6. Tilbakefall</strong> — helt normalt, ikke et nederlag. Møt det uten dømming og gå videre sammen.</span></li>
+      </ol>
+    </div>
+  </section>
+
   <div class="controls">
     <button type="button" id="expandAll">Vis alle</button>
     <button type="button" id="collapseAll">Skjul alle</button>
   </div>
 
   <!-- SØVN -->
-  <details class="topic">
+  <details class="topic topic-sleep">
     <summary>Søvn <span class="chevron">▸</span></summary>
     <div class="topic-body">
       <h3>Pull-spørsmål</h3>
@@ -350,7 +539,7 @@
   </details>
 
   <!-- FYSISK AKTIVITET -->
-  <details class="topic">
+  <details class="topic topic-activity">
     <summary>Fysisk aktivitet <span class="chevron">▸</span></summary>
     <div class="topic-body">
       <h3>Pull-spørsmål</h3>
@@ -382,7 +571,7 @@
   </details>
 
   <!-- KOSTHOLD -->
-  <details class="topic">
+  <details class="topic topic-food">
     <summary>Kosthold <span class="chevron">▸</span></summary>
     <div class="topic-body">
       <h3>Pull-spørsmål</h3>
@@ -414,7 +603,7 @@
   </details>
 
   <!-- VEKT OG GENERELL HELSE -->
-  <details class="topic">
+  <details class="topic topic-weight">
     <summary>Vekt og generell helse <span class="chevron">▸</span></summary>
     <div class="topic-body">
       <h3>Pull-spørsmål</h3>
