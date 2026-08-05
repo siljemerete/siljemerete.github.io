@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Motiverende intervju — hurtigreferanse</title>
+<style>
+  :root {
+    --bg: #f6f8f7;
+    --card: #ffffff;
+    --ink: #1f2d2b;
+    --muted: #56655f;
+    --accent: #2f7d6b;
+    --accent-dark: #235c50;
+    --accent-soft: #e3f1ec;
+    --push: #b96b2a;
+    --push-soft: #fbeee0;
+    --border: #dfe7e3;
+    --shadow: 0 1px 3px rgba(31, 45, 43, 0.08), 0 1px 2px rgba(31, 45, 43, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  header.page-header {
+    margin-bottom: 1.75rem;
+  }
+
+  header.page-header h1 {
+    font-size: 1.7rem;
+    margin: 0 0 0.35rem;
+    color: var(--accent-dark);
+  }
+
+  header.page-header p.tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  .reminder {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  section.primer h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent-dark);
+  }
+
+  .oars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.6rem;
+    margin: 0.75rem 0 1rem;
+  }
+
+  .oars-item {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.55rem 0.7rem;
+    font-size: 0.9rem;
+  }
+
+  .oars-item strong {
+    display: block;
+    color: var(--accent-dark);
+    font-size: 0.95rem;
+  }
+
+  .pull-push-note {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+  }
+
+  .pull-push-note div {
+    flex: 1 1 220px;
+    padding: 0.55rem 0.7rem;
+    border-radius: 8px;
+  }
+
+  .pull-push-note .pull { background: var(--accent-soft); }
+  .pull-push-note .push { background: var(--push-soft); }
+
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .controls button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .controls button:hover {
+    background: var(--accent-soft);
+  }
+
+  .topic {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 0.9rem;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .topic > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1rem 1.25rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .topic > summary::-webkit-details-marker { display: none; }
+
+  .topic > summary .chevron {
+    transition: transform 0.15s ease;
+    color: var(--accent);
+    font-size: 1rem;
+  }
+
+  .topic[open] > summary .chevron {
+    transform: rotate(90deg);
+  }
+
+  .topic > summary:hover {
+    background: var(--accent-soft);
+  }
+
+  .topic-body {
+    padding: 0 1.25rem 1.25rem;
+  }
+
+  .topic-body h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+    margin: 1.1rem 0 0.5rem;
+  }
+
+  .topic-body ul {
+    margin: 0;
+    padding-left: 1.15rem;
+  }
+
+  .topic-body li {
+    margin-bottom: 0.45rem;
+  }
+
+  .topic-body .pull-list li::marker { color: var(--accent); }
+  .topic-body .push-list li::marker { color: var(--push); }
+
+  .affirmation {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--accent-dark);
+  }
+
+  .dialogue {
+    background: var(--bg);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    font-size: 0.92rem;
+  }
+
+  .dialogue p {
+    margin: 0.3rem 0;
+  }
+
+  .dialogue .speaker {
+    font-weight: 600;
+    color: var(--accent-dark);
+  }
+
+  footer.closing {
+    margin-top: 1.75rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong {
+    color: var(--accent-dark);
+  }
+
+  @media print {
+    body { background: #fff; }
+    .controls { display: none; }
+    .topic { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-header">
+    <h1>Motiverende intervju — hurtigreferanse</h1>
+    <p class="tagline">Søvn · Fysisk aktivitet · Kosthold · Vekt og generell helse</p>
+    <div class="reminder">
+      Målet er ikke å overbevise — det er å hjelpe pasienten til å høre
+      seg selv si hvorfor endring er mulig. Hold det lite, konkret og i
+      pasientens eget språk. <strong>Dette skal kjennes overkommelig.</strong>
+    </div>
+  </header>
+
+  <section class="primer">
+    <h2>Kort om metoden: OARS</h2>
+    <div class="oars-grid">
+      <div class="oars-item"><strong>O</strong>Åpne spørsmål</div>
+      <div class="oars-item"><strong>A</strong>Bekreftelser</div>
+      <div class="oars-item"><strong>R</strong>Reflekterende lytting</div>
+      <div class="oars-item"><strong>S</strong>Oppsummeringer</div>
+    </div>
+    <div class="pull-push-note">
+      <div class="pull"><strong>Pull (trekke ut):</strong> Åpne spørsmål som får pasienten til selv å formulere grunner og verdier for endring.</div>
+      <div class="push"><strong>Push (skyve mildt):</strong> Spørsmål som forsiktig løfter frem ambivalens eller peker mot et konkret neste steg — uten å belære.</div>
+    </div>
+  </section>
+
+  <div class="controls">
+    <button type="button" id="expandAll">Vis alle</button>
+    <button type="button" id="collapseAll">Skjul alle</button>
+  </div>
+
+  <!-- SØVN -->
+  <details class="topic">
+    <summary>Søvn <span class="chevron">▸</span></summary>
+    <div class="topic-body">
+      <h3>Pull-spørsmål</h3>
+      <ul class="pull-list">
+        <li>Hva ville en god natts søvn bety for deg — hva ville vært annerledes dagen etter?</li>
+        <li>Hva er det beste du vet om søvnen din slik den er nå?</li>
+        <li>Hva har du prøvd før som har hjulpet, selv litt?</li>
+        <li>Hvordan merker du på kroppen når du har sovet godt versus dårlig?</li>
+        <li>Hva er viktig for deg med tanke på hvile og overskudd akkurat nå i livet?</li>
+      </ul>
+      <h3>Push-spørsmål</h3>
+      <ul class="push-list">
+        <li>Hva tror du gjør det vanskelig å endre kveldsrutinene dine?</li>
+        <li>På en skala fra 1–10, hvor viktig er bedre søvn for deg akkurat nå — og hvorfor ikke lavere?</li>
+        <li>Hva er ett lite skritt du kunne se for deg å prøve denne uken?</li>
+        <li>Hva ville gjort at du merket en forskjell om en måned?</li>
+      </ul>
+      <h3>Bekreftelse å reflektere tilbake</h3>
+      <p class="affirmation">"Du har allerede lagt merke til hva som faktisk hjelper — det er en god start å bygge videre på."</p>
+      <h3>Eksempeldialog</h3>
+      <div class="dialogue">
+        <p><span class="speaker">Behandler:</span> Hva ville en bedre natts søvn gjort for deg?</p>
+        <p><span class="speaker">Pasient:</span> Jeg tror jeg hadde orket mer med ungene om morgenen.</p>
+        <p><span class="speaker">Behandler:</span> Så mer overskudd til familien er noe av det som betyr mest for deg her.</p>
+        <p><span class="speaker">Pasient:</span> Ja, akkurat.</p>
+        <p><span class="speaker">Behandler:</span> Det er en sterk grunn. Hva tenker du kunne vært et lite første steg?</p>
+      </div>
+    </div>
+  </details>
+
+  <!-- FYSISK AKTIVITET -->
+  <details class="topic">
+    <summary>Fysisk aktivitet <span class="chevron">▸</span></summary>
+    <div class="topic-body">
+      <h3>Pull-spørsmål</h3>
+      <ul class="pull-list">
+        <li>Hva slags bevegelse har du likt tidligere i livet, selv om det er lenge siden?</li>
+        <li>Hva ville mer energi i hverdagen gjort mulig for deg?</li>
+        <li>Hva er grunnen til at aktivitet betyr noe for deg — utover det "man bør"?</li>
+        <li>Hvordan kjennes det i kroppen når du har beveget deg litt?</li>
+        <li>Hva har fungert for deg før, selv i korte perioder?</li>
+      </ul>
+      <h3>Push-spørsmål</h3>
+      <ul class="push-list">
+        <li>Hva er det som vanligvis stopper deg når du har planlagt å bevege deg?</li>
+        <li>Hvor viktig er dette for deg på en skala fra 1–10 — og hva skulle til for at det ble ett tall høyere?</li>
+        <li>Hva er den minste formen for bevegelse du kunne tenke deg å prøve denne uken?</li>
+        <li>Hvis ingenting endret seg, hvordan tror du det ser ut om et år?</li>
+      </ul>
+      <h3>Bekreftelse å reflektere tilbake</h3>
+      <p class="affirmation">"Du vet allerede hvilken type bevegelse som passer deg — det er en styrke du kan bygge videre fra."</p>
+      <h3>Eksempeldialog</h3>
+      <div class="dialogue">
+        <p><span class="speaker">Behandler:</span> Har det vært noe bevegelse du har likt før?</p>
+        <p><span class="speaker">Pasient:</span> Jeg pleide å gå turer med hunden, det var greit.</p>
+        <p><span class="speaker">Behandler:</span> Så en rolig gåtur er noe som har passet deg godt tidligere.</p>
+        <p><span class="speaker">Pasient:</span> Ja, det var faktisk hyggelig.</p>
+        <p><span class="speaker">Behandler:</span> Hva om det var noe du kunne finne tilbake til, i det tempoet som passer nå?</p>
+      </div>
+    </div>
+  </details>
+
+  <!-- KOSTHOLD -->
+  <details class="topic">
+    <summary>Kosthold <span class="chevron">▸</span></summary>
+    <div class="topic-body">
+      <h3>Pull-spørsmål</h3>
+      <ul class="pull-list">
+        <li>Hva liker du med matvanene dine slik de er i dag?</li>
+        <li>Hva ville et sunnere forhold til mat gjort lettere for deg?</li>
+        <li>Hvilke måltider eller vaner er du allerede fornøyd med?</li>
+        <li>Hva er viktig for deg når det gjelder mat — glede, energi, helse, fellesskap?</li>
+        <li>Hva har du lært om deg selv fra tidligere forsøk på å endre kosthold?</li>
+      </ul>
+      <h3>Push-spørsmål</h3>
+      <ul class="push-list">
+        <li>Hva pleier å gjøre det vanskelig å følge opp gode intensjoner rundt mat?</li>
+        <li>Hvor viktig er dette for deg akkurat nå, fra 1–10 — hva ligger bak det tallet?</li>
+        <li>Hva er én liten justering du kunne tenke deg å prøve, ikke en full omveltning?</li>
+        <li>Hva tror du vil skje hvis vanene fortsetter akkurat som nå?</li>
+      </ul>
+      <h3>Bekreftelse å reflektere tilbake</h3>
+      <p class="affirmation">"Du har allerede god innsikt i hva som fungerer for deg — det gjør det lettere å finne neste skritt sammen."</p>
+      <h3>Eksempeldialog</h3>
+      <div class="dialogue">
+        <p><span class="speaker">Behandler:</span> Hva er du fornøyd med når det gjelder maten din i dag?</p>
+        <p><span class="speaker">Pasient:</span> Jeg spiser faktisk frokost hver dag nå.</p>
+        <p><span class="speaker">Behandler:</span> Det er ikke lite — en fast frokostvane er noe mange strever med.</p>
+        <p><span class="speaker">Pasient:</span> Ja, det stemmer.</p>
+        <p><span class="speaker">Behandler:</span> Hva om vi bygger videre derfra, ett måltid av gangen?</p>
+      </div>
+    </div>
+  </details>
+
+  <!-- VEKT OG GENERELL HELSE -->
+  <details class="topic">
+    <summary>Vekt og generell helse <span class="chevron">▸</span></summary>
+    <div class="topic-body">
+      <h3>Pull-spørsmål</h3>
+      <ul class="pull-list">
+        <li>Hva betyr god helse for deg, utover tall på en vekt?</li>
+        <li>Hva ville vært mulig for deg hvis kroppen kjentes litt lettere å leve i?</li>
+        <li>Hva er du stolt av når du tenker på helsereisen din så langt?</li>
+        <li>Hva har vært viktig for deg å ta vare på, selv i perioder som har vært tunge?</li>
+        <li>Hvem eller hva gir deg støtte når det gjelder helsa di?</li>
+      </ul>
+      <h3>Push-spørsmål</h3>
+      <ul class="push-list">
+        <li>Hva tenker du er den største bremseklossen for deg akkurat nå?</li>
+        <li>Fra 1–10, hvor klar er du for å gjøre en endring — og hva skiller det fra et lavere tall?</li>
+        <li>Hva er ett konkret, lite mål du kunne se for deg innen neste avtale?</li>
+        <li>Hvordan vil du vite at det går riktig vei for deg, uten at det bare handler om vekten?</li>
+      </ul>
+      <h3>Bekreftelse å reflektere tilbake</h3>
+      <p class="affirmation">"Du har vist at du klarer å ta vare på deg selv før — den evnen har du fortsatt med deg."</p>
+      <h3>Eksempeldialog</h3>
+      <div class="dialogue">
+        <p><span class="speaker">Behandler:</span> Hva betyr god helse for deg, hvis vi ser bort fra tall?</p>
+        <p><span class="speaker">Pasient:</span> At jeg orker å leke med barnebarna uten å bli helt utslitt.</p>
+        <p><span class="speaker">Behandler:</span> Det å ha overskudd til dem er altså det som driver deg mest.</p>
+        <p><span class="speaker">Pasient:</span> Ja, det er egentlig det viktigste.</p>
+        <p><span class="speaker">Behandler:</span> Da har vi noe ekte å bygge målene rundt.</p>
+      </div>
+    </div>
+  </details>
+
+  <footer class="closing">
+    Små skritt. Pasientens egne ord styrer planen.<br>
+    <strong>Dette er overkommelig — og du trenger ikke gjøre det alene.</strong>
+  </footer>
+
+</div>
+
+<script>
+  document.getElementById('expandAll').addEventListener('click', function () {
+    document.querySelectorAll('details.topic').forEach(function (d) { d.open = true; });
+  });
+  document.getElementById('collapseAll').addEventListener('click', function () {
+    document.querySelectorAll('details.topic').forEach(function (d) { d.open = false; });
+  });
+</script>
+
+</body>
+</html>
