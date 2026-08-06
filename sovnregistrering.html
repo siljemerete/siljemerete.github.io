@@ -214,6 +214,16 @@
     resize: vertical;
   }
 
+  .computed-value {
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    font-weight: 600;
+  }
+
   .field input[type="range"] {
     width: 100%;
     accent-color: var(--accent);
@@ -325,8 +335,7 @@
     <h1>Søvnregistrering — én uke</h1>
     <p class="tagline">Et bilde av kveldene og nettene dine, dag for dag</p>
     <div class="reminder">
-      Dette er ikke en eksamen i søvn — bare et bilde av uken din, slik at vi
-      kan finne gode neste steg sammen. Fyll ut så mye du klarer, i ditt eget
+      Fyll ut så mye du klarer, i ditt eget
       tempo. Alt du legger inn lagres i denne nettleseren, så du kan lukke
       siden og fortsette senere. <strong>Det er helt greit om noen dager
       mangler noe.</strong>
@@ -423,8 +432,8 @@
               '<input type="time" id="waketime-' + n + '" data-key="waketime-' + n + '">' +
             '</div>' +
             '<div class="field">' +
-              '<label for="hours-' + n + '">Antall timer sovet</label>' +
-              '<input type="number" min="0" max="16" step="0.25" id="hours-' + n + '" data-key="hours-' + n + '" placeholder="F.eks. 6.5">' +
+              '<label>Antall timer sovet — beregnes automatisk</label>' +
+              '<div class="computed-value" id="hours-value-' + n + '">–</div>' +
             '</div>' +
             '<div class="field field-wide">' +
               '<label for="quality-' + n + '">Søvnkvalitet: <span class="quality-value" id="quality-value-' + n + '">Ikke satt</span> / 10</label>' +
@@ -485,13 +494,15 @@
     for (var n = 1; n <= DAY_COUNT; n++) {
       var range = document.getElementById('quality-' + n);
       var display = document.getElementById('quality-value-' + n);
-      if (!range || !display) continue;
-      if (data[range.id + '-touched'] === 'true') {
-        range.setAttribute('data-touched', 'true');
-        display.textContent = range.value;
-      } else {
-        display.textContent = 'Ikke satt';
+      if (range && display) {
+        if (data[range.id + '-touched'] === 'true') {
+          range.setAttribute('data-touched', 'true');
+          display.textContent = range.value;
+        } else {
+          display.textContent = 'Ikke satt';
+        }
       }
+      updateHoursDisplay(n);
     }
   }
 
@@ -500,13 +511,34 @@
     return range && range.getAttribute('data-touched') === 'true';
   }
 
+  function computeHours(n) {
+    var bedtimeEl = document.getElementById('bedtime-' + n);
+    var waketimeEl = document.getElementById('waketime-' + n);
+    if (!bedtimeEl || !waketimeEl || !bedtimeEl.value || !waketimeEl.value) return null;
+
+    var bedParts = bedtimeEl.value.split(':').map(Number);
+    var wakeParts = waketimeEl.value.split(':').map(Number);
+    var bedMinutes = bedParts[0] * 60 + bedParts[1];
+    var wakeMinutes = wakeParts[0] * 60 + wakeParts[1];
+    var diff = wakeMinutes - bedMinutes;
+    if (diff <= 0) diff += 24 * 60;
+    return diff / 60;
+  }
+
+  function updateHoursDisplay(n) {
+    var display = document.getElementById('hours-value-' + n);
+    if (!display) return;
+    var hours = computeHours(n);
+    display.textContent = hours === null ? '–' : hours.toFixed(2) + ' t';
+  }
+
   function updateSummary() {
     var hoursSum = 0, hoursCount = 0;
     var qualitySum = 0, qualityCount = 0;
     var daysFilled = 0;
 
     for (var n = 1; n <= DAY_COUNT; n++) {
-      var hoursEl = document.getElementById('hours-' + n);
+      updateHoursDisplay(n);
       var hasAnyData = isRangeTouched(n);
 
       document.querySelectorAll('[data-day="' + n + '"] [data-key]:not([type="range"])').forEach(function (el) {
@@ -514,8 +546,8 @@
       });
       if (hasAnyData) daysFilled++;
 
-      var hoursVal = parseFloat(hoursEl.value);
-      if (!isNaN(hoursVal)) {
+      var hoursVal = computeHours(n);
+      if (hoursVal !== null) {
         hoursSum += hoursVal;
         hoursCount++;
       }
@@ -549,7 +581,8 @@
       var afterDur = document.getElementById('afterbed-duration-' + n).value;
       var afterAct = document.getElementById('afterbed-activity-' + n).value;
       var waketime = document.getElementById('waketime-' + n).value;
-      var hours = document.getElementById('hours-' + n).value;
+      var hoursVal = computeHours(n);
+      var hours = hoursVal === null ? '' : hoursVal.toFixed(2);
       var quality = isRangeTouched(n) ? document.getElementById('quality-' + n).value : '';
       var reflection = document.getElementById('reflection-' + n).value;
 
