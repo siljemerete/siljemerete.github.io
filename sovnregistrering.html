@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Søvnregistrering — én uke</title>
+<style>
+  :root {
+    --bg: #f6f8f7;
+    --card: #ffffff;
+    --ink: #1f2d2b;
+    --muted: #56655f;
+    --accent: #2f7d6b;
+    --accent-dark: #235c50;
+    --accent-soft: #e3f1ec;
+    --push: #b96b2a;
+    --push-soft: #fbeee0;
+    --border: #dfe7e3;
+    --shadow: 0 1px 3px rgba(31, 45, 43, 0.08), 0 1px 2px rgba(31, 45, 43, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  header.page-header {
+    margin-bottom: 1.75rem;
+  }
+
+  header.page-header h1 {
+    font-size: 1.7rem;
+    margin: 0 0 0.35rem;
+    color: var(--accent-dark);
+  }
+
+  header.page-header p.tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  .reminder {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  section.primer h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent-dark);
+  }
+
+  .oars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.6rem;
+    margin: 0.75rem 0 1rem;
+  }
+
+  .oars-item {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.55rem 0.7rem;
+    font-size: 0.9rem;
+  }
+
+  .oars-item strong {
+    display: block;
+    color: var(--accent-dark);
+    font-size: 1.3rem;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .controls button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .controls button:hover {
+    background: var(--accent-soft);
+  }
+
+  .controls button.danger {
+    color: var(--push);
+  }
+
+  .controls button.danger:hover {
+    background: var(--push-soft);
+  }
+
+  .topic {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 0.9rem;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .topic > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1rem 1.25rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .topic > summary::-webkit-details-marker { display: none; }
+
+  .topic > summary .chevron {
+    transition: transform 0.15s ease;
+    color: var(--accent);
+    font-size: 1rem;
+  }
+
+  .topic[open] > summary .chevron {
+    transform: rotate(90deg);
+  }
+
+  .topic > summary:hover {
+    background: var(--accent-soft);
+  }
+
+  .topic-body {
+    padding: 0.25rem 1.25rem 1.25rem;
+  }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 0.9rem;
+    margin-top: 0.75rem;
+  }
+
+  .field-wide {
+    grid-column: 1 / -1;
+  }
+
+  .field label {
+    display: block;
+    font-weight: 600;
+    color: var(--accent-dark);
+    margin-bottom: 0.3rem;
+    font-size: 0.88rem;
+  }
+
+  .field input[type="text"],
+  .field input[type="date"],
+  .field input[type="time"],
+  .field input[type="number"],
+  .field textarea {
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .field textarea {
+    min-height: 64px;
+    resize: vertical;
+  }
+
+  .field input[type="range"] {
+    width: 100%;
+    accent-color: var(--accent);
+  }
+
+  .quality-value {
+    color: var(--accent-dark);
+    font-size: 1.05rem;
+  }
+
+  .quality-anchors {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+    gap: 0.5rem;
+  }
+
+  .affirmation {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--accent-dark);
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.6rem;
+    margin: 0.75rem 0 1rem;
+  }
+
+  .stat-item {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.7rem 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  .stat-item strong {
+    display: block;
+    color: var(--accent-dark);
+    font-size: 1.4rem;
+  }
+
+  .send-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .send-buttons button {
+    font-size: 0.92rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .send-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .muted-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  footer.closing {
+    margin-top: 1.75rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong {
+    color: var(--accent-dark);
+  }
+
+  @media print {
+    body { background: #fff; }
+    .controls, .send-buttons, .muted-note { display: none; }
+    .topic { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-header">
+    <h1>Søvnregistrering — én uke</h1>
+    <p class="tagline">Et bilde av kveldene og nettene dine, dag for dag</p>
+    <div class="reminder">
+      Dette er ikke en eksamen i søvn — bare et bilde av uken din, slik at vi
+      kan finne gode neste steg sammen. Fyll ut så mye du klarer, i ditt eget
+      tempo. Alt du legger inn lagres i denne nettleseren, så du kan lukke
+      siden og fortsette senere. <strong>Det er helt greit om noen dager
+      mangler noe.</strong>
+    </div>
+  </header>
+
+  <div class="controls">
+    <button type="button" id="expandAll">Vis alle</button>
+    <button type="button" id="collapseAll">Skjul alle</button>
+    <button type="button" id="resetAll" class="danger">Nullstill alt</button>
+  </div>
+
+  <div id="days"></div>
+
+  <section class="primer" id="summarySection">
+    <h2>Oppsummering for uken</h2>
+    <div class="stat-grid">
+      <div class="stat-item"><strong id="avg-hours">–</strong>Snitt timer sovet</div>
+      <div class="stat-item"><strong id="avg-quality">–</strong>Snitt søvnkvalitet (1–10)</div>
+      <div class="stat-item"><strong id="days-filled">–</strong>Dager registrert</div>
+    </div>
+    <div class="field field-wide">
+      <label for="weekly-reflection">Hvilken natt var best denne uken — hva var annerledes da?</label>
+      <textarea id="weekly-reflection" data-key="weekly-reflection" placeholder="Skriv gjerne fritt her..."></textarea>
+    </div>
+  </section>
+
+  <section class="primer">
+    <h2>Send inn registreringen</h2>
+    <p class="muted-note">
+      Du kan sende registreringen direkte fra din egen e-postapp, eller laste
+      den ned som en tekstfil du selv sender eller tar med til timen. Hvis
+      "Send på e-post" ikke åpner riktig på mobilen din, bruk nedlastingen i
+      stedet.
+    </p>
+    <div class="send-buttons">
+      <button type="button" id="sendEmail">Send på e-post</button>
+      <button type="button" id="downloadText" class="secondary">Last ned som tekstfil</button>
+    </div>
+  </section>
+
+  <footer class="closing">
+    Små, ærlige notater — ikke perfekte.<br>
+    <strong>Dette er overkommelig, og du trenger ikke gjøre det alene.</strong>
+  </footer>
+
+</div>
+
+<script>
+  var DAY_COUNT = 7;
+  var STORAGE_KEY = 'sovnregistrering-data';
+  var RECIPIENT = 'silje.merete.binder@gmail.com';
+
+  function dayCardHTML(n) {
+    return (
+      '<details class="topic" data-day="' + n + '">' +
+        '<summary>Dag ' + n + ' <span class="chevron">▸</span></summary>' +
+        '<div class="topic-body">' +
+          '<div class="field-grid">' +
+            '<div class="field">' +
+              '<label for="date-' + n + '">Dato (valgfritt)</label>' +
+              '<input type="date" id="date-' + n + '" data-key="date-' + n + '">' +
+            '</div>' +
+            '<div class="field">' +
+              '<label for="meal-' + n + '">Kveldsmåltid — hva og omtrent når</label>' +
+              '<input type="text" id="meal-' + n + '" data-key="meal-' + n + '" placeholder="F.eks. taco kl. 19, eller ingenting etter kl. 20">' +
+            '</div>' +
+            '<div class="field">' +
+              '<label for="tv-' + n + '">TV-vaner i går kveld</label>' +
+              '<input type="text" id="tv-' + n + '" data-key="tv-' + n + '" placeholder="F.eks. 1 time serie, eller ingen TV">' +
+            '</div>' +
+            '<div class="field">' +
+              '<label for="phone-before-' + n + '">Mobilbruk — siste gang før leggetid</label>' +
+              '<input type="text" id="phone-before-' + n + '" data-key="phone-before-' + n + '" placeholder="F.eks. kl. 22.30, sosiale medier">' +
+            '</div>' +
+            '<div class="field">' +
+              '<label for="phone-night-' + n + '">Mobilbruk — hvis du var våken om natten</label>' +
+              '<input type="text" id="phone-night-' + n + '" data-key="phone-night-' + n + '" placeholder="F.eks. sjekket klokka/mobilen kl. 03">' +
+            '</div>' +
+            '<div class="field">' +
+              '<label for="bedtime-' + n + '">Leggetid</label>' +
+              '<input type="time" id="bedtime-' + n + '" data-key="bedtime-' + n + '">' +
+            '</div>' +
+            '<div class="field">' +
+              '<label for="afterbed-duration-' + n + '">Vaner etter leggetid — varighet (minutter)</label>' +
+              '<input type="number" min="0" step="5" id="afterbed-duration-' + n + '" data-key="afterbed-duration-' + n + '" placeholder="F.eks. 20">' +
+            '</div>' +
+            '<div class="field">' +
+              '<label for="afterbed-activity-' + n + '">Vaner etter leggetid — hva gjorde du</label>' +
+              '<input type="text" id="afterbed-activity-' + n + '" data-key="afterbed-activity-' + n + '" placeholder="F.eks. leste bok, scrollet mobil">' +
+            '</div>' +
+            '<div class="field">' +
+              '<label for="waketime-' + n + '">Oppvåkningstidspunkt</label>' +
+              '<input type="time" id="waketime-' + n + '" data-key="waketime-' + n + '">' +
+            '</div>' +
+            '<div class="field">' +
+              '<label for="hours-' + n + '">Antall timer sovet</label>' +
+              '<input type="number" min="0" max="16" step="0.25" id="hours-' + n + '" data-key="hours-' + n + '" placeholder="F.eks. 6.5">' +
+            '</div>' +
+            '<div class="field field-wide">' +
+              '<label for="quality-' + n + '">Søvnkvalitet: <span class="quality-value" id="quality-value-' + n + '">Ikke satt</span> / 10</label>' +
+              '<input type="range" min="1" max="10" step="1" value="5" id="quality-' + n + '" data-key="quality-' + n + '" data-touched="false">' +
+              '<div class="quality-anchors">' +
+                '<span>1 — Urolig, våknet mye</span>' +
+                '<span>10 — Uthvilt, sammenhengende søvn</span>' +
+              '</div>' +
+            '</div>' +
+            '<div class="field field-wide">' +
+              '<label for="reflection-' + n + '">Hva var bra med denne natten — selv noe lite?</label>' +
+              '<textarea id="reflection-' + n + '" data-key="reflection-' + n + '" placeholder="Skriv gjerne fritt her..."></textarea>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</details>'
+    );
+  }
+
+  function buildDayCards() {
+    var container = document.getElementById('days');
+    var html = '';
+    for (var n = 1; n <= DAY_COUNT; n++) {
+      html += dayCardHTML(n);
+    }
+    container.innerHTML = html;
+  }
+
+  function readState() {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return {};
+    try {
+      return JSON.parse(raw) || {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveState() {
+    var data = {};
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      data[el.getAttribute('data-key')] = el.value;
+    });
+    document.querySelectorAll('input[type="range"]').forEach(function (el) {
+      data[el.id + '-touched'] = el.getAttribute('data-touched');
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function loadState() {
+    var data = readState();
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      var key = el.getAttribute('data-key');
+      if (data[key] !== undefined) {
+        el.value = data[key];
+      }
+    });
+    for (var n = 1; n <= DAY_COUNT; n++) {
+      var range = document.getElementById('quality-' + n);
+      var display = document.getElementById('quality-value-' + n);
+      if (!range || !display) continue;
+      if (data[range.id + '-touched'] === 'true') {
+        range.setAttribute('data-touched', 'true');
+        display.textContent = range.value;
+      } else {
+        display.textContent = 'Ikke satt';
+      }
+    }
+  }
+
+  function isRangeTouched(n) {
+    var range = document.getElementById('quality-' + n);
+    return range && range.getAttribute('data-touched') === 'true';
+  }
+
+  function updateSummary() {
+    var hoursSum = 0, hoursCount = 0;
+    var qualitySum = 0, qualityCount = 0;
+    var daysFilled = 0;
+
+    for (var n = 1; n <= DAY_COUNT; n++) {
+      var hoursEl = document.getElementById('hours-' + n);
+      var hasAnyData = isRangeTouched(n);
+
+      document.querySelectorAll('[data-day="' + n + '"] [data-key]:not([type="range"])').forEach(function (el) {
+        if (el.value && el.value.trim() !== '') hasAnyData = true;
+      });
+      if (hasAnyData) daysFilled++;
+
+      var hoursVal = parseFloat(hoursEl.value);
+      if (!isNaN(hoursVal)) {
+        hoursSum += hoursVal;
+        hoursCount++;
+      }
+
+      if (isRangeTouched(n)) {
+        var qualityVal = parseFloat(document.getElementById('quality-' + n).value);
+        if (!isNaN(qualityVal)) {
+          qualitySum += qualityVal;
+          qualityCount++;
+        }
+      }
+    }
+
+    document.getElementById('avg-hours').textContent = hoursCount ? (hoursSum / hoursCount).toFixed(1) : '–';
+    document.getElementById('avg-quality').textContent = qualityCount ? (qualitySum / qualityCount).toFixed(1) : '–';
+    document.getElementById('days-filled').textContent = daysFilled + ' / ' + DAY_COUNT;
+  }
+
+  function buildSummaryText() {
+    var lines = [];
+    lines.push('Søvnregistrering — én uke');
+    lines.push('');
+
+    for (var n = 1; n <= DAY_COUNT; n++) {
+      var date = document.getElementById('date-' + n).value;
+      var meal = document.getElementById('meal-' + n).value;
+      var tv = document.getElementById('tv-' + n).value;
+      var phoneBefore = document.getElementById('phone-before-' + n).value;
+      var phoneNight = document.getElementById('phone-night-' + n).value;
+      var bedtime = document.getElementById('bedtime-' + n).value;
+      var afterDur = document.getElementById('afterbed-duration-' + n).value;
+      var afterAct = document.getElementById('afterbed-activity-' + n).value;
+      var waketime = document.getElementById('waketime-' + n).value;
+      var hours = document.getElementById('hours-' + n).value;
+      var quality = isRangeTouched(n) ? document.getElementById('quality-' + n).value : '';
+      var reflection = document.getElementById('reflection-' + n).value;
+
+      lines.push('Dag ' + n + (date ? ' (' + date + ')' : ''));
+      lines.push('  Kveldsmåltid: ' + (meal || '-'));
+      lines.push('  TV-vaner: ' + (tv || '-'));
+      lines.push('  Mobilbruk før leggetid: ' + (phoneBefore || '-'));
+      lines.push('  Mobilbruk i løpet av natten: ' + (phoneNight || '-'));
+      lines.push('  Leggetid: ' + (bedtime || '-'));
+      lines.push('  Vaner etter leggetid: ' + (afterDur ? afterDur + ' min, ' : '') + (afterAct || '-'));
+      lines.push('  Oppvåkningstidspunkt: ' + (waketime || '-'));
+      lines.push('  Timer sovet: ' + (hours || '-'));
+      lines.push('  Søvnkvalitet (1-10): ' + (quality || '-'));
+      lines.push('  Refleksjon: ' + (reflection || '-'));
+      lines.push('');
+    }
+
+    lines.push('Snitt timer sovet: ' + document.getElementById('avg-hours').textContent);
+    lines.push('Snitt søvnkvalitet: ' + document.getElementById('avg-quality').textContent);
+    lines.push('Dager registrert: ' + document.getElementById('days-filled').textContent);
+    lines.push('');
+    lines.push('Beste natt denne uken / hva var annerledes: ' + (document.getElementById('weekly-reflection').value || '-'));
+
+    return lines.join('\n');
+  }
+
+  function sendEmail() {
+    var subject = encodeURIComponent('Søvnregistrering - én uke');
+    var body = encodeURIComponent(buildSummaryText());
+    window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
+  }
+
+  function downloadText() {
+    var blob = new Blob([buildSummaryText()], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'sovnregistrering.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    buildDayCards();
+    loadState();
+    updateSummary();
+
+    document.body.addEventListener('input', function (e) {
+      if (!e.target.hasAttribute('data-key')) return;
+      if (e.target.type === 'range') {
+        e.target.setAttribute('data-touched', 'true');
+        var n = e.target.id.split('-')[1];
+        var display = document.getElementById('quality-value-' + n);
+        if (display) display.textContent = e.target.value;
+      }
+      saveState();
+      updateSummary();
+    });
+
+    document.getElementById('expandAll').addEventListener('click', function () {
+      document.querySelectorAll('details.topic').forEach(function (d) { d.open = true; });
+    });
+    document.getElementById('collapseAll').addEventListener('click', function () {
+      document.querySelectorAll('details.topic').forEach(function (d) { d.open = false; });
+    });
+    document.getElementById('resetAll').addEventListener('click', function () {
+      if (!confirm('Nullstille all registrert søvndata for uken? Dette kan ikke angres.')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    });
+
+    document.getElementById('sendEmail').addEventListener('click', sendEmail);
+    document.getElementById('downloadText').addEventListener('click', downloadText);
+  });
+</script>
+
+</body>
+</html>
