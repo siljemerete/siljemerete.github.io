@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silje Merete SMART Helseveiledning</title>
+<style>
+  :root {
+    --bg: #f6f8f7;
+    --card: #ffffff;
+    --ink: #1f2d2b;
+    --muted: #56655f;
+    --accent: #2f7d6b;
+    --accent-dark: #235c50;
+    --accent-soft: #e3f1ec;
+    --push: #b96b2a;
+    --push-soft: #fbeee0;
+    --border: #dfe7e3;
+    --shadow: 0 1px 3px rgba(31, 45, 43, 0.08), 0 1px 2px rgba(31, 45, 43, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  /* Top navigation */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(246, 248, 247, 0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0.9rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .brand {
+    font-weight: 700;
+    color: var(--accent-dark);
+    font-size: 1.02rem;
+    white-space: nowrap;
+  }
+
+  .brand span {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  nav.site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 0.9rem;
+  }
+
+  nav.site-nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.92rem;
+    padding: 0.25rem 0.1rem;
+    border-bottom: 2px solid transparent;
+  }
+
+  nav.site-nav a:hover {
+    color: var(--accent-dark);
+    border-bottom-color: var(--accent);
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, var(--accent-soft), var(--bg));
+    padding: 3rem 0 2.5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero h1 {
+    margin: 0 0 0.5rem;
+    font-size: 2rem;
+    color: var(--accent-dark);
+  }
+
+  .hero p.tagline {
+    margin: 0 auto 1.5rem;
+    max-width: 46ch;
+    color: var(--muted);
+    font-size: 1.08rem;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+  }
+
+  .cta-button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  /* Sections */
+  .card-section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 1.5rem 1.75rem;
+    margin: 1.75rem 0;
+    box-shadow: var(--shadow);
+    scroll-margin-top: 5rem;
+  }
+
+  .card-section h2 {
+    margin-top: 0;
+    color: var(--accent-dark);
+    font-size: 1.3rem;
+  }
+
+  .card-section p {
+    margin: 0.6rem 0;
+  }
+
+  .card-section p:last-child {
+    margin-bottom: 0;
+  }
+
+  .card-section a.inline-link {
+    color: var(--accent-dark);
+    font-weight: 600;
+  }
+
+  /* Om meg */
+  .about-grid {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
+  .photo-placeholder {
+    flex: 0 0 auto;
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    border: 2px dashed var(--border);
+  }
+
+  .about-text {
+    flex: 1 1 320px;
+  }
+
+  /* Service and resource cards */
+  .service-grid,
+  .resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-top: 0.9rem;
+  }
+
+  .service-card {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+  }
+
+  .service-card h3 {
+    margin: 0 0 0.4rem;
+    color: var(--accent-dark);
+    font-size: 1rem;
+  }
+
+  .service-card p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--ink);
+  }
+
+  .resource-card {
+    display: block;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .resource-card:hover {
+    border-color: var(--accent);
+    box-shadow: var(--shadow);
+  }
+
+  .resource-card h3 {
+    margin: 0 0 0.4rem;
+    color: var(--accent-dark);
+    font-size: 1rem;
+  }
+
+  .resource-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .resource-card .arrow {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+
+  footer.closing {
+    margin: 2rem 0 1rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong {
+    color: var(--accent-dark);
+  }
+
+  @media (max-width: 560px) {
+    .nav-wrap { justify-content: center; text-align: center; }
+    .hero h1 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <div class="brand">Silje Merete <span>SMART Helseveiledning</span></div>
+    <nav class="site-nav">
+      <a href="#om-meg">Om meg</a>
+      <a href="#helseveiledning">Helseveiledning</a>
+      <a href="#utdanning">Utdanning</a>
+      <a href="#tjenester">Tjenester</a>
+      <a href="#ressurser">Ressurser</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Silje Merete SMART Helseveiledning</h1>
+    <p class="tagline">Helseveiledning for små, gjennomførbare skritt mot bedre helse og hverdag.</p>
+    <a class="cta-button" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post</a>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section id="om-meg" class="card-section">
+    <h2>Om meg</h2>
+    <div class="about-grid">
+      <div class="photo-placeholder" aria-hidden="true">SM</div>
+      <div class="about-text">
+        <p>Jeg heter Silje Merete, og jobber med helseveiledning med fokus på små, realistiske endringer som er mulig å få til i en travel hverdag.</p>
+        <p>Mer om min bakgrunn og erfaring fylles inn her.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="helseveiledning" class="card-section">
+    <h2>Hva er helseveiledning?</h2>
+    <p>Helseveiledning handler om å støtte og motivere mennesker til å ta gode valg for egen helse — gjennom samtale, kunnskap og konkrete, realistiske mål som bygger på det som allerede fungerer i livet ditt. Fremfor å komme med ferdige svar, er målet å hjelpe deg med å finne dine egne grunner og din egen vei videre.</p>
+    <p>Denne tilnærmingen bygger på metodikken fra <a class="inline-link" href="#" target="_blank" rel="noopener">Abel Institutt</a>, som utdanner helseveiledere i Norge.</p>
+  </section>
+
+  <section id="utdanning" class="card-section">
+    <h2>Utdanning og bakgrunn</h2>
+    <p>Jeg tar for tiden videreutdanning som helseveileder gjennom Abel Institutt, og er nå i tredje semester av studiet.</p>
+    <p>Mer om tidligere utdanning og bakgrunn fylles inn her.</p>
+  </section>
+
+  <section id="tjenester" class="card-section">
+    <h2>Tjenester</h2>
+    <div class="service-grid">
+      <div class="service-card">
+        <h3>Privatpersoner</h3>
+        <p>Individuell helseveiledning med utgangspunkt i dine egne mål, enten det handler om søvn, aktivitet, kosthold eller generell hverdagshelse.</p>
+      </div>
+      <div class="service-card">
+        <h3>Bedrifter og arbeidsplasser</h3>
+        <p>Foredrag, kurs og oppfølging tilpasset arbeidsplassen, med fokus på bærekraftige helsevaner for ansatte.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ressurser" class="card-section">
+    <h2>Ressurser og verktøy</h2>
+    <div class="resource-grid">
+      <a class="resource-card" href="motiverende-intervju.html">
+        <h3>Motiverende intervju</h3>
+        <p>Hurtigreferanse for gode helsesamtaler om søvn, aktivitet, kosthold og vekt.</p>
+        <p class="arrow">Åpne verktøy →</p>
+      </a>
+      <a class="resource-card" href="sovnregistrering.html">
+        <h3>Søvnregistrering</h3>
+        <p>Skjema for én ukes selvregistrering av søvn og kveldsvaner.</p>
+        <p class="arrow">Åpne verktøy →</p>
+      </a>
+    </div>
+  </section>
+
+  <section id="kontakt" class="card-section">
+    <h2>Kontakt</h2>
+    <p>Ta gjerne kontakt for en uforpliktende prat om helseveiledning.</p>
+    <a class="cta-button" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post</a>
+  </section>
+
+</div>
+
+<footer class="closing">
+  Små skritt. Dine mål, ditt tempo.<br>
+  <strong>Du trenger ikke gjøre det alene.</strong>
+</footer>
+
+</body>
+</html>
