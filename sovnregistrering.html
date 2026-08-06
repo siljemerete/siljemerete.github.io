@@ -321,9 +321,52 @@
     color: var(--accent-dark);
   }
 
+  .continue-prompt,
+  .confirm-reset {
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .continue-prompt {
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+  }
+
+  .continue-prompt p {
+    margin: 0 0 0.6rem;
+    color: var(--accent-dark);
+    font-weight: 600;
+  }
+
+  .confirm-reset {
+    background: var(--push-soft);
+    border: 1px solid var(--push);
+  }
+
+  .confirm-reset p {
+    margin: 0 0 0.6rem;
+    color: var(--push);
+    font-weight: 600;
+  }
+
+  .continue-prompt .send-buttons,
+  .confirm-reset .send-buttons {
+    margin: 0;
+  }
+
+  .send-buttons button.danger-solid {
+    background: var(--push);
+    border-color: var(--push);
+  }
+
+  .send-buttons button.danger-solid:hover {
+    filter: brightness(0.9);
+  }
+
   @media print {
     body { background: #fff; }
-    .controls, .send-buttons, .muted-note { display: none; }
+    .controls, .send-buttons, .muted-note, .continue-prompt, .confirm-reset { display: none; }
     .topic { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
   }
 </style>
@@ -342,10 +385,26 @@
     </div>
   </header>
 
+  <div class="continue-prompt" id="continuePrompt" hidden>
+    <p>Vi fant en tidligere registrering lagret i denne nettleseren.</p>
+    <div class="send-buttons">
+      <button type="button" id="continueYes">Fortsett forrige registrering</button>
+      <button type="button" id="continueNo" class="secondary">Start blankt</button>
+    </div>
+  </div>
+
   <div class="controls">
     <button type="button" id="expandAll">Vis alle</button>
     <button type="button" id="collapseAll">Skjul alle</button>
     <button type="button" id="resetAll" class="danger">Nullstill alt</button>
+  </div>
+
+  <div class="confirm-reset" id="confirmReset" hidden>
+    <p>Nullstille all registrert søvndata for uken? Dette kan ikke angres.</p>
+    <div class="send-buttons">
+      <button type="button" id="confirmResetYes" class="danger-solid">Ja, nullstill alt</button>
+      <button type="button" id="confirmResetNo" class="secondary">Avbryt</button>
+    </div>
   </div>
 
   <div id="days"></div>
@@ -506,6 +565,14 @@
     }
   }
 
+  function hasStoredData() {
+    var data = readState();
+    return Object.keys(data).some(function (key) {
+      if (key.indexOf('-touched') !== -1) return data[key] === 'true';
+      return data[key] && String(data[key]).trim() !== '';
+    });
+  }
+
   function isRangeTouched(n) {
     var range = document.getElementById('quality-' + n);
     return range && range.getAttribute('data-touched') === 'true';
@@ -629,8 +696,24 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     buildDayCards();
-    loadState();
-    updateSummary();
+
+    if (hasStoredData()) {
+      document.getElementById('continuePrompt').hidden = false;
+    } else {
+      loadState();
+      updateSummary();
+    }
+
+    document.getElementById('continueYes').addEventListener('click', function () {
+      document.getElementById('continuePrompt').hidden = true;
+      loadState();
+      updateSummary();
+    });
+    document.getElementById('continueNo').addEventListener('click', function () {
+      localStorage.removeItem(STORAGE_KEY);
+      document.getElementById('continuePrompt').hidden = true;
+      updateSummary();
+    });
 
     document.body.addEventListener('input', function (e) {
       if (!e.target.hasAttribute('data-key')) return;
@@ -651,9 +734,14 @@
       document.querySelectorAll('details.topic').forEach(function (d) { d.open = false; });
     });
     document.getElementById('resetAll').addEventListener('click', function () {
-      if (!confirm('Nullstille all registrert søvndata for uken? Dette kan ikke angres.')) return;
+      document.getElementById('confirmReset').hidden = false;
+    });
+    document.getElementById('confirmResetYes').addEventListener('click', function () {
       localStorage.removeItem(STORAGE_KEY);
       location.reload();
+    });
+    document.getElementById('confirmResetNo').addEventListener('click', function () {
+      document.getElementById('confirmReset').hidden = true;
     });
 
     document.getElementById('sendEmail').addEventListener('click', sendEmail);
