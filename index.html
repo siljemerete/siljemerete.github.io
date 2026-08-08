@@ -259,14 +259,6 @@
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 1rem 1.1rem;
-    text-decoration: none;
-    color: inherit;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
-  }
-
-  .resource-card:hover {
-    border-color: var(--accent);
-    box-shadow: var(--shadow);
   }
 
   .resource-card h3 {
@@ -281,8 +273,8 @@
     color: var(--muted);
   }
 
-  .resource-card .arrow {
-    color: var(--accent);
+  .resource-card .note {
+    color: var(--accent-dark);
     font-weight: 600;
     font-size: 0.85rem;
   }
@@ -403,11 +395,11 @@
   <section id="ressurser" class="card-section">
     <h2>Ressurser og verktøy</h2>
     <div class="resource-grid">
-      <a class="resource-card" href="sovnregistrering.html">
+      <div class="resource-card">
         <h3>Søvnregistrering</h3>
         <p>Skjema for én ukes selvregistrering av søvn og kveldsvaner.</p>
-        <p class="arrow">Åpne verktøy →</p>
-      </a>
+        <p class="note">Deles direkte med klienter</p>
+      </div>
     </div>
   </section>
 
