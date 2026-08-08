@@ -35,6 +35,9 @@
     --weight-accent: #4a6fa5;
     --weight-accent-dark: #35507d;
     --weight-soft: #e2e9f3;
+    --stress-accent: #a3415c;
+    --stress-accent-dark: #7a2f45;
+    --stress-soft: #f6e2e8;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -68,6 +71,9 @@
       --weight-accent: #7ea0d6;
       --weight-accent-dark: #a8c2e8;
       --weight-soft: #232c3a;
+      --stress-accent: #e08aa3;
+      --stress-accent-dark: #f0aec0;
+      --stress-soft: #3a2530;
     }
   }
 
@@ -101,6 +107,9 @@
     --weight-accent: #7ea0d6;
     --weight-accent-dark: #a8c2e8;
     --weight-soft: #232c3a;
+    --stress-accent: #e08aa3;
+    --stress-accent-dark: #f0aec0;
+    --stress-soft: #3a2530;
   }
 
   :root[data-theme="light"] {
@@ -133,6 +142,9 @@
     --weight-accent: #4a6fa5;
     --weight-accent-dark: #35507d;
     --weight-soft: #e2e9f3;
+    --stress-accent: #a3415c;
+    --stress-accent-dark: #7a2f45;
+    --stress-soft: #f6e2e8;
   }
 
   * { box-sizing: border-box; }
@@ -321,6 +333,16 @@
     color: var(--ink);
   }
 
+  .wheel-note {
+    margin: 1rem 0 0;
+    padding: 0.7rem 0.9rem;
+    border-left: 4px solid var(--stress-accent);
+    background: var(--stress-soft);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: var(--ink);
+  }
+
   .controls {
     display: flex;
     justify-content: flex-end;
@@ -346,6 +368,7 @@
   .topic-activity { --tc: var(--activity-accent); --tcd: var(--activity-accent-dark); --ts: var(--activity-soft); }
   .topic-food { --tc: var(--food-accent); --tcd: var(--food-accent-dark); --ts: var(--food-soft); }
   .topic-weight { --tc: var(--weight-accent); --tcd: var(--weight-accent-dark); --ts: var(--weight-soft); }
+  .topic-stress { --tc: var(--stress-accent); --tcd: var(--stress-accent-dark); --ts: var(--stress-soft); }
 
   .topic {
     background: var(--card);
@@ -461,7 +484,7 @@
 
   <header class="page-header">
     <h1>Motiverende intervju — hurtigreferanse</h1>
-    <p class="tagline">Søvn · Fysisk aktivitet · Kosthold · Vekt og generell helse</p>
+    <p class="tagline">Søvn · Fysisk aktivitet · Kosthold · Vekt og generell helse · Stress</p>
     <div class="reminder">
       Målet er ikke å overbevise — det er å hjelpe pasienten til å høre
       seg selv si hvorfor endring er mulig. Hold det lite, konkret og i
@@ -499,6 +522,7 @@
         <li><span class="dot" style="--dot-color: var(--stage-6);"></span><span><strong>6. Tilbakefall</strong> — helt normalt, ikke et nederlag. Møt det uten dømming og gå videre sammen.</span></li>
       </ol>
     </div>
+    <p class="wheel-note">Stress er en av de vanligste utløserne for tilbakefall. Spør om stressnivået gjennom hele prosessen, ikke bare ved oppstart — se eget tema om stress under.</p>
   </section>
 
   <div class="controls">
@@ -630,6 +654,38 @@
         <p><span class="speaker">Behandler:</span> Det å ha overskudd til dem er altså det som driver deg mest.</p>
         <p><span class="speaker">Pasient:</span> Ja, det er egentlig det viktigste.</p>
         <p><span class="speaker">Behandler:</span> Da har vi noe ekte å bygge målene rundt.</p>
+      </div>
+    </div>
+  </details>
+
+  <!-- STRESS -->
+  <details class="topic topic-stress">
+    <summary>Stress <span class="chevron">▸</span></summary>
+    <div class="topic-body">
+      <h3>Pull-spørsmål</h3>
+      <ul class="pull-list">
+        <li>Hva er det som gjør at du kjenner deg mest presset i hverdagen?</li>
+        <li>Hva pleier å hjelpe deg å roe deg ned, selv litt?</li>
+        <li>Hva ville mindre stress gjort mulig for deg?</li>
+        <li>Hvordan merker du på kroppen at du er stresset?</li>
+        <li>Hva er du allerede god på når det gjelder å ta vare på deg selv i travle perioder?</li>
+      </ul>
+      <h3>Push-spørsmål</h3>
+      <ul class="push-list">
+        <li>Hva tror du er de største stressfaktorene dine akkurat nå?</li>
+        <li>Fra 1–10, hvor mye påvirker stresset hverdagen din — hva ligger bak det tallet?</li>
+        <li>Hva er én liten ting du kunne gjøre denne uken for å dempe presset?</li>
+        <li>Hva pleier å skje med søvn, mat eller aktivitet når stresset øker?</li>
+      </ul>
+      <h3>Bekreftelse å reflektere tilbake</h3>
+      <p class="affirmation">"Du kjenner allerede kroppen din godt nok til å legge merke til når presset blir for stort — det er et godt utgangspunkt."</p>
+      <h3>Eksempeldialog</h3>
+      <div class="dialogue">
+        <p><span class="speaker">Behandler:</span> Hva gjør deg mest stresset for tiden?</p>
+        <p><span class="speaker">Pasient:</span> Egentlig bare at det er så mye samtidig, jobb og hjem.</p>
+        <p><span class="speaker">Behandler:</span> Så det er mengden, ikke én bestemt ting, som kjennes tyngst.</p>
+        <p><span class="speaker">Pasient:</span> Ja, akkurat sånn.</p>
+        <p><span class="speaker">Behandler:</span> Hva pleier å hjelpe, selv litt, når det blir sånn?</p>
       </div>
     </div>
   </details>
