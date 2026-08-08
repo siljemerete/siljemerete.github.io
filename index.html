@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Silje Merete SMART Helseveiledning</title>
+<meta name="description" content="Personlig helseveiledning for privatpersoner og bedrifter, med fokus på søvn, stress, kosthold og fysisk aktivitet. Digital oppfølging, med mulighet for fysisk møte i Drammen.">
+<meta property="og:title" content="Silje Merete SMART Helseveiledning">
+<meta property="og:description" content="Personlig helseveiledning for privatpersoner og bedrifter, med fokus på søvn, stress, kosthold og fysisk aktivitet.">
+<meta property="og:type" content="website">
 <style>
   :root {
     --bg: #f6f8f7;
@@ -93,8 +97,31 @@
   .hero {
     background: linear-gradient(135deg, var(--accent-soft), var(--bg));
     padding: 3rem 0 2.5rem;
-    text-align: center;
     border-bottom: 1px solid var(--border);
+  }
+
+  .hero-grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap-reverse;
+    text-align: left;
+  }
+
+  .hero-text {
+    flex: 1 1 320px;
+    max-width: 46ch;
+  }
+
+  .hero-photo {
+    flex: 0 0 auto;
+    width: 220px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 4px solid #fff;
+    box-shadow: var(--shadow);
   }
 
   .hero h1 {
@@ -104,10 +131,14 @@
   }
 
   .hero p.tagline {
-    margin: 0 auto 1.5rem;
-    max-width: 46ch;
+    margin: 0 0 1.5rem;
     color: var(--muted);
     font-size: 1.08rem;
+  }
+
+  @media (max-width: 640px) {
+    .hero-grid { flex-direction: column-reverse; text-align: center; }
+    .hero-text { max-width: 100%; }
   }
 
   .cta-button {
@@ -169,8 +200,8 @@
   .photo-placeholder,
   .profile-photo {
     flex: 0 0 auto;
-    width: 128px;
-    height: 128px;
+    width: 168px;
+    height: 168px;
     border-radius: 50%;
   }
 
@@ -292,6 +323,7 @@
       <a href="#helseveiledning">Helseveiledning</a>
       <a href="#utdanning">Utdanning</a>
       <a href="#tjenester">Tjenester</a>
+      <a href="#samtaler">Slik foregår det</a>
       <a href="#ressurser">Ressurser</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
@@ -299,10 +331,13 @@
 </header>
 
 <section class="hero">
-  <div class="wrap">
-    <h1>Silje Merete SMART Helseveiledning</h1>
-    <p class="tagline">Helseveiledning for små, gjennomførbare skritt mot bedre helse og hverdag.</p>
-    <a class="cta-button" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post</a>
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <h1>Silje Merete SMART Helseveiledning</h1>
+      <p class="tagline">Helseveiledning for små, gjennomførbare skritt mot bedre helse og hverdag.</p>
+      <a class="cta-button" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post</a>
+    </div>
+    <img class="hero-photo" src="images/hero-havet.jpg" alt="Silje Merete ute ved havet">
   </div>
 </section>
 
@@ -311,7 +346,7 @@
   <section id="om-meg" class="card-section">
     <h2>Om meg</h2>
     <div class="about-grid">
-      <img class="profile-photo" src="images/profilbilde.jpg" alt="Silje Merete">
+      <img class="profile-photo" src="images/profilbilde.jpg" alt="Silje Merete Binder">
       <div class="about-text">
         <p>Hei, og velkommen! Jeg heter Silje Merete S. Binder. Jeg er utdannet pedagog og leder, og har i over 20 år veiledet mennesker gjennom prosesser der de ønsker endring i livet sitt. Det å få være med på reisen når mennesker finner en ny hverdag, er det som driver meg.</p>
         <p>Som helseveileder er rollen min å utforske sammen med deg: vi kan se på søvn, stress, kosthold, fysisk aktivitet og andre vaner som påvirker deg. Sammen finner vi frem til akkurat det som passer for deg å fokusere på nå i ditt liv, og i ditt tempo. Du kjenner deg selv og livet ditt best — jeg er her for å støtte og motivere deg på veien. Alt vi snakker om er underlagt taushetsplikt, så du kan kjenne deg trygg.</p>
@@ -346,14 +381,28 @@
     </div>
   </section>
 
+  <section id="samtaler" class="card-section">
+    <h2>Slik foregår en samtale</h2>
+    <div class="service-grid">
+      <div class="service-card">
+        <h3>Oppstartssamtale — ca. 45 min</h3>
+        <p>Vi blir kjent, og kartlegger sammen hvordan hverdagen din ser ut i dag og hva du ønsker å jobbe med.</p>
+      </div>
+      <div class="service-card">
+        <h3>Ukentlig oppfølging — ca. 15 min</h3>
+        <p>Korte, faste samtaler der vi følger opp målene dine og justerer kursen underveis.</p>
+      </div>
+      <div class="service-card">
+        <h3>Digital kontakt underveis</h3>
+        <p>Ved behov er det også mulig med kontakt mellom samtalene.</p>
+      </div>
+    </div>
+    <p>Samtalene foregår først og fremst digitalt, men det er også mulig å møtes fysisk i Drammen.</p>
+  </section>
+
   <section id="ressurser" class="card-section">
     <h2>Ressurser og verktøy</h2>
     <div class="resource-grid">
-      <a class="resource-card" href="motiverende-intervju.html">
-        <h3>Motiverende intervju</h3>
-        <p>Hurtigreferanse for gode helsesamtaler om søvn, aktivitet, kosthold og vekt.</p>
-        <p class="arrow">Åpne verktøy →</p>
-      </a>
       <a class="resource-card" href="sovnregistrering.html">
         <h3>Søvnregistrering</h3>
         <p>Skjema for én ukes selvregistrering av søvn og kveldsvaner.</p>
@@ -364,7 +413,7 @@
 
   <section id="kontakt" class="card-section">
     <h2>Kontakt</h2>
-    <p>Ta gjerne kontakt for en uforpliktende prat om helseveiledning.</p>
+    <p>Ta gjerne kontakt for en uforpliktende prat om helseveiledning. Du trenger ikke vite nøyaktig hva du lurer på — send meg en e-post, så finner vi ut av resten sammen.</p>
     <a class="cta-button" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post</a>
   </section>
 
