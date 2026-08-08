@@ -166,11 +166,15 @@
     margin-top: 0.5rem;
   }
 
-  .photo-placeholder {
+  .photo-placeholder,
+  .profile-photo {
     flex: 0 0 auto;
     width: 128px;
     height: 128px;
     border-radius: 50%;
+  }
+
+  .photo-placeholder {
     background: var(--accent-soft);
     color: var(--accent-dark);
     display: flex;
@@ -179,6 +183,12 @@
     font-size: 2rem;
     font-weight: 700;
     border: 2px dashed var(--border);
+  }
+
+  .profile-photo {
+    object-fit: cover;
+    border: 3px solid var(--accent-soft);
+    box-shadow: var(--shadow);
   }
 
   .about-text {
@@ -246,6 +256,14 @@
     font-size: 0.85rem;
   }
 
+  .tjenester-photo {
+    width: 100%;
+    max-height: 280px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+
   footer.closing {
     margin: 2rem 0 1rem;
     text-align: center;
@@ -293,7 +311,7 @@
   <section id="om-meg" class="card-section">
     <h2>Om meg</h2>
     <div class="about-grid">
-      <div class="photo-placeholder" aria-hidden="true">SM</div>
+      <img class="profile-photo" src="images/profilbilde.jpg" alt="Silje Merete">
       <div class="about-text">
         <p>Hei, og velkommen! Jeg heter Silje Merete. Jeg er utdannet pedagog og leder, med over 20 års erfaring i å veilede mennesker gjennom prosesser der de ønsker endring i livet sitt — og det er nettopp dette jeg brenner for.</p>
         <p>Som helseveileder er rollen min å utforske sammen med deg: vi ser på kosthold, søvn, fysisk aktivitet og andre vaner, og finner fram til det som passer for akkurat ditt liv, i ditt eget tempo. Du kjenner livet ditt best — jeg er her for å støtte og motivere deg på veien. Alt vi snakker om er underlagt taushetsplikt, så du kan kjenne deg trygg.</p>
@@ -315,6 +333,7 @@
 
   <section id="tjenester" class="card-section">
     <h2>Tjenester</h2>
+    <img class="tjenester-photo" src="images/yogamatte.jpg" alt="Yogamatte og bolster, klar for en økt med bevegelse og ro">
     <div class="service-grid">
       <div class="service-card">
         <h3>Privatpersoner</h3>
