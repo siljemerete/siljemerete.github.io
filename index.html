@@ -298,6 +298,14 @@
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 1rem 1.1rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .resource-card:hover {
+    border-color: var(--accent);
+    box-shadow: var(--shadow);
   }
 
   .quote-card {
@@ -484,16 +492,16 @@
   <section id="ressurser" class="card-section">
     <h2>Ressurser og verktøy</h2>
     <div class="resource-grid">
-      <div class="resource-card">
+      <a class="resource-card" href="sovnregistrering.html">
         <h3>Søvnregistrering</h3>
         <p>Skjema for én ukes selvregistrering av søvn og kveldsvaner.</p>
-        <p class="note">Deles direkte med klienter</p>
-      </div>
-      <div class="resource-card">
+        <p class="note">Krever kode fra Silje Merete</p>
+      </a>
+      <a class="resource-card" href="dagbok-stresskoppen.html">
         <h3>Dagbok for stresskoppen</h3>
         <p>Skjema for 7 dagers selvregistrering av situasjon, intensitet og hva som fyller og tømmer stresskoppen.</p>
-        <p class="note">Deles direkte med klienter</p>
-      </div>
+        <p class="note">Krever kode fra Silje Merete</p>
+      </a>
     </div>
   </section>
 
