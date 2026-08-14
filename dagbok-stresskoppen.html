@@ -357,7 +357,281 @@
     <button type="button" id="resetAll" class="danger">Nullstill alt</button>
   </div>
 
-  <div id="days"></div>
+  <div id="days">
+    <details class="topic" data-day="1">
+      <summary>Dag 1 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-1">Dato (valgfritt)</label>
+            <input type="date" id="date-1" data-key="date-1">
+          </div>
+          <div class="field field-wide">
+            <label for="situation-1">Situasjon — hva skjedde i dag som du legger merke til?</label>
+            <textarea id="situation-1" data-key="situation-1" placeholder="F.eks. mye å gjøre på jobb, en hyggelig telefon, en krevende beskjed"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="intensity-1">Intensitet: <span class="range-value" id="intensity-value-1">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="intensity-1" data-key="intensity-1" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Rolig, koppen nesten tom</span>
+              <span>10 — Full kopp, nær overløp</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="physical-1">Fysiske tegn — hva kjente du i kroppen?</label>
+            <input type="text" id="physical-1" data-key="physical-1" placeholder="F.eks. spente skuldre, vondt i magen, rask puls">
+          </div>
+          <div class="field">
+            <label for="thoughts-1">Tanker — hva tenkte du om situasjonen?</label>
+            <input type="text" id="thoughts-1" data-key="thoughts-1" placeholder="F.eks. «jeg rekker ikke alt», «dette går fint»">
+          </div>
+          <div class="field">
+            <label for="reaction-1">Reaksjon — hva gjorde du?</label>
+            <input type="text" id="reaction-1" data-key="reaction-1" placeholder="F.eks. tok en pause, presterte videre, snakket med noen">
+          </div>
+          <div class="field">
+            <label for="emptied-1">Hva tømte koppen litt i dag?</label>
+            <input type="text" id="emptied-1" data-key="emptied-1" placeholder="F.eks. gikk en tur, trente, tok en pause">
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="2">
+      <summary>Dag 2 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-2">Dato (valgfritt)</label>
+            <input type="date" id="date-2" data-key="date-2">
+          </div>
+          <div class="field field-wide">
+            <label for="situation-2">Situasjon — hva skjedde i dag som du legger merke til?</label>
+            <textarea id="situation-2" data-key="situation-2" placeholder="F.eks. mye å gjøre på jobb, en hyggelig telefon, en krevende beskjed"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="intensity-2">Intensitet: <span class="range-value" id="intensity-value-2">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="intensity-2" data-key="intensity-2" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Rolig, koppen nesten tom</span>
+              <span>10 — Full kopp, nær overløp</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="physical-2">Fysiske tegn — hva kjente du i kroppen?</label>
+            <input type="text" id="physical-2" data-key="physical-2" placeholder="F.eks. spente skuldre, vondt i magen, rask puls">
+          </div>
+          <div class="field">
+            <label for="thoughts-2">Tanker — hva tenkte du om situasjonen?</label>
+            <input type="text" id="thoughts-2" data-key="thoughts-2" placeholder="F.eks. «jeg rekker ikke alt», «dette går fint»">
+          </div>
+          <div class="field">
+            <label for="reaction-2">Reaksjon — hva gjorde du?</label>
+            <input type="text" id="reaction-2" data-key="reaction-2" placeholder="F.eks. tok en pause, presterte videre, snakket med noen">
+          </div>
+          <div class="field">
+            <label for="emptied-2">Hva tømte koppen litt i dag?</label>
+            <input type="text" id="emptied-2" data-key="emptied-2" placeholder="F.eks. gikk en tur, trente, tok en pause">
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="3">
+      <summary>Dag 3 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-3">Dato (valgfritt)</label>
+            <input type="date" id="date-3" data-key="date-3">
+          </div>
+          <div class="field field-wide">
+            <label for="situation-3">Situasjon — hva skjedde i dag som du legger merke til?</label>
+            <textarea id="situation-3" data-key="situation-3" placeholder="F.eks. mye å gjøre på jobb, en hyggelig telefon, en krevende beskjed"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="intensity-3">Intensitet: <span class="range-value" id="intensity-value-3">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="intensity-3" data-key="intensity-3" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Rolig, koppen nesten tom</span>
+              <span>10 — Full kopp, nær overløp</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="physical-3">Fysiske tegn — hva kjente du i kroppen?</label>
+            <input type="text" id="physical-3" data-key="physical-3" placeholder="F.eks. spente skuldre, vondt i magen, rask puls">
+          </div>
+          <div class="field">
+            <label for="thoughts-3">Tanker — hva tenkte du om situasjonen?</label>
+            <input type="text" id="thoughts-3" data-key="thoughts-3" placeholder="F.eks. «jeg rekker ikke alt», «dette går fint»">
+          </div>
+          <div class="field">
+            <label for="reaction-3">Reaksjon — hva gjorde du?</label>
+            <input type="text" id="reaction-3" data-key="reaction-3" placeholder="F.eks. tok en pause, presterte videre, snakket med noen">
+          </div>
+          <div class="field">
+            <label for="emptied-3">Hva tømte koppen litt i dag?</label>
+            <input type="text" id="emptied-3" data-key="emptied-3" placeholder="F.eks. gikk en tur, trente, tok en pause">
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="4">
+      <summary>Dag 4 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-4">Dato (valgfritt)</label>
+            <input type="date" id="date-4" data-key="date-4">
+          </div>
+          <div class="field field-wide">
+            <label for="situation-4">Situasjon — hva skjedde i dag som du legger merke til?</label>
+            <textarea id="situation-4" data-key="situation-4" placeholder="F.eks. mye å gjøre på jobb, en hyggelig telefon, en krevende beskjed"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="intensity-4">Intensitet: <span class="range-value" id="intensity-value-4">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="intensity-4" data-key="intensity-4" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Rolig, koppen nesten tom</span>
+              <span>10 — Full kopp, nær overløp</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="physical-4">Fysiske tegn — hva kjente du i kroppen?</label>
+            <input type="text" id="physical-4" data-key="physical-4" placeholder="F.eks. spente skuldre, vondt i magen, rask puls">
+          </div>
+          <div class="field">
+            <label for="thoughts-4">Tanker — hva tenkte du om situasjonen?</label>
+            <input type="text" id="thoughts-4" data-key="thoughts-4" placeholder="F.eks. «jeg rekker ikke alt», «dette går fint»">
+          </div>
+          <div class="field">
+            <label for="reaction-4">Reaksjon — hva gjorde du?</label>
+            <input type="text" id="reaction-4" data-key="reaction-4" placeholder="F.eks. tok en pause, presterte videre, snakket med noen">
+          </div>
+          <div class="field">
+            <label for="emptied-4">Hva tømte koppen litt i dag?</label>
+            <input type="text" id="emptied-4" data-key="emptied-4" placeholder="F.eks. gikk en tur, trente, tok en pause">
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="5">
+      <summary>Dag 5 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-5">Dato (valgfritt)</label>
+            <input type="date" id="date-5" data-key="date-5">
+          </div>
+          <div class="field field-wide">
+            <label for="situation-5">Situasjon — hva skjedde i dag som du legger merke til?</label>
+            <textarea id="situation-5" data-key="situation-5" placeholder="F.eks. mye å gjøre på jobb, en hyggelig telefon, en krevende beskjed"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="intensity-5">Intensitet: <span class="range-value" id="intensity-value-5">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="intensity-5" data-key="intensity-5" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Rolig, koppen nesten tom</span>
+              <span>10 — Full kopp, nær overløp</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="physical-5">Fysiske tegn — hva kjente du i kroppen?</label>
+            <input type="text" id="physical-5" data-key="physical-5" placeholder="F.eks. spente skuldre, vondt i magen, rask puls">
+          </div>
+          <div class="field">
+            <label for="thoughts-5">Tanker — hva tenkte du om situasjonen?</label>
+            <input type="text" id="thoughts-5" data-key="thoughts-5" placeholder="F.eks. «jeg rekker ikke alt», «dette går fint»">
+          </div>
+          <div class="field">
+            <label for="reaction-5">Reaksjon — hva gjorde du?</label>
+            <input type="text" id="reaction-5" data-key="reaction-5" placeholder="F.eks. tok en pause, presterte videre, snakket med noen">
+          </div>
+          <div class="field">
+            <label for="emptied-5">Hva tømte koppen litt i dag?</label>
+            <input type="text" id="emptied-5" data-key="emptied-5" placeholder="F.eks. gikk en tur, trente, tok en pause">
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="6">
+      <summary>Dag 6 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-6">Dato (valgfritt)</label>
+            <input type="date" id="date-6" data-key="date-6">
+          </div>
+          <div class="field field-wide">
+            <label for="situation-6">Situasjon — hva skjedde i dag som du legger merke til?</label>
+            <textarea id="situation-6" data-key="situation-6" placeholder="F.eks. mye å gjøre på jobb, en hyggelig telefon, en krevende beskjed"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="intensity-6">Intensitet: <span class="range-value" id="intensity-value-6">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="intensity-6" data-key="intensity-6" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Rolig, koppen nesten tom</span>
+              <span>10 — Full kopp, nær overløp</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="physical-6">Fysiske tegn — hva kjente du i kroppen?</label>
+            <input type="text" id="physical-6" data-key="physical-6" placeholder="F.eks. spente skuldre, vondt i magen, rask puls">
+          </div>
+          <div class="field">
+            <label for="thoughts-6">Tanker — hva tenkte du om situasjonen?</label>
+            <input type="text" id="thoughts-6" data-key="thoughts-6" placeholder="F.eks. «jeg rekker ikke alt», «dette går fint»">
+          </div>
+          <div class="field">
+            <label for="reaction-6">Reaksjon — hva gjorde du?</label>
+            <input type="text" id="reaction-6" data-key="reaction-6" placeholder="F.eks. tok en pause, presterte videre, snakket med noen">
+          </div>
+          <div class="field">
+            <label for="emptied-6">Hva tømte koppen litt i dag?</label>
+            <input type="text" id="emptied-6" data-key="emptied-6" placeholder="F.eks. gikk en tur, trente, tok en pause">
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="7">
+      <summary>Dag 7 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-7">Dato (valgfritt)</label>
+            <input type="date" id="date-7" data-key="date-7">
+          </div>
+          <div class="field field-wide">
+            <label for="situation-7">Situasjon — hva skjedde i dag som du legger merke til?</label>
+            <textarea id="situation-7" data-key="situation-7" placeholder="F.eks. mye å gjøre på jobb, en hyggelig telefon, en krevende beskjed"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="intensity-7">Intensitet: <span class="range-value" id="intensity-value-7">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="intensity-7" data-key="intensity-7" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Rolig, koppen nesten tom</span>
+              <span>10 — Full kopp, nær overløp</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="physical-7">Fysiske tegn — hva kjente du i kroppen?</label>
+            <input type="text" id="physical-7" data-key="physical-7" placeholder="F.eks. spente skuldre, vondt i magen, rask puls">
+          </div>
+          <div class="field">
+            <label for="thoughts-7">Tanker — hva tenkte du om situasjonen?</label>
+            <input type="text" id="thoughts-7" data-key="thoughts-7" placeholder="F.eks. «jeg rekker ikke alt», «dette går fint»">
+          </div>
+          <div class="field">
+            <label for="reaction-7">Reaksjon — hva gjorde du?</label>
+            <input type="text" id="reaction-7" data-key="reaction-7" placeholder="F.eks. tok en pause, presterte videre, snakket med noen">
+          </div>
+          <div class="field">
+            <label for="emptied-7">Hva tømte koppen litt i dag?</label>
+            <input type="text" id="emptied-7" data-key="emptied-7" placeholder="F.eks. gikk en tur, trente, tok en pause">
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
 
   <section class="primer" id="summarySection">
     <h2>Oppsummering for uken</h2>
@@ -396,59 +670,6 @@
   var DAY_COUNT = 7;
   var STORAGE_KEY = 'dagbok-stresskoppen-data';
   var RECIPIENT = 'silje.merete.binder@gmail.com';
-
-  function dayCardHTML(n) {
-    return (
-      '<details class="topic" data-day="' + n + '">' +
-        '<summary>Dag ' + n + ' <span class="chevron">▸</span></summary>' +
-        '<div class="topic-body">' +
-          '<div class="field-grid">' +
-            '<div class="field">' +
-              '<label for="date-' + n + '">Dato (valgfritt)</label>' +
-              '<input type="date" id="date-' + n + '" data-key="date-' + n + '">' +
-            '</div>' +
-            '<div class="field field-wide">' +
-              '<label for="situation-' + n + '">Situasjon — hva skjedde i dag som du legger merke til?</label>' +
-              '<textarea id="situation-' + n + '" data-key="situation-' + n + '" placeholder="F.eks. mye å gjøre på jobb, en hyggelig telefon, en krevende beskjed"></textarea>' +
-            '</div>' +
-            '<div class="field field-wide">' +
-              '<label for="intensity-' + n + '">Intensitet: <span class="range-value" id="intensity-value-' + n + '">Ikke satt</span> / 10</label>' +
-              '<input type="range" min="1" max="10" step="1" value="5" id="intensity-' + n + '" data-key="intensity-' + n + '" data-touched="false">' +
-              '<div class="range-anchors">' +
-                '<span>1 — Rolig, koppen nesten tom</span>' +
-                '<span>10 — Full kopp, nær overløp</span>' +
-              '</div>' +
-            '</div>' +
-            '<div class="field">' +
-              '<label for="physical-' + n + '">Fysiske tegn — hva kjente du i kroppen?</label>' +
-              '<input type="text" id="physical-' + n + '" data-key="physical-' + n + '" placeholder="F.eks. spente skuldre, vondt i magen, rask puls">' +
-            '</div>' +
-            '<div class="field">' +
-              '<label for="thoughts-' + n + '">Tanker — hva tenkte du om situasjonen?</label>' +
-              '<input type="text" id="thoughts-' + n + '" data-key="thoughts-' + n + '" placeholder="F.eks. «jeg rekker ikke alt», «dette går fint»">' +
-            '</div>' +
-            '<div class="field">' +
-              '<label for="reaction-' + n + '">Reaksjon — hva gjorde du?</label>' +
-              '<input type="text" id="reaction-' + n + '" data-key="reaction-' + n + '" placeholder="F.eks. tok en pause, presterte videre, snakket med noen">' +
-            '</div>' +
-            '<div class="field">' +
-              '<label for="emptied-' + n + '">Hva tømte koppen litt i dag?</label>' +
-              '<input type="text" id="emptied-' + n + '" data-key="emptied-' + n + '" placeholder="F.eks. gikk en tur, trente, tok en pause">' +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-      '</details>'
-    );
-  }
-
-  function buildDayCards() {
-    var container = document.getElementById('days');
-    var html = '';
-    for (var n = 1; n <= DAY_COUNT; n++) {
-      html += dayCardHTML(n);
-    }
-    container.innerHTML = html;
-  }
 
   function readState() {
     var raw = localStorage.getItem(STORAGE_KEY);
@@ -573,7 +794,6 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    buildDayCards();
     loadState();
     updateSummary();
 
