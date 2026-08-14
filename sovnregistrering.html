@@ -467,7 +467,421 @@
     <button type="button" id="resetAll" class="danger">Nullstill alt</button>
   </div>
 
-  <div id="days"></div>
+  <div id="days">
+    <details class="topic" data-day="1">
+      <summary>Dag 1 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-1">Dato (valgfritt)</label>
+            <input type="date" id="date-1" data-key="date-1">
+          </div>
+          <div class="field">
+            <label for="meal-1">Kveldsmåltid — hva og omtrent når</label>
+            <input type="text" id="meal-1" data-key="meal-1" placeholder="F.eks. taco kl. 19, eller ingenting etter kl. 20">
+          </div>
+          <div class="field">
+            <label for="tv-1">TV-vaner i går kveld</label>
+            <input type="text" id="tv-1" data-key="tv-1" placeholder="F.eks. 1 time serie, eller ingen TV">
+          </div>
+          <div class="field">
+            <label for="phone-before-1">Mobilbruk — siste gang før leggetid</label>
+            <input type="text" id="phone-before-1" data-key="phone-before-1" placeholder="F.eks. kl. 22.30, sosiale medier">
+          </div>
+          <div class="field">
+            <label for="phone-night-1">Mobilbruk — hvis du var våken om natten</label>
+            <input type="text" id="phone-night-1" data-key="phone-night-1" placeholder="F.eks. sjekket klokka/mobilen kl. 03">
+          </div>
+          <div class="field">
+            <label for="bedtime-1">Leggetid</label>
+            <input type="time" id="bedtime-1" data-key="bedtime-1">
+          </div>
+          <div class="field">
+            <label for="afterbed-duration-1">Vaner etter leggetid — varighet (minutter)</label>
+            <input type="number" min="0" step="5" id="afterbed-duration-1" data-key="afterbed-duration-1" placeholder="F.eks. 20">
+          </div>
+          <div class="field">
+            <label for="afterbed-activity-1">Vaner etter leggetid — hva gjorde du</label>
+            <input type="text" id="afterbed-activity-1" data-key="afterbed-activity-1" placeholder="F.eks. leste bok, scrollet mobil">
+          </div>
+          <div class="field">
+            <label for="waketime-1">Oppvåkningstidspunkt</label>
+            <input type="time" id="waketime-1" data-key="waketime-1">
+          </div>
+          <div class="field">
+            <label for="hours-1">Antall timer sovet</label>
+            <input type="number" min="0" max="16" step="0.25" id="hours-1" data-key="hours-1" placeholder="F.eks. 6.5">
+          </div>
+          <div class="field field-wide">
+            <label for="quality-1">Søvnkvalitet: <span class="quality-value" id="quality-value-1">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="quality-1" data-key="quality-1" data-touched="false">
+            <div class="quality-anchors">
+              <span>1 — Urolig, våknet mye</span>
+              <span>10 — Uthvilt, sammenhengende søvn</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="reflection-1">Hva var bra med denne natten — selv noe lite?</label>
+            <textarea id="reflection-1" data-key="reflection-1" placeholder="Skriv gjerne fritt her..."></textarea>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="2">
+      <summary>Dag 2 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-2">Dato (valgfritt)</label>
+            <input type="date" id="date-2" data-key="date-2">
+          </div>
+          <div class="field">
+            <label for="meal-2">Kveldsmåltid — hva og omtrent når</label>
+            <input type="text" id="meal-2" data-key="meal-2" placeholder="F.eks. taco kl. 19, eller ingenting etter kl. 20">
+          </div>
+          <div class="field">
+            <label for="tv-2">TV-vaner i går kveld</label>
+            <input type="text" id="tv-2" data-key="tv-2" placeholder="F.eks. 1 time serie, eller ingen TV">
+          </div>
+          <div class="field">
+            <label for="phone-before-2">Mobilbruk — siste gang før leggetid</label>
+            <input type="text" id="phone-before-2" data-key="phone-before-2" placeholder="F.eks. kl. 22.30, sosiale medier">
+          </div>
+          <div class="field">
+            <label for="phone-night-2">Mobilbruk — hvis du var våken om natten</label>
+            <input type="text" id="phone-night-2" data-key="phone-night-2" placeholder="F.eks. sjekket klokka/mobilen kl. 03">
+          </div>
+          <div class="field">
+            <label for="bedtime-2">Leggetid</label>
+            <input type="time" id="bedtime-2" data-key="bedtime-2">
+          </div>
+          <div class="field">
+            <label for="afterbed-duration-2">Vaner etter leggetid — varighet (minutter)</label>
+            <input type="number" min="0" step="5" id="afterbed-duration-2" data-key="afterbed-duration-2" placeholder="F.eks. 20">
+          </div>
+          <div class="field">
+            <label for="afterbed-activity-2">Vaner etter leggetid — hva gjorde du</label>
+            <input type="text" id="afterbed-activity-2" data-key="afterbed-activity-2" placeholder="F.eks. leste bok, scrollet mobil">
+          </div>
+          <div class="field">
+            <label for="waketime-2">Oppvåkningstidspunkt</label>
+            <input type="time" id="waketime-2" data-key="waketime-2">
+          </div>
+          <div class="field">
+            <label for="hours-2">Antall timer sovet</label>
+            <input type="number" min="0" max="16" step="0.25" id="hours-2" data-key="hours-2" placeholder="F.eks. 6.5">
+          </div>
+          <div class="field field-wide">
+            <label for="quality-2">Søvnkvalitet: <span class="quality-value" id="quality-value-2">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="quality-2" data-key="quality-2" data-touched="false">
+            <div class="quality-anchors">
+              <span>1 — Urolig, våknet mye</span>
+              <span>10 — Uthvilt, sammenhengende søvn</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="reflection-2">Hva var bra med denne natten — selv noe lite?</label>
+            <textarea id="reflection-2" data-key="reflection-2" placeholder="Skriv gjerne fritt her..."></textarea>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="3">
+      <summary>Dag 3 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-3">Dato (valgfritt)</label>
+            <input type="date" id="date-3" data-key="date-3">
+          </div>
+          <div class="field">
+            <label for="meal-3">Kveldsmåltid — hva og omtrent når</label>
+            <input type="text" id="meal-3" data-key="meal-3" placeholder="F.eks. taco kl. 19, eller ingenting etter kl. 20">
+          </div>
+          <div class="field">
+            <label for="tv-3">TV-vaner i går kveld</label>
+            <input type="text" id="tv-3" data-key="tv-3" placeholder="F.eks. 1 time serie, eller ingen TV">
+          </div>
+          <div class="field">
+            <label for="phone-before-3">Mobilbruk — siste gang før leggetid</label>
+            <input type="text" id="phone-before-3" data-key="phone-before-3" placeholder="F.eks. kl. 22.30, sosiale medier">
+          </div>
+          <div class="field">
+            <label for="phone-night-3">Mobilbruk — hvis du var våken om natten</label>
+            <input type="text" id="phone-night-3" data-key="phone-night-3" placeholder="F.eks. sjekket klokka/mobilen kl. 03">
+          </div>
+          <div class="field">
+            <label for="bedtime-3">Leggetid</label>
+            <input type="time" id="bedtime-3" data-key="bedtime-3">
+          </div>
+          <div class="field">
+            <label for="afterbed-duration-3">Vaner etter leggetid — varighet (minutter)</label>
+            <input type="number" min="0" step="5" id="afterbed-duration-3" data-key="afterbed-duration-3" placeholder="F.eks. 20">
+          </div>
+          <div class="field">
+            <label for="afterbed-activity-3">Vaner etter leggetid — hva gjorde du</label>
+            <input type="text" id="afterbed-activity-3" data-key="afterbed-activity-3" placeholder="F.eks. leste bok, scrollet mobil">
+          </div>
+          <div class="field">
+            <label for="waketime-3">Oppvåkningstidspunkt</label>
+            <input type="time" id="waketime-3" data-key="waketime-3">
+          </div>
+          <div class="field">
+            <label for="hours-3">Antall timer sovet</label>
+            <input type="number" min="0" max="16" step="0.25" id="hours-3" data-key="hours-3" placeholder="F.eks. 6.5">
+          </div>
+          <div class="field field-wide">
+            <label for="quality-3">Søvnkvalitet: <span class="quality-value" id="quality-value-3">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="quality-3" data-key="quality-3" data-touched="false">
+            <div class="quality-anchors">
+              <span>1 — Urolig, våknet mye</span>
+              <span>10 — Uthvilt, sammenhengende søvn</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="reflection-3">Hva var bra med denne natten — selv noe lite?</label>
+            <textarea id="reflection-3" data-key="reflection-3" placeholder="Skriv gjerne fritt her..."></textarea>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="4">
+      <summary>Dag 4 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-4">Dato (valgfritt)</label>
+            <input type="date" id="date-4" data-key="date-4">
+          </div>
+          <div class="field">
+            <label for="meal-4">Kveldsmåltid — hva og omtrent når</label>
+            <input type="text" id="meal-4" data-key="meal-4" placeholder="F.eks. taco kl. 19, eller ingenting etter kl. 20">
+          </div>
+          <div class="field">
+            <label for="tv-4">TV-vaner i går kveld</label>
+            <input type="text" id="tv-4" data-key="tv-4" placeholder="F.eks. 1 time serie, eller ingen TV">
+          </div>
+          <div class="field">
+            <label for="phone-before-4">Mobilbruk — siste gang før leggetid</label>
+            <input type="text" id="phone-before-4" data-key="phone-before-4" placeholder="F.eks. kl. 22.30, sosiale medier">
+          </div>
+          <div class="field">
+            <label for="phone-night-4">Mobilbruk — hvis du var våken om natten</label>
+            <input type="text" id="phone-night-4" data-key="phone-night-4" placeholder="F.eks. sjekket klokka/mobilen kl. 03">
+          </div>
+          <div class="field">
+            <label for="bedtime-4">Leggetid</label>
+            <input type="time" id="bedtime-4" data-key="bedtime-4">
+          </div>
+          <div class="field">
+            <label for="afterbed-duration-4">Vaner etter leggetid — varighet (minutter)</label>
+            <input type="number" min="0" step="5" id="afterbed-duration-4" data-key="afterbed-duration-4" placeholder="F.eks. 20">
+          </div>
+          <div class="field">
+            <label for="afterbed-activity-4">Vaner etter leggetid — hva gjorde du</label>
+            <input type="text" id="afterbed-activity-4" data-key="afterbed-activity-4" placeholder="F.eks. leste bok, scrollet mobil">
+          </div>
+          <div class="field">
+            <label for="waketime-4">Oppvåkningstidspunkt</label>
+            <input type="time" id="waketime-4" data-key="waketime-4">
+          </div>
+          <div class="field">
+            <label for="hours-4">Antall timer sovet</label>
+            <input type="number" min="0" max="16" step="0.25" id="hours-4" data-key="hours-4" placeholder="F.eks. 6.5">
+          </div>
+          <div class="field field-wide">
+            <label for="quality-4">Søvnkvalitet: <span class="quality-value" id="quality-value-4">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="quality-4" data-key="quality-4" data-touched="false">
+            <div class="quality-anchors">
+              <span>1 — Urolig, våknet mye</span>
+              <span>10 — Uthvilt, sammenhengende søvn</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="reflection-4">Hva var bra med denne natten — selv noe lite?</label>
+            <textarea id="reflection-4" data-key="reflection-4" placeholder="Skriv gjerne fritt her..."></textarea>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="5">
+      <summary>Dag 5 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-5">Dato (valgfritt)</label>
+            <input type="date" id="date-5" data-key="date-5">
+          </div>
+          <div class="field">
+            <label for="meal-5">Kveldsmåltid — hva og omtrent når</label>
+            <input type="text" id="meal-5" data-key="meal-5" placeholder="F.eks. taco kl. 19, eller ingenting etter kl. 20">
+          </div>
+          <div class="field">
+            <label for="tv-5">TV-vaner i går kveld</label>
+            <input type="text" id="tv-5" data-key="tv-5" placeholder="F.eks. 1 time serie, eller ingen TV">
+          </div>
+          <div class="field">
+            <label for="phone-before-5">Mobilbruk — siste gang før leggetid</label>
+            <input type="text" id="phone-before-5" data-key="phone-before-5" placeholder="F.eks. kl. 22.30, sosiale medier">
+          </div>
+          <div class="field">
+            <label for="phone-night-5">Mobilbruk — hvis du var våken om natten</label>
+            <input type="text" id="phone-night-5" data-key="phone-night-5" placeholder="F.eks. sjekket klokka/mobilen kl. 03">
+          </div>
+          <div class="field">
+            <label for="bedtime-5">Leggetid</label>
+            <input type="time" id="bedtime-5" data-key="bedtime-5">
+          </div>
+          <div class="field">
+            <label for="afterbed-duration-5">Vaner etter leggetid — varighet (minutter)</label>
+            <input type="number" min="0" step="5" id="afterbed-duration-5" data-key="afterbed-duration-5" placeholder="F.eks. 20">
+          </div>
+          <div class="field">
+            <label for="afterbed-activity-5">Vaner etter leggetid — hva gjorde du</label>
+            <input type="text" id="afterbed-activity-5" data-key="afterbed-activity-5" placeholder="F.eks. leste bok, scrollet mobil">
+          </div>
+          <div class="field">
+            <label for="waketime-5">Oppvåkningstidspunkt</label>
+            <input type="time" id="waketime-5" data-key="waketime-5">
+          </div>
+          <div class="field">
+            <label for="hours-5">Antall timer sovet</label>
+            <input type="number" min="0" max="16" step="0.25" id="hours-5" data-key="hours-5" placeholder="F.eks. 6.5">
+          </div>
+          <div class="field field-wide">
+            <label for="quality-5">Søvnkvalitet: <span class="quality-value" id="quality-value-5">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="quality-5" data-key="quality-5" data-touched="false">
+            <div class="quality-anchors">
+              <span>1 — Urolig, våknet mye</span>
+              <span>10 — Uthvilt, sammenhengende søvn</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="reflection-5">Hva var bra med denne natten — selv noe lite?</label>
+            <textarea id="reflection-5" data-key="reflection-5" placeholder="Skriv gjerne fritt her..."></textarea>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="6">
+      <summary>Dag 6 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-6">Dato (valgfritt)</label>
+            <input type="date" id="date-6" data-key="date-6">
+          </div>
+          <div class="field">
+            <label for="meal-6">Kveldsmåltid — hva og omtrent når</label>
+            <input type="text" id="meal-6" data-key="meal-6" placeholder="F.eks. taco kl. 19, eller ingenting etter kl. 20">
+          </div>
+          <div class="field">
+            <label for="tv-6">TV-vaner i går kveld</label>
+            <input type="text" id="tv-6" data-key="tv-6" placeholder="F.eks. 1 time serie, eller ingen TV">
+          </div>
+          <div class="field">
+            <label for="phone-before-6">Mobilbruk — siste gang før leggetid</label>
+            <input type="text" id="phone-before-6" data-key="phone-before-6" placeholder="F.eks. kl. 22.30, sosiale medier">
+          </div>
+          <div class="field">
+            <label for="phone-night-6">Mobilbruk — hvis du var våken om natten</label>
+            <input type="text" id="phone-night-6" data-key="phone-night-6" placeholder="F.eks. sjekket klokka/mobilen kl. 03">
+          </div>
+          <div class="field">
+            <label for="bedtime-6">Leggetid</label>
+            <input type="time" id="bedtime-6" data-key="bedtime-6">
+          </div>
+          <div class="field">
+            <label for="afterbed-duration-6">Vaner etter leggetid — varighet (minutter)</label>
+            <input type="number" min="0" step="5" id="afterbed-duration-6" data-key="afterbed-duration-6" placeholder="F.eks. 20">
+          </div>
+          <div class="field">
+            <label for="afterbed-activity-6">Vaner etter leggetid — hva gjorde du</label>
+            <input type="text" id="afterbed-activity-6" data-key="afterbed-activity-6" placeholder="F.eks. leste bok, scrollet mobil">
+          </div>
+          <div class="field">
+            <label for="waketime-6">Oppvåkningstidspunkt</label>
+            <input type="time" id="waketime-6" data-key="waketime-6">
+          </div>
+          <div class="field">
+            <label for="hours-6">Antall timer sovet</label>
+            <input type="number" min="0" max="16" step="0.25" id="hours-6" data-key="hours-6" placeholder="F.eks. 6.5">
+          </div>
+          <div class="field field-wide">
+            <label for="quality-6">Søvnkvalitet: <span class="quality-value" id="quality-value-6">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="quality-6" data-key="quality-6" data-touched="false">
+            <div class="quality-anchors">
+              <span>1 — Urolig, våknet mye</span>
+              <span>10 — Uthvilt, sammenhengende søvn</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="reflection-6">Hva var bra med denne natten — selv noe lite?</label>
+            <textarea id="reflection-6" data-key="reflection-6" placeholder="Skriv gjerne fritt her..."></textarea>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="7">
+      <summary>Dag 7 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-7">Dato (valgfritt)</label>
+            <input type="date" id="date-7" data-key="date-7">
+          </div>
+          <div class="field">
+            <label for="meal-7">Kveldsmåltid — hva og omtrent når</label>
+            <input type="text" id="meal-7" data-key="meal-7" placeholder="F.eks. taco kl. 19, eller ingenting etter kl. 20">
+          </div>
+          <div class="field">
+            <label for="tv-7">TV-vaner i går kveld</label>
+            <input type="text" id="tv-7" data-key="tv-7" placeholder="F.eks. 1 time serie, eller ingen TV">
+          </div>
+          <div class="field">
+            <label for="phone-before-7">Mobilbruk — siste gang før leggetid</label>
+            <input type="text" id="phone-before-7" data-key="phone-before-7" placeholder="F.eks. kl. 22.30, sosiale medier">
+          </div>
+          <div class="field">
+            <label for="phone-night-7">Mobilbruk — hvis du var våken om natten</label>
+            <input type="text" id="phone-night-7" data-key="phone-night-7" placeholder="F.eks. sjekket klokka/mobilen kl. 03">
+          </div>
+          <div class="field">
+            <label for="bedtime-7">Leggetid</label>
+            <input type="time" id="bedtime-7" data-key="bedtime-7">
+          </div>
+          <div class="field">
+            <label for="afterbed-duration-7">Vaner etter leggetid — varighet (minutter)</label>
+            <input type="number" min="0" step="5" id="afterbed-duration-7" data-key="afterbed-duration-7" placeholder="F.eks. 20">
+          </div>
+          <div class="field">
+            <label for="afterbed-activity-7">Vaner etter leggetid — hva gjorde du</label>
+            <input type="text" id="afterbed-activity-7" data-key="afterbed-activity-7" placeholder="F.eks. leste bok, scrollet mobil">
+          </div>
+          <div class="field">
+            <label for="waketime-7">Oppvåkningstidspunkt</label>
+            <input type="time" id="waketime-7" data-key="waketime-7">
+          </div>
+          <div class="field">
+            <label for="hours-7">Antall timer sovet</label>
+            <input type="number" min="0" max="16" step="0.25" id="hours-7" data-key="hours-7" placeholder="F.eks. 6.5">
+          </div>
+          <div class="field field-wide">
+            <label for="quality-7">Søvnkvalitet: <span class="quality-value" id="quality-value-7">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="quality-7" data-key="quality-7" data-touched="false">
+            <div class="quality-anchors">
+              <span>1 — Urolig, våknet mye</span>
+              <span>10 — Uthvilt, sammenhengende søvn</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="reflection-7">Hva var bra med denne natten — selv noe lite?</label>
+            <textarea id="reflection-7" data-key="reflection-7" placeholder="Skriv gjerne fritt her..."></textarea>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
 
   <section class="primer" id="summarySection">
     <h2>Oppsummering for uken</h2>
@@ -507,79 +921,6 @@
   var DAY_COUNT = 7;
   var STORAGE_KEY = 'sovnregistrering-data';
   var RECIPIENT = 'silje.merete.binder@gmail.com';
-
-  function dayCardHTML(n) {
-    return (
-      '<details class="topic" data-day="' + n + '">' +
-        '<summary>Dag ' + n + ' <span class="chevron">▸</span></summary>' +
-        '<div class="topic-body">' +
-          '<div class="field-grid">' +
-            '<div class="field">' +
-              '<label for="date-' + n + '">Dato (valgfritt)</label>' +
-              '<input type="date" id="date-' + n + '" data-key="date-' + n + '">' +
-            '</div>' +
-            '<div class="field">' +
-              '<label for="meal-' + n + '">Kveldsmåltid — hva og omtrent når</label>' +
-              '<input type="text" id="meal-' + n + '" data-key="meal-' + n + '" placeholder="F.eks. taco kl. 19, eller ingenting etter kl. 20">' +
-            '</div>' +
-            '<div class="field">' +
-              '<label for="tv-' + n + '">TV-vaner i går kveld</label>' +
-              '<input type="text" id="tv-' + n + '" data-key="tv-' + n + '" placeholder="F.eks. 1 time serie, eller ingen TV">' +
-            '</div>' +
-            '<div class="field">' +
-              '<label for="phone-before-' + n + '">Mobilbruk — siste gang før leggetid</label>' +
-              '<input type="text" id="phone-before-' + n + '" data-key="phone-before-' + n + '" placeholder="F.eks. kl. 22.30, sosiale medier">' +
-            '</div>' +
-            '<div class="field">' +
-              '<label for="phone-night-' + n + '">Mobilbruk — hvis du var våken om natten</label>' +
-              '<input type="text" id="phone-night-' + n + '" data-key="phone-night-' + n + '" placeholder="F.eks. sjekket klokka/mobilen kl. 03">' +
-            '</div>' +
-            '<div class="field">' +
-              '<label for="bedtime-' + n + '">Leggetid</label>' +
-              '<input type="time" id="bedtime-' + n + '" data-key="bedtime-' + n + '">' +
-            '</div>' +
-            '<div class="field">' +
-              '<label for="afterbed-duration-' + n + '">Vaner etter leggetid — varighet (minutter)</label>' +
-              '<input type="number" min="0" step="5" id="afterbed-duration-' + n + '" data-key="afterbed-duration-' + n + '" placeholder="F.eks. 20">' +
-            '</div>' +
-            '<div class="field">' +
-              '<label for="afterbed-activity-' + n + '">Vaner etter leggetid — hva gjorde du</label>' +
-              '<input type="text" id="afterbed-activity-' + n + '" data-key="afterbed-activity-' + n + '" placeholder="F.eks. leste bok, scrollet mobil">' +
-            '</div>' +
-            '<div class="field">' +
-              '<label for="waketime-' + n + '">Oppvåkningstidspunkt</label>' +
-              '<input type="time" id="waketime-' + n + '" data-key="waketime-' + n + '">' +
-            '</div>' +
-            '<div class="field">' +
-              '<label for="hours-' + n + '">Antall timer sovet</label>' +
-              '<input type="number" min="0" max="16" step="0.25" id="hours-' + n + '" data-key="hours-' + n + '" placeholder="F.eks. 6.5">' +
-            '</div>' +
-            '<div class="field field-wide">' +
-              '<label for="quality-' + n + '">Søvnkvalitet: <span class="quality-value" id="quality-value-' + n + '">Ikke satt</span> / 10</label>' +
-              '<input type="range" min="1" max="10" step="1" value="5" id="quality-' + n + '" data-key="quality-' + n + '" data-touched="false">' +
-              '<div class="quality-anchors">' +
-                '<span>1 — Urolig, våknet mye</span>' +
-                '<span>10 — Uthvilt, sammenhengende søvn</span>' +
-              '</div>' +
-            '</div>' +
-            '<div class="field field-wide">' +
-              '<label for="reflection-' + n + '">Hva var bra med denne natten — selv noe lite?</label>' +
-              '<textarea id="reflection-' + n + '" data-key="reflection-' + n + '" placeholder="Skriv gjerne fritt her..."></textarea>' +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-      '</details>'
-    );
-  }
-
-  function buildDayCards() {
-    var container = document.getElementById('days');
-    var html = '';
-    for (var n = 1; n <= DAY_COUNT; n++) {
-      html += dayCardHTML(n);
-    }
-    container.innerHTML = html;
-  }
 
   function readState() {
     var raw = localStorage.getItem(STORAGE_KEY);
@@ -723,7 +1064,6 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    buildDayCards();
     loadState();
     updateSummary();
 
