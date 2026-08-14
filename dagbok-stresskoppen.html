@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dagbok for stresskroppen — én uke</title>
+<title>Dagbok for stresskoppen — 7 dager</title>
 <style>
   :root {
     --bg: #f6f8f7;
@@ -93,8 +93,8 @@
     font-size: 0.9rem;
   }
 
-  .signs-item.activated { background: var(--push-soft); }
-  .signs-item.calm { background: var(--accent-soft); }
+  .signs-item.fills { background: var(--push-soft); }
+  .signs-item.empties { background: var(--accent-soft); }
 
   .signs-item strong {
     display: block;
@@ -199,7 +199,6 @@
 
   .field input[type="text"],
   .field input[type="date"],
-  .field input[type="number"],
   .field textarea {
     width: 100%;
     padding: 0.5rem 0.65rem;
@@ -239,15 +238,6 @@
     color: var(--muted);
     margin-top: 0.3rem;
     gap: 0.5rem;
-  }
-
-  .affirmation {
-    background: var(--accent-soft);
-    border-radius: 8px;
-    padding: 0.7rem 0.9rem;
-    font-size: 0.95rem;
-    font-style: italic;
-    color: var(--accent-dark);
   }
 
   .stat-grid {
@@ -330,33 +320,33 @@
 <div class="wrap">
 
   <header class="page-header">
-    <h1>Dagbok for stresskroppen — én uke</h1>
-    <p class="tagline">Et bilde av hvordan stress viser seg i kroppen din, dag for dag</p>
+    <h1>Dagbok for stresskoppen — 7 dager</h1>
+    <p class="tagline">Et par minutter hver dag — gjerne som en liten oppsummering om kvelden</p>
     <div class="reminder">
-      Dette er ikke en eksamen i stressmestring — bare et bilde av uken din,
-      slik at vi kan finne gode neste steg sammen. Fyll ut så mye du klarer,
-      i ditt eget tempo. Alt du legger inn lagres i denne nettleseren, så du
-      kan lukke siden og fortsette senere. <strong>Det er helt greit om noen
-      dager mangler noe.</strong>
+      Dette er ikke en eksamen i å registrere riktig — bare et lite
+      pusterom for å bli mer bevisst på egen dag. Skriv litt om kvelden,
+      eller noter underveis om det passer bedre for deg. Alt du legger
+      inn lagres i denne nettleseren, så du kan lukke siden og fortsette
+      i morgen. <strong>Det er helt greit om noen dager mangler noe.</strong>
     </div>
   </header>
 
   <section class="primer">
-    <h2>Om stresskroppen</h2>
-    <p>Når kroppen opplever stress over tid, aktiveres det samme
-    beredskapssystemet som skal hjelpe oss i akutt fare — men uten en tydelig
-    "av-knapp" kan det bli stående på lenger enn det trenger. Det kan vise seg
-    som spente muskler, rastløshet, uro i magen, hodepine, rask pust eller
-    dårlig søvn. Denne dagboken hjelper deg å legge merke til hvordan stresset
-    viser seg i akkurat din kropp — og hva som faktisk roer den ned.</p>
+    <h2>Om stresskoppen</h2>
+    <p>Stresskoppen er et bilde på at vi alle bærer med oss en usynlig
+    kopp som fylles opp av stress gjennom dagen. Noe fyller koppen —
+    krav, bekymringer, dårlig søvn. Annet tømmer den litt — pauser,
+    bevegelse, hvile, en god samtale. Blir koppen for full uten å bli
+    tømt, renner den lettere over. Denne dagboken hjelper deg å legge
+    merke til hva som fyller og hva som tømmer koppen din, dag for dag.</p>
     <div class="signs-grid">
-      <div class="signs-item activated">
-        <strong>Tegn på aktivert stresskropp</strong>
-        Rask puls, anspente skuldre/nakke, grunn pust, uro i magen, rastløshet, vansker med å slappe av
+      <div class="signs-item fills">
+        <strong>Fyller koppen</strong>
+        Tidspress, krav, bekymringer, dårlig søvn, konflikter, for mye på en gang
       </div>
-      <div class="signs-item calm">
-        <strong>Tegn på roligere kropp</strong>
-        Rolig, dyp pust, avslappede muskler, ro i magen, tilstedeværelse, lettere for å tenke klart
+      <div class="signs-item empties">
+        <strong>Tømmer koppen</strong>
+        Pauser, bevegelse eller turer, god søvn, en trygg samtale, noe du liker å gjøre
       </div>
     </div>
   </section>
@@ -372,13 +362,11 @@
   <section class="primer" id="summarySection">
     <h2>Oppsummering for uken</h2>
     <div class="stat-grid">
-      <div class="stat-item"><strong id="avg-stress">–</strong>Snitt stressnivå (1–10)</div>
-      <div class="stat-item"><strong id="avg-energy">–</strong>Snitt energinivå (1–10)</div>
-      <div class="stat-item"><strong id="avg-sleep">–</strong>Snitt timer sovet</div>
+      <div class="stat-item"><strong id="avg-intensity">–</strong>Snitt intensitet (1–10)</div>
       <div class="stat-item"><strong id="days-filled">–</strong>Dager registrert</div>
     </div>
     <div class="field field-wide">
-      <label for="weekly-reflection">Hvilken dag kjentes roligst denne uken — hva var annerledes da?</label>
+      <label for="weekly-reflection">Hvilken dag kjentes mest i balanse denne uken — hva bidro til det?</label>
       <textarea id="weekly-reflection" data-key="weekly-reflection" placeholder="Skriv gjerne fritt her..."></textarea>
     </div>
   </section>
@@ -406,7 +394,7 @@
 
 <script>
   var DAY_COUNT = 7;
-  var STORAGE_KEY = 'dagbok-stresskroppen-data';
+  var STORAGE_KEY = 'dagbok-stresskoppen-data';
   var RECIPIENT = 'silje.merete.binder@gmail.com';
 
   function dayCardHTML(n) {
@@ -420,44 +408,32 @@
               '<input type="date" id="date-' + n + '" data-key="date-' + n + '">' +
             '</div>' +
             '<div class="field field-wide">' +
-              '<label for="stress-' + n + '">Stressnivå i dag: <span class="range-value" id="stress-value-' + n + '">Ikke satt</span> / 10</label>' +
-              '<input type="range" min="1" max="10" step="1" value="5" id="stress-' + n + '" data-key="stress-' + n + '" data-touched="false">' +
+              '<label for="situation-' + n + '">Situasjon — hva skjedde i dag som du legger merke til?</label>' +
+              '<textarea id="situation-' + n + '" data-key="situation-' + n + '" placeholder="F.eks. mye å gjøre på jobb, en hyggelig telefon, en krevende beskjed"></textarea>' +
+            '</div>' +
+            '<div class="field field-wide">' +
+              '<label for="intensity-' + n + '">Intensitet: <span class="range-value" id="intensity-value-' + n + '">Ikke satt</span> / 10</label>' +
+              '<input type="range" min="1" max="10" step="1" value="5" id="intensity-' + n + '" data-key="intensity-' + n + '" data-touched="false">' +
               '<div class="range-anchors">' +
-                '<span>1 — Rolig og avslappet</span>' +
-                '<span>10 — Høyt aktivert, i beredskap</span>' +
+                '<span>1 — Rolig, koppen nesten tom</span>' +
+                '<span>10 — Full kopp, nær overløp</span>' +
               '</div>' +
             '</div>' +
-            '<div class="field field-wide">' +
-              '<label for="body-signals-' + n + '">Hvor kjentes stresset i kroppen?</label>' +
-              '<input type="text" id="body-signals-' + n + '" data-key="body-signals-' + n + '" placeholder="F.eks. spente skuldre, vondt i magen, hodepine">' +
+            '<div class="field">' +
+              '<label for="physical-' + n + '">Fysiske tegn — hva kjente du i kroppen?</label>' +
+              '<input type="text" id="physical-' + n + '" data-key="physical-' + n + '" placeholder="F.eks. spente skuldre, vondt i magen, rask puls">' +
             '</div>' +
             '<div class="field">' +
-              '<label for="trigger-' + n + '">Hva trigget stresset, om du vet det?</label>' +
-              '<input type="text" id="trigger-' + n + '" data-key="trigger-' + n + '" placeholder="F.eks. tidspress på jobb, en vanskelig samtale">' +
+              '<label for="thoughts-' + n + '">Tanker — hva tenkte du om situasjonen?</label>' +
+              '<input type="text" id="thoughts-' + n + '" data-key="thoughts-' + n + '" placeholder="F.eks. «jeg rekker ikke alt», «dette går fint»">' +
             '</div>' +
             '<div class="field">' +
-              '<label for="breathing-' + n + '">Pust gjennom dagen</label>' +
-              '<input type="text" id="breathing-' + n + '" data-key="breathing-' + n + '" placeholder="F.eks. rask og overfladisk om morgenen, roligere utover dagen">' +
+              '<label for="reaction-' + n + '">Reaksjon — hva gjorde du?</label>' +
+              '<input type="text" id="reaction-' + n + '" data-key="reaction-' + n + '" placeholder="F.eks. tok en pause, presterte videre, snakket med noen">' +
             '</div>' +
             '<div class="field">' +
-              '<label for="coping-' + n + '">Hva gjorde du for å roe kroppen ned?</label>' +
-              '<input type="text" id="coping-' + n + '" data-key="coping-' + n + '" placeholder="F.eks. gikk en tur, pustet dypt, satte en grense">' +
-            '</div>' +
-            '<div class="field">' +
-              '<label for="sleep-hours-' + n + '">Søvn natten før (timer)</label>' +
-              '<input type="number" min="0" max="16" step="0.25" id="sleep-hours-' + n + '" data-key="sleep-hours-' + n + '" placeholder="F.eks. 6.5">' +
-            '</div>' +
-            '<div class="field field-wide">' +
-              '<label for="energy-' + n + '">Energinivå i dag: <span class="range-value" id="energy-value-' + n + '">Ikke satt</span> / 10</label>' +
-              '<input type="range" min="1" max="10" step="1" value="5" id="energy-' + n + '" data-key="energy-' + n + '" data-touched="false">' +
-              '<div class="range-anchors">' +
-                '<span>1 — Utslitt</span>' +
-                '<span>10 — Uthvilt og til stede</span>' +
-              '</div>' +
-            '</div>' +
-            '<div class="field field-wide">' +
-              '<label for="reflection-' + n + '">Noe du la merke til i dag, selv noe lite?</label>' +
-              '<textarea id="reflection-' + n + '" data-key="reflection-' + n + '" placeholder="Skriv gjerne fritt her..."></textarea>' +
+              '<label for="emptied-' + n + '">Hva tømte koppen litt i dag?</label>' +
+              '<input type="text" id="emptied-' + n + '" data-key="emptied-' + n + '" placeholder="F.eks. gikk en tur, trente, tok en pause">' +
             '</div>' +
           '</div>' +
         '</div>' +
@@ -503,109 +479,83 @@
         el.value = data[key];
       }
     });
-    ['stress', 'energy'].forEach(function (prefix) {
-      for (var n = 1; n <= DAY_COUNT; n++) {
-        var range = document.getElementById(prefix + '-' + n);
-        var display = document.getElementById(prefix + '-value-' + n);
-        if (!range || !display) continue;
-        if (data[range.id + '-touched'] === 'true') {
-          range.setAttribute('data-touched', 'true');
-          display.textContent = range.value;
-        } else {
-          display.textContent = 'Ikke satt';
-        }
+    for (var n = 1; n <= DAY_COUNT; n++) {
+      var range = document.getElementById('intensity-' + n);
+      var display = document.getElementById('intensity-value-' + n);
+      if (!range || !display) continue;
+      if (data[range.id + '-touched'] === 'true') {
+        range.setAttribute('data-touched', 'true');
+        display.textContent = range.value;
+      } else {
+        display.textContent = 'Ikke satt';
       }
-    });
+    }
   }
 
-  function isRangeTouched(prefix, n) {
-    var range = document.getElementById(prefix + '-' + n);
+  function isRangeTouched(n) {
+    var range = document.getElementById('intensity-' + n);
     return range && range.getAttribute('data-touched') === 'true';
   }
 
   function updateSummary() {
-    var stressSum = 0, stressCount = 0;
-    var energySum = 0, energyCount = 0;
-    var sleepSum = 0, sleepCount = 0;
+    var intensitySum = 0, intensityCount = 0;
     var daysFilled = 0;
 
     for (var n = 1; n <= DAY_COUNT; n++) {
-      var hasAnyData = isRangeTouched('stress', n) || isRangeTouched('energy', n);
+      var hasAnyData = isRangeTouched(n);
 
       document.querySelectorAll('[data-day="' + n + '"] [data-key]:not([type="range"])').forEach(function (el) {
         if (el.value && el.value.trim() !== '') hasAnyData = true;
       });
       if (hasAnyData) daysFilled++;
 
-      if (isRangeTouched('stress', n)) {
-        var stressVal = parseFloat(document.getElementById('stress-' + n).value);
-        if (!isNaN(stressVal)) {
-          stressSum += stressVal;
-          stressCount++;
+      if (isRangeTouched(n)) {
+        var intensityVal = parseFloat(document.getElementById('intensity-' + n).value);
+        if (!isNaN(intensityVal)) {
+          intensitySum += intensityVal;
+          intensityCount++;
         }
-      }
-
-      if (isRangeTouched('energy', n)) {
-        var energyVal = parseFloat(document.getElementById('energy-' + n).value);
-        if (!isNaN(energyVal)) {
-          energySum += energyVal;
-          energyCount++;
-        }
-      }
-
-      var sleepVal = parseFloat(document.getElementById('sleep-hours-' + n).value);
-      if (!isNaN(sleepVal)) {
-        sleepSum += sleepVal;
-        sleepCount++;
       }
     }
 
-    document.getElementById('avg-stress').textContent = stressCount ? (stressSum / stressCount).toFixed(1) : '–';
-    document.getElementById('avg-energy').textContent = energyCount ? (energySum / energyCount).toFixed(1) : '–';
-    document.getElementById('avg-sleep').textContent = sleepCount ? (sleepSum / sleepCount).toFixed(1) : '–';
+    document.getElementById('avg-intensity').textContent = intensityCount ? (intensitySum / intensityCount).toFixed(1) : '–';
     document.getElementById('days-filled').textContent = daysFilled + ' / ' + DAY_COUNT;
   }
 
   function buildSummaryText() {
     var lines = [];
-    lines.push('Dagbok for stresskroppen — én uke');
+    lines.push('Dagbok for stresskoppen — 7 dager');
     lines.push('');
 
     for (var n = 1; n <= DAY_COUNT; n++) {
       var date = document.getElementById('date-' + n).value;
-      var stress = isRangeTouched('stress', n) ? document.getElementById('stress-' + n).value : '';
-      var bodySignals = document.getElementById('body-signals-' + n).value;
-      var trigger = document.getElementById('trigger-' + n).value;
-      var breathing = document.getElementById('breathing-' + n).value;
-      var coping = document.getElementById('coping-' + n).value;
-      var sleepHours = document.getElementById('sleep-hours-' + n).value;
-      var energy = isRangeTouched('energy', n) ? document.getElementById('energy-' + n).value : '';
-      var reflection = document.getElementById('reflection-' + n).value;
+      var situation = document.getElementById('situation-' + n).value;
+      var intensity = isRangeTouched(n) ? document.getElementById('intensity-' + n).value : '';
+      var physical = document.getElementById('physical-' + n).value;
+      var thoughts = document.getElementById('thoughts-' + n).value;
+      var reaction = document.getElementById('reaction-' + n).value;
+      var emptied = document.getElementById('emptied-' + n).value;
 
       lines.push('Dag ' + n + (date ? ' (' + date + ')' : ''));
-      lines.push('  Stressnivå (1-10): ' + (stress || '-'));
-      lines.push('  Hvor kjentes stresset i kroppen: ' + (bodySignals || '-'));
-      lines.push('  Utløser: ' + (trigger || '-'));
-      lines.push('  Pust gjennom dagen: ' + (breathing || '-'));
-      lines.push('  Hva roet kroppen ned: ' + (coping || '-'));
-      lines.push('  Søvn natten før (timer): ' + (sleepHours || '-'));
-      lines.push('  Energinivå (1-10): ' + (energy || '-'));
-      lines.push('  Refleksjon: ' + (reflection || '-'));
+      lines.push('  Situasjon: ' + (situation || '-'));
+      lines.push('  Intensitet (1-10): ' + (intensity || '-'));
+      lines.push('  Fysiske tegn: ' + (physical || '-'));
+      lines.push('  Tanker: ' + (thoughts || '-'));
+      lines.push('  Reaksjon: ' + (reaction || '-'));
+      lines.push('  Hva tømte koppen litt: ' + (emptied || '-'));
       lines.push('');
     }
 
-    lines.push('Snitt stressnivå: ' + document.getElementById('avg-stress').textContent);
-    lines.push('Snitt energinivå: ' + document.getElementById('avg-energy').textContent);
-    lines.push('Snitt timer sovet: ' + document.getElementById('avg-sleep').textContent);
+    lines.push('Snitt intensitet: ' + document.getElementById('avg-intensity').textContent);
     lines.push('Dager registrert: ' + document.getElementById('days-filled').textContent);
     lines.push('');
-    lines.push('Roligste dag denne uken / hva var annerledes: ' + (document.getElementById('weekly-reflection').value || '-'));
+    lines.push('Mest i balanse denne uken / hva bidro til det: ' + (document.getElementById('weekly-reflection').value || '-'));
 
     return lines.join('\n');
   }
 
   function sendEmail() {
-    var subject = encodeURIComponent('Dagbok for stresskroppen - én uke');
+    var subject = encodeURIComponent('Dagbok for stresskoppen - 7 dager');
     var body = encodeURIComponent(buildSummaryText());
     window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
   }
@@ -615,7 +565,7 @@
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
     a.href = url;
-    a.download = 'dagbok-stresskroppen.txt';
+    a.download = 'dagbok-stresskoppen.txt';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -631,10 +581,8 @@
       if (!e.target.hasAttribute('data-key')) return;
       if (e.target.type === 'range') {
         e.target.setAttribute('data-touched', 'true');
-        var parts = e.target.id.split('-');
-        var n = parts[parts.length - 1];
-        var prefix = parts.slice(0, -1).join('-');
-        var display = document.getElementById(prefix + '-value-' + n);
+        var n = e.target.id.split('-')[1];
+        var display = document.getElementById('intensity-value-' + n);
         if (display) display.textContent = e.target.value;
       }
       saveState();
