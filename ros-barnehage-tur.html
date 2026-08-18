@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROS for turer og utflukter i barnehagen</title>
+<style>
+  :root {
+    --bg: #f6f8f7;
+    --card: #ffffff;
+    --ink: #1f2d2b;
+    --muted: #56655f;
+    --accent: #2f7d6b;
+    --accent-dark: #235c50;
+    --accent-soft: #e3f1ec;
+    --push: #b96b2a;
+    --push-soft: #fbeee0;
+    --border: #dfe7e3;
+    --shadow: 0 1px 3px rgba(31, 45, 43, 0.08), 0 1px 2px rgba(31, 45, 43, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  header.page-header {
+    margin-bottom: 1.75rem;
+  }
+
+  header.page-header h1 {
+    font-size: 1.6rem;
+    margin: 0 0 0.35rem;
+    color: var(--accent-dark);
+  }
+
+  header.page-header p.tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  .reminder {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  section.primer h2 {
+    margin-top: 0;
+    font-size: 1.15rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer h3 {
+    font-size: 0.98rem;
+    color: var(--accent-dark);
+    margin: 1.1rem 0 0.3rem;
+  }
+
+  section.primer p {
+    margin: 0.6rem 0 0;
+  }
+
+  .law-list {
+    margin: 0.5rem 0 0;
+    padding-left: 1.1rem;
+  }
+
+  .law-list li {
+    margin-bottom: 0.6rem;
+    font-size: 0.94rem;
+  }
+
+  .law-list strong {
+    color: var(--accent-dark);
+  }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 0.9rem;
+    margin-top: 0.5rem;
+  }
+
+  .field-wide {
+    grid-column: 1 / -1;
+  }
+
+  .field label {
+    display: block;
+    font-weight: 600;
+    color: var(--accent-dark);
+    margin-bottom: 0.3rem;
+    font-size: 0.88rem;
+  }
+
+  .field input[type="text"],
+  .field input[type="date"],
+  .field input[type="time"],
+  .field input[type="number"],
+  .field textarea {
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .field textarea {
+    min-height: 60px;
+    resize: vertical;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    margin-top: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+
+  table.risk-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 720px;
+    font-size: 0.9rem;
+  }
+
+  table.risk-table th {
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    text-align: left;
+    padding: 0.6rem 0.65rem;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  table.risk-table td {
+    padding: 0.5rem 0.5rem;
+    border-top: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  table.risk-table textarea {
+    width: 100%;
+    min-height: 52px;
+    padding: 0.4rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.88rem;
+    resize: vertical;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  table.risk-table select {
+    width: 100%;
+    padding: 0.4rem 0.4rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.88rem;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  table.risk-table select.level-lav { color: var(--accent-dark); }
+  table.risk-table select.level-middels { color: var(--push); }
+  table.risk-table select.level-hoy { color: #a8331f; font-weight: 600; }
+
+  .row-remove {
+    border: none;
+    background: none;
+    color: var(--push);
+    cursor: pointer;
+    font-size: 0.82rem;
+    padding: 0.3rem 0.2rem;
+    white-space: nowrap;
+  }
+
+  .row-remove:hover {
+    text-decoration: underline;
+  }
+
+  .add-row-btn {
+    margin-top: 0.75rem;
+    font-size: 0.88rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .add-row-btn:hover {
+    background: var(--accent-soft);
+  }
+
+  .checklist {
+    list-style: none;
+    margin: 0.5rem 0 0;
+    padding: 0;
+  }
+
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.45rem 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: 0.94rem;
+  }
+
+  .checklist li:last-child {
+    border-bottom: none;
+  }
+
+  .checklist input[type="checkbox"] {
+    margin-top: 0.2rem;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .sig-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-top: 0.75rem;
+  }
+
+  .sig-box {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+  }
+
+  .sig-box h3 {
+    margin: 0 0 0.6rem;
+    font-size: 0.92rem;
+    color: var(--accent-dark);
+  }
+
+  .send-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .send-buttons button {
+    font-size: 0.92rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .send-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .send-buttons button.danger {
+    background: var(--card);
+    color: var(--push);
+    border-color: var(--push);
+  }
+
+  .send-buttons button.danger:hover {
+    background: var(--push-soft);
+  }
+
+  .muted-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .sources {
+    font-size: 0.85rem;
+  }
+
+  .sources ul {
+    padding-left: 1.1rem;
+    margin: 0.5rem 0 0;
+  }
+
+  .sources li {
+    margin-bottom: 0.4rem;
+  }
+
+  .sources a {
+    color: var(--accent-dark);
+  }
+
+  footer.closing {
+    margin-top: 1.75rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong {
+    color: var(--accent-dark);
+  }
+
+  a.back-link {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: var(--accent-dark);
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  a.back-link:hover {
+    text-decoration: underline;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .send-buttons, .muted-note, .add-row-btn, .row-remove, a.back-link { display: none; }
+    section.primer { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    table.risk-table { min-width: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="back-link" href="index.html">&larr; Tilbake til forsiden</a>
+
+  <header class="page-header">
+    <h1>Risiko- og sårbarhetsvurdering (ROS) for turer og utflukter i barnehagen</h1>
+    <p class="tagline">Mal forankret i barnehageloven, forskrift om helse og miljø i barnehager, skoler og skolefritidsordninger, og Drammen kommunes rutiner for risiko- og sårbarhetsanalyse</p>
+    <div class="reminder">
+      Dette er en arbeidsmal — ikke et ferdig godkjent dokument. Innholdet må
+      tilpasses den enkelte barnehage, den konkrete turen og barnehagens eget
+      internkontrollsystem, og godkjennes av styrer/pedagogisk leder før bruk.
+      Sjekk alltid gjeldende lov- og forskriftstekst på
+      <a href="https://lovdata.no/" target="_blank" rel="noopener">lovdata.no</a>
+      og barnehageeiers egne rutiner, da regelverk og lokale rutiner kan endres.
+    </div>
+  </header>
+
+  <section class="primer">
+    <h2>Lovgrunnlag og forankring</h2>
+    <p>Risikovurdering av turer og utflukter er ikke en isolert øvelse — den er en
+    del av barnehagens lovpålagte plikt til å ivareta barnas sikkerhet og helse,
+    og skal inngå i barnehagens systematiske internkontroll. Malen under bygger på:</p>
+    <ul class="law-list">
+      <li><strong>Barnehageloven § 1 (Formål):</strong> Barnehagen skal i samarbeid
+      og forståelse med hjemmet ivareta barnas behov for omsorg og lek, og fremme
+      læring og danning som grunnlag for allsidig utvikling — herunder trygge
+      rammer rundt barnas hverdag, også utenfor barnehagens område.</li>
+      <li><strong>Barnehageloven §§ 41–42 (Barnehagemiljø og aktivitetsplikt):</strong>
+      Barna har rett til et trygt og godt barnehagemiljø, og barnehagen skal
+      handle raskt og systematisk når det er nødvendig for å ivareta et barns
+      sikkerhet og trivsel — noe som også gjelder den fysiske tryggheten på tur.</li>
+      <li><strong>Forskrift om pedagogisk bemanning og dispensasjon i barnehager</strong>
+      (fastsatt med hjemmel i barnehageloven): setter minstekrav til
+      bemanningsnorm (voksentetthet), som er styrende for hvor mange voksne som
+      må delta på en tur for at gruppen skal ha forsvarlig tilsyn.</li>
+      <li><strong>Forskrift om helse og miljø i barnehager, skoler og
+      skolefritidsordninger, § 14 (Beredskap, førstehjelp og sikkerhetsutstyr):</strong>
+      barnehagen skal ha oppdaterte beredskapsplaner, tilgjengelig
+      førstehjelpsutstyr og klare rutiner for varsling ved skade eller ulykke —
+      også når barna er på tur utenfor barnehagens område.</li>
+      <li><strong>Samme forskrift § 18 (Internkontroll):</strong> barnehagen skal
+      ha et systematisk internkontrollsystem som blant annet omfatter
+      risikovurdering av virksomhetens aktiviteter. En egen ROS/dagROS-vurdering
+      før hver tur er en praktisk måte å oppfylle dette kravet på.</li>
+      <li><strong>Rammeplan for barnehagens innhold og oppgaver:</strong>
+      barnehagen skal ha rutiner for sikkerhet på turer og andre aktiviteter
+      utenfor barnehagens område, som er kjent for både ansatte og foreldre, og
+      barna skal få oppleve friluftsliv og uteliv tilpasset alder og modenhet.</li>
+      <li><strong>Drammen kommunes rutiner og ROS-metodikk:</strong> Drammen
+      kommune legger til grunn en risikovurdering basert på sannsynlighet og
+      konsekvens (samme grunnmetodikk som kommunens helhetlige ROS-arbeid), og
+      forventer at barnehager i kommunen har oppdaterte rutiner for helse og
+      miljø, inkludert risikovurdering av turer, som del av egen internkontroll
+      og tilgjengelig ved kommunalt tilsyn.</li>
+    </ul>
+    <p class="muted-note">Se kildelisten nederst på siden for lenker til
+    regelverk og kommunens sider.</p>
+  </section>
+
+  <section class="primer">
+    <h2>1. Generell informasjon og rammebetingelser</h2>
+    <div class="field-grid">
+      <div class="field">
+        <label for="barnehage">Barnehage / avdeling</label>
+        <input type="text" id="barnehage" data-key="barnehage" placeholder="Navn på barnehage og avdeling">
+      </div>
+      <div class="field">
+        <label for="dato-tur">Dato for turen</label>
+        <input type="date" id="dato-tur" data-key="dato-tur">
+      </div>
+      <div class="field">
+        <label for="tidsrom">Tidsrom (fra – til)</label>
+        <input type="text" id="tidsrom" data-key="tidsrom" placeholder="F.eks. 09:00–09:45">
+      </div>
+      <div class="field field-wide">
+        <label for="destinasjon">Destinasjon / områdebeskrivelse</label>
+        <textarea id="destinasjon" data-key="destinasjon" placeholder="Hvor skal turen gå, og hvordan er området (inngjerdet, nær trafikkert vei, vann i nærheten, oversiktlig/uoversiktlig)?"></textarea>
+      </div>
+      <div class="field">
+        <label for="antall-barn">Antall barn og aldersgruppe</label>
+        <input type="text" id="antall-barn" data-key="antall-barn" placeholder="F.eks. 12 barn, 3–5 år">
+      </div>
+      <div class="field">
+        <label for="bemanning-tur">Bemanning på tur</label>
+        <input type="text" id="bemanning-tur" data-key="bemanning-tur" placeholder="Antall voksne, jf. bemanningsnormen">
+      </div>
+      <div class="field field-wide">
+        <label for="beredskap">Beredskap / grunnbemanning igjen i barnehagen</label>
+        <textarea id="beredskap" data-key="beredskap" placeholder="Hvordan er resten av barnehagen bemannet mens gruppen er på tur, og hvem kan rykke ut ved behov?"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="primer">
+    <h2>2. Risikovurdering og tiltaksplan</h2>
+    <p class="muted-note">Sannsynlighet og konsekvens vurderes hver for seg
+    (Lav / Middels / Høy), i tråd med kommunens ROS-metodikk. Legg til egne
+    rader for faremomenter som gjelder den konkrete turen.</p>
+    <div class="table-wrap">
+      <table class="risk-table">
+        <thead>
+          <tr>
+            <th style="width: 24%;">Faremoment / hendelse</th>
+            <th style="width: 12%;">Sannsynlighet</th>
+            <th style="width: 12%;">Konsekvens</th>
+            <th>Forebyggende og avbøtende tiltak</th>
+            <th style="width: 4%;"></th>
+          </tr>
+        </thead>
+        <tbody id="riskTableBody"></tbody>
+      </table>
+    </div>
+    <button type="button" class="add-row-btn" id="addRow">+ Legg til faremoment</button>
+  </section>
+
+  <section class="primer">
+    <h2>3. Sjekkliste før avgang</h2>
+    <ul class="checklist" id="checklist">
+      <li><input type="checkbox" data-key="chk-1" id="chk-1"><label for="chk-1">Opptelling og registrering av barn før avgang (navneliste avstemt)</label></li>
+      <li><input type="checkbox" data-key="chk-2" id="chk-2"><label for="chk-2">Alle barn har på godt synlige refleksvester</label></li>
+      <li><input type="checkbox" data-key="chk-3" id="chk-3"><label for="chk-3">Gjennomført toalettbesøk for alle barn før avgang</label></li>
+      <li><input type="checkbox" data-key="chk-4" id="chk-4"><label for="chk-4">Førstehjelpsskrin og fulladet mobiltelefon medbringes av pedagogisk leder</label></li>
+      <li><input type="checkbox" data-key="chk-5" id="chk-5"><label for="chk-5">Avklart intern tilkallingsavtale med avdelingen/styrer i barnehagen</label></li>
+      <li><input type="checkbox" data-key="chk-6" id="chk-6"><label for="chk-6">Barna er inndelt i faste smågrupper med ansvarlig voksen fordelt</label></li>
+      <li><input type="checkbox" data-key="chk-7" id="chk-7"><label for="chk-7">Bemanning på tur er i tråd med bemanningsnormen og denne ROS-vurderingen</label></li>
+      <li><input type="checkbox" data-key="chk-8" id="chk-8"><label for="chk-8">Foresatte er kjent med barnehagens faste rutiner for turer og uteliv</label></li>
+    </ul>
+  </section>
+
+  <section class="primer">
+    <h2>4. Pedagogisk vurdering og godkjenning</h2>
+    <div class="field field-wide">
+      <label for="konklusjon">Konklusjon</label>
+      <textarea id="konklusjon" data-key="konklusjon" placeholder="F.eks. «Turen vurderes som sikkerhetsmessig forsvarlig under forutsetning av at overnevnte tiltak, tidsrammer og avtalt beredskap overholdes.»"></textarea>
+    </div>
+    <div class="sig-grid">
+      <div class="sig-box">
+        <h3>Dato &amp; pedagogisk leder</h3>
+        <div class="field">
+          <label for="ped-dato">Dato</label>
+          <input type="date" id="ped-dato" data-key="ped-dato">
+        </div>
+        <div class="field">
+          <label for="ped-navn">Navn</label>
+          <input type="text" id="ped-navn" data-key="ped-navn">
+        </div>
+      </div>
+      <div class="sig-box">
+        <h3>Dato &amp; styrer / fagleder</h3>
+        <div class="field">
+          <label for="styrer-dato">Dato</label>
+          <input type="date" id="styrer-dato" data-key="styrer-dato">
+        </div>
+        <div class="field">
+          <label for="styrer-navn">Navn</label>
+          <input type="text" id="styrer-navn" data-key="styrer-navn">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="primer sources">
+    <h2>Kilder og videre lesning</h2>
+    <ul>
+      <li><a href="https://lovdata.no/lov/2005-06-17-64" target="_blank" rel="noopener">Barnehageloven (LOV-2005-06-17-64) — Lovdata</a></li>
+      <li><a href="https://lovdata.no/dokument/SF/forskrift/2023-03-28-449" target="_blank" rel="noopener">Forskrift om helse og miljø i barnehager, skoler og skolefritidsordninger (FOR-2023-03-28-449) — Lovdata</a></li>
+      <li><a href="https://www.helsedirektoratet.no/veiledere/helse-og-miljo-i-barnehager-skoler-skolefritidsordninger/miljo-og-helsekrav-til-virksomheter-5-15/14-beredskap-forstehjelp-og-sikkerhetsutstyr" target="_blank" rel="noopener">§ 14 Beredskap, førstehjelp og sikkerhetsutstyr — veileder, Helsedirektoratet</a></li>
+      <li><a href="https://www.helsedirektoratet.no/veiledere/helse-og-miljo-i-barnehager-skoler-skolefritidsordninger/godkjenning-internkontroll-tilsyn-og-klage/18-internkontroll" target="_blank" rel="noopener">§ 18 Internkontroll — veileder, Helsedirektoratet</a></li>
+      <li><a href="https://lovdata.no/forskrift/2017-06-22-1049" target="_blank" rel="noopener">Forskrift om pedagogisk bemanning og dispensasjon i barnehager — Lovdata</a></li>
+      <li><a href="https://www.udir.no/contentassets/5d0f4d947b244cfe90be8e6d475ba1b4/rammeplan-for-barnehagen---bokmal-pdf.pdf" target="_blank" rel="noopener">Rammeplan for barnehagens innhold og oppgaver — Utdanningsdirektoratet</a></li>
+      <li><a href="https://www.drammen.kommune.no/tjenester/skole/helse-og-miljo-i-barnehager-skoler-og-skolefritidsordninger/" target="_blank" rel="noopener">Helse og miljø i barnehager, skoler og SFO — Drammen kommune</a></li>
+      <li><a href="https://www.drammen.kommune.no/om-kommunen/organisasjon-administrasjon/beredskap-og-samfunnssikkerhet/helhetlig-risiko--og-sarbarhetsanalyse/" target="_blank" rel="noopener">Helhetlig risiko- og sårbarhetsanalyse — Drammen kommune</a></li>
+    </ul>
+    <p>Malen er utarbeidet som et praktisk hjelpemiddel og er ikke en juridisk
+    tolkning. Barnehageeier og styrer har ansvaret for at innholdet stemmer
+    overens med gjeldende regelverk og kommunens til enhver tid gjeldende
+    rutiner.</p>
+  </section>
+
+  <section class="primer">
+    <h2>Skriv ut eller lagre</h2>
+    <p class="muted-note">
+      Skjemaet lagres automatisk i denne nettleseren mens du fyller det ut.
+      Bruk «Skriv ut / Lagre som PDF» for å få et undertegnbart dokument, eller
+      last det ned som tekstfil for å ta det inn i barnehagens eget system.
+    </p>
+    <div class="send-buttons">
+      <button type="button" id="printForm">Skriv ut / Lagre som PDF</button>
+      <button type="button" id="downloadText" class="secondary">Last ned som tekstfil</button>
+      <button type="button" id="resetAll" class="danger">Nullstill skjema</button>
+    </div>
+  </section>
+
+  <footer class="closing">
+    Trygge turer starter med gode rutiner — ikke perfekte skjemaer.<br>
+    <strong>Tilpass alltid malen til barnehagens egne forhold.</strong>
+  </footer>
+
+</div>
+
+<script>
+  var STORAGE_KEY = 'ros-barnehage-tur-data';
+  var LEVELS = ['Lav', 'Middels', 'Høy'];
+
+  function defaultRows() {
+    return [
+      {
+        hendelse: 'Barn forlater området / manglende gjerde',
+        sannsynlighet: 'Middels',
+        konsekvens: 'Høy',
+        tiltak: 'Faste ansvarsgrupper (ca. 7–8 barn per voksen). Tydelige, avklarte grenser for lek. Kontinuerlig telling og sonedeling blant voksne. Alle barn har på synlige refleksvester.'
+      },
+      {
+        hendelse: 'Toalettbehov hos barn',
+        sannsynlighet: 'Høy',
+        konsekvens: 'Lav',
+        tiltak: 'Alle barn går på toalettet rett før avgang. Ved dobesøk underveis avbrytes turen, og hele gruppen returnerer samlet til barnehagen.'
+      },
+      {
+        hendelse: 'Akutt skade / ulykke',
+        sannsynlighet: 'Lav',
+        konsekvens: 'Høy',
+        tiltak: 'Førstehjelpsskrin og fulladet mobiltelefon medbringes. Pedagogisk leder varsler straks barnehagen for bistand/utrykning. Øvrige voksne skjermer og ivaretar resten av barnegruppen.'
+      },
+      {
+        hendelse: 'Uoversiktlige forhold / andre grupper på stedet',
+        sannsynlighet: 'Middels',
+        konsekvens: 'Middels',
+        tiltak: 'Dersom det blir mange andre barn/grupper på stedet, avbrytes turen og gruppen går tilbake for å unngå sammenblanding.'
+      },
+      {
+        hendelse: 'Forflytning til og fra stedet (trafikk)',
+        sannsynlighet: 'Lav',
+        konsekvens: 'Middels',
+        tiltak: 'Barna går strukturert i rekke/par med én voksen foran, én i midten og én bakerst. Skjerpet oppmerksomhet ved kryssing av vei/atkomst.'
+      }
+    ];
+  }
+
+  function levelClass(value) {
+    if (value === 'Lav') return 'level-lav';
+    if (value === 'Høy') return 'level-hoy';
+    return 'level-middels';
+  }
+
+  function buildLevelSelect(value) {
+    var select = document.createElement('select');
+    LEVELS.forEach(function (level) {
+      var opt = document.createElement('option');
+      opt.value = level;
+      opt.textContent = level;
+      if (level === value) opt.selected = true;
+      select.appendChild(opt);
+    });
+    select.className = levelClass(value);
+    select.addEventListener('change', function () {
+      select.className = levelClass(select.value);
+      saveState();
+    });
+    return select;
+  }
+
+  function buildRow(row) {
+    var tr = document.createElement('tr');
+
+    var tdHendelse = document.createElement('td');
+    var hendelseInput = document.createElement('textarea');
+    hendelseInput.value = row.hendelse || '';
+    hendelseInput.addEventListener('input', saveState);
+    tdHendelse.appendChild(hendelseInput);
+    tr.appendChild(tdHendelse);
+
+    var tdSanns = document.createElement('td');
+    var sannsSelect = buildLevelSelect(row.sannsynlighet || 'Lav');
+    tdSanns.appendChild(sannsSelect);
+    tr.appendChild(tdSanns);
+
+    var tdKons = document.createElement('td');
+    var konsSelect = buildLevelSelect(row.konsekvens || 'Lav');
+    tdKons.appendChild(konsSelect);
+    tr.appendChild(tdKons);
+
+    var tdTiltak = document.createElement('td');
+    var tiltakInput = document.createElement('textarea');
+    tiltakInput.value = row.tiltak || '';
+    tiltakInput.addEventListener('input', saveState);
+    tdTiltak.appendChild(tiltakInput);
+    tr.appendChild(tdTiltak);
+
+    var tdRemove = document.createElement('td');
+    var removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'row-remove';
+    removeBtn.textContent = 'Fjern';
+    removeBtn.addEventListener('click', function () {
+      tr.remove();
+      saveState();
+    });
+    tdRemove.appendChild(removeBtn);
+    tr.appendChild(tdRemove);
+
+    return tr;
+  }
+
+  function renderTable(rows) {
+    var tbody = document.getElementById('riskTableBody');
+    tbody.innerHTML = '';
+    rows.forEach(function (row) {
+      tbody.appendChild(buildRow(row));
+    });
+  }
+
+  function readRowsFromTable() {
+    var rows = [];
+    document.querySelectorAll('#riskTableBody tr').forEach(function (tr) {
+      var cells = tr.querySelectorAll('td');
+      rows.push({
+        hendelse: cells[0].querySelector('textarea').value,
+        sannsynlighet: cells[1].querySelector('select').value,
+        konsekvens: cells[2].querySelector('select').value,
+        tiltak: cells[3].querySelector('textarea').value
+      });
+    });
+    return rows;
+  }
+
+  function collectFieldState() {
+    var data = {};
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      if (el.type === 'checkbox') {
+        data[el.getAttribute('data-key')] = el.checked;
+      } else {
+        data[el.getAttribute('data-key')] = el.value;
+      }
+    });
+    return data;
+  }
+
+  function saveState() {
+    var data = collectFieldState();
+    data._rows = readRowsFromTable();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function readState() {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    try {
+      return JSON.parse(raw);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function loadState() {
+    var data = readState();
+    if (!data) {
+      renderTable(defaultRows());
+      return;
+    }
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      var key = el.getAttribute('data-key');
+      if (data[key] === undefined) return;
+      if (el.type === 'checkbox') {
+        el.checked = !!data[key];
+      } else {
+        el.value = data[key];
+      }
+    });
+    renderTable(data._rows && data._rows.length ? data._rows : defaultRows());
+  }
+
+  function buildSummaryText() {
+    var lines = [];
+    lines.push('Risiko- og sårbarhetsvurdering (ROS) for turer og utflukter i barnehagen');
+    lines.push('');
+    lines.push('1. Generell informasjon');
+    lines.push('  Barnehage/avdeling: ' + (document.getElementById('barnehage').value || '-'));
+    lines.push('  Dato for turen: ' + (document.getElementById('dato-tur').value || '-'));
+    lines.push('  Tidsrom: ' + (document.getElementById('tidsrom').value || '-'));
+    lines.push('  Destinasjon/områdebeskrivelse: ' + (document.getElementById('destinasjon').value || '-'));
+    lines.push('  Antall barn og aldersgruppe: ' + (document.getElementById('antall-barn').value || '-'));
+    lines.push('  Bemanning på tur: ' + (document.getElementById('bemanning-tur').value || '-'));
+    lines.push('  Beredskap/grunnbemanning igjen i barnehagen: ' + (document.getElementById('beredskap').value || '-'));
+    lines.push('');
+    lines.push('2. Risikovurdering og tiltaksplan');
+    readRowsFromTable().forEach(function (row, i) {
+      lines.push('  Faremoment ' + (i + 1) + ': ' + (row.hendelse || '-'));
+      lines.push('    Sannsynlighet: ' + row.sannsynlighet + ' / Konsekvens: ' + row.konsekvens);
+      lines.push('    Tiltak: ' + (row.tiltak || '-'));
+    });
+    lines.push('');
+    lines.push('3. Sjekkliste før avgang');
+    document.querySelectorAll('#checklist li').forEach(function (li) {
+      var checkbox = li.querySelector('input[type="checkbox"]');
+      var label = li.querySelector('label');
+      lines.push('  [' + (checkbox.checked ? 'x' : ' ') + '] ' + label.textContent);
+    });
+    lines.push('');
+    lines.push('4. Pedagogisk vurdering og godkjenning');
+    lines.push('  Konklusjon: ' + (document.getElementById('konklusjon').value || '-'));
+    lines.push('  Pedagogisk leder: ' + (document.getElementById('ped-navn').value || '-') + ' (' + (document.getElementById('ped-dato').value || 'dato mangler') + ')');
+    lines.push('  Styrer/fagleder: ' + (document.getElementById('styrer-navn').value || '-') + ' (' + (document.getElementById('styrer-dato').value || 'dato mangler') + ')');
+
+    return lines.join('\n');
+  }
+
+  function downloadText() {
+    var blob = new Blob([buildSummaryText()], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'ros-barnehage-tur.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    loadState();
+
+    document.body.addEventListener('input', function (e) {
+      if (!e.target.hasAttribute('data-key')) return;
+      saveState();
+    });
+    document.body.addEventListener('change', function (e) {
+      if (!e.target.hasAttribute('data-key')) return;
+      saveState();
+    });
+
+    document.getElementById('addRow').addEventListener('click', function () {
+      document.getElementById('riskTableBody').appendChild(buildRow({ hendelse: '', sannsynlighet: 'Lav', konsekvens: 'Lav', tiltak: '' }));
+      saveState();
+    });
+
+    document.getElementById('printForm').addEventListener('click', function () {
+      window.print();
+    });
+
+    document.getElementById('downloadText').addEventListener('click', downloadText);
+
+    document.getElementById('resetAll').addEventListener('click', function () {
+      if (!confirm('Nullstille hele skjemaet? Dette kan ikke angres.')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    });
+  });
+</script>
+
+</body>
+</html>
