@@ -228,6 +228,14 @@
     accent-color: var(--accent);
   }
 
+  .slider-desc {
+    grid-column: 2 / 4;
+    grid-row: 3;
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
   .field-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -524,7 +532,8 @@
   var AREAS = [
     { key: 'energi',      label: 'Energi og overskudd',      icon: '⚡', color: '#5c9a3b' },
     { key: 'fysisk',       label: 'Fysisk form og kapasitet', icon: '🏃', color: '#e0a91e' },
-    { key: 'funksjon',     label: 'Funksjon i hverdagen',     icon: '🧍', color: '#e2801f' },
+    { key: 'funksjon',     label: 'Funksjon i hverdagen',     icon: '🧍', color: '#e2801f',
+      desc: 'Om kroppen og hodet henger med i det praktiske hverdagen krever — jobb, husarbeid, konsentrasjon og å klare deg selv, uten at det koster for mye.' },
     { key: 'sovn',         label: 'Søvn og restitusjon',      icon: '🌙', color: '#7c5fc7' },
     { key: 'stress',       label: 'Stress og indre ro',       icon: '🧠', color: '#3f80c9' },
     { key: 'sosial',       label: 'Sosial trivsel',           icon: '👥', color: '#c23a70' },
@@ -767,7 +776,8 @@
         '<span class="slider-dot" style="background:' + a.color + '">' + a.icon + '</span>' +
         '<label for="slider-' + a.key + '">' + a.label + '</label>' +
         '<span class="slider-value" id="value-' + a.key + '">' + values[a.key] + '</span>' +
-        '<input type="range" min="1" max="10" step="1" value="' + values[a.key] + '" id="slider-' + a.key + '" data-key="' + a.key + '">';
+        '<input type="range" min="1" max="10" step="1" value="' + values[a.key] + '" id="slider-' + a.key + '" data-key="' + a.key + '">' +
+        (a.desc ? '<p class="slider-desc">' + a.desc + '</p>' : '');
       grid.appendChild(item);
     });
 
