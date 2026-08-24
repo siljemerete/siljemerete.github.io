@@ -489,7 +489,7 @@
         <textarea id="refleksjon-overrasket" data-key="refleksjon-overrasket" placeholder="Skriv gjerne fritt her..."></textarea>
       </div>
       <div class="field field-wide">
-        <label for="refleksjon-prioritet">Hvilket område ønsker du å prioritere først — og hva kunne vært ett lite skritt der?</label>
+        <label for="refleksjon-prioritet">Hvilket område/er ønsker du å prioritere først?</label>
         <textarea id="refleksjon-prioritet" data-key="refleksjon-prioritet" placeholder="Skriv gjerne fritt her..."></textarea>
       </div>
     </div>
@@ -818,7 +818,7 @@
     });
     lines.push('');
     lines.push('Hva jeg legger merke til: ' + (document.getElementById('refleksjon-overrasket').value || '-'));
-    lines.push('Hva jeg vil prioritere først: ' + (document.getElementById('refleksjon-prioritet').value || '-'));
+    lines.push('Område/er jeg vil prioritere først: ' + (document.getElementById('refleksjon-prioritet').value || '-'));
     return lines.join('\n');
   }
 
