@@ -532,6 +532,24 @@
     border-bottom-color: var(--accent-dark);
   }
 
+  .ticket-row-qr {
+    align-items: center;
+  }
+
+  .ticket-qr-link {
+    display: block;
+    width: 3.4rem;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(15, 30, 27, 0.25);
+  }
+
+  .ticket-qr-link img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
   @media (max-width: 560px) {
     .ticket-stub { margin: -1.4rem 0.5rem 0; padding: 1rem 1rem 0.8rem; }
     .ticket-value { font-size: 0.82rem; }
@@ -622,6 +640,12 @@
       <div class="ticket-row">
         <span class="ticket-label">Kontakt</span>
         <span class="ticket-value"><a class="ticket-link" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">silje.merete.binder@gmail.com</a></span>
+      </div>
+      <div class="ticket-row ticket-row-qr">
+        <span class="ticket-label">Hjemmeside</span>
+        <a class="ticket-qr-link" href="https://siljemerete.github.io/">
+          <img src="images/qr-hjemmeside.svg" alt="QR-kode til siljemerete.github.io" width="80" height="80">
+        </a>
       </div>
     </div>
 
