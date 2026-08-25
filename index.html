@@ -8,6 +8,9 @@
 <meta property="og:title" content="Silje Merete SMART Helseveiledning">
 <meta property="og:description" content="Personlig helseveiledning for privatpersoner og bedrifter, med fokus på søvn, stress, kosthold og fysisk aktivitet.">
 <meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f6f8f7;
@@ -378,6 +381,145 @@
     margin-bottom: 1rem;
   }
 
+  /* Ticket-style info card ("gavekort"-inspired) */
+  .ticket-section {
+    background: var(--accent-dark);
+    padding: 2.75rem 1.25rem;
+  }
+
+  .ticket {
+    position: relative;
+    max-width: 480px;
+    margin: 0 auto;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 18px 40px rgba(15, 30, 27, 0.35);
+  }
+
+  .ticket::before,
+  .ticket::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 16px;
+    background-image: radial-gradient(circle at 10px 8px, var(--accent-dark) 8px, transparent 8.5px);
+    background-size: 22px 16px;
+    background-repeat: repeat-x;
+    z-index: 3;
+  }
+
+  .ticket::before { top: -1px; }
+  .ticket::after { bottom: -1px; transform: rotate(180deg); }
+
+  .ticket-photo {
+    position: relative;
+    padding: 1.9rem 1.5rem 2.4rem;
+    background: linear-gradient(160deg, rgba(10, 26, 23, 0.86), rgba(35, 92, 80, 0.72)),
+                url("images/hero-havet.jpg") center/cover;
+    text-align: center;
+  }
+
+  .ticket-emblem {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .ticket-emblem svg { flex: 0 0 auto; }
+
+  .ticket-emblem-text {
+    text-align: left;
+    line-height: 1.15;
+  }
+
+  .ticket-emblem-text strong {
+    display: block;
+    color: #fff;
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+  }
+
+  .ticket-emblem-text span {
+    display: block;
+    color: var(--accent-soft);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .ticket-stub {
+    position: relative;
+    background: #fdfdfb;
+    margin: -1.4rem 0.9rem 0;
+    border-radius: 10px;
+    padding: 1.1rem 1.3rem 0.9rem;
+    box-shadow: 0 6px 18px rgba(15, 30, 27, 0.18);
+    z-index: 2;
+  }
+
+  .ticket-signature {
+    margin: 0 0 0.5rem;
+    font-family: "Caveat", "Segoe Script", "Brush Script MT", cursive;
+    font-size: 2.1rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    transform: rotate(-2deg);
+  }
+
+  .ticket-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.55rem 0;
+    border-top: 1px dashed var(--border);
+  }
+
+  .ticket-row:first-of-type { border-top: 1px dashed var(--border); }
+
+  .ticket-label {
+    flex: 0 0 auto;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--muted);
+  }
+
+  .ticket-value {
+    text-align: right;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .ticket-banner {
+    background: var(--push);
+    color: #fff;
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.95rem;
+    padding: 0.85rem 1rem 1.1rem;
+  }
+
+  .ticket-banner span {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--push-soft);
+  }
+
+  @media (max-width: 560px) {
+    .ticket-stub { margin: -1.4rem 0.5rem 0; padding: 1rem 1rem 0.8rem; }
+    .ticket-value { font-size: 0.82rem; }
+  }
+
   footer.closing {
     margin: 2rem 0 1rem;
     text-align: center;
@@ -402,6 +544,7 @@
   <div class="nav-wrap">
     <div class="brand">Silje Merete <span>SMART Helseveiledning</span></div>
     <nav class="site-nav">
+      <a href="#infokort">Kort om meg</a>
       <a href="#om-meg">Om meg</a>
       <a href="#helseveiledning">Helseveiledning</a>
       <a href="#utdanning">Utdanning</a>
@@ -422,6 +565,49 @@
       <a class="cta-button" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post</a>
     </div>
     <img class="hero-photo" src="images/hero-havet.jpg" alt="Silje Merete ute ved havet">
+  </div>
+</section>
+
+<section id="infokort" class="ticket-section">
+  <div class="ticket">
+    <div class="ticket-photo">
+      <div class="ticket-emblem">
+        <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+          <circle cx="17" cy="17" r="16" fill="none" stroke="#fff" stroke-width="1.4"/>
+          <circle cx="17" cy="17" r="11.5" fill="none" stroke="#fff" stroke-width="1"/>
+          <path d="M17 8 L19.3 15 L27 17 L19.3 19 L17 26 L14.7 19 L7 17 L14.7 15 Z" fill="#fff"/>
+        </svg>
+        <div class="ticket-emblem-text">
+          <strong>Silje Merete</strong>
+          <span>Smart Helseveiledning</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ticket-stub">
+      <p class="ticket-signature">Silje Merete</p>
+      <div class="ticket-row">
+        <span class="ticket-label">Tilbyr</span>
+        <span class="ticket-value">Personlig helseveiledning</span>
+      </div>
+      <div class="ticket-row">
+        <span class="ticket-label">Fokus</span>
+        <span class="ticket-value">Søvn, stress, kosthold, aktivitet</span>
+      </div>
+      <div class="ticket-row">
+        <span class="ticket-label">For</span>
+        <span class="ticket-value">Privatpersoner og bedrifter</span>
+      </div>
+      <div class="ticket-row">
+        <span class="ticket-label">Sted</span>
+        <span class="ticket-value">Digitalt, eller fysisk i Drammen</span>
+      </div>
+    </div>
+
+    <div class="ticket-banner">
+      Din vei til bedre helse
+      <span>Send meg en e-post for en uforpliktende prat</span>
+    </div>
   </div>
 </section>
 
