@@ -102,57 +102,111 @@
   .card-front {
     position: relative;
     display: flex;
-    align-items: center;
-    gap: 8mm;
-    padding: 9mm 10mm;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4mm;
+    padding: 6mm 9mm;
     background: linear-gradient(160deg, rgba(10, 26, 23, 0.86), rgba(35, 92, 80, 0.72)),
                 url("images/hero-havet.jpg") center/cover;
   }
 
-  .front-text {
-    flex: 1 1 auto;
-    min-width: 0;
+  /* Row 1 — info about her + link to the homepage */
+  .front-row-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5mm;
   }
+
+  .front-text { flex: 1 1 auto; min-width: 0; }
 
   .front-emblem {
     display: flex;
     align-items: center;
-    gap: 4mm;
-    margin-bottom: 5mm;
+    gap: 3.5mm;
+    margin-bottom: 2.5mm;
   }
 
-  .front-emblem svg { width: 12mm; height: 12mm; flex: 0 0 auto; }
+  .front-emblem svg { width: 10mm; height: 10mm; flex: 0 0 auto; }
 
   .front-emblem-text { text-align: left; line-height: 1.15; }
 
   .front-emblem-text strong {
     display: block;
     color: #fff;
-    font-size: 6mm;
+    font-size: 5.4mm;
     letter-spacing: 0.02em;
   }
 
   .front-emblem-text span {
     display: block;
     color: var(--accent-soft);
-    font-size: 3.4mm;
+    font-size: 3mm;
     text-transform: uppercase;
     letter-spacing: 0.1em;
   }
 
   .front-tagline {
     color: #fff;
-    font-size: 4.2mm;
-    line-height: 1.45;
+    font-size: 3.6mm;
+    line-height: 1.4;
     margin: 0;
+  }
+
+  .front-qr-mini {
+    flex: 0 0 auto;
+    width: 19mm;
+    background: #fff;
+    border-radius: 2mm;
+    padding: 1.3mm;
+    box-shadow: 0 1mm 2mm rgba(0, 0, 0, 0.35);
+    text-align: center;
+  }
+
+  .front-qr-mini img { display: block; width: 100%; height: auto; }
+
+  .front-qr-mini span {
+    display: block;
+    margin-top: 0.6mm;
+    font-size: 1.9mm;
+    line-height: 1.15;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  /* Row 2 — the free consultation offer + the qualifying-question QR */
+  .front-row-offer {
+    display: flex;
+    align-items: center;
+    gap: 6mm;
+    padding-top: 4mm;
+    border-top: 1px dashed rgba(255, 255, 255, 0.35);
+  }
+
+  .front-offer-text { flex: 1 1 auto; min-width: 0; }
+
+  .front-offer-heading {
+    margin: 0 0 1.5mm;
+    color: #fff;
+    font-size: 4.6mm;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .front-offer-caption {
+    margin: 0;
+    color: var(--accent-soft);
+    font-size: 3.2mm;
+    line-height: 1.4;
   }
 
   .front-qr {
     flex: 0 0 auto;
-    width: 52mm;
+    width: 40mm;
     background: #fff;
     border-radius: 2.5mm;
-    padding: 2.5mm;
+    padding: 2mm;
     box-shadow: 0 1.5mm 3mm rgba(0, 0, 0, 0.35);
     text-align: center;
   }
@@ -165,8 +219,8 @@
 
   .front-qr span {
     display: block;
-    margin-top: 1.2mm;
-    font-size: 3mm;
+    margin-top: 1mm;
+    font-size: 2.6mm;
     line-height: 1.2;
     letter-spacing: 0.02em;
     color: var(--ink);
@@ -191,31 +245,46 @@
 
 <div class="print-instructions">
   <h1>Visittkort, klar for utskrift</h1>
-  <p>Ensidig kort i A6-format (148 × 105 mm) — bilde, logo og tagline til venstre, stor QR-kode til høyre. Koden åpner rett i e-postappen til deg, med emnefeltet «Gratis helsekartleggingssamtale» og en ferdig utfylt mal med begge spørsmålene i sin helhet (helsevurdering 1–10, og oppfølgingsspørsmålet om hva som skulle vært annerledes) samt felt for navn og mobilnummer. Den er ikke avhengig av at noen nettside er publisert, så den fungerer med en gang. QR-koden er stor (52 mm) for å skanne pålitelig siden den bærer mye tekst. Trykk «Skriv ut» og skru på <strong>bakgrunnsgrafikk</strong> i utskriftsinnstillingene, så blir fargene, bildet og QR-koden med.</p>
+  <p>Ensidig kort i A6-format (148 × 105 mm), alt på én side. Øverst: bilde, logo, tagline og en liten QR-kode til hjemmesiden. Nederst: tilbudet om en gratis helsekartleggingssamtale, med en stor QR-kode som åpner e-postappen med begge spørsmålene i sin helhet (helsevurdering 1–10, og oppfølgingsspørsmålet om hva som skulle vært annerledes) samt felt for navn og mobilnummer, ferdig utfylt. Ingen av kodene er avhengig av at noen nettside er publisert. Trykk «Skriv ut» og skru på <strong>bakgrunnsgrafikk</strong> i utskriftsinnstillingene, så blir fargene, bildet og QR-kodene med.</p>
   <button onclick="window.print()">Skriv ut kortet</button>
 </div>
 
 <div class="cards">
 
   <div class="card card-front">
-    <div class="front-text">
-      <div class="front-emblem">
-        <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
-          <circle cx="17" cy="17" r="16" fill="none" stroke="#fff" stroke-width="1.4"/>
-          <circle cx="17" cy="17" r="11.5" fill="none" stroke="#fff" stroke-width="1"/>
-          <path d="M17 8 L19.3 15 L27 17 L19.3 19 L17 26 L14.7 19 L7 17 L14.7 15 Z" fill="#fff"/>
-        </svg>
-        <div class="front-emblem-text">
-          <strong>Silje Merete</strong>
-          <span>Smart Helseveiledning</span>
+
+    <div class="front-row-info">
+      <div class="front-text">
+        <div class="front-emblem">
+          <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+            <circle cx="17" cy="17" r="16" fill="none" stroke="#fff" stroke-width="1.4"/>
+            <circle cx="17" cy="17" r="11.5" fill="none" stroke="#fff" stroke-width="1"/>
+            <path d="M17 8 L19.3 15 L27 17 L19.3 19 L17 26 L14.7 19 L7 17 L14.7 15 Z" fill="#fff"/>
+          </svg>
+          <div class="front-emblem-text">
+            <strong>Silje Merete</strong>
+            <span>Smart Helseveiledning</span>
+          </div>
         </div>
+        <p class="front-tagline">Helseveiledning for små, gjennomførbare skritt mot bedre helse og hverdag.</p>
       </div>
-      <p class="front-tagline">Helseveiledning for små, gjennomførbare skritt mot bedre helse og hverdag.</p>
+      <div class="front-qr-mini">
+        <img src="images/qr-hjemmeside.svg" alt="QR-kode til hjemmesiden siljemerete.github.io" width="80" height="80">
+        <span>Hjemmeside</span>
+      </div>
     </div>
-    <div class="front-qr">
-      <img src="images/qr-helsesjekk.svg" alt="QR-kode som åpner en e-post om gratis helsekartleggingssamtale" width="160" height="160">
-      <span>Gratis samtale</span>
+
+    <div class="front-row-offer">
+      <div class="front-offer-text">
+        <p class="front-offer-heading">Gratis helsekartleggingssamtale</p>
+        <p class="front-offer-caption">Meld deg på her og svar på to spørsmål.</p>
+      </div>
+      <div class="front-qr">
+        <img src="images/qr-helsesjekk.svg" alt="QR-kode som åpner en e-post om gratis helsekartleggingssamtale" width="160" height="160">
+        <span>Gratis samtale</span>
+      </div>
     </div>
+
   </div>
 
 </div>
