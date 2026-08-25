@@ -71,15 +71,15 @@
     padding-bottom: 2rem;
   }
 
-  /* Card = standard business card, 85mm x 55mm */
+  /* Card = A6 landscape, 148mm x 105mm */
   .card {
     position: relative;
-    width: 85mm;
-    height: 55mm;
+    width: 148mm;
+    height: 105mm;
     background: var(--card);
     overflow: hidden;
     box-shadow: 0 8px 24px rgba(15, 30, 27, 0.25);
-    border-radius: 2.5mm;
+    border-radius: 4mm;
   }
 
   .card::before,
@@ -88,9 +88,9 @@
     position: absolute;
     left: 0;
     right: 0;
-    height: 3mm;
-    background-image: radial-gradient(circle at 2.5mm 1.6mm, #d7ded9 1.6mm, transparent 1.7mm);
-    background-size: 5mm 3mm;
+    height: 5mm;
+    background-image: radial-gradient(circle at 4mm 2.6mm, #d7ded9 2.6mm, transparent 2.7mm);
+    background-size: 8mm 5mm;
     background-repeat: repeat-x;
     z-index: 3;
   }
@@ -103,8 +103,8 @@
     position: relative;
     display: flex;
     align-items: center;
-    gap: 3mm;
-    padding: 4.5mm 5mm;
+    gap: 8mm;
+    padding: 9mm 10mm;
     background: linear-gradient(160deg, rgba(10, 26, 23, 0.86), rgba(35, 92, 80, 0.72)),
                 url("images/hero-havet.jpg") center/cover;
   }
@@ -117,43 +117,43 @@
   .front-emblem {
     display: flex;
     align-items: center;
-    gap: 2.5mm;
-    margin-bottom: 3mm;
+    gap: 4mm;
+    margin-bottom: 5mm;
   }
 
-  .front-emblem svg { width: 7mm; height: 7mm; flex: 0 0 auto; }
+  .front-emblem svg { width: 12mm; height: 12mm; flex: 0 0 auto; }
 
   .front-emblem-text { text-align: left; line-height: 1.15; }
 
   .front-emblem-text strong {
     display: block;
     color: #fff;
-    font-size: 4mm;
+    font-size: 6mm;
     letter-spacing: 0.02em;
   }
 
   .front-emblem-text span {
     display: block;
     color: var(--accent-soft);
-    font-size: 2.3mm;
+    font-size: 3.4mm;
     text-transform: uppercase;
     letter-spacing: 0.1em;
   }
 
   .front-tagline {
     color: #fff;
-    font-size: 2.7mm;
-    line-height: 1.4;
+    font-size: 4.2mm;
+    line-height: 1.45;
     margin: 0;
   }
 
   .front-qr {
     flex: 0 0 auto;
-    width: 27mm;
+    width: 52mm;
     background: #fff;
-    border-radius: 1.5mm;
-    padding: 1.2mm;
-    box-shadow: 0 1mm 2mm rgba(0, 0, 0, 0.35);
+    border-radius: 2.5mm;
+    padding: 2.5mm;
+    box-shadow: 0 1.5mm 3mm rgba(0, 0, 0, 0.35);
     text-align: center;
   }
 
@@ -165,8 +165,8 @@
 
   .front-qr span {
     display: block;
-    margin-top: 0.7mm;
-    font-size: 1.7mm;
+    margin-top: 1.2mm;
+    font-size: 3mm;
     line-height: 1.2;
     letter-spacing: 0.02em;
     color: var(--ink);
@@ -183,7 +183,7 @@
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
     }
-    @page { size: 85mm 55mm; margin: 0; }
+    @page { size: 148mm 105mm; margin: 0; }
   }
 </style>
 </head>
@@ -191,7 +191,7 @@
 
 <div class="print-instructions">
   <h1>Visittkort, klar for utskrift</h1>
-  <p>Forenklet, ensidig kort i standard visittkortformat (85 × 55 mm) — samme innhold som forsiden av det opprinnelige kortet (bilde, logo, tagline), pluss en QR-kode. Koden åpner rett i e-postappen til deg, med emnefeltet «Gratis helsekartleggingssamtale» og en ferdig utfylt mal med de to spørsmålene (helsevurdering 1–10, og hva som skulle vært annerledes) og et felt for telefonnummer. Den er ikke avhengig av at noen nettside er publisert, så den fungerer med en gang. Trykk «Skriv ut» og skru på <strong>bakgrunnsgrafikk</strong> i utskriftsinnstillingene, så blir fargene, bildet og QR-koden med.</p>
+  <p>Ensidig kort i A6-format (148 × 105 mm) — bilde, logo og tagline til venstre, stor QR-kode til høyre. Koden åpner rett i e-postappen til deg, med emnefeltet «Gratis helsekartleggingssamtale» og en ferdig utfylt mal med begge spørsmålene i sin helhet (helsevurdering 1–10, og oppfølgingsspørsmålet om hva som skulle vært annerledes) samt felt for navn og mobilnummer. Den er ikke avhengig av at noen nettside er publisert, så den fungerer med en gang. QR-koden er stor (52 mm) for å skanne pålitelig siden den bærer mye tekst. Trykk «Skriv ut» og skru på <strong>bakgrunnsgrafikk</strong> i utskriftsinnstillingene, så blir fargene, bildet og QR-koden med.</p>
   <button onclick="window.print()">Skriv ut kortet</button>
 </div>
 
