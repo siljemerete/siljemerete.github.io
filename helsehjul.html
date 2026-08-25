@@ -1,0 +1,881 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Helsehjulet — se helheten</title>
+<style>
+  :root {
+    --bg: #f6f8f7;
+    --card: #ffffff;
+    --ink: #1f2d2b;
+    --muted: #56655f;
+    --accent: #2f7d6b;
+    --accent-dark: #235c50;
+    --accent-soft: #e3f1ec;
+    --push: #b96b2a;
+    --push-soft: #fbeee0;
+    --border: #dfe7e3;
+    --shadow: 0 1px 3px rgba(31, 45, 43, 0.08), 0 1px 2px rgba(31, 45, 43, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  header.page-header {
+    margin-bottom: 1.75rem;
+  }
+
+  header.page-header a.back-link {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    margin-bottom: 0.75rem;
+  }
+
+  header.page-header a.back-link:hover {
+    color: var(--accent-dark);
+  }
+
+  header.page-header h1 {
+    font-size: 1.7rem;
+    margin: 0 0 0.35rem;
+    color: var(--accent-dark);
+  }
+
+  header.page-header p.tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  .reminder {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem 1.35rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  section.primer h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer p {
+    margin: 0.6rem 0 0;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .controls button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .controls button:hover {
+    background: var(--accent-soft);
+  }
+
+  .controls button.danger {
+    color: var(--push);
+  }
+
+  .controls button.danger:hover {
+    background: var(--push-soft);
+  }
+
+  /* Wheel */
+  .wheel-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 0.5rem 0.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  .wheel-holder {
+    max-width: 480px;
+    margin: 0 auto;
+    touch-action: none;
+  }
+
+  .wheel-holder svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .wheel-hint {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 0.5rem 0 0.75rem;
+  }
+
+  .axis-handle {
+    cursor: grab;
+  }
+
+  .axis-handle:active {
+    cursor: grabbing;
+  }
+
+  .axis-label-text {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .axis-icon-text {
+    font-size: 20px;
+    text-anchor: middle;
+    dominant-baseline: central;
+  }
+
+  .scale-text {
+    font-size: 11px;
+    fill: var(--muted);
+  }
+
+  /* Sliders */
+  .sliders-grid {
+    display: grid;
+    gap: 0.7rem;
+    margin-top: 0.9rem;
+  }
+
+  .slider-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.6rem 0.8rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+  }
+
+  .slider-dot {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex: 0 0 auto;
+  }
+
+  .slider-item label {
+    grid-column: 2 / 3;
+    grid-row: 1;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--accent-dark);
+  }
+
+  .slider-value {
+    grid-column: 3 / 4;
+    grid-row: 1;
+    font-weight: 700;
+    color: var(--accent-dark);
+    min-width: 1.6em;
+    text-align: right;
+  }
+
+  .slider-item input[type="range"] {
+    grid-column: 2 / 4;
+    grid-row: 2;
+    width: 100%;
+    accent-color: var(--accent);
+  }
+
+  .slider-desc {
+    grid-column: 2 / 4;
+    grid-row: 3;
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 0.9rem;
+    margin-top: 0.75rem;
+  }
+
+  .field-wide {
+    grid-column: 1 / -1;
+  }
+
+  .field label {
+    display: block;
+    font-weight: 600;
+    color: var(--accent-dark);
+    margin-bottom: 0.3rem;
+    font-size: 0.88rem;
+  }
+
+  .field textarea {
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--ink);
+    min-height: 64px;
+    resize: vertical;
+  }
+
+  .field textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .send-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .send-buttons button {
+    font-size: 0.92rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .send-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .muted-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  footer.closing {
+    margin-top: 1.75rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong {
+    color: var(--accent-dark);
+  }
+
+  body.gate-locked .wrap,
+  body.gate-locked footer.closing {
+    display: none;
+  }
+
+  .gate-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 100;
+  }
+
+  body.gate-locked .gate-overlay {
+    display: flex;
+  }
+
+  .gate-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 2rem 1.75rem;
+    max-width: 340px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .gate-box h1 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    color: var(--accent-dark);
+  }
+
+  .gate-box p {
+    margin: 0 0 1rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .gate-box input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    font-family: inherit;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  .gate-box input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .gate-box button {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .gate-box button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .gate-error {
+    display: none;
+    color: var(--push);
+    font-size: 0.85rem;
+    margin: 0.7rem 0 0;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .controls, .send-buttons, .muted-note, header.page-header a.back-link { display: none; }
+    .wheel-card, section.primer, .slider-item { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body class="gate-locked">
+
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box">
+    <h1>Tilgang til verktøyet</h1>
+    <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
+    <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
+    <button type="button" id="gateSubmit">Lås opp</button>
+    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var GATE_KEY = 'client-resource-unlocked';
+    var CODE = 'nyevaner';
+
+    function unlock() {
+      localStorage.setItem(GATE_KEY, 'true');
+      document.body.classList.remove('gate-locked');
+    }
+
+    if (localStorage.getItem(GATE_KEY) === 'true') {
+      unlock();
+    }
+
+    function trySubmit() {
+      var input = document.getElementById('gateCode');
+      var error = document.getElementById('gateError');
+      if (input.value.trim().toLowerCase() === CODE) {
+        error.style.display = 'none';
+        unlock();
+      } else {
+        error.style.display = 'block';
+      }
+    }
+
+    document.getElementById('gateSubmit').addEventListener('click', trySubmit);
+    document.getElementById('gateCode').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') trySubmit();
+    });
+  })();
+</script>
+
+<div class="wrap">
+
+  <header class="page-header">
+    <a class="back-link" href="index.html">← Til forsiden</a>
+    <h1>Helsehjulet — se helheten</h1>
+    <p class="tagline">Et øyeblikksbilde av hvordan du har det på åtte områder akkurat nå</p>
+    <div class="reminder">
+      Dra i punktene på hjulet, eller bruk glidebryterne under, og sett hvert
+      område til det tallet mellom 1 og 10 som kjennes riktig for deg akkurat
+      nå. Det finnes ingen fasit — hjulet er ment som et utgangspunkt for
+      samtalen vår. Alt du legger inn lagres i denne nettleseren, så du kan
+      lukke siden og fortsette senere.
+    </div>
+  </header>
+
+  <div class="controls">
+    <button type="button" id="resetAll" class="danger">Nullstill alt</button>
+  </div>
+
+  <div class="wheel-card">
+    <div class="wheel-holder" id="wheelHolder">
+      <svg id="wheelSvg" viewBox="0 0 760 640" role="img" aria-label="Helsehjul med åtte områder, hvert med en verdi fra 1 til 10"></svg>
+    </div>
+    <p class="wheel-hint">Dra i den fargede prikken på hver linje for å sette verdien</p>
+  </div>
+
+  <section class="primer">
+    <h2>De åtte områdene</h2>
+    <div class="sliders-grid" id="slidersGrid"></div>
+  </section>
+
+  <section class="primer">
+    <h2>Refleksjon</h2>
+    <div class="field-grid">
+      <div class="field field-wide">
+        <label for="refleksjon-overrasket">Hva legger du merke til når du ser helheten?</label>
+        <textarea id="refleksjon-overrasket" data-key="refleksjon-overrasket" placeholder="Skriv gjerne fritt her..."></textarea>
+      </div>
+      <div class="field field-wide">
+        <label for="refleksjon-prioritet">Hvilket område ønsker du og prioritere først?</label>
+        <textarea id="refleksjon-prioritet" data-key="refleksjon-prioritet" placeholder="Skriv gjerne fritt her..."></textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="primer">
+    <h2>Send inn hjulet</h2>
+    <p class="muted-note">
+      Du kan sende hjulet direkte fra din egen e-postapp, eller laste det ned
+      som en tekstfil du selv sender eller tar med til timen. Hvis "Send på
+      e-post" ikke åpner riktig på mobilen din, bruk nedlastingen i stedet.
+    </p>
+    <div class="send-buttons">
+      <button type="button" id="sendEmail">Send på e-post</button>
+      <button type="button" id="downloadText" class="secondary">Last ned som tekstfil</button>
+    </div>
+  </section>
+
+  <footer class="closing">
+    Ett øyeblikksbilde, ikke en dom.<br>
+    <strong>Du trenger ikke gjøre det alene.</strong>
+  </footer>
+
+</div>
+
+<script>
+  var STORAGE_KEY = 'helsehjul-data';
+  var RECIPIENT = 'silje.merete.binder@gmail.com';
+  var SVG_NS = 'http://www.w3.org/2000/svg';
+
+  // Ordered clockwise starting at the top, matching the paper wheel.
+  var AREAS = [
+    { key: 'energi',       label: 'Energi og overskudd',      icon: '⚡', color: '#5c9a3b',
+      desc: 'Hvor mye futt og overskudd du kjenner gjennom en vanlig dag — motsatt av å være sliten eller tom.' },
+    { key: 'fysisk',       label: 'Fysisk form og kapasitet', icon: '🏃', color: '#e0a91e',
+      desc: 'Kondisjon, styrke og bevegelighet — hvor godt kroppen tåler fysisk aktivitet og anstrengelse.' },
+    { key: 'funksjon',     label: 'Funksjon i hverdagen',     icon: '🧍', color: '#e2801f',
+      desc: 'Om kroppen og hodet henger med i det praktiske hverdagen krever — jobb, husarbeid, konsentrasjon og å klare deg selv, uten at det koster for mye.' },
+    { key: 'sovn',         label: 'Søvn og restitusjon',      icon: '🌙', color: '#7c5fc7',
+      desc: 'Hvor godt du sover, og om du våkner uthvilt og klar til dagen.' },
+    { key: 'stress',       label: 'Stress og indre ro',       icon: '🧠', color: '#3f80c9',
+      desc: 'Hvor mye stress du bærer på, og hvor lett du finner ro og senker skuldrene.' },
+    { key: 'sosial',       label: 'Sosial trivsel',           icon: '👥', color: '#c23a70',
+      desc: 'Kvaliteten på relasjonene dine — om du kjenner tilhørighet, støtte og godt fellesskap med andre.' },
+    { key: 'helse',        label: 'Helse',                    icon: '❤', color: '#1b2a4a',
+      desc: 'Din generelle helsetilstand — kropp og fysiske forhold som påvirker hverdagen din.' },
+    { key: 'livskvalitet', label: 'Livskvalitet',             icon: '🙂', color: '#1f97a3',
+      desc: 'Hvor fornøyd og meningsfullt du opplever livet ditt som helhet, akkurat nå.' }
+  ];
+
+  var CX = 380, CY = 320, RMAX = 170;
+  var values = {};
+  AREAS.forEach(function (a) { values[a.key] = 5; });
+
+  function angleFor(i) {
+    return i * (360 / AREAS.length) * Math.PI / 180;
+  }
+
+  function pointFor(i, r) {
+    var ang = angleFor(i);
+    return { x: CX + r * Math.sin(ang), y: CY - r * Math.cos(ang) };
+  }
+
+  function el(tag, attrs) {
+    var e = document.createElementNS(SVG_NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+
+  function radiusForValue(v) {
+    return (v / 10) * RMAX;
+  }
+
+  var svg = document.getElementById('wheelSvg');
+  var vertexEls = [];
+  var polygonEl;
+
+  function buildWheel() {
+    svg.innerHTML = '';
+
+    // grid circles
+    for (var g = 1; g <= 10; g++) {
+      var r = (g / 10) * RMAX;
+      svg.appendChild(el('circle', {
+        cx: CX, cy: CY, r: r, fill: 'none',
+        stroke: '#d7ded9', 'stroke-width': g === 10 ? 1.4 : 1,
+        'stroke-dasharray': g === 10 ? 'none' : '2,4'
+      }));
+    }
+
+    // scale numbers along the top axis
+    for (var s = 1; s <= 10; s++) {
+      var p = pointFor(0, (s / 10) * RMAX);
+      svg.appendChild(el('text', {
+        x: p.x - 8, y: p.y + 3, 'text-anchor': 'end', class: 'scale-text'
+      })).textContent = s;
+    }
+
+    // axis lines
+    AREAS.forEach(function (a, i) {
+      var outer = pointFor(i, RMAX);
+      svg.appendChild(el('line', {
+        x1: CX, y1: CY, x2: outer.x, y2: outer.y,
+        stroke: '#c7d1cb', 'stroke-width': 1
+      }));
+    });
+
+    // outer colored ring segments
+    var half = (360 / AREAS.length) / 2;
+    AREAS.forEach(function (a, i) {
+      var startAng = i * (360 / AREAS.length) - half + 90;
+      var endAng = i * (360 / AREAS.length) + half + 90;
+      var r1 = RMAX + 6, r2 = RMAX + 24;
+      var p1 = { x: CX + r1 * Math.cos(startAng * Math.PI / 180), y: CY + r1 * Math.sin(startAng * Math.PI / 180) };
+      var p2 = { x: CX + r1 * Math.cos(endAng * Math.PI / 180), y: CY + r1 * Math.sin(endAng * Math.PI / 180) };
+      var p3 = { x: CX + r2 * Math.cos(endAng * Math.PI / 180), y: CY + r2 * Math.sin(endAng * Math.PI / 180) };
+      var p4 = { x: CX + r2 * Math.cos(startAng * Math.PI / 180), y: CY + r2 * Math.sin(startAng * Math.PI / 180) };
+      var d = 'M ' + p1.x + ' ' + p1.y +
+        ' A ' + r1 + ' ' + r1 + ' 0 0 1 ' + p2.x + ' ' + p2.y +
+        ' L ' + p3.x + ' ' + p3.y +
+        ' A ' + r2 + ' ' + r2 + ' 0 0 0 ' + p4.x + ' ' + p4.y + ' Z';
+      svg.appendChild(el('path', { d: d, fill: a.color }));
+    });
+
+    // icon badges + labels
+    AREAS.forEach(function (a, i) {
+      var iconPt = pointFor(i, RMAX + 48);
+      var iconGroup = el('g', {});
+      iconGroup.appendChild(el('circle', { cx: iconPt.x, cy: iconPt.y, r: 17, fill: a.color }));
+      var iconText = el('text', { x: iconPt.x, y: iconPt.y + 1, class: 'axis-icon-text', fill: '#fff' });
+      iconText.textContent = a.icon;
+      iconGroup.appendChild(iconText);
+      svg.appendChild(iconGroup);
+
+      var labelPt = pointFor(i, RMAX + 82);
+      var anchor = 'middle';
+      if (labelPt.x < CX - 15) anchor = 'end';
+      else if (labelPt.x > CX + 15) anchor = 'start';
+      var labelText = el('text', {
+        x: labelPt.x, y: labelPt.y, 'text-anchor': anchor,
+        class: 'axis-label-text', fill: a.color
+      });
+      var lineHeight = 17;
+      var lines = wrapLabel(a.label);
+      var startY = labelPt.y - ((lines.length - 1) * lineHeight) / 2;
+      lines.forEach(function (line, li) {
+        var tspan = el('tspan', { x: labelPt.x, y: startY + li * lineHeight });
+        tspan.textContent = line;
+        labelText.appendChild(tspan);
+      });
+      svg.appendChild(labelText);
+    });
+
+    // polygon fill
+    polygonEl = el('polygon', {
+      fill: 'var(--accent)', 'fill-opacity': '0.22',
+      stroke: 'var(--accent-dark)', 'stroke-width': 2
+    });
+    svg.appendChild(polygonEl);
+
+    // draggable vertices
+    vertexEls = AREAS.map(function (a, i) {
+      var v = el('circle', {
+        r: 9, fill: '#fff', stroke: a.color, 'stroke-width': 4,
+        class: 'axis-handle', 'data-key': a.key, 'data-index': i,
+        tabindex: '0', role: 'slider', 'aria-label': a.label,
+        'aria-valuemin': '1', 'aria-valuemax': '10'
+      });
+      svg.appendChild(v);
+      return v;
+    });
+
+    updateWheel();
+    attachDragHandlers();
+  }
+
+  function wrapLabel(label) {
+    if (label.length <= 14) return [label];
+    var words = label.split(' ');
+    var mid = Math.ceil(words.length / 2);
+    return [words.slice(0, mid).join(' '), words.slice(mid).join(' ')];
+  }
+
+  function updateWheel() {
+    var points = AREAS.map(function (a, i) {
+      return pointFor(i, radiusForValue(values[a.key]));
+    });
+    polygonEl.setAttribute('points', points.map(function (p) { return p.x + ',' + p.y; }).join(' '));
+    vertexEls.forEach(function (v, i) {
+      v.setAttribute('cx', points[i].x);
+      v.setAttribute('cy', points[i].y);
+      v.setAttribute('aria-valuenow', values[AREAS[i].key]);
+    });
+  }
+
+  function svgPoint(evt) {
+    var pt = svg.createSVGPoint();
+    pt.x = evt.clientX;
+    pt.y = evt.clientY;
+    return pt.matrixTransform(svg.getScreenCTM().inverse());
+  }
+
+  function valueFromPointer(index, evt) {
+    var p = svgPoint(evt);
+    var ang = angleFor(index);
+    var dirX = Math.sin(ang), dirY = -Math.cos(ang);
+    var dx = p.x - CX, dy = p.y - CY;
+    var dist = dx * dirX + dy * dirY; // projection onto axis direction
+    var v = Math.round((dist / RMAX) * 10);
+    if (v < 1) v = 1;
+    if (v > 10) v = 10;
+    return v;
+  }
+
+  function setValue(key, v, skipSave) {
+    values[key] = v;
+    var slider = document.getElementById('slider-' + key);
+    var display = document.getElementById('value-' + key);
+    if (slider) slider.value = v;
+    if (display) display.textContent = v;
+    updateWheel();
+    if (!skipSave) saveState();
+  }
+
+  function attachDragHandlers() {
+    var activeIndex = null;
+
+    function onMove(evt) {
+      if (activeIndex === null) return;
+      evt.preventDefault();
+      var a = AREAS[activeIndex];
+      setValue(a.key, valueFromPointer(activeIndex, evt));
+    }
+
+    function onUp() {
+      activeIndex = null;
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup', onUp);
+    }
+
+    vertexEls.forEach(function (v, i) {
+      v.addEventListener('pointerdown', function (evt) {
+        evt.preventDefault();
+        activeIndex = i;
+        window.addEventListener('pointermove', onMove);
+        window.addEventListener('pointerup', onUp);
+      });
+
+      v.addEventListener('keydown', function (evt) {
+        var key = AREAS[i].key;
+        if (evt.key === 'ArrowUp' || evt.key === 'ArrowRight') {
+          evt.preventDefault();
+          setValue(key, Math.min(10, values[key] + 1));
+        } else if (evt.key === 'ArrowDown' || evt.key === 'ArrowLeft') {
+          evt.preventDefault();
+          setValue(key, Math.max(1, values[key] - 1));
+        }
+      });
+    });
+
+    // allow tapping/clicking anywhere along an axis line to jump the value there
+    svg.addEventListener('pointerdown', function (evt) {
+      if (evt.target.classList && evt.target.classList.contains('axis-handle')) return;
+      var p = svgPoint(evt);
+      var dx = p.x - CX, dy = p.y - CY;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist > RMAX + 4) return;
+      var angle = Math.atan2(dx, -dy);
+      if (angle < 0) angle += 2 * Math.PI;
+      var step = 2 * Math.PI / AREAS.length;
+      var index = Math.round(angle / step) % AREAS.length;
+      var a = AREAS[index];
+      setValue(a.key, valueFromPointer(index, evt));
+    });
+  }
+
+  function buildSliders() {
+    var grid = document.getElementById('slidersGrid');
+    AREAS.forEach(function (a) {
+      var item = document.createElement('div');
+      item.className = 'slider-item';
+      item.innerHTML =
+        '<span class="slider-dot" style="background:' + a.color + '">' + a.icon + '</span>' +
+        '<label for="slider-' + a.key + '">' + a.label + '</label>' +
+        '<span class="slider-value" id="value-' + a.key + '">' + values[a.key] + '</span>' +
+        '<input type="range" min="1" max="10" step="1" value="' + values[a.key] + '" id="slider-' + a.key + '" data-key="' + a.key + '">' +
+        (a.desc ? '<p class="slider-desc">' + a.desc + '</p>' : '');
+      grid.appendChild(item);
+    });
+
+    grid.addEventListener('input', function (evt) {
+      if (evt.target.type !== 'range') return;
+      var key = evt.target.getAttribute('data-key');
+      setValue(key, parseInt(evt.target.value, 10));
+    });
+  }
+
+  function readState() {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return {};
+    try {
+      return JSON.parse(raw) || {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveState() {
+    var data = { values: values };
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      if (el.tagName === 'TEXTAREA') data[el.getAttribute('data-key')] = el.value;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function loadState() {
+    var data = readState();
+    if (data.values) {
+      AREAS.forEach(function (a) {
+        if (data.values[a.key] !== undefined) values[a.key] = data.values[a.key];
+      });
+    }
+    document.querySelectorAll('textarea[data-key]').forEach(function (el) {
+      var key = el.getAttribute('data-key');
+      if (data[key] !== undefined) el.value = data[key];
+    });
+  }
+
+  function buildSummaryText() {
+    var lines = [];
+    lines.push('Helsehjulet');
+    lines.push('');
+    AREAS.forEach(function (a) {
+      lines.push(a.label + ': ' + values[a.key] + ' / 10');
+    });
+    lines.push('');
+    lines.push('Hva jeg legger merke til: ' + (document.getElementById('refleksjon-overrasket').value || '-'));
+    lines.push('Område/er jeg vil prioritere først: ' + (document.getElementById('refleksjon-prioritet').value || '-'));
+    return lines.join('\n');
+  }
+
+  function sendEmail() {
+    var subject = encodeURIComponent('Helsehjulet');
+    var body = encodeURIComponent(buildSummaryText());
+    window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
+  }
+
+  function downloadText() {
+    var blob = new Blob([buildSummaryText()], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'helsehjulet.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    loadState();
+    buildSliders();
+    buildWheel();
+
+    document.body.addEventListener('input', function (e) {
+      if (e.target.tagName === 'TEXTAREA' && e.target.hasAttribute('data-key')) saveState();
+    });
+
+    document.getElementById('resetAll').addEventListener('click', function () {
+      if (!confirm('Nullstille hele helsehjulet? Dette kan ikke angres.')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    });
+
+    document.getElementById('sendEmail').addEventListener('click', sendEmail);
+    document.getElementById('downloadText').addEventListener('click', downloadText);
+  });
+</script>
+
+</body>
+</html>
