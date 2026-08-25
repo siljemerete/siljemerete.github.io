@@ -495,6 +495,7 @@
   }
 
   .ticket-banner {
+    display: block;
     background: var(--push);
     color: #fff;
     text-align: center;
@@ -503,6 +504,12 @@
     letter-spacing: 0.12em;
     font-size: 0.95rem;
     padding: 0.85rem 1rem 1.1rem;
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+
+  .ticket-banner:hover {
+    background: var(--accent-dark);
   }
 
   .ticket-banner span {
@@ -513,6 +520,16 @@
     text-transform: none;
     letter-spacing: 0.02em;
     color: var(--push-soft);
+  }
+
+  .ticket-link {
+    color: var(--accent-dark);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ticket-link:hover {
+    border-bottom-color: var(--accent-dark);
   }
 
   @media (max-width: 560px) {
@@ -602,12 +619,16 @@
         <span class="ticket-label">Sted</span>
         <span class="ticket-value">Digitalt, eller fysisk i Drammen</span>
       </div>
+      <div class="ticket-row">
+        <span class="ticket-label">Kontakt</span>
+        <span class="ticket-value"><a class="ticket-link" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">silje.merete.binder@gmail.com</a></span>
+      </div>
     </div>
 
-    <div class="ticket-banner">
+    <a class="ticket-banner" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">
       Din vei til bedre helse
       <span>Send meg en e-post for en uforpliktende prat</span>
-    </div>
+    </a>
   </div>
 </section>
 
