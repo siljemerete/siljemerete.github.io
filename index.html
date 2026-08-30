@@ -10,17 +10,17 @@
 <meta property="og:type" content="website">
 <style>
   :root {
-    --bg: #f6f8f7;
+    --bg: #f0f7f9;
     --card: #ffffff;
-    --ink: #1f2d2b;
-    --muted: #56655f;
-    --accent: #2f7d6b;
-    --accent-dark: #235c50;
-    --accent-soft: #e3f1ec;
-    --push: #b96b2a;
-    --push-soft: #fbeee0;
-    --border: #dfe7e3;
-    --shadow: 0 1px 3px rgba(31, 45, 43, 0.08), 0 1px 2px rgba(31, 45, 43, 0.06);
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --push: #c9823f;
+    --push-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
   }
 
   * { box-sizing: border-box; }
@@ -95,9 +95,24 @@
 
   /* Hero */
   .hero {
-    background: linear-gradient(135deg, var(--accent-soft), var(--bg));
-    padding: 3rem 0 2.5rem;
-    border-bottom: 1px solid var(--border);
+    position: relative;
+    background: linear-gradient(160deg, var(--accent-soft), var(--bg) 75%);
+    padding: 3rem 0 4rem;
+    overflow: hidden;
+  }
+
+  .hero-wave {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    line-height: 0;
+  }
+
+  .hero-wave svg {
+    display: block;
+    width: 100%;
+    height: 56px;
   }
 
   .hero-grid {
@@ -472,10 +487,22 @@
     margin-bottom: 1rem;
   }
 
+  .footer-wave {
+    line-height: 0;
+    margin-top: 2rem;
+  }
+
+  .footer-wave svg {
+    display: block;
+    width: 100%;
+    height: 48px;
+  }
+
   footer.closing {
-    margin: 2rem 0 1rem;
+    margin: 0;
     text-align: center;
-    padding: 1.25rem;
+    padding: 1.5rem 1.25rem 2rem;
+    background: var(--accent-soft);
     color: var(--muted);
     font-size: 0.95rem;
   }
@@ -516,6 +543,12 @@
     </div>
     <img class="hero-photo" src="images/hero-havet.jpg" alt="Silje Merete ute ved havet">
   </div>
+  <div class="hero-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path style="fill:var(--accent-soft)" opacity="0.7" d="M0,45 C240,95 480,5 720,35 C960,65 1200,15 1440,55 L1440,100 L0,100 Z"></path>
+      <path style="fill:var(--bg)" d="M0,65 C240,25 480,90 720,55 C960,20 1200,80 1440,40 L1440,100 L0,100 Z"></path>
+    </svg>
+  </div>
 </section>
 
 <div class="wrap">
@@ -525,7 +558,7 @@
     <div class="about-grid">
       <img class="profile-photo" src="images/profilbilde.jpg" alt="Silje Merete Binder">
       <div class="about-text">
-        <p>Hei, og velkommen til deg! <svg class="flower-icon" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><g fill="#8fcdb8"><circle cx="10" cy="4" r="4"/><circle cx="16" cy="8" r="4"/><circle cx="14" cy="15" r="4"/><circle cx="6" cy="15" r="4"/><circle cx="4" cy="8" r="4"/></g><circle cx="10" cy="10" r="3" fill="var(--accent)"/></svg> Jeg heter Silje Merete og er utdannet pedagog og leder. Jeg har i over 20 år veiledet mennesker gjennom prosesser der de ønsker endring i livet sitt. Det å få være med på reisen når mennesker finner sin nye hverdag, er det som driver meg.</p>
+        <p>Hei, og velkommen til deg! <svg class="flower-icon" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><g fill="#8fd3e0"><circle cx="10" cy="4" r="4"/><circle cx="16" cy="8" r="4"/><circle cx="14" cy="15" r="4"/><circle cx="6" cy="15" r="4"/><circle cx="4" cy="8" r="4"/></g><circle cx="10" cy="10" r="3" fill="var(--accent)"/></svg> Jeg heter Silje Merete og er utdannet pedagog og leder. Jeg har i over 20 år veiledet mennesker gjennom prosesser der de ønsker endring i livet sitt. Det å få være med på reisen når mennesker finner sin nye hverdag, er det som driver meg.</p>
         <p>Som helseveileder er rollen min å utforske sammen med deg hvordan søvn, stress, kosthold, fysisk aktivitet og andre vaner påvirker hverdagen din, og finne frem til det som passer for akkurat ditt liv, i ditt eget tempo. Du kjenner deg selv og livet ditt best. Jeg er her for å støtte og motivere deg på veien. Alt vi snakker om er underlagt taushetsplikt, så du kan kjenne deg trygg.</p>
         <details class="edu-toggle">
           <summary>Utdanning og bakgrunn <span class="chevron">▸</span></summary>
@@ -718,6 +751,11 @@
 
 </div>
 
+<div class="footer-wave" aria-hidden="true">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path style="fill:var(--accent-soft)" d="M0,30 C240,60 480,0 720,20 C960,40 1200,10 1440,30 L1440,60 L0,60 Z"></path>
+  </svg>
+</div>
 <footer class="closing">
   Små skritt. Dine mål, ditt tempo.<br>
   <strong>Du trenger ikke gjøre det alene.</strong>
