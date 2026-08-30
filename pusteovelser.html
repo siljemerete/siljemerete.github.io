@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pusteøvelser — Silje Merete SMART Helseveiledning</title>
+<meta name="description" content="To enkle pusteøvelser for ro og stressmestring: firkantpusting (4x4) og pust inn på 2, ut på 4.">
+<style>
+  :root {
+    --bg: #f6f8f7;
+    --card: #ffffff;
+    --ink: #1f2d2b;
+    --muted: #56655f;
+    --accent: #2f7d6b;
+    --accent-dark: #235c50;
+    --accent-soft: #e3f1ec;
+    --border: #dfe7e3;
+    --shadow: 0 1px 3px rgba(31, 45, 43, 0.08), 0 1px 2px rgba(31, 45, 43, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--accent-soft), var(--bg));
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .hero h1 {
+    margin: 0 0 0.75rem;
+    font-size: 1.8rem;
+    color: var(--accent-dark);
+  }
+
+  .hero p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 44ch;
+    margin-inline: auto;
+  }
+
+  .exercise-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem 2rem;
+    margin: 2rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .exercise-card h2 {
+    margin: 0 0 0.4rem;
+    color: var(--accent-dark);
+    font-size: 1.3rem;
+  }
+
+  .exercise-card > p.desc {
+    margin: 0 0 1.5rem;
+    color: var(--muted);
+  }
+
+  .breath-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .breath-circle-wrap {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+  }
+
+  .breath-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    border: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(1);
+    transition: transform 4s linear;
+  }
+
+  .breath-label {
+    font-weight: 700;
+    color: var(--accent-dark);
+    font-size: 1rem;
+  }
+
+  .breath-instruction {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink);
+    min-height: 1.6em;
+  }
+
+  .breath-controls {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .breath-button {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.65rem 1.4rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    cursor: pointer;
+  }
+
+  .breath-button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .breath-button.secondary {
+    background: transparent;
+    color: var(--accent-dark);
+  }
+
+  .breath-button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .breath-button:disabled {
+    opacity: 0.5;
+    cursor: default;
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .home-link {
+    display: block;
+    text-align: center;
+    margin: 1rem 0 3rem;
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .home-link:hover { text-decoration: underline; }
+
+  footer.closing {
+    margin: 2rem 0 1rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong { color: var(--accent-dark); }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Pusteøvelser</h1>
+    <p>To enkle øvelser du kan bruke når du trenger å roe pust og nervesystem — følg sirkelen i ditt eget tempo.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section class="exercise-card">
+    <h2>Firkantpusting (4×4)</h2>
+    <p class="desc">Pust inn i 4 sekunder, hold i 4 sekunder, pust ut i 4 sekunder, hold i 4 sekunder. Gjenta så lenge det føles godt.</p>
+    <div class="breath-stage">
+      <div class="breath-circle-wrap">
+        <div class="breath-circle" id="box-circle">
+          <span class="breath-label" id="box-count">4</span>
+        </div>
+      </div>
+      <p class="breath-instruction" id="box-instruction">Trykk start når du er klar</p>
+      <div class="breath-controls">
+        <button class="breath-button" id="box-start">Start</button>
+        <button class="breath-button secondary" id="box-stop" disabled>Stopp</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="exercise-card">
+    <h2>Pust inn på 2, ut på 4</h2>
+    <p class="desc">Pust inn i 2 sekunder og ut i 4 sekunder. Et lengre utpust bidrar til å roe kroppen.</p>
+    <div class="breath-stage">
+      <div class="breath-circle-wrap">
+        <div class="breath-circle" id="two-four-circle">
+          <span class="breath-label" id="two-four-count">2</span>
+        </div>
+      </div>
+      <p class="breath-instruction" id="two-four-instruction">Trykk start når du er klar</p>
+      <div class="breath-controls">
+        <button class="breath-button" id="two-four-start">Start</button>
+        <button class="breath-button secondary" id="two-four-stop" disabled>Stopp</button>
+      </div>
+    </div>
+  </section>
+
+  <a class="home-link" href="index.html">Se hjemmesiden min →</a>
+
+</div>
+
+<footer class="closing">
+  Små skritt. Dine mål, ditt tempo.<br>
+  <strong>Du trenger ikke gjøre det alene.</strong>
+</footer>
+
+<script>
+  function runBreathingExercise(phases, els) {
+    let timeoutId = null;
+    let intervalId = null;
+    let running = false;
+
+    function stop() {
+      running = false;
+      clearTimeout(timeoutId);
+      clearInterval(intervalId);
+      els.circle.style.transitionDuration = "0.6s";
+      els.circle.style.transform = "scale(1)";
+      els.instruction.textContent = "Trykk start når du er klar";
+      els.count.textContent = phases[0].seconds;
+      els.startBtn.disabled = false;
+      els.stopBtn.disabled = true;
+    }
+
+    function runPhase(index) {
+      if (!running) return;
+      const phase = phases[index];
+      let secondsLeft = phase.seconds;
+
+      els.instruction.textContent = phase.label;
+      els.count.textContent = secondsLeft;
+      els.circle.style.transitionDuration = phase.seconds + "s";
+      els.circle.style.transform = "scale(" + phase.scale + ")";
+
+      clearInterval(intervalId);
+      intervalId = setInterval(() => {
+        secondsLeft -= 1;
+        if (secondsLeft > 0) {
+          els.count.textContent = secondsLeft;
+        }
+      }, 1000);
+
+      timeoutId = setTimeout(() => {
+        clearInterval(intervalId);
+        runPhase((index + 1) % phases.length);
+      }, phase.seconds * 1000);
+    }
+
+    els.startBtn.addEventListener("click", () => {
+      if (running) return;
+      running = true;
+      els.startBtn.disabled = true;
+      els.stopBtn.disabled = false;
+      els.circle.style.transform = "scale(1)";
+      requestAnimationFrame(() => runPhase(0));
+    });
+
+    els.stopBtn.addEventListener("click", stop);
+  }
+
+  runBreathingExercise(
+    [
+      { label: "Pust inn", seconds: 4, scale: 1.5 },
+      { label: "Hold", seconds: 4, scale: 1.5 },
+      { label: "Pust ut", seconds: 4, scale: 1 },
+      { label: "Hold", seconds: 4, scale: 1 }
+    ],
+    {
+      circle: document.getElementById("box-circle"),
+      count: document.getElementById("box-count"),
+      instruction: document.getElementById("box-instruction"),
+      startBtn: document.getElementById("box-start"),
+      stopBtn: document.getElementById("box-stop")
+    }
+  );
+
+  runBreathingExercise(
+    [
+      { label: "Pust inn", seconds: 2, scale: 1.5 },
+      { label: "Pust ut", seconds: 4, scale: 1 }
+    ],
+    {
+      circle: document.getElementById("two-four-circle"),
+      count: document.getElementById("two-four-count"),
+      instruction: document.getElementById("two-four-instruction"),
+      startBtn: document.getElementById("two-four-start"),
+      stopBtn: document.getElementById("two-four-stop")
+    }
+  );
+</script>
+
+</body>
+</html>
