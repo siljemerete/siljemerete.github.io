@@ -355,19 +355,47 @@
     box-shadow: var(--shadow);
   }
 
-  .resource-group {
-    margin-top: 1.75rem;
+  .resource-toggle {
+    margin-top: 1.1rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
   }
 
-  .resource-group h3 {
-    margin: 0 0 0.2rem;
+  .resource-toggle > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.9rem 1.1rem;
+    font-weight: 600;
     color: var(--accent-dark);
+    background: var(--accent-soft);
     font-size: 1.02rem;
-    padding-top: 1.1rem;
-    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .resource-group .coming-soon {
+  .resource-toggle > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .resource-toggle > summary .chevron {
+    transition: transform 0.15s ease;
+    color: var(--accent);
+    font-size: 0.9rem;
+  }
+
+  .resource-toggle[open] > summary .chevron {
+    transform: rotate(90deg);
+  }
+
+  .resource-toggle-body {
+    padding: 1.1rem 1.1rem 1.25rem;
+  }
+
+  .resource-toggle .coming-soon {
     margin: 0.9rem 0 0;
     font-size: 0.9rem;
     color: var(--muted);
@@ -558,7 +586,7 @@
 
   <section id="ressurser" class="card-section">
     <h2>Ressurser og verktøy</h2>
-    <p>De fleste verktøyene under krever en kode fra meg. <a class="inline-link" href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20ressurser">Kontakt meg for å få kode →</a></p>
+    <p>De fleste verktøyene under krever en kode fra meg, og hvert tema har sin egen kode. <a class="inline-link" href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20ressurser">Kontakt meg for å få kode →</a></p>
     <div class="resource-grid">
       <a class="resource-card" href="helsehjul.html">
         <h3>Helsehjulet</h3>
@@ -572,97 +600,103 @@
       </a>
     </div>
 
-    <div class="resource-group">
-      <h3>Stressmestring og søvn</h3>
-      <div class="resource-grid">
-        <a class="resource-card" href="pusteovelser.html">
-          <h3>Pusteøvelser</h3>
-          <p>To enkle, animerte pusteøvelser for ro og stressmestring: firkantpusting (4×4) og pust inn på 2, ut på 4.</p>
-        </a>
-        <a class="resource-card" href="sovnregistrering.html">
-          <h3>Søvnregistrering</h3>
-          <p>Skjema for én ukes selvregistrering av søvn og kveldsvaner.</p>
-          <p class="note">Krever kode fra Silje Merete</p>
-        </a>
-        <a class="resource-card" href="sovn-stress-logg.html">
-          <h3>Søvn og stress</h3>
-          <p>Ukentlig logg der du registrerer søvnkvalitet og stressnivå side om side, for å se sammenhengen mellom dem.</p>
-          <p class="note">Krever kode fra Silje Merete</p>
-        </a>
-        <a class="resource-card" href="dagbok-stresskoppen.html">
-          <h3>Dagbok for stresskoppen</h3>
-          <p>Skjema for 7 dagers selvregistrering av situasjon, intensitet og hva som fyller og tømmer stresskoppen.</p>
-          <p class="note">Krever kode fra Silje Merete</p>
-        </a>
-        <a class="resource-card" href="pss10.html">
-          <h3>PSS-10 — Opplevd stress-skala</h3>
-          <p>Cohens validerte spørreskjema med 10 spørsmål om hvor stresset du har opplevd den siste måneden.</p>
-          <p class="note">Krever kode fra Silje Merete</p>
-        </a>
+    <details class="resource-toggle">
+      <summary>Stressmestring og søvn <span class="chevron">▸</span></summary>
+      <div class="resource-toggle-body">
+        <div class="resource-grid">
+          <a class="resource-card" href="pusteovelser.html">
+            <h3>Pusteøvelser</h3>
+            <p>To enkle, animerte pusteøvelser for ro og stressmestring: firkantpusting (4×4) og pust inn på 2, ut på 4.</p>
+          </a>
+          <a class="resource-card" href="sovnregistrering.html">
+            <h3>Søvnregistrering</h3>
+            <p>Skjema for én ukes selvregistrering av søvn og kveldsvaner.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="sovn-stress-logg.html">
+            <h3>Søvn og stress</h3>
+            <p>Ukentlig logg der du registrerer søvnkvalitet og stressnivå side om side, for å se sammenhengen mellom dem.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="dagbok-stresskoppen.html">
+            <h3>Dagbok for stresskoppen</h3>
+            <p>Skjema for 7 dagers selvregistrering av situasjon, intensitet og hva som fyller og tømmer stresskoppen.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="pss10.html">
+            <h3>PSS-10 — Opplevd stress-skala</h3>
+            <p>Cohens validerte spørreskjema med 10 spørsmål om hvor stresset du har opplevd den siste måneden.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+        </div>
       </div>
-    </div>
+    </details>
 
-    <div class="resource-group">
-      <h3>Fysisk aktivitet og trening</h3>
-      <div class="resource-grid">
-        <a class="resource-card" href="6mwt.html">
-          <h3>6-minutters gangtest (6MWT)</h3>
-          <p>Tidtaker og loggverktøy for 6-minutters gangtest — mål utholdenhet og følg utviklingen over tid.</p>
-          <p class="note">Krever kode fra Silje Merete</p>
-        </a>
-        <a class="resource-card" href="ymca-step-test.html">
-          <h3>YMCA step-test</h3>
-          <p>Metronom, tidtaker og loggverktøy for YMCA 3-minutters step-test — mål kondisjon og følg utviklingen over tid.</p>
-          <p class="note">Krever kode fra Silje Merete</p>
-        </a>
-        <a class="resource-card" href="1rm-testing.html">
-          <h3>1RM-testing</h3>
-          <p>Beregn estimert 1RM med Brzycki-formelen, og følg utviklingen i maksimal styrke per øvelse over tid.</p>
-          <p class="note">Krever kode fra Silje Merete</p>
-        </a>
-        <a class="resource-card" href="sit-to-stand-test.html">
-          <h3>Sit-to-stand-test (30 sekunder)</h3>
-          <p>Tidtaker og telleknapp for 30-sekunders sit-to-stand-test — mål benstyrke og funksjon, og følg utviklingen over tid.</p>
-          <p class="note">Krever kode fra Silje Merete</p>
-        </a>
-        <a class="resource-card" href="borg-rpe-test.html">
-          <h3>Borg CR10-skala (0–10)</h3>
-          <p>Registrer opplevd anstrengelse med Borgs CR10-skala, og følg utviklingen i treningsintensitet per aktivitet over tid.</p>
-          <p class="note">Krever kode fra Silje Merete</p>
-        </a>
+    <details class="resource-toggle">
+      <summary>Fysisk aktivitet og trening <span class="chevron">▸</span></summary>
+      <div class="resource-toggle-body">
+        <div class="resource-grid">
+          <a class="resource-card" href="6mwt.html">
+            <h3>6-minutters gangtest (6MWT)</h3>
+            <p>Tidtaker og loggverktøy for 6-minutters gangtest — mål utholdenhet og følg utviklingen over tid.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="ymca-step-test.html">
+            <h3>YMCA step-test</h3>
+            <p>Metronom, tidtaker og loggverktøy for YMCA 3-minutters step-test — mål kondisjon og følg utviklingen over tid.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="1rm-testing.html">
+            <h3>1RM-testing</h3>
+            <p>Beregn estimert 1RM med Brzycki-formelen, og følg utviklingen i maksimal styrke per øvelse over tid.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="sit-to-stand-test.html">
+            <h3>Sit-to-stand-test (30 sekunder)</h3>
+            <p>Tidtaker og telleknapp for 30-sekunders sit-to-stand-test — mål benstyrke og funksjon, og følg utviklingen over tid.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="borg-rpe-test.html">
+            <h3>Borg CR10-skala (0–10)</h3>
+            <p>Registrer opplevd anstrengelse med Borgs CR10-skala, og følg utviklingen i treningsintensitet per aktivitet over tid.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+        </div>
       </div>
-    </div>
+    </details>
 
-    <div class="resource-group">
-      <h3>Kosthold</h3>
-      <div class="resource-grid">
-        <a class="resource-card" href="kosthold-spisevaner.html">
-          <h3>Kosthold og spisevaner</h3>
-          <p>Skjema for kartlegging av hva, hvor mye, når og hvorfor du spiser — for én vanlig hverdag og én vanlig helgedag.</p>
-          <p class="note">Krever kode fra Silje Merete</p>
-        </a>
-        <a class="resource-card" href="oppmerksom-spising.html">
-          <h3>Oppmerksom spising</h3>
-          <p>Skjema for 3 dagers registrering av sult- og metthetsskala før og etter måltider, samt hvor tilstedeværende du var mens du spiste.</p>
-          <p class="note">Krever kode fra Silje Merete</p>
-        </a>
-        <a class="resource-card" href="porsjonskontroll.html">
-          <h3>Porsjonskontroll — håndmodellen</h3>
-          <p>Skjema for 3 dagers registrering av porsjonsstørrelser med hånden som målestokk — grønnsaker, protein, karbohydrater og fett.</p>
-          <p class="note">Krever kode fra Silje Merete</p>
-        </a>
-        <a class="resource-card" href="maltidsinnhold.html">
-          <h3>Måltidsinnhold — tallerkenmodellen</h3>
-          <p>Skjema for 3 dagers avkrysning av hvilke matvaregrupper som var med i måltidene dine, ut fra tallerkenmodellen.</p>
-          <p class="note">Krever kode fra Silje Merete</p>
-        </a>
-        <a class="resource-card" href="spisepauser.html">
-          <h3>Spisepauser og småspising</h3>
-          <p>Skjema for 3 dagers registrering av spisevindu og mellommåltider, og om de kom av sult eller av følelser og vaner.</p>
-          <p class="note">Krever kode fra Silje Merete</p>
-        </a>
+    <details class="resource-toggle">
+      <summary>Kosthold <span class="chevron">▸</span></summary>
+      <div class="resource-toggle-body">
+        <div class="resource-grid">
+          <a class="resource-card" href="kosthold-spisevaner.html">
+            <h3>Kosthold og spisevaner</h3>
+            <p>Skjema for kartlegging av hva, hvor mye, når og hvorfor du spiser — for én vanlig hverdag og én vanlig helgedag.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="oppmerksom-spising.html">
+            <h3>Oppmerksom spising</h3>
+            <p>Skjema for 3 dagers registrering av sult- og metthetsskala før og etter måltider, samt hvor tilstedeværende du var mens du spiste.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="porsjonskontroll.html">
+            <h3>Porsjonskontroll — håndmodellen</h3>
+            <p>Skjema for 3 dagers registrering av porsjonsstørrelser med hånden som målestokk — grønnsaker, protein, karbohydrater og fett.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="maltidsinnhold.html">
+            <h3>Måltidsinnhold — tallerkenmodellen</h3>
+            <p>Skjema for 3 dagers avkrysning av hvilke matvaregrupper som var med i måltidene dine, ut fra tallerkenmodellen.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="spisepauser.html">
+            <h3>Spisepauser og småspising</h3>
+            <p>Skjema for 3 dagers registrering av spisevindu og mellommåltider, og om de kom av sult eller av følelser og vaner.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+        </div>
       </div>
-    </div>
+    </details>
   </section>
 
   <section id="investering" class="card-section invest-section">
