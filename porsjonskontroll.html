@@ -487,7 +487,9 @@
     <div class="reminder">
       Håndmodellen er en enkel måte å anslå porsjonsstørrelser på, uten å veie
       eller telle. For hvert måltid vurderer du om mengden av hver
-      matvaregruppe var mindre enn, omtrent som, eller mer enn anbefalt.
+      matvaregruppe var mindre enn, omtrent som, eller mer enn hånd-referansen
+      under. Dette er kun en beskrivelse av mengde — hva som er riktig mengde
+      for akkurat deg avtaler du med Silje Merete ut fra ditt eget kosthold.
       Alt du legger inn lagres i denne nettleseren, så du kan lukke siden og
       fortsette senere. <strong>Det er helt greit om noen felter står tomme —
       hopp bare over grupper som ikke var med i måltidet.</strong>
@@ -570,7 +572,7 @@
         '<select id="' + id + '" data-key="' + id + '">' +
           '<option value="">Ikke med i måltidet</option>' +
           '<option value="mindre">' + OPTION_LABELS.mindre + group.unit + '</option>' +
-          '<option value="passe">' + OPTION_LABELS.passe + group.unit + ' (anbefalt)</option>' +
+          '<option value="passe">' + OPTION_LABELS.passe + group.unit + '</option>' +
           '<option value="mer">' + OPTION_LABELS.mer + group.unit + '</option>' +
         '</select>' +
       '</div>'
@@ -633,7 +635,7 @@
   function renderStatGrid() {
     var html = '';
     FOOD_GROUPS.forEach(function (g) {
-      html += '<div class="stat-item"><strong id="pct-' + g.key + '">–</strong>Andel passe — ' + g.label + '</div>';
+      html += '<div class="stat-item"><strong id="pct-' + g.key + '">–</strong>Andel omtrent en hånd — ' + g.label + '</div>';
     });
     html += '<div class="stat-item"><strong id="meals-filled">–</strong>Måltider registrert</div>';
     document.getElementById('statGrid').innerHTML = html;
@@ -701,7 +703,7 @@
 
   function optionLabel(group, value) {
     if (!value) return '-';
-    return OPTION_LABELS[value] + group.unit + (value === 'passe' ? ' (anbefalt)' : '');
+    return OPTION_LABELS[value] + group.unit;
   }
 
   function buildSummaryText() {
@@ -731,7 +733,7 @@
     }
 
     FOOD_GROUPS.forEach(function (g) {
-      lines.push('Andel passe — ' + g.label + ': ' + document.getElementById('pct-' + g.key).textContent);
+      lines.push('Andel omtrent en hånd — ' + g.label + ': ' + document.getElementById('pct-' + g.key).textContent);
     });
     lines.push('Måltider registrert: ' + document.getElementById('meals-filled').textContent);
     lines.push('');
