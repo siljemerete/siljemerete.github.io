@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Borg RPE-skala (6–20) — Opplevd anstrengelse</title>
-<meta name="description" content="Registrer opplevd anstrengelse med Borgs RPE-skala (6-20), og følg utviklingen i treningsintensitet over tid.">
+<title>Borg CR10-skala (0–10) — Opplevd anstrengelse</title>
+<meta name="description" content="Registrer opplevd anstrengelse med Borgs CR10-skala (0-10), og følg utviklingen i treningsintensitet over tid.">
 <style>
   :root {
     --bg: #f6f8f7;
@@ -268,25 +268,6 @@
   .field textarea {
     min-height: 56px;
     resize: vertical;
-  }
-
-  .estimate-result {
-    margin-top: 0.9rem;
-    background: var(--accent-soft);
-    border-radius: 8px;
-    padding: 0.9rem 1.1rem;
-    text-align: center;
-  }
-
-  .estimate-result .estimate-value {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--accent-dark);
-  }
-
-  .estimate-result .estimate-label {
-    font-size: 0.85rem;
-    color: var(--muted);
   }
 
   .add-button {
@@ -588,7 +569,7 @@
 
   <header class="page-header">
     <a class="back-link" href="index.html">← Til forsiden</a>
-    <h1>Borg RPE-skala (6–20)</h1>
+    <h1>Borg CR10-skala (0–10)</h1>
     <p class="tagline">Registrer hvor anstrengende aktiviteten oppleves, og følg utviklingen over tid</p>
     <div class="reminder">
       RPE (rate of perceived exertion) er din egen opplevelse av hvor
@@ -599,9 +580,9 @@
   </header>
 
   <section class="primer">
-    <h2>Om Borg-skalaen</h2>
-    <p>Borgs RPE-skala går fra 6 til 20, der 6 er ingen anstrengelse og 20 er maksimal anstrengelse. Skalaen er laget slik at verdien ganget med 10 gir et grovt anslag på pulsen din under jevn, kontinuerlig utholdenhetstrening (f.eks. RPE 13 ≈ puls 130). Dette er en tommelfingerregel som varierer fra person til person, og stemmer dårligere ved styrketrening eller intervaller.</p>
-    <p>Slik gjør du det: gjennomfør aktiviteten, og velg deretter tallet som best beskriver hvor anstrengende den kjentes — ta gjerne pulsen samtidig hvis du har mulighet, så kan du sammenligne med det estimerte anslaget.</p>
+    <h2>Om CR10-skalaen</h2>
+    <p>Borgs CR10-skala (Category-Ratio) går fra 0 til 10, der 0 er ingen anstrengelse i det hele tatt og 10 er ekstremt sterk anstrengelse, nesten maksimal. I motsetning til den originale 6–20-skalaen er CR10 en forholdstallskala — en verdi på 10 oppleves altså omtrent dobbelt så anstrengende som en verdi på 5, ikke bare "høyere". Den brukes gjerne for opplevd anstrengelse, tung pust eller smerte.</p>
+    <p>Slik gjør du det: gjennomfør aktiviteten, og velg deretter tallet som best beskriver hvor anstrengende den kjentes. Ta gjerne pulsen samtidig hvis du har mulighet, så har du den som ekstra referanse ved siden av egen opplevelse.</p>
     <div class="scale-table" id="scaleTable"></div>
   </section>
 
@@ -621,17 +602,13 @@
         <input type="number" min="30" max="220" step="1" id="entry-pulse" placeholder="F.eks. 132">
       </div>
       <div class="field field-wide">
-        <label>Velg RPE-verdi</label>
+        <label>Velg CR10-verdi</label>
         <div class="rpe-picker" id="rpePicker"></div>
       </div>
       <div class="field field-wide">
         <label for="entry-note">Notat — hvordan kjentes det, vær, terreng, annet</label>
         <textarea id="entry-note" placeholder="Skriv gjerne fritt her..."></textarea>
       </div>
-    </div>
-    <div class="estimate-result">
-      <div class="estimate-value" id="estimateValue">–</div>
-      <div class="estimate-label">Estimert puls (RPE × 10)</div>
     </div>
     <button type="button" class="add-button" id="addEntry">Legg til registrering</button>
   </section>
@@ -648,8 +625,7 @@
           <tr>
             <th>Dato</th>
             <th>Aktivitet</th>
-            <th>RPE</th>
-            <th>Estimert puls</th>
+            <th>CR10</th>
             <th>Målt puls</th>
             <th>Endring</th>
             <th>Notat</th>
@@ -660,7 +636,7 @@
       </table>
     </div>
     <p class="empty-note" id="emptyNote">Ingen registreringer ennå.</p>
-    <p class="source-note">Skalaen er Borgs RPE-skala (6–20), utviklet av Gunnar Borg. Estimert puls (RPE × 10) er en grov tommelfingerregel — ikke en presis medisinsk måling.</p>
+    <p class="source-note">Skalaen er Borgs CR10-skala (0–10), utviklet av Gunnar Borg.</p>
   </section>
 
   <section class="primer">
@@ -685,45 +661,44 @@
 </div>
 
 <script>
-  var STORAGE_KEY = 'borg-rpe-test-data';
+  var STORAGE_KEY = 'borg-cr10-test-data';
   var RECIPIENT = 'silje.merete.binder@gmail.com';
 
+  var RPE_VALUES = [0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
   var RPE_LABELS = {
-    6: 'Ingen anstrengelse',
-    7: 'Ekstremt lett',
+    0: 'Ingenting i det hele tatt',
+    0.5: 'Ekstremt svak (så vidt merkbar)',
+    1: 'Svært svak',
+    2: 'Svak',
+    3: 'Moderat',
+    4: 'Noe sterk',
+    5: 'Sterk',
+    6: '',
+    7: 'Svært sterk',
     8: '',
-    9: 'Svært lett',
-    10: '',
-    11: 'Lett',
-    12: '',
-    13: 'Litt anstrengende',
-    14: '',
-    15: 'Anstrengende',
-    16: '',
-    17: 'Svært anstrengende',
-    18: '',
-    19: 'Ekstremt anstrengende',
-    20: 'Maksimal anstrengelse'
+    9: '',
+    10: 'Ekstremt sterk (nesten maksimal)'
   };
 
   var entries = [];
 
   function buildScaleTable() {
     var container = document.getElementById('scaleTable');
-    for (var v = 6; v <= 20; v++) {
+    RPE_VALUES.forEach(function (v) {
       var row = document.createElement('div');
-      row.className = 'scale-row ' + (v <= 12 ? 'light' : (v >= 15 ? 'hard' : ''));
+      row.className = 'scale-row ' + (v <= 3 ? 'light' : (v >= 7 ? 'hard' : ''));
       var label = RPE_LABELS[v];
       row.innerHTML =
         '<span class="scale-value">' + v + '</span>' +
         '<span class="scale-label' + (label ? '' : ' blank') + '">' + (label || '—') + '</span>';
       container.appendChild(row);
-    }
+    });
   }
 
   function buildRpePicker() {
     var picker = document.getElementById('rpePicker');
-    for (var v = 6; v <= 20; v++) {
+    RPE_VALUES.forEach(function (v) {
       var wrap = document.createElement('label');
       wrap.className = 'rpe-option';
       var input = document.createElement('input');
@@ -744,23 +719,12 @@
       wrap.appendChild(input);
       wrap.appendChild(span);
       picker.appendChild(wrap);
-    }
-
-    picker.addEventListener('change', function (evt) {
-      if (evt.target.type !== 'radio') return;
-      updateLiveEstimate();
     });
   }
 
   function selectedRpe() {
     var input = document.querySelector('input[name="entry-rpe"]:checked');
-    return input ? parseInt(input.value, 10) : null;
-  }
-
-  function updateLiveEstimate() {
-    var rpe = selectedRpe();
-    var el = document.getElementById('estimateValue');
-    el.textContent = rpe === null ? '–' : (rpe * 10);
+    return input ? parseFloat(input.value) : null;
   }
 
   function readState() {
@@ -820,7 +784,7 @@
       item.className = 'activity-summary-item';
       item.innerHTML =
         '<strong class="activity-name">' + escapeHtml(activity) + '</strong>' +
-        '<div class="activity-latest">RPE ' + latest + '</div>' +
+        '<div class="activity-latest">CR10: ' + latest + '</div>' +
         '<div class="activity-change ' + changeClass + '">' + changeText + '</div>';
       grid.appendChild(item);
     });
@@ -854,7 +818,6 @@
         '<td>' + (entry.date || '-') + '</td>' +
         '<td>' + escapeHtml(entry.activity) + '</td>' +
         '<td>' + entry.rpe + '</td>' +
-        '<td>' + (entry.rpe * 10) + '</td>' +
         '<td>' + (entry.pulse !== null && entry.pulse !== undefined ? entry.pulse : '-') + '</td>' +
         '<td class="' + deltaClass + '">' + deltaText + '</td>' +
         '<td>' + (entry.note ? escapeHtml(entry.note) : '-') + '</td>' +
@@ -888,7 +851,7 @@
     var pulse = pulseRaw === '' ? null : parseInt(pulseRaw, 10);
 
     if (!activity || !date || rpe === null) {
-      alert('Fyll ut aktivitet, dato og velg en RPE-verdi for å legge til registreringen.');
+      alert('Fyll ut aktivitet, dato og velg en CR10-verdi for å legge til registreringen.');
       return;
     }
 
@@ -909,13 +872,12 @@
     document.getElementById('entry-note').value = '';
     var checked = document.querySelector('input[name="entry-rpe"]:checked');
     if (checked) checked.checked = false;
-    updateLiveEstimate();
   }
 
   function buildSummaryText() {
     var sorted = sortedEntries();
     var lines = [];
-    lines.push('Borg RPE-skala (6-20) — Opplevd anstrengelse');
+    lines.push('Borg CR10-skala (0-10) — Opplevd anstrengelse');
     lines.push('');
 
     if (sorted.length === 0) {
@@ -925,7 +887,7 @@
       sorted.forEach(function (entry) {
         var prevRpe = lastSeen[entry.activity];
         var delta = prevRpe === undefined ? null : entry.rpe - prevRpe;
-        lines.push(entry.date + ' — ' + entry.activity + ': RPE ' + entry.rpe + (delta !== null ? ' (' + (delta > 0 ? '+' : '') + delta + ')' : '') + ', estimert puls ' + (entry.rpe * 10) + (entry.pulse !== null ? ', målt puls ' + entry.pulse : ''));
+        lines.push(entry.date + ' — ' + entry.activity + ': CR10 ' + entry.rpe + (delta !== null ? ' (' + (delta > 0 ? '+' : '') + delta + ')' : '') + (entry.pulse !== null ? ', målt puls ' + entry.pulse : ''));
         if (entry.note) {
           lines.push('  Notat: ' + entry.note);
         }
@@ -940,7 +902,7 @@
         var first = list[0].rpe;
         var latest = list[list.length - 1].rpe;
         var change = latest - first;
-        lines.push('  ' + activity + ': RPE ' + latest + (list.length >= 2 ? ' (' + (change > 0 ? '+' : '') + change + ' siden første gang)' : ''));
+        lines.push('  ' + activity + ': CR10 ' + latest + (list.length >= 2 ? ' (' + (change > 0 ? '+' : '') + change + ' siden første gang)' : ''));
       });
     }
 
@@ -948,7 +910,7 @@
   }
 
   function sendEmail() {
-    var subject = encodeURIComponent('Borg RPE-skala - Opplevd anstrengelse');
+    var subject = encodeURIComponent('Borg CR10-skala - Opplevd anstrengelse');
     var body = encodeURIComponent(buildSummaryText());
     window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
   }
