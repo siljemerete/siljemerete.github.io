@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Søvn og stress — én uke</title>
+<meta name="description" content="Ukentlig logg der du registrerer søvnkvalitet og stressnivå side om side, for å se sammenhengen mellom dem.">
+<style>
+  :root {
+    --bg: #f6f8f7;
+    --card: #ffffff;
+    --ink: #1f2d2b;
+    --muted: #56655f;
+    --accent: #2f7d6b;
+    --accent-dark: #235c50;
+    --accent-soft: #e3f1ec;
+    --push: #b96b2a;
+    --push-soft: #fbeee0;
+    --border: #dfe7e3;
+    --shadow: 0 1px 3px rgba(31, 45, 43, 0.08), 0 1px 2px rgba(31, 45, 43, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  header.page-header {
+    margin-bottom: 1.75rem;
+  }
+
+  header.page-header a.back-link {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    margin-bottom: 0.75rem;
+  }
+
+  header.page-header a.back-link:hover {
+    color: var(--accent-dark);
+  }
+
+  header.page-header h1 {
+    font-size: 1.7rem;
+    margin: 0 0 0.35rem;
+    color: var(--accent-dark);
+  }
+
+  header.page-header p.tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  .reminder {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  section.primer h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer p {
+    margin: 0.6rem 0 0;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .controls button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .controls button:hover {
+    background: var(--accent-soft);
+  }
+
+  .controls button.danger {
+    color: var(--push);
+  }
+
+  .controls button.danger:hover {
+    background: var(--push-soft);
+  }
+
+  .topic {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 0.9rem;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .topic > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1rem 1.25rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .topic > summary::-webkit-details-marker { display: none; }
+
+  .topic > summary .chevron {
+    transition: transform 0.15s ease;
+    color: var(--accent);
+    font-size: 1rem;
+  }
+
+  .topic[open] > summary .chevron {
+    transform: rotate(90deg);
+  }
+
+  .topic > summary:hover {
+    background: var(--accent-soft);
+  }
+
+  .topic-body {
+    padding: 0.25rem 1.25rem 1.25rem;
+  }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 0.9rem;
+    margin-top: 0.75rem;
+  }
+
+  .field-wide {
+    grid-column: 1 / -1;
+  }
+
+  .field label {
+    display: block;
+    font-weight: 600;
+    color: var(--accent-dark);
+    margin-bottom: 0.3rem;
+    font-size: 0.88rem;
+  }
+
+  .field input[type="text"],
+  .field input[type="date"],
+  .field textarea {
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .field textarea {
+    min-height: 56px;
+    resize: vertical;
+  }
+
+  .field input[type="range"] {
+    width: 100%;
+    accent-color: var(--accent);
+  }
+
+  .range-value {
+    color: var(--accent-dark);
+    font-size: 1.05rem;
+  }
+
+  .range-anchors {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+    gap: 0.5rem;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.6rem;
+    margin: 0.75rem 0 1rem;
+  }
+
+  .stat-item {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.7rem 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  .stat-item strong {
+    display: block;
+    color: var(--accent-dark);
+    font-size: 1.4rem;
+  }
+
+  .send-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .send-buttons button {
+    font-size: 0.92rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .send-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .muted-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  footer.closing {
+    margin-top: 1.75rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong {
+    color: var(--accent-dark);
+  }
+
+  body.gate-locked .wrap,
+  body.gate-locked footer.closing {
+    display: none;
+  }
+
+  .gate-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 100;
+  }
+
+  body.gate-locked .gate-overlay {
+    display: flex;
+  }
+
+  .gate-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 2rem 1.75rem;
+    max-width: 340px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .gate-box h1 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    color: var(--accent-dark);
+  }
+
+  .gate-box p {
+    margin: 0 0 1rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .gate-box input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    font-family: inherit;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  .gate-box input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .gate-box button {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .gate-box button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .gate-error {
+    display: none;
+    color: var(--push);
+    font-size: 0.85rem;
+    margin: 0.7rem 0 0;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .controls, .send-buttons, .muted-note, header.page-header a.back-link { display: none; }
+    .topic { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body class="gate-locked">
+
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box">
+    <h1>Tilgang til verktøyet</h1>
+    <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
+    <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
+    <button type="button" id="gateSubmit">Lås opp</button>
+    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var GATE_KEY = 'client-resource-unlocked';
+    var CODE = 'nyevaner';
+
+    function unlock() {
+      localStorage.setItem(GATE_KEY, 'true');
+      document.body.classList.remove('gate-locked');
+    }
+
+    if (localStorage.getItem(GATE_KEY) === 'true') {
+      unlock();
+    }
+
+    function trySubmit() {
+      var input = document.getElementById('gateCode');
+      var error = document.getElementById('gateError');
+      if (input.value.trim().toLowerCase() === CODE) {
+        error.style.display = 'none';
+        unlock();
+      } else {
+        error.style.display = 'block';
+      }
+    }
+
+    document.getElementById('gateSubmit').addEventListener('click', trySubmit);
+    document.getElementById('gateCode').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') trySubmit();
+    });
+  })();
+</script>
+
+<div class="wrap">
+
+  <header class="page-header">
+    <a class="back-link" href="index.html">← Til forsiden</a>
+    <h1>Søvn og stress — én uke</h1>
+    <p class="tagline">Registrer søvnkvalitet og stressnivå side om side, dag for dag</p>
+    <div class="reminder">
+      Hver dag setter du to enkle tall — hvor godt du sov natten før, og hvor
+      stresset du kjente deg i løpet av dagen. Over en uke kan det gi et bilde
+      av sammenhengen mellom dem. Dette er ikke en eksamen — bare et
+      utgangspunkt for samtalen vår. Alt du legger inn lagres i denne
+      nettleseren, så du kan lukke siden og fortsette senere. <strong>Det er
+      helt greit om noen dager mangler noe.</strong>
+    </div>
+  </header>
+
+  <div class="controls">
+    <button type="button" id="expandAll">Vis alle</button>
+    <button type="button" id="collapseAll">Skjul alle</button>
+    <button type="button" id="resetAll" class="danger">Nullstill alt</button>
+  </div>
+
+  <div id="days">
+    <details class="topic" data-day="1">
+      <summary>Dag 1 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-1">Dato (valgfritt)</label>
+            <input type="date" id="date-1" data-key="date-1">
+          </div>
+          <div class="field field-wide">
+            <label for="sleep-1">Søvnkvalitet i natt: <span class="range-value" id="sleep-value-1">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="sleep-1" data-key="sleep-1" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Urolig, våknet mye</span>
+              <span>10 — Uthvilt, sammenhengende søvn</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="stress-1">Stressnivå i dag: <span class="range-value" id="stress-value-1">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="stress-1" data-key="stress-1" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Rolig, avslappet</span>
+              <span>10 — Svært stresset</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="note-1">Noe som pekte seg ut — bra eller krevende?</label>
+            <textarea id="note-1" data-key="note-1" placeholder="Skriv gjerne fritt her..."></textarea>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="2">
+      <summary>Dag 2 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-2">Dato (valgfritt)</label>
+            <input type="date" id="date-2" data-key="date-2">
+          </div>
+          <div class="field field-wide">
+            <label for="sleep-2">Søvnkvalitet i natt: <span class="range-value" id="sleep-value-2">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="sleep-2" data-key="sleep-2" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Urolig, våknet mye</span>
+              <span>10 — Uthvilt, sammenhengende søvn</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="stress-2">Stressnivå i dag: <span class="range-value" id="stress-value-2">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="stress-2" data-key="stress-2" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Rolig, avslappet</span>
+              <span>10 — Svært stresset</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="note-2">Noe som pekte seg ut — bra eller krevende?</label>
+            <textarea id="note-2" data-key="note-2" placeholder="Skriv gjerne fritt her..."></textarea>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="3">
+      <summary>Dag 3 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-3">Dato (valgfritt)</label>
+            <input type="date" id="date-3" data-key="date-3">
+          </div>
+          <div class="field field-wide">
+            <label for="sleep-3">Søvnkvalitet i natt: <span class="range-value" id="sleep-value-3">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="sleep-3" data-key="sleep-3" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Urolig, våknet mye</span>
+              <span>10 — Uthvilt, sammenhengende søvn</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="stress-3">Stressnivå i dag: <span class="range-value" id="stress-value-3">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="stress-3" data-key="stress-3" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Rolig, avslappet</span>
+              <span>10 — Svært stresset</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="note-3">Noe som pekte seg ut — bra eller krevende?</label>
+            <textarea id="note-3" data-key="note-3" placeholder="Skriv gjerne fritt her..."></textarea>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="4">
+      <summary>Dag 4 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-4">Dato (valgfritt)</label>
+            <input type="date" id="date-4" data-key="date-4">
+          </div>
+          <div class="field field-wide">
+            <label for="sleep-4">Søvnkvalitet i natt: <span class="range-value" id="sleep-value-4">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="sleep-4" data-key="sleep-4" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Urolig, våknet mye</span>
+              <span>10 — Uthvilt, sammenhengende søvn</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="stress-4">Stressnivå i dag: <span class="range-value" id="stress-value-4">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="stress-4" data-key="stress-4" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Rolig, avslappet</span>
+              <span>10 — Svært stresset</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="note-4">Noe som pekte seg ut — bra eller krevende?</label>
+            <textarea id="note-4" data-key="note-4" placeholder="Skriv gjerne fritt her..."></textarea>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="5">
+      <summary>Dag 5 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-5">Dato (valgfritt)</label>
+            <input type="date" id="date-5" data-key="date-5">
+          </div>
+          <div class="field field-wide">
+            <label for="sleep-5">Søvnkvalitet i natt: <span class="range-value" id="sleep-value-5">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="sleep-5" data-key="sleep-5" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Urolig, våknet mye</span>
+              <span>10 — Uthvilt, sammenhengende søvn</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="stress-5">Stressnivå i dag: <span class="range-value" id="stress-value-5">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="stress-5" data-key="stress-5" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Rolig, avslappet</span>
+              <span>10 — Svært stresset</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="note-5">Noe som pekte seg ut — bra eller krevende?</label>
+            <textarea id="note-5" data-key="note-5" placeholder="Skriv gjerne fritt her..."></textarea>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="6">
+      <summary>Dag 6 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-6">Dato (valgfritt)</label>
+            <input type="date" id="date-6" data-key="date-6">
+          </div>
+          <div class="field field-wide">
+            <label for="sleep-6">Søvnkvalitet i natt: <span class="range-value" id="sleep-value-6">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="sleep-6" data-key="sleep-6" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Urolig, våknet mye</span>
+              <span>10 — Uthvilt, sammenhengende søvn</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="stress-6">Stressnivå i dag: <span class="range-value" id="stress-value-6">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="stress-6" data-key="stress-6" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Rolig, avslappet</span>
+              <span>10 — Svært stresset</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="note-6">Noe som pekte seg ut — bra eller krevende?</label>
+            <textarea id="note-6" data-key="note-6" placeholder="Skriv gjerne fritt her..."></textarea>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="7">
+      <summary>Dag 7 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-7">Dato (valgfritt)</label>
+            <input type="date" id="date-7" data-key="date-7">
+          </div>
+          <div class="field field-wide">
+            <label for="sleep-7">Søvnkvalitet i natt: <span class="range-value" id="sleep-value-7">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="sleep-7" data-key="sleep-7" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Urolig, våknet mye</span>
+              <span>10 — Uthvilt, sammenhengende søvn</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="stress-7">Stressnivå i dag: <span class="range-value" id="stress-value-7">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="stress-7" data-key="stress-7" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Rolig, avslappet</span>
+              <span>10 — Svært stresset</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="note-7">Noe som pekte seg ut — bra eller krevende?</label>
+            <textarea id="note-7" data-key="note-7" placeholder="Skriv gjerne fritt her..."></textarea>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <section class="primer" id="summarySection">
+    <h2>Oppsummering for uken</h2>
+    <div class="stat-grid">
+      <div class="stat-item"><strong id="avg-sleep">–</strong>Snitt søvnkvalitet (1–10)</div>
+      <div class="stat-item"><strong id="avg-stress">–</strong>Snitt stressnivå (1–10)</div>
+      <div class="stat-item"><strong id="days-filled">–</strong>Dager registrert</div>
+    </div>
+    <div class="field field-wide">
+      <label for="weekly-reflection">Ser du en sammenheng mellom søvnen og stresset denne uken?</label>
+      <textarea id="weekly-reflection" data-key="weekly-reflection" placeholder="Skriv gjerne fritt her..."></textarea>
+    </div>
+  </section>
+
+  <section class="primer">
+    <h2>Send inn registreringen</h2>
+    <p class="muted-note">
+      Du kan sende registreringen direkte fra din egen e-postapp, eller laste
+      den ned som en tekstfil du selv sender eller tar med til timen. Hvis
+      "Send på e-post" ikke åpner riktig på mobilen din, bruk nedlastingen i
+      stedet.
+    </p>
+    <div class="send-buttons">
+      <button type="button" id="sendEmail">Send på e-post</button>
+      <button type="button" id="downloadText" class="secondary">Last ned som tekstfil</button>
+    </div>
+  </section>
+
+  <footer class="closing">
+    Små, ærlige notater — ikke perfekte.<br>
+    <strong>Dette er overkommelig, og du trenger ikke gjøre det alene.</strong>
+  </footer>
+
+</div>
+
+<script>
+  var DAY_COUNT = 7;
+  var STORAGE_KEY = 'sovn-stress-logg-data';
+  var RECIPIENT = 'silje.merete.binder@gmail.com';
+
+  function readState() {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return {};
+    try {
+      return JSON.parse(raw) || {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveState() {
+    var data = {};
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      data[el.getAttribute('data-key')] = el.value;
+    });
+    document.querySelectorAll('input[type="range"]').forEach(function (el) {
+      data[el.id + '-touched'] = el.getAttribute('data-touched');
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function loadState() {
+    var data = readState();
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      var key = el.getAttribute('data-key');
+      if (data[key] !== undefined) {
+        el.value = data[key];
+      }
+    });
+    for (var n = 1; n <= DAY_COUNT; n++) {
+      ['sleep', 'stress'].forEach(function (kind) {
+        var range = document.getElementById(kind + '-' + n);
+        var display = document.getElementById(kind + '-value-' + n);
+        if (!range || !display) return;
+        if (data[range.id + '-touched'] === 'true') {
+          range.setAttribute('data-touched', 'true');
+          display.textContent = range.value;
+        } else {
+          display.textContent = 'Ikke satt';
+        }
+      });
+    }
+  }
+
+  function isRangeTouched(kind, n) {
+    var range = document.getElementById(kind + '-' + n);
+    return range && range.getAttribute('data-touched') === 'true';
+  }
+
+  function updateSummary() {
+    var sleepSum = 0, sleepCount = 0;
+    var stressSum = 0, stressCount = 0;
+    var daysFilled = 0;
+
+    for (var n = 1; n <= DAY_COUNT; n++) {
+      var hasAnyData = isRangeTouched('sleep', n) || isRangeTouched('stress', n);
+
+      document.querySelectorAll('[data-day="' + n + '"] [data-key]:not([type="range"])').forEach(function (el) {
+        if (el.value && el.value.trim() !== '') hasAnyData = true;
+      });
+      if (hasAnyData) daysFilled++;
+
+      if (isRangeTouched('sleep', n)) {
+        var sleepVal = parseFloat(document.getElementById('sleep-' + n).value);
+        if (!isNaN(sleepVal)) {
+          sleepSum += sleepVal;
+          sleepCount++;
+        }
+      }
+
+      if (isRangeTouched('stress', n)) {
+        var stressVal = parseFloat(document.getElementById('stress-' + n).value);
+        if (!isNaN(stressVal)) {
+          stressSum += stressVal;
+          stressCount++;
+        }
+      }
+    }
+
+    document.getElementById('avg-sleep').textContent = sleepCount ? (sleepSum / sleepCount).toFixed(1) : '–';
+    document.getElementById('avg-stress').textContent = stressCount ? (stressSum / stressCount).toFixed(1) : '–';
+    document.getElementById('days-filled').textContent = daysFilled + ' / ' + DAY_COUNT;
+  }
+
+  function buildSummaryText() {
+    var lines = [];
+    lines.push('Søvn og stress — én uke');
+    lines.push('');
+
+    for (var n = 1; n <= DAY_COUNT; n++) {
+      var date = document.getElementById('date-' + n).value;
+      var sleep = isRangeTouched('sleep', n) ? document.getElementById('sleep-' + n).value : '';
+      var stress = isRangeTouched('stress', n) ? document.getElementById('stress-' + n).value : '';
+      var note = document.getElementById('note-' + n).value;
+
+      lines.push('Dag ' + n + (date ? ' (' + date + ')' : ''));
+      lines.push('  Søvnkvalitet (1-10): ' + (sleep || '-'));
+      lines.push('  Stressnivå (1-10): ' + (stress || '-'));
+      lines.push('  Notat: ' + (note || '-'));
+      lines.push('');
+    }
+
+    lines.push('Snitt søvnkvalitet: ' + document.getElementById('avg-sleep').textContent);
+    lines.push('Snitt stressnivå: ' + document.getElementById('avg-stress').textContent);
+    lines.push('Dager registrert: ' + document.getElementById('days-filled').textContent);
+    lines.push('');
+    lines.push('Sammenheng mellom søvn og stress: ' + (document.getElementById('weekly-reflection').value || '-'));
+
+    return lines.join('\n');
+  }
+
+  function sendEmail() {
+    var subject = encodeURIComponent('Søvn og stress - én uke');
+    var body = encodeURIComponent(buildSummaryText());
+    window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
+  }
+
+  function downloadText() {
+    var blob = new Blob([buildSummaryText()], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'sovn-stress-logg.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    loadState();
+    updateSummary();
+
+    document.body.addEventListener('input', function (e) {
+      if (!e.target.hasAttribute('data-key')) return;
+      if (e.target.type === 'range') {
+        e.target.setAttribute('data-touched', 'true');
+        var parts = e.target.id.split('-');
+        var kind = parts[0];
+        var n = parts[1];
+        var display = document.getElementById(kind + '-value-' + n);
+        if (display) display.textContent = e.target.value;
+      }
+      saveState();
+      updateSummary();
+    });
+
+    document.getElementById('expandAll').addEventListener('click', function () {
+      document.querySelectorAll('details.topic').forEach(function (d) { d.open = true; });
+    });
+    document.getElementById('collapseAll').addEventListener('click', function () {
+      document.querySelectorAll('details.topic').forEach(function (d) { d.open = false; });
+    });
+    document.getElementById('resetAll').addEventListener('click', function () {
+      if (!confirm('Nullstille all registrert data for uken? Dette kan ikke angres.')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    });
+
+    document.getElementById('sendEmail').addEventListener('click', sendEmail);
+    document.getElementById('downloadText').addEventListener('click', downloadText);
+  });
+</script>
+
+</body>
+</html>
