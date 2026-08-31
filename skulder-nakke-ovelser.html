@@ -108,36 +108,8 @@
     opacity: 0.6;
   }
 
-  .step-icon {
-    display: inline-block;
-    width: 22px;
-    height: 22px;
-    vertical-align: middle;
-    margin-right: 0.4rem;
-    color: var(--accent);
-  }
-
-  .step-icon svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
   .timer-display {
     text-align: center;
-  }
-
-  .timer-illustration {
-    width: 96px;
-    height: 96px;
-    margin: 0 auto 0.5rem;
-    color: var(--accent-dark);
-  }
-
-  .timer-illustration svg {
-    width: 100%;
-    height: 100%;
-    display: block;
   }
 
   .timer-step-name {
@@ -282,7 +254,6 @@
   <section class="card">
     <h2>Tidtaker</h2>
     <div class="timer-display">
-      <div class="timer-illustration" id="timerIllustration"></div>
       <p class="timer-step-name" id="stepName">Klar til å starte</p>
       <div class="timer-clock" id="timerClock">00:30</div>
       <div class="timer-progress">
@@ -317,46 +288,13 @@
 </footer>
 
 <script>
-  var SVG_ATTRS = 'viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"';
-  var DONE_ICON = '<svg ' + SVG_ATTRS + '><path d="M22,52 L42,72 L80,28"/></svg>';
-
   var STEPS = [
-    {
-      label: 'Skulderrull bakover',
-      seconds: 30,
-      instruction: 'Rull skuldrene sakte bakover i store, rolige sirkler.',
-      icon: '<svg ' + SVG_ATTRS + '><circle cx="50" cy="24" r="9"/><line x1="50" y1="33" x2="50" y2="75"/><line x1="30" y1="48" x2="70" y2="48"/><path d="M62,40 A14,14 0 1 1 60,34"/><line x1="30" y1="48" x2="26" y2="70"/><line x1="70" y1="48" x2="74" y2="70"/></svg>'
-    },
-    {
-      label: 'Nakkestrekk mot høyre',
-      seconds: 30,
-      instruction: 'Bøy hodet forsiktig mot høyre skulder til du kjenner strekk på venstre side av halsen.',
-      icon: '<svg ' + SVG_ATTRS + '><line x1="50" y1="40" x2="50" y2="80"/><line x1="30" y1="45" x2="70" y2="45"/><line x1="55" y1="40" x2="62" y2="30"/><circle cx="66" cy="24" r="9"/></svg>'
-    },
-    {
-      label: 'Nakkestrekk mot venstre',
-      seconds: 30,
-      instruction: 'Bøy hodet forsiktig mot venstre skulder til du kjenner strekk på høyre side av halsen.',
-      icon: '<svg ' + SVG_ATTRS + '><line x1="50" y1="40" x2="50" y2="80"/><line x1="30" y1="45" x2="70" y2="45"/><line x1="45" y1="40" x2="38" y2="30"/><circle cx="34" cy="24" r="9"/></svg>'
-    },
-    {
-      label: 'Hakeinntrekking (dobbelthake)',
-      seconds: 30,
-      instruction: 'Trekk haken rett bakover, som for å lage dobbelthake. Slipp og gjenta rolig.',
-      icon: '<svg ' + SVG_ATTRS + '><circle cx="55" cy="26" r="9"/><line x1="52" y1="35" x2="50" y2="80"/><path d="M44,26 L30,26"/><path d="M36,21 L28,26 L36,31"/></svg>'
-    },
-    {
-      label: 'Skulderbladklem',
-      seconds: 30,
-      instruction: 'Trekk skulderbladene sammen bak ryggen, hold litt og slipp. Gjenta rolig.',
-      icon: '<svg ' + SVG_ATTRS + '><circle cx="50" cy="22" r="9"/><line x1="50" y1="31" x2="50" y2="75"/><line x1="30" y1="42" x2="70" y2="42"/><path d="M30,42 Q20,55 28,68"/><path d="M70,42 Q80,55 72,68"/></svg>'
-    },
-    {
-      label: 'Armstrekk over hodet',
-      seconds: 30,
-      instruction: 'Strekk begge armene opp over hodet og strekk hele overkroppen oppover.',
-      icon: '<svg ' + SVG_ATTRS + '><circle cx="50" cy="30" r="9"/><line x1="50" y1="39" x2="50" y2="80"/><line x1="50" y1="42" x2="25" y2="10"/><line x1="50" y1="42" x2="75" y2="10"/></svg>'
-    }
+    { label: 'Skulderrull bakover', seconds: 30, instruction: 'Rull skuldrene sakte bakover i store, rolige sirkler.' },
+    { label: 'Nakkestrekk mot høyre', seconds: 30, instruction: 'Bøy hodet forsiktig mot høyre skulder til du kjenner strekk på venstre side av halsen.' },
+    { label: 'Nakkestrekk mot venstre', seconds: 30, instruction: 'Bøy hodet forsiktig mot venstre skulder til du kjenner strekk på høyre side av halsen.' },
+    { label: 'Hakeinntrekking (dobbelthake)', seconds: 30, instruction: 'Trekk haken rett bakover, som for å lage dobbelthake. Slipp og gjenta rolig.' },
+    { label: 'Skulderbladklem', seconds: 30, instruction: 'Trekk skulderbladene sammen bak ryggen, hold litt og slipp. Gjenta rolig.' },
+    { label: 'Armstrekk over hodet', seconds: 30, instruction: 'Strekk begge armene opp over hodet og strekk hele overkroppen oppover.' }
   ];
 
   (function () {
@@ -368,7 +306,6 @@
 
     var stepListEl = document.getElementById('stepList');
     var stepNameEl = document.getElementById('stepName');
-    var illustrationEl = document.getElementById('timerIllustration');
     var clockEl = document.getElementById('timerClock');
     var progressBarEl = document.getElementById('timerProgressBar');
     var phraseEl = document.getElementById('timerPhrase');
@@ -382,7 +319,7 @@
       stepListEl.innerHTML = '';
       STEPS.forEach(function (step, i) {
         var li = document.createElement('li');
-        li.innerHTML = '<span class="step-icon">' + step.icon + '</span><strong>' + step.label + '</strong> — ' + step.seconds + ' sek';
+        li.innerHTML = '<strong>' + step.label + '</strong> — ' + step.seconds + ' sek';
         if (i === index) li.className = 'active';
         else if (i < index || (i === index && finished)) li.className = 'done';
         stepListEl.appendChild(li);
@@ -414,7 +351,6 @@
     function updateDisplay() {
       var step = STEPS[index];
       stepNameEl.textContent = finished ? 'Ferdig!' : (index + 1) + ' / ' + STEPS.length + ' — ' + step.label;
-      illustrationEl.innerHTML = finished ? DONE_ICON : step.icon;
       clockEl.textContent = formatClock(remaining);
       var elapsed = step.seconds - remaining;
       progressBarEl.style.width = ((elapsed / step.seconds) * 100) + '%';
