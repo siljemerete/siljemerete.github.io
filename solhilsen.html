@@ -130,36 +130,8 @@
     opacity: 0.6;
   }
 
-  .step-icon {
-    display: inline-block;
-    width: 22px;
-    height: 22px;
-    vertical-align: middle;
-    margin-right: 0.4rem;
-    color: var(--accent);
-  }
-
-  .step-icon svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
   .timer-display {
     text-align: center;
-  }
-
-  .timer-illustration {
-    width: 110px;
-    height: 110px;
-    margin: 0 auto 0.5rem;
-    color: var(--accent-dark);
-  }
-
-  .timer-illustration svg {
-    width: 100%;
-    height: 100%;
-    display: block;
   }
 
   .timer-step-name {
@@ -304,21 +276,20 @@
       <li>Varmer opp muskulaturen og øker sirkulasjonen og pulsen.</li>
       <li>Mobiliserer og smører ryggsøylen gjennom vekslende bøy og strekk.</li>
       <li>Bedrer bevegelighet i skuldre, hofter, hamstrings og legger.</li>
-      <li>Bygger stille styrke i kjerne, armer og bein gjennom stillinger som planke og kobra.</li>
+      <li>Bygger stille styrke i kjerne, armer og bein gjennom stillinger som planke og oppadgående hund.</li>
       <li>Roer og samler tankene, siden hver bevegelse er koblet til pusten.</li>
     </ul>
   </section>
 
   <section class="card">
     <h2>Øvelsene i sekvensen</h2>
-    <p class="desc">Timeren under leder deg gjennom alle 12 øvelsene etter tur. Én runde tar ca. 1,5 minutt — gjenta gjerne 3–5 runder for en full praksis.</p>
+    <p class="desc">Timeren under leder deg gjennom alle 12 øvelsene etter tur. Én runde tar ca. 2 minutter — gjenta gjerne 3–5 runder for en full praksis.</p>
     <ol class="step-list" id="stepList"></ol>
   </section>
 
   <section class="card">
     <h2>Tidtaker</h2>
     <div class="timer-display">
-      <div class="timer-illustration" id="timerIllustration"></div>
       <p class="timer-step-name" id="stepName">Klar til å starte</p>
       <div class="timer-clock" id="timerClock">00:08</div>
       <div class="timer-progress">
@@ -354,31 +325,19 @@
 </footer>
 
 <script>
-  var SVG_ATTRS = 'viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"';
-  var DONE_ICON = '<svg ' + SVG_ATTRS + '><path d="M22,52 L42,72 L80,28"/></svg>';
-
-  var ICON_STANDING = '<svg ' + SVG_ATTRS + '><circle cx="50" cy="16" r="8"/><path d="M50,24 Q47,50 49,88"/></svg>';
-  var ICON_ARMS_UP = '<svg ' + SVG_ATTRS + '><path d="M46,88 Q54,50 68,20"/><circle cx="72" cy="12" r="8"/></svg>';
-  var ICON_FORWARD_FOLD = '<svg ' + SVG_ATTRS + '><line x1="66" y1="90" x2="66" y2="50"/><path d="M66,50 L38,68"/><circle cx="32" cy="72" r="10"/><line x1="50" y1="58" x2="40" y2="88"/></svg>';
-  var ICON_HALF_LIFT = '<svg ' + SVG_ATTRS + '><line x1="70" y1="88" x2="68" y2="48"/><line x1="68" y1="48" x2="30" y2="42"/><circle cx="24" cy="41" r="8"/></svg>';
-  var ICON_PLANK = '<svg ' + SVG_ATTRS + '><path d="M20,58 Q45,62 78,50"/><circle cx="84" cy="46" r="8"/><line x1="60" y1="58" x2="58" y2="80"/></svg>';
-  var ICON_EIGHT_POINT = '<svg ' + SVG_ATTRS + '><circle cx="12" cy="78" r="8"/><path d="M24,74 Q42,48 58,70"/><path d="M58,70 Q68,80 78,75"/></svg>';
-  var ICON_COBRA = '<svg ' + SVG_ATTRS + '><path d="M18,82 Q45,80 60,45"/><circle cx="66" cy="36" r="8"/></svg>';
-  var ICON_DOWNDOG = '<svg ' + SVG_ATTRS + '><line x1="20" y1="88" x2="52" y2="40"/><line x1="84" y1="88" x2="52" y2="40"/><circle cx="52" cy="52" r="8"/></svg>';
-
   var STEPS = [
-    { label: 'Fjellstilling (Tadasana)', seconds: 8, instruction: 'Stå med føttene samlet, hendene foran brystet. Pust rolig og kjenn etter i kroppen.', icon: ICON_STANDING },
-    { label: 'Armene opp (Urdhva Hastasana)', seconds: 8, instruction: 'Pust inn og løft armene opp over hodet, len overkroppen lett bakover.', icon: ICON_ARMS_UP },
-    { label: 'Stående fremoverbøy (Uttanasana)', seconds: 8, instruction: 'Pust ut og bøy fremover fra hoftene, la hendene nå mot gulvet eller leggene.', icon: ICON_FORWARD_FOLD },
-    { label: 'Halv fremoverbøy (Ardha Uttanasana)', seconds: 8, instruction: 'Pust inn, rett ryggen flat med hendene på legger eller gulv, og se fremover.', icon: ICON_HALF_LIFT },
-    { label: 'Planke (Phalakasana)', seconds: 8, instruction: 'Pust ut og tre eller hopp føttene bakover til planke, kroppen i én rett linje.', icon: ICON_PLANK },
-    { label: 'Åtte punkts hilsen', seconds: 6, instruction: 'Senk kroppen rolig ned mot gulvet med albuene inntil kroppen. Gå gjerne ned på knærne.', icon: ICON_EIGHT_POINT },
-    { label: 'Kobra (Bhujangasana)', seconds: 8, instruction: 'Pust inn og løft brystet fra gulvet, skuldrene trukket bort fra ørene.', icon: ICON_COBRA },
-    { label: 'Nedadvendt hund (Adho Mukha Svanasana)', seconds: 10, instruction: 'Pust ut og løft hoftene opp og bakover, kropp og armer former en omvendt V.', icon: ICON_DOWNDOG },
-    { label: 'Halv fremoverbøy (Ardha Uttanasana)', seconds: 8, instruction: 'Pust inn, tre eller hopp føttene frem mellom hendene, og rett ryggen flat igjen.', icon: ICON_HALF_LIFT },
-    { label: 'Stående fremoverbøy (Uttanasana)', seconds: 8, instruction: 'Pust ut og la overkroppen henge ned igjen, med lett bøyde knær.', icon: ICON_FORWARD_FOLD },
-    { label: 'Armene opp (Urdhva Hastasana)', seconds: 8, instruction: 'Pust inn, rull opp virvel for virvel og løft armene over hodet.', icon: ICON_ARMS_UP },
-    { label: 'Fjellstilling (Tadasana)', seconds: 8, instruction: 'Pust ut og senk armene. Stå stille og kjenn etter før du eventuelt gjentar en ny runde.', icon: ICON_STANDING }
+    { label: 'Fjellstilling (Tadasana)', seconds: 8, instruction: 'Stå med føttene samlet, hendene foran brystet. Pust rolig og kjenn etter i kroppen.' },
+    { label: 'Armene opp (Urdhva Hastasana)', seconds: 8, instruction: 'Pust inn og løft armene opp over hodet, len overkroppen lett bakover.' },
+    { label: 'Stående fremoverbøy (Uttanasana)', seconds: 8, instruction: 'Pust ut og bøy fremover fra hoftene, la hendene nå mot gulvet eller leggene.' },
+    { label: 'Halv fremoverbøy (Ardha Uttanasana)', seconds: 8, instruction: 'Pust inn, rett ryggen flat med hendene på legger eller gulv, og se fremover.' },
+    { label: 'Planke (Phalakasana)', seconds: 8, instruction: 'Pust ut og tre eller hopp føttene bakover til planke, kroppen i én rett linje.' },
+    { label: 'Åtte punkts hilsen', seconds: 6, instruction: 'Senk kroppen rolig ned mot gulvet med albuene inntil kroppen. Gå gjerne ned på knærne.' },
+    { label: 'Oppadgående hund (Urdhva Mukha Svanasana)', seconds: 8, instruction: 'Pust inn og løft brystet og lårene fra gulvet, armene strake og skuldrene bort fra ørene.' },
+    { label: 'Nedadgående hund (Adho Mukha Svanasana)', seconds: 25, instruction: 'Pust ut og løft hoftene opp og bakover til en omvendt V. Hold stillingen i 5 rolige inn- og utpust.' },
+    { label: 'Halv fremoverbøy (Ardha Uttanasana)', seconds: 8, instruction: 'Pust inn, tre eller hopp føttene frem mellom hendene, og rett ryggen flat igjen.' },
+    { label: 'Stående fremoverbøy (Uttanasana)', seconds: 8, instruction: 'Pust ut og la overkroppen henge ned igjen, med lett bøyde knær.' },
+    { label: 'Armene opp (Urdhva Hastasana)', seconds: 8, instruction: 'Pust inn, rull opp virvel for virvel og løft armene over hodet.' },
+    { label: 'Fjellstilling (Tadasana)', seconds: 8, instruction: 'Pust ut og senk armene. Stå stille og kjenn etter før du eventuelt gjentar en ny runde.' }
   ];
 
   (function () {
@@ -390,7 +349,6 @@
 
     var stepListEl = document.getElementById('stepList');
     var stepNameEl = document.getElementById('stepName');
-    var illustrationEl = document.getElementById('timerIllustration');
     var clockEl = document.getElementById('timerClock');
     var progressBarEl = document.getElementById('timerProgressBar');
     var phraseEl = document.getElementById('timerPhrase');
@@ -404,7 +362,7 @@
       stepListEl.innerHTML = '';
       STEPS.forEach(function (step, i) {
         var li = document.createElement('li');
-        li.innerHTML = '<span class="step-icon">' + step.icon + '</span><strong>' + step.label + '</strong> — ' + step.seconds + ' sek';
+        li.innerHTML = '<strong>' + step.label + '</strong> — ' + step.seconds + ' sek';
         if (i === index) li.className = 'active';
         else if (i < index || (i === index && finished)) li.className = 'done';
         stepListEl.appendChild(li);
@@ -436,7 +394,6 @@
     function updateDisplay() {
       var step = STEPS[index];
       stepNameEl.textContent = finished ? 'Ferdig!' : (index + 1) + ' / ' + STEPS.length + ' — ' + step.label;
-      illustrationEl.innerHTML = finished ? DONE_ICON : step.icon;
       clockEl.textContent = formatClock(remaining);
       var elapsed = step.seconds - remaining;
       progressBarEl.style.width = ((elapsed / step.seconds) * 100) + '%';
