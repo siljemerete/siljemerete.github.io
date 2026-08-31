@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morgen- og kveldsstrekk — Silje Merete SMART Helseveiledning</title>
+<meta name="description" content="Kort strekk-sekvens for hele kroppen, fin å bruke morgen eller kveld, med styrt tidtaker gjennom hver øvelse.">
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --warn: #c9823f;
+    --warn-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--accent-soft), var(--bg));
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .hero h1 {
+    margin: 0 0 0.75rem;
+    font-size: 1.8rem;
+    color: var(--accent-dark);
+  }
+
+  .hero p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 46ch;
+    margin-inline: auto;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem 2rem;
+    margin: 2rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .card h2 {
+    margin: 0 0 0.6rem;
+    color: var(--accent-dark);
+    font-size: 1.3rem;
+  }
+
+  .card > p.desc {
+    margin: 0 0 1.25rem;
+    color: var(--muted);
+  }
+
+  .step-list {
+    margin: 0 0 1.5rem;
+    padding-left: 1.25rem;
+  }
+
+  .step-list li {
+    margin: 0 0 0.6rem;
+    color: var(--muted);
+  }
+
+  .step-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .step-list li strong {
+    color: var(--ink);
+  }
+
+  .step-list li.active {
+    color: var(--ink);
+  }
+
+  .step-list li.active strong {
+    color: var(--accent-dark);
+  }
+
+  .step-list li.done {
+    text-decoration: line-through;
+    opacity: 0.6;
+  }
+
+  .timer-display {
+    text-align: center;
+  }
+
+  .timer-step-name {
+    font-weight: 700;
+    color: var(--accent-dark);
+    font-size: 1.15rem;
+    min-height: 1.5em;
+  }
+
+  .timer-clock {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+
+  .timer-progress {
+    width: 100%;
+    height: 8px;
+    background: var(--accent-soft);
+    border-radius: 999px;
+    margin: 0.9rem 0 1rem;
+    overflow: hidden;
+  }
+
+  .timer-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    transition: width 1s linear;
+  }
+
+  .timer-phrase {
+    min-height: 2.4em;
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 1.02rem;
+  }
+
+  .timer-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.1rem;
+  }
+
+  .timer-buttons button {
+    font-size: 0.95rem;
+    padding: 0.65rem 1.3rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .timer-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .timer-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .timer-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .timer-buttons button:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  .caution-card {
+    background: var(--warn-soft);
+    border: 1px solid #ecd3ac;
+    border-left: 4px solid var(--warn);
+  }
+
+  .caution-card h2 {
+    color: #8a5a25;
+  }
+
+  .caution-list {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: var(--ink);
+  }
+
+  .caution-list li {
+    margin: 0 0 0.6rem;
+  }
+
+  .caution-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .home-link {
+    display: block;
+    text-align: center;
+    margin: 1rem 0 3rem;
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .home-link:hover { text-decoration: underline; }
+
+  footer.closing {
+    margin: 2rem 0 1rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong { color: var(--accent-dark); }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Morgen- og kveldsstrekk</h1>
+    <p>En rolig strekk-sekvens for hele kroppen — fin å starte eller avslutte dagen med, på gulvet eller på yogamatten.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section class="card">
+    <h2>Øvelsene i sekvensen</h2>
+    <p class="desc">Finn et rolig sted med litt plass. Timeren under leder deg gjennom alle øvelsene etter tur — totalt ca. 3,5 minutter.</p>
+    <ol class="step-list" id="stepList"></ol>
+  </section>
+
+  <section class="card">
+    <h2>Tidtaker</h2>
+    <div class="timer-display">
+      <p class="timer-step-name" id="stepName">Klar til å starte</p>
+      <div class="timer-clock" id="timerClock">00:45</div>
+      <div class="timer-progress">
+        <div class="timer-progress-bar" id="timerProgressBar"></div>
+      </div>
+      <p class="timer-phrase" id="timerPhrase">Trykk start når du er klar</p>
+    </div>
+    <div class="timer-buttons">
+      <button type="button" id="timerStart">Start</button>
+      <button type="button" id="timerPause" class="secondary" disabled>Pause</button>
+      <button type="button" id="timerPrev" class="secondary">Forrige</button>
+      <button type="button" id="timerNext" class="secondary">Neste</button>
+      <button type="button" id="timerReset" class="secondary">Nullstill</button>
+    </div>
+  </section>
+
+  <section class="card caution-card">
+    <h2>Viktige forholdsregler</h2>
+    <ul class="caution-list">
+      <li>Beveg deg rolig og innenfor det som er smertefritt — sikt på en behagelig strekk, ikke smerte.</li>
+      <li>Hopp over øvelser som gir skarp smerte eller ubehag, og ta kontakt med lege eller fysioterapeut ved vedvarende plager.</li>
+    </ul>
+  </section>
+
+  <a class="home-link" href="index.html">Se hjemmesiden min →</a>
+
+</div>
+
+<footer class="closing">
+  Små skritt. Dine mål, ditt tempo.<br>
+  <strong>Du trenger ikke gjøre det alene.</strong>
+</footer>
+
+<script>
+  var STEPS = [
+    { label: 'Katt-ku (Cat-cow)', seconds: 45, instruction: 'Stå på alle fire. Vekselvis rund og sving rygg i takt med pusten — rund på innpust, svai på utpust.' },
+    { label: 'Barnets positur', seconds: 45, instruction: 'Sitt på hælene, strekk armene fremover langs gulvet og la overkroppen synke ned. Pust rolig.' },
+    { label: 'Stående fremoverbøy', seconds: 30, instruction: 'Stå med føttene i hoftebredde. Bøy sakte fremover fra hoftene og la overkroppen henge, med lett bøyde knær.' },
+    { label: 'Sidestrekk mot høyre', seconds: 30, instruction: 'Stå med føttene i hoftebredde. Strekk venstre arm opp og bøy overkroppen rolig mot høyre.' },
+    { label: 'Sidestrekk mot venstre', seconds: 30, instruction: 'Strekk høyre arm opp og bøy overkroppen rolig mot venstre.' },
+    { label: 'Rolig pust i ro', seconds: 30, instruction: 'Stå eller sitt stille. Pust rolig og kjenn etter hvordan kroppen føles nå.' }
+  ];
+
+  (function () {
+    var index = 0;
+    var remaining = STEPS[0].seconds;
+    var timerInterval = null;
+    var timerRunning = false;
+    var finished = false;
+
+    var stepListEl = document.getElementById('stepList');
+    var stepNameEl = document.getElementById('stepName');
+    var clockEl = document.getElementById('timerClock');
+    var progressBarEl = document.getElementById('timerProgressBar');
+    var phraseEl = document.getElementById('timerPhrase');
+    var startBtn = document.getElementById('timerStart');
+    var pauseBtn = document.getElementById('timerPause');
+    var prevBtn = document.getElementById('timerPrev');
+    var nextBtn = document.getElementById('timerNext');
+    var resetBtn = document.getElementById('timerReset');
+
+    function renderStepList() {
+      stepListEl.innerHTML = '';
+      STEPS.forEach(function (step, i) {
+        var li = document.createElement('li');
+        li.innerHTML = '<strong>' + step.label + '</strong> — ' + step.seconds + ' sek';
+        if (i === index) li.className = 'active';
+        else if (i < index || (i === index && finished)) li.className = 'done';
+        stepListEl.appendChild(li);
+      });
+    }
+
+    function formatClock(seconds) {
+      var m = Math.floor(seconds / 60);
+      var s = seconds % 60;
+      return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    }
+
+    function beep() {
+      try {
+        var ctx = new (window.AudioContext || window.webkitAudioContext)();
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.frequency.value = 660;
+        gain.gain.setValueAtTime(0.001, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.25, ctx.currentTime + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.5);
+      } catch (e) { /* ignore if audio unavailable */ }
+    }
+
+    function updateDisplay() {
+      var step = STEPS[index];
+      stepNameEl.textContent = finished ? 'Ferdig!' : (index + 1) + ' / ' + STEPS.length + ' — ' + step.label;
+      clockEl.textContent = formatClock(remaining);
+      var elapsed = step.seconds - remaining;
+      progressBarEl.style.width = ((elapsed / step.seconds) * 100) + '%';
+      phraseEl.textContent = finished ? 'Bra jobbet! Du er ferdig med hele serien.' : step.instruction;
+      renderStepList();
+      prevBtn.disabled = index === 0 && !finished;
+      nextBtn.disabled = finished;
+    }
+
+    function stopInterval() {
+      timerRunning = false;
+      clearInterval(timerInterval);
+      startBtn.disabled = false;
+      pauseBtn.disabled = true;
+    }
+
+    function goToStep(newIndex) {
+      stopInterval();
+      finished = false;
+      index = Math.max(0, Math.min(newIndex, STEPS.length - 1));
+      remaining = STEPS[index].seconds;
+      updateDisplay();
+    }
+
+    function advance() {
+      if (index >= STEPS.length - 1) {
+        stopInterval();
+        finished = true;
+        beep();
+        updateDisplay();
+        return;
+      }
+      index += 1;
+      remaining = STEPS[index].seconds;
+      beep();
+      updateDisplay();
+    }
+
+    function tick() {
+      remaining -= 1;
+      if (remaining <= 0) {
+        advance();
+      } else {
+        clockEl.textContent = formatClock(remaining);
+        var step = STEPS[index];
+        var elapsed = step.seconds - remaining;
+        progressBarEl.style.width = ((elapsed / step.seconds) * 100) + '%';
+      }
+    }
+
+    function startTimer() {
+      if (timerRunning) return;
+      if (finished) goToStep(0);
+      timerRunning = true;
+      startBtn.disabled = true;
+      pauseBtn.disabled = false;
+      timerInterval = setInterval(tick, 1000);
+    }
+
+    function pauseTimer() {
+      stopInterval();
+    }
+
+    function resetTimer() {
+      goToStep(0);
+    }
+
+    startBtn.addEventListener('click', startTimer);
+    pauseBtn.addEventListener('click', pauseTimer);
+    resetBtn.addEventListener('click', resetTimer);
+    prevBtn.addEventListener('click', function () { goToStep(index - 1); });
+    nextBtn.addEventListener('click', function () { advance(); });
+
+    updateDisplay();
+  })();
+</script>
+
+</body>
+</html>
