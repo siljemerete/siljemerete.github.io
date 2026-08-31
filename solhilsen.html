@@ -17,10 +17,6 @@
     --warn: #c9823f;
     --warn-soft: #faf1e2;
     --border: #cfe3e8;
-    --sun-bg: #faf1de;
-    --sun-border: #ecdcb8;
-    --sun: #f7c948;
-    --sun-dark: #e0a51f;
     --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
   }
 
@@ -103,63 +99,13 @@
     margin-bottom: 0;
   }
 
-  .sun-wheel-wrap {
-    background: var(--sun-bg);
-    border: 1px solid var(--sun-border);
-    border-radius: 14px;
-    padding: 1.25rem;
-  }
-
-  .sun-wheel {
-    position: relative;
+  .sun-wheel-image {
+    display: block;
     width: 100%;
     max-width: 460px;
-    aspect-ratio: 1 / 1;
     margin: 0 auto;
-  }
-
-  .sun-core {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 27%;
-    height: 27%;
-    transform: translate(-50%, -50%);
-  }
-
-  .sun-core svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
-  .pose-item {
-    position: absolute;
-    width: 19%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-  }
-
-  .pose-icon {
-    width: 52%;
-    aspect-ratio: 1 / 1;
-    margin: 0 auto;
-    color: var(--ink);
-  }
-
-  .pose-icon svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
-  .pose-label {
-    display: block;
-    margin-top: 0.15rem;
-    font-size: 0.56rem;
-    line-height: 1.15;
-    font-weight: 600;
-    color: var(--accent-dark);
+    border-radius: 14px;
+    border: 1px solid var(--border);
   }
 
   .caution-card {
@@ -236,11 +182,7 @@
   <section class="card">
     <h2>Solhilsen — Surya Namaskar</h2>
     <p class="desc">De 12 øvelsene i rekkefølge, med klokken rundt sola. Følg pusten gjennom hver stilling og gjenta gjerne 3–5 runder.</p>
-    <div class="sun-wheel-wrap">
-      <div class="sun-wheel" id="sunWheel">
-        <div class="sun-core" id="sunCore"></div>
-      </div>
-    </div>
+    <img class="sun-wheel-image" src="images/solhilsen-surya-namaskar.jpg" alt="Surya Namaskar — de 12 øvelsene i solhilsen illustrert i sirkel rundt en sol, nummerert 1 til 12 med pusteretning (inhale/exhale) for hver stilling.">
   </section>
 
   <section class="card caution-card">
@@ -260,133 +202,6 @@
   Små skritt. Dine mål, ditt tempo.<br>
   <strong>Du trenger ikke gjøre det alene.</strong>
 </footer>
-
-<script>
-  function limb(x1, y1, x2, y2, w) {
-    var dx = x2 - x1, dy = y2 - y1;
-    var len = Math.sqrt(dx * dx + dy * dy);
-    var angle = Math.atan2(dy, dx) * 180 / Math.PI;
-    return '<rect x="0" y="' + (-w / 2).toFixed(1) + '" width="' + len.toFixed(1) + '" height="' + w + '" rx="' + (w / 2) + '" transform="translate(' + x1 + ',' + y1 + ') rotate(' + angle.toFixed(1) + ')"/>';
-  }
-
-  function head(cx, cy, r) {
-    return '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '"/>';
-  }
-
-  function figure(parts) {
-    return '<svg viewBox="0 0 100 100" fill="currentColor">' + parts.join('') + '</svg>';
-  }
-
-  var ICON_STANDING = figure([
-    limb(50, 22, 50, 55, 15),
-    limb(50, 55, 44, 92, 11),
-    limb(50, 55, 56, 92, 11),
-    head(50, 14, 9)
-  ]);
-
-  var ICON_ARMS_UP = figure([
-    limb(44, 92, 50, 60, 12),
-    limb(56, 92, 50, 60, 12),
-    limb(50, 60, 60, 30, 15),
-    limb(60, 32, 72, 8, 9),
-    limb(56, 34, 46, 10, 9),
-    head(64, 22, 9)
-  ]);
-
-  var ICON_FORWARD_FOLD = figure([
-    limb(44, 92, 50, 55, 12),
-    limb(56, 92, 50, 55, 12),
-    limb(50, 55, 30, 70, 14),
-    limb(38, 61, 26, 90, 8),
-    head(22, 74, 9)
-  ]);
-
-  var ICON_HALF_LIFT = figure([
-    limb(58, 92, 58, 55, 12),
-    limb(58, 55, 22, 44, 15),
-    limb(30, 48, 34, 76, 9),
-    head(16, 41, 9)
-  ]);
-
-  var ICON_PLANK = figure([
-    limb(14, 62, 76, 48, 13),
-    limb(64, 51, 60, 80, 9),
-    head(83, 45, 9)
-  ]);
-
-  var ICON_EIGHT_POINT = figure([
-    limb(78, 68, 88, 80, 10),
-    limb(78, 68, 34, 78, 13),
-    limb(34, 78, 42, 88, 8),
-    head(20, 80, 9)
-  ]);
-
-  var ICON_UPDOG = figure([
-    limb(16, 86, 46, 80, 12),
-    limb(46, 80, 66, 46, 14),
-    limb(60, 52, 55, 82, 9),
-    head(71, 36, 9)
-  ]);
-
-  var ICON_DOWNDOG = figure([
-    limb(16, 88, 50, 40, 12),
-    limb(86, 88, 50, 40, 12),
-    head(50, 53, 9)
-  ]);
-
-  var POSES = [
-    { label: 'Fjellstilling', icon: ICON_STANDING },
-    { label: 'Armene opp', icon: ICON_ARMS_UP },
-    { label: 'Stående fremoverbøy', icon: ICON_FORWARD_FOLD },
-    { label: 'Halv fremoverbøy', icon: ICON_HALF_LIFT },
-    { label: 'Planke', icon: ICON_PLANK },
-    { label: 'Åtte punkts hilsen', icon: ICON_EIGHT_POINT },
-    { label: 'Oppadgående hund', icon: ICON_UPDOG },
-    { label: 'Nedadgående hund (5 pust)', icon: ICON_DOWNDOG },
-    { label: 'Halv fremoverbøy', icon: ICON_HALF_LIFT },
-    { label: 'Stående fremoverbøy', icon: ICON_FORWARD_FOLD },
-    { label: 'Armene opp', icon: ICON_ARMS_UP },
-    { label: 'Fjellstilling', icon: ICON_STANDING }
-  ];
-
-  function buildSunCore() {
-    var spikes = 16;
-    var outerR = 42;
-    var innerR = 21;
-    var points = [];
-    for (var i = 0; i < spikes * 2; i++) {
-      var angle = (Math.PI * i) / spikes;
-      var r = (i % 2 === 0) ? outerR : innerR;
-      var x = 50 + r * Math.sin(angle);
-      var y = 50 - r * Math.cos(angle);
-      points.push(x.toFixed(1) + ',' + y.toFixed(1));
-    }
-    var svg = '<svg viewBox="0 0 100 100">' +
-      '<polygon points="' + points.join(' ') + '" fill="var(--sun)" stroke="var(--sun-dark)" stroke-width="1.5" stroke-linejoin="round"/>' +
-      '<circle cx="50" cy="50" r="17" fill="var(--sun)" stroke="var(--sun-dark)" stroke-width="1.5"/>' +
-      '</svg>';
-    document.getElementById('sunCore').innerHTML = svg;
-  }
-
-  function buildPoseRing() {
-    var wheel = document.getElementById('sunWheel');
-    var radius = 40;
-    POSES.forEach(function (pose, i) {
-      var angle = (Math.PI * 2 * i) / POSES.length - Math.PI / 2;
-      var x = 50 + radius * Math.cos(angle);
-      var y = 50 + radius * Math.sin(angle);
-      var item = document.createElement('div');
-      item.className = 'pose-item';
-      item.style.left = x + '%';
-      item.style.top = y + '%';
-      item.innerHTML = '<span class="pose-icon">' + pose.icon + '</span><span class="pose-label">' + pose.label + '</span>';
-      wheel.appendChild(item);
-    });
-  }
-
-  buildSunCore();
-  buildPoseRing();
-</script>
 
 </body>
 </html>
