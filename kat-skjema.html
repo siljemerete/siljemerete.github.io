@@ -1,0 +1,977 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAT-skjema — tankeregistrering</title>
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --push: #c9823f;
+    --push-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  header.page-header {
+    margin-bottom: 1.75rem;
+  }
+
+  header.page-header h1 {
+    font-size: 1.7rem;
+    margin: 0 0 0.35rem;
+    color: var(--accent-dark);
+  }
+
+  header.page-header p.tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  .reminder {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  section.primer h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer p {
+    margin: 0.6rem 0 0;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.6rem;
+    margin-top: 0.9rem;
+  }
+
+  .steps-item {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .steps-item strong {
+    display: block;
+    color: var(--accent-dark);
+    font-size: 0.85rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .controls button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .controls button:hover {
+    background: var(--accent-soft);
+  }
+
+  .controls button.danger {
+    color: var(--push);
+  }
+
+  .controls button.danger:hover {
+    background: var(--push-soft);
+  }
+
+  .topic {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 0.9rem;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .topic > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1rem 1.25rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .topic > summary::-webkit-details-marker { display: none; }
+
+  .topic > summary .chevron {
+    transition: transform 0.15s ease;
+    color: var(--accent);
+    font-size: 1rem;
+  }
+
+  .topic[open] > summary .chevron {
+    transform: rotate(90deg);
+  }
+
+  .topic > summary:hover {
+    background: var(--accent-soft);
+  }
+
+  .topic-body {
+    padding: 0.25rem 1.25rem 1.25rem;
+  }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 0.9rem;
+    margin-top: 0.75rem;
+  }
+
+  .field-wide {
+    grid-column: 1 / -1;
+  }
+
+  .field label {
+    display: block;
+    font-weight: 600;
+    color: var(--accent-dark);
+    margin-bottom: 0.3rem;
+    font-size: 0.88rem;
+  }
+
+  .field .field-hint {
+    display: block;
+    font-weight: 400;
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin-top: 0.15rem;
+  }
+
+  .field input[type="text"],
+  .field input[type="date"],
+  .field textarea {
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .field textarea {
+    min-height: 64px;
+    resize: vertical;
+  }
+
+  .field input[type="range"] {
+    width: 100%;
+    accent-color: var(--accent);
+  }
+
+  .range-value {
+    color: var(--accent-dark);
+    font-size: 1.05rem;
+  }
+
+  .range-anchors {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+    gap: 0.5rem;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.6rem;
+    margin: 0.75rem 0 1rem;
+  }
+
+  .stat-item {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.7rem 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  .stat-item strong {
+    display: block;
+    color: var(--accent-dark);
+    font-size: 1.4rem;
+  }
+
+  .send-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .send-buttons button {
+    font-size: 0.92rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .send-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .muted-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  footer.closing {
+    margin-top: 1.75rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong {
+    color: var(--accent-dark);
+  }
+
+  body.gate-locked .wrap,
+  body.gate-locked footer.closing {
+    display: none;
+  }
+
+  .gate-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 100;
+  }
+
+  body.gate-locked .gate-overlay {
+    display: flex;
+  }
+
+  .gate-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 2rem 1.75rem;
+    max-width: 340px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .gate-box h1 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    color: var(--accent-dark);
+  }
+
+  .gate-box p {
+    margin: 0 0 1rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .gate-box input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    font-family: inherit;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  .gate-box input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .gate-box button {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .gate-box button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .gate-error {
+    display: none;
+    color: var(--push);
+    font-size: 0.85rem;
+    margin: 0.7rem 0 0;
+  }
+
+  .gate-contact {
+    margin-top: 0.9rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .gate-contact a {
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .gate-contact a:hover {
+    text-decoration: underline;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .controls, .send-buttons, .muted-note { display: none; }
+    .topic { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body class="gate-locked">
+
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box">
+    <h1>Tilgang til verktøyet</h1>
+    <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
+    <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
+    <button type="button" id="gateSubmit">Lås opp</button>
+    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20S%C3%B8vn%20og%20stress-verkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var GATE_KEY = 'gate-sovn-stress-unlocked';
+    var CODE = 'nyevaner';
+
+    function unlock() {
+      localStorage.setItem(GATE_KEY, 'true');
+      document.body.classList.remove('gate-locked');
+    }
+
+    if (localStorage.getItem(GATE_KEY) === 'true') {
+      unlock();
+    }
+
+    function trySubmit() {
+      var input = document.getElementById('gateCode');
+      var error = document.getElementById('gateError');
+      if (input.value.trim().toLowerCase() === CODE) {
+        error.style.display = 'none';
+        unlock();
+      } else {
+        error.style.display = 'block';
+      }
+    }
+
+    document.getElementById('gateSubmit').addEventListener('click', trySubmit);
+    document.getElementById('gateCode').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') trySubmit();
+    });
+  })();
+</script>
+
+<div class="wrap">
+
+  <header class="page-header">
+    <h1>KAT-skjema — tankeregistrering</h1>
+    <p class="tagline">Et enkelt skjema for å bli mer bevisst på sammenhengen mellom situasjon, tanke, følelse og handling</p>
+    <div class="reminder">
+      Dette er ikke en eksamen i å registrere riktig — bare et verktøy for
+      å stoppe opp og legge merke til egne tankemønstre. Fyll ut for én
+      situasjon om gangen, gjerne i etterkant av noe som skapte en sterk
+      følelse. <strong>Det er helt greit om noen felt eller dager mangler.</strong>
+    </div>
+  </header>
+
+  <section class="primer">
+    <h2>Om KAT-skjemaet</h2>
+    <p>KAT står for kognitiv atferdsterapi, og bygger på tanken om at
+    situasjoner i seg selv ikke avgjør hvordan vi har det — det er
+    tankene våre om situasjonen som påvirker følelsene og det vi gjør
+    videre. Ved å skrive ned situasjonen, den automatiske tanken,
+    følelsen og reaksjonen, blir det lettere å oppdage mønstre — og å
+    prøve ut om en mer balansert tanke endrer hvordan situasjonen kjennes.</p>
+    <div class="steps-grid">
+      <div class="steps-item"><strong>1. Situasjon</strong>Hva skjedde?</div>
+      <div class="steps-item"><strong>2. Tanke</strong>Hva tenkte du?</div>
+      <div class="steps-item"><strong>3. Følelse</strong>Hva kjente du?</div>
+      <div class="steps-item"><strong>4. Atferd</strong>Hva gjorde du?</div>
+      <div class="steps-item"><strong>5. Alternativ tanke</strong>Finnes det en annen måte å se det på?</div>
+    </div>
+  </section>
+
+  <div class="controls">
+    <button type="button" id="expandAll">Vis alle</button>
+    <button type="button" id="collapseAll">Skjul alle</button>
+    <button type="button" id="resetAll" class="danger">Nullstill alt</button>
+  </div>
+
+  <div id="days">
+    <details class="topic" data-day="1">
+      <summary>Situasjon 1 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-1">Dato (valgfritt)</label>
+            <input type="date" id="date-1" data-key="date-1">
+          </div>
+          <div class="field field-wide">
+            <label for="situation-1">Situasjon — hva skjedde, hvor var du, hvem var med?</label>
+            <textarea id="situation-1" data-key="situation-1" placeholder="F.eks. fikk en kritisk kommentar fra sjefen på et møte"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="thought-1">Automatisk tanke — hva tenkte du der og da?</label>
+            <textarea id="thought-1" data-key="thought-1" placeholder="F.eks. «jeg er ikke god nok», «dette går aldri bra»"></textarea>
+          </div>
+          <div class="field">
+            <label for="emotion-1">Følelse(r) — hva kjente du?</label>
+            <input type="text" id="emotion-1" data-key="emotion-1" placeholder="F.eks. skam, sinne, uro">
+          </div>
+          <div class="field field-wide">
+            <label for="intensity-1">Styrke på følelsen: <span class="range-value" id="intensity-value-1">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="intensity-1" data-key="intensity-1" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Nesten ikke merkbar</span>
+              <span>10 — Så sterk som mulig</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="physical-1">Kroppslige reaksjoner</label>
+            <input type="text" id="physical-1" data-key="physical-1" placeholder="F.eks. rask puls, klump i magen, spente skuldre">
+          </div>
+          <div class="field">
+            <label for="behavior-1">Atferd — hva gjorde du (eller unngikk å gjøre)?</label>
+            <input type="text" id="behavior-1" data-key="behavior-1" placeholder="F.eks. trakk meg unna, svarte irritert, sa ingenting">
+          </div>
+          <div class="field field-wide">
+            <label for="alternative-1">Alternativ, mer balansert tanke <span class="field-hint">Finnes det bevis for og imot den automatiske tanken? Hva ville du sagt til en venn i samme situasjon?</span></label>
+            <textarea id="alternative-1" data-key="alternative-1" placeholder="F.eks. «én kommentar betyr ikke at jeg ikke er god nok, jeg kan lære av dette»"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="new-intensity-1">Følelse etter alternativ tanke: <span class="range-value" id="new-intensity-value-1">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="new-intensity-1" data-key="new-intensity-1" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Nesten ikke merkbar</span>
+              <span>10 — Så sterk som mulig</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="2">
+      <summary>Situasjon 2 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-2">Dato (valgfritt)</label>
+            <input type="date" id="date-2" data-key="date-2">
+          </div>
+          <div class="field field-wide">
+            <label for="situation-2">Situasjon — hva skjedde, hvor var du, hvem var med?</label>
+            <textarea id="situation-2" data-key="situation-2" placeholder="F.eks. fikk en kritisk kommentar fra sjefen på et møte"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="thought-2">Automatisk tanke — hva tenkte du der og da?</label>
+            <textarea id="thought-2" data-key="thought-2" placeholder="F.eks. «jeg er ikke god nok», «dette går aldri bra»"></textarea>
+          </div>
+          <div class="field">
+            <label for="emotion-2">Følelse(r) — hva kjente du?</label>
+            <input type="text" id="emotion-2" data-key="emotion-2" placeholder="F.eks. skam, sinne, uro">
+          </div>
+          <div class="field field-wide">
+            <label for="intensity-2">Styrke på følelsen: <span class="range-value" id="intensity-value-2">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="intensity-2" data-key="intensity-2" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Nesten ikke merkbar</span>
+              <span>10 — Så sterk som mulig</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="physical-2">Kroppslige reaksjoner</label>
+            <input type="text" id="physical-2" data-key="physical-2" placeholder="F.eks. rask puls, klump i magen, spente skuldre">
+          </div>
+          <div class="field">
+            <label for="behavior-2">Atferd — hva gjorde du (eller unngikk å gjøre)?</label>
+            <input type="text" id="behavior-2" data-key="behavior-2" placeholder="F.eks. trakk meg unna, svarte irritert, sa ingenting">
+          </div>
+          <div class="field field-wide">
+            <label for="alternative-2">Alternativ, mer balansert tanke <span class="field-hint">Finnes det bevis for og imot den automatiske tanken? Hva ville du sagt til en venn i samme situasjon?</span></label>
+            <textarea id="alternative-2" data-key="alternative-2" placeholder="F.eks. «én kommentar betyr ikke at jeg ikke er god nok, jeg kan lære av dette»"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="new-intensity-2">Følelse etter alternativ tanke: <span class="range-value" id="new-intensity-value-2">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="new-intensity-2" data-key="new-intensity-2" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Nesten ikke merkbar</span>
+              <span>10 — Så sterk som mulig</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="3">
+      <summary>Situasjon 3 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-3">Dato (valgfritt)</label>
+            <input type="date" id="date-3" data-key="date-3">
+          </div>
+          <div class="field field-wide">
+            <label for="situation-3">Situasjon — hva skjedde, hvor var du, hvem var med?</label>
+            <textarea id="situation-3" data-key="situation-3" placeholder="F.eks. fikk en kritisk kommentar fra sjefen på et møte"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="thought-3">Automatisk tanke — hva tenkte du der og da?</label>
+            <textarea id="thought-3" data-key="thought-3" placeholder="F.eks. «jeg er ikke god nok», «dette går aldri bra»"></textarea>
+          </div>
+          <div class="field">
+            <label for="emotion-3">Følelse(r) — hva kjente du?</label>
+            <input type="text" id="emotion-3" data-key="emotion-3" placeholder="F.eks. skam, sinne, uro">
+          </div>
+          <div class="field field-wide">
+            <label for="intensity-3">Styrke på følelsen: <span class="range-value" id="intensity-value-3">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="intensity-3" data-key="intensity-3" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Nesten ikke merkbar</span>
+              <span>10 — Så sterk som mulig</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="physical-3">Kroppslige reaksjoner</label>
+            <input type="text" id="physical-3" data-key="physical-3" placeholder="F.eks. rask puls, klump i magen, spente skuldre">
+          </div>
+          <div class="field">
+            <label for="behavior-3">Atferd — hva gjorde du (eller unngikk å gjøre)?</label>
+            <input type="text" id="behavior-3" data-key="behavior-3" placeholder="F.eks. trakk meg unna, svarte irritert, sa ingenting">
+          </div>
+          <div class="field field-wide">
+            <label for="alternative-3">Alternativ, mer balansert tanke <span class="field-hint">Finnes det bevis for og imot den automatiske tanken? Hva ville du sagt til en venn i samme situasjon?</span></label>
+            <textarea id="alternative-3" data-key="alternative-3" placeholder="F.eks. «én kommentar betyr ikke at jeg ikke er god nok, jeg kan lære av dette»"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="new-intensity-3">Følelse etter alternativ tanke: <span class="range-value" id="new-intensity-value-3">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="new-intensity-3" data-key="new-intensity-3" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Nesten ikke merkbar</span>
+              <span>10 — Så sterk som mulig</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="4">
+      <summary>Situasjon 4 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-4">Dato (valgfritt)</label>
+            <input type="date" id="date-4" data-key="date-4">
+          </div>
+          <div class="field field-wide">
+            <label for="situation-4">Situasjon — hva skjedde, hvor var du, hvem var med?</label>
+            <textarea id="situation-4" data-key="situation-4" placeholder="F.eks. fikk en kritisk kommentar fra sjefen på et møte"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="thought-4">Automatisk tanke — hva tenkte du der og da?</label>
+            <textarea id="thought-4" data-key="thought-4" placeholder="F.eks. «jeg er ikke god nok», «dette går aldri bra»"></textarea>
+          </div>
+          <div class="field">
+            <label for="emotion-4">Følelse(r) — hva kjente du?</label>
+            <input type="text" id="emotion-4" data-key="emotion-4" placeholder="F.eks. skam, sinne, uro">
+          </div>
+          <div class="field field-wide">
+            <label for="intensity-4">Styrke på følelsen: <span class="range-value" id="intensity-value-4">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="intensity-4" data-key="intensity-4" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Nesten ikke merkbar</span>
+              <span>10 — Så sterk som mulig</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="physical-4">Kroppslige reaksjoner</label>
+            <input type="text" id="physical-4" data-key="physical-4" placeholder="F.eks. rask puls, klump i magen, spente skuldre">
+          </div>
+          <div class="field">
+            <label for="behavior-4">Atferd — hva gjorde du (eller unngikk å gjøre)?</label>
+            <input type="text" id="behavior-4" data-key="behavior-4" placeholder="F.eks. trakk meg unna, svarte irritert, sa ingenting">
+          </div>
+          <div class="field field-wide">
+            <label for="alternative-4">Alternativ, mer balansert tanke <span class="field-hint">Finnes det bevis for og imot den automatiske tanken? Hva ville du sagt til en venn i samme situasjon?</span></label>
+            <textarea id="alternative-4" data-key="alternative-4" placeholder="F.eks. «én kommentar betyr ikke at jeg ikke er god nok, jeg kan lære av dette»"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="new-intensity-4">Følelse etter alternativ tanke: <span class="range-value" id="new-intensity-value-4">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="new-intensity-4" data-key="new-intensity-4" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Nesten ikke merkbar</span>
+              <span>10 — Så sterk som mulig</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="5">
+      <summary>Situasjon 5 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-5">Dato (valgfritt)</label>
+            <input type="date" id="date-5" data-key="date-5">
+          </div>
+          <div class="field field-wide">
+            <label for="situation-5">Situasjon — hva skjedde, hvor var du, hvem var med?</label>
+            <textarea id="situation-5" data-key="situation-5" placeholder="F.eks. fikk en kritisk kommentar fra sjefen på et møte"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="thought-5">Automatisk tanke — hva tenkte du der og da?</label>
+            <textarea id="thought-5" data-key="thought-5" placeholder="F.eks. «jeg er ikke god nok», «dette går aldri bra»"></textarea>
+          </div>
+          <div class="field">
+            <label for="emotion-5">Følelse(r) — hva kjente du?</label>
+            <input type="text" id="emotion-5" data-key="emotion-5" placeholder="F.eks. skam, sinne, uro">
+          </div>
+          <div class="field field-wide">
+            <label for="intensity-5">Styrke på følelsen: <span class="range-value" id="intensity-value-5">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="intensity-5" data-key="intensity-5" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Nesten ikke merkbar</span>
+              <span>10 — Så sterk som mulig</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="physical-5">Kroppslige reaksjoner</label>
+            <input type="text" id="physical-5" data-key="physical-5" placeholder="F.eks. rask puls, klump i magen, spente skuldre">
+          </div>
+          <div class="field">
+            <label for="behavior-5">Atferd — hva gjorde du (eller unngikk å gjøre)?</label>
+            <input type="text" id="behavior-5" data-key="behavior-5" placeholder="F.eks. trakk meg unna, svarte irritert, sa ingenting">
+          </div>
+          <div class="field field-wide">
+            <label for="alternative-5">Alternativ, mer balansert tanke <span class="field-hint">Finnes det bevis for og imot den automatiske tanken? Hva ville du sagt til en venn i samme situasjon?</span></label>
+            <textarea id="alternative-5" data-key="alternative-5" placeholder="F.eks. «én kommentar betyr ikke at jeg ikke er god nok, jeg kan lære av dette»"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="new-intensity-5">Følelse etter alternativ tanke: <span class="range-value" id="new-intensity-value-5">Ikke satt</span> / 10</label>
+            <input type="range" min="1" max="10" step="1" value="5" id="new-intensity-5" data-key="new-intensity-5" data-touched="false">
+            <div class="range-anchors">
+              <span>1 — Nesten ikke merkbar</span>
+              <span>10 — Så sterk som mulig</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <section class="primer" id="summarySection">
+    <h2>Oppsummering</h2>
+    <div class="stat-grid">
+      <div class="stat-item"><strong id="avg-before">–</strong>Snitt styrke før (1–10)</div>
+      <div class="stat-item"><strong id="avg-after">–</strong>Snitt styrke etter (1–10)</div>
+      <div class="stat-item"><strong id="entries-filled">–</strong>Situasjoner registrert</div>
+    </div>
+    <div class="field field-wide">
+      <label for="weekly-reflection">Hva la du merke til når du sammenlignet den automatiske tanken med den alternative?</label>
+      <textarea id="weekly-reflection" data-key="weekly-reflection" placeholder="Skriv gjerne fritt her..."></textarea>
+    </div>
+  </section>
+
+  <section class="primer">
+    <h2>Send inn registreringen</h2>
+    <p class="muted-note">
+      Du kan sende registreringen direkte fra din egen e-postapp, eller laste
+      den ned som en tekstfil du selv sender eller tar med til timen. Hvis
+      "Send på e-post" ikke åpner riktig på mobilen din, bruk nedlastingen i
+      stedet.
+    </p>
+    <div class="send-buttons">
+      <button type="button" id="sendEmail">Send på e-post</button>
+      <button type="button" id="downloadText" class="secondary">Last ned som tekstfil</button>
+    </div>
+  </section>
+
+  <footer class="closing">
+    Små, ærlige notater — ikke perfekte.<br>
+    <strong>Dette er overkommelig, og du trenger ikke gjøre det alene.</strong>
+  </footer>
+
+</div>
+
+<script>
+  var DAY_COUNT = 5;
+  var STORAGE_KEY = 'kat-skjema-data';
+  var RECIPIENT = 'silje.merete.binder@gmail.com';
+
+  function readState() {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return {};
+    try {
+      return JSON.parse(raw) || {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveState() {
+    var data = {};
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      data[el.getAttribute('data-key')] = el.value;
+    });
+    document.querySelectorAll('input[type="range"]').forEach(function (el) {
+      data[el.id + '-touched'] = el.getAttribute('data-touched');
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function loadState() {
+    var data = readState();
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      var key = el.getAttribute('data-key');
+      if (data[key] !== undefined) {
+        el.value = data[key];
+      }
+    });
+    for (var n = 1; n <= DAY_COUNT; n++) {
+      ['intensity-', 'new-intensity-'].forEach(function (prefix) {
+        var range = document.getElementById(prefix + n);
+        var display = document.getElementById(prefix + 'value-' + n);
+        if (!range || !display) return;
+        if (data[range.id + '-touched'] === 'true') {
+          range.setAttribute('data-touched', 'true');
+          display.textContent = range.value;
+        } else {
+          display.textContent = 'Ikke satt';
+        }
+      });
+    }
+  }
+
+  function isRangeTouched(id) {
+    var range = document.getElementById(id);
+    return range && range.getAttribute('data-touched') === 'true';
+  }
+
+  function updateSummary() {
+    var beforeSum = 0, beforeCount = 0;
+    var afterSum = 0, afterCount = 0;
+    var entriesFilled = 0;
+
+    for (var n = 1; n <= DAY_COUNT; n++) {
+      var hasAnyData = isRangeTouched('intensity-' + n) || isRangeTouched('new-intensity-' + n);
+
+      document.querySelectorAll('[data-day="' + n + '"] [data-key]:not([type="range"])').forEach(function (el) {
+        if (el.value && el.value.trim() !== '') hasAnyData = true;
+      });
+      if (hasAnyData) entriesFilled++;
+
+      if (isRangeTouched('intensity-' + n)) {
+        var beforeVal = parseFloat(document.getElementById('intensity-' + n).value);
+        if (!isNaN(beforeVal)) {
+          beforeSum += beforeVal;
+          beforeCount++;
+        }
+      }
+      if (isRangeTouched('new-intensity-' + n)) {
+        var afterVal = parseFloat(document.getElementById('new-intensity-' + n).value);
+        if (!isNaN(afterVal)) {
+          afterSum += afterVal;
+          afterCount++;
+        }
+      }
+    }
+
+    document.getElementById('avg-before').textContent = beforeCount ? (beforeSum / beforeCount).toFixed(1) : '–';
+    document.getElementById('avg-after').textContent = afterCount ? (afterSum / afterCount).toFixed(1) : '–';
+    document.getElementById('entries-filled').textContent = entriesFilled + ' / ' + DAY_COUNT;
+  }
+
+  function buildSummaryText() {
+    var lines = [];
+    lines.push('KAT-skjema — tankeregistrering');
+    lines.push('');
+
+    for (var n = 1; n <= DAY_COUNT; n++) {
+      var date = document.getElementById('date-' + n).value;
+      var situation = document.getElementById('situation-' + n).value;
+      var thought = document.getElementById('thought-' + n).value;
+      var emotion = document.getElementById('emotion-' + n).value;
+      var intensity = isRangeTouched('intensity-' + n) ? document.getElementById('intensity-' + n).value : '';
+      var physical = document.getElementById('physical-' + n).value;
+      var behavior = document.getElementById('behavior-' + n).value;
+      var alternative = document.getElementById('alternative-' + n).value;
+      var newIntensity = isRangeTouched('new-intensity-' + n) ? document.getElementById('new-intensity-' + n).value : '';
+
+      lines.push('Situasjon ' + n + (date ? ' (' + date + ')' : ''));
+      lines.push('  Situasjon: ' + (situation || '-'));
+      lines.push('  Automatisk tanke: ' + (thought || '-'));
+      lines.push('  Følelse(r): ' + (emotion || '-'));
+      lines.push('  Styrke før (1-10): ' + (intensity || '-'));
+      lines.push('  Kroppslige reaksjoner: ' + (physical || '-'));
+      lines.push('  Atferd: ' + (behavior || '-'));
+      lines.push('  Alternativ tanke: ' + (alternative || '-'));
+      lines.push('  Styrke etter (1-10): ' + (newIntensity || '-'));
+      lines.push('');
+    }
+
+    lines.push('Snitt styrke før: ' + document.getElementById('avg-before').textContent);
+    lines.push('Snitt styrke etter: ' + document.getElementById('avg-after').textContent);
+    lines.push('Situasjoner registrert: ' + document.getElementById('entries-filled').textContent);
+    lines.push('');
+    lines.push('Refleksjon: ' + (document.getElementById('weekly-reflection').value || '-'));
+
+    return lines.join('\n');
+  }
+
+  function sendEmail() {
+    var subject = encodeURIComponent('KAT-skjema - tankeregistrering');
+    var body = encodeURIComponent(buildSummaryText());
+    window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
+  }
+
+  function downloadText() {
+    var blob = new Blob([buildSummaryText()], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'kat-skjema.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    loadState();
+    updateSummary();
+
+    document.body.addEventListener('input', function (e) {
+      if (!e.target.hasAttribute('data-key')) return;
+      if (e.target.type === 'range') {
+        e.target.setAttribute('data-touched', 'true');
+        var parts = e.target.id.split('-');
+        var n = parts[parts.length - 1];
+        var prefix = e.target.id.slice(0, e.target.id.length - n.length);
+        var display = document.getElementById(prefix + 'value-' + n);
+        if (display) display.textContent = e.target.value;
+      }
+      saveState();
+      updateSummary();
+    });
+
+    document.getElementById('expandAll').addEventListener('click', function () {
+      document.querySelectorAll('details.topic').forEach(function (d) { d.open = true; });
+    });
+    document.getElementById('collapseAll').addEventListener('click', function () {
+      document.querySelectorAll('details.topic').forEach(function (d) { d.open = false; });
+    });
+    document.getElementById('resetAll').addEventListener('click', function () {
+      if (!confirm('Nullstille all registrert data? Dette kan ikke angres.')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    });
+
+    document.getElementById('sendEmail').addEventListener('click', sendEmail);
+    document.getElementById('downloadText').addEventListener('click', downloadText);
+  });
+</script>
+
+</body>
+</html>
