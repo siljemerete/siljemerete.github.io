@@ -10,17 +10,17 @@
 <meta property="og:type" content="website">
 <style>
   :root {
-    --bg: #f0f7f9;
+    --bg: #f4f8fb;
     --card: #ffffff;
-    --ink: #12313d;
-    --muted: #4f7080;
-    --accent: #1f7a8c;
-    --accent-dark: #145868;
-    --accent-soft: #dff1f5;
+    --ink: #16283a;
+    --muted: #55697c;
+    --accent: #386ba0;
+    --accent-dark: #1f3c5c;
+    --accent-soft: #e7f0f8;
     --push: #c9823f;
     --push-soft: #faf1e2;
-    --border: #cfe3e8;
-    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+    --border: #d6e3ee;
+    --shadow: 0 1px 3px rgba(22, 40, 58, 0.08), 0 1px 2px rgba(22, 40, 58, 0.06);
   }
 
   * { box-sizing: border-box; }
@@ -129,8 +129,13 @@
     max-width: 46ch;
   }
 
-  .hero-photo {
+  .hero-photo-wrap {
+    position: relative;
     flex: 0 0 auto;
+  }
+
+  .hero-photo {
+    display: block;
     width: 220px;
     height: 280px;
     object-fit: cover;
@@ -139,10 +144,40 @@
     box-shadow: var(--shadow);
   }
 
+  .stat-badge {
+    position: absolute;
+    left: -1.1rem;
+    bottom: -1.1rem;
+    background: #fff;
+    border-radius: 14px;
+    padding: 0.55rem 0.9rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+
+  .stat-number {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--accent-dark);
+  }
+
+  .stat-label {
+    margin: 0.2rem 0 0;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+  }
+
   .hero h1 {
     margin: 0 0 0.5rem;
-    font-size: 2rem;
+    font-size: 2.25rem;
+    line-height: 1.15;
     color: var(--accent-dark);
+    text-wrap: balance;
   }
 
   .hero p.tagline {
@@ -185,16 +220,40 @@
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 1.5rem 1.5rem 1.75rem;
-    margin: 1.75rem 0;
+    padding: 1.85rem 1.85rem 2.1rem;
+    margin: 2.25rem 0;
     box-shadow: var(--shadow);
     scroll-margin-top: 5rem;
+  }
+
+  .card-section:nth-of-type(even):not(.invest-section) {
+    background: var(--accent-soft);
+  }
+
+  .card-section:nth-of-type(even):not(.invest-section) .service-card {
+    background: #fff;
+  }
+
+  .kicker {
+    margin: 0 0 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .invest-section .kicker,
+  .hero .kicker {
+    color: var(--accent-soft);
   }
 
   .card-section h2 {
     margin-top: 0;
     color: var(--accent-dark);
-    font-size: 1.3rem;
+    font-size: 1.5rem;
+    line-height: 1.25;
+    text-wrap: balance;
   }
 
   .card-section p {
@@ -340,6 +399,11 @@
     background: var(--accent-soft);
     border-radius: 10px;
     padding: 1rem 1.1rem;
+  }
+
+  .card-icon {
+    display: block;
+    margin-bottom: 0.6rem;
   }
 
   .service-card h3 {
@@ -541,7 +605,13 @@
       <p class="value-prop">20 år med å se mennesker gjennom endring — nå er blikket mitt rettet mot hele deg.</p>
       <a class="cta-button" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post</a>
     </div>
-    <img class="hero-photo" src="images/hero-havet.jpg" alt="Silje Merete ute ved havet">
+    <div class="hero-photo-wrap">
+      <img class="hero-photo" src="images/hero-havet.jpg" alt="Silje Merete ute ved havet">
+      <div class="stat-badge">
+        <p class="stat-number">20+</p>
+        <p class="stat-label">års erfaring</p>
+      </div>
+    </div>
   </div>
   <div class="hero-wave" aria-hidden="true">
     <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -554,6 +624,7 @@
 <div class="wrap">
 
   <section id="om-meg" class="card-section">
+    <p class="kicker">Din veileder</p>
     <h2>Om meg</h2>
     <div class="about-grid">
       <img class="profile-photo" src="images/profilbilde.jpg" alt="Silje Merete Binder">
@@ -573,6 +644,7 @@
   </section>
 
   <section id="helseveiledning" class="card-section">
+    <p class="kicker">Metodikk</p>
     <h2>Hva er helseveiledning?</h2>
     <p>Helseveiledning handler om å støtte og motivere til å ta gode valg for egen helse, gjennom samtale, kunnskap og konkrete, realistiske mål som bygger på det som allerede fungerer i livet ditt. Målet er å hjelpe deg med å finne dine gode vaner og din egen vei videre.</p>
     <p>Denne tilnærmingen bygger på metodikken fra <a class="inline-link" href="https://instituttet.abelhelse.no/" target="_blank" rel="noopener">Abel Instituttet</a>, som utdanner helseveiledere i Norge.</p>
@@ -584,14 +656,17 @@
   </div>
 
   <section id="tjenester" class="card-section">
+    <p class="kicker">Hva jeg tilbyr</p>
     <h2>Tjenester</h2>
     <img class="tjenester-photo" src="images/yogamatte.jpg" alt="Yogamatte og bolster, klar for en økt med bevegelse og ro">
     <div class="service-grid">
       <div class="service-card">
+        <svg class="card-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg>
         <h3>Privatpersoner</h3>
         <p>Individuell helseveiledning med utgangspunkt i dine egne mål, enten det handler om søvn, aktivitet, kosthold eller generell hverdagshelse.</p>
       </div>
       <div class="service-card">
+        <svg class="card-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><rect x="4" y="9" width="16" height="11" rx="1.2"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
         <h3>Bedrifter og arbeidsplasser</h3>
         <p>Foredrag, kurs og oppfølging tilpasset arbeidsplassen, med fokus på bærekraftige helsevaner for ansatte.</p>
       </div>
@@ -599,17 +674,21 @@
   </section>
 
   <section id="samtaler" class="card-section">
+    <p class="kicker">Praktisk info</p>
     <h2>Slik foregår en samtale</h2>
     <div class="service-grid">
       <div class="service-card">
+        <svg class="card-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
         <h3>Oppstartssamtale — ca. 45 min</h3>
         <p>Vi blir kjent, og kartlegger sammen hvordan hverdagen din ser ut i dag og hva du ønsker å jobbe med.</p>
       </div>
       <div class="service-card">
+        <svg class="card-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15-6.7V3.5M18 5.3H15"/><path d="M21 12a9 9 0 0 1-15 6.7v1.8M6 18.7H9"/></svg>
         <h3>Ukentlig oppfølging</h3>
         <p>Første oppfølgingssamtale tar ca. 30 min, deretter korte, faste samtaler på ca. 15 min der vi følger opp målene dine og justerer kursen underveis.</p>
       </div>
       <div class="service-card">
+        <svg class="card-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5Z"/></svg>
         <h3>Digital kontakt underveis</h3>
         <p>Ved behov er det også mulig med kontakt mellom samtalene.</p>
       </div>
@@ -618,6 +697,7 @@
   </section>
 
   <section id="ressurser" class="card-section">
+    <p class="kicker">Verktøy og skjema</p>
     <h2>Ressurser og verktøy</h2>
     <p>De fleste verktøyene under krever en kode fra meg, og hvert tema har sin egen kode. <a class="inline-link" href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20ressurser">Kontakt meg for å få kode →</a></p>
     <div class="resource-grid">
@@ -786,12 +866,14 @@
   </section>
 
   <section id="investering" class="card-section invest-section">
+    <p class="kicker">Hvorfor nå</p>
     <h2>En investering i deg selv</h2>
     <p>Helseveiledning er en investering i deg selv — akkurat som et medlemskap på et treningssenter, hvis du bruker det. I helseveiledningen går jeg veien sammen med deg, og du vil kunne få det livet du bestemmer deg for.</p>
     <a class="cta-button" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post</a>
   </section>
 
   <section id="kontakt" class="card-section">
+    <p class="kicker">Ta kontakt</p>
     <h2>Kontakt</h2>
     <p>Ta gjerne kontakt for en uforpliktende prat om helseveiledning. Du trenger ikke vite nøyaktig hva du lurer på — send meg en e-post, så finner vi ut av resten sammen.</p>
     <a class="cta-button" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post</a>
