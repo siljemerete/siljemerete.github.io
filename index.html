@@ -386,6 +386,30 @@
     flex: 1 1 320px;
   }
 
+  .credential-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
+    padding: 0.6rem 1rem;
+    background: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.88rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .credential-badge:hover {
+    border-color: var(--accent);
+    box-shadow: var(--shadow);
+  }
+
+  .credential-badge strong {
+    color: var(--accent-dark);
+  }
+
   .flower-icon {
     vertical-align: -3px;
   }
@@ -692,6 +716,10 @@
         </details>
       </div>
     </div>
+    <a class="credential-badge" href="https://instituttet.abelhelse.no/" target="_blank" rel="noopener">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><path d="M2 9 12 4l10 5-10 5-10-5Z"/><path d="M6 11.5V16c0 1.4 2.7 3 6 3s6-1.6 6-3v-4.5"/><path d="M22 9v6"/></svg>
+      <span>Under utdanning som helseveileder ved <strong>Abel Instituttet</strong></span>
+    </a>
   </section>
 
   <section id="helseveiledning" class="card-section">
