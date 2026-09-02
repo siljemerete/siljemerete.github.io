@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kosthold — 4 dagers registrering</title>
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --push: #c9823f;
+    --push-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  header.page-header {
+    margin-bottom: 1.75rem;
+  }
+
+  header.page-header a.back-link {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    margin-bottom: 0.75rem;
+  }
+
+  header.page-header a.back-link:hover {
+    color: var(--accent-dark);
+  }
+
+  header.page-header h1 {
+    font-size: 1.7rem;
+    margin: 0 0 0.35rem;
+    color: var(--accent-dark);
+  }
+
+  header.page-header p.tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  .reminder {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem 1.35rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  section.primer h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer p {
+    margin: 0.6rem 0 0;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .controls button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .controls button:hover {
+    background: var(--accent-soft);
+  }
+
+  .controls button.danger {
+    color: var(--push);
+  }
+
+  .controls button.danger:hover {
+    background: var(--push-soft);
+  }
+
+  .topic {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 0.9rem;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .topic > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1rem 1.25rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .topic > summary::-webkit-details-marker { display: none; }
+
+  .topic > summary .chevron {
+    transition: transform 0.15s ease;
+    color: var(--accent);
+    font-size: 1rem;
+  }
+
+  .topic[open] > summary .chevron {
+    transform: rotate(90deg);
+  }
+
+  .topic > summary:hover {
+    background: var(--accent-soft);
+  }
+
+  .topic-body {
+    padding: 0.25rem 1.25rem 1.25rem;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+    margin-top: 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  table.diet-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 560px;
+  }
+
+  table.diet-table th,
+  table.diet-table td {
+    border: 1px solid var(--border);
+    padding: 0.5rem;
+    vertical-align: top;
+  }
+
+  table.diet-table thead th {
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  table.diet-table thead th:first-child {
+    background: var(--card);
+  }
+
+  table.diet-table tbody th {
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  table.diet-table td input[type="text"] {
+    width: 100%;
+    min-width: 140px;
+    padding: 0.4rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  table.diet-table td input[type="text"]:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 0.9rem;
+    margin-top: 0.75rem;
+  }
+
+  .field-wide {
+    grid-column: 1 / -1;
+  }
+
+  .field label {
+    display: block;
+    font-weight: 600;
+    color: var(--accent-dark);
+    margin-bottom: 0.3rem;
+    font-size: 0.88rem;
+  }
+
+  .field textarea {
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--ink);
+    min-height: 64px;
+    resize: vertical;
+  }
+
+  .field textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .send-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .send-buttons button {
+    font-size: 0.92rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .send-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .muted-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  footer.closing {
+    margin-top: 1.75rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong {
+    color: var(--accent-dark);
+  }
+
+  body.gate-locked .wrap,
+  body.gate-locked footer.closing {
+    display: none;
+  }
+
+  .gate-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 100;
+  }
+
+  body.gate-locked .gate-overlay {
+    display: flex;
+  }
+
+  .gate-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 2rem 1.75rem;
+    max-width: 340px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .gate-box h1 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    color: var(--accent-dark);
+  }
+
+  .gate-box p {
+    margin: 0 0 1rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .gate-box input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    font-family: inherit;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  .gate-box input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .gate-box button {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .gate-box button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .gate-error {
+    display: none;
+    color: var(--push);
+    font-size: 0.85rem;
+    margin: 0.7rem 0 0;
+  }
+
+  .gate-contact {
+    margin-top: 0.9rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .gate-contact a {
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .gate-contact a:hover {
+    text-decoration: underline;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .controls, .send-buttons, .muted-note, header.page-header a.back-link { display: none; }
+    .topic { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body class="gate-locked">
+
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box">
+    <h1>Tilgang til verktøyet</h1>
+    <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
+    <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
+    <button type="button" id="gateSubmit">Lås opp</button>
+    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20Kosthold-verkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var GATE_KEY = 'gate-kosthold-unlocked';
+    var CODE = 'nyevaner';
+
+    function unlock() {
+      localStorage.setItem(GATE_KEY, 'true');
+      document.body.classList.remove('gate-locked');
+    }
+
+    if (localStorage.getItem(GATE_KEY) === 'true') {
+      unlock();
+    }
+
+    function trySubmit() {
+      var input = document.getElementById('gateCode');
+      var error = document.getElementById('gateError');
+      if (input.value.trim().toLowerCase() === CODE) {
+        error.style.display = 'none';
+        unlock();
+      } else {
+        error.style.display = 'block';
+      }
+    }
+
+    document.getElementById('gateSubmit').addEventListener('click', trySubmit);
+    document.getElementById('gateCode').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') trySubmit();
+    });
+  })();
+</script>
+
+<div class="wrap">
+
+  <header class="page-header">
+    <a class="back-link" href="index.html">← Til forsiden</a>
+    <h1>Kosthold — 4 dagers registrering</h1>
+    <p class="tagline">Fylles ut for 3 vanlige hverdager og 1 vanlig helgedag</p>
+    <div class="reminder">
+      Dette er en grundigere versjon av kostholdsregistreringen, for et mer
+      helhetlig bilde av spisemønsteret ditt over en uke. Fyll ut det du
+      husker for hver del av dagen: hva du spiste og drakk, hvor mye, når og
+      hvor du spiste, og hvorfor (sult, rutine, sosialt, kjedsomhet e.l.).
+      Velg gjerne dager som ikke ligger rett etter hverandre. Alt du legger
+      inn lagres i denne nettleseren, så du kan lukke siden og fortsette
+      senere.
+    </div>
+  </header>
+
+  <div class="controls">
+    <button type="button" id="expandAll">Vis alle</button>
+    <button type="button" id="collapseAll">Skjul alle</button>
+    <button type="button" id="resetAll" class="danger">Nullstill alt</button>
+  </div>
+
+  <details class="topic" data-daytype="hverdag1" open>
+    <summary>Hverdag 1 <span class="chevron">▸</span></summary>
+    <div class="topic-body">
+      <div class="table-scroll">
+        <table class="diet-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Hva</th>
+              <th>Hvor mye</th>
+              <th>Når &amp; hvor</th>
+              <th>Hvorfor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Morgen</th>
+              <td><input type="text" id="hverdag1-morgen-hva" data-key="hverdag1-morgen-hva" placeholder="F.eks. havregrøt, kaffe"></td>
+              <td><input type="text" id="hverdag1-morgen-hvormye" data-key="hverdag1-morgen-hvormye" placeholder="F.eks. én skål"></td>
+              <td><input type="text" id="hverdag1-morgen-nar" data-key="hverdag1-morgen-nar" placeholder="F.eks. kl. 07, kjøkkenet"></td>
+              <td><input type="text" id="hverdag1-morgen-hvorfor" data-key="hverdag1-morgen-hvorfor" placeholder="F.eks. sulten, rutine"></td>
+            </tr>
+            <tr>
+              <th scope="row">Formiddag</th>
+              <td><input type="text" id="hverdag1-formiddag-hva" data-key="hverdag1-formiddag-hva" placeholder="F.eks. frukt"></td>
+              <td><input type="text" id="hverdag1-formiddag-hvormye" data-key="hverdag1-formiddag-hvormye" placeholder="F.eks. ett eple"></td>
+              <td><input type="text" id="hverdag1-formiddag-nar" data-key="hverdag1-formiddag-nar" placeholder="F.eks. kl. 10, på jobb"></td>
+              <td><input type="text" id="hverdag1-formiddag-hvorfor" data-key="hverdag1-formiddag-hvorfor" placeholder="F.eks. pause, sosialt"></td>
+            </tr>
+            <tr>
+              <th scope="row">Ettermiddag</th>
+              <td><input type="text" id="hverdag1-ettermiddag-hva" data-key="hverdag1-ettermiddag-hva" placeholder="F.eks. brødskive"></td>
+              <td><input type="text" id="hverdag1-ettermiddag-hvormye" data-key="hverdag1-ettermiddag-hvormye" placeholder="F.eks. to skiver"></td>
+              <td><input type="text" id="hverdag1-ettermiddag-nar" data-key="hverdag1-ettermiddag-nar" placeholder="F.eks. kl. 16, hjemme"></td>
+              <td><input type="text" id="hverdag1-ettermiddag-hvorfor" data-key="hverdag1-ettermiddag-hvorfor" placeholder="F.eks. sulten, vane"></td>
+            </tr>
+            <tr>
+              <th scope="row">Kveld</th>
+              <td><input type="text" id="hverdag1-kveld-hva" data-key="hverdag1-kveld-hva" placeholder="F.eks. middag, snacks"></td>
+              <td><input type="text" id="hverdag1-kveld-hvormye" data-key="hverdag1-kveld-hvormye" placeholder="F.eks. én tallerken"></td>
+              <td><input type="text" id="hverdag1-kveld-nar" data-key="hverdag1-kveld-nar" placeholder="F.eks. kl. 19, spisebordet"></td>
+              <td><input type="text" id="hverdag1-kveld-hvorfor" data-key="hverdag1-kveld-hvorfor" placeholder="F.eks. sulten, foran TV-en"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+
+  <details class="topic" data-daytype="hverdag2">
+    <summary>Hverdag 2 <span class="chevron">▸</span></summary>
+    <div class="topic-body">
+      <div class="table-scroll">
+        <table class="diet-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Hva</th>
+              <th>Hvor mye</th>
+              <th>Når &amp; hvor</th>
+              <th>Hvorfor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Morgen</th>
+              <td><input type="text" id="hverdag2-morgen-hva" data-key="hverdag2-morgen-hva" placeholder="F.eks. havregrøt, kaffe"></td>
+              <td><input type="text" id="hverdag2-morgen-hvormye" data-key="hverdag2-morgen-hvormye" placeholder="F.eks. én skål"></td>
+              <td><input type="text" id="hverdag2-morgen-nar" data-key="hverdag2-morgen-nar" placeholder="F.eks. kl. 07, kjøkkenet"></td>
+              <td><input type="text" id="hverdag2-morgen-hvorfor" data-key="hverdag2-morgen-hvorfor" placeholder="F.eks. sulten, rutine"></td>
+            </tr>
+            <tr>
+              <th scope="row">Formiddag</th>
+              <td><input type="text" id="hverdag2-formiddag-hva" data-key="hverdag2-formiddag-hva" placeholder="F.eks. frukt"></td>
+              <td><input type="text" id="hverdag2-formiddag-hvormye" data-key="hverdag2-formiddag-hvormye" placeholder="F.eks. ett eple"></td>
+              <td><input type="text" id="hverdag2-formiddag-nar" data-key="hverdag2-formiddag-nar" placeholder="F.eks. kl. 10, på jobb"></td>
+              <td><input type="text" id="hverdag2-formiddag-hvorfor" data-key="hverdag2-formiddag-hvorfor" placeholder="F.eks. pause, sosialt"></td>
+            </tr>
+            <tr>
+              <th scope="row">Ettermiddag</th>
+              <td><input type="text" id="hverdag2-ettermiddag-hva" data-key="hverdag2-ettermiddag-hva" placeholder="F.eks. brødskive"></td>
+              <td><input type="text" id="hverdag2-ettermiddag-hvormye" data-key="hverdag2-ettermiddag-hvormye" placeholder="F.eks. to skiver"></td>
+              <td><input type="text" id="hverdag2-ettermiddag-nar" data-key="hverdag2-ettermiddag-nar" placeholder="F.eks. kl. 16, hjemme"></td>
+              <td><input type="text" id="hverdag2-ettermiddag-hvorfor" data-key="hverdag2-ettermiddag-hvorfor" placeholder="F.eks. sulten, vane"></td>
+            </tr>
+            <tr>
+              <th scope="row">Kveld</th>
+              <td><input type="text" id="hverdag2-kveld-hva" data-key="hverdag2-kveld-hva" placeholder="F.eks. middag, snacks"></td>
+              <td><input type="text" id="hverdag2-kveld-hvormye" data-key="hverdag2-kveld-hvormye" placeholder="F.eks. én tallerken"></td>
+              <td><input type="text" id="hverdag2-kveld-nar" data-key="hverdag2-kveld-nar" placeholder="F.eks. kl. 19, spisebordet"></td>
+              <td><input type="text" id="hverdag2-kveld-hvorfor" data-key="hverdag2-kveld-hvorfor" placeholder="F.eks. sulten, foran TV-en"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+
+  <details class="topic" data-daytype="hverdag3">
+    <summary>Hverdag 3 <span class="chevron">▸</span></summary>
+    <div class="topic-body">
+      <div class="table-scroll">
+        <table class="diet-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Hva</th>
+              <th>Hvor mye</th>
+              <th>Når &amp; hvor</th>
+              <th>Hvorfor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Morgen</th>
+              <td><input type="text" id="hverdag3-morgen-hva" data-key="hverdag3-morgen-hva" placeholder="F.eks. havregrøt, kaffe"></td>
+              <td><input type="text" id="hverdag3-morgen-hvormye" data-key="hverdag3-morgen-hvormye" placeholder="F.eks. én skål"></td>
+              <td><input type="text" id="hverdag3-morgen-nar" data-key="hverdag3-morgen-nar" placeholder="F.eks. kl. 07, kjøkkenet"></td>
+              <td><input type="text" id="hverdag3-morgen-hvorfor" data-key="hverdag3-morgen-hvorfor" placeholder="F.eks. sulten, rutine"></td>
+            </tr>
+            <tr>
+              <th scope="row">Formiddag</th>
+              <td><input type="text" id="hverdag3-formiddag-hva" data-key="hverdag3-formiddag-hva" placeholder="F.eks. frukt"></td>
+              <td><input type="text" id="hverdag3-formiddag-hvormye" data-key="hverdag3-formiddag-hvormye" placeholder="F.eks. ett eple"></td>
+              <td><input type="text" id="hverdag3-formiddag-nar" data-key="hverdag3-formiddag-nar" placeholder="F.eks. kl. 10, på jobb"></td>
+              <td><input type="text" id="hverdag3-formiddag-hvorfor" data-key="hverdag3-formiddag-hvorfor" placeholder="F.eks. pause, sosialt"></td>
+            </tr>
+            <tr>
+              <th scope="row">Ettermiddag</th>
+              <td><input type="text" id="hverdag3-ettermiddag-hva" data-key="hverdag3-ettermiddag-hva" placeholder="F.eks. brødskive"></td>
+              <td><input type="text" id="hverdag3-ettermiddag-hvormye" data-key="hverdag3-ettermiddag-hvormye" placeholder="F.eks. to skiver"></td>
+              <td><input type="text" id="hverdag3-ettermiddag-nar" data-key="hverdag3-ettermiddag-nar" placeholder="F.eks. kl. 16, hjemme"></td>
+              <td><input type="text" id="hverdag3-ettermiddag-hvorfor" data-key="hverdag3-ettermiddag-hvorfor" placeholder="F.eks. sulten, vane"></td>
+            </tr>
+            <tr>
+              <th scope="row">Kveld</th>
+              <td><input type="text" id="hverdag3-kveld-hva" data-key="hverdag3-kveld-hva" placeholder="F.eks. middag, snacks"></td>
+              <td><input type="text" id="hverdag3-kveld-hvormye" data-key="hverdag3-kveld-hvormye" placeholder="F.eks. én tallerken"></td>
+              <td><input type="text" id="hverdag3-kveld-nar" data-key="hverdag3-kveld-nar" placeholder="F.eks. kl. 19, spisebordet"></td>
+              <td><input type="text" id="hverdag3-kveld-hvorfor" data-key="hverdag3-kveld-hvorfor" placeholder="F.eks. sulten, foran TV-en"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+
+  <details class="topic" data-daytype="helg">
+    <summary>Helgedag <span class="chevron">▸</span></summary>
+    <div class="topic-body">
+      <div class="table-scroll">
+        <table class="diet-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Hva</th>
+              <th>Hvor mye</th>
+              <th>Når &amp; hvor</th>
+              <th>Hvorfor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Morgen</th>
+              <td><input type="text" id="helg-morgen-hva" data-key="helg-morgen-hva" placeholder="F.eks. egg, toast"></td>
+              <td><input type="text" id="helg-morgen-hvormye" data-key="helg-morgen-hvormye" placeholder="F.eks. to egg"></td>
+              <td><input type="text" id="helg-morgen-nar" data-key="helg-morgen-nar" placeholder="F.eks. kl. 10, kjøkkenet"></td>
+              <td><input type="text" id="helg-morgen-hvorfor" data-key="helg-morgen-hvorfor" placeholder="F.eks. koselig frokost"></td>
+            </tr>
+            <tr>
+              <th scope="row">Formiddag</th>
+              <td><input type="text" id="helg-formiddag-hva" data-key="helg-formiddag-hva" placeholder="F.eks. kaffe og bolle"></td>
+              <td><input type="text" id="helg-formiddag-hvormye" data-key="helg-formiddag-hvormye" placeholder="F.eks. én bolle"></td>
+              <td><input type="text" id="helg-formiddag-nar" data-key="helg-formiddag-nar" placeholder="F.eks. kl. 12, kafé"></td>
+              <td><input type="text" id="helg-formiddag-hvorfor" data-key="helg-formiddag-hvorfor" placeholder="F.eks. sosialt, godt"></td>
+            </tr>
+            <tr>
+              <th scope="row">Ettermiddag</th>
+              <td><input type="text" id="helg-ettermiddag-hva" data-key="helg-ettermiddag-hva" placeholder="F.eks. snacks, chips"></td>
+              <td><input type="text" id="helg-ettermiddag-hvormye" data-key="helg-ettermiddag-hvormye" placeholder="F.eks. en pose"></td>
+              <td><input type="text" id="helg-ettermiddag-nar" data-key="helg-ettermiddag-nar" placeholder="F.eks. kl. 15, sofaen"></td>
+              <td><input type="text" id="helg-ettermiddag-hvorfor" data-key="helg-ettermiddag-hvorfor" placeholder="F.eks. kjedsomhet, kos"></td>
+            </tr>
+            <tr>
+              <th scope="row">Kveld</th>
+              <td><input type="text" id="helg-kveld-hva" data-key="helg-kveld-hva" placeholder="F.eks. middag, dessert"></td>
+              <td><input type="text" id="helg-kveld-hvormye" data-key="helg-kveld-hvormye" placeholder="F.eks. én tallerken + is"></td>
+              <td><input type="text" id="helg-kveld-nar" data-key="helg-kveld-nar" placeholder="F.eks. kl. 18, spisebordet"></td>
+              <td><input type="text" id="helg-kveld-hvorfor" data-key="helg-kveld-hvorfor" placeholder="F.eks. sosialt, feiring"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+
+  <section class="primer">
+    <h2>Mønstre over flere dager</h2>
+    <div class="field-grid">
+      <div class="field field-wide">
+        <label for="refleksjon-monster">Er det noe som går igjen når du ser de fire dagene under ett — samme type mat, samme tidspunkter, samme følelser?</label>
+        <textarea id="refleksjon-monster" data-key="refleksjon-monster" placeholder="Skriv gjerne fritt her..."></textarea>
+      </div>
+      <div class="field field-wide">
+        <label for="refleksjon-forskjell">Hva legger du merke til når du sammenligner hverdagene og helgedagen?</label>
+        <textarea id="refleksjon-forskjell" data-key="refleksjon-forskjell" placeholder="Skriv gjerne fritt her..."></textarea>
+      </div>
+      <div class="field field-wide">
+        <label for="refleksjon-endre">Er det noe ved spisevanene dine du ønsker å endre på, om noe?</label>
+        <textarea id="refleksjon-endre" data-key="refleksjon-endre" placeholder="Skriv gjerne fritt her..."></textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="primer">
+    <h2>Send inn registreringen</h2>
+    <p class="muted-note">
+      Du kan sende registreringen direkte fra din egen e-postapp, eller laste
+      den ned som en tekstfil du selv sender eller tar med til timen. Hvis
+      "Send på e-post" ikke åpner riktig på mobilen din, bruk nedlastingen i
+      stedet.
+    </p>
+    <div class="send-buttons">
+      <button type="button" id="sendEmail">Send på e-post</button>
+      <button type="button" id="downloadText" class="secondary">Last ned som tekstfil</button>
+    </div>
+  </section>
+
+  <footer class="closing">
+    Ingen fasit — bare et bilde av en vanlig uke.<br>
+    <strong>Du trenger ikke gjøre det alene.</strong>
+  </footer>
+
+</div>
+
+<script>
+  var STORAGE_KEY = 'kosthold-4dager-data';
+  var RECIPIENT = 'silje.merete.binder@gmail.com';
+
+  var DAY_TYPES = [
+    { key: 'hverdag1', label: 'Hverdag 1' },
+    { key: 'hverdag2', label: 'Hverdag 2' },
+    { key: 'hverdag3', label: 'Hverdag 3' },
+    { key: 'helg', label: 'Helgedag' }
+  ];
+  var ROWS = [
+    { key: 'morgen', label: 'Morgen' },
+    { key: 'formiddag', label: 'Formiddag' },
+    { key: 'ettermiddag', label: 'Ettermiddag' },
+    { key: 'kveld', label: 'Kveld' }
+  ];
+  var COLS = [
+    { key: 'hva', label: 'Hva' },
+    { key: 'hvormye', label: 'Hvor mye' },
+    { key: 'nar', label: 'Når & hvor' },
+    { key: 'hvorfor', label: 'Hvorfor' }
+  ];
+
+  function readState() {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return {};
+    try {
+      return JSON.parse(raw) || {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveState() {
+    var data = {};
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      data[el.getAttribute('data-key')] = el.value;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function loadState() {
+    var data = readState();
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      var key = el.getAttribute('data-key');
+      if (data[key] !== undefined) el.value = data[key];
+    });
+  }
+
+  function buildSummaryText() {
+    var lines = [];
+    lines.push('Kosthold — 4 dagers registrering');
+    lines.push('');
+
+    DAY_TYPES.forEach(function (dt) {
+      lines.push(dt.label);
+      ROWS.forEach(function (row) {
+        lines.push('  ' + row.label + ':');
+        COLS.forEach(function (col) {
+          var el = document.getElementById(dt.key + '-' + row.key + '-' + col.key);
+          lines.push('    ' + col.label + ': ' + (el && el.value ? el.value : '-'));
+        });
+      });
+      lines.push('');
+    });
+
+    lines.push('Mønstre over flere dager: ' + (document.getElementById('refleksjon-monster').value || '-'));
+    lines.push('Forskjeller mellom hverdager og helg: ' + (document.getElementById('refleksjon-forskjell').value || '-'));
+    lines.push('Ønsket endring: ' + (document.getElementById('refleksjon-endre').value || '-'));
+
+    return lines.join('\n');
+  }
+
+  function sendEmail() {
+    var subject = encodeURIComponent('Kosthold — 4 dagers registrering');
+    var body = encodeURIComponent(buildSummaryText());
+    window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
+  }
+
+  function downloadText() {
+    var blob = new Blob([buildSummaryText()], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'kosthold-4dager.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    loadState();
+
+    document.body.addEventListener('input', function (e) {
+      if (!e.target.hasAttribute('data-key')) return;
+      saveState();
+    });
+
+    document.getElementById('expandAll').addEventListener('click', function () {
+      document.querySelectorAll('details.topic').forEach(function (d) { d.open = true; });
+    });
+    document.getElementById('collapseAll').addEventListener('click', function () {
+      document.querySelectorAll('details.topic').forEach(function (d) { d.open = false; });
+    });
+    document.getElementById('resetAll').addEventListener('click', function () {
+      if (!confirm('Nullstille all registrert data for 4 dagers kostholdsregistrering? Dette kan ikke angres.')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    });
+
+    document.getElementById('sendEmail').addEventListener('click', sendEmail);
+    document.getElementById('downloadText').addEventListener('click', downloadText);
+  });
+</script>
+
+</body>
+</html>
