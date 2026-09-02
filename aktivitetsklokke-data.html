@@ -1,0 +1,927 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data fra telefon eller aktivitetsklokke — 7 dager</title>
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --push: #c9823f;
+    --push-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  header.page-header {
+    margin-bottom: 1.75rem;
+  }
+
+  header.page-header h1 {
+    font-size: 1.7rem;
+    margin: 0 0 0.35rem;
+    color: var(--accent-dark);
+  }
+
+  header.page-header p.tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  .reminder {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  section.primer h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer p {
+    margin: 0.6rem 0 0;
+  }
+
+  .signs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.6rem;
+    margin-top: 0.9rem;
+  }
+
+  .signs-item {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .signs-item strong {
+    display: block;
+    color: var(--accent-dark);
+    font-size: 0.85rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .controls button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .controls button:hover {
+    background: var(--accent-soft);
+  }
+
+  .controls button.danger {
+    color: var(--push);
+  }
+
+  .controls button.danger:hover {
+    background: var(--push-soft);
+  }
+
+  .topic {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 0.9rem;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .topic > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1rem 1.25rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .topic > summary::-webkit-details-marker { display: none; }
+
+  .topic > summary .chevron {
+    transition: transform 0.15s ease;
+    color: var(--accent);
+    font-size: 1rem;
+  }
+
+  .topic[open] > summary .chevron {
+    transform: rotate(90deg);
+  }
+
+  .topic > summary:hover {
+    background: var(--accent-soft);
+  }
+
+  .topic-body {
+    padding: 0.25rem 1.25rem 1.25rem;
+  }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 0.9rem;
+    margin-top: 0.75rem;
+  }
+
+  .field-wide {
+    grid-column: 1 / -1;
+  }
+
+  .field label {
+    display: block;
+    font-weight: 600;
+    color: var(--accent-dark);
+    margin-bottom: 0.3rem;
+    font-size: 0.88rem;
+  }
+
+  .field .field-hint {
+    display: block;
+    font-weight: 400;
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin-top: 0.15rem;
+  }
+
+  .field input[type="text"],
+  .field input[type="date"],
+  .field textarea {
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .field textarea {
+    min-height: 64px;
+    resize: vertical;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.6rem;
+    margin: 0.75rem 0 1rem;
+  }
+
+  .stat-item {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.7rem 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  .stat-item strong {
+    display: block;
+    color: var(--accent-dark);
+    font-size: 1.4rem;
+  }
+
+  .send-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .send-buttons button {
+    font-size: 0.92rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .send-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .muted-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  footer.closing {
+    margin-top: 1.75rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong {
+    color: var(--accent-dark);
+  }
+
+  body.gate-locked .wrap,
+  body.gate-locked footer.closing {
+    display: none;
+  }
+
+  .gate-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 100;
+  }
+
+  body.gate-locked .gate-overlay {
+    display: flex;
+  }
+
+  .gate-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 2rem 1.75rem;
+    max-width: 340px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .gate-box h1 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    color: var(--accent-dark);
+  }
+
+  .gate-box p {
+    margin: 0 0 1rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .gate-box input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    font-family: inherit;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  .gate-box input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .gate-box button {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .gate-box button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .gate-error {
+    display: none;
+    color: var(--push);
+    font-size: 0.85rem;
+    margin: 0.7rem 0 0;
+  }
+
+  .gate-contact {
+    margin-top: 0.9rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .gate-contact a {
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .gate-contact a:hover {
+    text-decoration: underline;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .controls, .send-buttons, .muted-note { display: none; }
+    .topic { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body class="gate-locked">
+
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box">
+    <h1>Tilgang til verktøyet</h1>
+    <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
+    <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
+    <button type="button" id="gateSubmit">Lås opp</button>
+    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20aktivitetsverkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var GATE_KEY = 'gate-aktivitet-unlocked';
+    var CODE = 'nyevaner';
+
+    function unlock() {
+      localStorage.setItem(GATE_KEY, 'true');
+      document.body.classList.remove('gate-locked');
+    }
+
+    if (localStorage.getItem(GATE_KEY) === 'true') {
+      unlock();
+    }
+
+    function trySubmit() {
+      var input = document.getElementById('gateCode');
+      var error = document.getElementById('gateError');
+      if (input.value.trim().toLowerCase() === CODE) {
+        error.style.display = 'none';
+        unlock();
+      } else {
+        error.style.display = 'block';
+      }
+    }
+
+    document.getElementById('gateSubmit').addEventListener('click', trySubmit);
+    document.getElementById('gateCode').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') trySubmit();
+    });
+  })();
+</script>
+
+<div class="wrap">
+
+  <header class="page-header">
+    <h1>Data fra telefon eller aktivitetsklokke</h1>
+    <p class="tagline">Et sted å samle tallene appen eller klokken din allerede har registrert, 7 dager i strekk</p>
+    <div class="reminder">
+      Har du en aktivitetsklokke eller en helse-app på telefonen (som
+      Apple Health, Google Fit, Garmin, Fitbit eller lignende), kan du
+      skrive av tallene derfra hit én gang om dagen. Da får vi et samlet
+      bilde uten at du trenger å dele tilgang til appen din.
+      <strong>Fyll inn det du har — det er helt greit om noe mangler.</strong>
+    </div>
+  </header>
+
+  <section class="primer">
+    <h2>Om denne registreringen</h2>
+    <p>De fleste telefoner og aktivitetsklokker registrerer automatisk ting
+    som skritt, aktive minutter, puls og søvn. Denne siden er ikke koblet
+    til noen app — den er bare et enkelt sted å skrive av tallene du ser i
+    din egen app, slik at vi kan se dem samlet og følge utviklingen over
+    tid.</p>
+    <div class="signs-grid">
+      <div class="signs-item"><strong>Hvor finner jeg tallene?</strong>Apple Health, Google Fit/Fit-appen, Samsung Health, Garmin Connect, Fitbit-appen eller tilsvarende — se under «i dag» eller «historikk» for hver dag.</div>
+    </div>
+  </section>
+
+  <div class="controls">
+    <button type="button" id="expandAll">Vis alle</button>
+    <button type="button" id="collapseAll">Skjul alle</button>
+    <button type="button" id="resetAll" class="danger">Nullstill alt</button>
+  </div>
+
+  <div id="days">
+    <details class="topic" data-day="1">
+      <summary>Dag 1 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-1">Dato (valgfritt)</label>
+            <input type="date" id="date-1" data-key="date-1">
+          </div>
+          <div class="field">
+            <label for="steps-1">Skritt</label>
+            <input type="text" id="steps-1" data-key="steps-1" placeholder="F.eks. 8200">
+          </div>
+          <div class="field">
+            <label for="active-1">Aktive minutter</label>
+            <input type="text" id="active-1" data-key="active-1" placeholder="F.eks. 45">
+          </div>
+          <div class="field">
+            <label for="calories-1">Forbrente kalorier (aktivitet)</label>
+            <input type="text" id="calories-1" data-key="calories-1" placeholder="F.eks. 420">
+          </div>
+          <div class="field">
+            <label for="restinghr-1">Hvilepuls (slag/min)</label>
+            <input type="text" id="restinghr-1" data-key="restinghr-1" placeholder="F.eks. 62">
+          </div>
+          <div class="field">
+            <label for="sleep-1">Søvn (timer)</label>
+            <input type="text" id="sleep-1" data-key="sleep-1" placeholder="F.eks. 7,5">
+          </div>
+          <div class="field field-wide">
+            <label for="note-1">Annet fra appen / klokken <span class="field-hint">F.eks. søvnscore, maks puls, distanse, etasjer</span></label>
+            <input type="text" id="note-1" data-key="note-1" placeholder="F.eks. søvnscore 78, 5,2 km">
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="2">
+      <summary>Dag 2 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-2">Dato (valgfritt)</label>
+            <input type="date" id="date-2" data-key="date-2">
+          </div>
+          <div class="field">
+            <label for="steps-2">Skritt</label>
+            <input type="text" id="steps-2" data-key="steps-2" placeholder="F.eks. 8200">
+          </div>
+          <div class="field">
+            <label for="active-2">Aktive minutter</label>
+            <input type="text" id="active-2" data-key="active-2" placeholder="F.eks. 45">
+          </div>
+          <div class="field">
+            <label for="calories-2">Forbrente kalorier (aktivitet)</label>
+            <input type="text" id="calories-2" data-key="calories-2" placeholder="F.eks. 420">
+          </div>
+          <div class="field">
+            <label for="restinghr-2">Hvilepuls (slag/min)</label>
+            <input type="text" id="restinghr-2" data-key="restinghr-2" placeholder="F.eks. 62">
+          </div>
+          <div class="field">
+            <label for="sleep-2">Søvn (timer)</label>
+            <input type="text" id="sleep-2" data-key="sleep-2" placeholder="F.eks. 7,5">
+          </div>
+          <div class="field field-wide">
+            <label for="note-2">Annet fra appen / klokken <span class="field-hint">F.eks. søvnscore, maks puls, distanse, etasjer</span></label>
+            <input type="text" id="note-2" data-key="note-2" placeholder="F.eks. søvnscore 78, 5,2 km">
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="3">
+      <summary>Dag 3 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-3">Dato (valgfritt)</label>
+            <input type="date" id="date-3" data-key="date-3">
+          </div>
+          <div class="field">
+            <label for="steps-3">Skritt</label>
+            <input type="text" id="steps-3" data-key="steps-3" placeholder="F.eks. 8200">
+          </div>
+          <div class="field">
+            <label for="active-3">Aktive minutter</label>
+            <input type="text" id="active-3" data-key="active-3" placeholder="F.eks. 45">
+          </div>
+          <div class="field">
+            <label for="calories-3">Forbrente kalorier (aktivitet)</label>
+            <input type="text" id="calories-3" data-key="calories-3" placeholder="F.eks. 420">
+          </div>
+          <div class="field">
+            <label for="restinghr-3">Hvilepuls (slag/min)</label>
+            <input type="text" id="restinghr-3" data-key="restinghr-3" placeholder="F.eks. 62">
+          </div>
+          <div class="field">
+            <label for="sleep-3">Søvn (timer)</label>
+            <input type="text" id="sleep-3" data-key="sleep-3" placeholder="F.eks. 7,5">
+          </div>
+          <div class="field field-wide">
+            <label for="note-3">Annet fra appen / klokken <span class="field-hint">F.eks. søvnscore, maks puls, distanse, etasjer</span></label>
+            <input type="text" id="note-3" data-key="note-3" placeholder="F.eks. søvnscore 78, 5,2 km">
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="4">
+      <summary>Dag 4 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-4">Dato (valgfritt)</label>
+            <input type="date" id="date-4" data-key="date-4">
+          </div>
+          <div class="field">
+            <label for="steps-4">Skritt</label>
+            <input type="text" id="steps-4" data-key="steps-4" placeholder="F.eks. 8200">
+          </div>
+          <div class="field">
+            <label for="active-4">Aktive minutter</label>
+            <input type="text" id="active-4" data-key="active-4" placeholder="F.eks. 45">
+          </div>
+          <div class="field">
+            <label for="calories-4">Forbrente kalorier (aktivitet)</label>
+            <input type="text" id="calories-4" data-key="calories-4" placeholder="F.eks. 420">
+          </div>
+          <div class="field">
+            <label for="restinghr-4">Hvilepuls (slag/min)</label>
+            <input type="text" id="restinghr-4" data-key="restinghr-4" placeholder="F.eks. 62">
+          </div>
+          <div class="field">
+            <label for="sleep-4">Søvn (timer)</label>
+            <input type="text" id="sleep-4" data-key="sleep-4" placeholder="F.eks. 7,5">
+          </div>
+          <div class="field field-wide">
+            <label for="note-4">Annet fra appen / klokken <span class="field-hint">F.eks. søvnscore, maks puls, distanse, etasjer</span></label>
+            <input type="text" id="note-4" data-key="note-4" placeholder="F.eks. søvnscore 78, 5,2 km">
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="5">
+      <summary>Dag 5 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-5">Dato (valgfritt)</label>
+            <input type="date" id="date-5" data-key="date-5">
+          </div>
+          <div class="field">
+            <label for="steps-5">Skritt</label>
+            <input type="text" id="steps-5" data-key="steps-5" placeholder="F.eks. 8200">
+          </div>
+          <div class="field">
+            <label for="active-5">Aktive minutter</label>
+            <input type="text" id="active-5" data-key="active-5" placeholder="F.eks. 45">
+          </div>
+          <div class="field">
+            <label for="calories-5">Forbrente kalorier (aktivitet)</label>
+            <input type="text" id="calories-5" data-key="calories-5" placeholder="F.eks. 420">
+          </div>
+          <div class="field">
+            <label for="restinghr-5">Hvilepuls (slag/min)</label>
+            <input type="text" id="restinghr-5" data-key="restinghr-5" placeholder="F.eks. 62">
+          </div>
+          <div class="field">
+            <label for="sleep-5">Søvn (timer)</label>
+            <input type="text" id="sleep-5" data-key="sleep-5" placeholder="F.eks. 7,5">
+          </div>
+          <div class="field field-wide">
+            <label for="note-5">Annet fra appen / klokken <span class="field-hint">F.eks. søvnscore, maks puls, distanse, etasjer</span></label>
+            <input type="text" id="note-5" data-key="note-5" placeholder="F.eks. søvnscore 78, 5,2 km">
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="6">
+      <summary>Dag 6 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-6">Dato (valgfritt)</label>
+            <input type="date" id="date-6" data-key="date-6">
+          </div>
+          <div class="field">
+            <label for="steps-6">Skritt</label>
+            <input type="text" id="steps-6" data-key="steps-6" placeholder="F.eks. 8200">
+          </div>
+          <div class="field">
+            <label for="active-6">Aktive minutter</label>
+            <input type="text" id="active-6" data-key="active-6" placeholder="F.eks. 45">
+          </div>
+          <div class="field">
+            <label for="calories-6">Forbrente kalorier (aktivitet)</label>
+            <input type="text" id="calories-6" data-key="calories-6" placeholder="F.eks. 420">
+          </div>
+          <div class="field">
+            <label for="restinghr-6">Hvilepuls (slag/min)</label>
+            <input type="text" id="restinghr-6" data-key="restinghr-6" placeholder="F.eks. 62">
+          </div>
+          <div class="field">
+            <label for="sleep-6">Søvn (timer)</label>
+            <input type="text" id="sleep-6" data-key="sleep-6" placeholder="F.eks. 7,5">
+          </div>
+          <div class="field field-wide">
+            <label for="note-6">Annet fra appen / klokken <span class="field-hint">F.eks. søvnscore, maks puls, distanse, etasjer</span></label>
+            <input type="text" id="note-6" data-key="note-6" placeholder="F.eks. søvnscore 78, 5,2 km">
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="7">
+      <summary>Dag 7 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-7">Dato (valgfritt)</label>
+            <input type="date" id="date-7" data-key="date-7">
+          </div>
+          <div class="field">
+            <label for="steps-7">Skritt</label>
+            <input type="text" id="steps-7" data-key="steps-7" placeholder="F.eks. 8200">
+          </div>
+          <div class="field">
+            <label for="active-7">Aktive minutter</label>
+            <input type="text" id="active-7" data-key="active-7" placeholder="F.eks. 45">
+          </div>
+          <div class="field">
+            <label for="calories-7">Forbrente kalorier (aktivitet)</label>
+            <input type="text" id="calories-7" data-key="calories-7" placeholder="F.eks. 420">
+          </div>
+          <div class="field">
+            <label for="restinghr-7">Hvilepuls (slag/min)</label>
+            <input type="text" id="restinghr-7" data-key="restinghr-7" placeholder="F.eks. 62">
+          </div>
+          <div class="field">
+            <label for="sleep-7">Søvn (timer)</label>
+            <input type="text" id="sleep-7" data-key="sleep-7" placeholder="F.eks. 7,5">
+          </div>
+          <div class="field field-wide">
+            <label for="note-7">Annet fra appen / klokken <span class="field-hint">F.eks. søvnscore, maks puls, distanse, etasjer</span></label>
+            <input type="text" id="note-7" data-key="note-7" placeholder="F.eks. søvnscore 78, 5,2 km">
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <section class="primer" id="summarySection">
+    <h2>Oppsummering for uken</h2>
+    <div class="stat-grid">
+      <div class="stat-item"><strong id="avg-steps">–</strong>Snitt skritt</div>
+      <div class="stat-item"><strong id="avg-active">–</strong>Snitt aktive minutter</div>
+      <div class="stat-item"><strong id="avg-hr">–</strong>Snitt hvilepuls</div>
+      <div class="stat-item"><strong id="avg-sleep">–</strong>Snitt søvn (timer)</div>
+      <div class="stat-item"><strong id="days-filled">–</strong>Dager registrert</div>
+    </div>
+    <div class="field field-wide">
+      <label for="weekly-reflection">Noe du la merke til i tallene denne uken?</label>
+      <textarea id="weekly-reflection" data-key="weekly-reflection" placeholder="Skriv gjerne fritt her..."></textarea>
+    </div>
+  </section>
+
+  <section class="primer">
+    <h2>Send inn registreringen</h2>
+    <p class="muted-note">
+      Du kan sende registreringen direkte fra din egen e-postapp, eller laste
+      den ned som en tekstfil du selv sender eller tar med til timen. Hvis
+      "Send på e-post" ikke åpner riktig på mobilen din, bruk nedlastingen i
+      stedet.
+    </p>
+    <div class="send-buttons">
+      <button type="button" id="sendEmail">Send på e-post</button>
+      <button type="button" id="downloadText" class="secondary">Last ned som tekstfil</button>
+    </div>
+  </section>
+
+  <footer class="closing">
+    Tallene appen din allerede har — bare samlet på ett sted.<br>
+    <strong>Dette er overkommelig, og du trenger ikke gjøre det alene.</strong>
+  </footer>
+
+</div>
+
+<script>
+  var DAY_COUNT = 7;
+  var STORAGE_KEY = 'aktivitetsklokke-data';
+  var RECIPIENT = 'silje.merete.binder@gmail.com';
+  var NUMERIC_FIELDS = ['steps', 'active', 'calories', 'restinghr', 'sleep'];
+
+  function parseNumber(value) {
+    if (!value) return NaN;
+    return parseFloat(value.replace(',', '.'));
+  }
+
+  function readState() {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return {};
+    try {
+      return JSON.parse(raw) || {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveState() {
+    var data = {};
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      data[el.getAttribute('data-key')] = el.value;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function loadState() {
+    var data = readState();
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      var key = el.getAttribute('data-key');
+      if (data[key] !== undefined) {
+        el.value = data[key];
+      }
+    });
+  }
+
+  function average(values) {
+    var sum = 0, count = 0;
+    values.forEach(function (v) {
+      var n = parseNumber(v);
+      if (!isNaN(n)) {
+        sum += n;
+        count++;
+      }
+    });
+    return count ? (sum / count) : null;
+  }
+
+  function updateSummary() {
+    var daysFilled = 0;
+    var byField = { steps: [], active: [], calories: [], restinghr: [], sleep: [] };
+
+    for (var n = 1; n <= DAY_COUNT; n++) {
+      var hasAnyData = false;
+      document.querySelectorAll('[data-day="' + n + '"] [data-key]').forEach(function (el) {
+        if (el.value && el.value.trim() !== '') hasAnyData = true;
+      });
+      if (hasAnyData) daysFilled++;
+
+      NUMERIC_FIELDS.forEach(function (field) {
+        var el = document.getElementById(field + '-' + n);
+        if (el) byField[field].push(el.value);
+      });
+    }
+
+    var avgSteps = average(byField.steps);
+    var avgActive = average(byField.active);
+    var avgHr = average(byField.restinghr);
+    var avgSleep = average(byField.sleep);
+
+    document.getElementById('avg-steps').textContent = avgSteps !== null ? Math.round(avgSteps) : '–';
+    document.getElementById('avg-active').textContent = avgActive !== null ? avgActive.toFixed(1) : '–';
+    document.getElementById('avg-hr').textContent = avgHr !== null ? avgHr.toFixed(1) : '–';
+    document.getElementById('avg-sleep').textContent = avgSleep !== null ? avgSleep.toFixed(1) : '–';
+    document.getElementById('days-filled').textContent = daysFilled + ' / ' + DAY_COUNT;
+  }
+
+  function buildSummaryText() {
+    var lines = [];
+    lines.push('Data fra telefon eller aktivitetsklokke — 7 dager');
+    lines.push('');
+
+    for (var n = 1; n <= DAY_COUNT; n++) {
+      var date = document.getElementById('date-' + n).value;
+      var steps = document.getElementById('steps-' + n).value;
+      var active = document.getElementById('active-' + n).value;
+      var calories = document.getElementById('calories-' + n).value;
+      var restinghr = document.getElementById('restinghr-' + n).value;
+      var sleep = document.getElementById('sleep-' + n).value;
+      var note = document.getElementById('note-' + n).value;
+
+      lines.push('Dag ' + n + (date ? ' (' + date + ')' : ''));
+      lines.push('  Skritt: ' + (steps || '-'));
+      lines.push('  Aktive minutter: ' + (active || '-'));
+      lines.push('  Forbrente kalorier: ' + (calories || '-'));
+      lines.push('  Hvilepuls: ' + (restinghr || '-'));
+      lines.push('  Søvn (timer): ' + (sleep || '-'));
+      lines.push('  Annet: ' + (note || '-'));
+      lines.push('');
+    }
+
+    lines.push('Snitt skritt: ' + document.getElementById('avg-steps').textContent);
+    lines.push('Snitt aktive minutter: ' + document.getElementById('avg-active').textContent);
+    lines.push('Snitt hvilepuls: ' + document.getElementById('avg-hr').textContent);
+    lines.push('Snitt søvn (timer): ' + document.getElementById('avg-sleep').textContent);
+    lines.push('Dager registrert: ' + document.getElementById('days-filled').textContent);
+    lines.push('');
+    lines.push('Refleksjon: ' + (document.getElementById('weekly-reflection').value || '-'));
+
+    return lines.join('\n');
+  }
+
+  function sendEmail() {
+    var subject = encodeURIComponent('Data fra telefon eller aktivitetsklokke - 7 dager');
+    var body = encodeURIComponent(buildSummaryText());
+    window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
+  }
+
+  function downloadText() {
+    var blob = new Blob([buildSummaryText()], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'aktivitetsklokke-data.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    loadState();
+    updateSummary();
+
+    document.body.addEventListener('input', function (e) {
+      if (!e.target.hasAttribute('data-key')) return;
+      saveState();
+      updateSummary();
+    });
+
+    document.getElementById('expandAll').addEventListener('click', function () {
+      document.querySelectorAll('details.topic').forEach(function (d) { d.open = true; });
+    });
+    document.getElementById('collapseAll').addEventListener('click', function () {
+      document.querySelectorAll('details.topic').forEach(function (d) { d.open = false; });
+    });
+    document.getElementById('resetAll').addEventListener('click', function () {
+      if (!confirm('Nullstille all registrert data for uken? Dette kan ikke angres.')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    });
+
+    document.getElementById('sendEmail').addEventListener('click', sendEmail);
+    document.getElementById('downloadText').addEventListener('click', downloadText);
+  });
+</script>
+
+</body>
+</html>
