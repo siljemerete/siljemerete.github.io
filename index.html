@@ -96,9 +96,36 @@
   /* Hero */
   .hero {
     position: relative;
-    background: linear-gradient(160deg, var(--accent-soft), var(--bg) 75%);
-    padding: 3rem 0 4rem;
+    display: flex;
+    align-items: flex-end;
+    min-height: clamp(440px, 82vh, 760px);
+    background-image:
+      linear-gradient(180deg, rgba(15, 28, 45, 0.12) 0%, rgba(15, 28, 45, 0.32) 55%, rgba(15, 28, 45, 0.82) 100%),
+      url('images/hero-havet.jpg');
+    background-size: cover;
+    background-position: center 38%;
     overflow: hidden;
+    padding: 3rem 0 4.5rem;
+  }
+
+  .hero-shine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.55) 42%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0.55) 58%, transparent 80%);
+    background-size: 300% 300%;
+    mix-blend-mode: overlay;
+    animation: hero-shine-sweep 5s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes hero-shine-sweep {
+    0% { background-position: 0% 10%; }
+    50% { background-position: 100% 90%; }
+    100% { background-position: 0% 10%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-shine { animation: none; }
   }
 
   .hero-wave {
@@ -115,39 +142,24 @@
     height: 56px;
   }
 
-  .hero-grid {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2.5rem;
-    flex-wrap: wrap-reverse;
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
     text-align: left;
   }
 
-  .hero-text {
-    flex: 1 1 320px;
-    max-width: 46ch;
-  }
-
-  .hero-photo-wrap {
-    position: relative;
-    flex: 0 0 auto;
-  }
-
-  .hero-photo {
-    display: block;
-    width: 220px;
-    height: 280px;
-    object-fit: cover;
-    border-radius: 16px;
-    border: 4px solid #fff;
-    box-shadow: var(--shadow);
+  .hero-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.1rem;
   }
 
   .stat-badge {
-    position: absolute;
-    left: -1.1rem;
-    bottom: -1.1rem;
+    display: inline-flex;
+    flex-direction: column;
     background: #fff;
     border-radius: 14px;
     padding: 0.55rem 0.9rem;
@@ -176,26 +188,28 @@
     margin: 0 0 0.5rem;
     font-size: 2.25rem;
     line-height: 1.15;
-    color: var(--accent-dark);
+    color: #fff;
+    text-shadow: 0 2px 16px rgba(10, 22, 36, 0.45);
     text-wrap: balance;
   }
 
   .hero p.tagline {
     margin: 0 0 0.75rem;
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 1px 10px rgba(10, 22, 36, 0.4);
     font-size: 1.08rem;
   }
 
   .hero p.value-prop {
     margin: 0 0 1.5rem;
-    color: var(--accent-dark);
+    color: #fff;
+    text-shadow: 0 1px 10px rgba(10, 22, 36, 0.4);
     font-weight: 600;
     font-size: 1rem;
   }
 
   @media (max-width: 640px) {
-    .hero-grid { flex-direction: column-reverse; text-align: center; }
-    .hero-text { max-width: 100%; }
+    .hero-content { text-align: center; max-width: 100%; }
   }
 
   .cta-button {
@@ -673,15 +687,13 @@
 </header>
 
 <section class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-text">
-      <h1>Silje Merete SMART Helseveiledning</h1>
-      <p class="tagline">Helseveiledning for små, gjennomførbare skritt mot bedre helse og hverdag.</p>
-      <p class="value-prop">20 år med å se mennesker gjennom endring — nå er blikket mitt rettet mot hele deg.</p>
+  <div class="hero-shine" aria-hidden="true"></div>
+  <div class="wrap hero-content">
+    <h1>Silje Merete SMART Helseveiledning</h1>
+    <p class="tagline">Helseveiledning for små, gjennomførbare skritt mot bedre helse og hverdag.</p>
+    <p class="value-prop">20 år med å se mennesker gjennom endring — nå er blikket mitt rettet mot hele deg.</p>
+    <div class="hero-cta-row">
       <a class="cta-button" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post</a>
-    </div>
-    <div class="hero-photo-wrap">
-      <img class="hero-photo" src="images/hero-havet.jpg" alt="Silje Merete ute ved havet">
       <div class="stat-badge">
         <p class="stat-number">20+</p>
         <p class="stat-label">års erfaring</p>
