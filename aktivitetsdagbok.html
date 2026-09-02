@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aktivitetsdagbok — 7 dager</title>
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --push: #c9823f;
+    --push-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  header.page-header {
+    margin-bottom: 1.75rem;
+  }
+
+  header.page-header h1 {
+    font-size: 1.7rem;
+    margin: 0 0 0.35rem;
+    color: var(--accent-dark);
+  }
+
+  header.page-header p.tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  .reminder {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  section.primer h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer p {
+    margin: 0.6rem 0 0;
+  }
+
+  .signs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.6rem;
+    margin-top: 0.9rem;
+  }
+
+  .signs-item {
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .signs-item.fills { background: var(--accent-soft); }
+  .signs-item.empties { background: var(--push-soft); }
+
+  .signs-item strong {
+    display: block;
+    color: var(--accent-dark);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.3rem;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .controls button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .controls button:hover {
+    background: var(--accent-soft);
+  }
+
+  .controls button.danger {
+    color: var(--push);
+  }
+
+  .controls button.danger:hover {
+    background: var(--push-soft);
+  }
+
+  .topic {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 0.9rem;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .topic > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1rem 1.25rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .topic > summary::-webkit-details-marker { display: none; }
+
+  .topic > summary .chevron {
+    transition: transform 0.15s ease;
+    color: var(--accent);
+    font-size: 1rem;
+  }
+
+  .topic[open] > summary .chevron {
+    transform: rotate(90deg);
+  }
+
+  .topic > summary:hover {
+    background: var(--accent-soft);
+  }
+
+  .topic-body {
+    padding: 0.25rem 1.25rem 1.25rem;
+  }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 0.9rem;
+    margin-top: 0.75rem;
+  }
+
+  .field-wide {
+    grid-column: 1 / -1;
+  }
+
+  .field label {
+    display: block;
+    font-weight: 600;
+    color: var(--accent-dark);
+    margin-bottom: 0.3rem;
+    font-size: 0.88rem;
+  }
+
+  .field input[type="text"],
+  .field input[type="date"],
+  .field textarea {
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .field textarea {
+    min-height: 64px;
+    resize: vertical;
+  }
+
+  .field input[type="range"] {
+    width: 100%;
+    accent-color: var(--accent);
+  }
+
+  .range-value {
+    color: var(--accent-dark);
+    font-size: 1.05rem;
+  }
+
+  .range-anchors {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+    gap: 0.5rem;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.6rem;
+    margin: 0.75rem 0 1rem;
+  }
+
+  .stat-item {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.7rem 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  .stat-item strong {
+    display: block;
+    color: var(--accent-dark);
+    font-size: 1.4rem;
+  }
+
+  .send-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .send-buttons button {
+    font-size: 0.92rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .send-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .muted-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  footer.closing {
+    margin-top: 1.75rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong {
+    color: var(--accent-dark);
+  }
+
+  body.gate-locked .wrap,
+  body.gate-locked footer.closing {
+    display: none;
+  }
+
+  .gate-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 100;
+  }
+
+  body.gate-locked .gate-overlay {
+    display: flex;
+  }
+
+  .gate-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 2rem 1.75rem;
+    max-width: 340px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .gate-box h1 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    color: var(--accent-dark);
+  }
+
+  .gate-box p {
+    margin: 0 0 1rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .gate-box input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    font-family: inherit;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  .gate-box input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .gate-box button {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .gate-box button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .gate-error {
+    display: none;
+    color: var(--push);
+    font-size: 0.85rem;
+    margin: 0.7rem 0 0;
+  }
+
+  .gate-contact {
+    margin-top: 0.9rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .gate-contact a {
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .gate-contact a:hover {
+    text-decoration: underline;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .controls, .send-buttons, .muted-note { display: none; }
+    .topic { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body class="gate-locked">
+
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box">
+    <h1>Tilgang til verktøyet</h1>
+    <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
+    <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
+    <button type="button" id="gateSubmit">Lås opp</button>
+    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20aktivitetsverkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var GATE_KEY = 'gate-aktivitet-unlocked';
+    var CODE = 'nyevaner';
+
+    function unlock() {
+      localStorage.setItem(GATE_KEY, 'true');
+      document.body.classList.remove('gate-locked');
+    }
+
+    if (localStorage.getItem(GATE_KEY) === 'true') {
+      unlock();
+    }
+
+    function trySubmit() {
+      var input = document.getElementById('gateCode');
+      var error = document.getElementById('gateError');
+      if (input.value.trim().toLowerCase() === CODE) {
+        error.style.display = 'none';
+        unlock();
+      } else {
+        error.style.display = 'block';
+      }
+    }
+
+    document.getElementById('gateSubmit').addEventListener('click', trySubmit);
+    document.getElementById('gateCode').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') trySubmit();
+    });
+  })();
+</script>
+
+<div class="wrap">
+
+  <header class="page-header">
+    <h1>Aktivitetsdagbok — 7 dager</h1>
+    <p class="tagline">Et par minutter hver dag — for å bli bevisst på hvor mye du beveger deg, og hva som gjør det lettere</p>
+    <div class="reminder">
+      Dette er ikke en eksamen i å trene mye — bare et lite verktøy for å
+      legge merke til bevegelsen som allerede er i hverdagen din, og hva
+      som hjelper eller hindrer deg. Skriv litt om kvelden, eller noter
+      underveis om det passer bedre for deg. Alt du legger inn lagres i
+      denne nettleseren, så du kan lukke siden og fortsette i morgen.
+      <strong>Det er helt greit om noen dager mangler noe.</strong>
+    </div>
+  </header>
+
+  <section class="primer">
+    <h2>Om aktivitetsdagboken</h2>
+    <p>All bevegelse teller — ikke bare planlagt trening. En gåtur, hagearbeid,
+    trapper eller lek med barna er også fysisk aktivitet. Denne dagboken
+    hjelper deg å få oversikt over hva slags bevegelse du faktisk får inn i
+    hverdagen, hvor anstrengende det kjentes, og hva som gjorde det lettere
+    eller vanskeligere å være i aktivitet den dagen.</p>
+    <div class="signs-grid">
+      <div class="signs-item fills">
+        <strong>Gjør det lettere</strong>
+        God tid, noen å være aktiv sammen med, klær og utstyr klart, en fast rutine
+      </div>
+      <div class="signs-item empties">
+        <strong>Gjør det vanskeligere</strong>
+        Tidspress, tretthet, dårlig vær, uforutsette hendelser, lite overskudd
+      </div>
+    </div>
+  </section>
+
+  <div class="controls">
+    <button type="button" id="expandAll">Vis alle</button>
+    <button type="button" id="collapseAll">Skjul alle</button>
+    <button type="button" id="resetAll" class="danger">Nullstill alt</button>
+  </div>
+
+  <div id="days">
+    <details class="topic" data-day="1">
+      <summary>Dag 1 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-1">Dato (valgfritt)</label>
+            <input type="date" id="date-1" data-key="date-1">
+          </div>
+          <div class="field">
+            <label for="duration-1">Varighet (minutter)</label>
+            <input type="text" id="duration-1" data-key="duration-1" placeholder="F.eks. 30">
+          </div>
+          <div class="field field-wide">
+            <label for="activity-1">Aktivitet — hva slags bevegelse fikk du i dag?</label>
+            <textarea id="activity-1" data-key="activity-1" placeholder="F.eks. gåtur til jobb, styrketrening, hagearbeid, lek med barna"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="effort-1">Opplevd anstrengelse: <span class="range-value" id="effort-value-1">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="effort-1" data-key="effort-1" data-touched="false">
+            <div class="range-anchors">
+              <span>0 — Ingen anstrengelse</span>
+              <span>10 — Maksimal anstrengelse</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="feeling-1">Hvordan kjentes kroppen etterpå?</label>
+            <input type="text" id="feeling-1" data-key="feeling-1" placeholder="F.eks. opplagt, stiv, energisk, sliten">
+          </div>
+          <div class="field">
+            <label for="helper-1">Hva gjorde det lettere eller vanskeligere i dag?</label>
+            <input type="text" id="helper-1" data-key="helper-1" placeholder="F.eks. hadde tid, dårlig vær, avtale med en venn">
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="2">
+      <summary>Dag 2 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-2">Dato (valgfritt)</label>
+            <input type="date" id="date-2" data-key="date-2">
+          </div>
+          <div class="field">
+            <label for="duration-2">Varighet (minutter)</label>
+            <input type="text" id="duration-2" data-key="duration-2" placeholder="F.eks. 30">
+          </div>
+          <div class="field field-wide">
+            <label for="activity-2">Aktivitet — hva slags bevegelse fikk du i dag?</label>
+            <textarea id="activity-2" data-key="activity-2" placeholder="F.eks. gåtur til jobb, styrketrening, hagearbeid, lek med barna"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="effort-2">Opplevd anstrengelse: <span class="range-value" id="effort-value-2">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="effort-2" data-key="effort-2" data-touched="false">
+            <div class="range-anchors">
+              <span>0 — Ingen anstrengelse</span>
+              <span>10 — Maksimal anstrengelse</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="feeling-2">Hvordan kjentes kroppen etterpå?</label>
+            <input type="text" id="feeling-2" data-key="feeling-2" placeholder="F.eks. opplagt, stiv, energisk, sliten">
+          </div>
+          <div class="field">
+            <label for="helper-2">Hva gjorde det lettere eller vanskeligere i dag?</label>
+            <input type="text" id="helper-2" data-key="helper-2" placeholder="F.eks. hadde tid, dårlig vær, avtale med en venn">
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="3">
+      <summary>Dag 3 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-3">Dato (valgfritt)</label>
+            <input type="date" id="date-3" data-key="date-3">
+          </div>
+          <div class="field">
+            <label for="duration-3">Varighet (minutter)</label>
+            <input type="text" id="duration-3" data-key="duration-3" placeholder="F.eks. 30">
+          </div>
+          <div class="field field-wide">
+            <label for="activity-3">Aktivitet — hva slags bevegelse fikk du i dag?</label>
+            <textarea id="activity-3" data-key="activity-3" placeholder="F.eks. gåtur til jobb, styrketrening, hagearbeid, lek med barna"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="effort-3">Opplevd anstrengelse: <span class="range-value" id="effort-value-3">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="effort-3" data-key="effort-3" data-touched="false">
+            <div class="range-anchors">
+              <span>0 — Ingen anstrengelse</span>
+              <span>10 — Maksimal anstrengelse</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="feeling-3">Hvordan kjentes kroppen etterpå?</label>
+            <input type="text" id="feeling-3" data-key="feeling-3" placeholder="F.eks. opplagt, stiv, energisk, sliten">
+          </div>
+          <div class="field">
+            <label for="helper-3">Hva gjorde det lettere eller vanskeligere i dag?</label>
+            <input type="text" id="helper-3" data-key="helper-3" placeholder="F.eks. hadde tid, dårlig vær, avtale med en venn">
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="4">
+      <summary>Dag 4 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-4">Dato (valgfritt)</label>
+            <input type="date" id="date-4" data-key="date-4">
+          </div>
+          <div class="field">
+            <label for="duration-4">Varighet (minutter)</label>
+            <input type="text" id="duration-4" data-key="duration-4" placeholder="F.eks. 30">
+          </div>
+          <div class="field field-wide">
+            <label for="activity-4">Aktivitet — hva slags bevegelse fikk du i dag?</label>
+            <textarea id="activity-4" data-key="activity-4" placeholder="F.eks. gåtur til jobb, styrketrening, hagearbeid, lek med barna"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="effort-4">Opplevd anstrengelse: <span class="range-value" id="effort-value-4">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="effort-4" data-key="effort-4" data-touched="false">
+            <div class="range-anchors">
+              <span>0 — Ingen anstrengelse</span>
+              <span>10 — Maksimal anstrengelse</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="feeling-4">Hvordan kjentes kroppen etterpå?</label>
+            <input type="text" id="feeling-4" data-key="feeling-4" placeholder="F.eks. opplagt, stiv, energisk, sliten">
+          </div>
+          <div class="field">
+            <label for="helper-4">Hva gjorde det lettere eller vanskeligere i dag?</label>
+            <input type="text" id="helper-4" data-key="helper-4" placeholder="F.eks. hadde tid, dårlig vær, avtale med en venn">
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="5">
+      <summary>Dag 5 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-5">Dato (valgfritt)</label>
+            <input type="date" id="date-5" data-key="date-5">
+          </div>
+          <div class="field">
+            <label for="duration-5">Varighet (minutter)</label>
+            <input type="text" id="duration-5" data-key="duration-5" placeholder="F.eks. 30">
+          </div>
+          <div class="field field-wide">
+            <label for="activity-5">Aktivitet — hva slags bevegelse fikk du i dag?</label>
+            <textarea id="activity-5" data-key="activity-5" placeholder="F.eks. gåtur til jobb, styrketrening, hagearbeid, lek med barna"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="effort-5">Opplevd anstrengelse: <span class="range-value" id="effort-value-5">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="effort-5" data-key="effort-5" data-touched="false">
+            <div class="range-anchors">
+              <span>0 — Ingen anstrengelse</span>
+              <span>10 — Maksimal anstrengelse</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="feeling-5">Hvordan kjentes kroppen etterpå?</label>
+            <input type="text" id="feeling-5" data-key="feeling-5" placeholder="F.eks. opplagt, stiv, energisk, sliten">
+          </div>
+          <div class="field">
+            <label for="helper-5">Hva gjorde det lettere eller vanskeligere i dag?</label>
+            <input type="text" id="helper-5" data-key="helper-5" placeholder="F.eks. hadde tid, dårlig vær, avtale med en venn">
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="6">
+      <summary>Dag 6 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-6">Dato (valgfritt)</label>
+            <input type="date" id="date-6" data-key="date-6">
+          </div>
+          <div class="field">
+            <label for="duration-6">Varighet (minutter)</label>
+            <input type="text" id="duration-6" data-key="duration-6" placeholder="F.eks. 30">
+          </div>
+          <div class="field field-wide">
+            <label for="activity-6">Aktivitet — hva slags bevegelse fikk du i dag?</label>
+            <textarea id="activity-6" data-key="activity-6" placeholder="F.eks. gåtur til jobb, styrketrening, hagearbeid, lek med barna"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="effort-6">Opplevd anstrengelse: <span class="range-value" id="effort-value-6">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="effort-6" data-key="effort-6" data-touched="false">
+            <div class="range-anchors">
+              <span>0 — Ingen anstrengelse</span>
+              <span>10 — Maksimal anstrengelse</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="feeling-6">Hvordan kjentes kroppen etterpå?</label>
+            <input type="text" id="feeling-6" data-key="feeling-6" placeholder="F.eks. opplagt, stiv, energisk, sliten">
+          </div>
+          <div class="field">
+            <label for="helper-6">Hva gjorde det lettere eller vanskeligere i dag?</label>
+            <input type="text" id="helper-6" data-key="helper-6" placeholder="F.eks. hadde tid, dårlig vær, avtale med en venn">
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-day="7">
+      <summary>Dag 7 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="date-7">Dato (valgfritt)</label>
+            <input type="date" id="date-7" data-key="date-7">
+          </div>
+          <div class="field">
+            <label for="duration-7">Varighet (minutter)</label>
+            <input type="text" id="duration-7" data-key="duration-7" placeholder="F.eks. 30">
+          </div>
+          <div class="field field-wide">
+            <label for="activity-7">Aktivitet — hva slags bevegelse fikk du i dag?</label>
+            <textarea id="activity-7" data-key="activity-7" placeholder="F.eks. gåtur til jobb, styrketrening, hagearbeid, lek med barna"></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="effort-7">Opplevd anstrengelse: <span class="range-value" id="effort-value-7">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="effort-7" data-key="effort-7" data-touched="false">
+            <div class="range-anchors">
+              <span>0 — Ingen anstrengelse</span>
+              <span>10 — Maksimal anstrengelse</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="feeling-7">Hvordan kjentes kroppen etterpå?</label>
+            <input type="text" id="feeling-7" data-key="feeling-7" placeholder="F.eks. opplagt, stiv, energisk, sliten">
+          </div>
+          <div class="field">
+            <label for="helper-7">Hva gjorde det lettere eller vanskeligere i dag?</label>
+            <input type="text" id="helper-7" data-key="helper-7" placeholder="F.eks. hadde tid, dårlig vær, avtale med en venn">
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <section class="primer" id="summarySection">
+    <h2>Oppsummering for uken</h2>
+    <div class="stat-grid">
+      <div class="stat-item"><strong id="total-minutes">–</strong>Minutter totalt</div>
+      <div class="stat-item"><strong id="avg-effort">–</strong>Snitt anstrengelse (0–10)</div>
+      <div class="stat-item"><strong id="days-filled">–</strong>Dager registrert</div>
+    </div>
+    <div class="field field-wide">
+      <label for="weekly-reflection">Hvilken dag følte du deg mest i gang — hva bidro til det?</label>
+      <textarea id="weekly-reflection" data-key="weekly-reflection" placeholder="Skriv gjerne fritt her..."></textarea>
+    </div>
+  </section>
+
+  <section class="primer">
+    <h2>Send inn registreringen</h2>
+    <p class="muted-note">
+      Du kan sende registreringen direkte fra din egen e-postapp, eller laste
+      den ned som en tekstfil du selv sender eller tar med til timen. Hvis
+      "Send på e-post" ikke åpner riktig på mobilen din, bruk nedlastingen i
+      stedet.
+    </p>
+    <div class="send-buttons">
+      <button type="button" id="sendEmail">Send på e-post</button>
+      <button type="button" id="downloadText" class="secondary">Last ned som tekstfil</button>
+    </div>
+  </section>
+
+  <footer class="closing">
+    Små skritt, telt bokstavelig.<br>
+    <strong>Dette er overkommelig, og du trenger ikke gjøre det alene.</strong>
+  </footer>
+
+</div>
+
+<script>
+  var DAY_COUNT = 7;
+  var STORAGE_KEY = 'aktivitetsdagbok-data';
+  var RECIPIENT = 'silje.merete.binder@gmail.com';
+
+  function readState() {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return {};
+    try {
+      return JSON.parse(raw) || {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveState() {
+    var data = {};
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      data[el.getAttribute('data-key')] = el.value;
+    });
+    document.querySelectorAll('input[type="range"]').forEach(function (el) {
+      data[el.id + '-touched'] = el.getAttribute('data-touched');
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function loadState() {
+    var data = readState();
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      var key = el.getAttribute('data-key');
+      if (data[key] !== undefined) {
+        el.value = data[key];
+      }
+    });
+    for (var n = 1; n <= DAY_COUNT; n++) {
+      var range = document.getElementById('effort-' + n);
+      var display = document.getElementById('effort-value-' + n);
+      if (!range || !display) continue;
+      if (data[range.id + '-touched'] === 'true') {
+        range.setAttribute('data-touched', 'true');
+        display.textContent = range.value;
+      } else {
+        display.textContent = 'Ikke satt';
+      }
+    }
+  }
+
+  function isRangeTouched(n) {
+    var range = document.getElementById('effort-' + n);
+    return range && range.getAttribute('data-touched') === 'true';
+  }
+
+  function updateSummary() {
+    var effortSum = 0, effortCount = 0;
+    var minutesSum = 0;
+    var daysFilled = 0;
+
+    for (var n = 1; n <= DAY_COUNT; n++) {
+      var hasAnyData = isRangeTouched(n);
+
+      document.querySelectorAll('[data-day="' + n + '"] [data-key]:not([type="range"])').forEach(function (el) {
+        if (el.value && el.value.trim() !== '') hasAnyData = true;
+      });
+      if (hasAnyData) daysFilled++;
+
+      if (isRangeTouched(n)) {
+        var effortVal = parseFloat(document.getElementById('effort-' + n).value);
+        if (!isNaN(effortVal)) {
+          effortSum += effortVal;
+          effortCount++;
+        }
+      }
+
+      var durationVal = parseFloat(document.getElementById('duration-' + n).value);
+      if (!isNaN(durationVal)) {
+        minutesSum += durationVal;
+      }
+    }
+
+    document.getElementById('avg-effort').textContent = effortCount ? (effortSum / effortCount).toFixed(1) : '–';
+    document.getElementById('total-minutes').textContent = minutesSum > 0 ? minutesSum : '–';
+    document.getElementById('days-filled').textContent = daysFilled + ' / ' + DAY_COUNT;
+  }
+
+  function buildSummaryText() {
+    var lines = [];
+    lines.push('Aktivitetsdagbok — 7 dager');
+    lines.push('');
+
+    for (var n = 1; n <= DAY_COUNT; n++) {
+      var date = document.getElementById('date-' + n).value;
+      var duration = document.getElementById('duration-' + n).value;
+      var activity = document.getElementById('activity-' + n).value;
+      var effort = isRangeTouched(n) ? document.getElementById('effort-' + n).value : '';
+      var feeling = document.getElementById('feeling-' + n).value;
+      var helper = document.getElementById('helper-' + n).value;
+
+      lines.push('Dag ' + n + (date ? ' (' + date + ')' : ''));
+      lines.push('  Aktivitet: ' + (activity || '-'));
+      lines.push('  Varighet (min): ' + (duration || '-'));
+      lines.push('  Opplevd anstrengelse (0-10): ' + (effort || '-'));
+      lines.push('  Hvordan kjentes kroppen etterpå: ' + (feeling || '-'));
+      lines.push('  Hva gjorde det lettere/vanskeligere: ' + (helper || '-'));
+      lines.push('');
+    }
+
+    lines.push('Minutter totalt: ' + document.getElementById('total-minutes').textContent);
+    lines.push('Snitt anstrengelse: ' + document.getElementById('avg-effort').textContent);
+    lines.push('Dager registrert: ' + document.getElementById('days-filled').textContent);
+    lines.push('');
+    lines.push('Mest i gang denne uken / hva bidro til det: ' + (document.getElementById('weekly-reflection').value || '-'));
+
+    return lines.join('\n');
+  }
+
+  function sendEmail() {
+    var subject = encodeURIComponent('Aktivitetsdagbok - 7 dager');
+    var body = encodeURIComponent(buildSummaryText());
+    window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
+  }
+
+  function downloadText() {
+    var blob = new Blob([buildSummaryText()], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'aktivitetsdagbok.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    loadState();
+    updateSummary();
+
+    document.body.addEventListener('input', function (e) {
+      if (!e.target.hasAttribute('data-key')) return;
+      if (e.target.type === 'range') {
+        e.target.setAttribute('data-touched', 'true');
+        var n = e.target.id.split('-')[1];
+        var display = document.getElementById('effort-value-' + n);
+        if (display) display.textContent = e.target.value;
+      }
+      saveState();
+      updateSummary();
+    });
+
+    document.getElementById('expandAll').addEventListener('click', function () {
+      document.querySelectorAll('details.topic').forEach(function (d) { d.open = true; });
+    });
+    document.getElementById('collapseAll').addEventListener('click', function () {
+      document.querySelectorAll('details.topic').forEach(function (d) { d.open = false; });
+    });
+    document.getElementById('resetAll').addEventListener('click', function () {
+      if (!confirm('Nullstille all registrert data for uken? Dette kan ikke angres.')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    });
+
+    document.getElementById('sendEmail').addEventListener('click', sendEmail);
+    document.getElementById('downloadText').addEventListener('click', downloadText);
+  });
+</script>
+
+</body>
+</html>
