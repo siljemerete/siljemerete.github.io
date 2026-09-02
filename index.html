@@ -286,37 +286,37 @@
   .invest-section::after {
     content: "";
     position: absolute;
-    width: 420px;
-    height: 420px;
+    width: 380px;
+    height: 380px;
     border-radius: 50%;
-    filter: blur(75px);
-    opacity: 0.5;
+    filter: blur(60px);
+    opacity: 0.65;
     pointer-events: none;
     z-index: 0;
   }
 
   .invest-section::before {
-    background: #2f7fd9;
-    top: -160px;
-    left: -110px;
-    animation: aurora-drift-1 16s ease-in-out infinite alternate;
+    background: #3d8ce0;
+    top: -140px;
+    left: -100px;
+    animation: aurora-drift-1 7s ease-in-out infinite alternate;
   }
 
   .invest-section::after {
-    background: #6fb4e8;
-    bottom: -180px;
-    right: -120px;
-    animation: aurora-drift-2 20s ease-in-out infinite alternate;
+    background: #7fc0f0;
+    bottom: -160px;
+    right: -110px;
+    animation: aurora-drift-2 9s ease-in-out infinite alternate;
   }
 
   @keyframes aurora-drift-1 {
     from { transform: translate(0, 0) scale(1); }
-    to { transform: translate(70px, 50px) scale(1.2); }
+    to { transform: translate(140px, 90px) scale(1.35); }
   }
 
   @keyframes aurora-drift-2 {
     from { transform: translate(0, 0) scale(1); }
-    to { transform: translate(-60px, -40px) scale(1.15); }
+    to { transform: translate(-130px, -80px) scale(1.3); }
   }
 
   @media (prefers-reduced-motion: reduce) {
