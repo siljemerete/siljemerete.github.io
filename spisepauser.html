@@ -1,0 +1,794 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spisepauser og småspising</title>
+<meta name="description" content="Skjema for 3 dagers registrering av spisevindu, mellommåltider og grunnen til å spise mellom hovedmåltidene — fysisk sult eller følelser og vaner.">
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --push: #c9823f;
+    --push-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  header.page-header {
+    margin-bottom: 1.75rem;
+  }
+
+  header.page-header a.back-link {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    margin-bottom: 0.75rem;
+  }
+
+  header.page-header a.back-link:hover {
+    color: var(--accent-dark);
+  }
+
+  header.page-header h1 {
+    font-size: 1.7rem;
+    margin: 0 0 0.35rem;
+    color: var(--accent-dark);
+  }
+
+  header.page-header p.tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  .reminder {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem 1.35rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  section.primer h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer p {
+    margin: 0.6rem 0 0;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .controls button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .controls button:hover {
+    background: var(--accent-soft);
+  }
+
+  .controls button.danger {
+    color: var(--push);
+  }
+
+  .controls button.danger:hover {
+    background: var(--push-soft);
+  }
+
+  .topic {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 0.9rem;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .topic > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1rem 1.25rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .topic > summary::-webkit-details-marker { display: none; }
+
+  .topic > summary .chevron {
+    transition: transform 0.15s ease;
+    color: var(--accent);
+    font-size: 1rem;
+  }
+
+  .topic[open] > summary .chevron {
+    transform: rotate(90deg);
+  }
+
+  .topic > summary:hover {
+    background: var(--accent-soft);
+  }
+
+  .topic-body {
+    padding: 0.25rem 1.25rem 1.25rem;
+  }
+
+  .window-block {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 0.5rem 0 1rem;
+  }
+
+  .window-result {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.9rem;
+    color: var(--accent-dark);
+    font-weight: 600;
+  }
+
+  .snack-block {
+    border-top: 1px solid var(--border);
+    padding: 1rem 0 0.25rem;
+  }
+
+  .snack-block h3 {
+    margin: 0 0 0.5rem;
+    font-size: 0.98rem;
+    color: var(--accent-dark);
+  }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 0.9rem;
+    margin-top: 0.75rem;
+  }
+
+  .field-wide {
+    grid-column: 1 / -1;
+  }
+
+  .field label {
+    display: block;
+    font-weight: 600;
+    color: var(--accent-dark);
+    margin-bottom: 0.3rem;
+    font-size: 0.88rem;
+  }
+
+  .field input[type="text"],
+  .field input[type="date"],
+  .field input[type="time"],
+  .field select,
+  .field textarea {
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .field textarea {
+    min-height: 56px;
+    resize: vertical;
+  }
+
+  .day-date {
+    max-width: 220px;
+    margin-bottom: 0.5rem;
+  }
+
+  .time-field {
+    max-width: 160px;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.6rem;
+    margin: 0.75rem 0 1rem;
+  }
+
+  .stat-item {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.7rem 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  .stat-item strong {
+    display: block;
+    color: var(--accent-dark);
+    font-size: 1.4rem;
+  }
+
+  .send-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .send-buttons button {
+    font-size: 0.92rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .send-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .muted-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  footer.closing {
+    margin-top: 1.75rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong {
+    color: var(--accent-dark);
+  }
+
+  body.gate-locked .wrap,
+  body.gate-locked footer.closing {
+    display: none;
+  }
+
+  .gate-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 100;
+  }
+
+  body.gate-locked .gate-overlay {
+    display: flex;
+  }
+
+  .gate-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 2rem 1.75rem;
+    max-width: 340px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .gate-box h1 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    color: var(--accent-dark);
+  }
+
+  .gate-box p {
+    margin: 0 0 1rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .gate-box input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    font-family: inherit;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  .gate-box input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .gate-box button {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .gate-box button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .gate-error {
+    display: none;
+    color: var(--push);
+    font-size: 0.85rem;
+    margin: 0.7rem 0 0;
+  }
+
+  .gate-contact {
+    margin-top: 0.9rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .gate-contact a {
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .gate-contact a:hover {
+    text-decoration: underline;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .controls, .send-buttons, .muted-note, header.page-header a.back-link { display: none; }
+    .topic { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body class="gate-locked">
+
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box">
+    <h1>Tilgang til verktøyet</h1>
+    <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
+    <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
+    <button type="button" id="gateSubmit">Lås opp</button>
+    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20Kosthold-verkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var GATE_KEY = 'gate-kosthold-unlocked';
+    var CODE = 'nyevaner';
+
+    function unlock() {
+      localStorage.setItem(GATE_KEY, 'true');
+      document.body.classList.remove('gate-locked');
+    }
+
+    if (localStorage.getItem(GATE_KEY) === 'true') {
+      unlock();
+    }
+
+    function trySubmit() {
+      var input = document.getElementById('gateCode');
+      var error = document.getElementById('gateError');
+      if (input.value.trim().toLowerCase() === CODE) {
+        error.style.display = 'none';
+        unlock();
+      } else {
+        error.style.display = 'block';
+      }
+    }
+
+    document.getElementById('gateSubmit').addEventListener('click', trySubmit);
+    document.getElementById('gateCode').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') trySubmit();
+    });
+  })();
+</script>
+
+<div class="wrap">
+
+  <header class="page-header">
+    <a class="back-link" href="index.html">← Til forsiden</a>
+    <h1>Spisepauser og småspising</h1>
+    <p class="tagline">Registrer spisevinduet ditt og grunnen til mellommåltider, tre dager på rad</p>
+    <div class="reminder">
+      Noter tidspunktet for det første og det siste du spiser hver dag — det
+      gir spisevinduet ditt. Noter også eventuelle mellommåltider, og om de
+      kom av fysisk sult, eller av noe annet som kjedsomhet, stress, sosialt
+      press eller ren vane. Målet er ikke faste eller strenge regler, men mer
+      bevissthet rundt pausene mellom måltidene. Alt du legger inn lagres i
+      denne nettleseren, så du kan lukke siden og fortsette senere. <strong>Det
+      er helt greit om noen felter står tomme.</strong>
+    </div>
+  </header>
+
+  <div class="controls">
+    <button type="button" id="expandAll">Vis alle</button>
+    <button type="button" id="collapseAll">Skjul alle</button>
+    <button type="button" id="resetAll" class="danger">Nullstill alt</button>
+  </div>
+
+  <div id="days"></div>
+
+  <section class="primer" id="summarySection">
+    <h2>Oppsummering</h2>
+    <div class="stat-grid">
+      <div class="stat-item"><strong id="avg-window">–</strong>Snitt spisevindu (timer)</div>
+      <div class="stat-item"><strong id="snack-count">–</strong>Mellommåltider registrert</div>
+      <div class="stat-item"><strong id="pct-non-hunger">–</strong>Andel ikke drevet av sult</div>
+    </div>
+    <div class="field field-wide">
+      <label for="sluttrefleksjon">Hva la du merke til om pausene mellom måltidene dine i løpet av disse tre dagene?</label>
+      <textarea id="sluttrefleksjon" data-key="sluttrefleksjon" placeholder="Skriv gjerne fritt her..."></textarea>
+    </div>
+  </section>
+
+  <section class="primer">
+    <h2>Send inn registreringen</h2>
+    <p class="muted-note">
+      Du kan sende registreringen direkte fra din egen e-postapp, eller laste
+      den ned som en tekstfil du selv sender eller tar med til timen. Hvis
+      "Send på e-post" ikke åpner riktig på mobilen din, bruk nedlastingen i
+      stedet.
+    </p>
+    <div class="send-buttons">
+      <button type="button" id="sendEmail">Send på e-post</button>
+      <button type="button" id="downloadText" class="secondary">Last ned som tekstfil</button>
+    </div>
+  </section>
+
+  <footer class="closing">
+    Ingen fasit — bare et bilde av pausene dine.<br>
+    <strong>Du trenger ikke gjøre det alene.</strong>
+  </footer>
+
+</div>
+
+<script>
+  var DAY_COUNT = 3;
+  var SNACK_SLOTS = 3;
+  var STORAGE_KEY = 'spisepauser-data';
+  var RECIPIENT = 'silje.merete.binder@gmail.com';
+
+  var REASONS = {
+    sult: 'Fysisk sult',
+    kjedsomhet: 'Kjedsomhet',
+    stress: 'Stress',
+    sosialt: 'Sosialt/vane',
+    annet: 'Annet'
+  };
+
+  function buildSnackBlock(n, s) {
+    var idTid = 'd' + n + '-snack' + s + '-tid';
+    var idHva = 'd' + n + '-snack' + s + '-hva';
+    var idGrunn = 'd' + n + '-snack' + s + '-grunn';
+
+    return (
+      '<div class="snack-block" data-snack="' + s + '">' +
+        '<h3>Mellommåltid ' + s + '</h3>' +
+        '<div class="field-grid">' +
+          '<div class="field time-field">' +
+            '<label for="' + idTid + '">Tidspunkt</label>' +
+            '<input type="time" id="' + idTid + '" data-key="' + idTid + '">' +
+          '</div>' +
+          '<div class="field field-wide">' +
+            '<label for="' + idHva + '">Hva spiste eller drakk du?</label>' +
+            '<input type="text" id="' + idHva + '" data-key="' + idHva + '" placeholder="F.eks. en håndfull nøtter">' +
+          '</div>' +
+          '<div class="field field-wide">' +
+            '<label for="' + idGrunn + '">Hva var grunnen?</label>' +
+            '<select id="' + idGrunn + '" data-key="' + idGrunn + '">' +
+              '<option value="">Velg...</option>' +
+              '<option value="sult">' + REASONS.sult + '</option>' +
+              '<option value="kjedsomhet">' + REASONS.kjedsomhet + '</option>' +
+              '<option value="stress">' + REASONS.stress + '</option>' +
+              '<option value="sosialt">' + REASONS.sosialt + '</option>' +
+              '<option value="annet">' + REASONS.annet + '</option>' +
+            '</select>' +
+          '</div>' +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  function buildDayMarkup(n) {
+    var idForste = 'd' + n + '-forste';
+    var idSiste = 'd' + n + '-siste';
+
+    var snacksHtml = '';
+    for (var s = 1; s <= SNACK_SLOTS; s++) snacksHtml += buildSnackBlock(n, s);
+
+    return (
+      '<details class="topic" data-day="' + n + '">' +
+        '<summary>Dag ' + n + ' <span class="chevron">▸</span></summary>' +
+        '<div class="topic-body">' +
+          '<div class="field day-date">' +
+            '<label for="date-' + n + '">Dato (valgfritt)</label>' +
+            '<input type="date" id="date-' + n + '" data-key="date-' + n + '">' +
+          '</div>' +
+          '<div class="window-block">' +
+            '<div class="field time-field">' +
+              '<label for="' + idForste + '">Første måltid</label>' +
+              '<input type="time" id="' + idForste + '" data-key="' + idForste + '">' +
+            '</div>' +
+            '<div class="field time-field">' +
+              '<label for="' + idSiste + '">Siste måltid</label>' +
+              '<input type="time" id="' + idSiste + '" data-key="' + idSiste + '">' +
+            '</div>' +
+            '<div class="window-result" id="window-result-' + n + '">Spisevindu: –</div>' +
+          '</div>' +
+          snacksHtml +
+          '<div class="snack-block">' +
+            '<div class="field field-wide">' +
+              '<label for="refleksjon-' + n + '">Noe som pekte seg ut i dag — bra eller krevende?</label>' +
+              '<textarea id="refleksjon-' + n + '" data-key="refleksjon-' + n + '" placeholder="Skriv gjerne fritt her..."></textarea>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</details>'
+    );
+  }
+
+  function renderDays() {
+    var html = '';
+    for (var n = 1; n <= DAY_COUNT; n++) html += buildDayMarkup(n);
+    document.getElementById('days').innerHTML = html;
+  }
+
+  function readState() {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return {};
+    try {
+      return JSON.parse(raw) || {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveState() {
+    var data = {};
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      data[el.getAttribute('data-key')] = el.value;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function loadState() {
+    var data = readState();
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      var key = el.getAttribute('data-key');
+      if (data[key] !== undefined) el.value = data[key];
+    });
+  }
+
+  function timeToHours(value) {
+    if (!value) return null;
+    var parts = value.split(':');
+    if (parts.length < 2) return null;
+    var h = parseInt(parts[0], 10);
+    var m = parseInt(parts[1], 10);
+    if (isNaN(h) || isNaN(m)) return null;
+    return h + m / 60;
+  }
+
+  function computeWindow(n) {
+    var forste = timeToHours(document.getElementById('d' + n + '-forste').value);
+    var siste = timeToHours(document.getElementById('d' + n + '-siste').value);
+    var el = document.getElementById('window-result-' + n);
+    if (forste === null || siste === null) {
+      el.textContent = 'Spisevindu: –';
+      return null;
+    }
+    var diff = siste - forste;
+    if (diff < 0) diff += 24;
+    el.textContent = 'Spisevindu: ' + diff.toFixed(1) + ' t';
+    return diff;
+  }
+
+  function updateSummary() {
+    var windowSum = 0, windowCount = 0;
+    var snackCount = 0;
+    var nonHungerCount = 0, reasonCount = 0;
+
+    for (var n = 1; n <= DAY_COUNT; n++) {
+      var w = computeWindow(n);
+      if (w !== null) { windowSum += w; windowCount++; }
+
+      for (var s = 1; s <= SNACK_SLOTS; s++) {
+        var idTid = 'd' + n + '-snack' + s + '-tid';
+        var idHva = 'd' + n + '-snack' + s + '-hva';
+        var idGrunn = 'd' + n + '-snack' + s + '-grunn';
+
+        var tid = document.getElementById(idTid).value;
+        var hva = document.getElementById(idHva).value;
+        var grunn = document.getElementById(idGrunn).value;
+
+        if (tid || (hva && hva.trim() !== '') || grunn) snackCount++;
+        if (grunn) {
+          reasonCount++;
+          if (grunn !== 'sult') nonHungerCount++;
+        }
+      }
+    }
+
+    document.getElementById('avg-window').textContent = windowCount ? (windowSum / windowCount).toFixed(1) + ' t' : '–';
+    document.getElementById('snack-count').textContent = snackCount;
+    document.getElementById('pct-non-hunger').textContent = reasonCount ? Math.round((nonHungerCount / reasonCount) * 100) + ' %' : '–';
+  }
+
+  function buildSummaryText() {
+    var lines = [];
+    lines.push('Spisepauser og småspising — 3 dager');
+    lines.push('');
+
+    for (var n = 1; n <= DAY_COUNT; n++) {
+      var date = document.getElementById('date-' + n).value;
+      lines.push('Dag ' + n + (date ? ' (' + date + ')' : ''));
+      lines.push('  Første måltid: ' + (document.getElementById('d' + n + '-forste').value || '-'));
+      lines.push('  Siste måltid: ' + (document.getElementById('d' + n + '-siste').value || '-'));
+      lines.push('  ' + document.getElementById('window-result-' + n).textContent);
+
+      for (var s = 1; s <= SNACK_SLOTS; s++) {
+        var tid = document.getElementById('d' + n + '-snack' + s + '-tid').value;
+        var hva = document.getElementById('d' + n + '-snack' + s + '-hva').value;
+        var grunn = document.getElementById('d' + n + '-snack' + s + '-grunn').value;
+        if (!tid && !hva && !grunn) continue;
+        lines.push('  Mellommåltid ' + s + ': kl. ' + (tid || '-') + ' — ' + (hva || '-') + ' — grunn: ' + (REASONS[grunn] || '-'));
+      }
+
+      lines.push('  Dagsnotat: ' + (document.getElementById('refleksjon-' + n).value || '-'));
+      lines.push('');
+    }
+
+    lines.push('Snitt spisevindu: ' + document.getElementById('avg-window').textContent);
+    lines.push('Mellommåltider registrert: ' + document.getElementById('snack-count').textContent);
+    lines.push('Andel mellommåltider ikke drevet av sult: ' + document.getElementById('pct-non-hunger').textContent);
+    lines.push('');
+    lines.push('Refleksjon over tre dager: ' + (document.getElementById('sluttrefleksjon').value || '-'));
+
+    return lines.join('\n');
+  }
+
+  function sendEmail() {
+    var subject = encodeURIComponent('Spisepauser og smaspising - 3 dager');
+    var body = encodeURIComponent(buildSummaryText());
+    window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
+  }
+
+  function downloadText() {
+    var blob = new Blob([buildSummaryText()], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'spisepauser.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    renderDays();
+    loadState();
+    updateSummary();
+
+    document.getElementById('days').querySelectorAll('details.topic').forEach(function (d, i) {
+      if (i === 0) d.open = true;
+    });
+
+    document.body.addEventListener('input', function (e) {
+      if (!e.target.hasAttribute('data-key')) return;
+      saveState();
+      updateSummary();
+    });
+    document.body.addEventListener('change', function (e) {
+      if (!e.target.hasAttribute('data-key')) return;
+      saveState();
+      updateSummary();
+    });
+
+    document.getElementById('expandAll').addEventListener('click', function () {
+      document.querySelectorAll('details.topic').forEach(function (d) { d.open = true; });
+    });
+    document.getElementById('collapseAll').addEventListener('click', function () {
+      document.querySelectorAll('details.topic').forEach(function (d) { d.open = false; });
+    });
+    document.getElementById('resetAll').addEventListener('click', function () {
+      if (!confirm('Nullstille all registrert data om spisepauser? Dette kan ikke angres.')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    });
+
+    document.getElementById('sendEmail').addEventListener('click', sendEmail);
+    document.getElementById('downloadText').addEventListener('click', downloadText);
+  });
+</script>
+
+</body>
+</html>

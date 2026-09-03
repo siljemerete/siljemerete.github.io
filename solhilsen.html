@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solhilsen — Silje Merete SMART Helseveiledning</title>
+<meta name="description" content="Den klassiske solhilsen (Surya Namaskar) fra yoga, med forklaring og en illustrert oversikt over alle 12 øvelsene i sirkel rundt sola.">
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --warn: #c9823f;
+    --warn-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--accent-soft), var(--bg));
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .hero h1 {
+    margin: 0 0 0.75rem;
+    font-size: 1.8rem;
+    color: var(--accent-dark);
+  }
+
+  .hero p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 46ch;
+    margin-inline: auto;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem 2rem;
+    margin: 2rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .card h2 {
+    margin: 0 0 0.6rem;
+    color: var(--accent-dark);
+    font-size: 1.3rem;
+  }
+
+  .card > p.desc {
+    margin: 0 0 1.25rem;
+    color: var(--muted);
+  }
+
+  .card p {
+    margin: 0 0 0.9rem;
+  }
+
+  .card p:last-child {
+    margin-bottom: 0;
+  }
+
+  .benefit-list {
+    margin: 0.9rem 0 0;
+    padding-left: 1.25rem;
+    color: var(--ink);
+  }
+
+  .benefit-list li {
+    margin: 0 0 0.5rem;
+  }
+
+  .benefit-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .personal-note {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin: 0 0 1.5rem;
+    font-style: italic;
+    color: var(--accent-dark);
+  }
+
+  .personal-note p {
+    margin: 0;
+  }
+
+  .personal-note .signature {
+    display: block;
+    margin-top: 0.6rem;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .sun-wheel-image {
+    display: block;
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+  }
+
+  .caution-card {
+    background: var(--warn-soft);
+    border: 1px solid #ecd3ac;
+    border-left: 4px solid var(--warn);
+  }
+
+  .caution-card h2 {
+    color: #8a5a25;
+  }
+
+  .caution-list {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: var(--ink);
+  }
+
+  .caution-list li {
+    margin: 0 0 0.6rem;
+  }
+
+  .caution-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .home-link {
+    display: block;
+    text-align: center;
+    margin: 1rem 0 3rem;
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .home-link:hover { text-decoration: underline; }
+
+  footer.closing {
+    margin: 2rem 0 1rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong { color: var(--accent-dark); }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Solhilsen</h1>
+    <p>Den klassiske solhilsen fra yoga (Surya Namaskar) — en flytende sekvens av 12 øvelser knyttet sammen med pusten.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section class="card">
+    <h2>Hva er en solhilsen?</h2>
+    <div class="personal-note">
+      <p>Solhilsen er min personlige favoritt øvelse. Jeg kjenner hvordan hele kroppen min våkner når jeg beveger meg gjennom den — pust for pust, ledd for ledd. Å få gjøre den utendørs tidlig en morgen, med sola varmende rett imot, oppleves for meg som noe av det mest helende jeg vet.</p>
+      <span class="signature">— Silje Merete</span>
+    </div>
+    <p>Solhilsen er en fast rekke med 12 yogastillinger som flyter over i hverandre, der hver bevegelse følger et inn- eller utpust. Tradisjonelt ble den gjort vendt mot solen om morgenen, som en måte å hilse dagen velkommen på — derav navnet.</p>
+    <p>Sekvensen veksler mellom å strekke og bøye ryggsøylen, noe som varmer opp og mobiliserer hele kroppen fra topp til tå. Den brukes ofte som oppvarming før annen yoga, eller som en kort praksis i seg selv.</p>
+    <p><strong>Hva gjør den for kroppen?</strong></p>
+    <ul class="benefit-list">
+      <li>Varmer opp muskulaturen og øker sirkulasjonen og pulsen.</li>
+      <li>Mobiliserer og smører ryggsøylen gjennom vekslende bøy og strekk.</li>
+      <li>Bedrer bevegelighet i skuldre, hofter, hamstrings og legger.</li>
+      <li>Bygger stille styrke i kjerne, armer og bein gjennom stillinger som planke og oppadgående hund.</li>
+      <li>Roer og samler tankene, siden hver bevegelse er koblet til pusten.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Solhilsen — Surya Namaskar</h2>
+    <p class="desc">Stillingene i solhilsen, illustrert rundt sola — flere av dem gjøres to ganger i sekvensen, speilvendt på hver side. Følg pusten gjennom hver stilling og gjenta gjerne 3–5 runder.</p>
+    <img class="sun-wheel-image" src="images/solhilsen-surya-namaskar-v2.jpg" alt="Surya Namaskar — stillingene i solhilsen illustrert i sirkel rundt en sol, med norsk navn under hver stilling.">
+  </section>
+
+  <section class="card caution-card">
+    <h2>Viktige forholdsregler</h2>
+    <ul class="caution-list">
+      <li>Beveg deg rolig og innenfor det som er smertefritt — sikt på en behagelig strekk og stø pust, ikke smerte eller andpustenhet.</li>
+      <li>Gå ned på knærne i planke og åtte punkts hilsen dersom håndledd, skuldre eller kjerne trenger avlastning.</li>
+      <li>Vær forsiktig eller ta kontakt med lege først ved høyt blodtrykk, svimmelhet, graviditet eller skader i rygg, håndledd eller skuldre.</li>
+    </ul>
+  </section>
+
+  <a class="home-link" href="index.html">Se hjemmesiden min →</a>
+
+</div>
+
+<footer class="closing">
+  Små skritt. Dine mål, ditt tempo.<br>
+  <strong>Du trenger ikke gjøre det alene.</strong>
+</footer>
+
+</body>
+</html>

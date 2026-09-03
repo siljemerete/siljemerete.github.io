@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tennisball under foten — Silje Merete SMART Helseveiledning</title>
+<meta name="description" content="Øvelse for bindevev og fotsåle: rull og tråkk på en tennisball under foten for å løsne opp stram muskulatur og forebygge hælsmerter.">
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --warn: #c9823f;
+    --warn-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--accent-soft), var(--bg));
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .hero h1 {
+    margin: 0 0 0.75rem;
+    font-size: 1.8rem;
+    color: var(--accent-dark);
+  }
+
+  .hero p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 46ch;
+    margin-inline: auto;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem 2rem;
+    margin: 2rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .card h2 {
+    margin: 0 0 0.6rem;
+    color: var(--accent-dark);
+    font-size: 1.3rem;
+  }
+
+  .card > p.desc {
+    margin: 0 0 1.25rem;
+    color: var(--muted);
+  }
+
+  .step-list {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+
+  .step-list li {
+    margin: 0 0 0.8rem;
+  }
+
+  .step-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .step-list strong {
+    color: var(--accent-dark);
+  }
+
+  .personal-note {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin: 0 0 1.25rem;
+    font-style: italic;
+    color: var(--accent-dark);
+  }
+
+  .personal-note p {
+    margin: 0;
+  }
+
+  .personal-note .signature {
+    display: block;
+    margin-top: 0.6rem;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .timer-foot-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .foot-button {
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.55rem 1.2rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .foot-button.active {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .timer-display {
+    text-align: center;
+  }
+
+  .timer-clock {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+
+  .timer-progress {
+    width: 100%;
+    height: 8px;
+    background: var(--accent-soft);
+    border-radius: 999px;
+    margin: 0.9rem 0 1rem;
+    overflow: hidden;
+  }
+
+  .timer-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    transition: width 1s linear;
+  }
+
+  .timer-phrase {
+    min-height: 1.6em;
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 1.05rem;
+  }
+
+  .timer-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.1rem;
+  }
+
+  .timer-buttons button {
+    font-size: 0.95rem;
+    padding: 0.65rem 1.3rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .timer-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .timer-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .timer-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .timer-buttons button:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  .caution-card {
+    background: var(--warn-soft);
+    border: 1px solid #ecd3ac;
+    border-left: 4px solid var(--warn);
+  }
+
+  .caution-card h2 {
+    color: #8a5a25;
+  }
+
+  .caution-list {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: var(--ink);
+  }
+
+  .caution-list li {
+    margin: 0 0 0.6rem;
+  }
+
+  .caution-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .home-link {
+    display: block;
+    text-align: center;
+    margin: 1rem 0 3rem;
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .home-link:hover { text-decoration: underline; }
+
+  footer.closing {
+    margin: 2rem 0 1rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong { color: var(--accent-dark); }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Tennisball under foten</h1>
+    <p>En enkel egenmassasje for bindevev og fotsåle — bra for stram muskulatur og til forebygging av hælsmerter som plantar fasciitt.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section class="card">
+    <h2>Slik gjør du øvelsen</h2>
+    <div class="personal-note">
+      <p>Jeg opplever at denne øvelsen alltid gir en tydelig lettelse. Foten kjennes mykere etterpå, jeg står dypere og mer jordet, og kjenner hvordan spenninger slipper tak.</p>
+      <span class="signature">— Silje Merete</span>
+    </div>
+    <p class="desc">Bruk en tennisball.</p>
+    <ol class="step-list">
+      <li><strong>Sitt eller stå:</strong> Start gjerne sittende på en stol for å kontrollere trykket. Når du er klar for mer belastning, kan du reise deg opp og stå.</li>
+      <li><strong>Finn triggerpunkter:</strong> Plasser tennisballen under foten og rull den sakte frem og tilbake fra hælen og ut mot tærne.</li>
+      <li><strong>Tråkk ned:</strong> Når du finner et ømt punkt (et "knutepunkt" eller triggerpunkt), stopper du opp. Legg forsiktig mer vekt på foten slik at du tråkker ballen godt inn i det ømme punktet.</li>
+      <li><strong>Hold trykket:</strong> Hold trykket på det ømme punktet i 30–60 sekunder mens du puster rolig, helt til du kjenner at smerten eller spenningen begynner å slippe taket. Rull deretter ballen videre under foten til du finner et nytt ømt punkt, og gjenta.</li>
+      <li><strong>Tid:</strong> Gjør dette i rundt 4–5 minutter per fot.</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>Tidtaker per fot</h2>
+    <div class="timer-foot-toggle">
+      <button type="button" class="foot-button active" id="foot-venstre">Venstre fot</button>
+      <button type="button" class="foot-button" id="foot-hoyre">Høyre fot</button>
+    </div>
+    <div class="timer-display">
+      <div class="timer-clock" id="timerClock">05:00</div>
+      <div class="timer-progress">
+        <div class="timer-progress-bar" id="timerProgressBar"></div>
+      </div>
+      <p class="timer-phrase" id="timerPhrase">Trykk start når du er klar</p>
+    </div>
+    <div class="timer-buttons">
+      <button type="button" id="timerStart">Start</button>
+      <button type="button" id="timerPause" class="secondary" disabled>Pause</button>
+      <button type="button" id="timerReset" class="secondary">Nullstill</button>
+    </div>
+  </section>
+
+  <section class="card caution-card">
+    <h2>Viktige forholdsregler</h2>
+    <ul class="caution-list">
+      <li><strong>"Deilig-vondt":</strong> Det skal være et intenst, men tålbart trykk. Hvis smerten gjør at du spenner deg i resten av kroppen, tråkker du for hardt.</li>
+      <li><strong>Unngå akutt betennelse:</strong> Hvis du har en skarp, stikkende og veldig akutt smerte under foten (for eksempel hvis det gjør ekstremt vondt de første skrittene om morgenen), bør du være forsiktig med for hardt direkte trykk. Ta gjerne kontakt med meg eller lege hvis du er usikker.</li>
+    </ul>
+  </section>
+
+  <a class="home-link" href="index.html">Se hjemmesiden min →</a>
+
+</div>
+
+<footer class="closing">
+  Små skritt. Dine mål, ditt tempo.<br>
+  <strong>Du trenger ikke gjøre det alene.</strong>
+</footer>
+
+<script>
+  (function () {
+    var TOTAL_SECONDS = 300;
+    var remaining = TOTAL_SECONDS;
+    var timerInterval = null;
+    var timerRunning = false;
+    var currentFoot = 'venstre';
+
+    var clockEl = document.getElementById('timerClock');
+    var progressBarEl = document.getElementById('timerProgressBar');
+    var phraseEl = document.getElementById('timerPhrase');
+    var startBtn = document.getElementById('timerStart');
+    var pauseBtn = document.getElementById('timerPause');
+    var resetBtn = document.getElementById('timerReset');
+    var footVenstreBtn = document.getElementById('foot-venstre');
+    var footHoyreBtn = document.getElementById('foot-hoyre');
+
+    function formatClock(seconds) {
+      var m = Math.floor(seconds / 60);
+      var s = seconds % 60;
+      return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    }
+
+    function beep() {
+      try {
+        var ctx = new (window.AudioContext || window.webkitAudioContext)();
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.frequency.value = 660;
+        gain.gain.setValueAtTime(0.001, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.25, ctx.currentTime + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.5);
+      } catch (e) { /* ignore if audio unavailable */ }
+    }
+
+    function updateDisplay() {
+      clockEl.textContent = formatClock(remaining);
+      var elapsed = TOTAL_SECONDS - remaining;
+      progressBarEl.style.width = ((elapsed / TOTAL_SECONDS) * 100) + '%';
+    }
+
+    function otherFootLabel() {
+      return currentFoot === 'venstre' ? 'høyre fot' : 'venstre fot';
+    }
+
+    function tick() {
+      remaining -= 1;
+      updateDisplay();
+      if (remaining <= 0) {
+        stopTimer();
+        phraseEl.textContent = 'Ferdig! Bytt til ' + otherFootLabel() + ' og trykk start igjen.';
+        beep();
+      }
+    }
+
+    function startTimer() {
+      if (timerRunning || remaining <= 0) return;
+      timerRunning = true;
+      startBtn.disabled = true;
+      pauseBtn.disabled = false;
+      footVenstreBtn.disabled = true;
+      footHoyreBtn.disabled = true;
+      phraseEl.textContent = 'Rull og tråkk rolig på ballen';
+      timerInterval = setInterval(tick, 1000);
+    }
+
+    function stopTimer() {
+      timerRunning = false;
+      clearInterval(timerInterval);
+      startBtn.disabled = false;
+      pauseBtn.disabled = true;
+      footVenstreBtn.disabled = false;
+      footHoyreBtn.disabled = false;
+    }
+
+    function pauseTimer() {
+      stopTimer();
+      phraseEl.textContent = 'Pause';
+    }
+
+    function resetTimer() {
+      stopTimer();
+      remaining = TOTAL_SECONDS;
+      updateDisplay();
+      phraseEl.textContent = 'Trykk start når du er klar';
+    }
+
+    function setFoot(foot) {
+      currentFoot = foot;
+      footVenstreBtn.classList.toggle('active', foot === 'venstre');
+      footHoyreBtn.classList.toggle('active', foot === 'hoyre');
+      resetTimer();
+    }
+
+    startBtn.addEventListener('click', startTimer);
+    pauseBtn.addEventListener('click', pauseTimer);
+    resetBtn.addEventListener('click', resetTimer);
+    footVenstreBtn.addEventListener('click', function () { setFoot('venstre'); });
+    footHoyreBtn.addEventListener('click', function () { setFoot('hoyre'); });
+
+    updateDisplay();
+  })();
+</script>
+
+</body>
+</html>

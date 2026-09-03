@@ -10,17 +10,17 @@
 <meta property="og:type" content="website">
 <style>
   :root {
-    --bg: #f6f8f7;
+    --bg: #f4f8fb;
     --card: #ffffff;
-    --ink: #1f2d2b;
-    --muted: #56655f;
-    --accent: #2f7d6b;
-    --accent-dark: #235c50;
-    --accent-soft: #e3f1ec;
-    --push: #b96b2a;
-    --push-soft: #fbeee0;
-    --border: #dfe7e3;
-    --shadow: 0 1px 3px rgba(31, 45, 43, 0.08), 0 1px 2px rgba(31, 45, 43, 0.06);
+    --ink: #16283a;
+    --muted: #55697c;
+    --accent: #386ba0;
+    --accent-dark: #1f3c5c;
+    --accent-soft: #e7f0f8;
+    --push: #c9823f;
+    --push-soft: #faf1e2;
+    --border: #d6e3ee;
+    --shadow: 0 1px 3px rgba(22, 40, 58, 0.08), 0 1px 2px rgba(22, 40, 58, 0.06);
   }
 
   * { box-sizing: border-box; }
@@ -95,57 +95,121 @@
 
   /* Hero */
   .hero {
-    background: linear-gradient(135deg, var(--accent-soft), var(--bg));
-    padding: 3rem 0 2.5rem;
-    border-bottom: 1px solid var(--border);
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: clamp(440px, 82vh, 760px);
+    background-image:
+      linear-gradient(180deg, rgba(15, 28, 45, 0.12) 0%, rgba(15, 28, 45, 0.32) 55%, rgba(15, 28, 45, 0.82) 100%),
+      url('images/hero-havet.jpg');
+    background-size: cover;
+    background-position: center 38%;
+    overflow: hidden;
+    padding: 3rem 0 4.5rem;
   }
 
-  .hero-grid {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2.5rem;
-    flex-wrap: wrap-reverse;
+  .hero-shine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.55) 42%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0.55) 58%, transparent 80%);
+    background-size: 300% 300%;
+    mix-blend-mode: overlay;
+    animation: hero-shine-sweep 12s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes hero-shine-sweep {
+    0% { background-position: 0% 10%; }
+    50% { background-position: 100% 90%; }
+    100% { background-position: 0% 10%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-shine { animation: none; }
+  }
+
+  .hero-wave {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    line-height: 0;
+  }
+
+  .hero-wave svg {
+    display: block;
+    width: 100%;
+    height: 56px;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
     text-align: left;
   }
 
-  .hero-text {
-    flex: 1 1 320px;
-    max-width: 46ch;
+  .hero-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.1rem;
   }
 
-  .hero-photo {
-    flex: 0 0 auto;
-    width: 220px;
-    height: 280px;
-    object-fit: cover;
-    border-radius: 16px;
-    border: 4px solid #fff;
+  .stat-badge {
+    display: inline-flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 14px;
+    padding: 0.55rem 0.9rem;
+    text-align: center;
     box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+
+  .stat-number {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--accent-dark);
+  }
+
+  .stat-label {
+    margin: 0.2rem 0 0;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
   }
 
   .hero h1 {
     margin: 0 0 0.5rem;
-    font-size: 2rem;
-    color: var(--accent-dark);
+    font-size: 2.25rem;
+    line-height: 1.15;
+    color: #fff;
+    text-shadow: 0 2px 16px rgba(10, 22, 36, 0.45);
+    text-wrap: balance;
   }
 
   .hero p.tagline {
     margin: 0 0 0.75rem;
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 1px 10px rgba(10, 22, 36, 0.4);
     font-size: 1.08rem;
   }
 
   .hero p.value-prop {
     margin: 0 0 1.5rem;
-    color: var(--accent-dark);
+    color: #fff;
+    text-shadow: 0 1px 10px rgba(10, 22, 36, 0.4);
     font-weight: 600;
     font-size: 1rem;
   }
 
   @media (max-width: 640px) {
-    .hero-grid { flex-direction: column-reverse; text-align: center; }
-    .hero-text { max-width: 100%; }
+    .hero-content { text-align: center; max-width: 100%; }
   }
 
   .cta-button {
@@ -170,16 +234,40 @@
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 1.5rem 1.5rem 1.75rem;
-    margin: 1.75rem 0;
+    padding: 1.85rem 1.85rem 2.1rem;
+    margin: 2.25rem 0;
     box-shadow: var(--shadow);
     scroll-margin-top: 5rem;
+  }
+
+  .card-section:nth-of-type(even):not(.invest-section) {
+    background: var(--accent-soft);
+  }
+
+  .card-section:nth-of-type(even):not(.invest-section) .service-card {
+    background: #fff;
+  }
+
+  .kicker {
+    margin: 0 0 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .invest-section .kicker,
+  .hero .kicker {
+    color: var(--accent-soft);
   }
 
   .card-section h2 {
     margin-top: 0;
     color: var(--accent-dark);
-    font-size: 1.3rem;
+    font-size: 1.5rem;
+    line-height: 1.25;
+    text-wrap: balance;
   }
 
   .card-section p {
@@ -196,9 +284,60 @@
   }
 
   .invest-section {
+    position: relative;
+    overflow: hidden;
     background: var(--accent-dark);
     border-color: var(--accent-dark);
     text-align: center;
+  }
+
+  .invest-section > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .invest-section::before,
+  .invest-section::after {
+    content: "";
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.65;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .invest-section::before {
+    background: #3d8ce0;
+    top: -140px;
+    left: -100px;
+    animation: aurora-drift-1 7s ease-in-out infinite alternate;
+  }
+
+  .invest-section::after {
+    background: #7fc0f0;
+    bottom: -160px;
+    right: -110px;
+    animation: aurora-drift-2 9s ease-in-out infinite alternate;
+  }
+
+  @keyframes aurora-drift-1 {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(140px, 90px) scale(1.35); }
+  }
+
+  @keyframes aurora-drift-2 {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(-130px, -80px) scale(1.3); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .invest-section::before,
+    .invest-section::after {
+      animation: none;
+    }
   }
 
   .invest-section h2,
@@ -289,8 +428,79 @@
     flex: 1 1 320px;
   }
 
+  .credential-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
+    padding: 0.6rem 1rem;
+    background: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.88rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .credential-badge:hover {
+    border-color: var(--accent);
+    box-shadow: var(--shadow);
+  }
+
+  .credential-badge strong {
+    color: var(--accent-dark);
+  }
+
   .flower-icon {
     vertical-align: -3px;
+  }
+
+  .edu-toggle {
+    margin-top: 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .edu-toggle > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.85rem 1.1rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .edu-toggle > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .edu-toggle > summary .chevron {
+    transition: transform 0.15s ease;
+    color: var(--accent);
+    font-size: 0.9rem;
+  }
+
+  .edu-toggle[open] > summary .chevron {
+    transform: rotate(90deg);
+  }
+
+  .edu-toggle-body {
+    padding: 1rem 1.1rem 1.1rem;
+  }
+
+  .edu-toggle-body p {
+    margin: 0.6rem 0 0;
+  }
+
+  .edu-toggle-body p:first-child {
+    margin-top: 0;
   }
 
   /* Service and resource cards */
@@ -306,6 +516,11 @@
     background: var(--accent-soft);
     border-radius: 10px;
     padding: 1rem 1.1rem;
+  }
+
+  .card-icon {
+    display: block;
+    margin-bottom: 0.6rem;
   }
 
   .service-card h3 {
@@ -334,6 +549,53 @@
   .resource-card:hover {
     border-color: var(--accent);
     box-shadow: var(--shadow);
+  }
+
+  .resource-toggle {
+    margin-top: 1.1rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .resource-toggle > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.9rem 1.1rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    background: var(--accent-soft);
+    font-size: 1.02rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .resource-toggle > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .resource-toggle > summary .chevron {
+    transition: transform 0.15s ease;
+    color: var(--accent);
+    font-size: 0.9rem;
+  }
+
+  .resource-toggle[open] > summary .chevron {
+    transform: rotate(90deg);
+  }
+
+  .resource-toggle-body {
+    padding: 1.1rem 1.1rem 1.25rem;
+  }
+
+  .resource-toggle .coming-soon {
+    margin: 0.9rem 0 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
   }
 
   .quote-card {
@@ -406,10 +668,22 @@
     margin-bottom: 1rem;
   }
 
+  .footer-wave {
+    line-height: 0;
+    margin-top: 2rem;
+  }
+
+  .footer-wave svg {
+    display: block;
+    width: 100%;
+    height: 48px;
+  }
+
   footer.closing {
-    margin: 2rem 0 1rem;
+    margin: 0;
     text-align: center;
-    padding: 1.25rem;
+    padding: 1.5rem 1.25rem 2rem;
+    background: var(--accent-soft);
     color: var(--muted);
     font-size: 0.95rem;
   }
@@ -432,7 +706,6 @@
     <nav class="site-nav">
       <a href="#om-meg">Om meg</a>
       <a href="#helseveiledning">Helseveiledning</a>
-      <a href="#utdanning">Utdanning</a>
       <a href="#tjenester">Tjenester</a>
       <a href="#samtaler">Slik foregår det</a>
       <a href="#ressurser">Ressurser</a>
@@ -442,14 +715,24 @@
 </header>
 
 <section class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-text">
-      <h1>Silje Merete SMART Helseveiledning</h1>
-      <p class="tagline">Helseveiledning for små, gjennomførbare skritt mot bedre helse og hverdag.</p>
-      <p class="value-prop">20 år med å se mennesker gjennom endring — nå er blikket mitt rettet mot hele deg.</p>
+  <div class="hero-shine" aria-hidden="true"></div>
+  <div class="wrap hero-content">
+    <h1>Silje Merete SMART Helseveiledning</h1>
+    <p class="tagline">Helseveiledning for små, gjennomførbare skritt mot bedre helse og hverdag.</p>
+    <p class="value-prop">20 år med å se mennesker gjennom endring. Nå er blikket mitt rettet mot hele deg.</p>
+    <div class="hero-cta-row">
       <a class="cta-button" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post</a>
+      <div class="stat-badge">
+        <p class="stat-number">20+</p>
+        <p class="stat-label">års erfaring</p>
+      </div>
     </div>
-    <img class="hero-photo" src="images/hero-havet.jpg" alt="Silje Merete ute ved havet">
+  </div>
+  <div class="hero-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path style="fill:var(--accent-soft)" opacity="0.7" d="M0,45 C240,95 480,5 720,35 C960,65 1200,15 1440,55 L1440,100 L0,100 Z"></path>
+      <path style="fill:var(--bg)" d="M0,65 C240,25 480,90 720,55 C960,20 1200,80 1440,40 L1440,100 L0,100 Z"></path>
+    </svg>
   </div>
 </section>
 
@@ -462,19 +745,57 @@
   </section>
 
   <section id="om-meg" class="card-section">
+    <p class="kicker">Din veileder</p>
     <h2>Om meg</h2>
     <div class="about-grid">
       <img class="profile-photo" src="images/profilbilde.jpg" alt="Silje Merete Binder">
       <div class="about-text">
-        <p>Hei, og velkommen til deg! <svg class="flower-icon" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><g fill="#8fcdb8"><circle cx="10" cy="4" r="4"/><circle cx="16" cy="8" r="4"/><circle cx="14" cy="15" r="4"/><circle cx="6" cy="15" r="4"/><circle cx="4" cy="8" r="4"/></g><circle cx="10" cy="10" r="3" fill="var(--accent)"/></svg> Jeg heter Silje Merete og er utdannet pedagog og leder. Jeg har i over 20 år veiledet mennesker gjennom prosesser der de ønsker endring i livet sitt. Det å få være med på reisen når mennesker finner sin nye hverdag, er det som driver meg.</p>
-        <p>Som helseveileder er rollen min å utforske sammen med deg: vi kan se på søvn, stress, kosthold, fysisk aktivitet og andre vaner som påvirker deg, og finne frem til det som passer for akkurat ditt liv, i ditt eget tempo. Du kjenner deg selv og livet ditt best — jeg er her for å støtte og motivere deg på veien. Alt vi snakker om er underlagt taushetsplikt, så du kan kjenne deg trygg.</p>
+        <p>Hei, og velkommen til deg! <svg class="flower-icon" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><g fill="#8fd3e0"><circle cx="10" cy="4" r="4"/><circle cx="16" cy="8" r="4"/><circle cx="14" cy="15" r="4"/><circle cx="6" cy="15" r="4"/><circle cx="4" cy="8" r="4"/></g><circle cx="10" cy="10" r="3" fill="var(--accent)"/></svg> Jeg heter Silje Merete og er utdannet pedagog og leder. Jeg har i over 20 år veiledet mennesker gjennom prosesser der de ønsker endring i livet sitt. Det å få være med på reisen når mennesker finner sin nye hverdag, er det som driver meg.</p>
+        <p>Sammen ser vi på hvordan søvn, stress, kosthold, fysisk aktivitet og andre vaner påvirker hverdagen din, og finner fram til det som passer for akkurat ditt liv, i ditt eget tempo, og med respekt for at du kjenner deg selv best. Alt vi snakker om er underlagt taushetsplikt, så du kan kjenne deg trygg.</p>
+        <details class="edu-toggle">
+          <summary>Utdanning og bakgrunn <span class="chevron">▸</span></summary>
+          <div class="edu-toggle-body">
+            <p>Jeg har en cand.mag. i barnevernspedagogikk og utviklingsstudier, med videreutdanning i veiledning og ledelse.</p>
+            <p>Jeg har hele tiden arbeidet tett med mennesker i utvikling, blant annet som leder i barnehage, og det har gitt meg god trening i å møte mennesker der de er, og i å skape rom hvor det er trygt å snakke om endring.</p>
+            <p>I dag er jeg i siste avsluttende del av videreutdanningen som helseveileder, der jeg bygger videre på pedagogikk- og ledelseserfaringen min, med et konkret fokus på hvordan man kartlegger vaner og støtter varig endring over tid.</p>
+          </div>
+        </details>
       </div>
     </div>
+    <a class="credential-badge" href="https://instituttet.abelhelse.no/" target="_blank" rel="noopener">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><path d="M2 9 12 4l10 5-10 5-10-5Z"/><path d="M6 11.5V16c0 1.4 2.7 3 6 3s6-1.6 6-3v-4.5"/><path d="M22 9v6"/></svg>
+      <span>Under utdanning som helseveileder ved <strong>Abel Instituttet</strong></span>
+    </a>
   </section>
 
   <section id="helseveiledning" class="card-section">
+    <p class="kicker">Metodikk</p>
     <h2>Hva er helseveiledning?</h2>
-    <p>Helseveiledning handler om å støtte og motivere til å ta gode valg for egen helse — gjennom samtale, kunnskap og konkrete, realistiske mål som bygger på det som allerede fungerer i livet ditt. Målet er å hjelpe deg med å finne dine gode vaner og din egen vei videre.</p>
+    <p>Helseveiledning handler om å støtte og motivere til å ta gode valg for egen helse, gjennom samtale, kunnskap og konkrete, realistiske mål som bygger på det som allerede fungerer i livet ditt. Målet er å hjelpe deg med å finne dine gode vaner og din egen vei videre.</p>
+
+    <div class="service-grid method-grid">
+      <div class="service-card">
+        <svg class="card-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.8-4.8"/></svg>
+        <h3>1. Kartlegging</h3>
+        <p>Vi ser sammen på hvordan hverdagen din ser ut i dag (søvn, kosthold, aktivitet, stress og relasjoner), blant annet med helsehjulet.</p>
+      </div>
+      <div class="service-card">
+        <svg class="card-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5Z"/></svg>
+        <h3>2. Samtale og motivasjon</h3>
+        <p>Gjennom samtale utforsker vi dine egne grunner til endring, og det som allerede fungerer i livet ditt.</p>
+      </div>
+      <div class="service-card">
+        <svg class="card-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="0.9" fill="var(--accent-dark)"/></svg>
+        <h3>3. Konkrete mål</h3>
+        <p>Sammen setter vi konkrete, realistiske mål tilpasset akkurat din situasjon og ditt eget tempo.</p>
+      </div>
+      <div class="service-card">
+        <svg class="card-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15-6.7V3.5M18 5.3H15"/><path d="M21 12a9 9 0 0 1-15 6.7v1.8M6 18.7H9"/></svg>
+        <h3>4. Oppfølging over tid</h3>
+        <p>Faste, korte oppfølgingssamtaler hjelper deg å bygge vaner som varer, ikke bare nå kortsiktige mål.</p>
+      </div>
+    </div>
+
     <p>Denne tilnærmingen bygger på metodikken fra <a class="inline-link" href="https://instituttet.abelhelse.no/" target="_blank" rel="noopener">Abel Instituttet</a>, som utdanner helseveiledere i Norge.</p>
   </section>
 
@@ -483,21 +804,18 @@
     <blockquote>Din framtid skapes av <strong>vanene du gjentar</strong>, ikke de kortsiktige målene du setter.</blockquote>
   </div>
 
-  <section id="utdanning" class="card-section">
-    <h2>Utdanning og bakgrunn</h2>
-    <p>Jeg har en cand.mag. i barnevernspedagogikk og utviklingsstudier. Videreutdanninger i veiledning og ledelse. Jeg har hele tiden arbeidet tett med mennesker i utvikling — blant annet som leder i barnehage — noe som har gitt meg god trening i å møte mennesker der de er, og i å skape rom hvor det er trygt å snakke om endring.</p>
-    <p>I dag tar jeg videreutdanning som helseveileder gjennom Abel Instituttet, og er i siste avsluttende del av studiet. Der bygger jeg videre på pedagogikk- og ledelseserfaringen min, med et konkret fokus på hvordan man kartlegger vaner og støtter varig endring over tid.</p>
-  </section>
-
   <section id="tjenester" class="card-section">
+    <p class="kicker">Hva jeg tilbyr</p>
     <h2>Tjenester</h2>
     <img class="tjenester-photo" src="images/yogamatte.jpg" alt="Yogamatte og bolster, klar for en økt med bevegelse og ro">
     <div class="service-grid">
       <div class="service-card">
+        <svg class="card-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg>
         <h3>Privatpersoner</h3>
         <p>Individuell helseveiledning med utgangspunkt i dine egne mål, enten det handler om søvn, aktivitet, kosthold eller generell hverdagshelse.</p>
       </div>
       <div class="service-card">
+        <svg class="card-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><rect x="4" y="9" width="16" height="11" rx="1.2"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
         <h3>Bedrifter og arbeidsplasser</h3>
         <p>Foredrag, kurs og oppfølging tilpasset arbeidsplassen, med fokus på bærekraftige helsevaner for ansatte.</p>
       </div>
@@ -505,17 +823,21 @@
   </section>
 
   <section id="samtaler" class="card-section">
+    <p class="kicker">Praktisk info</p>
     <h2>Slik foregår en samtale</h2>
     <div class="service-grid">
       <div class="service-card">
-        <h3>Oppstartssamtale — ca. 45 min</h3>
+        <svg class="card-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+        <h3>Oppstartssamtale (ca. 45 min)</h3>
         <p>Vi blir kjent, og kartlegger sammen hvordan hverdagen din ser ut i dag og hva du ønsker å jobbe med.</p>
       </div>
       <div class="service-card">
+        <svg class="card-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15-6.7V3.5M18 5.3H15"/><path d="M21 12a9 9 0 0 1-15 6.7v1.8M6 18.7H9"/></svg>
         <h3>Ukentlig oppfølging</h3>
         <p>Første oppfølgingssamtale tar ca. 30 min, deretter korte, faste samtaler på ca. 15 min der vi følger opp målene dine og justerer kursen underveis.</p>
       </div>
       <div class="service-card">
+        <svg class="card-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5Z"/></svg>
         <h3>Digital kontakt underveis</h3>
         <p>Ved behov er det også mulig med kontakt mellom samtalene.</p>
       </div>
@@ -524,35 +846,185 @@
   </section>
 
   <section id="ressurser" class="card-section">
+    <p class="kicker">Verktøy og skjema</p>
     <h2>Ressurser og verktøy</h2>
+    <p>De fleste verktøyene under krever en kode fra meg, og hvert tema har sin egen kode. <a class="inline-link" href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20ressurser">Kontakt meg for å få kode →</a></p>
     <div class="resource-grid">
       <a class="resource-card" href="helsehjul.html">
         <h3>Helsehjulet</h3>
         <p>Interaktivt hjul der du selv vurderer åtte områder av helsen din, fra 1 til 10.</p>
         <p class="note">Krever kode fra Silje Merete</p>
       </a>
-      <a class="resource-card" href="sovnregistrering.html">
-        <h3>Søvnregistrering</h3>
-        <p>Skjema for én ukes selvregistrering av søvn og kveldsvaner.</p>
+      <a class="resource-card" href="livsstilhjul.html">
+        <h3>Livsstilshjulet</h3>
+        <p>Interaktivt hjul der du selv vurderer fem sentrale levevaner (trening, kosthold, søvn, stressmestring og relasjoner) fra 1 til 10.</p>
         <p class="note">Krever kode fra Silje Merete</p>
       </a>
-      <a class="resource-card" href="dagbok-stresskoppen.html">
-        <h3>Dagbok for stresskoppen</h3>
-        <p>Skjema for 7 dagers selvregistrering av situasjon, intensitet og hva som fyller og tømmer stresskoppen.</p>
+      <a class="resource-card" href="relasjoner-sosialt-liv.html">
+        <h3>Relasjoner og sosialt liv</h3>
+        <p>Kartlegging av menneskene rundt deg, mulige mål og aktuelle tiltak for bedre sosial kontakt og relasjoner.</p>
         <p class="note">Krever kode fra Silje Merete</p>
       </a>
     </div>
+
+    <details class="resource-toggle">
+      <summary>Stressmestring og søvn <span class="chevron">▸</span></summary>
+      <div class="resource-toggle-body">
+        <div class="resource-grid">
+          <a class="resource-card" href="sovnregistrering.html">
+            <h3>Søvnregistrering</h3>
+            <p>Skjema for én ukes selvregistrering av søvn og kveldsvaner.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="sovn-stress-logg.html">
+            <h3>Søvn og stress</h3>
+            <p>Ukentlig logg der du registrerer søvnkvalitet og stressnivå side om side, for å se sammenhengen mellom dem.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="dagbok-stresskoppen.html">
+            <h3>Dagbok for stresskoppen</h3>
+            <p>Skjema for 7 dagers selvregistrering av situasjon, intensitet og hva som fyller og tømmer stresskoppen.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="pss10.html">
+            <h3>PSS-10: Opplevd stress-skala</h3>
+            <p>Cohens validerte spørreskjema med 10 spørsmål om hvor stresset du har opplevd den siste måneden.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="kat-skjema.html">
+            <h3>KAT-skjema: tankeregistrering</h3>
+            <p>Skjema for å registrere situasjon, automatisk tanke, følelse og atferd, og prøve ut en mer balansert alternativ tanke.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+        </div>
+      </div>
+    </details>
+
+    <details class="resource-toggle">
+      <summary>Fysisk aktivitet og trening <span class="chevron">▸</span></summary>
+      <div class="resource-toggle-body">
+        <div class="resource-grid">
+          <a class="resource-card" href="aktivitetsdagbok.html">
+            <h3>Aktivitetsdagbok</h3>
+            <p>Skjema for 7 dagers registrering av fysisk aktivitet, varighet og opplevd anstrengelse, og hva som gjør det lettere eller vanskeligere å være i bevegelse.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="aktivitetsklokke-data.html">
+            <h3>Data fra telefon eller aktivitetsklokke</h3>
+            <p>Skjema for 7 dagers avskrift av skritt, aktive minutter, hvilepuls og søvn fra egen helse-app eller aktivitetsklokke.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="6mwt.html">
+            <h3>6-minutters gangtest (6MWT)</h3>
+            <p>Tidtaker og loggverktøy for 6-minutters gangtest. Mål utholdenhet og følg utviklingen over tid.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="ymca-step-test.html">
+            <h3>YMCA step-test</h3>
+            <p>Metronom, tidtaker og loggverktøy for YMCA 3-minutters step-test. Mål kondisjon og følg utviklingen over tid.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="1rm-testing.html">
+            <h3>1RM-testing</h3>
+            <p>Beregn estimert 1RM med Brzycki-formelen, og følg utviklingen i maksimal styrke per øvelse over tid.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="sit-to-stand-test.html">
+            <h3>Sit-to-stand-test (30 sekunder)</h3>
+            <p>Tidtaker og telleknapp for 30-sekunders sit-to-stand-test. Mål benstyrke og funksjon, og følg utviklingen over tid.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="borg-rpe-test.html">
+            <h3>Borg CR10-skala (0–10)</h3>
+            <p>Registrer opplevd anstrengelse med Borgs CR10-skala, og følg utviklingen i treningsintensitet per aktivitet over tid.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+        </div>
+      </div>
+    </details>
+
+    <details class="resource-toggle">
+      <summary>Kosthold <span class="chevron">▸</span></summary>
+      <div class="resource-toggle-body">
+        <div class="resource-grid">
+          <a class="resource-card" href="kosthold-spisevaner.html">
+            <h3>Kosthold og spisevaner</h3>
+            <p>Skjema for kartlegging av hva, hvor mye, når og hvorfor du spiser, for én vanlig hverdag og én vanlig helgedag.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="kosthold-4dager.html">
+            <h3>Kosthold: 4 dagers registrering</h3>
+            <p>Grundigere skjema for kartlegging av hva, hvor mye, når og hvorfor du spiser, for 3 vanlige hverdager og 1 vanlig helgedag.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="oppmerksom-spising.html">
+            <h3>Oppmerksom spising</h3>
+            <p>Skjema for 3 dagers registrering av sult- og metthetsskala før og etter måltider, samt hvor tilstedeværende du var mens du spiste.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="porsjonskontroll.html">
+            <h3>Porsjonskontroll: håndmodellen</h3>
+            <p>Skjema for 3 dagers registrering av porsjonsstørrelser med hånden som målestokk: grønnsaker, protein, karbohydrater og fett.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="maltidsinnhold.html">
+            <h3>Måltidsinnhold: tallerkenmodellen</h3>
+            <p>Skjema for 3 dagers avkrysning av hvilke matvaregrupper som var med i måltidene dine, ut fra tallerkenmodellen.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="spisepauser.html">
+            <h3>Spisepauser og småspising</h3>
+            <p>Skjema for 3 dagers registrering av spisevindu og mellommåltider, og om de kom av sult eller av følelser og vaner.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+        </div>
+      </div>
+    </details>
+
+    <details class="resource-toggle">
+      <summary>Yoga &amp; mindfulness <span class="chevron">▸</span></summary>
+      <div class="resource-toggle-body">
+        <div class="resource-grid">
+          <a class="resource-card" href="pusteovelser.html">
+            <h3>Pusteøvelser</h3>
+            <p>To enkle, animerte pusteøvelser for ro og stressmestring: firkantpusting (4×4) og pust inn på 2, ut på 4.</p>
+          </a>
+          <a class="resource-card" href="beina-opp-veggen.html">
+            <h3>Beina opp etter veggen</h3>
+            <p>Viparita Karani (en enkel, passiv øvelse som roer nervesystemet raskt ved akutt stress og uro), med forklaring og tidtaker.</p>
+          </a>
+          <a class="resource-card" href="morgen-kveld-strekk.html">
+            <h3>Morgen- og kveldsstrekk</h3>
+            <p>Rolig yoga-inspirert strekk-sekvens for hele kroppen, med styrt tidtaker gjennom hver øvelse. Fin å starte eller avslutte dagen med.</p>
+          </a>
+          <a class="resource-card" href="tennisball-fotsale.html">
+            <h3>Tennisball under foten</h3>
+            <p>Egenmassasje for bindevev og fotsåle, med tidtaker per fot. Bra for stram muskulatur og til forebygging av hælsmerter.</p>
+          </a>
+          <a class="resource-card" href="skulder-nakke-ovelser.html">
+            <h3>Skulder- og nakkeøvelser</h3>
+            <p>Kort øvelsesserie du kan gjøre rett fra stolen, med styrt tidtaker gjennom hver øvelse. Fin pause i en arbeidsdag med mye stillesitting.</p>
+          </a>
+          <a class="resource-card" href="solhilsen.html">
+            <h3>Solhilsen</h3>
+            <p>Den klassiske solhilsen fra yoga (Surya Namaskar), 12 øvelser knyttet sammen med pusten, med forklaring og illustrert oversikt i sirkel rundt sola.</p>
+          </a>
+        </div>
+      </div>
+    </details>
   </section>
 
   <section id="investering" class="card-section invest-section">
+    <p class="kicker">Hvorfor nå</p>
     <h2>En investering i deg selv</h2>
-    <p>Helseveiledning er en investering i deg selv — akkurat som et medlemskap på et treningssenter, hvis du bruker det. I helseveiledningen går jeg veien sammen med deg, og du vil kunne få det livet du bestemmer deg for.</p>
+    <p>Helseveiledning er en investering i deg selv, akkurat som et medlemskap på et treningssenter, hvis du bruker det. I helseveiledningen går jeg veien sammen med deg, og du vil kunne få det livet du bestemmer deg for.</p>
     <a class="cta-button" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post</a>
   </section>
 
   <section id="kontakt" class="card-section">
+    <p class="kicker">Ta kontakt</p>
     <h2>Kontakt</h2>
-    <p>Ta gjerne kontakt for en uforpliktende prat om helseveiledning. Du trenger ikke vite nøyaktig hva du lurer på — send meg en e-post, så finner vi ut av resten sammen.</p>
+    <p>Ta gjerne kontakt for en uforpliktende prat om helseveiledning. Du trenger ikke vite nøyaktig hva du lurer på. Send meg en e-post, så finner vi ut av resten sammen.</p>
     <a class="cta-button" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post</a>
 
     <div class="contact-card">
@@ -563,6 +1035,11 @@
 
 </div>
 
+<div class="footer-wave" aria-hidden="true">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path style="fill:var(--accent-soft)" d="M0,30 C240,60 480,0 720,20 C960,40 1200,10 1440,30 L1440,60 L0,60 Z"></path>
+  </svg>
+</div>
 <footer class="closing">
   Små skritt. Dine mål, ditt tempo.<br>
   <strong>Du trenger ikke gjøre det alene.</strong>

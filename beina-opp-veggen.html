@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beina opp etter veggen — Silje Merete SMART Helseveiledning</title>
+<meta name="description" content="Beina opp etter veggen (Viparita Karani) — en enkel, passiv øvelse for akutt stress og uro, med forklaring, steg-for-steg og tidtaker.">
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --warn: #c9823f;
+    --warn-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--accent-soft), var(--bg));
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .hero h1 {
+    margin: 0 0 0.75rem;
+    font-size: 1.8rem;
+    color: var(--accent-dark);
+  }
+
+  .hero p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 46ch;
+    margin-inline: auto;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem 2rem;
+    margin: 2rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .card h2 {
+    margin: 0 0 0.6rem;
+    color: var(--accent-dark);
+    font-size: 1.3rem;
+  }
+
+  .card > p.desc {
+    margin: 0 0 1.25rem;
+    color: var(--muted);
+  }
+
+  .benefit-list {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+
+  .benefit-list li {
+    margin: 0 0 0.6rem;
+  }
+
+  .benefit-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .step-list {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+
+  .step-list li {
+    margin: 0 0 0.8rem;
+  }
+
+  .step-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .step-list strong {
+    color: var(--accent-dark);
+  }
+
+  .timer-preset-toggle {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .preset-button {
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.55rem 1.2rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .preset-button.active {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .timer-display {
+    text-align: center;
+  }
+
+  .timer-clock {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+
+  .timer-progress {
+    width: 100%;
+    height: 8px;
+    background: var(--accent-soft);
+    border-radius: 999px;
+    margin: 0.9rem 0 1rem;
+    overflow: hidden;
+  }
+
+  .timer-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    transition: width 1s linear;
+  }
+
+  .timer-phrase {
+    min-height: 1.6em;
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 1.05rem;
+  }
+
+  .timer-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.1rem;
+  }
+
+  .timer-buttons button {
+    font-size: 0.95rem;
+    padding: 0.65rem 1.3rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .timer-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .timer-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .timer-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .timer-buttons button:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  .caution-card {
+    background: var(--warn-soft);
+    border: 1px solid #ecd3ac;
+    border-left: 4px solid var(--warn);
+  }
+
+  .caution-card h2 {
+    color: #8a5a25;
+  }
+
+  .caution-list {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: var(--ink);
+  }
+
+  .caution-list li {
+    margin: 0 0 0.6rem;
+  }
+
+  .caution-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .home-link {
+    display: block;
+    text-align: center;
+    margin: 1rem 0 3rem;
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .home-link:hover { text-decoration: underline; }
+
+  footer.closing {
+    margin: 2rem 0 1rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong { color: var(--accent-dark); }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Beina opp etter veggen</h1>
+    <p>Viparita Karani — en enkel, passiv yogaøvelse som roer nervesystemet raskt ved akutt stress og uro.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section class="card">
+    <h2>Hvorfor er den så bra?</h2>
+    <ul class="benefit-list">
+      <li>Aktiverer det parasympatiske nervesystemet — kroppens "ro og fordøy"-respons — og roer ned stressresponsen raskt.</li>
+      <li>Senker puls og blodtrykk.</li>
+      <li>Fremmer tilbakestrømming av blod og lymfe, og lindrer hovne eller trøtte bein og føtter.</li>
+      <li>Krever ingen styrke eller fleksibilitet — helt passiv og tilgjengelig for de fleste, uansett form.</li>
+      <li>Fin også ved uro om kvelden eller søvnvansker.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Slik gjør du øvelsen</h2>
+    <ol class="step-list">
+      <li><strong>Finn plass ved en vegg:</strong> Sett deg med den ene siden inntil veggen, med hoftene nær veggen.</li>
+      <li><strong>Løft beina opp:</strong> Vri deg rundt og løft beina opp langs veggen mens du legger deg ned på ryggen — hoftene så nær veggen som er behagelig.</li>
+      <li><strong>Slapp av i armene:</strong> La armene hvile avslappet langs siden, med håndflatene opp.</li>
+      <li><strong>Pust rolig:</strong> Lukk øynene, slipp ned skuldre og kjeve, og pust rolig og dypt.</li>
+      <li><strong>Bli liggende:</strong> Bli liggende i 5–15 minutter.</li>
+      <li><strong>Kom rolig opp:</strong> Bøy knærne inn mot magen, rull over på siden, og reis deg sakte.</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>Tidtaker</h2>
+    <div class="timer-preset-toggle">
+      <button type="button" class="preset-button" data-minutes="5">5 min</button>
+      <button type="button" class="preset-button active" data-minutes="10">10 min</button>
+      <button type="button" class="preset-button" data-minutes="15">15 min</button>
+    </div>
+    <div class="timer-display">
+      <div class="timer-clock" id="timerClock">10:00</div>
+      <div class="timer-progress">
+        <div class="timer-progress-bar" id="timerProgressBar"></div>
+      </div>
+      <p class="timer-phrase" id="timerPhrase">Trykk start når du er klar</p>
+    </div>
+    <div class="timer-buttons">
+      <button type="button" id="timerStart">Start</button>
+      <button type="button" id="timerPause" class="secondary" disabled>Pause</button>
+      <button type="button" id="timerReset" class="secondary">Nullstill</button>
+    </div>
+  </section>
+
+  <section class="card caution-card">
+    <h2>Viktige forholdsregler</h2>
+    <ul class="caution-list">
+      <li>Unngå ved grønn stær (glaukom), ukontrollert høyt blodtrykk, eller alvorlige rygg- eller nakkeplager — spør lege ved usikkerhet.</li>
+      <li>I senere del av graviditeten bør du unngå å ligge flatt på ryggen lenge — spør jordmor eller lege om denne øvelsen passer for deg.</li>
+      <li>Bruk gjerne en pute eller sammenrullet teppe under hoftene eller korsryggen for ekstra komfort.</li>
+      <li>Kom rolig opp igjen etterpå — ikke reis deg brått.</li>
+    </ul>
+  </section>
+
+  <a class="home-link" href="index.html">Se hjemmesiden min →</a>
+
+</div>
+
+<footer class="closing">
+  Små skritt. Dine mål, ditt tempo.<br>
+  <strong>Du trenger ikke gjøre det alene.</strong>
+</footer>
+
+<script>
+  (function () {
+    var totalSeconds = 10 * 60;
+    var remaining = totalSeconds;
+    var timerInterval = null;
+    var timerRunning = false;
+
+    var clockEl = document.getElementById('timerClock');
+    var progressBarEl = document.getElementById('timerProgressBar');
+    var phraseEl = document.getElementById('timerPhrase');
+    var startBtn = document.getElementById('timerStart');
+    var pauseBtn = document.getElementById('timerPause');
+    var resetBtn = document.getElementById('timerReset');
+    var presetButtons = document.querySelectorAll('.preset-button');
+
+    function formatClock(seconds) {
+      var m = Math.floor(seconds / 60);
+      var s = seconds % 60;
+      return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    }
+
+    function beep() {
+      try {
+        var ctx = new (window.AudioContext || window.webkitAudioContext)();
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.frequency.value = 660;
+        gain.gain.setValueAtTime(0.001, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.25, ctx.currentTime + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.5);
+      } catch (e) { /* ignore if audio unavailable */ }
+    }
+
+    function updateDisplay() {
+      clockEl.textContent = formatClock(remaining);
+      var elapsed = totalSeconds - remaining;
+      progressBarEl.style.width = ((elapsed / totalSeconds) * 100) + '%';
+    }
+
+    function stopInterval() {
+      timerRunning = false;
+      clearInterval(timerInterval);
+      startBtn.disabled = false;
+      pauseBtn.disabled = true;
+    }
+
+    function tick() {
+      remaining -= 1;
+      if (remaining <= 0) {
+        remaining = 0;
+        updateDisplay();
+        stopInterval();
+        phraseEl.textContent = 'Ferdig. Kom rolig opp igjen.';
+        beep();
+        return;
+      }
+      updateDisplay();
+    }
+
+    function startTimer() {
+      if (timerRunning || remaining <= 0) return;
+      timerRunning = true;
+      startBtn.disabled = true;
+      pauseBtn.disabled = false;
+      presetButtons.forEach(function (btn) { btn.disabled = true; });
+      phraseEl.textContent = 'Slapp av og pust rolig';
+      timerInterval = setInterval(tick, 1000);
+    }
+
+    function pauseTimer() {
+      stopInterval();
+      presetButtons.forEach(function (btn) { btn.disabled = false; });
+      phraseEl.textContent = 'Pause';
+    }
+
+    function resetTimer() {
+      stopInterval();
+      presetButtons.forEach(function (btn) { btn.disabled = false; });
+      remaining = totalSeconds;
+      updateDisplay();
+      phraseEl.textContent = 'Trykk start når du er klar';
+    }
+
+    function setPreset(minutes, btn) {
+      presetButtons.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      totalSeconds = minutes * 60;
+      resetTimer();
+    }
+
+    presetButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        setPreset(parseInt(btn.getAttribute('data-minutes'), 10), btn);
+      });
+    });
+
+    startBtn.addEventListener('click', startTimer);
+    pauseBtn.addEventListener('click', pauseTimer);
+    resetBtn.addEventListener('click', resetTimer);
+
+    updateDisplay();
+  })();
+</script>
+
+</body>
+</html>

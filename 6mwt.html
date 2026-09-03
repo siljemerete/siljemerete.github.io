@@ -1,0 +1,1081 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6-minutters gangtest (6MWT)</title>
+<meta name="description" content="Tidtaker og loggverktøy for 6-minutters gangtest — følg utholdenhet og kondisjon over tid.">
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --push: #c9823f;
+    --push-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  header.page-header {
+    margin-bottom: 1.75rem;
+  }
+
+  header.page-header a.back-link {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    margin-bottom: 0.75rem;
+  }
+
+  header.page-header a.back-link:hover {
+    color: var(--accent-dark);
+  }
+
+  header.page-header h1 {
+    font-size: 1.7rem;
+    margin: 0 0 0.35rem;
+    color: var(--accent-dark);
+  }
+
+  header.page-header p.tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  .reminder {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem 1.35rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  section.primer h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer p {
+    margin: 0.6rem 0 0;
+  }
+
+  section.primer ul {
+    margin: 0.6rem 0 0;
+    padding-left: 1.2rem;
+  }
+
+  section.primer li {
+    margin: 0.3rem 0;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .controls button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .controls button:hover {
+    background: var(--accent-soft);
+  }
+
+  .controls button.danger {
+    color: var(--push);
+  }
+
+  .controls button.danger:hover {
+    background: var(--push-soft);
+  }
+
+  /* Timer */
+  .timer-display {
+    text-align: center;
+    padding: 1rem 0 0.5rem;
+  }
+
+  .timer-clock {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+
+  .timer-progress {
+    width: 100%;
+    height: 8px;
+    background: var(--accent-soft);
+    border-radius: 999px;
+    margin: 0.9rem 0 1rem;
+    overflow: hidden;
+  }
+
+  .timer-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    transition: width 1s linear;
+  }
+
+  .timer-phrase {
+    min-height: 1.6em;
+    font-weight: 600;
+    color: var(--accent-dark);
+    font-size: 1.02rem;
+  }
+
+  .timer-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1rem;
+  }
+
+  .timer-buttons button {
+    font-size: 0.95rem;
+    padding: 0.65rem 1.3rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .timer-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .timer-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .timer-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .timer-buttons button:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  /* Distance calculator */
+  .calc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+    align-items: end;
+  }
+
+  .calc-result {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.7rem 0.9rem;
+    margin-top: 0.9rem;
+    font-size: 0.95rem;
+    color: var(--accent-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .calc-result strong {
+    font-size: 1.2rem;
+  }
+
+  .calc-result button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .calc-result button:hover {
+    background: var(--card);
+    border-color: var(--accent-dark);
+  }
+
+  /* Fields */
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 0.9rem;
+    margin-top: 0.75rem;
+  }
+
+  .field-wide {
+    grid-column: 1 / -1;
+  }
+
+  .field label {
+    display: block;
+    font-weight: 600;
+    color: var(--accent-dark);
+    margin-bottom: 0.3rem;
+    font-size: 0.88rem;
+  }
+
+  .field input[type="text"],
+  .field input[type="date"],
+  .field input[type="number"],
+  .field textarea {
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .field textarea {
+    min-height: 56px;
+    resize: vertical;
+  }
+
+  .field input[type="range"] {
+    width: 100%;
+    accent-color: var(--accent);
+  }
+
+  .range-value {
+    color: var(--accent-dark);
+    font-size: 1.05rem;
+  }
+
+  .range-anchors {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+    gap: 0.5rem;
+  }
+
+  .add-button {
+    margin-top: 1.1rem;
+    font-size: 0.95rem;
+    padding: 0.65rem 1.3rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .add-button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  /* Results table */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.6rem;
+    margin: 0.75rem 0 1rem;
+  }
+
+  .stat-item {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.7rem 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  .stat-item strong {
+    display: block;
+    color: var(--accent-dark);
+    font-size: 1.4rem;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+    margin-top: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  table.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 520px;
+  }
+
+  table.results-table th,
+  table.results-table td {
+    border: 1px solid var(--border);
+    padding: 0.5rem 0.6rem;
+    font-size: 0.88rem;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  table.results-table thead th {
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  table.results-table td.delta-positive { color: var(--accent-dark); font-weight: 600; }
+  table.results-table td.delta-negative { color: var(--push); font-weight: 600; }
+
+  table.results-table button.delete-row {
+    font-size: 0.78rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--push);
+    cursor: pointer;
+  }
+
+  table.results-table button.delete-row:hover {
+    background: var(--push-soft);
+  }
+
+  .empty-note {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 0.75rem;
+  }
+
+  .send-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .send-buttons button {
+    font-size: 0.92rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .send-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .muted-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  footer.closing {
+    margin-top: 1.75rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong {
+    color: var(--accent-dark);
+  }
+
+  body.gate-locked .wrap,
+  body.gate-locked footer.closing {
+    display: none;
+  }
+
+  .gate-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 100;
+  }
+
+  body.gate-locked .gate-overlay {
+    display: flex;
+  }
+
+  .gate-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 2rem 1.75rem;
+    max-width: 340px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .gate-box h1 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    color: var(--accent-dark);
+  }
+
+  .gate-box p {
+    margin: 0 0 1rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .gate-box input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    font-family: inherit;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  .gate-box input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .gate-box button {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .gate-box button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .gate-error {
+    display: none;
+    color: var(--push);
+    font-size: 0.85rem;
+    margin: 0.7rem 0 0;
+  }
+
+  .gate-contact {
+    margin-top: 0.9rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .gate-contact a {
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .gate-contact a:hover {
+    text-decoration: underline;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .controls, .send-buttons, .muted-note, header.page-header a.back-link, .timer-buttons { display: none; }
+    section.primer { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body class="gate-locked">
+
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box">
+    <h1>Tilgang til verktøyet</h1>
+    <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
+    <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
+    <button type="button" id="gateSubmit">Lås opp</button>
+    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20Trening%20og%20aktivitet-verkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var GATE_KEY = 'gate-aktivitet-unlocked';
+    var CODE = 'nyevaner';
+
+    function unlock() {
+      localStorage.setItem(GATE_KEY, 'true');
+      document.body.classList.remove('gate-locked');
+    }
+
+    if (localStorage.getItem(GATE_KEY) === 'true') {
+      unlock();
+    }
+
+    function trySubmit() {
+      var input = document.getElementById('gateCode');
+      var error = document.getElementById('gateError');
+      if (input.value.trim().toLowerCase() === CODE) {
+        error.style.display = 'none';
+        unlock();
+      } else {
+        error.style.display = 'block';
+      }
+    }
+
+    document.getElementById('gateSubmit').addEventListener('click', trySubmit);
+    document.getElementById('gateCode').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') trySubmit();
+    });
+  })();
+</script>
+
+<div class="wrap">
+
+  <header class="page-header">
+    <a class="back-link" href="index.html">← Til forsiden</a>
+    <h1>6-minutters gangtest (6MWT)</h1>
+    <p class="tagline">Mål utholdenhet og kondisjon, og følg utviklingen din over tid</p>
+    <div class="reminder">
+      Dette er en enkel måte å følge kondisjon og utholdenhet over tid — ikke
+      en medisinsk vurdering. Er du usikker på om testen er trygg for deg,
+      for eksempel ved hjerte- eller lungesykdom, ta kontakt med lege først.
+      Resultatene dine lagres kun i denne nettleseren.
+    </div>
+  </header>
+
+  <section class="primer">
+    <h2>Slik gjennomfører du testen</h2>
+    <ul>
+      <li>Finn en flat, jevn strekning innendørs eller utendørs — gjerne en korridor eller sti på minst 20–30 meter.</li>
+      <li>Merk av start- og vendepunkt, eller bruk en kjent rundeavstand.</li>
+      <li>Gå så langt du kan på 6 minutter, i ditt eget tempo. Du kan sakke ned eller stoppe og hvile underveis, men klokken fortsetter å gå.</li>
+      <li>Ikke varm opp på forhånd, og bruk vanlige, komfortable sko.</li>
+      <li>Noter total distanse i meter når tiden er ute.</li>
+    </ul>
+  </section>
+
+  <section class="primer">
+    <h2>Tidtaker</h2>
+    <div class="timer-display">
+      <div class="timer-clock" id="timerClock">06:00</div>
+      <div class="timer-progress">
+        <div class="timer-progress-bar" id="timerProgressBar"></div>
+      </div>
+      <p class="timer-phrase" id="timerPhrase">Trykk start når du er klar til å gå</p>
+    </div>
+    <div class="timer-buttons">
+      <button type="button" id="timerStart">Start</button>
+      <button type="button" id="timerPause" class="secondary" disabled>Pause</button>
+      <button type="button" id="timerReset" class="secondary">Nullstill</button>
+    </div>
+  </section>
+
+  <section class="primer">
+    <h2>Regn ut distanse</h2>
+    <p>Hvis du gikk faste runder, kan du bruke denne til å regne ut total distanse.</p>
+    <div class="calc-grid">
+      <div class="field">
+        <label for="calc-lap">Rundelengde (meter)</label>
+        <input type="number" min="1" step="1" value="30" id="calc-lap">
+      </div>
+      <div class="field">
+        <label for="calc-laps">Antall hele runder</label>
+        <input type="number" min="0" step="1" value="0" id="calc-laps">
+      </div>
+      <div class="field">
+        <label for="calc-extra">Ekstra meter på siste runde</label>
+        <input type="number" min="0" step="1" value="0" id="calc-extra">
+      </div>
+    </div>
+    <div class="calc-result">
+      <span>Beregnet distanse: <strong id="calc-total">0</strong> meter</span>
+      <button type="button" id="calc-use">Bruk denne distansen under</button>
+    </div>
+  </section>
+
+  <section class="primer">
+    <h2>Registrer resultat</h2>
+    <div class="field-grid">
+      <div class="field">
+        <label for="entry-date">Dato</label>
+        <input type="date" id="entry-date">
+      </div>
+      <div class="field">
+        <label for="entry-distance">Distanse gått (meter)</label>
+        <input type="number" min="0" step="1" id="entry-distance" placeholder="F.eks. 420">
+      </div>
+      <div class="field field-wide">
+        <label for="entry-borg-before">Anstrengelse før testen (Borg-skala): <span class="range-value" id="entry-borg-before-value">Ikke satt</span> / 10</label>
+        <input type="range" min="0" max="10" step="1" value="0" id="entry-borg-before" data-touched="false">
+        <div class="range-anchors">
+          <span>0 — Ingen anstrengelse</span>
+          <span>10 — Maksimal anstrengelse</span>
+        </div>
+      </div>
+      <div class="field field-wide">
+        <label for="entry-borg-after">Anstrengelse etter testen (Borg-skala): <span class="range-value" id="entry-borg-after-value">Ikke satt</span> / 10</label>
+        <input type="range" min="0" max="10" step="1" value="0" id="entry-borg-after" data-touched="false">
+        <div class="range-anchors">
+          <span>0 — Ingen anstrengelse</span>
+          <span>10 — Maksimal anstrengelse</span>
+        </div>
+      </div>
+      <div class="field field-wide">
+        <label for="entry-note">Notat — pauser, symptomer, vær, annet</label>
+        <textarea id="entry-note" placeholder="Skriv gjerne fritt her..."></textarea>
+      </div>
+    </div>
+    <button type="button" class="add-button" id="addEntry">Legg til resultat</button>
+  </section>
+
+  <section class="primer">
+    <h2>Dine resultater over tid</h2>
+    <div class="controls">
+      <button type="button" id="resetAll" class="danger">Nullstill alle resultater</button>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-item"><strong id="stat-first">–</strong>Første test (m)</div>
+      <div class="stat-item"><strong id="stat-latest">–</strong>Siste test (m)</div>
+      <div class="stat-item"><strong id="stat-change">–</strong>Endring totalt (m)</div>
+    </div>
+    <div class="table-scroll">
+      <table class="results-table" id="resultsTable">
+        <thead>
+          <tr>
+            <th>Dato</th>
+            <th>Distanse (m)</th>
+            <th>Endring</th>
+            <th>Borg før / etter</th>
+            <th>Notat</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="resultsBody"></tbody>
+      </table>
+    </div>
+    <p class="empty-note" id="emptyNote">Ingen resultater registrert ennå.</p>
+  </section>
+
+  <section class="primer">
+    <h2>Send inn resultatene</h2>
+    <p class="muted-note">
+      Du kan sende resultatene direkte fra din egen e-postapp, eller laste
+      dem ned som en tekstfil du selv sender eller tar med til timen. Hvis
+      "Send på e-post" ikke åpner riktig på mobilen din, bruk nedlastingen i
+      stedet.
+    </p>
+    <div class="send-buttons">
+      <button type="button" id="sendEmail">Send på e-post</button>
+      <button type="button" id="downloadText" class="secondary">Last ned som tekstfil</button>
+    </div>
+  </section>
+
+  <footer class="closing">
+    Ett skritt av gangen — bokstavelig talt.<br>
+    <strong>Du trenger ikke gjøre det alene.</strong>
+  </footer>
+
+</div>
+
+<script>
+  var STORAGE_KEY = '6mwt-data';
+  var RECIPIENT = 'silje.merete.binder@gmail.com';
+  var TOTAL_SECONDS = 360;
+
+  var PHRASES = {
+    60: 'Du gjør det bra. Du har 5 minutter igjen.',
+    120: 'Fortsett det gode arbeidet. Du har 4 minutter igjen.',
+    180: 'Du gjør det bra. Du er halvveis.',
+    240: 'Fortsett det gode arbeidet. Du har bare 2 minutter igjen.',
+    300: 'Du gjør det bra. Du har bare 1 minutt igjen.',
+    360: 'Stopp. Testen er ferdig.'
+  };
+
+  var entries = [];
+  var remaining = TOTAL_SECONDS;
+  var timerInterval = null;
+  var timerRunning = false;
+
+  function formatClock(seconds) {
+    var m = Math.floor(seconds / 60);
+    var s = seconds % 60;
+    return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  function beep() {
+    try {
+      var ctx = new (window.AudioContext || window.webkitAudioContext)();
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.frequency.value = 660;
+      gain.gain.setValueAtTime(0.001, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.25, ctx.currentTime + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.5);
+    } catch (e) { /* ignore if audio unavailable */ }
+  }
+
+  function updateTimerDisplay() {
+    document.getElementById('timerClock').textContent = formatClock(remaining);
+    var elapsed = TOTAL_SECONDS - remaining;
+    document.getElementById('timerProgressBar').style.width = ((elapsed / TOTAL_SECONDS) * 100) + '%';
+  }
+
+  function tickTimer() {
+    remaining -= 1;
+    var elapsed = TOTAL_SECONDS - remaining;
+    updateTimerDisplay();
+    if (PHRASES[elapsed]) {
+      document.getElementById('timerPhrase').textContent = PHRASES[elapsed];
+      beep();
+    }
+    if (remaining <= 0) {
+      stopTimer();
+      document.getElementById('entry-date').focus();
+    }
+  }
+
+  function startTimer() {
+    if (timerRunning) return;
+    timerRunning = true;
+    document.getElementById('timerStart').disabled = true;
+    document.getElementById('timerPause').disabled = false;
+    if (remaining === TOTAL_SECONDS) {
+      document.getElementById('timerPhrase').textContent = 'Gå!';
+    } else {
+      document.getElementById('timerPhrase').textContent = 'Fortsetter...';
+    }
+    timerInterval = setInterval(tickTimer, 1000);
+  }
+
+  function pauseTimer() {
+    timerRunning = false;
+    clearInterval(timerInterval);
+    document.getElementById('timerStart').disabled = false;
+    document.getElementById('timerPause').disabled = true;
+    document.getElementById('timerPhrase').textContent = 'Pause';
+  }
+
+  function stopTimer() {
+    timerRunning = false;
+    clearInterval(timerInterval);
+    document.getElementById('timerStart').disabled = false;
+    document.getElementById('timerPause').disabled = true;
+  }
+
+  function resetTimer() {
+    stopTimer();
+    remaining = TOTAL_SECONDS;
+    updateTimerDisplay();
+    document.getElementById('timerPhrase').textContent = 'Trykk start når du er klar til å gå';
+  }
+
+  function updateCalc() {
+    var lap = parseFloat(document.getElementById('calc-lap').value) || 0;
+    var laps = parseFloat(document.getElementById('calc-laps').value) || 0;
+    var extra = parseFloat(document.getElementById('calc-extra').value) || 0;
+    var total = Math.round(lap * laps + extra);
+    document.getElementById('calc-total').textContent = total;
+    return total;
+  }
+
+  function isBorgTouched(id) {
+    var el = document.getElementById(id);
+    return el && el.getAttribute('data-touched') === 'true';
+  }
+
+  function readState() {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return [];
+    try {
+      var data = JSON.parse(raw);
+      return (data && data.entries) || [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveState() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ entries: entries }));
+  }
+
+  function sortedEntries() {
+    return entries.slice().sort(function (a, b) {
+      return (a.date || '').localeCompare(b.date || '');
+    });
+  }
+
+  function renderResults() {
+    var sorted = sortedEntries();
+    var body = document.getElementById('resultsBody');
+    var table = document.getElementById('resultsTable');
+    var emptyNote = document.getElementById('emptyNote');
+    body.innerHTML = '';
+
+    if (sorted.length === 0) {
+      table.style.display = 'none';
+      emptyNote.style.display = 'block';
+    } else {
+      table.style.display = 'table';
+      emptyNote.style.display = 'none';
+    }
+
+    var prevDistance = null;
+    sorted.forEach(function (entry) {
+      var tr = document.createElement('tr');
+
+      var delta = prevDistance === null ? null : entry.distance - prevDistance;
+      var deltaText = delta === null ? '–' : (delta > 0 ? '+' : '') + delta + ' m';
+      var deltaClass = delta === null ? '' : (delta > 0 ? 'delta-positive' : (delta < 0 ? 'delta-negative' : ''));
+
+      var borgText = (entry.borgBefore !== null && entry.borgBefore !== undefined ? entry.borgBefore : '–') +
+        ' / ' + (entry.borgAfter !== null && entry.borgAfter !== undefined ? entry.borgAfter : '–');
+
+      tr.innerHTML =
+        '<td>' + (entry.date || '-') + '</td>' +
+        '<td>' + entry.distance + '</td>' +
+        '<td class="' + deltaClass + '">' + deltaText + '</td>' +
+        '<td>' + borgText + '</td>' +
+        '<td>' + (entry.note ? escapeHtml(entry.note) : '-') + '</td>' +
+        '<td></td>';
+
+      var deleteTd = tr.lastElementChild;
+      var deleteBtn = document.createElement('button');
+      deleteBtn.type = 'button';
+      deleteBtn.className = 'delete-row';
+      deleteBtn.textContent = 'Slett';
+      deleteBtn.addEventListener('click', function () {
+        if (!confirm('Slette denne registreringen?')) return;
+        entries = entries.filter(function (e) { return e.id !== entry.id; });
+        saveState();
+        renderResults();
+      });
+      deleteTd.appendChild(deleteBtn);
+
+      body.appendChild(tr);
+      prevDistance = entry.distance;
+    });
+
+    document.getElementById('stat-first').textContent = sorted.length ? sorted[0].distance : '–';
+    document.getElementById('stat-latest').textContent = sorted.length ? sorted[sorted.length - 1].distance : '–';
+    if (sorted.length >= 2) {
+      var change = sorted[sorted.length - 1].distance - sorted[0].distance;
+      document.getElementById('stat-change').textContent = (change > 0 ? '+' : '') + change;
+    } else {
+      document.getElementById('stat-change').textContent = '–';
+    }
+  }
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function addEntry() {
+    var date = document.getElementById('entry-date').value;
+    var distance = parseFloat(document.getElementById('entry-distance').value);
+
+    if (!date || isNaN(distance)) {
+      alert('Fyll ut dato og distanse gått for å legge til resultatet.');
+      return;
+    }
+
+    var entry = {
+      id: Date.now() + '-' + Math.random().toString(36).slice(2, 8),
+      date: date,
+      distance: distance,
+      borgBefore: isBorgTouched('entry-borg-before') ? parseInt(document.getElementById('entry-borg-before').value, 10) : null,
+      borgAfter: isBorgTouched('entry-borg-after') ? parseInt(document.getElementById('entry-borg-after').value, 10) : null,
+      note: document.getElementById('entry-note').value
+    };
+
+    entries.push(entry);
+    saveState();
+    renderResults();
+
+    document.getElementById('entry-distance').value = '';
+    document.getElementById('entry-note').value = '';
+    ['entry-borg-before', 'entry-borg-after'].forEach(function (id) {
+      var el = document.getElementById(id);
+      el.value = 0;
+      el.setAttribute('data-touched', 'false');
+      document.getElementById(id + '-value').textContent = 'Ikke satt';
+    });
+  }
+
+  function buildSummaryText() {
+    var sorted = sortedEntries();
+    var lines = [];
+    lines.push('6-minutters gangtest (6MWT)');
+    lines.push('');
+
+    if (sorted.length === 0) {
+      lines.push('Ingen resultater registrert ennå.');
+    } else {
+      var prevDistance = null;
+      sorted.forEach(function (entry) {
+        var delta = prevDistance === null ? null : entry.distance - prevDistance;
+        lines.push(entry.date + ': ' + entry.distance + ' m' + (delta !== null ? ' (' + (delta > 0 ? '+' : '') + delta + ' m)' : ''));
+        if (entry.borgBefore !== null || entry.borgAfter !== null) {
+          lines.push('  Borg før/etter: ' + (entry.borgBefore !== null ? entry.borgBefore : '-') + ' / ' + (entry.borgAfter !== null ? entry.borgAfter : '-'));
+        }
+        if (entry.note) {
+          lines.push('  Notat: ' + entry.note);
+        }
+        prevDistance = entry.distance;
+      });
+      lines.push('');
+      lines.push('Første test: ' + sorted[0].distance + ' m');
+      lines.push('Siste test: ' + sorted[sorted.length - 1].distance + ' m');
+      if (sorted.length >= 2) {
+        var totalChange = sorted[sorted.length - 1].distance - sorted[0].distance;
+        lines.push('Endring totalt: ' + (totalChange > 0 ? '+' : '') + totalChange + ' m');
+      }
+    }
+
+    return lines.join('\n');
+  }
+
+  function sendEmail() {
+    var subject = encodeURIComponent('6-minutters gangtest (6MWT)');
+    var body = encodeURIComponent(buildSummaryText());
+    window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
+  }
+
+  function downloadText() {
+    var blob = new Blob([buildSummaryText()], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = '6mwt.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    entries = readState();
+    updateTimerDisplay();
+    renderResults();
+    updateCalc();
+
+    var today = new Date();
+    document.getElementById('entry-date').value = today.toISOString().slice(0, 10);
+
+    document.getElementById('timerStart').addEventListener('click', startTimer);
+    document.getElementById('timerPause').addEventListener('click', pauseTimer);
+    document.getElementById('timerReset').addEventListener('click', resetTimer);
+
+    ['calc-lap', 'calc-laps', 'calc-extra'].forEach(function (id) {
+      document.getElementById(id).addEventListener('input', updateCalc);
+    });
+    document.getElementById('calc-use').addEventListener('click', function () {
+      document.getElementById('entry-distance').value = updateCalc();
+    });
+
+    ['entry-borg-before', 'entry-borg-after'].forEach(function (id) {
+      document.getElementById(id).addEventListener('input', function (e) {
+        e.target.setAttribute('data-touched', 'true');
+        document.getElementById(id + '-value').textContent = e.target.value;
+      });
+    });
+
+    document.getElementById('addEntry').addEventListener('click', addEntry);
+
+    document.getElementById('resetAll').addEventListener('click', function () {
+      if (!confirm('Nullstille alle registrerte resultater? Dette kan ikke angres.')) return;
+      entries = [];
+      localStorage.removeItem(STORAGE_KEY);
+      renderResults();
+    });
+
+    document.getElementById('sendEmail').addEventListener('click', sendEmail);
+    document.getElementById('downloadText').addEventListener('click', downloadText);
+  });
+</script>
+
+</body>
+</html>

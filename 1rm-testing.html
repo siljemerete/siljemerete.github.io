@@ -1,0 +1,886 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1RM-testing</title>
+<meta name="description" content="Beregn estimert 1RM med Brzycki-formelen, og følg utviklingen i maksimal styrke over tid.">
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --push: #c9823f;
+    --push-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  header.page-header {
+    margin-bottom: 1.75rem;
+  }
+
+  header.page-header a.back-link {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    margin-bottom: 0.75rem;
+  }
+
+  header.page-header a.back-link:hover {
+    color: var(--accent-dark);
+  }
+
+  header.page-header h1 {
+    font-size: 1.7rem;
+    margin: 0 0 0.35rem;
+    color: var(--accent-dark);
+  }
+
+  header.page-header p.tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  .reminder {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem 1.35rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  section.primer h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer p {
+    margin: 0.6rem 0 0;
+  }
+
+  section.primer a.inline-link {
+    color: var(--accent-dark);
+    font-weight: 600;
+  }
+
+  .formula-box {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.7rem 1rem;
+    margin-top: 0.75rem;
+    font-family: "Cambria Math", Cambria, Georgia, serif;
+    font-style: italic;
+    font-size: 1.02rem;
+    color: var(--accent-dark);
+    text-align: center;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .controls button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .controls button:hover {
+    background: var(--accent-soft);
+  }
+
+  .controls button.danger {
+    color: var(--push);
+  }
+
+  .controls button.danger:hover {
+    background: var(--push-soft);
+  }
+
+  /* Fields */
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.9rem;
+    margin-top: 0.75rem;
+  }
+
+  .field-wide {
+    grid-column: 1 / -1;
+  }
+
+  .field label {
+    display: block;
+    font-weight: 600;
+    color: var(--accent-dark);
+    margin-bottom: 0.3rem;
+    font-size: 0.88rem;
+  }
+
+  .field input[type="text"],
+  .field input[type="date"],
+  .field input[type="number"],
+  .field textarea {
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .field textarea {
+    min-height: 56px;
+    resize: vertical;
+  }
+
+  .field .hint {
+    margin-top: 0.3rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .estimate-result {
+    margin-top: 0.9rem;
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    text-align: center;
+  }
+
+  .estimate-result .estimate-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+  }
+
+  .estimate-result .estimate-label {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .add-button {
+    margin-top: 1.1rem;
+    font-size: 0.95rem;
+    padding: 0.65rem 1.3rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .add-button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  /* Per-exercise summary */
+  .exercise-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.6rem;
+    margin-top: 0.75rem;
+  }
+
+  .exercise-summary-item {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.7rem 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  .exercise-summary-item strong.exercise-name {
+    display: block;
+    color: var(--accent-dark);
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .exercise-summary-item .exercise-latest {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+  }
+
+  .exercise-summary-item .exercise-change.delta-positive { color: var(--accent-dark); }
+  .exercise-summary-item .exercise-change.delta-negative { color: var(--push); }
+
+  /* Results table */
+  .table-scroll {
+    overflow-x: auto;
+    margin-top: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  table.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 620px;
+  }
+
+  table.results-table th,
+  table.results-table td {
+    border: 1px solid var(--border);
+    padding: 0.5rem 0.6rem;
+    font-size: 0.88rem;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  table.results-table thead th {
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  table.results-table td.delta-positive { color: var(--accent-dark); font-weight: 600; }
+  table.results-table td.delta-negative { color: var(--push); font-weight: 600; }
+
+  table.results-table button.delete-row {
+    font-size: 0.78rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--push);
+    cursor: pointer;
+  }
+
+  table.results-table button.delete-row:hover {
+    background: var(--push-soft);
+  }
+
+  .empty-note {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 0.75rem;
+  }
+
+  .source-note {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.9rem;
+  }
+
+  .send-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .send-buttons button {
+    font-size: 0.92rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .send-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .muted-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  footer.closing {
+    margin-top: 1.75rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong {
+    color: var(--accent-dark);
+  }
+
+  body.gate-locked .wrap,
+  body.gate-locked footer.closing {
+    display: none;
+  }
+
+  .gate-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 100;
+  }
+
+  body.gate-locked .gate-overlay {
+    display: flex;
+  }
+
+  .gate-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 2rem 1.75rem;
+    max-width: 340px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .gate-box h1 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    color: var(--accent-dark);
+  }
+
+  .gate-box p {
+    margin: 0 0 1rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .gate-box input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    font-family: inherit;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  .gate-box input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .gate-box button {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .gate-box button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .gate-error {
+    display: none;
+    color: var(--push);
+    font-size: 0.85rem;
+    margin: 0.7rem 0 0;
+  }
+
+  .gate-contact {
+    margin-top: 0.9rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .gate-contact a {
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .gate-contact a:hover {
+    text-decoration: underline;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .controls, .send-buttons, .muted-note, header.page-header a.back-link { display: none; }
+    section.primer { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body class="gate-locked">
+
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box">
+    <h1>Tilgang til verktøyet</h1>
+    <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
+    <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
+    <button type="button" id="gateSubmit">Lås opp</button>
+    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20Trening%20og%20aktivitet-verkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var GATE_KEY = 'gate-aktivitet-unlocked';
+    var CODE = 'nyevaner';
+
+    function unlock() {
+      localStorage.setItem(GATE_KEY, 'true');
+      document.body.classList.remove('gate-locked');
+    }
+
+    if (localStorage.getItem(GATE_KEY) === 'true') {
+      unlock();
+    }
+
+    function trySubmit() {
+      var input = document.getElementById('gateCode');
+      var error = document.getElementById('gateError');
+      if (input.value.trim().toLowerCase() === CODE) {
+        error.style.display = 'none';
+        unlock();
+      } else {
+        error.style.display = 'block';
+      }
+    }
+
+    document.getElementById('gateSubmit').addEventListener('click', trySubmit);
+    document.getElementById('gateCode').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') trySubmit();
+    });
+  })();
+</script>
+
+<div class="wrap">
+
+  <header class="page-header">
+    <a class="back-link" href="index.html">← Til forsiden</a>
+    <h1>1RM-testing</h1>
+    <p class="tagline">Anslå maksimal styrke, og følg utviklingen din over tid</p>
+    <div class="reminder">
+      Dette er en enkel måte å følge utviklingen av maksimal styrke over tid
+      — ikke en medisinsk vurdering. Direkte testing av 1RM (å løfte
+      tyngste vekt én gang) krever korrekt teknikk og innebærer risiko for
+      overbelastning eller feil teknikk. For de fleste er det tryggere og
+      mer praktisk å estimere 1RM ut fra en litt lettere vekt løftet flere
+      ganger. Bruk alltid god oppvarming og riktig teknikk, og la deg gjerne
+      veilede av en trent person. Resultatene dine lagres kun i denne
+      nettleseren.
+    </div>
+  </header>
+
+  <section class="primer">
+    <h2>Om 1RM-testing</h2>
+    <p>1RM (one repetition maximum) er den tyngste belastningen en person klarer å løfte én gang med korrekt teknikk, og den mest brukte metoden for å vurdere maksimal dynamisk styrke.</p>
+    <p>Direkte testing av 1RM kan gi mer presise resultater, men krever korrekt teknikk og innebærer risiko for overbelastning eller feil teknikk hvis testleder ikke har erfaring med å gjennomføre slike tester. I praksis benyttes derfor ofte indirekte metoder, hvor man utfører en moderat belastning og registrerer hvor mange repetisjoner man klarer kontrollert. Deretter estimeres 1RM ved hjelp av en formel.</p>
+    <p>Verktøyet under bruker Brzycki-formelen, som er blant de mest brukte og mest pålitelige dersom antall repetisjoner ligger mellom 10 og 15:</p>
+    <div class="formula-box">1RM = Vekt ÷ (1,0278 − 0,0278 × Antall repetisjoner)</div>
+    <p>Slik gjør du det: velg en øvelse, og løft en vekt du klarer å ta i 10–15 kontrollerte repetisjoner med god teknikk. Fyll inn øvelse, vekt og antall repetisjoner under, så regner verktøyet automatisk ut din estimerte 1RM.</p>
+  </section>
+
+  <section class="primer">
+    <h2>Beregn estimert 1RM</h2>
+    <div class="field-grid">
+      <div class="field field-wide">
+        <label for="entry-exercise">Øvelse</label>
+        <input type="text" id="entry-exercise" placeholder="F.eks. Knebøy, Benkpress, Markløft">
+      </div>
+      <div class="field">
+        <label for="entry-date">Dato</label>
+        <input type="date" id="entry-date">
+      </div>
+      <div class="field">
+        <label for="entry-weight">Vekt løftet (kg)</label>
+        <input type="number" min="0" step="0.5" id="entry-weight" placeholder="F.eks. 60">
+      </div>
+      <div class="field">
+        <label for="entry-reps">Antall repetisjoner</label>
+        <input type="number" min="1" max="20" step="1" id="entry-reps" placeholder="F.eks. 12">
+        <p class="hint">Bruk 1 for et direkte testet 1RM. Formelen er mest pålitelig ved 10–15 repetisjoner.</p>
+      </div>
+      <div class="field field-wide">
+        <label for="entry-note">Notat — teknikk, følelse, annet</label>
+        <textarea id="entry-note" placeholder="Skriv gjerne fritt her..."></textarea>
+      </div>
+    </div>
+    <div class="estimate-result">
+      <div class="estimate-value" id="estimateValue">–</div>
+      <div class="estimate-label">Estimert 1RM (kg)</div>
+    </div>
+    <button type="button" class="add-button" id="addEntry">Legg til resultat</button>
+  </section>
+
+  <section class="primer">
+    <h2>Dine resultater over tid</h2>
+    <div class="controls">
+      <button type="button" id="resetAll" class="danger">Nullstill alle resultater</button>
+    </div>
+    <div class="exercise-summary-grid" id="exerciseSummaryGrid"></div>
+    <div class="table-scroll">
+      <table class="results-table" id="resultsTable">
+        <thead>
+          <tr>
+            <th>Dato</th>
+            <th>Øvelse</th>
+            <th>Vekt (kg)</th>
+            <th>Reps</th>
+            <th>Estimert 1RM (kg)</th>
+            <th>Endring</th>
+            <th>Notat</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="resultsBody"></tbody>
+      </table>
+    </div>
+    <p class="empty-note" id="emptyNote">Ingen resultater registrert ennå.</p>
+    <p class="source-note">Formelen og fremgangsmåten er hentet fra kursmateriell om 1RM-testing, og er kun ment som et referansepunkt — ikke en medisinsk vurdering.</p>
+  </section>
+
+  <section class="primer">
+    <h2>Send inn resultatene</h2>
+    <p class="muted-note">
+      Du kan sende resultatene direkte fra din egen e-postapp, eller laste
+      dem ned som en tekstfil du selv sender eller tar med til timen. Hvis
+      "Send på e-post" ikke åpner riktig på mobilen din, bruk nedlastingen i
+      stedet.
+    </p>
+    <div class="send-buttons">
+      <button type="button" id="sendEmail">Send på e-post</button>
+      <button type="button" id="downloadText" class="secondary">Last ned som tekstfil</button>
+    </div>
+  </section>
+
+  <footer class="closing">
+    Styrke bygges gjennom jevn, kontrollert fremgang.<br>
+    <strong>Du trenger ikke gjøre det alene.</strong>
+  </footer>
+
+</div>
+
+<script>
+  var STORAGE_KEY = '1rm-testing-data';
+  var RECIPIENT = 'silje.merete.binder@gmail.com';
+
+  var entries = [];
+
+  function estimate1RM(weight, reps) {
+    if (reps === 1) return weight;
+    return weight / (1.0278 - 0.0278 * reps);
+  }
+
+  function round1(n) {
+    return Math.round(n * 10) / 10;
+  }
+
+  function updateLiveEstimate() {
+    var weight = parseFloat(document.getElementById('entry-weight').value);
+    var reps = parseInt(document.getElementById('entry-reps').value, 10);
+    var el = document.getElementById('estimateValue');
+    if (isNaN(weight) || isNaN(reps) || reps < 1 || weight <= 0) {
+      el.textContent = '–';
+      return;
+    }
+    el.textContent = round1(estimate1RM(weight, reps));
+  }
+
+  function readState() {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return [];
+    try {
+      var data = JSON.parse(raw);
+      return (data && data.entries) || [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveState() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ entries: entries }));
+  }
+
+  function sortedEntries() {
+    return entries.slice().sort(function (a, b) {
+      return (a.date || '').localeCompare(b.date || '');
+    });
+  }
+
+  function groupByExercise(sorted) {
+    var groups = {};
+    var order = [];
+    sorted.forEach(function (entry) {
+      if (!groups[entry.exercise]) {
+        groups[entry.exercise] = [];
+        order.push(entry.exercise);
+      }
+      groups[entry.exercise].push(entry);
+    });
+    return { groups: groups, order: order };
+  }
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function renderExerciseSummary(sorted) {
+    var grid = document.getElementById('exerciseSummaryGrid');
+    grid.innerHTML = '';
+    var grouped = groupByExercise(sorted);
+
+    grouped.order.forEach(function (exercise) {
+      var list = grouped.groups[exercise];
+      var first = list[0].oneRM;
+      var latest = list[list.length - 1].oneRM;
+      var change = round1(latest - first);
+      var changeClass = list.length < 2 ? '' : (change > 0 ? 'delta-positive' : (change < 0 ? 'delta-negative' : ''));
+      var changeText = list.length < 2 ? 'Kun én test' : (change > 0 ? '+' : '') + change + ' kg siden første test';
+
+      var item = document.createElement('div');
+      item.className = 'exercise-summary-item';
+      item.innerHTML =
+        '<strong class="exercise-name">' + escapeHtml(exercise) + '</strong>' +
+        '<div class="exercise-latest">' + round1(latest) + ' kg</div>' +
+        '<div class="exercise-change ' + changeClass + '">' + changeText + '</div>';
+      grid.appendChild(item);
+    });
+  }
+
+  function renderResults() {
+    var sorted = sortedEntries();
+    var body = document.getElementById('resultsBody');
+    var table = document.getElementById('resultsTable');
+    var emptyNote = document.getElementById('emptyNote');
+    body.innerHTML = '';
+
+    if (sorted.length === 0) {
+      table.style.display = 'none';
+      emptyNote.style.display = 'block';
+    } else {
+      table.style.display = 'table';
+      emptyNote.style.display = 'none';
+    }
+
+    var lastSeen = {};
+    sorted.forEach(function (entry) {
+      var tr = document.createElement('tr');
+
+      var prevOneRM = lastSeen[entry.exercise];
+      var delta = prevOneRM === undefined ? null : round1(entry.oneRM - prevOneRM);
+      var deltaText = delta === null ? '–' : (delta > 0 ? '+' : '') + delta;
+      var deltaClass = delta === null ? '' : (delta > 0 ? 'delta-positive' : (delta < 0 ? 'delta-negative' : ''));
+
+      tr.innerHTML =
+        '<td>' + (entry.date || '-') + '</td>' +
+        '<td>' + escapeHtml(entry.exercise) + '</td>' +
+        '<td>' + entry.weight + '</td>' +
+        '<td>' + entry.reps + '</td>' +
+        '<td>' + round1(entry.oneRM) + '</td>' +
+        '<td class="' + deltaClass + '">' + deltaText + '</td>' +
+        '<td>' + (entry.note ? escapeHtml(entry.note) : '-') + '</td>' +
+        '<td></td>';
+
+      var deleteTd = tr.lastElementChild;
+      var deleteBtn = document.createElement('button');
+      deleteBtn.type = 'button';
+      deleteBtn.className = 'delete-row';
+      deleteBtn.textContent = 'Slett';
+      deleteBtn.addEventListener('click', function () {
+        if (!confirm('Slette denne registreringen?')) return;
+        entries = entries.filter(function (e) { return e.id !== entry.id; });
+        saveState();
+        renderResults();
+      });
+      deleteTd.appendChild(deleteBtn);
+
+      body.appendChild(tr);
+      lastSeen[entry.exercise] = entry.oneRM;
+    });
+
+    renderExerciseSummary(sorted);
+  }
+
+  function addEntry() {
+    var exercise = document.getElementById('entry-exercise').value.trim();
+    var date = document.getElementById('entry-date').value;
+    var weight = parseFloat(document.getElementById('entry-weight').value);
+    var reps = parseInt(document.getElementById('entry-reps').value, 10);
+
+    if (!exercise || !date || isNaN(weight) || weight <= 0 || isNaN(reps) || reps < 1) {
+      alert('Fyll ut øvelse, dato, vekt og repetisjoner for å legge til resultatet.');
+      return;
+    }
+
+    var entry = {
+      id: Date.now() + '-' + Math.random().toString(36).slice(2, 8),
+      date: date,
+      exercise: exercise,
+      weight: weight,
+      reps: reps,
+      oneRM: round1(estimate1RM(weight, reps)),
+      note: document.getElementById('entry-note').value
+    };
+
+    entries.push(entry);
+    saveState();
+    renderResults();
+
+    document.getElementById('entry-weight').value = '';
+    document.getElementById('entry-reps').value = '';
+    document.getElementById('entry-note').value = '';
+    updateLiveEstimate();
+  }
+
+  function buildSummaryText() {
+    var sorted = sortedEntries();
+    var lines = [];
+    lines.push('1RM-testing');
+    lines.push('');
+
+    if (sorted.length === 0) {
+      lines.push('Ingen resultater registrert ennå.');
+    } else {
+      var lastSeen = {};
+      sorted.forEach(function (entry) {
+        var prevOneRM = lastSeen[entry.exercise];
+        var delta = prevOneRM === undefined ? null : round1(entry.oneRM - prevOneRM);
+        lines.push(entry.date + ' — ' + entry.exercise + ': ' + entry.weight + ' kg x ' + entry.reps + ' reps → estimert 1RM ' + round1(entry.oneRM) + ' kg' + (delta !== null ? ' (' + (delta > 0 ? '+' : '') + delta + ' kg)' : ''));
+        if (entry.note) {
+          lines.push('  Notat: ' + entry.note);
+        }
+        lastSeen[entry.exercise] = entry.oneRM;
+      });
+
+      lines.push('');
+      lines.push('Oppsummering per øvelse:');
+      var grouped = groupByExercise(sorted);
+      grouped.order.forEach(function (exercise) {
+        var list = grouped.groups[exercise];
+        var first = list[0].oneRM;
+        var latest = list[list.length - 1].oneRM;
+        var change = round1(latest - first);
+        lines.push('  ' + exercise + ': ' + round1(latest) + ' kg' + (list.length >= 2 ? ' (' + (change > 0 ? '+' : '') + change + ' kg siden første test)' : ''));
+      });
+    }
+
+    return lines.join('\n');
+  }
+
+  function sendEmail() {
+    var subject = encodeURIComponent('1RM-testing');
+    var body = encodeURIComponent(buildSummaryText());
+    window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
+  }
+
+  function downloadText() {
+    var blob = new Blob([buildSummaryText()], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = '1rm-testing.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    entries = readState();
+    renderResults();
+
+    var today = new Date();
+    document.getElementById('entry-date').value = today.toISOString().slice(0, 10);
+
+    ['entry-weight', 'entry-reps'].forEach(function (id) {
+      document.getElementById(id).addEventListener('input', updateLiveEstimate);
+    });
+
+    document.getElementById('addEntry').addEventListener('click', addEntry);
+
+    document.getElementById('resetAll').addEventListener('click', function () {
+      if (!confirm('Nullstille alle registrerte resultater? Dette kan ikke angres.')) return;
+      entries = [];
+      localStorage.removeItem(STORAGE_KEY);
+      renderResults();
+    });
+
+    document.getElementById('sendEmail').addEventListener('click', sendEmail);
+    document.getElementById('downloadText').addEventListener('click', downloadText);
+  });
+</script>
+
+</body>
+</html>

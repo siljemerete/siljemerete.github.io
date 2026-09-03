@@ -1,0 +1,1144 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YMCA step-test</title>
+<meta name="description" content="Metronom, tidtaker og loggverktøy for YMCA 3-minutters step-test — mål kondisjon og følg utviklingen over tid.">
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --push: #c9823f;
+    --push-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  header.page-header {
+    margin-bottom: 1.75rem;
+  }
+
+  header.page-header a.back-link {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    margin-bottom: 0.75rem;
+  }
+
+  header.page-header a.back-link:hover {
+    color: var(--accent-dark);
+  }
+
+  header.page-header h1 {
+    font-size: 1.7rem;
+    margin: 0 0 0.35rem;
+    color: var(--accent-dark);
+  }
+
+  header.page-header p.tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  .reminder {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem 1.35rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  section.primer h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer p {
+    margin: 0.6rem 0 0;
+  }
+
+  section.primer ul {
+    margin: 0.6rem 0 0;
+    padding-left: 1.2rem;
+  }
+
+  section.primer li {
+    margin: 0.3rem 0;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .controls button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .controls button:hover {
+    background: var(--accent-soft);
+  }
+
+  .controls button.danger {
+    color: var(--push);
+  }
+
+  .controls button.danger:hover {
+    background: var(--push-soft);
+  }
+
+  /* Timer */
+  .timer-display {
+    text-align: center;
+    padding: 1rem 0 0.5rem;
+  }
+
+  .timer-clock {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+
+  .timer-clock.small {
+    font-size: 2.4rem;
+  }
+
+  .timer-progress {
+    width: 100%;
+    height: 8px;
+    background: var(--accent-soft);
+    border-radius: 999px;
+    margin: 0.9rem 0 1rem;
+    overflow: hidden;
+  }
+
+  .timer-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    transition: width 0.2s linear;
+  }
+
+  .timer-phrase {
+    min-height: 1.6em;
+    font-weight: 600;
+    color: var(--accent-dark);
+    font-size: 1.02rem;
+  }
+
+  .step-cue {
+    display: inline-block;
+    min-width: 5em;
+    margin-top: 0.4rem;
+    padding: 0.3rem 1rem;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.04em;
+  }
+
+  .timer-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1rem;
+  }
+
+  .timer-buttons button {
+    font-size: 0.95rem;
+    padding: 0.65rem 1.3rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .timer-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .timer-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .timer-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .timer-buttons button:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  /* Fields */
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 0.9rem;
+    margin-top: 0.75rem;
+  }
+
+  .field-wide {
+    grid-column: 1 / -1;
+  }
+
+  .field label {
+    display: block;
+    font-weight: 600;
+    color: var(--accent-dark);
+    margin-bottom: 0.3rem;
+    font-size: 0.88rem;
+  }
+
+  .field input[type="text"],
+  .field input[type="date"],
+  .field input[type="number"],
+  .field textarea {
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .field textarea {
+    min-height: 56px;
+    resize: vertical;
+  }
+
+  .gender-options {
+    display: flex;
+    gap: 1.25rem;
+    padding: 0.5rem 0.1rem;
+  }
+
+  .gender-options label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 500;
+    color: var(--ink);
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .gender-options input {
+    accent-color: var(--accent);
+  }
+
+  .rating-result {
+    margin-top: 0.9rem;
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.95rem;
+    color: var(--accent-dark);
+    display: none;
+  }
+
+  .rating-result strong {
+    font-size: 1.05rem;
+  }
+
+  .add-button {
+    margin-top: 1.1rem;
+    font-size: 0.95rem;
+    padding: 0.65rem 1.3rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .add-button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  /* Results table */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.6rem;
+    margin: 0.75rem 0 1rem;
+  }
+
+  .stat-item {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.7rem 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  .stat-item strong {
+    display: block;
+    color: var(--accent-dark);
+    font-size: 1.4rem;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+    margin-top: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  table.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 560px;
+  }
+
+  table.results-table th,
+  table.results-table td {
+    border: 1px solid var(--border);
+    padding: 0.5rem 0.6rem;
+    font-size: 0.88rem;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  table.results-table thead th {
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  table.results-table td.delta-positive { color: var(--accent-dark); font-weight: 600; }
+  table.results-table td.delta-negative { color: var(--push); font-weight: 600; }
+
+  table.results-table button.delete-row {
+    font-size: 0.78rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--push);
+    cursor: pointer;
+  }
+
+  table.results-table button.delete-row:hover {
+    background: var(--push-soft);
+  }
+
+  .empty-note {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 0.75rem;
+  }
+
+  .source-note {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.9rem;
+  }
+
+  .send-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .send-buttons button {
+    font-size: 0.92rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .send-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .muted-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  footer.closing {
+    margin-top: 1.75rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong {
+    color: var(--accent-dark);
+  }
+
+  body.gate-locked .wrap,
+  body.gate-locked footer.closing {
+    display: none;
+  }
+
+  .gate-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 100;
+  }
+
+  body.gate-locked .gate-overlay {
+    display: flex;
+  }
+
+  .gate-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 2rem 1.75rem;
+    max-width: 340px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .gate-box h1 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    color: var(--accent-dark);
+  }
+
+  .gate-box p {
+    margin: 0 0 1rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .gate-box input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    font-family: inherit;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  .gate-box input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .gate-box button {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .gate-box button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .gate-error {
+    display: none;
+    color: var(--push);
+    font-size: 0.85rem;
+    margin: 0.7rem 0 0;
+  }
+
+  .gate-contact {
+    margin-top: 0.9rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .gate-contact a {
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .gate-contact a:hover {
+    text-decoration: underline;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .controls, .send-buttons, .muted-note, header.page-header a.back-link, .timer-buttons { display: none; }
+    section.primer { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body class="gate-locked">
+
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box">
+    <h1>Tilgang til verktøyet</h1>
+    <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
+    <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
+    <button type="button" id="gateSubmit">Lås opp</button>
+    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20Trening%20og%20aktivitet-verkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var GATE_KEY = 'gate-aktivitet-unlocked';
+    var CODE = 'nyevaner';
+
+    function unlock() {
+      localStorage.setItem(GATE_KEY, 'true');
+      document.body.classList.remove('gate-locked');
+    }
+
+    if (localStorage.getItem(GATE_KEY) === 'true') {
+      unlock();
+    }
+
+    function trySubmit() {
+      var input = document.getElementById('gateCode');
+      var error = document.getElementById('gateError');
+      if (input.value.trim().toLowerCase() === CODE) {
+        error.style.display = 'none';
+        unlock();
+      } else {
+        error.style.display = 'block';
+      }
+    }
+
+    document.getElementById('gateSubmit').addEventListener('click', trySubmit);
+    document.getElementById('gateCode').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') trySubmit();
+    });
+  })();
+</script>
+
+<div class="wrap">
+
+  <header class="page-header">
+    <a class="back-link" href="index.html">← Til forsiden</a>
+    <h1>YMCA step-test</h1>
+    <p class="tagline">Mål kondisjon med et enkelt trappetrinn, og følg utviklingen din over tid</p>
+    <div class="reminder">
+      Dette er en enkel måte å følge kondisjon over tid — ikke en medisinsk
+      vurdering. Er du usikker på om testen er trygg for deg, for eksempel
+      ved hjerte- eller lungesykdom, svimmelhet eller balanseproblemer, ta
+      kontakt med lege først. Stopp umiddelbart ved brystsmerter, sterk
+      tung pust eller svimmelhet. Resultatene dine lagres kun i denne
+      nettleseren.
+    </div>
+  </header>
+
+  <section class="primer">
+    <h2>Slik gjennomfører du testen</h2>
+    <p><strong>Du trenger:</strong> et stabilt trinn eller en kasse på ca. 30 cm høyde, en stol å sette deg på etterpå, og noe å telle puls med (fingrene og et klokkeslett holder fint).</p>
+    <ul>
+      <li>Still deg foran trinnet. Når tidtakeren starter, tråkker du i takt: opp — opp — ned — ned, i tempoet som vises under (96 taktslag i minuttet, altså 24 hele tråkk-sykluser).</li>
+      <li>Hold jevn takt i 3 minutter sammenhengende.</li>
+      <li>Når tiden er ute, sett deg umiddelbart ned.</li>
+      <li>Finn pulsen din og tell antall slag i ett fullt minutt (60 sekunder) — bruk pulstelleren under.</li>
+    </ul>
+  </section>
+
+  <section class="primer">
+    <h2>Metronom og tidtaker — 3 minutter</h2>
+    <div class="timer-display">
+      <div class="timer-clock" id="timerClock">03:00</div>
+      <div class="timer-progress">
+        <div class="timer-progress-bar" id="timerProgressBar"></div>
+      </div>
+      <div><span class="step-cue" id="stepCue">Klar</span></div>
+      <p class="timer-phrase" id="timerPhrase">Trykk start når du er klar til å tråkke</p>
+    </div>
+    <div class="timer-buttons">
+      <button type="button" id="timerStart">Start</button>
+      <button type="button" id="timerPause" class="secondary" disabled>Pause</button>
+      <button type="button" id="timerReset" class="secondary">Nullstill</button>
+    </div>
+  </section>
+
+  <section class="primer">
+    <h2>Pulstelling etter testen — 60 sekunder</h2>
+    <p>Sett deg umiddelbart etter testen. Finn pulsen på håndleddet eller halsen, trykk start, og tell antall slag helt til tiden er ute.</p>
+    <div class="timer-display">
+      <div class="timer-clock small" id="recoveryClock">01:00</div>
+      <div class="timer-progress">
+        <div class="timer-progress-bar" id="recoveryProgressBar"></div>
+      </div>
+      <p class="timer-phrase" id="recoveryPhrase">Trykk start rett etter du har satt deg</p>
+    </div>
+    <div class="timer-buttons">
+      <button type="button" id="recoveryStart">Start pulstelling</button>
+      <button type="button" id="recoveryReset" class="secondary">Nullstill</button>
+    </div>
+  </section>
+
+  <section class="primer">
+    <h2>Registrer resultat</h2>
+    <div class="field-grid">
+      <div class="field">
+        <label for="entry-date">Dato</label>
+        <input type="date" id="entry-date">
+      </div>
+      <div class="field">
+        <label for="entry-age">Alder</label>
+        <input type="number" min="10" max="110" step="1" id="entry-age" placeholder="F.eks. 42">
+      </div>
+      <div class="field">
+        <label>Kjønn (for normtabellen)</label>
+        <div class="gender-options">
+          <label><input type="radio" name="entry-gender" value="female"> Kvinne</label>
+          <label><input type="radio" name="entry-gender" value="male"> Mann</label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="entry-hr">Puls etter testen (1 min, bpm)</label>
+        <input type="number" min="30" max="220" step="1" id="entry-hr" placeholder="F.eks. 96">
+      </div>
+      <div class="field field-wide">
+        <label for="entry-note">Notat — hvordan kjentes det, pauser, annet</label>
+        <textarea id="entry-note" placeholder="Skriv gjerne fritt her..."></textarea>
+      </div>
+    </div>
+    <div class="rating-result" id="ratingResult"></div>
+    <button type="button" class="add-button" id="addEntry">Legg til resultat</button>
+  </section>
+
+  <section class="primer">
+    <h2>Dine resultater over tid</h2>
+    <div class="controls">
+      <button type="button" id="resetAll" class="danger">Nullstill alle resultater</button>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-item"><strong id="stat-first">–</strong>Første test (puls)</div>
+      <div class="stat-item"><strong id="stat-latest">–</strong>Siste test (puls)</div>
+      <div class="stat-item"><strong id="stat-change">–</strong>Endring totalt (lavere er bedre)</div>
+    </div>
+    <div class="table-scroll">
+      <table class="results-table" id="resultsTable">
+        <thead>
+          <tr>
+            <th>Dato</th>
+            <th>Puls (1 min)</th>
+            <th>Vurdering</th>
+            <th>Endring</th>
+            <th>Notat</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="resultsBody"></tbody>
+      </table>
+    </div>
+    <p class="empty-note" id="emptyNote">Ingen resultater registrert ennå.</p>
+    <p class="source-note">Normtallene er hentet fra YMCA sin standardprotokoll for 3-minutters step-test ("Y's Way to Physical Fitness"), og er kun ment som et referansepunkt — ikke en medisinsk vurdering.</p>
+  </section>
+
+  <section class="primer">
+    <h2>Send inn resultatene</h2>
+    <p class="muted-note">
+      Du kan sende resultatene direkte fra din egen e-postapp, eller laste
+      dem ned som en tekstfil du selv sender eller tar med til timen. Hvis
+      "Send på e-post" ikke åpner riktig på mobilen din, bruk nedlastingen i
+      stedet.
+    </p>
+    <div class="send-buttons">
+      <button type="button" id="sendEmail">Send på e-post</button>
+      <button type="button" id="downloadText" class="secondary">Last ned som tekstfil</button>
+    </div>
+  </section>
+
+  <footer class="closing">
+    Kondisjon bygges over tid, ett trinn av gangen.<br>
+    <strong>Du trenger ikke gjøre det alene.</strong>
+  </footer>
+
+</div>
+
+<script>
+  var STORAGE_KEY = 'ymca-step-test-data';
+  var RECIPIENT = 'silje.merete.binder@gmail.com';
+
+  var NORMS = {
+    female: {
+      '18-25': { excellent: [52, 81], good: [85, 93], aboveAverage: [96, 102], average: [104, 110], belowAverage: [113, 120], poor: [122, 131], veryPoor: [135, 169] },
+      '26-35': { excellent: [58, 80], good: [85, 92], aboveAverage: [95, 101], average: [104, 110], belowAverage: [113, 119], poor: [122, 129], veryPoor: [134, 171] },
+      '36-45': { excellent: [51, 84], good: [89, 96], aboveAverage: [100, 104], average: [107, 112], belowAverage: [115, 120], poor: [124, 132], veryPoor: [137, 169] },
+      '46-55': { excellent: [63, 91], good: [95, 101], aboveAverage: [104, 110], average: [113, 118], belowAverage: [120, 124], poor: [126, 132], veryPoor: [137, 171] },
+      '56-65': { excellent: [60, 92], good: [97, 103], aboveAverage: [106, 111], average: [113, 118], belowAverage: [119, 127], poor: [129, 135], veryPoor: [141, 174] },
+      '65+':   { excellent: [70, 92], good: [96, 101], aboveAverage: [104, 111], average: [116, 121], belowAverage: [123, 126], poor: [128, 133], veryPoor: [135, 155] }
+    },
+    male: {
+      '18-25': { excellent: [50, 76], good: [79, 84], aboveAverage: [88, 93], average: [95, 100], belowAverage: [102, 107], poor: [111, 119], veryPoor: [124, 157] },
+      '26-35': { excellent: [51, 76], good: [79, 85], aboveAverage: [88, 94], average: [96, 102], belowAverage: [104, 110], poor: [114, 121], veryPoor: [126, 161] },
+      '36-45': { excellent: [49, 76], good: [80, 88], aboveAverage: [92, 98], average: [100, 105], belowAverage: [108, 113], poor: [116, 124], veryPoor: [130, 163] },
+      '46-55': { excellent: [56, 82], good: [87, 93], aboveAverage: [95, 101], average: [103, 109], belowAverage: [113, 119], poor: [121, 126], veryPoor: [131, 159] },
+      '56-65': { excellent: [60, 77], good: [86, 94], aboveAverage: [97, 100], average: [103, 109], belowAverage: [111, 117], poor: [119, 128], veryPoor: [131, 154] },
+      '65+':   { excellent: [59, 81], good: [87, 92], aboveAverage: [94, 102], average: [104, 110], belowAverage: [114, 118], poor: [121, 126], veryPoor: [130, 151] }
+    }
+  };
+
+  var RATING_ORDER = ['excellent', 'good', 'aboveAverage', 'average', 'belowAverage', 'poor', 'veryPoor'];
+  var RATING_LABELS = {
+    excellent: 'Utmerket',
+    good: 'God',
+    aboveAverage: 'Over gjennomsnittet',
+    average: 'Gjennomsnittlig',
+    belowAverage: 'Under gjennomsnittet',
+    poor: 'Dårlig',
+    veryPoor: 'Svært dårlig'
+  };
+
+  var entries = [];
+
+  var TEST_SECONDS = 180;
+  var testRemaining = TEST_SECONDS;
+  var testInterval = null;
+  var metronomeInterval = null;
+  var testRunning = false;
+  var beatCount = 0;
+  var STEP_LABELS = ['Opp', 'Opp', 'Ned', 'Ned'];
+
+  var TEST_PHRASES = {
+    60: '1 minutt unnagjort. 2 minutter igjen.',
+    120: '2 minutter unnagjort. 1 minutt igjen.',
+    150: '30 sekunder igjen.',
+    180: 'Stopp. Sett deg umiddelbart og tell pulsen.'
+  };
+
+  var RECOVERY_SECONDS = 60;
+  var recoveryRemaining = RECOVERY_SECONDS;
+  var recoveryInterval = null;
+  var recoveryRunning = false;
+
+  function formatClock(seconds) {
+    var m = Math.floor(seconds / 60);
+    var s = seconds % 60;
+    return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  function beep(freq, duration) {
+    try {
+      var ctx = new (window.AudioContext || window.webkitAudioContext)();
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.001, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.2, ctx.currentTime + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+      osc.start();
+      osc.stop(ctx.currentTime + duration);
+    } catch (e) { /* ignore if audio unavailable */ }
+  }
+
+  function updateTestDisplay() {
+    document.getElementById('timerClock').textContent = formatClock(testRemaining);
+    var elapsed = TEST_SECONDS - testRemaining;
+    document.getElementById('timerProgressBar').style.width = ((elapsed / TEST_SECONDS) * 100) + '%';
+  }
+
+  function tickTest() {
+    testRemaining -= 1;
+    var elapsed = TEST_SECONDS - testRemaining;
+    updateTestDisplay();
+    if (TEST_PHRASES[elapsed]) {
+      document.getElementById('timerPhrase').textContent = TEST_PHRASES[elapsed];
+    }
+    if (testRemaining <= 0) {
+      stopTest();
+      beep(440, 0.6);
+    }
+  }
+
+  function tickMetronome() {
+    beatCount = (beatCount + 1) % 4;
+    document.getElementById('stepCue').textContent = STEP_LABELS[beatCount];
+    beep(beatCount === 0 ? 880 : 660, 0.08);
+  }
+
+  function startTest() {
+    if (testRunning) return;
+    testRunning = true;
+    document.getElementById('timerStart').disabled = true;
+    document.getElementById('timerPause').disabled = false;
+    document.getElementById('timerPhrase').textContent = testRemaining === TEST_SECONDS ? 'Tråkk i takt!' : 'Fortsetter...';
+    beatCount = -1;
+    testInterval = setInterval(tickTest, 1000);
+    metronomeInterval = setInterval(tickMetronome, 625);
+  }
+
+  function pauseTest() {
+    testRunning = false;
+    clearInterval(testInterval);
+    clearInterval(metronomeInterval);
+    document.getElementById('timerStart').disabled = false;
+    document.getElementById('timerPause').disabled = true;
+    document.getElementById('timerPhrase').textContent = 'Pause';
+    document.getElementById('stepCue').textContent = 'Pause';
+  }
+
+  function stopTest() {
+    testRunning = false;
+    clearInterval(testInterval);
+    clearInterval(metronomeInterval);
+    document.getElementById('timerStart').disabled = false;
+    document.getElementById('timerPause').disabled = true;
+  }
+
+  function resetTest() {
+    stopTest();
+    testRemaining = TEST_SECONDS;
+    updateTestDisplay();
+    document.getElementById('timerPhrase').textContent = 'Trykk start når du er klar til å tråkke';
+    document.getElementById('stepCue').textContent = 'Klar';
+  }
+
+  function updateRecoveryDisplay() {
+    document.getElementById('recoveryClock').textContent = formatClock(recoveryRemaining);
+    var elapsed = RECOVERY_SECONDS - recoveryRemaining;
+    document.getElementById('recoveryProgressBar').style.width = ((elapsed / RECOVERY_SECONDS) * 100) + '%';
+  }
+
+  function tickRecovery() {
+    recoveryRemaining -= 1;
+    updateRecoveryDisplay();
+    if (recoveryRemaining <= 0) {
+      recoveryRunning = false;
+      clearInterval(recoveryInterval);
+      document.getElementById('recoveryStart').disabled = false;
+      document.getElementById('recoveryPhrase').textContent = 'Ferdig — skriv inn antall slag du talte under.';
+      beep(440, 0.6);
+      document.getElementById('entry-hr').focus();
+    }
+  }
+
+  function startRecovery() {
+    if (recoveryRunning) return;
+    recoveryRunning = true;
+    document.getElementById('recoveryStart').disabled = true;
+    document.getElementById('recoveryPhrase').textContent = 'Teller...';
+    recoveryInterval = setInterval(tickRecovery, 1000);
+  }
+
+  function resetRecovery() {
+    recoveryRunning = false;
+    clearInterval(recoveryInterval);
+    recoveryRemaining = RECOVERY_SECONDS;
+    updateRecoveryDisplay();
+    document.getElementById('recoveryStart').disabled = false;
+    document.getElementById('recoveryPhrase').textContent = 'Trykk start rett etter du har satt deg';
+  }
+
+  function ageBracket(age) {
+    if (age <= 25) return '18-25';
+    if (age <= 35) return '26-35';
+    if (age <= 45) return '36-45';
+    if (age <= 55) return '46-55';
+    if (age <= 65) return '56-65';
+    return '65+';
+  }
+
+  function classify(gender, age, hr) {
+    var bracket = ageBracket(age);
+    var norms = NORMS[gender][bracket];
+    for (var i = 0; i < RATING_ORDER.length; i++) {
+      var key = RATING_ORDER[i];
+      if (hr <= norms[key][1]) return key;
+    }
+    return 'veryPoor';
+  }
+
+  function readState() {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return [];
+    try {
+      var data = JSON.parse(raw);
+      return (data && data.entries) || [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveState() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ entries: entries }));
+  }
+
+  function sortedEntries() {
+    return entries.slice().sort(function (a, b) {
+      return (a.date || '').localeCompare(b.date || '');
+    });
+  }
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function renderResults() {
+    var sorted = sortedEntries();
+    var body = document.getElementById('resultsBody');
+    var table = document.getElementById('resultsTable');
+    var emptyNote = document.getElementById('emptyNote');
+    body.innerHTML = '';
+
+    if (sorted.length === 0) {
+      table.style.display = 'none';
+      emptyNote.style.display = 'block';
+    } else {
+      table.style.display = 'table';
+      emptyNote.style.display = 'none';
+    }
+
+    var prevHr = null;
+    sorted.forEach(function (entry) {
+      var tr = document.createElement('tr');
+
+      var delta = prevHr === null ? null : entry.hr - prevHr;
+      var deltaText = delta === null ? '–' : (delta > 0 ? '+' : '') + delta;
+      var deltaClass = delta === null ? '' : (delta < 0 ? 'delta-positive' : (delta > 0 ? 'delta-negative' : ''));
+
+      var ratingLabel = RATING_LABELS[classify(entry.gender, entry.age, entry.hr)];
+
+      tr.innerHTML =
+        '<td>' + (entry.date || '-') + '</td>' +
+        '<td>' + entry.hr + '</td>' +
+        '<td>' + ratingLabel + '</td>' +
+        '<td class="' + deltaClass + '">' + deltaText + '</td>' +
+        '<td>' + (entry.note ? escapeHtml(entry.note) : '-') + '</td>' +
+        '<td></td>';
+
+      var deleteTd = tr.lastElementChild;
+      var deleteBtn = document.createElement('button');
+      deleteBtn.type = 'button';
+      deleteBtn.className = 'delete-row';
+      deleteBtn.textContent = 'Slett';
+      deleteBtn.addEventListener('click', function () {
+        if (!confirm('Slette denne registreringen?')) return;
+        entries = entries.filter(function (e) { return e.id !== entry.id; });
+        saveState();
+        renderResults();
+      });
+      deleteTd.appendChild(deleteBtn);
+
+      body.appendChild(tr);
+      prevHr = entry.hr;
+    });
+
+    document.getElementById('stat-first').textContent = sorted.length ? sorted[0].hr : '–';
+    document.getElementById('stat-latest').textContent = sorted.length ? sorted[sorted.length - 1].hr : '–';
+    if (sorted.length >= 2) {
+      var change = sorted[sorted.length - 1].hr - sorted[0].hr;
+      document.getElementById('stat-change').textContent = (change > 0 ? '+' : '') + change;
+    } else {
+      document.getElementById('stat-change').textContent = '–';
+    }
+  }
+
+  function addEntry() {
+    var date = document.getElementById('entry-date').value;
+    var age = parseInt(document.getElementById('entry-age').value, 10);
+    var genderInput = document.querySelector('input[name="entry-gender"]:checked');
+    var hr = parseInt(document.getElementById('entry-hr').value, 10);
+
+    if (!date || isNaN(age) || !genderInput || isNaN(hr)) {
+      alert('Fyll ut dato, alder, kjønn og puls etter testen for å legge til resultatet.');
+      return;
+    }
+
+    var gender = genderInput.value;
+    var entry = {
+      id: Date.now() + '-' + Math.random().toString(36).slice(2, 8),
+      date: date,
+      age: age,
+      gender: gender,
+      hr: hr,
+      note: document.getElementById('entry-note').value
+    };
+
+    entries.push(entry);
+    saveState();
+    renderResults();
+
+    var ratingKey = classify(gender, age, hr);
+    var resultBox = document.getElementById('ratingResult');
+    resultBox.style.display = 'block';
+    resultBox.innerHTML = 'Vurdering: <strong>' + RATING_LABELS[ratingKey] + '</strong> for ' + (gender === 'female' ? 'kvinne' : 'mann') + ' i aldersgruppen ' + ageBracket(age) + '.';
+
+    document.getElementById('entry-hr').value = '';
+    document.getElementById('entry-note').value = '';
+  }
+
+  function buildSummaryText() {
+    var sorted = sortedEntries();
+    var lines = [];
+    lines.push('YMCA step-test');
+    lines.push('');
+
+    if (sorted.length === 0) {
+      lines.push('Ingen resultater registrert ennå.');
+    } else {
+      var prevHr = null;
+      sorted.forEach(function (entry) {
+        var delta = prevHr === null ? null : entry.hr - prevHr;
+        var ratingLabel = RATING_LABELS[classify(entry.gender, entry.age, entry.hr)];
+        lines.push(entry.date + ': ' + entry.hr + ' slag/min' + (delta !== null ? ' (' + (delta > 0 ? '+' : '') + delta + ')' : '') + ' — ' + ratingLabel);
+        lines.push('  Alder: ' + entry.age + ', kjønn: ' + (entry.gender === 'female' ? 'kvinne' : 'mann'));
+        if (entry.note) {
+          lines.push('  Notat: ' + entry.note);
+        }
+        prevHr = entry.hr;
+      });
+      lines.push('');
+      lines.push('Første test: ' + sorted[0].hr + ' slag/min');
+      lines.push('Siste test: ' + sorted[sorted.length - 1].hr + ' slag/min');
+      if (sorted.length >= 2) {
+        var totalChange = sorted[sorted.length - 1].hr - sorted[0].hr;
+        lines.push('Endring totalt: ' + (totalChange > 0 ? '+' : '') + totalChange + ' (lavere er bedre)');
+      }
+    }
+
+    return lines.join('\n');
+  }
+
+  function sendEmail() {
+    var subject = encodeURIComponent('YMCA step-test');
+    var body = encodeURIComponent(buildSummaryText());
+    window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
+  }
+
+  function downloadText() {
+    var blob = new Blob([buildSummaryText()], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'ymca-step-test.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    entries = readState();
+    updateTestDisplay();
+    updateRecoveryDisplay();
+    renderResults();
+
+    var today = new Date();
+    document.getElementById('entry-date').value = today.toISOString().slice(0, 10);
+
+    document.getElementById('timerStart').addEventListener('click', startTest);
+    document.getElementById('timerPause').addEventListener('click', pauseTest);
+    document.getElementById('timerReset').addEventListener('click', resetTest);
+
+    document.getElementById('recoveryStart').addEventListener('click', startRecovery);
+    document.getElementById('recoveryReset').addEventListener('click', resetRecovery);
+
+    document.getElementById('addEntry').addEventListener('click', addEntry);
+
+    document.getElementById('resetAll').addEventListener('click', function () {
+      if (!confirm('Nullstille alle registrerte resultater? Dette kan ikke angres.')) return;
+      entries = [];
+      localStorage.removeItem(STORAGE_KEY);
+      renderResults();
+    });
+
+    document.getElementById('sendEmail').addEventListener('click', sendEmail);
+    document.getElementById('downloadText').addEventListener('click', downloadText);
+  });
+</script>
+
+</body>
+</html>

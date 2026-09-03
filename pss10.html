@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PSS-10 — Opplevd stress-skala</title>
+<meta name="description" content="PSS-10 (Perceived Stress Scale) — et validert spørreskjema med 10 spørsmål om hvor stresset du har opplevd den siste måneden.">
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --push: #c9823f;
+    --push-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  header.page-header {
+    margin-bottom: 1.75rem;
+  }
+
+  header.page-header a.back-link {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    margin-bottom: 0.75rem;
+  }
+
+  header.page-header a.back-link:hover {
+    color: var(--accent-dark);
+  }
+
+  header.page-header h1 {
+    font-size: 1.7rem;
+    margin: 0 0 0.35rem;
+    color: var(--accent-dark);
+  }
+
+  header.page-header p.tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  .reminder {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem 1.35rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  section.primer h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer p {
+    margin: 0.6rem 0 0;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .controls button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .controls button:hover {
+    background: var(--accent-soft);
+  }
+
+  .controls button.danger {
+    color: var(--push);
+  }
+
+  .controls button.danger:hover {
+    background: var(--push-soft);
+  }
+
+  .pss-question {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.9rem 1rem 1rem;
+    margin-top: 0.9rem;
+  }
+
+  .pss-question:first-of-type {
+    margin-top: 0.25rem;
+  }
+
+  .pss-question p.pss-label {
+    margin: 0 0 0.7rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+
+  .pss-question p.pss-label span.pss-num {
+    color: var(--accent-dark);
+    margin-right: 0.35rem;
+  }
+
+  .pss-options {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.4rem;
+  }
+
+  @media (max-width: 560px) {
+    .pss-options {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .pss-option {
+    position: relative;
+  }
+
+  .pss-option input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .pss-option span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 2.6em;
+    padding: 0.4rem 0.35rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.78rem;
+    color: var(--ink);
+    background: var(--card);
+  }
+
+  .pss-option input:checked + span {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .pss-option input:focus-visible + span {
+    outline: 2px solid var(--accent-dark);
+    outline-offset: 2px;
+  }
+
+  .score-card {
+    background: var(--accent-soft);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    text-align: center;
+    margin: 1.5rem 0;
+  }
+
+  .score-total {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    line-height: 1.1;
+  }
+
+  .score-total span.max {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .score-category {
+    margin: 0.4rem 0 0;
+    font-weight: 600;
+    font-size: 1.02rem;
+  }
+
+  .score-progress {
+    margin: 0.5rem 0 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 0.9rem;
+    margin-top: 0.75rem;
+  }
+
+  .field-wide {
+    grid-column: 1 / -1;
+  }
+
+  .field label {
+    display: block;
+    font-weight: 600;
+    color: var(--accent-dark);
+    margin-bottom: 0.3rem;
+    font-size: 0.88rem;
+  }
+
+  .field textarea {
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--ink);
+    min-height: 64px;
+    resize: vertical;
+  }
+
+  .field textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .send-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .send-buttons button {
+    font-size: 0.92rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .send-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .muted-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  footer.closing {
+    margin-top: 1.75rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong {
+    color: var(--accent-dark);
+  }
+
+  body.gate-locked .wrap,
+  body.gate-locked footer.closing {
+    display: none;
+  }
+
+  .gate-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 100;
+  }
+
+  body.gate-locked .gate-overlay {
+    display: flex;
+  }
+
+  .gate-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 2rem 1.75rem;
+    max-width: 340px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .gate-box h1 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    color: var(--accent-dark);
+  }
+
+  .gate-box p {
+    margin: 0 0 1rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .gate-box input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    font-family: inherit;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  .gate-box input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .gate-box button {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .gate-box button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .gate-error {
+    display: none;
+    color: var(--push);
+    font-size: 0.85rem;
+    margin: 0.7rem 0 0;
+  }
+
+  .gate-contact {
+    margin-top: 0.9rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .gate-contact a {
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .gate-contact a:hover {
+    text-decoration: underline;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .controls, .send-buttons, .muted-note, header.page-header a.back-link { display: none; }
+    section.primer, .pss-question { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body class="gate-locked">
+
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box">
+    <h1>Tilgang til verktøyet</h1>
+    <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
+    <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
+    <button type="button" id="gateSubmit">Lås opp</button>
+    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20S%C3%B8vn%20og%20stress-verkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var GATE_KEY = 'gate-sovn-stress-unlocked';
+    var CODE = 'nyevaner';
+
+    function unlock() {
+      localStorage.setItem(GATE_KEY, 'true');
+      document.body.classList.remove('gate-locked');
+    }
+
+    if (localStorage.getItem(GATE_KEY) === 'true') {
+      unlock();
+    }
+
+    function trySubmit() {
+      var input = document.getElementById('gateCode');
+      var error = document.getElementById('gateError');
+      if (input.value.trim().toLowerCase() === CODE) {
+        error.style.display = 'none';
+        unlock();
+      } else {
+        error.style.display = 'block';
+      }
+    }
+
+    document.getElementById('gateSubmit').addEventListener('click', trySubmit);
+    document.getElementById('gateCode').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') trySubmit();
+    });
+  })();
+</script>
+
+<div class="wrap">
+
+  <header class="page-header">
+    <a class="back-link" href="index.html">← Til forsiden</a>
+    <h1>PSS-10 — Opplevd stress-skala</h1>
+    <p class="tagline">Cohens Perceived Stress Scale, 10 spørsmål om den siste måneden</p>
+    <div class="reminder">
+      For hvert spørsmål, velg det svaret som stemmer best med hvor ofte du
+      har følt eller tenkt slik i løpet av <strong>den siste måneden</strong>.
+      Det finnes ingen riktige eller gale svar. Skjemaet er ment som et
+      utgangspunkt for samtalen vår, ikke en diagnose. Svarene dine lagres
+      kun i denne nettleseren.
+    </div>
+  </header>
+
+  <div class="controls">
+    <button type="button" id="resetAll" class="danger">Nullstill alt</button>
+  </div>
+
+  <section class="primer">
+    <h2>Spørsmålene</h2>
+    <div id="questionList"></div>
+  </section>
+
+  <div class="score-card">
+    <div class="score-total"><span id="scoreValue">0</span><span class="max"> / 40</span></div>
+    <p class="score-category" id="scoreCategory">Svar på spørsmålene for å se resultatet</p>
+    <p class="score-progress" id="scoreProgress">0 av 10 besvart</p>
+  </div>
+
+  <section class="primer">
+    <h2>Refleksjon</h2>
+    <div class="field-grid">
+      <div class="field field-wide">
+        <label for="refleksjon-notat">Er det noe rundt resultatet du vil ta opp i samtalen vår?</label>
+        <textarea id="refleksjon-notat" data-key="refleksjon-notat" placeholder="Skriv gjerne fritt her..."></textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="primer">
+    <h2>Send inn skjemaet</h2>
+    <p class="muted-note">
+      Du kan sende svarene dine direkte fra din egen e-postapp, eller laste
+      dem ned som en tekstfil du selv sender eller tar med til timen. Hvis
+      "Send på e-post" ikke åpner riktig på mobilen din, bruk nedlastingen i
+      stedet.
+    </p>
+    <div class="send-buttons">
+      <button type="button" id="sendEmail">Send på e-post</button>
+      <button type="button" id="downloadText" class="secondary">Last ned som tekstfil</button>
+    </div>
+  </section>
+
+  <footer class="closing">
+    Ett øyeblikksbilde, ikke en dom.<br>
+    <strong>Du trenger ikke gjøre det alene.</strong>
+  </footer>
+
+</div>
+
+<script>
+  var STORAGE_KEY = 'pss10-data';
+  var RECIPIENT = 'silje.merete.binder@gmail.com';
+
+  var OPTIONS = [
+    { value: 0, label: 'Aldri' },
+    { value: 1, label: 'Nesten aldri' },
+    { value: 2, label: 'Av og til' },
+    { value: 3, label: 'Ganske ofte' },
+    { value: 4, label: 'Svært ofte' }
+  ];
+
+  var QUESTIONS = [
+    { key: 'q1', reverse: false, text: 'Hvor ofte har du i løpet av den siste måneden blitt opprørt på grunn av noe som skjedde uventet?' },
+    { key: 'q2', reverse: false, text: 'Hvor ofte har du i løpet av den siste måneden følt at du ikke kunne kontrollere de viktige tingene i livet ditt?' },
+    { key: 'q3', reverse: false, text: 'Hvor ofte har du i løpet av den siste måneden følt deg nervøs og stresset?' },
+    { key: 'q4', reverse: true,  text: 'Hvor ofte har du i løpet av den siste måneden følt deg trygg på din evne til å håndtere dine personlige problemer?' },
+    { key: 'q5', reverse: true,  text: 'Hvor ofte har du i løpet av den siste måneden følt at ting gikk din vei?' },
+    { key: 'q6', reverse: false, text: 'Hvor ofte har du i løpet av den siste måneden opplevd at du ikke klarte å mestre alt du måtte gjøre?' },
+    { key: 'q7', reverse: true,  text: 'Hvor ofte har du i løpet av den siste måneden vært i stand til å kontrollere irritasjoner i livet ditt?' },
+    { key: 'q8', reverse: true,  text: 'Hvor ofte har du i løpet av den siste måneden følt at du hadde full oversikt over tingene?' },
+    { key: 'q9', reverse: false, text: 'Hvor ofte har du i løpet av den siste måneden blitt sint fordi ting som skjedde var utenfor din kontroll?' },
+    { key: 'q10', reverse: false, text: 'Hvor ofte har du i løpet av den siste måneden følt at vanskelighetene hopet seg opp så mye at du ikke klarte å overvinne dem?' }
+  ];
+
+  var answers = {};
+
+  function buildQuestions() {
+    var list = document.getElementById('questionList');
+    QUESTIONS.forEach(function (q, i) {
+      var item = document.createElement('div');
+      item.className = 'pss-question';
+
+      var label = document.createElement('p');
+      label.className = 'pss-label';
+      label.innerHTML = '<span class="pss-num">' + (i + 1) + '.</span>' + q.text;
+      item.appendChild(label);
+
+      var optionsWrap = document.createElement('div');
+      optionsWrap.className = 'pss-options';
+      OPTIONS.forEach(function (opt) {
+        var wrap = document.createElement('label');
+        wrap.className = 'pss-option';
+        var input = document.createElement('input');
+        input.type = 'radio';
+        input.name = q.key;
+        input.value = opt.value;
+        input.setAttribute('data-key', q.key);
+        var span = document.createElement('span');
+        span.textContent = opt.label;
+        wrap.appendChild(input);
+        wrap.appendChild(span);
+        optionsWrap.appendChild(wrap);
+      });
+      item.appendChild(optionsWrap);
+      list.appendChild(item);
+    });
+
+    list.addEventListener('change', function (evt) {
+      if (evt.target.type !== 'radio') return;
+      answers[evt.target.getAttribute('data-key')] = parseInt(evt.target.value, 10);
+      saveState();
+      updateScore();
+    });
+  }
+
+  function categoryFor(total) {
+    if (total <= 13) return { label: 'Lavt opplevd stress', color: 'var(--accent-dark)' };
+    if (total <= 26) return { label: 'Moderat opplevd stress', color: '#b9791e' };
+    return { label: 'Høyt opplevd stress', color: 'var(--push)' };
+  }
+
+  function updateScore() {
+    var answered = QUESTIONS.filter(function (q) { return answers[q.key] !== undefined; });
+    var total = answered.reduce(function (sum, q) {
+      var v = answers[q.key];
+      return sum + (q.reverse ? 4 - v : v);
+    }, 0);
+
+    document.getElementById('scoreValue').textContent = total;
+    document.getElementById('scoreProgress').textContent = answered.length + ' av ' + QUESTIONS.length + ' besvart';
+
+    var categoryEl = document.getElementById('scoreCategory');
+    if (answered.length === QUESTIONS.length) {
+      var cat = categoryFor(total);
+      categoryEl.textContent = cat.label;
+      categoryEl.style.color = cat.color;
+    } else {
+      categoryEl.textContent = 'Svar på alle spørsmålene for å se resultatet';
+      categoryEl.style.color = 'var(--muted)';
+    }
+  }
+
+  function readState() {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return {};
+    try {
+      return JSON.parse(raw) || {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveState() {
+    var data = { answers: answers };
+    document.querySelectorAll('textarea[data-key]').forEach(function (el) {
+      data[el.getAttribute('data-key')] = el.value;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function loadState() {
+    var data = readState();
+    if (data.answers) {
+      answers = data.answers;
+      QUESTIONS.forEach(function (q) {
+        if (answers[q.key] !== undefined) {
+          var input = document.querySelector('input[name="' + q.key + '"][value="' + answers[q.key] + '"]');
+          if (input) input.checked = true;
+        }
+      });
+    }
+    document.querySelectorAll('textarea[data-key]').forEach(function (el) {
+      var key = el.getAttribute('data-key');
+      if (data[key] !== undefined) el.value = data[key];
+    });
+  }
+
+  function buildSummaryText() {
+    var answered = QUESTIONS.filter(function (q) { return answers[q.key] !== undefined; });
+    var total = answered.reduce(function (sum, q) {
+      var v = answers[q.key];
+      return sum + (q.reverse ? 4 - v : v);
+    }, 0);
+
+    var lines = [];
+    lines.push('PSS-10 — Opplevd stress-skala');
+    lines.push('');
+    QUESTIONS.forEach(function (q, i) {
+      var v = answers[q.key];
+      var optLabel = v !== undefined ? OPTIONS[v].label : 'Ikke besvart';
+      lines.push((i + 1) + '. ' + q.text);
+      lines.push('   Svar: ' + optLabel);
+    });
+    lines.push('');
+    if (answered.length === QUESTIONS.length) {
+      lines.push('Sum: ' + total + ' / 40 (' + categoryFor(total).label + ')');
+    } else {
+      lines.push('Sum: ' + total + ' / 40 (' + answered.length + ' av ' + QUESTIONS.length + ' besvart)');
+    }
+    lines.push('');
+    lines.push('Notat til samtalen: ' + (document.getElementById('refleksjon-notat').value || '-'));
+    return lines.join('\n');
+  }
+
+  function sendEmail() {
+    var subject = encodeURIComponent('PSS-10 — Opplevd stress-skala');
+    var body = encodeURIComponent(buildSummaryText());
+    window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
+  }
+
+  function downloadText() {
+    var blob = new Blob([buildSummaryText()], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'pss10.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    buildQuestions();
+    loadState();
+    updateScore();
+
+    document.body.addEventListener('input', function (e) {
+      if (e.target.tagName === 'TEXTAREA' && e.target.hasAttribute('data-key')) saveState();
+    });
+
+    document.getElementById('resetAll').addEventListener('click', function () {
+      if (!confirm('Nullstille hele skjemaet? Dette kan ikke angres.')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    });
+
+    document.getElementById('sendEmail').addEventListener('click', sendEmail);
+    document.getElementById('downloadText').addEventListener('click', downloadText);
+  });
+</script>
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Helsehjulet — se helheten</title>
+<title>Livsstilshjulet — se levevanene dine</title>
 <style>
   :root {
     --bg: #f0f7f9;
@@ -439,7 +439,7 @@
     <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
     <button type="button" id="gateSubmit">Lås opp</button>
     <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
-    <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20Helsehjulet">Kontakt meg for å få kode →</a></p>
+    <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20Livsstilshjulet">Kontakt meg for å få kode →</a></p>
   </div>
 </div>
 
@@ -479,14 +479,14 @@
 
   <header class="page-header">
     <a class="back-link" href="index.html">← Til forsiden</a>
-    <h1>Helsehjulet — se helheten</h1>
-    <p class="tagline">Et øyeblikksbilde av hvordan du har det på åtte områder akkurat nå</p>
+    <h1>Livsstilshjulet — se levevanene dine</h1>
+    <p class="tagline">Et øyeblikksbilde av hvordan du lever på fem sentrale områder akkurat nå</p>
     <div class="reminder">
       Dra i punktene på hjulet, eller bruk glidebryterne under, og sett hvert
       område til det tallet mellom 1 og 10 som kjennes riktig for deg akkurat
       nå. Det finnes ingen fasit — hjulet er ment som et utgangspunkt for
-      samtalen vår. Alt du legger inn lagres i denne nettleseren, så du kan
-      lukke siden og fortsette senere.
+      samtalen vår om ulike deler av livsstilen. Alt du legger inn lagres i
+      denne nettleseren, så du kan lukke siden og fortsette senere.
     </div>
   </header>
 
@@ -496,13 +496,13 @@
 
   <div class="wheel-card">
     <div class="wheel-holder" id="wheelHolder">
-      <svg id="wheelSvg" viewBox="0 0 760 640" role="img" aria-label="Helsehjul med åtte områder, hvert med en verdi fra 1 til 10"></svg>
+      <svg id="wheelSvg" viewBox="0 0 760 640" role="img" aria-label="Livsstilshjul med fem områder, hvert med en verdi fra 1 til 10"></svg>
     </div>
     <p class="wheel-hint">Dra i den fargede prikken på hver linje for å sette verdien</p>
   </div>
 
   <section class="primer">
-    <h2>De åtte områdene</h2>
+    <h2>De fem områdene</h2>
     <div class="sliders-grid" id="slidersGrid"></div>
   </section>
 
@@ -541,28 +541,22 @@
 </div>
 
 <script>
-  var STORAGE_KEY = 'helsehjul-data';
+  var STORAGE_KEY = 'livsstilhjul-data';
   var RECIPIENT = 'silje.merete.binder@gmail.com';
   var SVG_NS = 'http://www.w3.org/2000/svg';
 
   // Ordered clockwise starting at the top, matching the paper wheel.
   var AREAS = [
-    { key: 'energi',       label: 'Energi og overskudd',      icon: '⚡', color: '#5c9a3b',
-      desc: 'Hvor mye futt og overskudd du kjenner gjennom en vanlig dag — motsatt av å være sliten eller tom.' },
-    { key: 'fysisk',       label: 'Fysisk form og kapasitet', icon: '🏃', color: '#e0a91e',
-      desc: 'Kondisjon, styrke og bevegelighet — hvor godt kroppen tåler fysisk aktivitet og anstrengelse.' },
-    { key: 'funksjon',     label: 'Funksjon i hverdagen',     icon: '🧍', color: '#e2801f',
-      desc: 'Om kroppen og hodet henger med i det praktiske hverdagen krever — jobb, husarbeid, konsentrasjon og å klare deg selv, uten at det koster for mye.' },
-    { key: 'sovn',         label: 'Søvn og restitusjon',      icon: '🌙', color: '#7c5fc7',
-      desc: 'Hvor godt du sover, og om du våkner uthvilt og klar til dagen.' },
-    { key: 'stress',       label: 'Stress og indre ro',       icon: '🧠', color: '#3f80c9',
-      desc: 'Hvor mye stress du bærer på, og hvor lett du finner ro og senker skuldrene.' },
-    { key: 'sosial',       label: 'Sosial trivsel',           icon: '👥', color: '#c23a70',
-      desc: 'Kvaliteten på relasjonene dine — om du kjenner tilhørighet, støtte og godt fellesskap med andre.' },
-    { key: 'helse',        label: 'Helse',                    icon: '❤', color: '#1b2a4a',
-      desc: 'Din generelle helsetilstand — kropp og fysiske forhold som påvirker hverdagen din.' },
-    { key: 'livskvalitet', label: 'Livskvalitet',             icon: '🙂', color: '#1f97a3',
-      desc: 'Hvor fornøyd og meningsfullt du opplever livet ditt som helhet, akkurat nå.' }
+    { key: 'fysisk',      label: 'Fysisk aktivitet og trening', icon: '👟', color: '#14213d',
+      desc: 'Hvor mye du beveger deg og trener i hverdagen — både aktiv hverdag og planlagt trening.' },
+    { key: 'kosthold',    label: 'Kosthold',                     icon: '🥗', color: '#2f6f9f',
+      desc: 'Hvordan du spiser og drikker, og hvor fornøyd du er med kostholdet ditt.' },
+    { key: 'sovn',        label: 'Søvn og restitusjon',          icon: '🌙', color: '#8aab6f',
+      desc: 'Hvor godt du sover, og om du får nok hvile og restitusjon.' },
+    { key: 'stress',      label: 'Stressmestring',                icon: '🧘', color: '#dfb23c',
+      desc: 'Hvor godt du håndterer stress, og hvor lett du finner ro i hverdagen.' },
+    { key: 'relasjoner',  label: 'Relasjoner og sosialt liv',     icon: '👥', color: '#c23a86',
+      desc: 'Kvaliteten på relasjonene dine, og hvor mye godt sosialt liv du har rundt deg.' }
   ];
 
   var CX = 380, CY = 320, RMAX = 170;
@@ -845,7 +839,7 @@
 
   function buildSummaryText() {
     var lines = [];
-    lines.push('Helsehjulet');
+    lines.push('Livsstilshjulet');
     lines.push('');
     AREAS.forEach(function (a) {
       lines.push(a.label + ': ' + values[a.key] + ' / 10');
@@ -857,7 +851,7 @@
   }
 
   function sendEmail() {
-    var subject = encodeURIComponent('Helsehjulet');
+    var subject = encodeURIComponent('Livsstilshjulet');
     var body = encodeURIComponent(buildSummaryText());
     window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
   }
@@ -867,7 +861,7 @@
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
     a.href = url;
-    a.download = 'helsehjulet.txt';
+    a.download = 'livsstilhjulet.txt';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -884,7 +878,7 @@
     });
 
     document.getElementById('resetAll').addEventListener('click', function () {
-      if (!confirm('Nullstille hele helsehjulet? Dette kan ikke angres.')) return;
+      if (!confirm('Nullstille hele livsstilshjulet? Dette kan ikke angres.')) return;
       localStorage.removeItem(STORAGE_KEY);
       location.reload();
     });
