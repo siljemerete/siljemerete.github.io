@@ -223,6 +223,34 @@
     border-color: var(--accent-soft);
   }
 
+  .offer-section {
+    background: var(--push);
+    border-color: var(--push);
+    text-align: center;
+  }
+
+  .offer-section h2,
+  .offer-section p {
+    color: #fff;
+  }
+
+  .offer-section p {
+    max-width: 56ch;
+    margin-inline: auto;
+  }
+
+  .offer-section .cta-button {
+    margin-top: 0.75rem;
+    background: #fff;
+    color: var(--push);
+    border-color: #fff;
+  }
+
+  .offer-section .cta-button:hover {
+    background: var(--push-soft);
+    border-color: var(--push-soft);
+  }
+
   /* Om meg */
   .about-grid {
     display: flex;
@@ -426,6 +454,12 @@
 </section>
 
 <div class="wrap">
+
+  <section id="gratis-samtale" class="card-section offer-section">
+    <h2>Gratis helsekartleggingssamtale</h2>
+    <p>Meld deg på her og svar på to spørsmål.</p>
+    <a class="cta-button" href="helsesjekk.html">Meld deg på →</a>
+  </section>
 
   <section id="om-meg" class="card-section">
     <h2>Om meg</h2>
