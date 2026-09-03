@@ -538,9 +538,11 @@
   .method-highlight {
     grid-column: 1 / -1;
     background: var(--accent-dark);
+    border-radius: 12px;
+    padding: 1.5rem 1.75rem;
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1.5rem;
   }
 
   .method-highlight .card-icon {
@@ -553,7 +555,15 @@
     color: #fff;
   }
 
-  .method-highlight h3 { margin: 0 0 0.3rem; }
+  .method-highlight h3 {
+    margin: 0 0 0.4rem;
+    font-size: 1.1rem;
+  }
+
+  .method-highlight p {
+    font-size: 0.98rem;
+    max-width: 56ch;
+  }
 
   @media (max-width: 560px) {
     .method-highlight { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
