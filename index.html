@@ -433,23 +433,44 @@
     align-items: center;
     gap: 0.6rem;
     margin-top: 1.25rem;
-    padding: 0.6rem 1rem;
+    padding: 0.6rem 1.1rem;
     background: var(--accent-soft);
-    border: 1px solid var(--border);
+    border: 1.5px solid var(--accent);
     border-radius: 999px;
+    box-shadow: var(--shadow);
     text-decoration: none;
     color: var(--ink);
     font-size: 0.88rem;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
   }
 
   .credential-badge:hover {
-    border-color: var(--accent);
-    box-shadow: var(--shadow);
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(31, 60, 92, 0.25);
+    transform: translateY(-1px);
   }
 
   .credential-badge strong {
     color: var(--accent-dark);
+  }
+
+  .credential-badge:hover strong {
+    color: #fff;
+  }
+
+  .credential-badge svg {
+    flex: 0 0 auto;
+    transition: stroke 0.15s ease;
+  }
+
+  .credential-badge:hover svg {
+    stroke: #fff;
+  }
+
+  .badge-arrow {
+    margin-left: 0.1rem;
+    font-weight: 700;
   }
 
   .flower-icon {
@@ -840,6 +861,7 @@
     <a class="credential-badge" href="https://instituttet.abelhelse.no/" target="_blank" rel="noopener">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><path d="M2 9 12 4l10 5-10 5-10-5Z"/><path d="M6 11.5V16c0 1.4 2.7 3 6 3s6-1.6 6-3v-4.5"/><path d="M22 9v6"/></svg>
       <span>Under utdanning som helseveileder ved <strong>Abel Instituttet</strong></span>
+      <span class="badge-arrow" aria-hidden="true">&rarr;</span>
     </a>
   </section>
 
