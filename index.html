@@ -535,6 +535,30 @@
     color: var(--ink);
   }
 
+  .method-highlight {
+    grid-column: 1 / -1;
+    background: var(--accent-dark);
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .method-highlight .card-icon {
+    margin-bottom: 0;
+    flex: 0 0 auto;
+  }
+
+  .method-highlight h3,
+  .method-highlight p {
+    color: #fff;
+  }
+
+  .method-highlight h3 { margin: 0 0 0.3rem; }
+
+  @media (max-width: 560px) {
+    .method-highlight { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+  }
+
   .resource-card {
     display: block;
     background: var(--bg);
@@ -789,10 +813,12 @@
         <h3>3. Konkrete mål</h3>
         <p>Sammen setter vi konkrete, realistiske mål tilpasset akkurat din situasjon og ditt eget tempo.</p>
       </div>
-      <div class="service-card">
-        <svg class="card-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15-6.7V3.5M18 5.3H15"/><path d="M21 12a9 9 0 0 1-15 6.7v1.8M6 18.7H9"/></svg>
-        <h3>4. Oppfølging over tid</h3>
-        <p>Vaner som varer er ingen quick fix. Det krever at du er villig til å investere tid i din egen helse, og med faste, korte oppfølgingssamtaler bygger vi det steg for steg, slik at du faktisk får det livet du ønsker deg.</p>
+      <div class="service-card method-highlight">
+        <svg class="card-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15-6.7V3.5M18 5.3H15"/><path d="M21 12a9 9 0 0 1-15 6.7v1.8M6 18.7H9"/></svg>
+        <div class="method-highlight-text">
+          <h3>4. Oppfølging over tid</h3>
+          <p>Vaner som varer er ingen quick fix. Det krever at du er villig til å investere tid i din egen helse, og med faste, korte oppfølgingssamtaler bygger vi det steg for steg, slik at du faktisk får det livet du ønsker deg.</p>
+        </div>
       </div>
     </div>
 
