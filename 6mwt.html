@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>6-minutters gangtest (6MWT)</title>
-<meta name="description" content="Tidtaker og loggverktøy for 6-minutters gangtest — følg utholdenhet og kondisjon over tid.">
+<meta name="description" content="Tidtaker og loggverktøy for 6-minutters gangtest: følg utholdenhet og kondisjon over tid.">
 <style>
   :root {
     --bg: #f0f7f9;
@@ -570,7 +570,7 @@
     <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
     <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
     <button type="button" id="gateSubmit">Lås opp</button>
-    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-error" id="gateError">Feil kode, prøv igjen.</p>
     <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20Trening%20og%20aktivitet-verkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
   </div>
 </div>
@@ -614,7 +614,7 @@
     <h1>6-minutters gangtest (6MWT)</h1>
     <p class="tagline">Mål utholdenhet og kondisjon, og følg utviklingen din over tid</p>
     <div class="reminder">
-      Dette er en enkel måte å følge kondisjon og utholdenhet over tid — ikke
+      Dette er en enkel måte å følge kondisjon og utholdenhet over tid, ikke
       en medisinsk vurdering. Er du usikker på om testen er trygg for deg,
       for eksempel ved hjerte- eller lungesykdom, ta kontakt med lege først.
       Resultatene dine lagres kun i denne nettleseren.
@@ -624,7 +624,7 @@
   <section class="primer">
     <h2>Slik gjennomfører du testen</h2>
     <ul>
-      <li>Finn en flat, jevn strekning innendørs eller utendørs — gjerne en korridor eller sti på minst 20–30 meter.</li>
+      <li>Finn en flat, jevn strekning innendørs eller utendørs, gjerne en korridor eller sti på minst 20 til 30 meter.</li>
       <li>Merk av start- og vendepunkt, eller bruk en kjent rundeavstand.</li>
       <li>Gå så langt du kan på 6 minutter, i ditt eget tempo. Du kan sakke ned eller stoppe og hvile underveis, men klokken fortsetter å gå.</li>
       <li>Ikke varm opp på forhånd, og bruk vanlige, komfortable sko.</li>
@@ -686,20 +686,20 @@
         <label for="entry-borg-before">Anstrengelse før testen (Borg-skala): <span class="range-value" id="entry-borg-before-value">Ikke satt</span> / 10</label>
         <input type="range" min="0" max="10" step="1" value="0" id="entry-borg-before" data-touched="false">
         <div class="range-anchors">
-          <span>0 — Ingen anstrengelse</span>
-          <span>10 — Maksimal anstrengelse</span>
+          <span>0, Ingen anstrengelse</span>
+          <span>10, Maksimal anstrengelse</span>
         </div>
       </div>
       <div class="field field-wide">
         <label for="entry-borg-after">Anstrengelse etter testen (Borg-skala): <span class="range-value" id="entry-borg-after-value">Ikke satt</span> / 10</label>
         <input type="range" min="0" max="10" step="1" value="0" id="entry-borg-after" data-touched="false">
         <div class="range-anchors">
-          <span>0 — Ingen anstrengelse</span>
-          <span>10 — Maksimal anstrengelse</span>
+          <span>0, Ingen anstrengelse</span>
+          <span>10, Maksimal anstrengelse</span>
         </div>
       </div>
       <div class="field field-wide">
-        <label for="entry-note">Notat — pauser, symptomer, vær, annet</label>
+        <label for="entry-note">Notat, pauser, symptomer, vær, annet</label>
         <textarea id="entry-note" placeholder="Skriv gjerne fritt her..."></textarea>
       </div>
     </div>
@@ -712,9 +712,9 @@
       <button type="button" id="resetAll" class="danger">Nullstill alle resultater</button>
     </div>
     <div class="stat-grid">
-      <div class="stat-item"><strong id="stat-first">–</strong>Første test (m)</div>
-      <div class="stat-item"><strong id="stat-latest">–</strong>Siste test (m)</div>
-      <div class="stat-item"><strong id="stat-change">–</strong>Endring totalt (m)</div>
+      <div class="stat-item"><strong id="stat-first">-</strong>Første test (m)</div>
+      <div class="stat-item"><strong id="stat-latest">-</strong>Siste test (m)</div>
+      <div class="stat-item"><strong id="stat-change">-</strong>Endring totalt (m)</div>
     </div>
     <div class="table-scroll">
       <table class="results-table" id="resultsTable">
@@ -749,7 +749,7 @@
   </section>
 
   <footer class="closing">
-    Ett skritt av gangen — bokstavelig talt.<br>
+    Ett skritt av gangen, bokstavelig talt.<br>
     <strong>Du trenger ikke gjøre det alene.</strong>
   </footer>
 
@@ -906,11 +906,11 @@
       var tr = document.createElement('tr');
 
       var delta = prevDistance === null ? null : entry.distance - prevDistance;
-      var deltaText = delta === null ? '–' : (delta > 0 ? '+' : '') + delta + ' m';
+      var deltaText = delta === null ? '-' : (delta > 0 ? '+' : '') + delta + ' m';
       var deltaClass = delta === null ? '' : (delta > 0 ? 'delta-positive' : (delta < 0 ? 'delta-negative' : ''));
 
-      var borgText = (entry.borgBefore !== null && entry.borgBefore !== undefined ? entry.borgBefore : '–') +
-        ' / ' + (entry.borgAfter !== null && entry.borgAfter !== undefined ? entry.borgAfter : '–');
+      var borgText = (entry.borgBefore !== null && entry.borgBefore !== undefined ? entry.borgBefore : '-') +
+        ' / ' + (entry.borgAfter !== null && entry.borgAfter !== undefined ? entry.borgAfter : '-');
 
       tr.innerHTML =
         '<td>' + (entry.date || '-') + '</td>' +
@@ -937,13 +937,13 @@
       prevDistance = entry.distance;
     });
 
-    document.getElementById('stat-first').textContent = sorted.length ? sorted[0].distance : '–';
-    document.getElementById('stat-latest').textContent = sorted.length ? sorted[sorted.length - 1].distance : '–';
+    document.getElementById('stat-first').textContent = sorted.length ? sorted[0].distance : '-';
+    document.getElementById('stat-latest').textContent = sorted.length ? sorted[sorted.length - 1].distance : '-';
     if (sorted.length >= 2) {
       var change = sorted[sorted.length - 1].distance - sorted[0].distance;
       document.getElementById('stat-change').textContent = (change > 0 ? '+' : '') + change;
     } else {
-      document.getElementById('stat-change').textContent = '–';
+      document.getElementById('stat-change').textContent = '-';
     }
   }
 

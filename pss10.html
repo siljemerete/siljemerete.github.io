@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PSS-10 — Opplevd stress-skala</title>
-<meta name="description" content="PSS-10 (Perceived Stress Scale) — et validert spørreskjema med 10 spørsmål om hvor stresset du har opplevd den siste måneden.">
+<title>PSS-10 | Opplevd stress-skala</title>
+<meta name="description" content="PSS-10 (Perceived Stress Scale): et validert spørreskjema med 10 spørsmål om hvor stresset du har opplevd den siste måneden.">
 <style>
   :root {
     --bg: #f0f7f9;
@@ -432,7 +432,7 @@
     <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
     <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
     <button type="button" id="gateSubmit">Lås opp</button>
-    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-error" id="gateError">Feil kode, prøv igjen.</p>
     <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20S%C3%B8vn%20og%20stress-verkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
   </div>
 </div>
@@ -473,7 +473,7 @@
 
   <header class="page-header">
     <a class="back-link" href="index.html">← Til forsiden</a>
-    <h1>PSS-10 — Opplevd stress-skala</h1>
+    <h1>PSS-10: Opplevd stress-skala</h1>
     <p class="tagline">Cohens Perceived Stress Scale, 10 spørsmål om den siste måneden</p>
     <div class="reminder">
       For hvert spørsmål, velg det svaret som stemmer best med hvor ofte du
@@ -666,7 +666,7 @@
     }, 0);
 
     var lines = [];
-    lines.push('PSS-10 — Opplevd stress-skala');
+    lines.push('PSS-10, Opplevd stress-skala');
     lines.push('');
     QUESTIONS.forEach(function (q, i) {
       var v = answers[q.key];
@@ -686,7 +686,7 @@
   }
 
   function sendEmail() {
-    var subject = encodeURIComponent('PSS-10 — Opplevd stress-skala');
+    var subject = encodeURIComponent('PSS-10, Opplevd stress-skala');
     var body = encodeURIComponent(buildSummaryText());
     window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
   }

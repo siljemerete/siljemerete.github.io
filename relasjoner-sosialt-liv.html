@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Relasjoner og sosialt liv — kartlegging</title>
+<title>Relasjoner og sosialt liv | kartlegging</title>
 <style>
   :root {
     --bg: #f0f7f9;
@@ -368,7 +368,7 @@
     <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
     <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
     <button type="button" id="gateSubmit">Lås opp</button>
-    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-error" id="gateError">Feil kode, prøv igjen.</p>
     <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20ressurser">Kontakt meg for å få kode →</a></p>
   </div>
 </div>
@@ -409,10 +409,10 @@
 
   <header class="page-header">
     <h1>Relasjoner og sosialt liv</h1>
-    <p class="tagline">Kartlegging av menneskene rundt deg — og hva du ønsker mer eller mindre av</p>
+    <p class="tagline">Kartlegging av menneskene rundt deg, og hva du ønsker mer eller mindre av</p>
     <div class="reminder">
       Relasjonene våre kan være noe av det viktigste vi har for helse og
-      trivsel — men de kan også være krevende. Man kan ha mange mennesker
+      trivsel, men de kan også være krevende. Man kan ha mange mennesker
       rundt seg og likevel kjenne på ensomhet. Dette skjemaet hjelper deg
       å få oversikt over hvem som er rundt deg, hva som fungerer godt, og
       hvor du eventuelt ønsker en endring. <strong>Det er helt greit om
@@ -426,7 +426,7 @@
 
   <section class="primer">
     <h2>Grunnleggende kartlegging</h2>
-    <p class="intro">Ta deg god tid — det finnes ikke riktige eller gale svar.</p>
+    <p class="intro">Ta deg god tid, det finnes ikke riktige eller gale svar.</p>
     <div class="field">
       <label for="who-around">Hvilke mennesker har du rundt deg? <span style="font-weight:400;color:var(--muted);">(familie, venner, kollegaer, naboer og andre)</span></label>
       <textarea id="who-around" data-key="who-around" placeholder="Skriv gjerne en enkel liste eller i fritekst"></textarea>
@@ -459,7 +459,7 @@
 
   <section class="primer">
     <h2>Mulige mål</h2>
-    <p class="intro">Kryss av det som kjennes aktuelt for deg — du kan velge så mange du vil.</p>
+    <p class="intro">Kryss av det som kjennes aktuelt for deg, du kan velge så mange du vil.</p>
     <div class="checklist" id="goalsList">
       <div class="check-item"><input type="checkbox" id="goal-1" data-key="goal-1"><label for="goal-1">Mindre ensomhet</label></div>
       <div class="check-item"><input type="checkbox" id="goal-2" data-key="goal-2"><label for="goal-2">Mer sosial kontakt</label></div>
@@ -503,8 +503,8 @@
   <section class="primer" id="summarySection">
     <h2>Oppsummering</h2>
     <div class="stat-grid">
-      <div class="stat-item"><strong id="goals-checked">–</strong>Mål valgt</div>
-      <div class="stat-item"><strong id="actions-checked">–</strong>Tiltak valgt</div>
+      <div class="stat-item"><strong id="goals-checked">-</strong>Mål valgt</div>
+      <div class="stat-item"><strong id="actions-checked">-</strong>Tiltak valgt</div>
     </div>
     <div class="field">
       <label for="first-step">Hva er ditt viktigste mål akkurat nå, og hva blir ditt første steg?</label>
@@ -612,7 +612,7 @@
 
   function buildSummaryText() {
     var lines = [];
-    lines.push('Relasjoner og sosialt liv — kartlegging');
+    lines.push('Relasjoner og sosialt liv, kartlegging');
     lines.push('');
     lines.push('Grunnleggende kartlegging');
     lines.push('  Hvilke mennesker har du rundt deg: ' + (document.getElementById('who-around').value || '-'));

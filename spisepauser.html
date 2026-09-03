@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spisepauser og småspising</title>
-<meta name="description" content="Skjema for 3 dagers registrering av spisevindu, mellommåltider og grunnen til å spise mellom hovedmåltidene — fysisk sult eller følelser og vaner.">
+<meta name="description" content="Skjema for 3 dagers registrering av spisevindu, mellommåltider og grunnen til å spise mellom hovedmåltidene: fysisk sult eller følelser og vaner.">
 <style>
   :root {
     --bg: #f0f7f9;
@@ -434,7 +434,7 @@
     <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
     <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
     <button type="button" id="gateSubmit">Lås opp</button>
-    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-error" id="gateError">Feil kode, prøv igjen.</p>
     <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20Kosthold-verkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
   </div>
 </div>
@@ -478,7 +478,7 @@
     <h1>Spisepauser og småspising</h1>
     <p class="tagline">Registrer spisevinduet ditt og grunnen til mellommåltider, tre dager på rad</p>
     <div class="reminder">
-      Noter tidspunktet for det første og det siste du spiser hver dag — det
+      Noter tidspunktet for det første og det siste du spiser hver dag, det
       gir spisevinduet ditt. Noter også eventuelle mellommåltider, og om de
       kom av fysisk sult, eller av noe annet som kjedsomhet, stress, sosialt
       press eller ren vane. Målet er ikke faste eller strenge regler, men mer
@@ -499,9 +499,9 @@
   <section class="primer" id="summarySection">
     <h2>Oppsummering</h2>
     <div class="stat-grid">
-      <div class="stat-item"><strong id="avg-window">–</strong>Snitt spisevindu (timer)</div>
-      <div class="stat-item"><strong id="snack-count">–</strong>Mellommåltider registrert</div>
-      <div class="stat-item"><strong id="pct-non-hunger">–</strong>Andel ikke drevet av sult</div>
+      <div class="stat-item"><strong id="avg-window">-</strong>Snitt spisevindu (timer)</div>
+      <div class="stat-item"><strong id="snack-count">-</strong>Mellommåltider registrert</div>
+      <div class="stat-item"><strong id="pct-non-hunger">-</strong>Andel ikke drevet av sult</div>
     </div>
     <div class="field field-wide">
       <label for="sluttrefleksjon">Hva la du merke til om pausene mellom måltidene dine i løpet av disse tre dagene?</label>
@@ -524,7 +524,7 @@
   </section>
 
   <footer class="closing">
-    Ingen fasit — bare et bilde av pausene dine.<br>
+    Ingen fasit, bare et bilde av pausene dine.<br>
     <strong>Du trenger ikke gjøre det alene.</strong>
   </footer>
 
@@ -601,12 +601,12 @@
               '<label for="' + idSiste + '">Siste måltid</label>' +
               '<input type="time" id="' + idSiste + '" data-key="' + idSiste + '">' +
             '</div>' +
-            '<div class="window-result" id="window-result-' + n + '">Spisevindu: –</div>' +
+            '<div class="window-result" id="window-result-' + n + '">Spisevindu: -</div>' +
           '</div>' +
           snacksHtml +
           '<div class="snack-block">' +
             '<div class="field field-wide">' +
-              '<label for="refleksjon-' + n + '">Noe som pekte seg ut i dag — bra eller krevende?</label>' +
+              '<label for="refleksjon-' + n + '">Noe som pekte seg ut i dag, bra eller krevende?</label>' +
               '<textarea id="refleksjon-' + n + '" data-key="refleksjon-' + n + '" placeholder="Skriv gjerne fritt her..."></textarea>' +
             '</div>' +
           '</div>' +
@@ -662,7 +662,7 @@
     var siste = timeToHours(document.getElementById('d' + n + '-siste').value);
     var el = document.getElementById('window-result-' + n);
     if (forste === null || siste === null) {
-      el.textContent = 'Spisevindu: –';
+      el.textContent = 'Spisevindu: -';
       return null;
     }
     var diff = siste - forste;
@@ -697,14 +697,14 @@
       }
     }
 
-    document.getElementById('avg-window').textContent = windowCount ? (windowSum / windowCount).toFixed(1) + ' t' : '–';
+    document.getElementById('avg-window').textContent = windowCount ? (windowSum / windowCount).toFixed(1) + ' t' : '-';
     document.getElementById('snack-count').textContent = snackCount;
-    document.getElementById('pct-non-hunger').textContent = reasonCount ? Math.round((nonHungerCount / reasonCount) * 100) + ' %' : '–';
+    document.getElementById('pct-non-hunger').textContent = reasonCount ? Math.round((nonHungerCount / reasonCount) * 100) + ' %' : '-';
   }
 
   function buildSummaryText() {
     var lines = [];
-    lines.push('Spisepauser og småspising — 3 dager');
+    lines.push('Spisepauser og småspising, 3 dager');
     lines.push('');
 
     for (var n = 1; n <= DAY_COUNT; n++) {
@@ -719,7 +719,7 @@
         var hva = document.getElementById('d' + n + '-snack' + s + '-hva').value;
         var grunn = document.getElementById('d' + n + '-snack' + s + '-grunn').value;
         if (!tid && !hva && !grunn) continue;
-        lines.push('  Mellommåltid ' + s + ': kl. ' + (tid || '-') + ' — ' + (hva || '-') + ' — grunn: ' + (REASONS[grunn] || '-'));
+        lines.push('  Mellommåltid ' + s + ': kl. ' + (tid || '-') + ': ' + (hva || '-') + ', grunn: ' + (REASONS[grunn] || '-'));
       }
 
       lines.push('  Dagsnotat: ' + (document.getElementById('refleksjon-' + n).value || '-'));

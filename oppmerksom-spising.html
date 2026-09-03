@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oppmerksom spising — 3 dager</title>
+<title>Oppmerksom spising | 3 dager</title>
 <meta name="description" content="Skjema for 3 dagers selvregistrering av oppmerksom spising, med sult- og metthetsskala før og etter hvert måltid.">
 <style>
   :root {
@@ -446,7 +446,7 @@
     <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
     <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
     <button type="button" id="gateSubmit">Lås opp</button>
-    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-error" id="gateError">Feil kode, prøv igjen.</p>
     <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20Kosthold-verkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
   </div>
 </div>
@@ -487,19 +487,17 @@
 
   <header class="page-header">
     <a class="back-link" href="index.html">← Til forsiden</a>
-    <h1>Oppmerksom spising — 3 dager</h1>
+    <h1>Oppmerksom spising: 3 dager</h1>
     <p class="tagline">Registrer sult og metthet før og etter måltider, tre dager på rad</p>
     <div class="reminder">
-      For hvert måltid eller mellommåltid setter du to tall på samme skala —
-      hvor sulten eller mett du var <strong>før</strong> du begynte å spise, og
+      For hvert måltid eller mellommåltid setter du to tall på samme skala: hvor sulten eller mett du var <strong>før</strong> du begynte å spise, og
       hvor sulten eller mett du var <strong>etter</strong>. Legg også merke til
       om du spiste rolig og tilstedeværende, eller fort og distrahert.
       Alt du legger inn lagres i denne nettleseren, så du kan lukke siden og
-      fortsette senere. <strong>Det er helt greit om noen felter står tomme —
-      hopp bare over perioder du ikke spiste noe i.</strong>
+      fortsette senere. <strong>Det er helt greit om noen felter står tomme. Hopp bare over perioder du ikke spiste noe i.</strong>
     </div>
     <p class="scale-key">
-      <strong>Skalaen (0–10):</strong> 0 = svært sulten, kanskje uvel eller
+      <strong>Skalaen (0 til 10):</strong> 0 = svært sulten, kanskje uvel eller
       svimmel av det &nbsp;·&nbsp; 5 = passe mett, komfortabel &nbsp;·&nbsp;
       10 = stappmett, ubehagelig full
     </p>
@@ -516,9 +514,9 @@
   <section class="primer" id="summarySection">
     <h2>Oppsummering</h2>
     <div class="stat-grid">
-      <div class="stat-item"><strong id="avg-sultfor">–</strong>Snitt før måltid (0–10)</div>
-      <div class="stat-item"><strong id="avg-mettetter">–</strong>Snitt etter måltid (0–10)</div>
-      <div class="stat-item"><strong id="meals-filled">–</strong>Måltider registrert</div>
+      <div class="stat-item"><strong id="avg-sultfor">-</strong>Snitt før måltid (0 til 10)</div>
+      <div class="stat-item"><strong id="avg-mettetter">-</strong>Snitt etter måltid (0 til 10)</div>
+      <div class="stat-item"><strong id="meals-filled">-</strong>Måltider registrert</div>
     </div>
     <div class="field field-wide">
       <label for="sluttrefleksjon">Hva la du merke til om sult og metthet i løpet av disse tre dagene?</label>
@@ -541,7 +539,7 @@
   </section>
 
   <footer class="closing">
-    Ingen fasit — bare oppmerksomhet på kroppens signaler.<br>
+    Ingen fasit, bare oppmerksomhet på kroppens signaler.<br>
     <strong>Du trenger ikke gjøre det alene.</strong>
   </footer>
 
@@ -559,7 +557,7 @@
     { key: 'kveld', label: 'Kveld' }
   ];
 
-  var SCALE_ANCHORS = ['0 — Svært sulten', '10 — Stappmett'];
+  var SCALE_ANCHORS = ['0, Svært sulten', '10, Stappmett'];
 
   function buildDayMarkup(n) {
     var mealsHtml = PERIODS.map(function (p) {
@@ -616,7 +614,7 @@
           mealsHtml +
           '<div class="meal-block">' +
             '<div class="field field-wide">' +
-              '<label for="refleksjon-' + n + '">Noe som pekte seg ut i dag — bra eller krevende?</label>' +
+              '<label for="refleksjon-' + n + '">Noe som pekte seg ut i dag, bra eller krevende?</label>' +
               '<textarea id="refleksjon-' + n + '" data-key="refleksjon-' + n + '" placeholder="Skriv gjerne fritt her..."></textarea>' +
             '</div>' +
           '</div>' +
@@ -704,8 +702,8 @@
       });
     }
 
-    document.getElementById('avg-sultfor').textContent = sultCount ? (sultSum / sultCount).toFixed(1) : '–';
-    document.getElementById('avg-mettetter').textContent = mettCount ? (mettSum / mettCount).toFixed(1) : '–';
+    document.getElementById('avg-sultfor').textContent = sultCount ? (sultSum / sultCount).toFixed(1) : '-';
+    document.getElementById('avg-mettetter').textContent = mettCount ? (mettSum / mettCount).toFixed(1) : '-';
     document.getElementById('meals-filled').textContent = mealsFilled + ' / ' + totalMeals;
   }
 
@@ -717,7 +715,7 @@
 
   function buildSummaryText() {
     var lines = [];
-    lines.push('Oppmerksom spising — 3 dager');
+    lines.push('Oppmerksom spising, 3 dager');
     lines.push('');
 
     for (var n = 1; n <= DAY_COUNT; n++) {

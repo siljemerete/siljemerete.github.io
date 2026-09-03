@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Data fra telefon eller aktivitetsklokke — 7 dager</title>
+<title>Data fra telefon eller aktivitetsklokke | 7 dager</title>
 <style>
   :root {
     --bg: #f0f7f9;
@@ -410,7 +410,7 @@
     <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
     <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
     <button type="button" id="gateSubmit">Lås opp</button>
-    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-error" id="gateError">Feil kode, prøv igjen.</p>
     <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20aktivitetsverkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
   </div>
 </div>
@@ -457,7 +457,7 @@
       Apple Health, Google Fit, Garmin, Fitbit eller lignende), kan du
       skrive av tallene derfra hit én gang om dagen. Da får vi et samlet
       bilde uten at du trenger å dele tilgang til appen din.
-      <strong>Fyll inn det du har — det er helt greit om noe mangler.</strong>
+      <strong>Fyll inn det du har, det er helt greit om noe mangler.</strong>
     </div>
   </header>
 
@@ -465,11 +465,11 @@
     <h2>Om denne registreringen</h2>
     <p>De fleste telefoner og aktivitetsklokker registrerer automatisk ting
     som skritt, aktive minutter, puls og søvn. Denne siden er ikke koblet
-    til noen app — den er bare et enkelt sted å skrive av tallene du ser i
+    til noen app, den er bare et enkelt sted å skrive av tallene du ser i
     din egen app, slik at vi kan se dem samlet og følge utviklingen over
     tid.</p>
     <div class="signs-grid">
-      <div class="signs-item"><strong>Hvor finner jeg tallene?</strong>Apple Health, Google Fit/Fit-appen, Samsung Health, Garmin Connect, Fitbit-appen eller tilsvarende — se under «i dag» eller «historikk» for hver dag.</div>
+      <div class="signs-item"><strong>Hvor finner jeg tallene?</strong>Apple Health, Google Fit/Fit-appen, Samsung Health, Garmin Connect, Fitbit-appen eller tilsvarende, se under «i dag» eller «historikk» for hver dag.</div>
     </div>
   </section>
 
@@ -730,11 +730,11 @@
   <section class="primer" id="summarySection">
     <h2>Oppsummering for uken</h2>
     <div class="stat-grid">
-      <div class="stat-item"><strong id="avg-steps">–</strong>Snitt skritt</div>
-      <div class="stat-item"><strong id="avg-active">–</strong>Snitt aktive minutter</div>
-      <div class="stat-item"><strong id="avg-hr">–</strong>Snitt hvilepuls</div>
-      <div class="stat-item"><strong id="avg-sleep">–</strong>Snitt søvn (timer)</div>
-      <div class="stat-item"><strong id="days-filled">–</strong>Dager registrert</div>
+      <div class="stat-item"><strong id="avg-steps">-</strong>Snitt skritt</div>
+      <div class="stat-item"><strong id="avg-active">-</strong>Snitt aktive minutter</div>
+      <div class="stat-item"><strong id="avg-hr">-</strong>Snitt hvilepuls</div>
+      <div class="stat-item"><strong id="avg-sleep">-</strong>Snitt søvn (timer)</div>
+      <div class="stat-item"><strong id="days-filled">-</strong>Dager registrert</div>
     </div>
     <div class="field field-wide">
       <label for="weekly-reflection">Noe du la merke til i tallene denne uken?</label>
@@ -757,7 +757,7 @@
   </section>
 
   <footer class="closing">
-    Tallene appen din allerede har — bare samlet på ett sted.<br>
+    Tallene appen din allerede har, bare samlet på ett sted.<br>
     <strong>Dette er overkommelig, og du trenger ikke gjøre det alene.</strong>
   </footer>
 
@@ -836,16 +836,16 @@
     var avgHr = average(byField.restinghr);
     var avgSleep = average(byField.sleep);
 
-    document.getElementById('avg-steps').textContent = avgSteps !== null ? Math.round(avgSteps) : '–';
-    document.getElementById('avg-active').textContent = avgActive !== null ? avgActive.toFixed(1) : '–';
-    document.getElementById('avg-hr').textContent = avgHr !== null ? avgHr.toFixed(1) : '–';
-    document.getElementById('avg-sleep').textContent = avgSleep !== null ? avgSleep.toFixed(1) : '–';
+    document.getElementById('avg-steps').textContent = avgSteps !== null ? Math.round(avgSteps) : '-';
+    document.getElementById('avg-active').textContent = avgActive !== null ? avgActive.toFixed(1) : '-';
+    document.getElementById('avg-hr').textContent = avgHr !== null ? avgHr.toFixed(1) : '-';
+    document.getElementById('avg-sleep').textContent = avgSleep !== null ? avgSleep.toFixed(1) : '-';
     document.getElementById('days-filled').textContent = daysFilled + ' / ' + DAY_COUNT;
   }
 
   function buildSummaryText() {
     var lines = [];
-    lines.push('Data fra telefon eller aktivitetsklokke — 7 dager');
+    lines.push('Data fra telefon eller aktivitetsklokke, 7 dager');
     lines.push('');
 
     for (var n = 1; n <= DAY_COUNT; n++) {

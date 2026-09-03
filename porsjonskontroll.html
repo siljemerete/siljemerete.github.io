@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Porsjonskontroll — håndmodellen</title>
-<meta name="description" content="Skjema for 3 dagers registrering av porsjonsstørrelser ved hjelp av håndmodellen — grønnsaker, protein, karbohydrater og fett.">
+<title>Porsjonskontroll | håndmodellen</title>
+<meta name="description" content="Skjema for 3 dagers registrering av porsjonsstørrelser ved hjelp av håndmodellen: grønnsaker, protein, karbohydrater og fett.">
 <style>
   :root {
     --bg: #f0f7f9;
@@ -441,7 +441,7 @@
     <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
     <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
     <button type="button" id="gateSubmit">Lås opp</button>
-    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-error" id="gateError">Feil kode, prøv igjen.</p>
     <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20Kosthold-verkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
   </div>
 </div>
@@ -482,17 +482,16 @@
 
   <header class="page-header">
     <a class="back-link" href="index.html">← Til forsiden</a>
-    <h1>Porsjonskontroll — håndmodellen</h1>
+    <h1>Porsjonskontroll: håndmodellen</h1>
     <p class="tagline">Registrer porsjonsstørrelser med hånden som målestokk, tre dager på rad</p>
     <div class="reminder">
       Håndmodellen er en enkel måte å anslå porsjonsstørrelser på, uten å veie
       eller telle. For hvert måltid vurderer du om mengden av hver
       matvaregruppe var mindre enn, omtrent som, eller mer enn hånd-referansen
-      under. Dette er kun en beskrivelse av mengde — hva som er riktig mengde
+      under. Dette er kun en beskrivelse av mengde, hva som er riktig mengde
       for akkurat deg avtaler du med Silje Merete ut fra ditt eget kosthold.
       Alt du legger inn lagres i denne nettleseren, så du kan lukke siden og
-      fortsette senere. <strong>Det er helt greit om noen felter står tomme —
-      hopp bare over grupper som ikke var med i måltidet.</strong>
+      fortsette senere. <strong>Det er helt greit om noen felter står tomme. Hopp bare over grupper som ikke var med i måltidet.</strong>
     </div>
     <ul class="hand-guide">
       <li><strong>Grønnsaker/frukt</strong>Én knyttneve</li>
@@ -534,7 +533,7 @@
   </section>
 
   <footer class="closing">
-    Ingen fasit — bare et bilde av porsjonene dine.<br>
+    Ingen fasit, bare et bilde av porsjonene dine.<br>
     <strong>Du trenger ikke gjøre det alene.</strong>
   </footer>
 
@@ -617,7 +616,7 @@
           mealsHtml +
           '<div class="meal-block">' +
             '<div class="field field-wide">' +
-              '<label for="refleksjon-' + n + '">Noe som pekte seg ut i dag — bra eller krevende?</label>' +
+              '<label for="refleksjon-' + n + '">Noe som pekte seg ut i dag, bra eller krevende?</label>' +
               '<textarea id="refleksjon-' + n + '" data-key="refleksjon-' + n + '" placeholder="Skriv gjerne fritt her..."></textarea>' +
             '</div>' +
           '</div>' +
@@ -635,9 +634,9 @@
   function renderStatGrid() {
     var html = '';
     FOOD_GROUPS.forEach(function (g) {
-      html += '<div class="stat-item"><strong id="pct-' + g.key + '">–</strong>Andel omtrent en hånd — ' + g.label + '</div>';
+      html += '<div class="stat-item"><strong id="pct-' + g.key + '">-</strong>Andel omtrent en hånd, ' + g.label + '</div>';
     });
-    html += '<div class="stat-item"><strong id="meals-filled">–</strong>Måltider registrert</div>';
+    html += '<div class="stat-item"><strong id="meals-filled">-</strong>Måltider registrert</div>';
     document.getElementById('statGrid').innerHTML = html;
   }
 
@@ -695,7 +694,7 @@
       var el = document.getElementById('pct-' + g.key);
       if (!el) return;
       var c = counts[g.key];
-      el.textContent = c.total ? Math.round((c.passe / c.total) * 100) + ' %' : '–';
+      el.textContent = c.total ? Math.round((c.passe / c.total) * 100) + ' %' : '-';
     });
 
     document.getElementById('meals-filled').textContent = mealsFilled + ' / ' + totalMeals;
@@ -708,7 +707,7 @@
 
   function buildSummaryText() {
     var lines = [];
-    lines.push('Porsjonskontroll — håndmodellen — 3 dager');
+    lines.push('Porsjonskontroll, håndmodellen, 3 dager');
     lines.push('');
 
     for (var n = 1; n <= DAY_COUNT; n++) {
@@ -733,7 +732,7 @@
     }
 
     FOOD_GROUPS.forEach(function (g) {
-      lines.push('Andel omtrent en hånd — ' + g.label + ': ' + document.getElementById('pct-' + g.key).textContent);
+      lines.push('Andel omtrent en hånd, ' + g.label + ': ' + document.getElementById('pct-' + g.key).textContent);
     });
     lines.push('Måltider registrert: ' + document.getElementById('meals-filled').textContent);
     lines.push('');

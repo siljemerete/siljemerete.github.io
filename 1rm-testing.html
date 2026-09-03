@@ -486,7 +486,7 @@
     <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
     <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
     <button type="button" id="gateSubmit">Lås opp</button>
-    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-error" id="gateError">Feil kode, prøv igjen.</p>
     <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20Trening%20og%20aktivitet-verkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
   </div>
 </div>
@@ -531,7 +531,7 @@
     <p class="tagline">Anslå maksimal styrke, og følg utviklingen din over tid</p>
     <div class="reminder">
       Dette er en enkel måte å følge utviklingen av maksimal styrke over tid
-      — ikke en medisinsk vurdering. Direkte testing av 1RM (å løfte
+     , ikke en medisinsk vurdering. Direkte testing av 1RM (å løfte
       tyngste vekt én gang) krever korrekt teknikk og innebærer risiko for
       overbelastning eller feil teknikk. For de fleste er det tryggere og
       mer praktisk å estimere 1RM ut fra en litt lettere vekt løftet flere
@@ -547,7 +547,7 @@
     <p>Direkte testing av 1RM kan gi mer presise resultater, men krever korrekt teknikk og innebærer risiko for overbelastning eller feil teknikk hvis testleder ikke har erfaring med å gjennomføre slike tester. I praksis benyttes derfor ofte indirekte metoder, hvor man utfører en moderat belastning og registrerer hvor mange repetisjoner man klarer kontrollert. Deretter estimeres 1RM ved hjelp av en formel.</p>
     <p>Verktøyet under bruker Brzycki-formelen, som er blant de mest brukte og mest pålitelige dersom antall repetisjoner ligger mellom 10 og 15:</p>
     <div class="formula-box">1RM = Vekt ÷ (1,0278 − 0,0278 × Antall repetisjoner)</div>
-    <p>Slik gjør du det: velg en øvelse, og løft en vekt du klarer å ta i 10–15 kontrollerte repetisjoner med god teknikk. Fyll inn øvelse, vekt og antall repetisjoner under, så regner verktøyet automatisk ut din estimerte 1RM.</p>
+    <p>Slik gjør du det: velg en øvelse, og løft en vekt du klarer å ta i 10 til 15 kontrollerte repetisjoner med god teknikk. Fyll inn øvelse, vekt og antall repetisjoner under, så regner verktøyet automatisk ut din estimerte 1RM.</p>
   </section>
 
   <section class="primer">
@@ -568,15 +568,15 @@
       <div class="field">
         <label for="entry-reps">Antall repetisjoner</label>
         <input type="number" min="1" max="20" step="1" id="entry-reps" placeholder="F.eks. 12">
-        <p class="hint">Bruk 1 for et direkte testet 1RM. Formelen er mest pålitelig ved 10–15 repetisjoner.</p>
+        <p class="hint">Bruk 1 for et direkte testet 1RM. Formelen er mest pålitelig ved 10 til 15 repetisjoner.</p>
       </div>
       <div class="field field-wide">
-        <label for="entry-note">Notat — teknikk, følelse, annet</label>
+        <label for="entry-note">Notat, teknikk, følelse, annet</label>
         <textarea id="entry-note" placeholder="Skriv gjerne fritt her..."></textarea>
       </div>
     </div>
     <div class="estimate-result">
-      <div class="estimate-value" id="estimateValue">–</div>
+      <div class="estimate-value" id="estimateValue">-</div>
       <div class="estimate-label">Estimert 1RM (kg)</div>
     </div>
     <button type="button" class="add-button" id="addEntry">Legg til resultat</button>
@@ -606,7 +606,7 @@
       </table>
     </div>
     <p class="empty-note" id="emptyNote">Ingen resultater registrert ennå.</p>
-    <p class="source-note">Formelen og fremgangsmåten er hentet fra kursmateriell om 1RM-testing, og er kun ment som et referansepunkt — ikke en medisinsk vurdering.</p>
+    <p class="source-note">Formelen og fremgangsmåten er hentet fra kursmateriell om 1RM-testing, og er kun ment som et referansepunkt, ikke en medisinsk vurdering.</p>
   </section>
 
   <section class="primer">
@@ -650,7 +650,7 @@
     var reps = parseInt(document.getElementById('entry-reps').value, 10);
     var el = document.getElementById('estimateValue');
     if (isNaN(weight) || isNaN(reps) || reps < 1 || weight <= 0) {
-      el.textContent = '–';
+      el.textContent = '-';
       return;
     }
     el.textContent = round1(estimate1RM(weight, reps));
@@ -740,7 +740,7 @@
 
       var prevOneRM = lastSeen[entry.exercise];
       var delta = prevOneRM === undefined ? null : round1(entry.oneRM - prevOneRM);
-      var deltaText = delta === null ? '–' : (delta > 0 ? '+' : '') + delta;
+      var deltaText = delta === null ? '-' : (delta > 0 ? '+' : '') + delta;
       var deltaClass = delta === null ? '' : (delta > 0 ? 'delta-positive' : (delta < 0 ? 'delta-negative' : ''));
 
       tr.innerHTML =
@@ -817,7 +817,7 @@
       sorted.forEach(function (entry) {
         var prevOneRM = lastSeen[entry.exercise];
         var delta = prevOneRM === undefined ? null : round1(entry.oneRM - prevOneRM);
-        lines.push(entry.date + ' — ' + entry.exercise + ': ' + entry.weight + ' kg x ' + entry.reps + ' reps → estimert 1RM ' + round1(entry.oneRM) + ' kg' + (delta !== null ? ' (' + (delta > 0 ? '+' : '') + delta + ' kg)' : ''));
+        lines.push(entry.date + ': ' + entry.exercise + ': ' + entry.weight + ' kg x ' + entry.reps + ' reps → estimert 1RM ' + round1(entry.oneRM) + ' kg' + (delta !== null ? ' (' + (delta > 0 ? '+' : '') + delta + ' kg)' : ''));
         if (entry.note) {
           lines.push('  Notat: ' + entry.note);
         }

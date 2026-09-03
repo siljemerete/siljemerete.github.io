@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>YMCA step-test</title>
-<meta name="description" content="Metronom, tidtaker og loggverktøy for YMCA 3-minutters step-test — mål kondisjon og følg utviklingen over tid.">
+<meta name="description" content="Metronom, tidtaker og loggverktøy for YMCA 3-minutters step-test: mål kondisjon og følg utviklingen over tid.">
 <style>
   :root {
     --bg: #f0f7f9;
@@ -566,7 +566,7 @@
     <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
     <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
     <button type="button" id="gateSubmit">Lås opp</button>
-    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-error" id="gateError">Feil kode, prøv igjen.</p>
     <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20Trening%20og%20aktivitet-verkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
   </div>
 </div>
@@ -610,7 +610,7 @@
     <h1>YMCA step-test</h1>
     <p class="tagline">Mål kondisjon med et enkelt trappetrinn, og følg utviklingen din over tid</p>
     <div class="reminder">
-      Dette er en enkel måte å følge kondisjon over tid — ikke en medisinsk
+      Dette er en enkel måte å følge kondisjon over tid, ikke en medisinsk
       vurdering. Er du usikker på om testen er trygg for deg, for eksempel
       ved hjerte- eller lungesykdom, svimmelhet eller balanseproblemer, ta
       kontakt med lege først. Stopp umiddelbart ved brystsmerter, sterk
@@ -623,15 +623,15 @@
     <h2>Slik gjennomfører du testen</h2>
     <p><strong>Du trenger:</strong> et stabilt trinn eller en kasse på ca. 30 cm høyde, en stol å sette deg på etterpå, og noe å telle puls med (fingrene og et klokkeslett holder fint).</p>
     <ul>
-      <li>Still deg foran trinnet. Når tidtakeren starter, tråkker du i takt: opp — opp — ned — ned, i tempoet som vises under (96 taktslag i minuttet, altså 24 hele tråkk-sykluser).</li>
+      <li>Still deg foran trinnet. Når tidtakeren starter, tråkker du i takt: opp, opp, ned, ned, i tempoet som vises under (96 taktslag i minuttet, altså 24 hele tråkk-sykluser).</li>
       <li>Hold jevn takt i 3 minutter sammenhengende.</li>
       <li>Når tiden er ute, sett deg umiddelbart ned.</li>
-      <li>Finn pulsen din og tell antall slag i ett fullt minutt (60 sekunder) — bruk pulstelleren under.</li>
+      <li>Finn pulsen din og tell antall slag i ett fullt minutt (60 sekunder), bruk pulstelleren under.</li>
     </ul>
   </section>
 
   <section class="primer">
-    <h2>Metronom og tidtaker — 3 minutter</h2>
+    <h2>Metronom og tidtaker: 3 minutter</h2>
     <div class="timer-display">
       <div class="timer-clock" id="timerClock">03:00</div>
       <div class="timer-progress">
@@ -648,7 +648,7 @@
   </section>
 
   <section class="primer">
-    <h2>Pulstelling etter testen — 60 sekunder</h2>
+    <h2>Pulstelling etter testen: 60 sekunder</h2>
     <p>Sett deg umiddelbart etter testen. Finn pulsen på håndleddet eller halsen, trykk start, og tell antall slag helt til tiden er ute.</p>
     <div class="timer-display">
       <div class="timer-clock small" id="recoveryClock">01:00</div>
@@ -686,7 +686,7 @@
         <input type="number" min="30" max="220" step="1" id="entry-hr" placeholder="F.eks. 96">
       </div>
       <div class="field field-wide">
-        <label for="entry-note">Notat — hvordan kjentes det, pauser, annet</label>
+        <label for="entry-note">Notat, hvordan kjentes det, pauser, annet</label>
         <textarea id="entry-note" placeholder="Skriv gjerne fritt her..."></textarea>
       </div>
     </div>
@@ -700,9 +700,9 @@
       <button type="button" id="resetAll" class="danger">Nullstill alle resultater</button>
     </div>
     <div class="stat-grid">
-      <div class="stat-item"><strong id="stat-first">–</strong>Første test (puls)</div>
-      <div class="stat-item"><strong id="stat-latest">–</strong>Siste test (puls)</div>
-      <div class="stat-item"><strong id="stat-change">–</strong>Endring totalt (lavere er bedre)</div>
+      <div class="stat-item"><strong id="stat-first">-</strong>Første test (puls)</div>
+      <div class="stat-item"><strong id="stat-latest">-</strong>Siste test (puls)</div>
+      <div class="stat-item"><strong id="stat-change">-</strong>Endring totalt (lavere er bedre)</div>
     </div>
     <div class="table-scroll">
       <table class="results-table" id="resultsTable">
@@ -720,7 +720,7 @@
       </table>
     </div>
     <p class="empty-note" id="emptyNote">Ingen resultater registrert ennå.</p>
-    <p class="source-note">Normtallene er hentet fra YMCA sin standardprotokoll for 3-minutters step-test ("Y's Way to Physical Fitness"), og er kun ment som et referansepunkt — ikke en medisinsk vurdering.</p>
+    <p class="source-note">Normtallene er hentet fra YMCA sin standardprotokoll for 3-minutters step-test ("Y's Way to Physical Fitness"), og er kun ment som et referansepunkt, ikke en medisinsk vurdering.</p>
   </section>
 
   <section class="primer">
@@ -897,7 +897,7 @@
       recoveryRunning = false;
       clearInterval(recoveryInterval);
       document.getElementById('recoveryStart').disabled = false;
-      document.getElementById('recoveryPhrase').textContent = 'Ferdig — skriv inn antall slag du talte under.';
+      document.getElementById('recoveryPhrase').textContent = 'Ferdig, skriv inn antall slag du talte under.';
       beep(440, 0.6);
       document.getElementById('entry-hr').focus();
     }
@@ -986,7 +986,7 @@
       var tr = document.createElement('tr');
 
       var delta = prevHr === null ? null : entry.hr - prevHr;
-      var deltaText = delta === null ? '–' : (delta > 0 ? '+' : '') + delta;
+      var deltaText = delta === null ? '-' : (delta > 0 ? '+' : '') + delta;
       var deltaClass = delta === null ? '' : (delta < 0 ? 'delta-positive' : (delta > 0 ? 'delta-negative' : ''));
 
       var ratingLabel = RATING_LABELS[classify(entry.gender, entry.age, entry.hr)];
@@ -1016,13 +1016,13 @@
       prevHr = entry.hr;
     });
 
-    document.getElementById('stat-first').textContent = sorted.length ? sorted[0].hr : '–';
-    document.getElementById('stat-latest').textContent = sorted.length ? sorted[sorted.length - 1].hr : '–';
+    document.getElementById('stat-first').textContent = sorted.length ? sorted[0].hr : '-';
+    document.getElementById('stat-latest').textContent = sorted.length ? sorted[sorted.length - 1].hr : '-';
     if (sorted.length >= 2) {
       var change = sorted[sorted.length - 1].hr - sorted[0].hr;
       document.getElementById('stat-change').textContent = (change > 0 ? '+' : '') + change;
     } else {
-      document.getElementById('stat-change').textContent = '–';
+      document.getElementById('stat-change').textContent = '-';
     }
   }
 
@@ -1073,7 +1073,7 @@
       sorted.forEach(function (entry) {
         var delta = prevHr === null ? null : entry.hr - prevHr;
         var ratingLabel = RATING_LABELS[classify(entry.gender, entry.age, entry.hr)];
-        lines.push(entry.date + ': ' + entry.hr + ' slag/min' + (delta !== null ? ' (' + (delta > 0 ? '+' : '') + delta + ')' : '') + ' — ' + ratingLabel);
+        lines.push(entry.date + ': ' + entry.hr + ' slag/min' + (delta !== null ? ' (' + (delta > 0 ? '+' : '') + delta + ')' : '') + ': ' + ratingLabel);
         lines.push('  Alder: ' + entry.age + ', kjønn: ' + (entry.gender === 'female' ? 'kvinne' : 'mann'));
         if (entry.note) {
           lines.push('  Notat: ' + entry.note);

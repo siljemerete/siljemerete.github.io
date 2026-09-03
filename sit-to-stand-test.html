@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sit-to-stand-test (30 sekunder)</title>
-<meta name="description" content="Tidtaker, telleknapp og loggverktøy for 30-sekunders sit-to-stand-test — mål benstyrke og funksjon, og følg utviklingen over tid.">
+<meta name="description" content="Tidtaker, telleknapp og loggverktøy for 30-sekunders sit-to-stand-test: mål benstyrke og funksjon, og følg utviklingen over tid.">
 <style>
   :root {
     --bg: #f0f7f9;
@@ -602,7 +602,7 @@
     <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
     <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
     <button type="button" id="gateSubmit">Lås opp</button>
-    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-error" id="gateError">Feil kode, prøv igjen.</p>
     <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20Trening%20og%20aktivitet-verkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
   </div>
 </div>
@@ -646,7 +646,7 @@
     <h1>Sit-to-stand-test (30 sekunder)</h1>
     <p class="tagline">Mål benstyrke og funksjon, og følg utviklingen din over tid</p>
     <div class="reminder">
-      Dette er en enkel måte å følge benstyrke og funksjon over tid — ikke en
+      Dette er en enkel måte å følge benstyrke og funksjon over tid, ikke en
       medisinsk vurdering. Bruk en stabil stol uten armlener, gjerne plassert
       mot en vegg. Er du usikker på om testen er trygg for deg, for eksempel
       ved svimmelhet, balanseproblemer eller hjerte- og lungesykdom, ta
@@ -657,17 +657,17 @@
 
   <section class="primer">
     <h2>Slik gjennomfører du testen</h2>
-    <p><strong>Du trenger:</strong> en stabil stol uten armlener med vanlig setehøyde (ca. 43–44 cm), gjerne plassert inntil en vegg så den ikke sklir.</p>
+    <p><strong>Du trenger:</strong> en stabil stol uten armlener med vanlig setehøyde (ca. 43 til 44 cm), gjerne plassert inntil en vegg så den ikke sklir.</p>
     <ul>
       <li>Sitt midt på stolen med armene i kryss over brystet.</li>
-      <li>Når tidtakeren starter, reiser du deg helt opp og setter deg helt ned igjen — så mange ganger du klarer på 30 sekunder.</li>
+      <li>Når tidtakeren starter, reiser du deg helt opp og setter deg helt ned igjen, så mange ganger du klarer på 30 sekunder.</li>
       <li>En reisning som er mer enn halvveis fullført når tiden er ute, telles med.</li>
       <li>Bruk telleknappen under mens du (eller den som hjelper deg) teller hver fullførte reisning.</li>
     </ul>
   </section>
 
   <section class="primer">
-    <h2>Tidtaker — 30 sekunder</h2>
+    <h2>Tidtaker: 30 sekunder</h2>
     <div class="timer-display">
       <div class="timer-clock" id="timerClock">00:30</div>
       <div class="timer-progress">
@@ -711,7 +711,7 @@
         <input type="number" min="0" max="60" step="1" id="entry-stands" placeholder="F.eks. 14">
       </div>
       <div class="field field-wide">
-        <label for="entry-note">Notat — teknikk, balanse, annet</label>
+        <label for="entry-note">Notat, teknikk, balanse, annet</label>
         <textarea id="entry-note" placeholder="Skriv gjerne fritt her..."></textarea>
       </div>
     </div>
@@ -725,9 +725,9 @@
       <button type="button" id="resetAll" class="danger">Nullstill alle resultater</button>
     </div>
     <div class="stat-grid">
-      <div class="stat-item"><strong id="stat-first">–</strong>Første test (reisninger)</div>
-      <div class="stat-item"><strong id="stat-latest">–</strong>Siste test (reisninger)</div>
-      <div class="stat-item"><strong id="stat-change">–</strong>Endring totalt</div>
+      <div class="stat-item"><strong id="stat-first">-</strong>Første test (reisninger)</div>
+      <div class="stat-item"><strong id="stat-latest">-</strong>Siste test (reisninger)</div>
+      <div class="stat-item"><strong id="stat-change">-</strong>Endring totalt</div>
     </div>
     <div class="table-scroll">
       <table class="results-table" id="resultsTable">
@@ -745,7 +745,7 @@
       </table>
     </div>
     <p class="empty-note" id="emptyNote">Ingen resultater registrert ennå.</p>
-    <p class="source-note">Aldersreferansen for 60 år og eldre er hentet fra CDC sitt STEADI-materiell, basert på Rikli &amp; Jones (1999). Grensene er forenklede referanseverdier — ikke en presis medisinsk grense. Under 60 år finnes det ingen tilsvarende standardisert referanse her, så testen brukes da kun til å følge din egen utvikling over tid.</p>
+    <p class="source-note">Aldersreferansen for 60 år og eldre er hentet fra CDC sitt STEADI-materiell, basert på Rikli &amp; Jones (1999). Grensene er forenklede referanseverdier, ikke en presis medisinsk grense. Under 60 år finnes det ingen tilsvarende standardisert referanse her, så testen brukes da kun til å følge din egen utvikling over tid.</p>
   </section>
 
   <section class="primer">
@@ -763,7 +763,7 @@
   </section>
 
   <footer class="closing">
-    Sterke ben, trygg hverdag — ett løft av gangen.<br>
+    Sterke ben, trygg hverdag, ett løft av gangen.<br>
     <strong>Du trenger ikke gjøre det alene.</strong>
   </footer>
 
@@ -944,7 +944,7 @@
       var tr = document.createElement('tr');
 
       var delta = prevStands === null ? null : entry.stands - prevStands;
-      var deltaText = delta === null ? '–' : (delta > 0 ? '+' : '') + delta;
+      var deltaText = delta === null ? '-' : (delta > 0 ? '+' : '') + delta;
       var deltaClass = delta === null ? '' : (delta > 0 ? 'delta-positive' : (delta < 0 ? 'delta-negative' : ''));
 
       tr.innerHTML =
@@ -972,13 +972,13 @@
       prevStands = entry.stands;
     });
 
-    document.getElementById('stat-first').textContent = sorted.length ? sorted[0].stands : '–';
-    document.getElementById('stat-latest').textContent = sorted.length ? sorted[sorted.length - 1].stands : '–';
+    document.getElementById('stat-first').textContent = sorted.length ? sorted[0].stands : '-';
+    document.getElementById('stat-latest').textContent = sorted.length ? sorted[sorted.length - 1].stands : '-';
     if (sorted.length >= 2) {
       var change = sorted[sorted.length - 1].stands - sorted[0].stands;
       document.getElementById('stat-change').textContent = (change > 0 ? '+' : '') + change;
     } else {
-      document.getElementById('stat-change').textContent = '–';
+      document.getElementById('stat-change').textContent = '-';
     }
   }
 
@@ -1012,7 +1012,7 @@
       var rating = classify(gender, age, stands);
       resultBox.style.display = 'block';
       if (rating === null) {
-        resultBox.innerHTML = 'Ingen standardisert aldersreferanse under 60 år — resultatet brukes til å følge din egen utvikling over tid.';
+        resultBox.innerHTML = 'Ingen standardisert aldersreferanse under 60 år, resultatet brukes til å følge din egen utvikling over tid.';
       } else {
         resultBox.innerHTML = 'Referanse: <strong>' + (rating === 'below' ? 'Under forventet nivå' : 'Innenfor forventet nivå') + '</strong> for ' + (gender === 'female' ? 'kvinne' : 'mann') + ' i aldersgruppen ' + ageBracket(age) + '.';
       }
@@ -1036,7 +1036,7 @@
       var prevStands = null;
       sorted.forEach(function (entry) {
         var delta = prevStands === null ? null : entry.stands - prevStands;
-        lines.push(entry.date + ': ' + entry.stands + ' reisninger' + (delta !== null ? ' (' + (delta > 0 ? '+' : '') + delta + ')' : '') + ' — ' + referenceText(entry));
+        lines.push(entry.date + ': ' + entry.stands + ' reisninger' + (delta !== null ? ' (' + (delta > 0 ? '+' : '') + delta + ')' : '') + ': ' + referenceText(entry));
         lines.push('  Alder: ' + entry.age + (entry.gender ? ', kjønn: ' + (entry.gender === 'female' ? 'kvinne' : 'mann') : ''));
         if (entry.note) {
           lines.push('  Notat: ' + entry.note);

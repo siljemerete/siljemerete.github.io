@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kosthold — 4 dagers registrering</title>
+<title>Kosthold | 4 dagers registrering</title>
 <style>
   :root {
     --bg: #f0f7f9;
@@ -427,7 +427,7 @@
     <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
     <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
     <button type="button" id="gateSubmit">Lås opp</button>
-    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-error" id="gateError">Feil kode, prøv igjen.</p>
     <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20Kosthold-verkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
   </div>
 </div>
@@ -468,7 +468,7 @@
 
   <header class="page-header">
     <a class="back-link" href="index.html">← Til forsiden</a>
-    <h1>Kosthold — 4 dagers registrering</h1>
+    <h1>Kosthold: 4 dagers registrering</h1>
     <p class="tagline">Fylles ut for 3 vanlige hverdager og 1 vanlig helgedag</p>
     <div class="reminder">
       Dette er en grundigere versjon av kostholdsregistreringen, for et mer
@@ -687,7 +687,7 @@
     <h2>Mønstre over flere dager</h2>
     <div class="field-grid">
       <div class="field field-wide">
-        <label for="refleksjon-monster">Er det noe som går igjen når du ser de fire dagene under ett — samme type mat, samme tidspunkter, samme følelser?</label>
+        <label for="refleksjon-monster">Er det noe som går igjen når du ser de fire dagene under ett, samme type mat, samme tidspunkter, samme følelser?</label>
         <textarea id="refleksjon-monster" data-key="refleksjon-monster" placeholder="Skriv gjerne fritt her..."></textarea>
       </div>
       <div class="field field-wide">
@@ -716,7 +716,7 @@
   </section>
 
   <footer class="closing">
-    Ingen fasit — bare et bilde av en vanlig uke.<br>
+    Ingen fasit, bare et bilde av en vanlig uke.<br>
     <strong>Du trenger ikke gjøre det alene.</strong>
   </footer>
 
@@ -773,7 +773,7 @@
 
   function buildSummaryText() {
     var lines = [];
-    lines.push('Kosthold — 4 dagers registrering');
+    lines.push('Kosthold, 4 dagers registrering');
     lines.push('');
 
     DAY_TYPES.forEach(function (dt) {
@@ -796,7 +796,7 @@
   }
 
   function sendEmail() {
-    var subject = encodeURIComponent('Kosthold — 4 dagers registrering');
+    var subject = encodeURIComponent('Kosthold, 4 dagers registrering');
     var body = encodeURIComponent(buildSummaryText());
     window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
   }

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Måltidsinnhold — tallerkenmodellen</title>
-<meta name="description" content="Skjema for 3 dagers registrering av måltidenes innhold ut fra tallerkenmodellen — grønnsaker, protein, fullkorn og sunt fett.">
+<title>Måltidsinnhold | tallerkenmodellen</title>
+<meta name="description" content="Skjema for 3 dagers registrering av måltidenes innhold ut fra tallerkenmodellen: grønnsaker, protein, fullkorn og sunt fett.">
 <style>
   :root {
     --bg: #f0f7f9;
@@ -472,7 +472,7 @@
     <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
     <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
     <button type="button" id="gateSubmit">Lås opp</button>
-    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-error" id="gateError">Feil kode, prøv igjen.</p>
     <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20Kosthold-verkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
   </div>
 </div>
@@ -513,7 +513,7 @@
 
   <header class="page-header">
     <a class="back-link" href="index.html">← Til forsiden</a>
-    <h1>Måltidsinnhold — tallerkenmodellen</h1>
+    <h1>Måltidsinnhold: tallerkenmodellen</h1>
     <p class="tagline">Sjekk hva slags matvaregrupper som var med i måltidene dine, tre dager på rad</p>
     <div class="reminder">
       Tallerkenmodellen er en enkel huskeregel for et balansert måltid: halve
@@ -543,9 +543,9 @@
   <section class="primer" id="summarySection">
     <h2>Oppsummering</h2>
     <div class="stat-grid">
-      <div class="stat-item"><strong id="avg-score">–</strong>Snitt grupper per måltid (0–4)</div>
-      <div class="stat-item"><strong id="balanced-count">–</strong>Balanserte måltider (3–4 av 4)</div>
-      <div class="stat-item"><strong id="meals-filled">–</strong>Måltider registrert</div>
+      <div class="stat-item"><strong id="avg-score">-</strong>Snitt grupper per måltid (0 til 4)</div>
+      <div class="stat-item"><strong id="balanced-count">-</strong>Balanserte måltider (3 til 4 av 4)</div>
+      <div class="stat-item"><strong id="meals-filled">-</strong>Måltider registrert</div>
     </div>
     <div class="field field-wide">
       <label for="sluttrefleksjon">Hva la du merke til om innholdet i måltidene dine i løpet av disse tre dagene?</label>
@@ -568,7 +568,7 @@
   </section>
 
   <footer class="closing">
-    Ingen fasit — bare et bilde av måltidene dine.<br>
+    Ingen fasit, bare et bilde av måltidene dine.<br>
     <strong>Du trenger ikke gjøre det alene.</strong>
   </footer>
 
@@ -645,7 +645,7 @@
           mealsHtml +
           '<div class="meal-block">' +
             '<div class="field field-wide">' +
-              '<label for="refleksjon-' + n + '">Noe som pekte seg ut i dag — bra eller krevende?</label>' +
+              '<label for="refleksjon-' + n + '">Noe som pekte seg ut i dag, bra eller krevende?</label>' +
               '<textarea id="refleksjon-' + n + '" data-key="refleksjon-' + n + '" placeholder="Skriv gjerne fritt her..."></textarea>' +
             '</div>' +
           '</div>' +
@@ -741,14 +741,14 @@
       });
     }
 
-    document.getElementById('avg-score').textContent = scoreCount ? (scoreSum / scoreCount).toFixed(1) : '–';
-    document.getElementById('balanced-count').textContent = scoreCount ? balancedCount + ' / ' + scoreCount : '–';
+    document.getElementById('avg-score').textContent = scoreCount ? (scoreSum / scoreCount).toFixed(1) : '-';
+    document.getElementById('balanced-count').textContent = scoreCount ? balancedCount + ' / ' + scoreCount : '-';
     document.getElementById('meals-filled').textContent = mealsFilled + ' / ' + totalMeals;
   }
 
   function buildSummaryText() {
     var lines = [];
-    lines.push('Måltidsinnhold — tallerkenmodellen — 3 dager');
+    lines.push('Måltidsinnhold, tallerkenmodellen, 3 dager');
     lines.push('');
 
     for (var n = 1; n <= DAY_COUNT; n++) {

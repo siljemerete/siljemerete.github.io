@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Borg CR10-skala (0–10) — Opplevd anstrengelse</title>
+<title>Borg CR10-skala (0 til 10) | Opplevd anstrengelse</title>
 <meta name="description" content="Registrer opplevd anstrengelse med Borgs CR10-skala (0-10), og følg utviklingen i treningsintensitet over tid.">
 <style>
   :root {
@@ -545,7 +545,7 @@
     <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
     <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
     <button type="button" id="gateSubmit">Lås opp</button>
-    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-error" id="gateError">Feil kode, prøv igjen.</p>
     <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20Trening%20og%20aktivitet-verkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
   </div>
 </div>
@@ -586,11 +586,11 @@
 
   <header class="page-header">
     <a class="back-link" href="index.html">← Til forsiden</a>
-    <h1>Borg CR10-skala (0–10)</h1>
+    <h1>Borg CR10-skala (0 til 10)</h1>
     <p class="tagline">Registrer hvor anstrengende aktiviteten oppleves, og følg utviklingen over tid</p>
     <div class="reminder">
       RPE (rate of perceived exertion) er din egen opplevelse av hvor
-      anstrengende en aktivitet er — pust, muskeltretthet og generell
+      anstrengende en aktivitet er, pust, muskeltretthet og generell
       følelse av innsats sett under ett. Dette er ikke en medisinsk
       vurdering. Registreringene dine lagres kun i denne nettleseren.
     </div>
@@ -598,7 +598,7 @@
 
   <section class="primer">
     <h2>Om CR10-skalaen</h2>
-    <p>Borgs CR10-skala (Category-Ratio) går fra 0 til 10, der 0 er ingen anstrengelse i det hele tatt og 10 er ekstremt sterk anstrengelse, nesten maksimal. I motsetning til den originale 6–20-skalaen er CR10 en forholdstallskala — en verdi på 10 oppleves altså omtrent dobbelt så anstrengende som en verdi på 5, ikke bare "høyere". Den brukes gjerne for opplevd anstrengelse, tung pust eller smerte.</p>
+    <p>Borgs CR10-skala (Category-Ratio) går fra 0 til 10, der 0 er ingen anstrengelse i det hele tatt og 10 er ekstremt sterk anstrengelse, nesten maksimal. I motsetning til den originale 6 til 20-skalaen er CR10 en forholdstallskala, en verdi på 10 oppleves altså omtrent dobbelt så anstrengende som en verdi på 5, ikke bare "høyere". Den brukes gjerne for opplevd anstrengelse, tung pust eller smerte.</p>
     <p>Slik gjør du det: gjennomfør aktiviteten, og velg deretter tallet som best beskriver hvor anstrengende den kjentes. Ta gjerne pulsen samtidig hvis du har mulighet, så har du den som ekstra referanse ved siden av egen opplevelse.</p>
     <div class="scale-table" id="scaleTable"></div>
   </section>
@@ -623,7 +623,7 @@
         <div class="rpe-picker" id="rpePicker"></div>
       </div>
       <div class="field field-wide">
-        <label for="entry-note">Notat — hvordan kjentes det, vær, terreng, annet</label>
+        <label for="entry-note">Notat, hvordan kjentes det, vær, terreng, annet</label>
         <textarea id="entry-note" placeholder="Skriv gjerne fritt her..."></textarea>
       </div>
     </div>
@@ -653,7 +653,7 @@
       </table>
     </div>
     <p class="empty-note" id="emptyNote">Ingen registreringer ennå.</p>
-    <p class="source-note">Skalaen er Borgs CR10-skala (0–10), utviklet av Gunnar Borg.</p>
+    <p class="source-note">Skalaen er Borgs CR10-skala (0 til 10), utviklet av Gunnar Borg.</p>
   </section>
 
   <section class="primer">
@@ -708,7 +708,7 @@
       var label = RPE_LABELS[v];
       row.innerHTML =
         '<span class="scale-value">' + v + '</span>' +
-        '<span class="scale-label' + (label ? '' : ' blank') + '">' + (label || '—') + '</span>';
+        '<span class="scale-label' + (label ? '' : ' blank') + '">' + (label || '-') + '</span>';
       container.appendChild(row);
     });
   }
@@ -828,7 +828,7 @@
 
       var prevRpe = lastSeen[entry.activity];
       var delta = prevRpe === undefined ? null : entry.rpe - prevRpe;
-      var deltaText = delta === null ? '–' : (delta > 0 ? '+' : '') + delta;
+      var deltaText = delta === null ? '-' : (delta > 0 ? '+' : '') + delta;
       var deltaClass = delta === null ? '' : (delta < 0 ? 'delta-positive' : (delta > 0 ? 'delta-negative' : ''));
 
       tr.innerHTML =
@@ -894,7 +894,7 @@
   function buildSummaryText() {
     var sorted = sortedEntries();
     var lines = [];
-    lines.push('Borg CR10-skala (0-10) — Opplevd anstrengelse');
+    lines.push('Borg CR10-skala (0-10), Opplevd anstrengelse');
     lines.push('');
 
     if (sorted.length === 0) {
@@ -904,7 +904,7 @@
       sorted.forEach(function (entry) {
         var prevRpe = lastSeen[entry.activity];
         var delta = prevRpe === undefined ? null : entry.rpe - prevRpe;
-        lines.push(entry.date + ' — ' + entry.activity + ': CR10 ' + entry.rpe + (delta !== null ? ' (' + (delta > 0 ? '+' : '') + delta + ')' : '') + (entry.pulse !== null ? ', målt puls ' + entry.pulse : ''));
+        lines.push(entry.date + ': ' + entry.activity + ': CR10 ' + entry.rpe + (delta !== null ? ' (' + (delta > 0 ? '+' : '') + delta + ')' : '') + (entry.pulse !== null ? ', målt puls ' + entry.pulse : ''));
         if (entry.note) {
           lines.push('  Notat: ' + entry.note);
         }

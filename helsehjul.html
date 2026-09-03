@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Helsehjulet — se helheten</title>
+<title>Helsehjulet | se helheten</title>
 <style>
   :root {
     --bg: #f0f7f9;
@@ -438,7 +438,7 @@
     <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
     <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
     <button type="button" id="gateSubmit">Lås opp</button>
-    <p class="gate-error" id="gateError">Feil kode — prøv igjen.</p>
+    <p class="gate-error" id="gateError">Feil kode, prøv igjen.</p>
     <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20Helsehjulet">Kontakt meg for å få kode →</a></p>
   </div>
 </div>
@@ -479,12 +479,12 @@
 
   <header class="page-header">
     <a class="back-link" href="index.html">← Til forsiden</a>
-    <h1>Helsehjulet — se helheten</h1>
+    <h1>Helsehjulet: se helheten</h1>
     <p class="tagline">Et øyeblikksbilde av hvordan du har det på åtte områder akkurat nå</p>
     <div class="reminder">
       Dra i punktene på hjulet, eller bruk glidebryterne under, og sett hvert
       område til det tallet mellom 1 og 10 som kjennes riktig for deg akkurat
-      nå. Det finnes ingen fasit — hjulet er ment som et utgangspunkt for
+      nå. Det finnes ingen fasit, hjulet er ment som et utgangspunkt for
       samtalen vår. Alt du legger inn lagres i denne nettleseren, så du kan
       lukke siden og fortsette senere.
     </div>
@@ -548,19 +548,19 @@
   // Ordered clockwise starting at the top, matching the paper wheel.
   var AREAS = [
     { key: 'energi',       label: 'Energi og overskudd',      icon: '⚡', color: '#5c9a3b',
-      desc: 'Hvor mye futt og overskudd du kjenner gjennom en vanlig dag — motsatt av å være sliten eller tom.' },
+      desc: 'Hvor mye futt og overskudd du kjenner gjennom en vanlig dag, motsatt av å være sliten eller tom.' },
     { key: 'fysisk',       label: 'Fysisk form og kapasitet', icon: '🏃', color: '#e0a91e',
-      desc: 'Kondisjon, styrke og bevegelighet — hvor godt kroppen tåler fysisk aktivitet og anstrengelse.' },
+      desc: 'Kondisjon, styrke og bevegelighet, hvor godt kroppen tåler fysisk aktivitet og anstrengelse.' },
     { key: 'funksjon',     label: 'Funksjon i hverdagen',     icon: '🧍', color: '#e2801f',
-      desc: 'Om kroppen og hodet henger med i det praktiske hverdagen krever — jobb, husarbeid, konsentrasjon og å klare deg selv, uten at det koster for mye.' },
+      desc: 'Om kroppen og hodet henger med i det praktiske hverdagen krever, jobb, husarbeid, konsentrasjon og å klare deg selv, uten at det koster for mye.' },
     { key: 'sovn',         label: 'Søvn og restitusjon',      icon: '🌙', color: '#7c5fc7',
       desc: 'Hvor godt du sover, og om du våkner uthvilt og klar til dagen.' },
     { key: 'stress',       label: 'Stress og indre ro',       icon: '🧠', color: '#3f80c9',
       desc: 'Hvor mye stress du bærer på, og hvor lett du finner ro og senker skuldrene.' },
     { key: 'sosial',       label: 'Sosial trivsel',           icon: '👥', color: '#c23a70',
-      desc: 'Kvaliteten på relasjonene dine — om du kjenner tilhørighet, støtte og godt fellesskap med andre.' },
+      desc: 'Kvaliteten på relasjonene dine, om du kjenner tilhørighet, støtte og godt fellesskap med andre.' },
     { key: 'helse',        label: 'Helse',                    icon: '❤', color: '#1b2a4a',
-      desc: 'Din generelle helsetilstand — kropp og fysiske forhold som påvirker hverdagen din.' },
+      desc: 'Din generelle helsetilstand, kropp og fysiske forhold som påvirker hverdagen din.' },
     { key: 'livskvalitet', label: 'Livskvalitet',             icon: '🙂', color: '#1f97a3',
       desc: 'Hvor fornøyd og meningsfullt du opplever livet ditt som helhet, akkurat nå.' }
   ];
