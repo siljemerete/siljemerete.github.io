@@ -536,6 +536,8 @@
   }
 
   .method-highlight {
+    position: relative;
+    overflow: hidden;
     grid-column: 1 / -1;
     background: var(--accent-dark);
     border-radius: 12px;
@@ -543,6 +545,45 @@
     display: flex;
     align-items: center;
     gap: 1.5rem;
+  }
+
+  .method-highlight > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .method-highlight::before,
+  .method-highlight::after {
+    content: "";
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.65;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .method-highlight::before {
+    background: #3d8ce0;
+    top: -140px;
+    left: -100px;
+    animation: aurora-drift-1 7s ease-in-out infinite alternate;
+  }
+
+  .method-highlight::after {
+    background: #7fc0f0;
+    bottom: -160px;
+    right: -110px;
+    animation: aurora-drift-2 9s ease-in-out infinite alternate;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .method-highlight::before,
+    .method-highlight::after {
+      animation: none;
+    }
   }
 
   .method-highlight .card-icon {
