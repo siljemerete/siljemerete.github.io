@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Skulder- og nakkeøvelser — Silje Merete SMART Helseveiledning</title>
+<title>Skulder- og nakkeøvelser | Silje Merete SMART Helseveiledning</title>
 <meta name="description" content="Kort øvelsesserie for skuldre og nakke du kan gjøre rett fra stolen, med styrt tidtaker gjennom hver øvelse.">
 <style>
   :root {
@@ -239,7 +239,7 @@
 <section class="hero">
   <div class="wrap">
     <h1>Skulder- og nakkeøvelser</h1>
-    <p>En kort serie du kan gjøre rett fra stolen — fin å bruke som en pause i løpet av en arbeidsdag med mye stillesitting.</p>
+    <p>En kort serie du kan gjøre rett fra stolen. Fin å bruke som en pause i løpet av en arbeidsdag med mye stillesitting.</p>
   </div>
 </section>
 
@@ -247,7 +247,7 @@
 
   <section class="card">
     <h2>Øvelsene i sekvensen</h2>
-    <p class="desc">Sitt godt i stolen med rak rygg. Timeren under leder deg gjennom alle øvelsene etter tur — totalt ca. 3 minutter.</p>
+    <p class="desc">Sitt godt i stolen med rak rygg. Timeren under leder deg gjennom alle øvelsene etter tur, totalt ca. 3 minutter.</p>
     <ol class="step-list" id="stepList"></ol>
   </section>
 
@@ -273,7 +273,7 @@
   <section class="card caution-card">
     <h2>Viktige forholdsregler</h2>
     <ul class="caution-list">
-      <li>Beveg deg rolig og innenfor det som er smertefritt — ingen av øvelsene skal gjøre vondt.</li>
+      <li>Beveg deg rolig og innenfor det som er smertefritt. Ingen av øvelsene skal gjøre vondt.</li>
       <li>Stopp og ta kontakt med lege dersom du kjenner nummenhet, prikking eller utstrålende smerte ned i armen, eller blir svimmel.</li>
     </ul>
   </section>
@@ -319,7 +319,7 @@
       stepListEl.innerHTML = '';
       STEPS.forEach(function (step, i) {
         var li = document.createElement('li');
-        li.innerHTML = '<strong>' + step.label + '</strong> — ' + step.seconds + ' sek';
+        li.innerHTML = '<strong>' + step.label + '</strong>: ' + step.seconds + ' sek';
         if (i === index) li.className = 'active';
         else if (i < index || (i === index && finished)) li.className = 'done';
         stepListEl.appendChild(li);
@@ -350,7 +350,7 @@
 
     function updateDisplay() {
       var step = STEPS[index];
-      stepNameEl.textContent = finished ? 'Ferdig!' : (index + 1) + ' / ' + STEPS.length + ' — ' + step.label;
+      stepNameEl.textContent = finished ? 'Ferdig!' : (index + 1) + ' / ' + STEPS.length + ': ' + step.label;
       clockEl.textContent = formatClock(remaining);
       var elapsed = step.seconds - remaining;
       progressBarEl.style.width = ((elapsed / step.seconds) * 100) + '%';

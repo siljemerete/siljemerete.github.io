@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Morgen- og kveldsstrekk — Silje Merete SMART Helseveiledning</title>
+<title>Morgen- og kveldsstrekk | Silje Merete SMART Helseveiledning</title>
 <meta name="description" content="Kort strekk-sekvens for hele kroppen, fin å bruke morgen eller kveld, med styrt tidtaker gjennom hver øvelse.">
 <style>
   :root {
@@ -267,7 +267,7 @@
 <section class="hero">
   <div class="wrap">
     <h1>Morgen- og kveldsstrekk</h1>
-    <p>En rolig strekk-sekvens for hele kroppen — fin å starte eller avslutte dagen med, på gulvet eller på yogamatten.</p>
+    <p>En rolig strekk-sekvens for hele kroppen. Fin å starte eller avslutte dagen med, på gulvet eller på yogamatten.</p>
   </div>
 </section>
 
@@ -275,7 +275,7 @@
 
   <section class="card">
     <h2>Øvelsene i sekvensen</h2>
-    <p class="desc">Finn et rolig sted med litt plass. Timeren under leder deg gjennom alle øvelsene etter tur — totalt ca. 3,5 minutter.</p>
+    <p class="desc">Finn et rolig sted med litt plass. Timeren under leder deg gjennom alle øvelsene etter tur, totalt ca. 3,5 minutter.</p>
     <ol class="step-list" id="stepList"></ol>
   </section>
 
@@ -302,7 +302,7 @@
   <section class="card caution-card">
     <h2>Viktige forholdsregler</h2>
     <ul class="caution-list">
-      <li>Beveg deg rolig og innenfor det som er smertefritt — sikt på en behagelig strekk, ikke smerte.</li>
+      <li>Beveg deg rolig og innenfor det som er smertefritt. Sikt på en behagelig strekk, ikke smerte.</li>
       <li>Hopp over øvelser som gir skarp smerte eller ubehag, og ta kontakt med lege eller fysioterapeut ved vedvarende plager.</li>
     </ul>
   </section>
@@ -324,7 +324,7 @@
     {
       label: 'Katt-ku (Cat-cow)',
       seconds: 45,
-      instruction: 'Stå på alle fire. Vekselvis rund og svai rygg i takt med pusten — rund på innpust, svai på utpust.',
+      instruction: 'Stå på alle fire. Vekselvis rund og svai rygg i takt med pusten: rund på innpust, svai på utpust.',
       icon: '<svg ' + SVG_ATTRS + '><circle cx="16" cy="34" r="9"/><path d="M24,40 Q50,18 82,42"/><line x1="26" y1="46" x2="22" y2="80"/><line x1="80" y1="46" x2="84" y2="80"/></svg>'
     },
     {
@@ -382,7 +382,7 @@
       stepListEl.innerHTML = '';
       STEPS.forEach(function (step, i) {
         var li = document.createElement('li');
-        li.innerHTML = '<span class="step-icon">' + step.icon + '</span><strong>' + step.label + '</strong> — ' + step.seconds + ' sek';
+        li.innerHTML = '<span class="step-icon">' + step.icon + '</span><strong>' + step.label + '</strong>: ' + step.seconds + ' sek';
         if (i === index) li.className = 'active';
         else if (i < index || (i === index && finished)) li.className = 'done';
         stepListEl.appendChild(li);
@@ -413,7 +413,7 @@
 
     function updateDisplay() {
       var step = STEPS[index];
-      stepNameEl.textContent = finished ? 'Ferdig!' : (index + 1) + ' / ' + STEPS.length + ' — ' + step.label;
+      stepNameEl.textContent = finished ? 'Ferdig!' : (index + 1) + ' / ' + STEPS.length + ': ' + step.label;
       illustrationEl.innerHTML = finished ? DONE_ICON : step.icon;
       clockEl.textContent = formatClock(remaining);
       var elapsed = step.seconds - remaining;
