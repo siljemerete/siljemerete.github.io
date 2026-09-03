@@ -776,6 +776,31 @@
     margin: 1rem 0 0;
   }
 
+  .kontakt-grid {
+    display: flex;
+    gap: 1.75rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
+  .kontakt-text {
+    flex: 1 1 320px;
+  }
+
+  .kontakt-qr {
+    flex: 0 0 auto;
+    width: 170px;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+
+  @media (max-width: 560px) {
+    .kontakt-grid { justify-content: center; }
+    .kontakt-qr { margin: 0.5rem auto 0; }
+  }
+
   .contact-name {
     margin: 0;
     font-weight: 600;
@@ -1161,12 +1186,17 @@
   <section id="kontakt" class="card-section">
     <p class="kicker">Ta kontakt</p>
     <h2>Kontakt</h2>
-    <p>Ta gjerne kontakt for en uforpliktende prat om helseveiledning. Du trenger ikke vite nøyaktig hva du lurer på. Send meg en e-post, så finner vi ut av resten sammen.</p>
-    <a class="cta-button" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post</a>
+    <div class="kontakt-grid">
+      <div class="kontakt-text">
+        <p>Ta gjerne kontakt for en uforpliktende prat om helseveiledning. Du trenger ikke vite nøyaktig hva du lurer på. Send meg en e-post, så finner vi ut av resten sammen.</p>
+        <a class="cta-button" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post</a>
 
-    <div class="contact-card">
-      <p class="contact-name">Silje Merete (Smart) Binder</p>
-      <p class="contact-detail">silje.merete.binder@gmail.com</p>
+        <div class="contact-card">
+          <p class="contact-name">Silje Merete (Smart) Binder</p>
+          <p class="contact-detail">silje.merete.binder@gmail.com</p>
+        </div>
+      </div>
+      <img class="kontakt-qr" src="images/qr-hjemmeside-branded.png" alt="QR-kode som lenker til siljemerete.github.io">
     </div>
   </section>
 
