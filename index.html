@@ -506,6 +506,27 @@
     font-weight: 700;
   }
 
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .badge-row .credential-badge {
+    margin-top: 0;
+  }
+
+  .story-badge {
+    background: var(--push-soft);
+    border-color: var(--push);
+  }
+
+  .story-badge:hover {
+    background: var(--push);
+    color: #fff;
+  }
+
   .flower-icon {
     vertical-align: -3px;
   }
@@ -920,14 +941,20 @@
             <p>I dag er jeg i siste avsluttende del av videreutdanningen som helseveileder, der jeg bygger videre på pedagogikk- og ledelseserfaringen min, med et konkret fokus på hvordan man kartlegger vaner og støtter varig endring over tid.</p>
           </div>
         </details>
-        <p><a class="inline-link" href="min-historie.html">Les min personlige historie, fra egen erfaring til fag →</a></p>
       </div>
     </div>
-    <a class="credential-badge" href="https://instituttet.abelhelse.no/" target="_blank" rel="noopener">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><path d="M2 9 12 4l10 5-10 5-10-5Z"/><path d="M6 11.5V16c0 1.4 2.7 3 6 3s6-1.6 6-3v-4.5"/><path d="M22 9v6"/></svg>
-      <span>Under utdanning som helseveileder ved <strong>Abel Instituttet</strong></span>
-      <span class="badge-arrow" aria-hidden="true">&rarr;</span>
-    </a>
+    <div class="badge-row">
+      <a class="credential-badge" href="https://instituttet.abelhelse.no/" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><path d="M2 9 12 4l10 5-10 5-10-5Z"/><path d="M6 11.5V16c0 1.4 2.7 3 6 3s6-1.6 6-3v-4.5"/><path d="M22 9v6"/></svg>
+        <span>Under utdanning som helseveileder ved <strong>Abel Instituttet</strong></span>
+        <span class="badge-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="credential-badge story-badge" href="min-historie.html">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><path d="M12 6.5c-1.4-2-4-2.8-6-1.4-2.2 1.6-2.6 4.7-.6 6.8L12 19l6.6-7.1c2-2.1 1.6-5.2-.6-6.8-2-1.4-4.6-.6-6 1.4Z"/></svg>
+        <span>Min personlige historie, fra egen erfaring til fag</span>
+        <span class="badge-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
   </section>
 
   <section id="helseveiledning" class="card-section">
