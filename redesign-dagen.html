@@ -1,0 +1,995 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Re-design dagen din</title>
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --push: #c9823f;
+    --push-soft: #faf1e2;
+    --border: #cfe3e8;
+    --load: #c9823f;
+    --load-soft: #faf1e2;
+    --active-cat: #b8892a;
+    --active-cat-soft: #faf3df;
+    --rest: #2f8f6f;
+    --rest-soft: #e3f5ec;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  header.page-header {
+    margin-bottom: 1.75rem;
+  }
+
+  header.page-header h1 {
+    font-size: 1.7rem;
+    margin: 0 0 0.35rem;
+    color: var(--accent-dark);
+  }
+
+  header.page-header p.tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  .reminder {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  section.primer h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer p {
+    margin: 0.6rem 0 0;
+  }
+
+  section.primer p.subtext {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .signs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 0.6rem;
+    margin-top: 0.9rem;
+  }
+
+  .signs-item {
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .signs-item.load { background: var(--load-soft); }
+  .signs-item.active-cat { background: var(--active-cat-soft); }
+  .signs-item.rest { background: var(--rest-soft); }
+
+  .signs-item strong {
+    display: block;
+    color: var(--accent-dark);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.3rem;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .controls button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .controls button:hover {
+    background: var(--accent-soft);
+  }
+
+  .controls button.danger {
+    color: var(--push);
+  }
+
+  .controls button.danger:hover {
+    background: var(--push-soft);
+  }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.9rem;
+    margin-top: 0.75rem;
+  }
+
+  .field-wide {
+    grid-column: 1 / -1;
+  }
+
+  .field label {
+    display: block;
+    font-weight: 600;
+    color: var(--accent-dark);
+    margin-bottom: 0.3rem;
+    font-size: 0.88rem;
+  }
+
+  .field input[type="text"],
+  .field input[type="date"],
+  .field input[type="time"],
+  .field select,
+  .field textarea {
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .field textarea {
+    min-height: 70px;
+    resize: vertical;
+  }
+
+  .field .hint {
+    margin-top: 0.3rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .add-button {
+    margin-top: 1.1rem;
+    font-size: 0.95rem;
+    padding: 0.65rem 1.3rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .add-button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  /* Visual timeline */
+  .timeline-scroll {
+    overflow-x: auto;
+    margin-top: 1.1rem;
+    padding: 0.75rem 0.25rem 0.5rem;
+  }
+
+  .timeline-strip {
+    display: flex;
+    align-items: flex-start;
+    min-width: max-content;
+  }
+
+  .tl-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 96px;
+    flex-shrink: 0;
+    text-align: center;
+  }
+
+  .tl-dot {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    background: var(--card);
+    border: 2px solid var(--accent);
+    color: var(--accent-dark);
+  }
+
+  .tl-endpoint .tl-dot {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+    width: 12px;
+    height: 12px;
+  }
+
+  .tl-node.tl-cat-load .tl-dot { border-color: var(--load); background: var(--load-soft); }
+  .tl-node.tl-cat-active .tl-dot { border-color: var(--active-cat); background: var(--active-cat-soft); }
+  .tl-node.tl-cat-rest .tl-dot { border-color: var(--rest); background: var(--rest-soft); }
+
+  .tl-label {
+    margin-top: 0.4rem;
+    font-size: 0.78rem;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .tl-label small {
+    color: var(--muted);
+  }
+
+  .tl-line {
+    flex: 1;
+    min-width: 24px;
+    height: 0;
+    border-top: 2px dashed var(--border);
+    margin-top: 17px;
+  }
+
+  .empty-note {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 0.75rem;
+  }
+
+  /* Timeline point cards */
+  .point-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.9rem;
+  }
+
+  .point-card {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .point-card .point-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .point-card .point-info {
+    flex: 1;
+  }
+
+  .point-card .point-time {
+    font-weight: 600;
+    color: var(--accent-dark);
+  }
+
+  .point-card .point-category {
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  .point-card button.delete-row {
+    font-size: 0.78rem;
+    padding: 0.3rem 0.65rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--push);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .point-card button.delete-row:hover {
+    background: var(--push-soft);
+  }
+
+  /* Re-design quadrants */
+  .quad-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .quad-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    background: var(--bg);
+  }
+
+  .quad-card h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1rem;
+    color: var(--accent-dark);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .quad-card p.quad-help {
+    margin: 0 0 0.5rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .quad-card textarea {
+    width: 100%;
+    min-height: 84px;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.92rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--ink);
+    resize: vertical;
+  }
+
+  .quad-card textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .send-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .send-buttons button {
+    font-size: 0.92rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .send-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .muted-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .source-note {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.9rem;
+  }
+
+  footer.closing {
+    margin-top: 1.75rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong {
+    color: var(--accent-dark);
+  }
+
+  body.gate-locked .wrap,
+  body.gate-locked footer.closing {
+    display: none;
+  }
+
+  .gate-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 100;
+  }
+
+  body.gate-locked .gate-overlay {
+    display: flex;
+  }
+
+  .gate-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 2rem 1.75rem;
+    max-width: 340px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .gate-box h1 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    color: var(--accent-dark);
+  }
+
+  .gate-box p {
+    margin: 0 0 1rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .gate-box input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    font-family: inherit;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  .gate-box input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .gate-box button {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .gate-box button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .gate-error {
+    display: none;
+    color: var(--push);
+    font-size: 0.85rem;
+    margin: 0.7rem 0 0;
+  }
+
+  .gate-contact {
+    margin-top: 0.9rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .gate-contact a {
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .gate-contact a:hover {
+    text-decoration: underline;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .controls, .send-buttons, .muted-note, .add-button, .point-card button.delete-row { display: none; }
+    section.primer { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body class="gate-locked">
+
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box">
+    <h1>Tilgang til verktøyet</h1>
+    <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
+    <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
+    <button type="button" id="gateSubmit">Lås opp</button>
+    <p class="gate-error" id="gateError">Feil kode, prøv igjen.</p>
+    <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20S%C3%B8vn%20og%20stress-verkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var GATE_KEY = 'gate-sovn-stress-unlocked';
+    var CODE = 'nyevaner';
+
+    function unlock() {
+      localStorage.setItem(GATE_KEY, 'true');
+      document.body.classList.remove('gate-locked');
+    }
+
+    if (localStorage.getItem(GATE_KEY) === 'true') {
+      unlock();
+    }
+
+    function trySubmit() {
+      var input = document.getElementById('gateCode');
+      var error = document.getElementById('gateError');
+      if (input.value.trim().toLowerCase() === CODE) {
+        error.style.display = 'none';
+        unlock();
+      } else {
+        error.style.display = 'block';
+      }
+    }
+
+    document.getElementById('gateSubmit').addEventListener('click', trySubmit);
+    document.getElementById('gateCode').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') trySubmit();
+    });
+  })();
+</script>
+
+<div class="wrap">
+
+  <header class="page-header">
+    <h1>Re-design dagen din</h1>
+    <p class="tagline">Gjør dagen du allerede lever litt bedre. Ikke planlegg for utopi.</p>
+    <div class="reminder">
+      Dette handler ikke om å planlegge en drømmedag du aldri får til, men om
+      å se på dagen slik den faktisk er, og finne noen få, konkrete
+      justeringer. Alt du legger inn lagres i denne nettleseren, så du kan
+      lukke siden og fortsette senere.
+    </div>
+  </header>
+
+  <section class="primer">
+    <h2>Om verktøyet</h2>
+    <p>De fleste dager veksler vi mellom perioder med høy belastning, passe
+    aktivering og faktisk restitusjon, altså pauser som gir kroppen ny
+    kapasitet. Ved å tegne opp en enkel tidslinje for dagen din, blir det
+    lettere å se mønsteret: hvor lenge du er aktivert før du får hentet deg
+    inn igjen, og om pausene dine faktisk gir deg noe tilbake.</p>
+    <div class="signs-grid">
+      <div class="signs-item load">
+        <strong>🔥 Høy belastning</strong>
+        Stress, tidsnød, krevende oppgaver
+      </div>
+      <div class="signs-item active-cat">
+        <strong>⚡ Passe aktivering</strong>
+        Fokusert jobbing, læring, engasjement
+      </div>
+      <div class="signs-item rest">
+        <strong>🌿 Faktisk restitusjon</strong>
+        Pauser der du faktisk pustet ut og ladet opp
+      </div>
+    </div>
+    <p class="subtext"><em>Husk: se etter mønstre, ikke perfekte vitenskapelige målinger.</em></p>
+  </section>
+
+  <section class="primer" id="timelineSection">
+    <h2>Tegn tidslinjen for i dag</h2>
+    <p class="subtext">Tegn en enkel tidslinje fra du våknet til akkurat nå. Legg til punkter for det som skjedde i løpet av dagen, og merk hvilken kategori det tilhører.</p>
+
+    <div class="field-grid">
+      <div class="field">
+        <label for="entry-date">Dato (valgfritt)</label>
+        <input type="date" id="entry-date" data-key="entry-date">
+      </div>
+      <div class="field">
+        <label for="wake-time">Våknet ca. kl.</label>
+        <input type="time" id="wake-time" data-key="wake-time">
+      </div>
+    </div>
+
+    <div class="field-grid">
+      <div class="field">
+        <label for="point-time">Klokkeslett</label>
+        <input type="time" id="point-time">
+      </div>
+      <div class="field">
+        <label for="point-category">Kategori</label>
+        <select id="point-category">
+          <option value="load">🔥 Høy belastning</option>
+          <option value="active">⚡ Passe aktivering</option>
+          <option value="rest">🌿 Faktisk restitusjon</option>
+        </select>
+      </div>
+      <div class="field field-wide">
+        <label for="point-label">Hva skjedde?</label>
+        <input type="text" id="point-label" placeholder="F.eks. morgenkaos, fokusert jobbing, pustepause">
+      </div>
+    </div>
+    <button type="button" class="add-button" id="addPoint">Legg til punkt</button>
+
+    <div class="timeline-scroll">
+      <div class="timeline-strip" id="timelineStrip"></div>
+    </div>
+    <p class="empty-note" id="timelineEmptyNote">Legg til punkter for å se tidslinjen din.</p>
+
+    <div class="point-list" id="pointList"></div>
+
+    <div class="controls">
+      <button type="button" id="resetAll" class="danger">Nullstill alt</button>
+    </div>
+  </section>
+
+  <section class="primer">
+    <h2>Hva forteller timeplanen din deg?</h2>
+    <p class="subtext">Se på dagen du nettopp har kartlagt.</p>
+    <div class="field-grid">
+      <div class="field field-wide">
+        <label for="reflect-activated">Hvor lenge er du aktivert før du får hentet deg inn igjen?</label>
+        <textarea id="reflect-activated" data-key="reflect-activated"></textarea>
+      </div>
+      <div class="field field-wide">
+        <label for="reflect-restitution">Hvor i dagen finner du faktisk restitusjon?</label>
+        <textarea id="reflect-restitution" data-key="reflect-restitution"></textarea>
+      </div>
+      <div class="field field-wide">
+        <label for="reflect-pauses">Gir pausene dine deg mer kapasitet, eller fyller de bare tiden mellom to oppgaver?</label>
+        <textarea id="reflect-pauses" data-key="reflect-pauses"></textarea>
+      </div>
+      <div class="field field-wide">
+        <label for="reflect-capacity">Når på dagen merker du at kapasiteten begynner å falle?</label>
+        <textarea id="reflect-capacity" data-key="reflect-capacity"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="primer">
+    <h2>Re-design dagen din</h2>
+    <p class="subtext">Gjør dagen du allerede lever litt bedre. Ikke planlegg for utopi.</p>
+    <div class="quad-grid">
+      <div class="quad-card">
+        <h3>📋 Hva MÅ være der?</h3>
+        <p class="quad-help">Behold oppgaver, ansvar og avtaler du faktisk ikke kan velge bort.</p>
+        <textarea id="quad-must" data-key="quad-must"></textarea>
+      </div>
+      <div class="quad-card">
+        <h3>🌿 Hvor trenger du restitusjon?</h3>
+        <p class="quad-help">Legg inn restitusjon der du faktisk trenger den. Hva gir <em>deg</em> kapasitet tilbake?</p>
+        <textarea id="quad-restitution" data-key="quad-restitution"></textarea>
+      </div>
+      <div class="quad-card">
+        <h3>📉 Hva kan endres?</h3>
+        <p class="quad-help">Kan noe fjernes, flyttes, forenkles, delegeres eller gjøres på en annen måte?</p>
+        <textarea id="quad-changeable" data-key="quad-changeable"></textarea>
+      </div>
+      <div class="quad-card">
+        <h3>🕐 Hvor trenger du margin?</h3>
+        <p class="quad-help">Er dagen planlagt helt opp mot kapasiteten din, eller finnes det rom for at livet skjer?</p>
+        <textarea id="quad-margin" data-key="quad-margin"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="primer">
+    <h2>Send inn skjemaet</h2>
+    <p class="muted-note">
+      Du kan sende skjemaet direkte fra din egen e-postapp, eller laste det
+      ned som en tekstfil du selv sender eller tar med til timen. Hvis
+      "Send på e-post" ikke åpner riktig på mobilen din, bruk nedlastingen i
+      stedet.
+    </p>
+    <div class="send-buttons">
+      <button type="button" id="sendEmail">Send på e-post</button>
+      <button type="button" id="downloadText" class="secondary">Last ned som tekstfil</button>
+    </div>
+    <p class="source-note">Inspirert av øvelsen «Re-design dagen din» fra ABEL Instituttet.</p>
+  </section>
+
+  <footer class="closing">
+    Små justeringer i en dag du allerede lever, ikke en ny, utopisk plan.<br>
+    <strong>Du trenger ikke gjøre det alene.</strong>
+  </footer>
+
+</div>
+
+<script>
+  var STORAGE_KEY = 'redesign-dagen-data';
+  var RECIPIENT = 'silje.merete.binder@gmail.com';
+  var CATEGORY_LABELS = { load: 'Høy belastning', active: 'Passe aktivering', rest: 'Faktisk restitusjon' };
+  var CATEGORY_ICONS = { load: '🔥', active: '⚡', rest: '🌿' };
+
+  var points = [];
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str == null ? '' : str;
+    return div.innerHTML;
+  }
+
+  function readState() {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return { fields: {}, points: [] };
+    try {
+      var data = JSON.parse(raw);
+      return { fields: data.fields || {}, points: data.points || [] };
+    } catch (e) {
+      return { fields: {}, points: [] };
+    }
+  }
+
+  function saveState() {
+    var fields = {};
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      fields[el.getAttribute('data-key')] = el.value;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ fields: fields, points: points }));
+  }
+
+  function loadState() {
+    var data = readState();
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      var key = el.getAttribute('data-key');
+      if (data.fields[key] !== undefined) {
+        el.value = data.fields[key];
+      }
+    });
+    points = data.points || [];
+  }
+
+  function sortedPoints() {
+    return points.slice().sort(function (a, b) {
+      return (a.time || '').localeCompare(b.time || '');
+    });
+  }
+
+  function renderTimeline() {
+    var strip = document.getElementById('timelineStrip');
+    var emptyNote = document.getElementById('timelineEmptyNote');
+    var sorted = sortedPoints();
+    var wake = document.getElementById('wake-time').value;
+
+    strip.innerHTML = '';
+
+    if (sorted.length === 0 && !wake) {
+      emptyNote.style.display = 'block';
+      return;
+    }
+    emptyNote.style.display = 'none';
+
+    var nodes = [];
+    nodes.push({ endpoint: true, label: 'Våknet', time: wake });
+    sorted.forEach(function (p) {
+      nodes.push({ endpoint: false, label: p.label, time: p.time, category: p.category });
+    });
+    nodes.push({ endpoint: true, label: 'Nå', time: '' });
+
+    nodes.forEach(function (n, i) {
+      var node = document.createElement('div');
+      node.className = 'tl-node' + (n.endpoint ? ' tl-endpoint' : ' tl-cat-' + n.category);
+
+      var dot = document.createElement('div');
+      dot.className = 'tl-dot';
+      dot.textContent = n.endpoint ? '' : (CATEGORY_ICONS[n.category] || '');
+
+      var label = document.createElement('div');
+      label.className = 'tl-label';
+      var labelText = n.label || (n.endpoint ? '' : 'Punkt');
+      label.innerHTML = escapeHtml(labelText) + (n.time ? '<br><small>' + escapeHtml(n.time) + '</small>' : '');
+
+      node.appendChild(dot);
+      node.appendChild(label);
+      strip.appendChild(node);
+
+      if (i < nodes.length - 1) {
+        var line = document.createElement('div');
+        line.className = 'tl-line';
+        strip.appendChild(line);
+      }
+    });
+  }
+
+  function renderPointList() {
+    var list = document.getElementById('pointList');
+    list.innerHTML = '';
+    sortedPoints().forEach(function (p) {
+      var card = document.createElement('div');
+      card.className = 'point-card';
+
+      var icon = document.createElement('span');
+      icon.className = 'point-icon';
+      icon.textContent = CATEGORY_ICONS[p.category] || '';
+
+      var info = document.createElement('span');
+      info.className = 'point-info';
+      info.innerHTML =
+        (p.time ? '<span class="point-time">' + escapeHtml(p.time) + '</span> &middot; ' : '') +
+        escapeHtml(p.label || '') +
+        '<br><span class="point-category">' + (CATEGORY_LABELS[p.category] || '') + '</span>';
+
+      var delBtn = document.createElement('button');
+      delBtn.type = 'button';
+      delBtn.className = 'delete-row';
+      delBtn.textContent = 'Slett';
+      delBtn.addEventListener('click', function () {
+        points = points.filter(function (item) { return item.id !== p.id; });
+        saveState();
+        renderAll();
+      });
+
+      card.appendChild(icon);
+      card.appendChild(info);
+      card.appendChild(delBtn);
+      list.appendChild(card);
+    });
+  }
+
+  function renderAll() {
+    renderTimeline();
+    renderPointList();
+  }
+
+  function addPoint() {
+    var time = document.getElementById('point-time').value;
+    var label = document.getElementById('point-label').value.trim();
+    var category = document.getElementById('point-category').value;
+
+    if (!label) {
+      alert('Skriv litt om hva som skjedde før du legger til punktet.');
+      return;
+    }
+
+    points.push({
+      id: Date.now() + '-' + Math.random().toString(36).slice(2, 8),
+      time: time,
+      label: label,
+      category: category
+    });
+
+    saveState();
+    renderAll();
+
+    document.getElementById('point-time').value = '';
+    document.getElementById('point-label').value = '';
+  }
+
+  function buildSummaryText() {
+    var lines = [];
+    lines.push('Re-design dagen din');
+    var date = document.getElementById('entry-date').value;
+    if (date) lines.push('Dato: ' + date);
+    lines.push('');
+
+    lines.push('Tidslinje for dagen:');
+    var wake = document.getElementById('wake-time').value;
+    if (wake) lines.push('  Våknet: ' + wake);
+    var sorted = sortedPoints();
+    if (sorted.length === 0) {
+      lines.push('  Ingen punkter lagt til ennå.');
+    } else {
+      sorted.forEach(function (p) {
+        lines.push('  ' + (p.time || '-') + ' - ' + p.label + ' (' + (CATEGORY_LABELS[p.category] || '') + ')');
+      });
+    }
+    lines.push('  Nå');
+    lines.push('');
+
+    lines.push('Hva forteller timeplanen din deg?');
+    lines.push('  Hvor lenge er du aktivert før du får hentet deg inn igjen: ' + (document.getElementById('reflect-activated').value || '-'));
+    lines.push('  Hvor i dagen finner du faktisk restitusjon: ' + (document.getElementById('reflect-restitution').value || '-'));
+    lines.push('  Gir pausene dine deg mer kapasitet, eller fyller de bare tiden mellom to oppgaver: ' + (document.getElementById('reflect-pauses').value || '-'));
+    lines.push('  Når på dagen merker du at kapasiteten begynner å falle: ' + (document.getElementById('reflect-capacity').value || '-'));
+    lines.push('');
+
+    lines.push('Re-design dagen din:');
+    lines.push('  Hva MÅ være der: ' + (document.getElementById('quad-must').value || '-'));
+    lines.push('  Hvor trenger du restitusjon: ' + (document.getElementById('quad-restitution').value || '-'));
+    lines.push('  Hva kan endres: ' + (document.getElementById('quad-changeable').value || '-'));
+    lines.push('  Hvor trenger du margin: ' + (document.getElementById('quad-margin').value || '-'));
+
+    return lines.join('\n');
+  }
+
+  function sendEmail() {
+    var subject = encodeURIComponent('Re-design dagen din');
+    var body = encodeURIComponent(buildSummaryText());
+    window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
+  }
+
+  function downloadText() {
+    var blob = new Blob([buildSummaryText()], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'redesign-dagen.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    loadState();
+    renderAll();
+
+    document.body.addEventListener('input', function (e) {
+      if (!e.target.hasAttribute('data-key')) return;
+      saveState();
+      if (e.target.id === 'wake-time') renderTimeline();
+    });
+
+    document.getElementById('addPoint').addEventListener('click', addPoint);
+
+    document.getElementById('resetAll').addEventListener('click', function () {
+      if (!confirm('Nullstille alt du har registrert for dagen? Dette kan ikke angres.')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    });
+
+    document.getElementById('sendEmail').addEventListener('click', sendEmail);
+    document.getElementById('downloadText').addEventListener('click', downloadText);
+  });
+</script>
+
+</body>
+</html>
