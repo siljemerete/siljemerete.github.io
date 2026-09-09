@@ -675,10 +675,6 @@
     <p class="empty-note" id="timelineEmptyNote">Legg til punkter for å se tidslinjen din.</p>
 
     <div class="point-list" id="pointList"></div>
-
-    <div class="controls">
-      <button type="button" id="resetAll" class="danger">Nullstill alt</button>
-    </div>
   </section>
 
   <section class="primer">
@@ -744,6 +740,9 @@
       <button type="button" id="downloadText" class="secondary">Last ned som tekstfil</button>
     </div>
     <p class="source-note">Inspirert av øvelsen «Re-design dagen din» fra ABEL Instituttet.</p>
+    <div class="controls">
+      <button type="button" id="resetAll" class="danger">Nullstill skjema</button>
+    </div>
   </section>
 
   <footer class="closing">
@@ -981,7 +980,7 @@
     document.getElementById('addPoint').addEventListener('click', addPoint);
 
     document.getElementById('resetAll').addEventListener('click', function () {
-      if (!confirm('Nullstille alt du har registrert for dagen? Dette kan ikke angres.')) return;
+      if (!confirm('Nullstille hele skjemaet? Alt du har registrert for dagen blir slettet, og dette kan ikke angres.')) return;
       localStorage.removeItem(STORAGE_KEY);
       location.reload();
     });
