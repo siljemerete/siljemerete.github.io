@@ -276,6 +276,34 @@
 
   .card p:last-child { margin-bottom: 0; }
 
+  .bonus-card {
+    background: var(--gold-soft);
+    border-color: #e6d3a8;
+  }
+
+  .bonus-card h2 {
+    color: #8a6417;
+  }
+
+  .affirmation-quote {
+    margin: 1rem 0;
+    padding: 1rem 1.25rem;
+    background: var(--card);
+    border: 1px dashed #d9c68f;
+    border-radius: 10px;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--ink);
+  }
+
+  .affirmation-quote .affirmation-example {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    font-style: normal;
+    color: var(--muted);
+  }
+
   .legend {
     display: flex;
     flex-wrap: wrap;
@@ -353,6 +381,17 @@
     </div>
   </section>
 
+  <section class="card bonus-card">
+    <h2>🎆 Klar for noe nytt i romjula?</h2>
+    <p>Romjula, de rolige dagene mellom jul og nyttår, er en fin anledning til å prøve noe du har lurt på lenge. Kanskje er det isbading, kanskje noe helt annet?</p>
+    <p>Avslutt året med å lage din egen affirmasjon for 2027, en bekreftende setning du gir deg selv inn i det nye året:</p>
+    <blockquote class="affirmation-quote">
+      «Jeg er ________________ i 2027.»
+      <span class="affirmation-example">Et eksempel: «Jeg er nysgjerrig og trygg på det nye året.»</span>
+    </blockquote>
+    <p>Skriv den ned et sted du ser den ofte, si den høyt, eller gjenta den for deg selv, gjør det som føles riktig for deg.</p>
+  </section>
+
   <a class="home-link" href="index.html">Se hjemmesiden min →</a>
 
 </div>
@@ -385,13 +424,13 @@
       presence: { icon: "⏳", title: "7 minutter for deg selv", desc: "Sett en tidtaker på 7 minutter. Lukk øynene, pust rolig, og la tankene komme og gå uten å henge deg opp i dem." } },
     { n: 6,
       strength: { icon: "🌉", title: "Hoftehev, 12 repetisjoner", desc: "Ligg på ryggen med bøyde knær. Løft hoftene opp mot taket og senk dem rolig ned igjen. 12 repetisjoner." },
-      presence: { icon: "🤫", title: "5 minutter stillhet", desc: "Skru av skjermen og la det være stille rundt deg i 5 minutter. Legg merke til lydene som er igjen når du lytter etter dem." } },
+      presence: { icon: "☀️", title: "Nyt dagslyset", desc: "Gå ut, eller sett deg nær et vindu, i noen minutter. La dagslyset falle på ansiktet og huden. Dagslys er naturlig lykkehormon-påfyll, selv på en grå desemberdag." } },
     { n: 7,
       strength: { icon: "↔️", title: "Sideplanke, 15 sek per side", desc: "Hold en sideplanke i 15 sekunder på hver side. Støtt deg gjerne på underarmen og et bøyd underben." },
       presence: { icon: "🌍", title: "Kjenn bakken under deg", desc: "Stå stille i ett minutt og kjenn hvordan føttene dine hviler mot gulvet. Legg merke til kontakten, punkt for punkt." } },
     { n: 8,
       strength: { icon: "🧱", title: "Vegghold, 20–30 sekunder", desc: "Len ryggen mot en vegg og gli ned til en sittende stilling med bøyde knær, som om du satt på en usynlig stol. Hold i 20–30 sekunder." },
-      presence: { icon: "🫶", title: "Hendene på hjertet", desc: "Legg begge hender på hjertet. Ta tre dype pust og kjenn takknemlighet for alt kroppen din har gjort for deg." } },
+      presence: { icon: "🤗", title: "Gi noen en klem", desc: "Gi noen du er glad i en god klem, eller gi deg selv en klem med armene rundt kroppen. Klem er en enkel snarvei til oksytocin, kroppens eget \"knytningshormon\"." } },
     { n: 9,
       strength: { icon: "💪", title: "10 armhevninger", desc: "Gjør 10 armhevninger, gjerne på knærne om det kjennes bedre. Kvalitet fremfor fart." },
       presence: { icon: "☕", title: "En kopp i ro", desc: "Lag deg en kopp te eller kakao. Drikk den sakte, uten skjerm, og kjenn smaken og varmen." } },
@@ -403,10 +442,10 @@
       presence: { icon: "🌬️", title: "Følg pusten din", desc: "Legg en hånd på magen. Legg merke til pusten din i 2 minutter, uten å prøve å endre den." } },
     { n: 12,
       strength: { icon: "🍑", title: "Sumo-knebøy, 10 repetisjoner", desc: "Stå med bena bredere enn hoftebredde og tærne litt utover. Bøy knærne rett over tærne og reis deg opp igjen. 10 repetisjoner." },
-      presence: { icon: "🎧", title: "Fem lyder", desc: "Lukk øynene og legg merke til fem lyder du kan høre rundt deg, én etter én." } },
+      presence: { icon: "🦋", title: "Din egen julehilsen", desc: "Lag din egen affirmasjon for jula, en bekreftende setning du gir deg selv. Fullfør «Jeg er ______» eller «Jeg har ______», og gjenta den for deg selv resten av måneden." } },
     { n: 13,
       strength: { icon: "🪑", title: "Tricepsdips i stolkant, 10 stk", desc: "Sett hendene i kanten av en stol med bena foran deg. Bøy og strekk albuene rolig. 10 repetisjoner." },
-      presence: { icon: "🌡️", title: "Kjenn temperaturen", desc: "Legg merke til hvordan lufta kjennes mot huden din akkurat nå. Varmt, kaldt, stille, i bevegelse. Ett minutt." } },
+      presence: { icon: "🥶", title: "En kald overraskelse", desc: "Avslutt dusjen med 20–30 sekunder kaldt vann, eller prøv en kort isbading om du har mulighet. Kulde kan gi et raskt løft for humør, søvn og immunforsvar." } },
     { n: 14,
       strength: { icon: "🪜", title: "Step-up, 10 per bein", desc: "Bruk et nederste trappetrinn eller en solid krakk. Trå opp og ned, kontrollert. 10 repetisjoner per bein." },
       presence: { icon: "🍵", title: "Bevisst slurk", desc: "Hold en varm kopp i hendene. Kjenn varmen mot håndflatene i ett minutt før du tar den første slurken." } },
@@ -421,7 +460,7 @@
       presence: { icon: "🪑", title: "Kjenn vekten din", desc: "Sitt stille og legg merke til hvor kroppen din hviler mot stolen eller gulvet. Ett minutt." } },
     { n: 18,
       strength: { icon: "🦿", title: "Beinløft liggende, 10 per side", desc: "Ligg på siden med bena rett. Løft det øverste beinet rolig opp og ned. 10 repetisjoner per side." },
-      presence: { icon: "😊", title: "Et rolig smil", desc: "Smil rolig til deg selv i 30 sekunder, og legg merke til hvordan det kjennes i resten av kroppen." } },
+      presence: { icon: "😂", title: "Le sammen med noen", desc: "Se noe morsomt sammen med noen, eller finn på en liten spøk. Le høyt sammen, det senker skuldrene og løfter humøret." } },
     { n: 19,
       strength: { icon: "🧎", title: "Armhevninger mot vegg, 10 stk", desc: "Stå med hendene mot en vegg litt bredere enn skulderbredde. Bøy og strekk albuene. 10 repetisjoner." },
       presence: { icon: "🏡", title: "Et trygt sted", desc: "Lukk øynene og se for deg et sted du kjenner deg helt trygg og rolig. Bli der i 2 minutter." } },
@@ -430,7 +469,7 @@
       presence: { icon: "🙌", title: "Strekk og pust", desc: "Strekk armene opp mot taket. Pust dypt inn og ut, tre ganger, og kjenn strekket gjennom hele kroppen." } },
     { n: 21,
       strength: { icon: "🪑", title: "Sittende beinstrekk, 10 per bein", desc: "Sitt på en stol og strekk det ene kneet rett ut, senk rolig ned igjen. 10 repetisjoner per bein." },
-      presence: { icon: "🍽️", title: "Én bevisst matbit", desc: "Spis én bit mat helt sakte. Legg merke til smak, konsistens og duft, uten noe annet rundt deg." } },
+      presence: { icon: "🍫", title: "En bit mørk sjokolade", desc: "Ta deg en liten bit mørk sjokolade og nyt den helt sakte. Legg merke til smak og tekstur, og kjenn at du unner deg selv noe godt." } },
     { n: 22,
       strength: { icon: "🍼", title: "Skulderpress med flasker, 10 stk", desc: "Hold en vannflaske i hver hånd. Press dem opp over hodet og senk rolig ned igjen. 10 repetisjoner." },
       presence: { icon: "🙆", title: "Skulder og nakke i ro", desc: "Rull skuldrene rolig bakover 10 ganger, og strekk nakken forsiktig til hver side. La pusten følge bevegelsen." } },
