@@ -5,31 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Julekalender | Silje Merete SMART Helseveiledning</title>
 <meta name="description" content="Julekalender med 24 luker: én styrkeøvelse og én tilstedeværelses-/meditasjonsøvelse hver dag. Hver luke åpnes kun fra og med sin egen dato i desember.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0f2f24;
-    --card: #ffffff;
-    --ink: #16283a;
-    --muted: #5b6f65;
-    --accent: #2f6d4f;
-    --accent-dark: #1c4632;
-    --accent-soft: #e7f3ea;
-    --gold: #b8862f;
-    --gold-soft: #faf1de;
-    --red: #a4373a;
-    --red-soft: #fbe9e7;
-    --border: #d8e6dc;
-    --shadow: 0 1px 3px rgba(22, 40, 58, 0.10), 0 1px 2px rgba(22, 40, 58, 0.08);
+    --paper: #f6efdd;
+    --paper-deep: #efe4c8;
+    --card: #fbf6e9;
+    --ink: #2b2318;
+    --muted: #6d5f47;
+    --rose: #b6502f;
+    --rose-deep: #8a3a1f;
+    --rose-soft: #f1e0cc;
+    --charcoal: #3f3b2f;
+    --border: #ddcda3;
+    --shadow: 0 2px 8px rgba(43, 35, 24, 0.10);
   }
 
   * { box-sizing: border-box; }
 
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: #f2f7f3;
+    font-family: "EB Garamond", Georgia, "Times New Roman", serif;
+    background: var(--paper);
     color: var(--ink);
-    line-height: 1.55;
+    line-height: 1.6;
+    font-size: 1.08rem;
+  }
+
+  h1, h2 {
+    font-family: "Cormorant Garamond", Georgia, serif;
   }
 
   .wrap {
@@ -38,43 +44,104 @@
     padding: 0 1.25rem;
   }
 
-  .hero {
-    background: linear-gradient(135deg, var(--accent-dark), var(--bg));
-    padding: 3rem 0 2.5rem;
+  /* Reusable rose + leaves ornament, drawn once and reused via <use> */
+  .petals-outer path { fill: var(--rose-soft); stroke: var(--rose); stroke-width: 1.8; }
+  .petals-inner path { fill: var(--paper-deep); stroke: var(--rose-deep); stroke-width: 1.2; }
+  .rose-center { fill: var(--rose-deep); stroke: #5c2812; stroke-width: 1; }
+  .leaf path:not(.vein) { fill: #ece3c6; stroke: var(--charcoal); stroke-width: 1.3; }
+  .leaf path.vein { stroke: var(--charcoal); stroke-width: 1; opacity: 0.6; fill: none; }
+
+  .frame-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.5rem, 4vw, 2.5rem);
+    flex-wrap: wrap;
+    padding: 2.5rem 0 1rem;
+  }
+
+  .corner {
+    width: clamp(58px, 9vw, 100px);
+    height: clamp(58px, 9vw, 100px);
+    flex-shrink: 0;
+  }
+
+  .corner-tr, .corner-br { transform: scaleX(-1); }
+  .corner-bl, .corner-br { transform: scaleY(-1); }
+  .corner-br { transform: scale(-1, -1); }
+
+  .title-banner {
+    position: relative;
+    width: clamp(230px, 46vw, 380px);
+    aspect-ratio: 380 / 110;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .banner-shape {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .banner-shape .banner-fill {
+    fill: var(--paper);
+    stroke: var(--rose);
+    stroke-width: 3;
+  }
+
+  .banner-shape .banner-inner-line {
+    fill: none;
+    stroke: var(--rose);
+    stroke-width: 1.3;
+    opacity: 0.55;
+  }
+
+  .title-banner h1 {
+    position: relative;
+    margin: 0;
+    font-size: clamp(1.3rem, 3.4vw, 1.9rem);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .lede {
     text-align: center;
-    color: #f2f7f3;
-  }
-
-  .hero .wrap { position: relative; }
-
-  .hero h1 {
-    margin: 0 0 0.75rem;
-    font-size: 2rem;
-  }
-
-  .hero p {
-    margin: 0 auto;
-    color: #d9e9df;
-    font-size: 1.05rem;
+    color: var(--muted);
     max-width: 52ch;
+    margin: 0 auto 0.7rem;
+    font-size: 1.08rem;
   }
 
-  .hero p + p {
-    margin-top: 0.6rem;
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin: 2.25rem 0;
+    color: var(--rose);
   }
 
-  .hero .snow {
-    font-size: 1.3rem;
-    letter-spacing: 0.4rem;
-    opacity: 0.8;
-    margin-bottom: 0.5rem;
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .divider span {
+    font-size: 1.2rem;
   }
 
   .status-banner {
     margin: 1.5rem auto 0;
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 4px;
     padding: 1rem 1.25rem;
     box-shadow: var(--shadow);
     text-align: center;
@@ -82,7 +149,7 @@
   }
 
   .status-banner strong {
-    color: var(--accent-dark);
+    color: var(--rose-deep);
   }
 
   .calendar-grid {
@@ -99,18 +166,18 @@
   .door {
     position: relative;
     aspect-ratio: 1 / 1;
-    border-radius: 12px;
-    border: none;
+    border-radius: 4px;
+    border: 1px solid var(--border);
     cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-family: inherit;
+    font-family: "Cormorant Garamond", Georgia, serif;
     font-weight: 700;
-    font-size: 1.4rem;
-    background: var(--accent);
-    color: #fff;
+    font-size: 1.5rem;
+    background: var(--card);
+    color: var(--ink);
     box-shadow: var(--shadow);
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
@@ -123,28 +190,31 @@
 
   .door:not(:disabled):hover {
     transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 4px 10px rgba(22, 40, 58, 0.18);
+    box-shadow: 0 4px 10px rgba(43, 35, 24, 0.18);
   }
 
   .door.today {
-    background: var(--gold);
-    box-shadow: 0 0 0 3px var(--gold-soft), var(--shadow);
+    background: var(--rose);
+    border-color: var(--rose-deep);
+    color: #fbf6e9;
+    box-shadow: 0 0 0 3px var(--rose-soft), var(--shadow);
     animation: glow 1.8s ease-in-out infinite;
   }
 
   @keyframes glow {
-    0%, 100% { box-shadow: 0 0 0 3px var(--gold-soft), 0 0 0px rgba(184,134,47,0.5); }
-    50% { box-shadow: 0 0 0 3px var(--gold-soft), 0 0 14px rgba(184,134,47,0.65); }
+    0%, 100% { box-shadow: 0 0 0 3px var(--rose-soft), 0 0 0px rgba(182,80,47,0.5); }
+    50% { box-shadow: 0 0 0 3px var(--rose-soft), 0 0 14px rgba(182,80,47,0.65); }
   }
 
   .door.opened {
-    background: var(--accent-soft);
-    color: var(--accent-dark);
+    background: var(--paper-deep);
+    color: var(--rose-deep);
   }
 
   .door.locked {
-    background: #dbe6de;
-    color: #8ba193;
+    background: #e7ddc4;
+    border-color: var(--border);
+    color: #a1937a;
     cursor: not-allowed;
   }
 
@@ -154,7 +224,7 @@
     grid-column: span 2;
     grid-row: span 2;
     font-size: 2.2rem;
-    border-radius: 16px;
+    border-radius: 6px;
   }
 
   .door.big .icon { font-size: 2rem; }
@@ -163,13 +233,15 @@
     font-size: 0.9rem;
     font-weight: 600;
     margin-top: 0.2rem;
+    font-family: "EB Garamond", Georgia, serif;
+    font-style: italic;
   }
 
   .modal-overlay {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(15, 47, 36, 0.55);
+    background: rgba(43, 35, 24, 0.55);
     align-items: center;
     justify-content: center;
     padding: 1.25rem;
@@ -182,7 +254,8 @@
 
   .modal {
     background: var(--card);
-    border-radius: 16px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
     max-width: 440px;
     width: 100%;
     padding: 2rem 1.75rem 1.75rem;
@@ -205,9 +278,11 @@
 
   .modal .modal-number {
     display: inline-block;
-    background: var(--accent-soft);
-    color: var(--accent-dark);
+    background: var(--paper-deep);
+    color: var(--rose-deep);
+    font-family: "Cormorant Garamond", Georgia, serif;
     font-weight: 700;
+    letter-spacing: 0.04em;
     border-radius: 999px;
     padding: 0.25rem 0.9rem;
     margin-bottom: 1.1rem;
@@ -224,17 +299,18 @@
     font-size: 0.8rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.08em;
     margin-bottom: 0.5rem;
   }
 
-  .modal .modal-tag.styrke { color: var(--accent-dark); }
-  .modal .modal-tag.tilstedevaerelse { color: var(--gold); }
+  .modal .modal-tag.styrke { color: var(--rose-deep); }
+  .modal .modal-tag.tilstedevaerelse { color: var(--rose); }
 
   .modal h2 {
     margin: 0 0 0.75rem;
     color: var(--ink);
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    font-weight: 600;
   }
 
   .modal p.desc {
@@ -251,13 +327,26 @@
   .modal-section + .modal-section {
     margin-top: 1.5rem;
     padding-top: 1.5rem;
-    border-top: 1px dashed var(--border);
+    position: relative;
+    border-top: 1px solid var(--border);
+  }
+
+  .modal-section + .modal-section::before {
+    content: "❦";
+    position: absolute;
+    top: -0.85rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--card);
+    padding: 0 0.6rem;
+    color: var(--rose);
+    font-size: 1.1rem;
   }
 
   .card {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 6px;
     padding: 1.5rem 1.5rem 1.75rem;
     margin: 2rem 0;
     box-shadow: var(--shadow);
@@ -265,8 +354,10 @@
 
   .card h2 {
     margin: 0 0 0.6rem;
-    color: var(--accent-dark);
-    font-size: 1.25rem;
+    color: var(--rose-deep);
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
   }
 
   .card p {
@@ -277,22 +368,23 @@
   .card p:last-child { margin-bottom: 0; }
 
   .bonus-card {
-    background: var(--gold-soft);
-    border-color: #e6d3a8;
+    background: var(--paper-deep);
+    border-color: var(--border);
   }
 
   .bonus-card h2 {
-    color: #8a6417;
+    color: var(--rose-deep);
   }
 
   .affirmation-quote {
     margin: 1rem 0;
     padding: 1rem 1.25rem;
     background: var(--card);
-    border: 1px dashed #d9c68f;
-    border-radius: 10px;
+    border: 1px dashed var(--rose);
+    border-radius: 4px;
+    font-family: "Cormorant Garamond", Georgia, serif;
     font-style: italic;
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     color: var(--ink);
   }
 
@@ -301,6 +393,7 @@
     margin-top: 0.5rem;
     font-size: 0.9rem;
     font-style: normal;
+    font-family: "EB Garamond", Georgia, serif;
     color: var(--muted);
   }
 
@@ -326,41 +419,88 @@
     display: inline-block;
   }
 
-  .legend .dot.strength { background: var(--accent); }
-  .legend .dot.care { background: var(--gold); }
-  .legend .dot.locked { background: #dbe6de; }
+  .legend .dot.strength { background: var(--rose); }
+  .legend .dot.care { background: var(--rose-deep); opacity: 0.7; }
+  .legend .dot.locked { background: #e7ddc4; }
 
   .home-link {
     display: block;
     text-align: center;
     margin: 1rem 0 3rem;
-    color: var(--accent-dark);
+    color: var(--rose-deep);
     font-weight: 600;
     text-decoration: none;
   }
 
   .home-link:hover { text-decoration: underline; }
 
+  .frame-row.frame-bottom {
+    padding: 0.5rem 0 2rem;
+  }
+
   footer.closing {
-    margin: 2rem 0 1rem;
+    margin: 0 0 1rem;
     text-align: center;
     padding: 1.25rem;
     color: var(--muted);
     font-size: 0.95rem;
   }
 
-  footer.closing strong { color: var(--accent-dark); }
+  footer.closing strong {
+    color: var(--rose-deep);
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 1.1rem;
+  }
 </style>
 </head>
 <body>
 
-<section class="hero">
+<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <defs>
+    <symbol id="rose-motif" viewBox="0 0 100 100">
+      <g class="leaf" transform="translate(26,80) rotate(-32) scale(0.85)">
+        <path d="M0,0 C-9,-10 -9,-26 0,-34 C9,-26 9,-10 0,0 Z"/>
+        <path class="vein" d="M0,-2 L0,-30"/>
+      </g>
+      <g class="leaf" transform="translate(74,80) rotate(32) scale(0.85)">
+        <path d="M0,0 C-9,-10 -9,-26 0,-34 C9,-26 9,-10 0,0 Z"/>
+        <path class="vein" d="M0,-2 L0,-30"/>
+      </g>
+      <g class="petals-outer">
+        <path d="M50,50 C34,42 30,18 50,6 C70,18 66,42 50,50 Z" transform="rotate(0 50 50)"/>
+        <path d="M50,50 C34,42 30,18 50,6 C70,18 66,42 50,50 Z" transform="rotate(72 50 50)"/>
+        <path d="M50,50 C34,42 30,18 50,6 C70,18 66,42 50,50 Z" transform="rotate(144 50 50)"/>
+        <path d="M50,50 C34,42 30,18 50,6 C70,18 66,42 50,50 Z" transform="rotate(216 50 50)"/>
+        <path d="M50,50 C34,42 30,18 50,6 C70,18 66,42 50,50 Z" transform="rotate(288 50 50)"/>
+      </g>
+      <g class="petals-inner">
+        <path d="M50,50 C41.2,45.6 39,32.4 50,25.8 C61,32.4 58.8,45.6 50,50 Z" transform="rotate(36 50 50)"/>
+        <path d="M50,50 C41.2,45.6 39,32.4 50,25.8 C61,32.4 58.8,45.6 50,50 Z" transform="rotate(108 50 50)"/>
+        <path d="M50,50 C41.2,45.6 39,32.4 50,25.8 C61,32.4 58.8,45.6 50,50 Z" transform="rotate(180 50 50)"/>
+        <path d="M50,50 C41.2,45.6 39,32.4 50,25.8 C61,32.4 58.8,45.6 50,50 Z" transform="rotate(252 50 50)"/>
+        <path d="M50,50 C41.2,45.6 39,32.4 50,25.8 C61,32.4 58.8,45.6 50,50 Z" transform="rotate(324 50 50)"/>
+      </g>
+      <circle class="rose-center" cx="50" cy="50" r="6"/>
+    </symbol>
+  </defs>
+</svg>
+
+<section class="manuscript-top">
+  <div class="frame-row">
+    <svg class="corner corner-tl" viewBox="0 0 100 100"><use href="#rose-motif"/></svg>
+    <div class="title-banner">
+      <svg class="banner-shape" viewBox="0 0 380 110" aria-hidden="true">
+        <path class="banner-fill" d="M20,55 L62,18 L318,18 L360,55 L318,92 L62,92 Z"/>
+        <path class="banner-inner-line" d="M62,18 L62,92 M318,18 L318,92"/>
+      </svg>
+      <h1>Julekalender</h1>
+    </div>
+    <svg class="corner corner-tr" viewBox="0 0 100 100"><use href="#rose-motif"/></svg>
+  </div>
   <div class="wrap">
-    <div class="snow">❄ ✧ ❄ ✧ ❄</div>
-    <h1>Julekalender 🎄</h1>
-    <p>24 luker frem mot jul. Bak hver luke venter én enkel styrkeøvelse og én tilstedeværelses- eller meditasjonsøvelse.</p>
-    <p>Gjør en styrkeøvelse eller tilstedeværelse, eller begge, hver dag. Gjør det for deg selv, ingen andre.</p>
-    <p>Kjennes en øvelse vanskelig på grunn av helsen din, eller er du usikker på hvordan den skal gjøres? Bytt den gjerne ut med noe annet i samme kategori som kjennes godt og riktig for deg.</p>
+    <p class="lede">24 luker frem mot jul. Bak hver luke venter én enkel styrkeøvelse og én tilstedeværelses- eller meditasjonsøvelse.</p>
+    <p class="lede">Gjør en styrkeøvelse eller tilstedeværelse, eller begge, hver dag. Gjør det for deg selv, ingen andre.</p>
+    <p class="lede">Kjennes en øvelse vanskelig på grunn av helsen din, eller er du usikker på hvordan den skal gjøres? Bytt den gjerne ut med noe annet i samme kategori som kjennes godt og riktig for deg.</p>
   </div>
 </section>
 
@@ -381,6 +521,8 @@
     </div>
   </section>
 
+  <div class="divider" aria-hidden="true"><span>❦</span></div>
+
   <section class="card bonus-card">
     <h2>🎆 Klar for noe nytt i romjula?</h2>
     <p>Romjula, de rolige dagene mellom jul og nyttår, er en fin anledning til å prøve noe du har lurt på lenge. Kanskje er det isbading, kanskje noe helt annet?</p>
@@ -394,6 +536,11 @@
 
   <a class="home-link" href="index.html">Se hjemmesiden min →</a>
 
+</div>
+
+<div class="frame-row frame-bottom">
+  <svg class="corner corner-bl" viewBox="0 0 100 100"><use href="#rose-motif"/></svg>
+  <svg class="corner corner-br" viewBox="0 0 100 100"><use href="#rose-motif"/></svg>
 </div>
 
 <div class="modal-overlay" id="modal-overlay">
