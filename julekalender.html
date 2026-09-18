@@ -327,7 +327,7 @@
 
   <section class="card">
     <h2>Slik virker kalenderen</h2>
-    <p>Hver luke låses opp på akkurat sin egen dato i desember, og kan bare åpnes den dagen. Kom tilbake hver dag for å se hva som venter bak neste luke.</p>
+    <p>Hver luke låses opp på sin egen dato i desember, og blir værende åpen resten av måneden. Du kan altså gå tilbake og åpne tidligere luker igjen når du vil, men de dagene som ikke har vært ennå, er fortsatt låst.</p>
     <p>Luke 24 er litt større enn de andre. Det er tross alt julaften!</p>
     <div class="legend">
       <span><span class="dot strength"></span> Styrketrening</span>
@@ -377,38 +377,24 @@
     { n: 24, type: "egenomsorg", icon: "🎄", title: "God jul!", desc: "Tenn alle lysene. Ta deg 10 minutter helt for deg selv, pust dypt, og kjenn stoltheten over hver eneste luke du har åpnet denne måneden. Riktig god jul!" }
   ];
 
-  var STORAGE_KEY = "julekalender-apnet";
-
-  function getOpened() {
-    try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-    } catch (e) {
-      return [];
-    }
-  }
-
-  function markOpened(n) {
-    try {
-      var opened = getOpened();
-      if (opened.indexOf(n) === -1) {
-        opened.push(n);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(opened));
-      }
-    } catch (e) { /* ignore */ }
-  }
-
   function todayInfo() {
     var now = new Date();
     return { isDecember: now.getMonth() === 11, date: now.getDate(), month: now.getMonth(), year: now.getFullYear() };
+  }
+
+  // En luke er tilgjengelig fra og med sin egen dato, ut desember.
+  function isUnlocked(door, t) {
+    if (!t.isDecember) return false;
+    return door.n <= t.date;
   }
 
   function renderStatus() {
     var t = todayInfo();
     var banner = document.getElementById("status-banner");
     if (t.isDecember && t.date >= 1 && t.date <= 24) {
-      banner.innerHTML = "I dag er det <strong>" + t.date + ". desember</strong>. Luke " + t.date + " er åpen for deg akkurat i dag!";
+      banner.innerHTML = "I dag er det <strong>" + t.date + ". desember</strong>. Luke " + t.date + " er åpen for deg i dag, og alle lukene før den kan også åpnes igjen.";
     } else if (t.isDecember && t.date > 24) {
-      banner.innerHTML = "God jul! Alle lukene er åpnet. <strong>Riktig godt nytt år!</strong>";
+      banner.innerHTML = "God jul! Alle lukene er åpne. <strong>Riktig godt nytt år!</strong>";
     } else {
       banner.innerHTML = "Kalenderen våkner <strong>1. desember</strong>. Kom tilbake da for å åpne den første luken!";
     }
@@ -416,29 +402,28 @@
 
   function renderGrid() {
     var t = todayInfo();
-    var opened = getOpened();
     var grid = document.getElementById("calendar-grid");
     grid.innerHTML = "";
 
     DOORS.forEach(function (door) {
+      var unlocked = isUnlocked(door, t);
       var isToday = t.isDecember && t.date === door.n;
-      var wasOpened = opened.indexOf(door.n) !== -1;
 
       var btn = document.createElement("button");
       btn.className = "door" + (door.n === 24 ? " big" : "");
       if (isToday) btn.className += " today";
-      else if (wasOpened) btn.className += " opened";
+      else if (unlocked) btn.className += " opened";
       else btn.className += " locked";
 
       var numberHtml = "<span>" + door.n + "</span>";
-      var iconHtml = "<span class=\"icon\">" + (wasOpened || isToday ? door.icon : "🔒") + "</span>";
+      var iconHtml = "<span class=\"icon\">" + (unlocked ? door.icon : "🔒") + "</span>";
       var labelHtml = door.n === 24 ? "<span class=\"label\">Julaften</span>" : "";
       btn.innerHTML = numberHtml + iconHtml + labelHtml;
 
       btn.setAttribute("aria-label", "Luke " + door.n);
       btn.addEventListener("click", function () {
-        if (isToday || wasOpened) {
-          openModal(door, isToday);
+        if (unlocked) {
+          openModal(door);
         } else {
           openLockedModal(door, t);
         }
@@ -448,8 +433,7 @@
     });
   }
 
-  function openModal(door, isToday) {
-    if (isToday) markOpened(door.n);
+  function openModal(door) {
     var modal = document.getElementById("modal");
     modal.className = "modal";
     var tagLabel = door.type === "styrke" ? "Styrketrening" : "Egenomsorg";
@@ -461,7 +445,6 @@
       "<h2>" + door.title + "</h2>" +
       "<p class=\"desc\">" + door.desc + "</p>";
     showOverlay();
-    renderGrid();
   }
 
   function openLockedModal(door, t) {
@@ -470,10 +453,8 @@
     var message;
     if (!t.isDecember) {
       message = "Denne luken åpner først " + door.n + ". desember.";
-    } else if (t.date < door.n) {
-      message = "Denne luken åpner " + door.n + ". desember. Bare " + (door.n - t.date) + " dag" + (door.n - t.date === 1 ? "" : "er") + " igjen!";
     } else {
-      message = "Denne luken var åpen " + door.n + ". desember. Håper du fikk med deg den!";
+      message = "Denne luken åpner " + door.n + ". desember. Bare " + (door.n - t.date) + " dag" + (door.n - t.date === 1 ? "" : "er") + " igjen!";
     }
     modal.innerHTML =
       "<button class=\"modal-close\" id=\"modal-close\" aria-label=\"Lukk\">✕</button>" +
