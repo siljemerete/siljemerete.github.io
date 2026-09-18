@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Julekalender | Silje Merete SMART Helseveiledning</title>
+<meta name="description" content="Julekalender med 24 luker: enkel styrketrening hjemme og egenomsorg. Hver luke åpnes kun på sin egen dato i desember.">
+<style>
+  :root {
+    --bg: #0f2f24;
+    --card: #ffffff;
+    --ink: #16283a;
+    --muted: #5b6f65;
+    --accent: #2f6d4f;
+    --accent-dark: #1c4632;
+    --accent-soft: #e7f3ea;
+    --gold: #b8862f;
+    --gold-soft: #faf1de;
+    --red: #a4373a;
+    --red-soft: #fbe9e7;
+    --border: #d8e6dc;
+    --shadow: 0 1px 3px rgba(22, 40, 58, 0.10), 0 1px 2px rgba(22, 40, 58, 0.08);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #f2f7f3;
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--accent-dark), var(--bg));
+    padding: 3rem 0 2.5rem;
+    text-align: center;
+    color: #f2f7f3;
+  }
+
+  .hero .wrap { position: relative; }
+
+  .hero h1 {
+    margin: 0 0 0.75rem;
+    font-size: 2rem;
+  }
+
+  .hero p {
+    margin: 0 auto;
+    color: #d9e9df;
+    font-size: 1.05rem;
+    max-width: 52ch;
+  }
+
+  .hero .snow {
+    font-size: 1.3rem;
+    letter-spacing: 0.4rem;
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+  }
+
+  .status-banner {
+    margin: 1.5rem auto 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    box-shadow: var(--shadow);
+    text-align: center;
+    color: var(--muted);
+  }
+
+  .status-banner strong {
+    color: var(--accent-dark);
+  }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    margin: 2rem 0;
+  }
+
+  @media (min-width: 560px) {
+    .calendar-grid { grid-template-columns: repeat(6, 1fr); }
+  }
+
+  .door {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 1.4rem;
+    background: var(--accent);
+    color: #fff;
+    box-shadow: var(--shadow);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .door .icon {
+    font-size: 1.1rem;
+    margin-top: 0.15rem;
+  }
+
+  .door:not(:disabled):hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 4px 10px rgba(22, 40, 58, 0.18);
+  }
+
+  .door.today {
+    background: var(--gold);
+    box-shadow: 0 0 0 3px var(--gold-soft), var(--shadow);
+    animation: glow 1.8s ease-in-out infinite;
+  }
+
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 0 3px var(--gold-soft), 0 0 0px rgba(184,134,47,0.5); }
+    50% { box-shadow: 0 0 0 3px var(--gold-soft), 0 0 14px rgba(184,134,47,0.65); }
+  }
+
+  .door.opened {
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+  }
+
+  .door.locked {
+    background: #dbe6de;
+    color: #8ba193;
+    cursor: not-allowed;
+  }
+
+  .door.locked .icon { opacity: 0.6; }
+
+  .door.big {
+    grid-column: span 2;
+    grid-row: span 2;
+    font-size: 2.2rem;
+    border-radius: 16px;
+  }
+
+  .door.big .icon { font-size: 2rem; }
+
+  .door.big .label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: 0.2rem;
+  }
+
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 47, 36, 0.55);
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    z-index: 50;
+  }
+
+  .modal-overlay.show {
+    display: flex;
+  }
+
+  .modal {
+    background: var(--card);
+    border-radius: 16px;
+    max-width: 440px;
+    width: 100%;
+    padding: 2rem 1.75rem 1.75rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    text-align: center;
+    position: relative;
+  }
+
+  .modal .modal-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.9rem;
+    border: none;
+    background: none;
+    font-size: 1.3rem;
+    color: var(--muted);
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .modal .modal-number {
+    display: inline-block;
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 0.25rem 0.9rem;
+    margin-bottom: 0.9rem;
+    font-size: 0.95rem;
+  }
+
+  .modal .modal-icon {
+    font-size: 2.4rem;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .modal .modal-tag {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+  }
+
+  .modal .modal-tag.styrke { color: var(--accent-dark); }
+  .modal .modal-tag.egenomsorg { color: var(--gold); }
+
+  .modal h2 {
+    margin: 0 0 0.75rem;
+    color: var(--ink);
+    font-size: 1.3rem;
+  }
+
+  .modal p.desc {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .modal.locked-modal .modal-icon { font-size: 2rem; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 1.5rem 1.75rem;
+    margin: 2rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .card h2 {
+    margin: 0 0 0.6rem;
+    color: var(--accent-dark);
+    font-size: 1.25rem;
+  }
+
+  .card p {
+    margin: 0 0 0.6rem;
+    color: var(--muted);
+  }
+
+  .card p:last-child { margin-bottom: 0; }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.75rem;
+  }
+
+  .legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+
+  .legend .dot {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .legend .dot.strength { background: var(--accent); }
+  .legend .dot.care { background: var(--gold); }
+  .legend .dot.locked { background: #dbe6de; }
+
+  .home-link {
+    display: block;
+    text-align: center;
+    margin: 1rem 0 3rem;
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .home-link:hover { text-decoration: underline; }
+
+  footer.closing {
+    margin: 2rem 0 1rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong { color: var(--accent-dark); }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="snow">❄ ✧ ❄ ✧ ❄</div>
+    <h1>Julekalender 🎄</h1>
+    <p>24 luker med enkel styrketrening hjemme og litt egenomsorg hver dag frem mot jul. Én ny luke om dagen, hele desember.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <div class="status-banner" id="status-banner"></div>
+
+  <div class="calendar-grid" id="calendar-grid"></div>
+
+  <section class="card">
+    <h2>Slik virker kalenderen</h2>
+    <p>Hver luke låses opp på akkurat sin egen dato i desember, og kan bare åpnes den dagen. Kom tilbake hver dag for å se hva som venter bak neste luke.</p>
+    <p>Luke 24 er litt større enn de andre. Det er tross alt julaften!</p>
+    <div class="legend">
+      <span><span class="dot strength"></span> Styrketrening</span>
+      <span><span class="dot care"></span> Egenomsorg</span>
+      <span><span class="dot locked"></span> Låst luke</span>
+    </div>
+  </section>
+
+  <a class="home-link" href="index.html">Se hjemmesiden min →</a>
+
+</div>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="modal"></div>
+</div>
+
+<footer class="closing">
+  Små skritt. Dine mål, ditt tempo.<br>
+  <strong>God adventstid, og god jul!</strong>
+</footer>
+
+<script>
+  var DOORS = [
+    { n: 1, type: "egenomsorg", icon: "🕯️", title: "Tenn et lys", desc: "Tenn et lys og bli sittende stille i 2 minutter. Ikke gjør noe annet, bare vær." },
+    { n: 2, type: "styrke", icon: "🦵", title: "10 knebøy", desc: "Stå med føttene i hoftebredde. Bøy knærne som om du skal sette deg ned, og reis deg opp igjen. 10 repetisjoner, i eget tempo." },
+    { n: 3, type: "egenomsorg", icon: "👂", title: "Lytt innover", desc: "Kjenn etter hvordan kroppen og humøret ditt egentlig er akkurat nå, uten å prøve å endre noe. Bare legg merke til det." },
+    { n: 4, type: "styrke", icon: "🧍", title: "Planke, 20 sekunder", desc: "Hold en planke-posisjon i 20 sekunder. Gjerne på knærne hvis det kjennes bedre for deg i dag." },
+    { n: 5, type: "egenomsorg", icon: "⏳", title: "7 minutter for deg selv", desc: "Sett en tidtaker på 7 minutter. Lukk øynene, pust rolig, og la tankene komme og gå uten å henge deg opp i dem." },
+    { n: 6, type: "styrke", icon: "🚶", title: "10 utfall per bein", desc: "Ta et langt steg frem og bøy begge knær til en utfallsposisjon. 10 repetisjoner på hvert bein." },
+    { n: 7, type: "egenomsorg", icon: "📝", title: "Tre ting å være takknemlig for", desc: "Skriv ned, eller bare tenk gjennom, tre ting du er takknemlig for akkurat i dag. Store eller små." },
+    { n: 8, type: "styrke", icon: "🪑", title: "Reis deg fra stolen, 10 ganger", desc: "Sitt på en stol og reis deg opp uten å bruke hendene. Sett deg rolig ned igjen. Gjenta 10 ganger." },
+    { n: 9, type: "egenomsorg", icon: "☕", title: "En kopp i ro", desc: "Lag deg en kopp te eller kakao. Drikk den sakte, uten skjerm, og kjenn smaken og varmen." },
+    { n: 10, type: "styrke", icon: "🦶", title: "10 tåhev", desc: "Stå og løft deg opp på tærne, senk deg rolig ned igjen. 10 repetisjoner. Hold gjerne i noe for balanse." },
+    { n: 11, type: "egenomsorg", icon: "🌬️", title: "En tur i kald luft", desc: "Gå en kort tur ute, om du kan. Kjenn den kalde vinterlufta mot ansiktet og pust den rolig inn." },
+    { n: 12, type: "styrke", icon: "🧱", title: "Vegghold, 20–30 sekunder", desc: "Len ryggen mot en vegg og gli ned til en sittende stilling med bøyde knær, som om du satt på en usynlig stol. Hold i 20–30 sekunder." },
+    { n: 13, type: "egenomsorg", icon: "💌", title: "En hyggelig melding", desc: "Send en melding til noen du er glad i, bare for å si at du tenker på dem." },
+    { n: 14, type: "styrke", icon: "💪", title: "10 armhevninger", desc: "Gjør 10 armhevninger, gjerne på knærne om det kjennes bedre. Kvalitet fremfor fart." },
+    { n: 15, type: "egenomsorg", icon: "🤫", title: "5 minutter stillhet", desc: "Skru av skjermen og la det være stille rundt deg i 5 minutter. Legg merke til lydene som er igjen når du lytter etter dem." },
+    { n: 16, type: "styrke", icon: "🌉", title: "Hoftehev, 12 repetisjoner", desc: "Ligg på ryggen med bøyde knær. Løft hoftene opp mot taket og senk dem rolig ned igjen. 12 repetisjoner." },
+    { n: 17, type: "egenomsorg", icon: "🌍", title: "Kjenn bakken under deg", desc: "Stå stille i ett minutt og kjenn hvordan føttene dine hviler mot gulvet. Legg merke til kontakten, punkt for punkt." },
+    { n: 18, type: "styrke", icon: "↔️", title: "Sideplanke, 15 sek per side", desc: "Hold en sideplanke i 15 sekunder på hver side. Støtt deg gjerne på underarmen og et bøyd underben." },
+    { n: 19, type: "egenomsorg", icon: "💛", title: "Et ærlig kompliment", desc: "Gi deg selv et ærlig kompliment, høyt eller bare i tankene. Du har fortjent det." },
+    { n: 20, type: "styrke", icon: "🦸", title: "\"Superman\", 10 repetisjoner", desc: "Ligg på magen og løft armer og bein samtidig, som om du flyr. Senk rolig ned igjen. 10 repetisjoner." },
+    { n: 21, type: "egenomsorg", icon: "✉️", title: "Brev til deg selv", desc: "Skriv noen linjer til deg selv om hva du vil huske fra året som har gått, eller hva du gleder deg til." },
+    { n: 22, type: "styrke", icon: "🙆", title: "Skulder og nakke", desc: "Rull skuldrene rolig bakover 10 ganger, og strekk nakken forsiktig til hver side. La pusten følge bevegelsen." },
+    { n: 23, type: "egenomsorg", icon: "🫶", title: "Hendene på hjertet", desc: "Legg begge hender på hjertet. Ta tre dype pust og kjenn takknemlighet for alt kroppen din har gjort for deg i år." },
+    { n: 24, type: "egenomsorg", icon: "🎄", title: "God jul!", desc: "Tenn alle lysene. Ta deg 10 minutter helt for deg selv, pust dypt, og kjenn stoltheten over hver eneste luke du har åpnet denne måneden. Riktig god jul!" }
+  ];
+
+  var STORAGE_KEY = "julekalender-apnet";
+
+  function getOpened() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function markOpened(n) {
+    try {
+      var opened = getOpened();
+      if (opened.indexOf(n) === -1) {
+        opened.push(n);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(opened));
+      }
+    } catch (e) { /* ignore */ }
+  }
+
+  function todayInfo() {
+    var now = new Date();
+    return { isDecember: now.getMonth() === 11, date: now.getDate(), month: now.getMonth(), year: now.getFullYear() };
+  }
+
+  function renderStatus() {
+    var t = todayInfo();
+    var banner = document.getElementById("status-banner");
+    if (t.isDecember && t.date >= 1 && t.date <= 24) {
+      banner.innerHTML = "I dag er det <strong>" + t.date + ". desember</strong>. Luke " + t.date + " er åpen for deg akkurat i dag!";
+    } else if (t.isDecember && t.date > 24) {
+      banner.innerHTML = "God jul! Alle lukene er åpnet. <strong>Riktig godt nytt år!</strong>";
+    } else {
+      banner.innerHTML = "Kalenderen våkner <strong>1. desember</strong>. Kom tilbake da for å åpne den første luken!";
+    }
+  }
+
+  function renderGrid() {
+    var t = todayInfo();
+    var opened = getOpened();
+    var grid = document.getElementById("calendar-grid");
+    grid.innerHTML = "";
+
+    DOORS.forEach(function (door) {
+      var isToday = t.isDecember && t.date === door.n;
+      var wasOpened = opened.indexOf(door.n) !== -1;
+
+      var btn = document.createElement("button");
+      btn.className = "door" + (door.n === 24 ? " big" : "");
+      if (isToday) btn.className += " today";
+      else if (wasOpened) btn.className += " opened";
+      else btn.className += " locked";
+
+      var numberHtml = "<span>" + door.n + "</span>";
+      var iconHtml = "<span class=\"icon\">" + (wasOpened || isToday ? door.icon : "🔒") + "</span>";
+      var labelHtml = door.n === 24 ? "<span class=\"label\">Julaften</span>" : "";
+      btn.innerHTML = numberHtml + iconHtml + labelHtml;
+
+      btn.setAttribute("aria-label", "Luke " + door.n);
+      btn.addEventListener("click", function () {
+        if (isToday || wasOpened) {
+          openModal(door, isToday);
+        } else {
+          openLockedModal(door, t);
+        }
+      });
+
+      grid.appendChild(btn);
+    });
+  }
+
+  function openModal(door, isToday) {
+    if (isToday) markOpened(door.n);
+    var modal = document.getElementById("modal");
+    modal.className = "modal";
+    var tagLabel = door.type === "styrke" ? "Styrketrening" : "Egenomsorg";
+    modal.innerHTML =
+      "<button class=\"modal-close\" id=\"modal-close\" aria-label=\"Lukk\">✕</button>" +
+      "<span class=\"modal-number\">Luke " + door.n + "</span>" +
+      "<span class=\"modal-icon\">" + door.icon + "</span>" +
+      "<div class=\"modal-tag " + door.type + "\">" + tagLabel + "</div>" +
+      "<h2>" + door.title + "</h2>" +
+      "<p class=\"desc\">" + door.desc + "</p>";
+    showOverlay();
+    renderGrid();
+  }
+
+  function openLockedModal(door, t) {
+    var modal = document.getElementById("modal");
+    modal.className = "modal locked-modal";
+    var message;
+    if (!t.isDecember) {
+      message = "Denne luken åpner først " + door.n + ". desember.";
+    } else if (t.date < door.n) {
+      message = "Denne luken åpner " + door.n + ". desember. Bare " + (door.n - t.date) + " dag" + (door.n - t.date === 1 ? "" : "er") + " igjen!";
+    } else {
+      message = "Denne luken var åpen " + door.n + ". desember. Håper du fikk med deg den!";
+    }
+    modal.innerHTML =
+      "<button class=\"modal-close\" id=\"modal-close\" aria-label=\"Lukk\">✕</button>" +
+      "<span class=\"modal-icon\">🔒</span>" +
+      "<h2>Luke " + door.n + " er låst</h2>" +
+      "<p class=\"desc\">" + message + "</p>";
+    showOverlay();
+  }
+
+  function showOverlay() {
+    var overlay = document.getElementById("modal-overlay");
+    overlay.className = "modal-overlay show";
+    document.getElementById("modal-close").addEventListener("click", closeModal);
+  }
+
+  function closeModal() {
+    document.getElementById("modal-overlay").className = "modal-overlay";
+  }
+
+  document.getElementById("modal-overlay").addEventListener("click", function (e) {
+    if (e.target === this) closeModal();
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeModal();
+  });
+
+  renderStatus();
+  renderGrid();
+</script>
+
+</body>
+</html>
