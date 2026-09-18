@@ -56,8 +56,6 @@
   .leaf path:not(.vein) { fill: #ece3c6; stroke: var(--charcoal); stroke-width: 1.3; }
   .leaf path.vein { stroke: var(--charcoal); stroke-width: 1; opacity: 0.6; fill: none; }
   .vine-ribbon { fill: none; stroke: var(--rose); stroke-width: 4; stroke-linecap: round; }
-  .bow { fill: var(--rose); stroke: var(--rose-deep); stroke-width: 1.5; opacity: 0.92; }
-  .bow-knot { fill: var(--rose-deep); }
 
   /* Full-page vine-and-rose border frame */
   .page-frame {
@@ -84,13 +82,20 @@
     position: absolute;
     width: clamp(64px, 8vw, 120px);
     height: clamp(64px, 8vw, 120px);
+    object-fit: contain;
     pointer-events: none;
   }
 
   .frame-corner-cluster.tl { top: -14px; left: -14px; }
-  .frame-corner-cluster.tr { top: -14px; right: -14px; transform: scaleX(-1); }
-  .frame-corner-cluster.bl { bottom: -14px; left: -14px; transform: scaleY(-1); }
-  .frame-corner-cluster.br { bottom: -14px; right: -14px; transform: scale(-1, -1); }
+  .frame-corner-cluster.tr { top: -14px; right: -14px; }
+  .frame-corner-cluster.bl { bottom: -14px; left: -14px; }
+  .frame-corner-cluster.br { bottom: -14px; right: -14px; }
+
+  .angel-image {
+    display: block;
+    width: clamp(140px, 22vw, 220px);
+    margin: 1.5rem auto 0.5rem;
+  }
 
   .frame-row {
     display: flex;
@@ -107,9 +112,9 @@
     flex-shrink: 0;
   }
 
-  .corner-tr, .corner-br { transform: scaleX(-1); }
-  .corner-bl, .corner-br { transform: scaleY(-1); }
-  .corner-br { transform: scale(-1, -1); }
+  .corner {
+    object-fit: contain;
+  }
 
   .title-banner {
     position: relative;
@@ -475,10 +480,6 @@
 
   .home-link:hover { text-decoration: underline; }
 
-  .frame-row.frame-bottom {
-    padding: 0.5rem 0 2rem;
-  }
-
   footer.closing {
     margin: 0 0 1rem;
     text-align: center;
@@ -524,13 +525,6 @@
       <circle class="rose-center" cx="50" cy="50" r="6"/>
     </symbol>
 
-    <symbol id="corner-cluster" viewBox="0 0 140 140">
-      <path class="bow" d="M55,95 C35,80 15,85 20,100 C25,112 45,108 55,100 C65,108 95,112 100,100 C105,85 85,80 65,95 Z"/>
-      <circle class="bow-knot" cx="60" cy="97" r="6"/>
-      <use href="#rose-motif" transform="translate(15,10) scale(0.62)"/>
-      <use href="#rose-motif" transform="translate(55,45) scale(0.42)"/>
-    </symbol>
-
     <pattern id="vine-tile" width="42" height="200" patternUnits="userSpaceOnUse">
       <path class="vine-ribbon" d="M21,0 C4,30 38,60 21,90 C4,120 38,150 21,200"/>
       <g class="leaf" transform="translate(8,25) rotate(-35) scale(0.6)">
@@ -557,14 +551,14 @@
 <div class="page-frame">
   <svg class="frame-vine left" aria-hidden="true"><rect width="100%" height="100%" fill="url(#vine-tile)"/></svg>
   <svg class="frame-vine right" aria-hidden="true"><rect width="100%" height="100%" fill="url(#vine-tile)"/></svg>
-  <svg class="frame-corner-cluster tl" viewBox="0 0 140 140" aria-hidden="true"><use href="#corner-cluster"/></svg>
-  <svg class="frame-corner-cluster tr" viewBox="0 0 140 140" aria-hidden="true"><use href="#corner-cluster"/></svg>
-  <svg class="frame-corner-cluster bl" viewBox="0 0 140 140" aria-hidden="true"><use href="#corner-cluster"/></svg>
-  <svg class="frame-corner-cluster br" viewBox="0 0 140 140" aria-hidden="true"><use href="#corner-cluster"/></svg>
+  <img class="frame-corner-cluster tl" src="images/julekalender-hjerte-ranke.jpg" alt="">
+  <img class="frame-corner-cluster tr" src="images/julekalender-hjerte-ranke.jpg" alt="">
+  <img class="frame-corner-cluster bl" src="images/julekalender-hjerte-ranke.jpg" alt="">
+  <img class="frame-corner-cluster br" src="images/julekalender-hjerte-ranke.jpg" alt="">
 
 <section class="manuscript-top">
   <div class="frame-row">
-    <svg class="corner corner-tl" viewBox="0 0 100 100"><use href="#rose-motif"/></svg>
+    <img class="corner" src="images/julekalender-hjerte-ranke.jpg" alt="">
     <div class="title-banner">
       <svg class="banner-shape" viewBox="0 0 380 110" aria-hidden="true">
         <path class="banner-fill" d="M20,55 L62,18 L318,18 L360,55 L318,92 L62,92 Z"/>
@@ -572,7 +566,7 @@
       </svg>
       <h1>Julekalender</h1>
     </div>
-    <svg class="corner corner-tr" viewBox="0 0 100 100"><use href="#rose-motif"/></svg>
+    <img class="corner" src="images/julekalender-hjerte-ranke.jpg" alt="">
   </div>
   <div class="wrap">
     <p class="lede">24 luker frem mot jul. Bak hver luke venter én enkel styrkeøvelse og én tilstedeværelses- eller meditasjonsøvelse.</p>
@@ -613,11 +607,8 @@
 
   <a class="home-link" href="index.html">Se hjemmesiden min →</a>
 
-</div>
+  <img class="angel-image" src="images/julekalender-engel-ranke.jpg" alt="Tegnet engel omkranset av blader, med en rose og sløyfe nederst">
 
-<div class="frame-row frame-bottom">
-  <svg class="corner corner-bl" viewBox="0 0 100 100"><use href="#rose-motif"/></svg>
-  <svg class="corner corner-br" viewBox="0 0 100 100"><use href="#rose-motif"/></svg>
 </div>
 
 <div class="modal-overlay" id="modal-overlay">
