@@ -21,6 +21,11 @@
     --charcoal: #3f3b2f;
     --border: #ddcda3;
     --shadow: 0 2px 8px rgba(43, 35, 24, 0.10);
+    --frame-w: 42px;
+  }
+
+  @media (max-width: 480px) {
+    :root { --frame-w: 0px; }
   }
 
   * { box-sizing: border-box; }
@@ -50,6 +55,42 @@
   .rose-center { fill: var(--rose-deep); stroke: #5c2812; stroke-width: 1; }
   .leaf path:not(.vein) { fill: #ece3c6; stroke: var(--charcoal); stroke-width: 1.3; }
   .leaf path.vein { stroke: var(--charcoal); stroke-width: 1; opacity: 0.6; fill: none; }
+  .vine-ribbon { fill: none; stroke: var(--rose); stroke-width: 4; stroke-linecap: round; }
+  .bow { fill: var(--rose); stroke: var(--rose-deep); stroke-width: 1.5; opacity: 0.92; }
+  .bow-knot { fill: var(--rose-deep); }
+
+  /* Full-page vine-and-rose border frame */
+  .page-frame {
+    position: relative;
+    padding: 0 var(--frame-w);
+  }
+
+  .frame-vine {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--frame-w);
+    pointer-events: none;
+  }
+
+  .frame-vine.left { left: 0; }
+  .frame-vine.right { right: 0; transform: scaleX(-1); }
+
+  @media (max-width: 480px) {
+    .frame-vine, .frame-corner-cluster { display: none; }
+  }
+
+  .frame-corner-cluster {
+    position: absolute;
+    width: clamp(64px, 8vw, 120px);
+    height: clamp(64px, 8vw, 120px);
+    pointer-events: none;
+  }
+
+  .frame-corner-cluster.tl { top: -14px; left: -14px; }
+  .frame-corner-cluster.tr { top: -14px; right: -14px; transform: scaleX(-1); }
+  .frame-corner-cluster.bl { bottom: -14px; left: -14px; transform: scaleY(-1); }
+  .frame-corner-cluster.br { bottom: -14px; right: -14px; transform: scale(-1, -1); }
 
   .frame-row {
     display: flex;
@@ -482,8 +523,44 @@
       </g>
       <circle class="rose-center" cx="50" cy="50" r="6"/>
     </symbol>
+
+    <symbol id="corner-cluster" viewBox="0 0 140 140">
+      <path class="bow" d="M55,95 C35,80 15,85 20,100 C25,112 45,108 55,100 C65,108 95,112 100,100 C105,85 85,80 65,95 Z"/>
+      <circle class="bow-knot" cx="60" cy="97" r="6"/>
+      <use href="#rose-motif" transform="translate(15,10) scale(0.62)"/>
+      <use href="#rose-motif" transform="translate(55,45) scale(0.42)"/>
+    </symbol>
+
+    <pattern id="vine-tile" width="42" height="200" patternUnits="userSpaceOnUse">
+      <path class="vine-ribbon" d="M21,0 C4,30 38,60 21,90 C4,120 38,150 21,200"/>
+      <g class="leaf" transform="translate(8,25) rotate(-35) scale(0.6)">
+        <path d="M0,0 C-9,-10 -9,-26 0,-34 C9,-26 9,-10 0,0 Z"/>
+        <path class="vein" d="M0,-2 L0,-30"/>
+      </g>
+      <g class="leaf" transform="translate(34,55) rotate(35) scale(0.6)">
+        <path d="M0,0 C-9,-10 -9,-26 0,-34 C9,-26 9,-10 0,0 Z"/>
+        <path class="vein" d="M0,-2 L0,-30"/>
+      </g>
+      <use href="#rose-motif" transform="translate(21,100) scale(0.34) translate(-50,-50)"/>
+      <g class="leaf" transform="translate(8,140) rotate(-40) scale(0.6)">
+        <path d="M0,0 C-9,-10 -9,-26 0,-34 C9,-26 9,-10 0,0 Z"/>
+        <path class="vein" d="M0,-2 L0,-30"/>
+      </g>
+      <g class="leaf" transform="translate(34,170) rotate(40) scale(0.6)">
+        <path d="M0,0 C-9,-10 -9,-26 0,-34 C9,-26 9,-10 0,0 Z"/>
+        <path class="vein" d="M0,-2 L0,-30"/>
+      </g>
+    </pattern>
   </defs>
 </svg>
+
+<div class="page-frame">
+  <svg class="frame-vine left" aria-hidden="true"><rect width="100%" height="100%" fill="url(#vine-tile)"/></svg>
+  <svg class="frame-vine right" aria-hidden="true"><rect width="100%" height="100%" fill="url(#vine-tile)"/></svg>
+  <svg class="frame-corner-cluster tl" viewBox="0 0 140 140" aria-hidden="true"><use href="#corner-cluster"/></svg>
+  <svg class="frame-corner-cluster tr" viewBox="0 0 140 140" aria-hidden="true"><use href="#corner-cluster"/></svg>
+  <svg class="frame-corner-cluster bl" viewBox="0 0 140 140" aria-hidden="true"><use href="#corner-cluster"/></svg>
+  <svg class="frame-corner-cluster br" viewBox="0 0 140 140" aria-hidden="true"><use href="#corner-cluster"/></svg>
 
 <section class="manuscript-top">
   <div class="frame-row">
@@ -551,6 +628,8 @@
   Små skritt. Dine mål, ditt tempo.<br>
   <strong>God adventstid, og god jul!</strong>
 </footer>
+
+</div>
 
 <script>
   var DOORS = [
