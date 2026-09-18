@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Julekalender | Silje Merete SMART Helseveiledning</title>
-<meta name="description" content="Julekalender med 24 luker: enkel styrketrening hjemme og egenomsorg. Hver luke åpnes kun på sin egen dato i desember.">
+<meta name="description" content="Julekalender med 24 luker: én styrkeøvelse og én tilstedeværelses-/meditasjonsøvelse hver dag. Hver luke åpnes kun fra og med sin egen dato i desember.">
 <style>
   :root {
     --bg: #0f2f24;
@@ -114,6 +114,7 @@
   .door .icon {
     font-size: 1.1rem;
     margin-top: 0.15rem;
+    letter-spacing: 0.1rem;
   }
 
   .door:not(:disabled):hover {
@@ -205,7 +206,7 @@
     font-weight: 700;
     border-radius: 999px;
     padding: 0.25rem 0.9rem;
-    margin-bottom: 0.9rem;
+    margin-bottom: 1.1rem;
     font-size: 0.95rem;
   }
 
@@ -224,7 +225,7 @@
   }
 
   .modal .modal-tag.styrke { color: var(--accent-dark); }
-  .modal .modal-tag.egenomsorg { color: var(--gold); }
+  .modal .modal-tag.tilstedevaerelse { color: var(--gold); }
 
   .modal h2 {
     margin: 0 0 0.75rem;
@@ -238,6 +239,16 @@
   }
 
   .modal.locked-modal .modal-icon { font-size: 2rem; }
+
+  .modal-section {
+    text-align: center;
+  }
+
+  .modal-section + .modal-section {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed var(--border);
+  }
 
   .card {
     background: var(--card);
@@ -315,7 +326,7 @@
   <div class="wrap">
     <div class="snow">❄ ✧ ❄ ✧ ❄</div>
     <h1>Julekalender 🎄</h1>
-    <p>24 luker med enkel styrketrening hjemme og litt egenomsorg hver dag frem mot jul. Én ny luke om dagen, hele desember.</p>
+    <p>24 luker frem mot jul. Bak hver luke venter én enkel styrkeøvelse hjemme og én tilstedeværelses- eller meditasjonsøvelse, hver eneste dag.</p>
   </div>
 </section>
 
@@ -327,11 +338,11 @@
 
   <section class="card">
     <h2>Slik virker kalenderen</h2>
-    <p>Hver luke låses opp på sin egen dato i desember, og blir værende åpen resten av måneden. Du kan altså gå tilbake og åpne tidligere luker igjen når du vil, men de dagene som ikke har vært ennå, er fortsatt låst.</p>
+    <p>Hver luke inneholder én styrkeøvelse og én tilstedeværelses- eller meditasjonsøvelse. Luken låses opp på sin egen dato i desember, og blir værende åpen resten av måneden. Du kan altså gå tilbake og åpne tidligere luker igjen når du vil, men de dagene som ikke har vært ennå, er fortsatt låst.</p>
     <p>Luke 24 er litt større enn de andre. Det er tross alt julaften!</p>
     <div class="legend">
       <span><span class="dot strength"></span> Styrketrening</span>
-      <span><span class="dot care"></span> Egenomsorg</span>
+      <span><span class="dot care"></span> Tilstedeværelse / meditasjon</span>
       <span><span class="dot locked"></span> Låst luke</span>
     </div>
   </section>
@@ -351,30 +362,78 @@
 
 <script>
   var DOORS = [
-    { n: 1, type: "egenomsorg", icon: "🕯️", title: "Tenn et lys", desc: "Tenn et lys og bli sittende stille i 2 minutter. Ikke gjør noe annet, bare vær." },
-    { n: 2, type: "styrke", icon: "🦵", title: "10 knebøy", desc: "Stå med føttene i hoftebredde. Bøy knærne som om du skal sette deg ned, og reis deg opp igjen. 10 repetisjoner, i eget tempo." },
-    { n: 3, type: "egenomsorg", icon: "👂", title: "Lytt innover", desc: "Kjenn etter hvordan kroppen og humøret ditt egentlig er akkurat nå, uten å prøve å endre noe. Bare legg merke til det." },
-    { n: 4, type: "styrke", icon: "🧍", title: "Planke, 20 sekunder", desc: "Hold en planke-posisjon i 20 sekunder. Gjerne på knærne hvis det kjennes bedre for deg i dag." },
-    { n: 5, type: "egenomsorg", icon: "⏳", title: "7 minutter for deg selv", desc: "Sett en tidtaker på 7 minutter. Lukk øynene, pust rolig, og la tankene komme og gå uten å henge deg opp i dem." },
-    { n: 6, type: "styrke", icon: "🚶", title: "10 utfall per bein", desc: "Ta et langt steg frem og bøy begge knær til en utfallsposisjon. 10 repetisjoner på hvert bein." },
-    { n: 7, type: "egenomsorg", icon: "📝", title: "Tre ting å være takknemlig for", desc: "Skriv ned, eller bare tenk gjennom, tre ting du er takknemlig for akkurat i dag. Store eller små." },
-    { n: 8, type: "styrke", icon: "🪑", title: "Reis deg fra stolen, 10 ganger", desc: "Sitt på en stol og reis deg opp uten å bruke hendene. Sett deg rolig ned igjen. Gjenta 10 ganger." },
-    { n: 9, type: "egenomsorg", icon: "☕", title: "En kopp i ro", desc: "Lag deg en kopp te eller kakao. Drikk den sakte, uten skjerm, og kjenn smaken og varmen." },
-    { n: 10, type: "styrke", icon: "🦶", title: "10 tåhev", desc: "Stå og løft deg opp på tærne, senk deg rolig ned igjen. 10 repetisjoner. Hold gjerne i noe for balanse." },
-    { n: 11, type: "egenomsorg", icon: "🌬️", title: "En tur i kald luft", desc: "Gå en kort tur ute, om du kan. Kjenn den kalde vinterlufta mot ansiktet og pust den rolig inn." },
-    { n: 12, type: "styrke", icon: "🧱", title: "Vegghold, 20–30 sekunder", desc: "Len ryggen mot en vegg og gli ned til en sittende stilling med bøyde knær, som om du satt på en usynlig stol. Hold i 20–30 sekunder." },
-    { n: 13, type: "egenomsorg", icon: "💌", title: "En hyggelig melding", desc: "Send en melding til noen du er glad i, bare for å si at du tenker på dem." },
-    { n: 14, type: "styrke", icon: "💪", title: "10 armhevninger", desc: "Gjør 10 armhevninger, gjerne på knærne om det kjennes bedre. Kvalitet fremfor fart." },
-    { n: 15, type: "egenomsorg", icon: "🤫", title: "5 minutter stillhet", desc: "Skru av skjermen og la det være stille rundt deg i 5 minutter. Legg merke til lydene som er igjen når du lytter etter dem." },
-    { n: 16, type: "styrke", icon: "🌉", title: "Hoftehev, 12 repetisjoner", desc: "Ligg på ryggen med bøyde knær. Løft hoftene opp mot taket og senk dem rolig ned igjen. 12 repetisjoner." },
-    { n: 17, type: "egenomsorg", icon: "🌍", title: "Kjenn bakken under deg", desc: "Stå stille i ett minutt og kjenn hvordan føttene dine hviler mot gulvet. Legg merke til kontakten, punkt for punkt." },
-    { n: 18, type: "styrke", icon: "↔️", title: "Sideplanke, 15 sek per side", desc: "Hold en sideplanke i 15 sekunder på hver side. Støtt deg gjerne på underarmen og et bøyd underben." },
-    { n: 19, type: "egenomsorg", icon: "💛", title: "Et ærlig kompliment", desc: "Gi deg selv et ærlig kompliment, høyt eller bare i tankene. Du har fortjent det." },
-    { n: 20, type: "styrke", icon: "🦸", title: "\"Superman\", 10 repetisjoner", desc: "Ligg på magen og løft armer og bein samtidig, som om du flyr. Senk rolig ned igjen. 10 repetisjoner." },
-    { n: 21, type: "egenomsorg", icon: "✉️", title: "Brev til deg selv", desc: "Skriv noen linjer til deg selv om hva du vil huske fra året som har gått, eller hva du gleder deg til." },
-    { n: 22, type: "styrke", icon: "🙆", title: "Skulder og nakke", desc: "Rull skuldrene rolig bakover 10 ganger, og strekk nakken forsiktig til hver side. La pusten følge bevegelsen." },
-    { n: 23, type: "egenomsorg", icon: "🫶", title: "Hendene på hjertet", desc: "Legg begge hender på hjertet. Ta tre dype pust og kjenn takknemlighet for alt kroppen din har gjort for deg i år." },
-    { n: 24, type: "egenomsorg", icon: "🎄", title: "God jul!", desc: "Tenn alle lysene. Ta deg 10 minutter helt for deg selv, pust dypt, og kjenn stoltheten over hver eneste luke du har åpnet denne måneden. Riktig god jul!" }
+    { n: 1,
+      strength: { icon: "🦵", title: "10 knebøy", desc: "Stå med føttene i hoftebredde. Bøy knærne som om du skal sette deg ned, og reis deg opp igjen. 10 repetisjoner, i eget tempo." },
+      presence: { icon: "🕯️", title: "Tenn et lys", desc: "Tenn et lys og bli sittende stille i 2 minutter. Ikke gjør noe annet, bare vær." } },
+    { n: 2,
+      strength: { icon: "🧍", title: "Planke, 20 sekunder", desc: "Hold en planke-posisjon i 20 sekunder. Gjerne på knærne hvis det kjennes bedre for deg i dag." },
+      presence: { icon: "👂", title: "Lytt innover", desc: "Kjenn etter hvordan kroppen og humøret ditt egentlig er akkurat nå, uten å prøve å endre noe. Bare legg merke til det." } },
+    { n: 3,
+      strength: { icon: "🚶", title: "10 utfall per bein", desc: "Ta et langt steg frem og bøy begge knær til en utfallsposisjon. 10 repetisjoner på hvert bein." },
+      presence: { icon: "🌬️", title: "Boksepust i ett minutt", desc: "Pust inn på 4 sekunder, hold i 4, pust ut på 4, hold i 4. Gjenta rolig i ett minutt." } },
+    { n: 4,
+      strength: { icon: "🪑", title: "Reis deg fra stolen, 10 ganger", desc: "Sitt på en stol og reis deg opp uten å bruke hendene. Sett deg rolig ned igjen. Gjenta 10 ganger." },
+      presence: { icon: "🧘", title: "Kroppsskanning", desc: "Legg merke til kroppen din, del for del, fra tær til isse. Bare kjenn etter, uten å endre noe. 3–5 minutter." } },
+    { n: 5,
+      strength: { icon: "🦶", title: "12 tåhev", desc: "Stå og løft deg opp på tærne, senk deg rolig ned igjen. 12 repetisjoner. Hold gjerne i noe for balanse." },
+      presence: { icon: "⏳", title: "7 minutter for deg selv", desc: "Sett en tidtaker på 7 minutter. Lukk øynene, pust rolig, og la tankene komme og gå uten å henge deg opp i dem." } },
+    { n: 6,
+      strength: { icon: "🌉", title: "Hoftehev, 12 repetisjoner", desc: "Ligg på ryggen med bøyde knær. Løft hoftene opp mot taket og senk dem rolig ned igjen. 12 repetisjoner." },
+      presence: { icon: "🤫", title: "5 minutter stillhet", desc: "Skru av skjermen og la det være stille rundt deg i 5 minutter. Legg merke til lydene som er igjen når du lytter etter dem." } },
+    { n: 7,
+      strength: { icon: "↔️", title: "Sideplanke, 15 sek per side", desc: "Hold en sideplanke i 15 sekunder på hver side. Støtt deg gjerne på underarmen og et bøyd underben." },
+      presence: { icon: "🌍", title: "Kjenn bakken under deg", desc: "Stå stille i ett minutt og kjenn hvordan føttene dine hviler mot gulvet. Legg merke til kontakten, punkt for punkt." } },
+    { n: 8,
+      strength: { icon: "🧱", title: "Vegghold, 20–30 sekunder", desc: "Len ryggen mot en vegg og gli ned til en sittende stilling med bøyde knær, som om du satt på en usynlig stol. Hold i 20–30 sekunder." },
+      presence: { icon: "🫶", title: "Hendene på hjertet", desc: "Legg begge hender på hjertet. Ta tre dype pust og kjenn takknemlighet for alt kroppen din har gjort for deg." } },
+    { n: 9,
+      strength: { icon: "💪", title: "10 armhevninger", desc: "Gjør 10 armhevninger, gjerne på knærne om det kjennes bedre. Kvalitet fremfor fart." },
+      presence: { icon: "☕", title: "En kopp i ro", desc: "Lag deg en kopp te eller kakao. Drikk den sakte, uten skjerm, og kjenn smaken og varmen." } },
+    { n: 10,
+      strength: { icon: "🦸", title: "\"Superman\", 10 repetisjoner", desc: "Ligg på magen og løft armer og bein samtidig, som om du flyr. Senk rolig ned igjen. 10 repetisjoner." },
+      presence: { icon: "👀", title: "To minutter uten telefon", desc: "Se ut av vinduet eller rundt deg i rommet i 2 minutter. Bare observer, uten å ta opp telefonen." } },
+    { n: 11,
+      strength: { icon: "🐦", title: "\"Fugl-hund\", 8 per side", desc: "Stå på alle fire. Strekk motsatt arm og bein rett ut samtidig, hold litt, og senk rolig ned. 8 repetisjoner per side." },
+      presence: { icon: "🌬️", title: "Følg pusten din", desc: "Legg en hånd på magen. Legg merke til pusten din i 2 minutter, uten å prøve å endre den." } },
+    { n: 12,
+      strength: { icon: "🍑", title: "Sumo-knebøy, 10 repetisjoner", desc: "Stå med bena bredere enn hoftebredde og tærne litt utover. Bøy knærne rett over tærne og reis deg opp igjen. 10 repetisjoner." },
+      presence: { icon: "🎧", title: "Fem lyder", desc: "Lukk øynene og legg merke til fem lyder du kan høre rundt deg, én etter én." } },
+    { n: 13,
+      strength: { icon: "🪑", title: "Tricepsdips i stolkant, 10 stk", desc: "Sett hendene i kanten av en stol med bena foran deg. Bøy og strekk albuene rolig. 10 repetisjoner." },
+      presence: { icon: "🌡️", title: "Kjenn temperaturen", desc: "Legg merke til hvordan lufta kjennes mot huden din akkurat nå. Varmt, kaldt, stille, i bevegelse. Ett minutt." } },
+    { n: 14,
+      strength: { icon: "🪜", title: "Step-up, 10 per bein", desc: "Bruk et nederste trappetrinn eller en solid krakk. Trå opp og ned, kontrollert. 10 repetisjoner per bein." },
+      presence: { icon: "🍵", title: "Bevisst slurk", desc: "Hold en varm kopp i hendene. Kjenn varmen mot håndflatene i ett minutt før du tar den første slurken." } },
+    { n: 15,
+      strength: { icon: "🌀", title: "Sittende vridning, 10 per side", desc: "Sitt med rak rygg og vri overkroppen rolig fra side til side. 10 repetisjoner per side." },
+      presence: { icon: "💛", title: "Legg merke til følelsen", desc: "Sett ord på én følelse du kjenner akkurat nå, uten å dømme den som riktig eller feil. Bare legg merke til den." } },
+    { n: 16,
+      strength: { icon: "👐", title: "Planke med skuldertrykk, 10 per side", desc: "I planke-posisjon, løft én hånd og trykk kort på motsatt skulder. Bytt side. 10 repetisjoner per side." },
+      presence: { icon: "🚶‍♀️", title: "Gå sakte, tre skritt", desc: "Ta tre svært sakte skritt og kjenn hele foten mot gulvet i hvert steg, fra hæl til tå." } },
+    { n: 17,
+      strength: { icon: "🔙", title: "Baklengs utfall, 10 per bein", desc: "Ta et steg bakover og bøy begge knær til en utfallsposisjon. 10 repetisjoner per bein." },
+      presence: { icon: "🪑", title: "Kjenn vekten din", desc: "Sitt stille og legg merke til hvor kroppen din hviler mot stolen eller gulvet. Ett minutt." } },
+    { n: 18,
+      strength: { icon: "🦿", title: "Beinløft liggende, 10 per side", desc: "Ligg på siden med bena rett. Løft det øverste beinet rolig opp og ned. 10 repetisjoner per side." },
+      presence: { icon: "😊", title: "Et rolig smil", desc: "Smil rolig til deg selv i 30 sekunder, og legg merke til hvordan det kjennes i resten av kroppen." } },
+    { n: 19,
+      strength: { icon: "🧎", title: "Armhevninger mot vegg, 10 stk", desc: "Stå med hendene mot en vegg litt bredere enn skulderbredde. Bøy og strekk albuene. 10 repetisjoner." },
+      presence: { icon: "🏡", title: "Et trygt sted", desc: "Lukk øynene og se for deg et sted du kjenner deg helt trygg og rolig. Bli der i 2 minutter." } },
+    { n: 20,
+      strength: { icon: "🦵", title: "Ettbeint tåhev, 8 per bein", desc: "Stå på ett bein og løft deg opp på tå, senk rolig ned. 8 repetisjoner per bein. Hold i noe for balanse." },
+      presence: { icon: "🙌", title: "Strekk og pust", desc: "Strekk armene opp mot taket. Pust dypt inn og ut, tre ganger, og kjenn strekket gjennom hele kroppen." } },
+    { n: 21,
+      strength: { icon: "🪑", title: "Sittende beinstrekk, 10 per bein", desc: "Sitt på en stol og strekk det ene kneet rett ut, senk rolig ned igjen. 10 repetisjoner per bein." },
+      presence: { icon: "🍽️", title: "Én bevisst matbit", desc: "Spis én bit mat helt sakte. Legg merke til smak, konsistens og duft, uten noe annet rundt deg." } },
+    { n: 22,
+      strength: { icon: "🍼", title: "Skulderpress med flasker, 10 stk", desc: "Hold en vannflaske i hver hånd. Press dem opp over hodet og senk rolig ned igjen. 10 repetisjoner." },
+      presence: { icon: "🙆", title: "Skulder og nakke i ro", desc: "Rull skuldrene rolig bakover 10 ganger, og strekk nakken forsiktig til hver side. La pusten følge bevegelsen." } },
+    { n: 23,
+      strength: { icon: "🐌", title: "Sakte knebøy, 8 repetisjoner", desc: "Gjør 8 knebøy i sakte tempo, tell til 4 ned og 4 opp. Legg merke til musklene som jobber." },
+      presence: { icon: "✉️", title: "Et lite ord til deg selv", desc: "Tenk gjennom, eller skriv ned, én ting du vil huske fra året som har gått. La deg selv kjenne stolthet." } },
+    { n: 24,
+      strength: { icon: "💃", title: "Fri bevegelse, 3 minutter", desc: "Sett på favorittjulesangen din og beveg deg fritt i 3 minutter. Ingen regler, bare kroppen og musikken." },
+      presence: { icon: "🎄", title: "Juleaften-ro", desc: "Tenn alle lysene. Ta deg 10 minutter helt for deg selv, pust dypt, og kjenn stoltheten over hver eneste luke du har åpnet denne måneden. Riktig god jul!" } }
   ];
 
   function todayInfo() {
@@ -416,7 +475,8 @@
       else btn.className += " locked";
 
       var numberHtml = "<span>" + door.n + "</span>";
-      var iconHtml = "<span class=\"icon\">" + (unlocked ? door.icon : "🔒") + "</span>";
+      var doorIcon = unlocked ? (door.strength.icon + " " + door.presence.icon) : "🔒";
+      var iconHtml = "<span class=\"icon\">" + doorIcon + "</span>";
       var labelHtml = door.n === 24 ? "<span class=\"label\">Julaften</span>" : "";
       btn.innerHTML = numberHtml + iconHtml + labelHtml;
 
@@ -433,17 +493,23 @@
     });
   }
 
+  function renderSection(type, tagLabel, item) {
+    return "<div class=\"modal-section\">" +
+      "<span class=\"modal-icon\">" + item.icon + "</span>" +
+      "<div class=\"modal-tag " + type + "\">" + tagLabel + "</div>" +
+      "<h2>" + item.title + "</h2>" +
+      "<p class=\"desc\">" + item.desc + "</p>" +
+      "</div>";
+  }
+
   function openModal(door) {
     var modal = document.getElementById("modal");
     modal.className = "modal";
-    var tagLabel = door.type === "styrke" ? "Styrketrening" : "Egenomsorg";
     modal.innerHTML =
       "<button class=\"modal-close\" id=\"modal-close\" aria-label=\"Lukk\">✕</button>" +
       "<span class=\"modal-number\">Luke " + door.n + "</span>" +
-      "<span class=\"modal-icon\">" + door.icon + "</span>" +
-      "<div class=\"modal-tag " + door.type + "\">" + tagLabel + "</div>" +
-      "<h2>" + door.title + "</h2>" +
-      "<p class=\"desc\">" + door.desc + "</p>";
+      renderSection("styrke", "Styrketrening", door.strength) +
+      renderSection("tilstedevaerelse", "Tilstedeværelse", door.presence);
     showOverlay();
   }
 
