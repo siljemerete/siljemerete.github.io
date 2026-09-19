@@ -283,6 +283,28 @@
     font-style: italic;
   }
 
+  .door.bonus {
+    grid-column: 1 / -1;
+    aspect-ratio: auto;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.9rem;
+    min-height: 76px;
+    padding: 1rem 1.5rem;
+    border-style: dashed;
+  }
+
+  .door.bonus .label {
+    font-size: 1.05rem;
+    font-weight: 600;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    letter-spacing: 0.02em;
+  }
+
+  .door.bonus.locked {
+    border-style: dashed;
+  }
+
   .modal-overlay {
     display: none;
     position: fixed;
@@ -362,6 +384,15 @@
   .modal p.desc {
     margin: 0;
     color: var(--muted);
+  }
+
+  .modal p.desc + p.desc {
+    margin-top: 0.85rem;
+  }
+
+  .modal .affirmation-quote {
+    margin: 1rem 0;
+    text-align: left;
   }
 
   .modal.locked-modal .modal-icon { font-size: 2rem; }
@@ -584,25 +615,12 @@
   <section class="card">
     <h2>Slik virker kalenderen</h2>
     <p>Hver luke inneholder én styrkeøvelse og én tilstedeværelses- eller meditasjonsøvelse. Luken låses opp på sin egen dato i desember, og blir værende åpen resten av måneden. Du kan altså gå tilbake og åpne tidligere luker igjen når du vil, men de dagene som ikke har vært ennå, er fortsatt låst.</p>
-    <p>Luke 24 er litt større enn de andre. Det er tross alt julaften!</p>
+    <p>Luke 24 er litt større enn de andre. Det er tross alt julaften! Nederst finner du også en avlang bonusluke som åpner 25. desember, med en liten oppgave om å lage din egen affirmasjon for 2027.</p>
     <div class="legend">
       <span><span class="dot strength"></span> Styrketrening</span>
       <span><span class="dot care"></span> Tilstedeværelse / meditasjon</span>
       <span><span class="dot locked"></span> Låst luke</span>
     </div>
-  </section>
-
-  <div class="divider" aria-hidden="true"><span>❦</span></div>
-
-  <section class="card bonus-card">
-    <h2>La 2027 bli ditt år</h2>
-    <p>En affirmasjon er en kort, bekreftende setning du gir deg selv, ord du velger å tro på igjen og igjen, til de blir sanne for deg. Det er mental trening: du bestemmer selv hvilke tanker som skal få plass, og dermed også hvordan du skal ha det. Ord er mektige. De setter spor.</p>
-    <p>Romjula, de rolige dagene mellom jul og nyttår, er en fin anledning til å lage din egen affirmasjon for året som kommer. Ikke et nyttårsforsett du skal presse deg selv til å huske, men en påminnelse om hvem du allerede er, eller hvem du er på vei til å bli:</p>
-    <blockquote class="affirmation-quote">
-      «Jeg er ________________ i 2027.»
-      <span class="affirmation-example">Et eksempel: «Jeg er nysgjerrig og trygg på det nye året.»</span>
-    </blockquote>
-    <p>Skriv den ned et sted du ser den ofte, si den høyt, eller gjenta den for deg selv. Gjør det som føles riktig for deg, og la 2027 bli ditt år.</p>
   </section>
 
   <a class="home-link" href="index.html">Se hjemmesiden min →</a>
@@ -715,37 +733,41 @@
     if (t.isDecember && t.date >= 1 && t.date <= 24) {
       banner.innerHTML = "I dag er det <strong>" + t.date + ". desember</strong>. Luke " + t.date + " er åpen for deg i dag, og alle lukene før den kan også åpnes igjen.";
     } else if (t.isDecember && t.date > 24) {
-      banner.innerHTML = "God jul! Alle lukene er åpne. <strong>Riktig godt nytt år!</strong>";
+      banner.innerHTML = "God jul! Alle lukene, inkludert bonusluken med din affirmasjon for 2027, er åpne. <strong>Riktig godt nytt år!</strong>";
     } else {
       banner.innerHTML = "Kalenderen våkner <strong>1. desember</strong>. Kom tilbake da for å åpne den første luken!";
     }
   }
+
+  var BONUS_DOOR = { n: 25 };
 
   function renderGrid() {
     var t = todayInfo();
     var grid = document.getElementById("calendar-grid");
     grid.innerHTML = "";
 
-    DOORS.forEach(function (door) {
+    DOORS.concat([BONUS_DOOR]).forEach(function (door) {
+      var isBonus = door.n === 25;
       var unlocked = isUnlocked(door, t);
       var isToday = t.isDecember && t.date === door.n;
 
       var btn = document.createElement("button");
-      btn.className = "door" + (door.n === 24 ? " big" : "");
+      btn.className = "door" + (door.n === 24 ? " big" : "") + (isBonus ? " bonus" : "");
       if (isToday) btn.className += " today";
       else if (unlocked) btn.className += " opened";
       else btn.className += " locked";
 
       var numberHtml = "<span>" + door.n + "</span>";
-      var doorIcon = unlocked ? (door.strength.icon + " " + door.presence.icon) : "🔒";
-      var iconHtml = "<span class=\"icon\">" + doorIcon + "</span>";
-      var labelHtml = door.n === 24 ? "<span class=\"label\">Julaften</span>" : "";
+      var iconHtml = unlocked ? "" : "<span class=\"icon\">🔒</span>";
+      var labelHtml = "";
+      if (door.n === 24) labelHtml = "<span class=\"label\">Julaften</span>";
+      if (isBonus) labelHtml = "<span class=\"label\">Din affirmasjon for 2027</span>";
       btn.innerHTML = numberHtml + iconHtml + labelHtml;
 
-      btn.setAttribute("aria-label", "Luke " + door.n);
+      btn.setAttribute("aria-label", isBonus ? "Bonusluke 25: Din affirmasjon for 2027" : "Luke " + door.n);
       btn.addEventListener("click", function () {
         if (unlocked) {
-          openModal(door);
+          if (isBonus) openBonusModal(); else openModal(door);
         } else {
           openLockedModal(door, t);
         }
@@ -772,6 +794,24 @@
       "<span class=\"modal-number\">Luke " + door.n + "</span>" +
       renderSection("styrke", "Styrketrening", door.strength) +
       renderSection("tilstedevaerelse", "Tilstedeværelse", door.presence);
+    showOverlay();
+  }
+
+  function openBonusModal() {
+    var modal = document.getElementById("modal");
+    modal.className = "modal";
+    modal.innerHTML =
+      "<button class=\"modal-close\" id=\"modal-close\" aria-label=\"Lukk\">✕</button>" +
+      "<span class=\"modal-number\">Luke 25</span>" +
+      "<div class=\"modal-section\">" +
+        "<span class=\"modal-icon\">🦋</span>" +
+        "<div class=\"modal-tag tilstedevaerelse\">Bonus</div>" +
+        "<h2>La 2027 bli ditt år</h2>" +
+        "<p class=\"desc\">En affirmasjon er en kort, bekreftende setning du gir deg selv, ord du velger å tro på igjen og igjen, til de blir sanne for deg. Det er mental trening: du bestemmer selv hvilke tanker som skal få plass, og dermed også hvordan du skal ha det. Ord er mektige. De setter spor.</p>" +
+        "<p class=\"desc\">Romjula, de rolige dagene mellom jul og nyttår, er en fin anledning til å lage din egen affirmasjon for året som kommer. Ikke et nyttårsforsett du skal presse deg selv til å huske, men en påminnelse om hvem du allerede er, eller hvem du er på vei til å bli:</p>" +
+        "<blockquote class=\"affirmation-quote\">«Jeg er ________________ i 2027.»<span class=\"affirmation-example\">Et eksempel: «Jeg er nysgjerrig og trygg på det nye året.»</span></blockquote>" +
+        "<p class=\"desc\">Skriv den ned et sted du ser den ofte, si den høyt, eller gjenta den for deg selv. Gjør det som føles riktig for deg, og la 2027 bli ditt år.</p>" +
+      "</div>";
     showOverlay();
   }
 
