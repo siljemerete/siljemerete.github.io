@@ -495,6 +495,15 @@
     font-size: 1.1rem;
   }
 </style>
+<!--
+  Statistikk: anonym, personvernvennlig sporing via GoatCounter (ingen
+  cookies, ingen personopplysninger, ingen samtykkebanner nødvendig).
+  Bytt ut "silje-julekalender" under med din egen site-kode fra
+  https://www.goatcounter.com/ (gratis) før 1. desember, så vises
+  besøk og luke-åpninger live på https://DIN-KODE.goatcounter.com
+-->
+<script data-goatcounter="https://silje-julekalender.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 
@@ -553,6 +562,17 @@
 </div>
 
 <script>
+  // Send en anonym telling til GoatCounter for en luke-åpning, uten å
+  // knekke kalenderen hvis skriptet ikke er lastet ennå (f.eks. tregt
+  // nett) eller sporing er blokkert av nettleseren.
+  function trackEvent(path, title) {
+    try {
+      if (window.goatcounter && window.goatcounter.count) {
+        window.goatcounter.count({ path: path, title: title, event: true });
+      }
+    } catch (e) { /* ignore */ }
+  }
+
   var DOORS = [
     { n: 1,
       strength: { icon: "🦵", title: "10 knebøy", desc: "Stå med føttene i hoftebredde. Bøy knærne som om du skal sette deg ned, og reis deg opp igjen. 10 repetisjoner, i eget tempo." },
@@ -699,6 +719,7 @@
   }
 
   function openModal(door) {
+    trackEvent("/luke-" + door.n, "Luke " + door.n + " åpnet");
     var modal = document.getElementById("modal");
     modal.className = "modal";
     modal.innerHTML =
@@ -710,6 +731,7 @@
   }
 
   function openBonusModal() {
+    trackEvent("/luke-25-bonus", "Luke 25 (bonus) åpnet");
     var modal = document.getElementById("modal");
     modal.className = "modal";
     modal.innerHTML =
