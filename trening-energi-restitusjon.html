@@ -556,11 +556,12 @@
 
   <header class="page-header">
     <h1>Trening, energi og restitusjon</h1>
-    <p class="tagline">Et enkelt skjema du fyller ut rundt styrkeøktene dine, for å bli kjent med din egen tålegrense</p>
+    <p class="tagline">Et enkelt skjema du fyller ut rundt treningsøktene dine, for å finne den dosen som gir deg overskudd</p>
     <div class="reminder">
       Dette er ikke en test av deg, og det finnes ingen riktige svar. Skjemaet
-      er et verktøy for å oppdage hvor mye kroppen din tåler akkurat nå, slik at
-      du kan komme i gang uten å gå for hardt ut og bli dårlig etterpå. Fyll ut
+      er et verktøy for å bli kjent med hvordan kroppen din reagerer på trening,
+      og hvor mye den tåler akkurat nå. Det passer for all slags trening, enten
+      det er styrke, gåturer, sykling, svømming eller en gruppetime. Fyll ut
       litt før økten, litt etter, og litt neste morgen. Alt lagres i denne
       nettleseren, så du kan lukke siden og fortsette senere.
       <strong>Det er helt greit om noe mangler.</strong>
@@ -569,10 +570,15 @@
 
   <section class="primer">
     <h2>Slik bruker du skjemaet</h2>
-    <p>Mange som prøver å komme i gang med trening kjenner igjen mønsteret: en god
-    dag gir lyst til å gjøre mye, og så kommer smellen dagen etter. Ved å notere
-    energi og smerter før og etter økten, og hvordan kroppen kjennes neste morgen,
-    blir det lettere å se hvilken dose som gir overskudd, og hvilken som tar det.</p>
+    <p>Mange kjenner igjen mønsteret: en god dag gir lyst til å gjøre mye, og så
+    kommer smellen dagen etter. Det gjelder særlig når du skal komme i gang igjen
+    etter en pause, sykdom eller skade, eller lever med smerter eller utmattelse.
+    Men også når alt går fint, er det nyttig å vite hvor mye trening som gir deg
+    energi, og når det begynner å ta mer enn det gir.</p>
+    <p>Ved å notere energi og smerter før og etter økten, og hvordan kroppen
+    kjennes neste morgen, blir det lettere å se hvilken dose som gir overskudd,
+    og hvilken som tar det. Du kan fylle ut så mange økter du vil, gjerne over
+    et par uker.</p>
     <div class="signs-grid">
       <div class="signs-item fills">
         <strong>Tegn på passe dose</strong>
@@ -595,7 +601,7 @@
 
   <div id="sessions">
     <details class="topic" data-session="1" open>
-      <summary>Uke 1, økt 1 <span class="chevron">▸</span></summary>
+      <summary>Økt 1 <span class="chevron">▸</span></summary>
       <div class="topic-body">
         <div class="phase">
           <h3>Før økten</h3>
@@ -613,10 +619,10 @@
             </div>
           </div>
           <div class="field field-wide">
-            <label for="pain-before-1">Smerter før økten: <span class="range-value" id="pain-before-1-value">Ikke satt</span> / 10</label>
+            <label for="pain-before-1">Smerter eller ubehag før økten: <span class="range-value" id="pain-before-1-value">Ikke satt</span> / 10</label>
             <input type="range" min="0" max="10" step="1" value="5" id="pain-before-1" data-key="pain-before-1" data-touched="false">
             <div class="range-anchors">
-              <span>0, Ingen smerter</span>
+              <span>0, Ingen</span>
               <span>10, Verst tenkelige smerter</span>
             </div>
           </div>
@@ -628,7 +634,7 @@
           <div class="field-grid">
           <div class="field field-wide">
             <label for="training-1">Hva trente du?</label>
-            <textarea id="training-1" data-key="training-1" placeholder="F.eks. knebøy til stol 2 x 10, roing med strikk 2 x 12, planke 3 x 20 sek"></textarea>
+            <textarea id="training-1" data-key="training-1" placeholder="F.eks. styrke: knebøy 2 x 10 og roing 2 x 12, eller: rolig gåtur, 3 km"></textarea>
           </div>
           <div class="field">
             <label for="duration-1">Hvor lenge (minutter)</label>
@@ -661,10 +667,10 @@
             </div>
           </div>
           <div class="field field-wide">
-            <label for="pain-after-1">Smerter noen timer etter: <span class="range-value" id="pain-after-1-value">Ikke satt</span> / 10</label>
+            <label for="pain-after-1">Smerter eller ubehag noen timer etter: <span class="range-value" id="pain-after-1-value">Ikke satt</span> / 10</label>
             <input type="range" min="0" max="10" step="1" value="5" id="pain-after-1" data-key="pain-after-1" data-touched="false">
             <div class="range-anchors">
-              <span>0, Ingen smerter</span>
+              <span>0, Ingen</span>
               <span>10, Verst tenkelige smerter</span>
             </div>
           </div>
@@ -702,14 +708,14 @@
           </div>
           <div class="field field-wide">
             <label for="again-note-1">Hva ville du i så fall endret? <span class="hint">(valgfritt)</span></label>
-            <input type="text" id="again-note-1" data-key="again-note-1" placeholder="F.eks. én runde mindre, lengre pauser, lettere strikk">
+            <input type="text" id="again-note-1" data-key="again-note-1" placeholder="F.eks. kortere tid, lavere tempo, færre repetisjoner, lengre pauser">
           </div>
           </div>
         </div>
       </div>
     </details>
     <details class="topic" data-session="2">
-      <summary>Uke 1, økt 2 <span class="chevron">▸</span></summary>
+      <summary>Økt 2 <span class="chevron">▸</span></summary>
       <div class="topic-body">
         <div class="phase">
           <h3>Før økten</h3>
@@ -727,10 +733,10 @@
             </div>
           </div>
           <div class="field field-wide">
-            <label for="pain-before-2">Smerter før økten: <span class="range-value" id="pain-before-2-value">Ikke satt</span> / 10</label>
+            <label for="pain-before-2">Smerter eller ubehag før økten: <span class="range-value" id="pain-before-2-value">Ikke satt</span> / 10</label>
             <input type="range" min="0" max="10" step="1" value="5" id="pain-before-2" data-key="pain-before-2" data-touched="false">
             <div class="range-anchors">
-              <span>0, Ingen smerter</span>
+              <span>0, Ingen</span>
               <span>10, Verst tenkelige smerter</span>
             </div>
           </div>
@@ -742,7 +748,7 @@
           <div class="field-grid">
           <div class="field field-wide">
             <label for="training-2">Hva trente du?</label>
-            <textarea id="training-2" data-key="training-2" placeholder="F.eks. knebøy til stol 2 x 10, roing med strikk 2 x 12, planke 3 x 20 sek"></textarea>
+            <textarea id="training-2" data-key="training-2" placeholder="F.eks. styrke: knebøy 2 x 10 og roing 2 x 12, eller: rolig gåtur, 3 km"></textarea>
           </div>
           <div class="field">
             <label for="duration-2">Hvor lenge (minutter)</label>
@@ -775,10 +781,10 @@
             </div>
           </div>
           <div class="field field-wide">
-            <label for="pain-after-2">Smerter noen timer etter: <span class="range-value" id="pain-after-2-value">Ikke satt</span> / 10</label>
+            <label for="pain-after-2">Smerter eller ubehag noen timer etter: <span class="range-value" id="pain-after-2-value">Ikke satt</span> / 10</label>
             <input type="range" min="0" max="10" step="1" value="5" id="pain-after-2" data-key="pain-after-2" data-touched="false">
             <div class="range-anchors">
-              <span>0, Ingen smerter</span>
+              <span>0, Ingen</span>
               <span>10, Verst tenkelige smerter</span>
             </div>
           </div>
@@ -816,14 +822,14 @@
           </div>
           <div class="field field-wide">
             <label for="again-note-2">Hva ville du i så fall endret? <span class="hint">(valgfritt)</span></label>
-            <input type="text" id="again-note-2" data-key="again-note-2" placeholder="F.eks. én runde mindre, lengre pauser, lettere strikk">
+            <input type="text" id="again-note-2" data-key="again-note-2" placeholder="F.eks. kortere tid, lavere tempo, færre repetisjoner, lengre pauser">
           </div>
           </div>
         </div>
       </div>
     </details>
     <details class="topic" data-session="3">
-      <summary>Uke 2, økt 1 <span class="chevron">▸</span></summary>
+      <summary>Økt 3 <span class="chevron">▸</span></summary>
       <div class="topic-body">
         <div class="phase">
           <h3>Før økten</h3>
@@ -841,10 +847,10 @@
             </div>
           </div>
           <div class="field field-wide">
-            <label for="pain-before-3">Smerter før økten: <span class="range-value" id="pain-before-3-value">Ikke satt</span> / 10</label>
+            <label for="pain-before-3">Smerter eller ubehag før økten: <span class="range-value" id="pain-before-3-value">Ikke satt</span> / 10</label>
             <input type="range" min="0" max="10" step="1" value="5" id="pain-before-3" data-key="pain-before-3" data-touched="false">
             <div class="range-anchors">
-              <span>0, Ingen smerter</span>
+              <span>0, Ingen</span>
               <span>10, Verst tenkelige smerter</span>
             </div>
           </div>
@@ -856,7 +862,7 @@
           <div class="field-grid">
           <div class="field field-wide">
             <label for="training-3">Hva trente du?</label>
-            <textarea id="training-3" data-key="training-3" placeholder="F.eks. knebøy til stol 2 x 10, roing med strikk 2 x 12, planke 3 x 20 sek"></textarea>
+            <textarea id="training-3" data-key="training-3" placeholder="F.eks. styrke: knebøy 2 x 10 og roing 2 x 12, eller: rolig gåtur, 3 km"></textarea>
           </div>
           <div class="field">
             <label for="duration-3">Hvor lenge (minutter)</label>
@@ -889,10 +895,10 @@
             </div>
           </div>
           <div class="field field-wide">
-            <label for="pain-after-3">Smerter noen timer etter: <span class="range-value" id="pain-after-3-value">Ikke satt</span> / 10</label>
+            <label for="pain-after-3">Smerter eller ubehag noen timer etter: <span class="range-value" id="pain-after-3-value">Ikke satt</span> / 10</label>
             <input type="range" min="0" max="10" step="1" value="5" id="pain-after-3" data-key="pain-after-3" data-touched="false">
             <div class="range-anchors">
-              <span>0, Ingen smerter</span>
+              <span>0, Ingen</span>
               <span>10, Verst tenkelige smerter</span>
             </div>
           </div>
@@ -930,14 +936,14 @@
           </div>
           <div class="field field-wide">
             <label for="again-note-3">Hva ville du i så fall endret? <span class="hint">(valgfritt)</span></label>
-            <input type="text" id="again-note-3" data-key="again-note-3" placeholder="F.eks. én runde mindre, lengre pauser, lettere strikk">
+            <input type="text" id="again-note-3" data-key="again-note-3" placeholder="F.eks. kortere tid, lavere tempo, færre repetisjoner, lengre pauser">
           </div>
           </div>
         </div>
       </div>
     </details>
     <details class="topic" data-session="4">
-      <summary>Uke 2, økt 2 <span class="chevron">▸</span></summary>
+      <summary>Økt 4 <span class="chevron">▸</span></summary>
       <div class="topic-body">
         <div class="phase">
           <h3>Før økten</h3>
@@ -955,10 +961,10 @@
             </div>
           </div>
           <div class="field field-wide">
-            <label for="pain-before-4">Smerter før økten: <span class="range-value" id="pain-before-4-value">Ikke satt</span> / 10</label>
+            <label for="pain-before-4">Smerter eller ubehag før økten: <span class="range-value" id="pain-before-4-value">Ikke satt</span> / 10</label>
             <input type="range" min="0" max="10" step="1" value="5" id="pain-before-4" data-key="pain-before-4" data-touched="false">
             <div class="range-anchors">
-              <span>0, Ingen smerter</span>
+              <span>0, Ingen</span>
               <span>10, Verst tenkelige smerter</span>
             </div>
           </div>
@@ -970,7 +976,7 @@
           <div class="field-grid">
           <div class="field field-wide">
             <label for="training-4">Hva trente du?</label>
-            <textarea id="training-4" data-key="training-4" placeholder="F.eks. knebøy til stol 2 x 10, roing med strikk 2 x 12, planke 3 x 20 sek"></textarea>
+            <textarea id="training-4" data-key="training-4" placeholder="F.eks. styrke: knebøy 2 x 10 og roing 2 x 12, eller: rolig gåtur, 3 km"></textarea>
           </div>
           <div class="field">
             <label for="duration-4">Hvor lenge (minutter)</label>
@@ -1003,10 +1009,10 @@
             </div>
           </div>
           <div class="field field-wide">
-            <label for="pain-after-4">Smerter noen timer etter: <span class="range-value" id="pain-after-4-value">Ikke satt</span> / 10</label>
+            <label for="pain-after-4">Smerter eller ubehag noen timer etter: <span class="range-value" id="pain-after-4-value">Ikke satt</span> / 10</label>
             <input type="range" min="0" max="10" step="1" value="5" id="pain-after-4" data-key="pain-after-4" data-touched="false">
             <div class="range-anchors">
-              <span>0, Ingen smerter</span>
+              <span>0, Ingen</span>
               <span>10, Verst tenkelige smerter</span>
             </div>
           </div>
@@ -1044,7 +1050,235 @@
           </div>
           <div class="field field-wide">
             <label for="again-note-4">Hva ville du i så fall endret? <span class="hint">(valgfritt)</span></label>
-            <input type="text" id="again-note-4" data-key="again-note-4" placeholder="F.eks. én runde mindre, lengre pauser, lettere strikk">
+            <input type="text" id="again-note-4" data-key="again-note-4" placeholder="F.eks. kortere tid, lavere tempo, færre repetisjoner, lengre pauser">
+          </div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-session="5">
+      <summary>Økt 5 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="phase">
+          <h3>Før økten</h3>
+          <div class="field-grid">
+          <div class="field">
+            <label for="date-5">Dato</label>
+            <input type="date" id="date-5" data-key="date-5">
+          </div>
+          <div class="field field-wide">
+            <label for="energy-before-5">Energi før økten: <span class="range-value" id="energy-before-5-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="energy-before-5" data-key="energy-before-5" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Helt tom</span>
+              <span>10, Full av energi</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="pain-before-5">Smerter eller ubehag før økten: <span class="range-value" id="pain-before-5-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="pain-before-5" data-key="pain-before-5" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Ingen</span>
+              <span>10, Verst tenkelige smerter</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Selve økten</h3>
+          <div class="field-grid">
+          <div class="field field-wide">
+            <label for="training-5">Hva trente du?</label>
+            <textarea id="training-5" data-key="training-5" placeholder="F.eks. styrke: knebøy 2 x 10 og roing 2 x 12, eller: rolig gåtur, 3 km"></textarea>
+          </div>
+          <div class="field">
+            <label for="duration-5">Hvor lenge (minutter)</label>
+            <input type="text" id="duration-5" data-key="duration-5" inputmode="numeric" placeholder="F.eks. 25">
+          </div>
+          <div class="field field-wide">
+            <label for="effort-5">Hvor hard føltes økten: <span class="range-value" id="effort-5-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="effort-5" data-key="effort-5" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Veldig lett</span>
+              <span>10, Maksimalt hardt</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Noen timer etterpå</h3>
+          <div class="field-grid">
+          <div class="field">
+            <label for="hours-after-5">Ca. hvor mange timer etter? <span class="hint">(valgfritt)</span></label>
+            <input type="text" id="hours-after-5" data-key="hours-after-5" inputmode="numeric" placeholder="F.eks. 3">
+          </div>
+          <div class="field field-wide">
+            <label for="energy-after-5">Energi noen timer etter: <span class="range-value" id="energy-after-5-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="energy-after-5" data-key="energy-after-5" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Helt tom</span>
+              <span>10, Full av energi</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="pain-after-5">Smerter eller ubehag noen timer etter: <span class="range-value" id="pain-after-5-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="pain-after-5" data-key="pain-after-5" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Ingen</span>
+              <span>10, Verst tenkelige smerter</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Neste morgen</h3>
+          <div class="field-grid">
+          <div class="field field-wide">
+            <label>Sammenlignet med før økten kjennes kroppen</label>
+            <div class="choice-row">
+              <label><input type="radio" name="morning-5" value="Bedre" data-radio="morning-5"> Bedre</label>
+              <label><input type="radio" name="morning-5" value="Omtrent som før" data-radio="morning-5"> Omtrent som før</label>
+              <label><input type="radio" name="morning-5" value="Dårligere" data-radio="morning-5"> Dårligere</label>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="morning-note-5">Hvordan kjennes kroppen neste morgen?</label>
+            <textarea id="morning-note-5" data-key="morning-note-5" placeholder="F.eks. litt støl i lårene, men uthvilt. Eller: tung i hele kroppen, trengte en rolig dag."></textarea>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Når du ser tilbake</h3>
+          <div class="field-grid">
+          <div class="field field-wide">
+            <label>Hvis du skulle gjort økten på nytt, ville du gjort mindre, det samme eller mer?</label>
+            <div class="choice-row">
+              <label><input type="radio" name="again-5" value="Mindre" data-radio="again-5"> Mindre</label>
+              <label><input type="radio" name="again-5" value="Det samme" data-radio="again-5"> Det samme</label>
+              <label><input type="radio" name="again-5" value="Mer" data-radio="again-5"> Mer</label>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="again-note-5">Hva ville du i så fall endret? <span class="hint">(valgfritt)</span></label>
+            <input type="text" id="again-note-5" data-key="again-note-5" placeholder="F.eks. kortere tid, lavere tempo, færre repetisjoner, lengre pauser">
+          </div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-session="6">
+      <summary>Økt 6 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="phase">
+          <h3>Før økten</h3>
+          <div class="field-grid">
+          <div class="field">
+            <label for="date-6">Dato</label>
+            <input type="date" id="date-6" data-key="date-6">
+          </div>
+          <div class="field field-wide">
+            <label for="energy-before-6">Energi før økten: <span class="range-value" id="energy-before-6-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="energy-before-6" data-key="energy-before-6" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Helt tom</span>
+              <span>10, Full av energi</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="pain-before-6">Smerter eller ubehag før økten: <span class="range-value" id="pain-before-6-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="pain-before-6" data-key="pain-before-6" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Ingen</span>
+              <span>10, Verst tenkelige smerter</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Selve økten</h3>
+          <div class="field-grid">
+          <div class="field field-wide">
+            <label for="training-6">Hva trente du?</label>
+            <textarea id="training-6" data-key="training-6" placeholder="F.eks. styrke: knebøy 2 x 10 og roing 2 x 12, eller: rolig gåtur, 3 km"></textarea>
+          </div>
+          <div class="field">
+            <label for="duration-6">Hvor lenge (minutter)</label>
+            <input type="text" id="duration-6" data-key="duration-6" inputmode="numeric" placeholder="F.eks. 25">
+          </div>
+          <div class="field field-wide">
+            <label for="effort-6">Hvor hard føltes økten: <span class="range-value" id="effort-6-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="effort-6" data-key="effort-6" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Veldig lett</span>
+              <span>10, Maksimalt hardt</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Noen timer etterpå</h3>
+          <div class="field-grid">
+          <div class="field">
+            <label for="hours-after-6">Ca. hvor mange timer etter? <span class="hint">(valgfritt)</span></label>
+            <input type="text" id="hours-after-6" data-key="hours-after-6" inputmode="numeric" placeholder="F.eks. 3">
+          </div>
+          <div class="field field-wide">
+            <label for="energy-after-6">Energi noen timer etter: <span class="range-value" id="energy-after-6-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="energy-after-6" data-key="energy-after-6" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Helt tom</span>
+              <span>10, Full av energi</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="pain-after-6">Smerter eller ubehag noen timer etter: <span class="range-value" id="pain-after-6-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="pain-after-6" data-key="pain-after-6" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Ingen</span>
+              <span>10, Verst tenkelige smerter</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Neste morgen</h3>
+          <div class="field-grid">
+          <div class="field field-wide">
+            <label>Sammenlignet med før økten kjennes kroppen</label>
+            <div class="choice-row">
+              <label><input type="radio" name="morning-6" value="Bedre" data-radio="morning-6"> Bedre</label>
+              <label><input type="radio" name="morning-6" value="Omtrent som før" data-radio="morning-6"> Omtrent som før</label>
+              <label><input type="radio" name="morning-6" value="Dårligere" data-radio="morning-6"> Dårligere</label>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="morning-note-6">Hvordan kjennes kroppen neste morgen?</label>
+            <textarea id="morning-note-6" data-key="morning-note-6" placeholder="F.eks. litt støl i lårene, men uthvilt. Eller: tung i hele kroppen, trengte en rolig dag."></textarea>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Når du ser tilbake</h3>
+          <div class="field-grid">
+          <div class="field field-wide">
+            <label>Hvis du skulle gjort økten på nytt, ville du gjort mindre, det samme eller mer?</label>
+            <div class="choice-row">
+              <label><input type="radio" name="again-6" value="Mindre" data-radio="again-6"> Mindre</label>
+              <label><input type="radio" name="again-6" value="Det samme" data-radio="again-6"> Det samme</label>
+              <label><input type="radio" name="again-6" value="Mer" data-radio="again-6"> Mer</label>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="again-note-6">Hva ville du i så fall endret? <span class="hint">(valgfritt)</span></label>
+            <input type="text" id="again-note-6" data-key="again-note-6" placeholder="F.eks. kortere tid, lavere tempo, færre repetisjoner, lengre pauser">
           </div>
           </div>
         </div>
@@ -1063,7 +1297,7 @@
             <th>Min</th>
             <th>Hard</th>
             <th>Energi før → etter</th>
-            <th>Smerter før → etter</th>
+            <th>Smerter/ubehag før → etter</th>
             <th>Neste morgen</th>
             <th>På nytt</th>
           </tr>
@@ -1072,8 +1306,8 @@
       </table>
     </div>
     <div class="field field-wide" style="margin-top: 1rem;">
-      <label for="reflection">Hva har du lagt merke til? Hvor tror du tålegrensen din ligger akkurat nå?</label>
-      <textarea id="reflection" data-key="reflection" placeholder="F.eks. Økter på rundt 20 minutter og anstrengelse 4 til 5 går fint. Når jeg går over 30 minutter, blir jeg dårlig dagen etter."></textarea>
+      <label for="reflection">Hva har du lagt merke til? Hvor tror du tålegrensen din ligger akkurat nå, og hva vil du prøve neste gang?</label>
+      <textarea id="reflection" data-key="reflection" placeholder="F.eks. Økter på rundt 20 til 30 minutter med anstrengelse 4 til 5 gir meg energi. Når jeg går hardere eller lenger, er jeg sliten hele neste dag."></textarea>
     </div>
   </section>
 
@@ -1100,10 +1334,12 @@
 
 <script>
   var SESSIONS = [
-    { n: 1, title: 'Uke 1, økt 1' },
-    { n: 2, title: 'Uke 1, økt 2' },
-    { n: 3, title: 'Uke 2, økt 1' },
-    { n: 4, title: 'Uke 2, økt 2' }
+    { n: 1, title: 'Økt 1' },
+    { n: 2, title: 'Økt 2' },
+    { n: 3, title: 'Økt 3' },
+    { n: 4, title: 'Økt 4' },
+    { n: 5, title: 'Økt 5' },
+    { n: 6, title: 'Økt 6' }
   ];
   var STORAGE_KEY = 'trening-energi-restitusjon-data';
   var RECIPIENT = 'silje.merete.binder@gmail.com';
@@ -1220,7 +1456,7 @@
       lines.push(s.title + (date ? ' (' + date + ')' : ''));
       lines.push('  Før økten');
       lines.push('    Energi (0-10): ' + (rangeVal('energy-before-' + n) || '-'));
-      lines.push('    Smerter (0-10): ' + (rangeVal('pain-before-' + n) || '-'));
+      lines.push('    Smerter/ubehag (0-10): ' + (rangeVal('pain-before-' + n) || '-'));
       lines.push('  Økten');
       lines.push('    Hva jeg trente: ' + (textVal('training-' + n) || '-'));
       lines.push('    Varighet (min): ' + (textVal('duration-' + n) || '-'));
@@ -1228,7 +1464,7 @@
       var hrs = textVal('hours-after-' + n);
       lines.push('  Noen timer etterpå' + (hrs ? ' (ca. ' + hrs + ' t)' : ''));
       lines.push('    Energi (0-10): ' + (rangeVal('energy-after-' + n) || '-'));
-      lines.push('    Smerter (0-10): ' + (rangeVal('pain-after-' + n) || '-'));
+      lines.push('    Smerter/ubehag (0-10): ' + (rangeVal('pain-after-' + n) || '-'));
       lines.push('  Neste morgen');
       lines.push('    Sammenlignet med før: ' + (radioVal('morning-' + n) || '-'));
       lines.push('    Hvordan kroppen kjennes: ' + (textVal('morning-note-' + n) || '-'));
