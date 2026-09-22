@@ -1,0 +1,1299 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trening, energi og restitusjon</title>
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --push: #c9823f;
+    --push-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  header.page-header {
+    margin-bottom: 1.75rem;
+  }
+
+  header.page-header h1 {
+    font-size: 1.7rem;
+    margin: 0 0 0.35rem;
+    color: var(--accent-dark);
+  }
+
+  header.page-header p.tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  .reminder {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  section.primer h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer p {
+    margin: 0.6rem 0 0;
+  }
+
+  .signs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.6rem;
+    margin-top: 0.9rem;
+  }
+
+  .signs-item {
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .signs-item.fills { background: var(--accent-soft); }
+  .signs-item.empties { background: var(--push-soft); }
+
+  .signs-item strong {
+    display: block;
+    color: var(--accent-dark);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.3rem;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .controls button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .controls button:hover {
+    background: var(--accent-soft);
+  }
+
+  .controls button.danger {
+    color: var(--push);
+  }
+
+  .controls button.danger:hover {
+    background: var(--push-soft);
+  }
+
+  .topic {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 0.9rem;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .topic > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1rem 1.25rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .topic > summary::-webkit-details-marker { display: none; }
+
+  .topic > summary .chevron {
+    transition: transform 0.15s ease;
+    color: var(--accent);
+    font-size: 1rem;
+  }
+
+  .topic[open] > summary .chevron {
+    transform: rotate(90deg);
+  }
+
+  .topic > summary:hover {
+    background: var(--accent-soft);
+  }
+
+  .topic-body {
+    padding: 0.25rem 1.25rem 1.25rem;
+  }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 0.9rem;
+    margin-top: 0.75rem;
+  }
+
+  .field-wide {
+    grid-column: 1 / -1;
+  }
+
+  .field label {
+    display: block;
+    font-weight: 600;
+    color: var(--accent-dark);
+    margin-bottom: 0.3rem;
+    font-size: 0.88rem;
+  }
+
+  .field input[type="text"],
+  .field input[type="date"],
+  .field textarea {
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .field textarea {
+    min-height: 64px;
+    resize: vertical;
+  }
+
+  .field input[type="range"] {
+    width: 100%;
+    accent-color: var(--accent);
+  }
+
+  .range-value {
+    color: var(--accent-dark);
+    font-size: 1.05rem;
+  }
+
+  .range-anchors {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+    gap: 0.5rem;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.6rem;
+    margin: 0.75rem 0 1rem;
+  }
+
+  .stat-item {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.7rem 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  .stat-item strong {
+    display: block;
+    color: var(--accent-dark);
+    font-size: 1.4rem;
+  }
+
+  .send-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .send-buttons button {
+    font-size: 0.92rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .send-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .muted-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  footer.closing {
+    margin-top: 1.75rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong {
+    color: var(--accent-dark);
+  }
+
+  body.gate-locked .wrap,
+  body.gate-locked footer.closing {
+    display: none;
+  }
+
+  .gate-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 100;
+  }
+
+  body.gate-locked .gate-overlay {
+    display: flex;
+  }
+
+  .gate-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 2rem 1.75rem;
+    max-width: 340px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .gate-box h1 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    color: var(--accent-dark);
+  }
+
+  .gate-box p {
+    margin: 0 0 1rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .gate-box input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    font-family: inherit;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  .gate-box input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .gate-box button {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .gate-box button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .gate-error {
+    display: none;
+    color: var(--push);
+    font-size: 0.85rem;
+    margin: 0.7rem 0 0;
+  }
+
+  .gate-contact {
+    margin-top: 0.9rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .gate-contact a {
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .gate-contact a:hover {
+    text-decoration: underline;
+  }
+
+
+  .phase {
+    border-top: 1px solid var(--border);
+    margin-top: 1.1rem;
+    padding-top: 0.9rem;
+  }
+
+  .phase:first-child {
+    border-top: none;
+    margin-top: 0.25rem;
+    padding-top: 0;
+  }
+
+  .phase h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--accent);
+  }
+
+  .choice-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .choice-row label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 500;
+    color: var(--ink);
+    font-size: 0.92rem;
+    padding: 0.45rem 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: #fff;
+    cursor: pointer;
+    margin: 0;
+  }
+
+  .choice-row input[type="radio"] {
+    accent-color: var(--accent);
+    margin: 0;
+  }
+
+  .choice-row label:has(input:checked) {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent-dark);
+  }
+
+  .field .hint {
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+    margin-top: 0.75rem;
+  }
+
+  table.overview {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    min-width: 520px;
+  }
+
+  table.overview th,
+  table.overview td {
+    padding: 0.45rem 0.5rem;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+
+  table.overview th {
+    color: var(--accent-dark);
+    font-weight: 600;
+    background: var(--accent-soft);
+  }
+
+  table.overview td:first-child,
+  table.overview th:first-child {
+    text-align: left;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .controls, .send-buttons, .muted-note { display: none; }
+    .topic { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    .topic:not([open]) > .topic-body { display: block; }
+  }
+</style>
+</head>
+<body class="gate-locked">
+
+
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box">
+    <h1>Tilgang til verktøyet</h1>
+    <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
+    <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
+    <button type="button" id="gateSubmit">Lås opp</button>
+    <p class="gate-error" id="gateError">Feil kode, prøv igjen.</p>
+    <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20aktivitetsverkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var GATE_KEY = 'gate-aktivitet-unlocked';
+    var CODE = 'nyevaner';
+
+    function unlock() {
+      localStorage.setItem(GATE_KEY, 'true');
+      document.body.classList.remove('gate-locked');
+    }
+
+    if (localStorage.getItem(GATE_KEY) === 'true') {
+      unlock();
+    }
+
+    function trySubmit() {
+      var input = document.getElementById('gateCode');
+      var error = document.getElementById('gateError');
+      if (input.value.trim().toLowerCase() === CODE) {
+        error.style.display = 'none';
+        unlock();
+      } else {
+        error.style.display = 'block';
+      }
+    }
+
+    document.getElementById('gateSubmit').addEventListener('click', trySubmit);
+    document.getElementById('gateCode').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') trySubmit();
+    });
+  })();
+</script>
+
+<div class="wrap">
+
+  <header class="page-header">
+    <h1>Trening, energi og restitusjon</h1>
+    <p class="tagline">Et enkelt skjema du fyller ut rundt styrkeøktene dine, for å bli kjent med din egen tålegrense</p>
+    <div class="reminder">
+      Dette er ikke en test av deg, og det finnes ingen riktige svar. Skjemaet
+      er et verktøy for å oppdage hvor mye kroppen din tåler akkurat nå, slik at
+      du kan komme i gang uten å gå for hardt ut og bli dårlig etterpå. Fyll ut
+      litt før økten, litt etter, og litt neste morgen. Alt lagres i denne
+      nettleseren, så du kan lukke siden og fortsette senere.
+      <strong>Det er helt greit om noe mangler.</strong>
+    </div>
+  </header>
+
+  <section class="primer">
+    <h2>Slik bruker du skjemaet</h2>
+    <p>Mange som prøver å komme i gang med trening kjenner igjen mønsteret: en god
+    dag gir lyst til å gjøre mye, og så kommer smellen dagen etter. Ved å notere
+    energi og smerter før og etter økten, og hvordan kroppen kjennes neste morgen,
+    blir det lettere å se hvilken dose som gir overskudd, og hvilken som tar det.</p>
+    <div class="signs-grid">
+      <div class="signs-item fills">
+        <strong>Tegn på passe dose</strong>
+        Energien er omtrent som før eller bedre noen timer etter, smertene har roet seg innen neste morgen, du kunne gjort det samme igjen
+      </div>
+      <div class="signs-item empties">
+        <strong>Tegn på at det ble for mye</strong>
+        Energien faller tydelig etterpå, smertene øker og sitter i til neste dag, du kjenner deg dårligere neste morgen
+      </div>
+    </div>
+    <p>Et godt utgangspunkt er å trene litt <em>under</em> det du tror du klarer.
+    Det er lettere å øke forsiktig neste gang enn å hente seg inn etter en for hard økt.</p>
+  </section>
+
+  <div class="controls">
+    <button type="button" id="expandAll">Vis alle</button>
+    <button type="button" id="collapseAll">Skjul alle</button>
+    <button type="button" id="resetAll" class="danger">Nullstill alt</button>
+  </div>
+
+  <div id="sessions">
+    <details class="topic" data-session="1" open>
+      <summary>Uke 1, økt 1 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="phase">
+          <h3>Før økten</h3>
+          <div class="field-grid">
+          <div class="field">
+            <label for="date-1">Dato</label>
+            <input type="date" id="date-1" data-key="date-1">
+          </div>
+          <div class="field field-wide">
+            <label for="energy-before-1">Energi før økten: <span class="range-value" id="energy-before-1-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="energy-before-1" data-key="energy-before-1" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Helt tom</span>
+              <span>10, Full av energi</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="pain-before-1">Smerter før økten: <span class="range-value" id="pain-before-1-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="pain-before-1" data-key="pain-before-1" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Ingen smerter</span>
+              <span>10, Verst tenkelige smerter</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Selve økten</h3>
+          <div class="field-grid">
+          <div class="field field-wide">
+            <label for="training-1">Hva trente du?</label>
+            <textarea id="training-1" data-key="training-1" placeholder="F.eks. knebøy til stol 2 x 10, roing med strikk 2 x 12, planke 3 x 20 sek"></textarea>
+          </div>
+          <div class="field">
+            <label for="duration-1">Hvor lenge (minutter)</label>
+            <input type="text" id="duration-1" data-key="duration-1" inputmode="numeric" placeholder="F.eks. 25">
+          </div>
+          <div class="field field-wide">
+            <label for="effort-1">Hvor hard føltes økten: <span class="range-value" id="effort-1-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="effort-1" data-key="effort-1" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Veldig lett</span>
+              <span>10, Maksimalt hardt</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Noen timer etterpå</h3>
+          <div class="field-grid">
+          <div class="field">
+            <label for="hours-after-1">Ca. hvor mange timer etter? <span class="hint">(valgfritt)</span></label>
+            <input type="text" id="hours-after-1" data-key="hours-after-1" inputmode="numeric" placeholder="F.eks. 3">
+          </div>
+          <div class="field field-wide">
+            <label for="energy-after-1">Energi noen timer etter: <span class="range-value" id="energy-after-1-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="energy-after-1" data-key="energy-after-1" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Helt tom</span>
+              <span>10, Full av energi</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="pain-after-1">Smerter noen timer etter: <span class="range-value" id="pain-after-1-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="pain-after-1" data-key="pain-after-1" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Ingen smerter</span>
+              <span>10, Verst tenkelige smerter</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Neste morgen</h3>
+          <div class="field-grid">
+          <div class="field field-wide">
+            <label>Sammenlignet med før økten kjennes kroppen</label>
+            <div class="choice-row">
+              <label><input type="radio" name="morning-1" value="Bedre" data-radio="morning-1"> Bedre</label>
+              <label><input type="radio" name="morning-1" value="Omtrent som før" data-radio="morning-1"> Omtrent som før</label>
+              <label><input type="radio" name="morning-1" value="Dårligere" data-radio="morning-1"> Dårligere</label>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="morning-note-1">Hvordan kjennes kroppen neste morgen?</label>
+            <textarea id="morning-note-1" data-key="morning-note-1" placeholder="F.eks. litt støl i lårene, men uthvilt. Eller: tung i hele kroppen, trengte en rolig dag."></textarea>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Når du ser tilbake</h3>
+          <div class="field-grid">
+          <div class="field field-wide">
+            <label>Hvis du skulle gjort økten på nytt, ville du gjort mindre, det samme eller mer?</label>
+            <div class="choice-row">
+              <label><input type="radio" name="again-1" value="Mindre" data-radio="again-1"> Mindre</label>
+              <label><input type="radio" name="again-1" value="Det samme" data-radio="again-1"> Det samme</label>
+              <label><input type="radio" name="again-1" value="Mer" data-radio="again-1"> Mer</label>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="again-note-1">Hva ville du i så fall endret? <span class="hint">(valgfritt)</span></label>
+            <input type="text" id="again-note-1" data-key="again-note-1" placeholder="F.eks. én runde mindre, lengre pauser, lettere strikk">
+          </div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-session="2">
+      <summary>Uke 1, økt 2 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="phase">
+          <h3>Før økten</h3>
+          <div class="field-grid">
+          <div class="field">
+            <label for="date-2">Dato</label>
+            <input type="date" id="date-2" data-key="date-2">
+          </div>
+          <div class="field field-wide">
+            <label for="energy-before-2">Energi før økten: <span class="range-value" id="energy-before-2-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="energy-before-2" data-key="energy-before-2" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Helt tom</span>
+              <span>10, Full av energi</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="pain-before-2">Smerter før økten: <span class="range-value" id="pain-before-2-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="pain-before-2" data-key="pain-before-2" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Ingen smerter</span>
+              <span>10, Verst tenkelige smerter</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Selve økten</h3>
+          <div class="field-grid">
+          <div class="field field-wide">
+            <label for="training-2">Hva trente du?</label>
+            <textarea id="training-2" data-key="training-2" placeholder="F.eks. knebøy til stol 2 x 10, roing med strikk 2 x 12, planke 3 x 20 sek"></textarea>
+          </div>
+          <div class="field">
+            <label for="duration-2">Hvor lenge (minutter)</label>
+            <input type="text" id="duration-2" data-key="duration-2" inputmode="numeric" placeholder="F.eks. 25">
+          </div>
+          <div class="field field-wide">
+            <label for="effort-2">Hvor hard føltes økten: <span class="range-value" id="effort-2-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="effort-2" data-key="effort-2" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Veldig lett</span>
+              <span>10, Maksimalt hardt</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Noen timer etterpå</h3>
+          <div class="field-grid">
+          <div class="field">
+            <label for="hours-after-2">Ca. hvor mange timer etter? <span class="hint">(valgfritt)</span></label>
+            <input type="text" id="hours-after-2" data-key="hours-after-2" inputmode="numeric" placeholder="F.eks. 3">
+          </div>
+          <div class="field field-wide">
+            <label for="energy-after-2">Energi noen timer etter: <span class="range-value" id="energy-after-2-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="energy-after-2" data-key="energy-after-2" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Helt tom</span>
+              <span>10, Full av energi</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="pain-after-2">Smerter noen timer etter: <span class="range-value" id="pain-after-2-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="pain-after-2" data-key="pain-after-2" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Ingen smerter</span>
+              <span>10, Verst tenkelige smerter</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Neste morgen</h3>
+          <div class="field-grid">
+          <div class="field field-wide">
+            <label>Sammenlignet med før økten kjennes kroppen</label>
+            <div class="choice-row">
+              <label><input type="radio" name="morning-2" value="Bedre" data-radio="morning-2"> Bedre</label>
+              <label><input type="radio" name="morning-2" value="Omtrent som før" data-radio="morning-2"> Omtrent som før</label>
+              <label><input type="radio" name="morning-2" value="Dårligere" data-radio="morning-2"> Dårligere</label>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="morning-note-2">Hvordan kjennes kroppen neste morgen?</label>
+            <textarea id="morning-note-2" data-key="morning-note-2" placeholder="F.eks. litt støl i lårene, men uthvilt. Eller: tung i hele kroppen, trengte en rolig dag."></textarea>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Når du ser tilbake</h3>
+          <div class="field-grid">
+          <div class="field field-wide">
+            <label>Hvis du skulle gjort økten på nytt, ville du gjort mindre, det samme eller mer?</label>
+            <div class="choice-row">
+              <label><input type="radio" name="again-2" value="Mindre" data-radio="again-2"> Mindre</label>
+              <label><input type="radio" name="again-2" value="Det samme" data-radio="again-2"> Det samme</label>
+              <label><input type="radio" name="again-2" value="Mer" data-radio="again-2"> Mer</label>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="again-note-2">Hva ville du i så fall endret? <span class="hint">(valgfritt)</span></label>
+            <input type="text" id="again-note-2" data-key="again-note-2" placeholder="F.eks. én runde mindre, lengre pauser, lettere strikk">
+          </div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-session="3">
+      <summary>Uke 2, økt 1 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="phase">
+          <h3>Før økten</h3>
+          <div class="field-grid">
+          <div class="field">
+            <label for="date-3">Dato</label>
+            <input type="date" id="date-3" data-key="date-3">
+          </div>
+          <div class="field field-wide">
+            <label for="energy-before-3">Energi før økten: <span class="range-value" id="energy-before-3-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="energy-before-3" data-key="energy-before-3" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Helt tom</span>
+              <span>10, Full av energi</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="pain-before-3">Smerter før økten: <span class="range-value" id="pain-before-3-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="pain-before-3" data-key="pain-before-3" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Ingen smerter</span>
+              <span>10, Verst tenkelige smerter</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Selve økten</h3>
+          <div class="field-grid">
+          <div class="field field-wide">
+            <label for="training-3">Hva trente du?</label>
+            <textarea id="training-3" data-key="training-3" placeholder="F.eks. knebøy til stol 2 x 10, roing med strikk 2 x 12, planke 3 x 20 sek"></textarea>
+          </div>
+          <div class="field">
+            <label for="duration-3">Hvor lenge (minutter)</label>
+            <input type="text" id="duration-3" data-key="duration-3" inputmode="numeric" placeholder="F.eks. 25">
+          </div>
+          <div class="field field-wide">
+            <label for="effort-3">Hvor hard føltes økten: <span class="range-value" id="effort-3-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="effort-3" data-key="effort-3" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Veldig lett</span>
+              <span>10, Maksimalt hardt</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Noen timer etterpå</h3>
+          <div class="field-grid">
+          <div class="field">
+            <label for="hours-after-3">Ca. hvor mange timer etter? <span class="hint">(valgfritt)</span></label>
+            <input type="text" id="hours-after-3" data-key="hours-after-3" inputmode="numeric" placeholder="F.eks. 3">
+          </div>
+          <div class="field field-wide">
+            <label for="energy-after-3">Energi noen timer etter: <span class="range-value" id="energy-after-3-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="energy-after-3" data-key="energy-after-3" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Helt tom</span>
+              <span>10, Full av energi</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="pain-after-3">Smerter noen timer etter: <span class="range-value" id="pain-after-3-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="pain-after-3" data-key="pain-after-3" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Ingen smerter</span>
+              <span>10, Verst tenkelige smerter</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Neste morgen</h3>
+          <div class="field-grid">
+          <div class="field field-wide">
+            <label>Sammenlignet med før økten kjennes kroppen</label>
+            <div class="choice-row">
+              <label><input type="radio" name="morning-3" value="Bedre" data-radio="morning-3"> Bedre</label>
+              <label><input type="radio" name="morning-3" value="Omtrent som før" data-radio="morning-3"> Omtrent som før</label>
+              <label><input type="radio" name="morning-3" value="Dårligere" data-radio="morning-3"> Dårligere</label>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="morning-note-3">Hvordan kjennes kroppen neste morgen?</label>
+            <textarea id="morning-note-3" data-key="morning-note-3" placeholder="F.eks. litt støl i lårene, men uthvilt. Eller: tung i hele kroppen, trengte en rolig dag."></textarea>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Når du ser tilbake</h3>
+          <div class="field-grid">
+          <div class="field field-wide">
+            <label>Hvis du skulle gjort økten på nytt, ville du gjort mindre, det samme eller mer?</label>
+            <div class="choice-row">
+              <label><input type="radio" name="again-3" value="Mindre" data-radio="again-3"> Mindre</label>
+              <label><input type="radio" name="again-3" value="Det samme" data-radio="again-3"> Det samme</label>
+              <label><input type="radio" name="again-3" value="Mer" data-radio="again-3"> Mer</label>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="again-note-3">Hva ville du i så fall endret? <span class="hint">(valgfritt)</span></label>
+            <input type="text" id="again-note-3" data-key="again-note-3" placeholder="F.eks. én runde mindre, lengre pauser, lettere strikk">
+          </div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="topic" data-session="4">
+      <summary>Uke 2, økt 2 <span class="chevron">▸</span></summary>
+      <div class="topic-body">
+        <div class="phase">
+          <h3>Før økten</h3>
+          <div class="field-grid">
+          <div class="field">
+            <label for="date-4">Dato</label>
+            <input type="date" id="date-4" data-key="date-4">
+          </div>
+          <div class="field field-wide">
+            <label for="energy-before-4">Energi før økten: <span class="range-value" id="energy-before-4-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="energy-before-4" data-key="energy-before-4" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Helt tom</span>
+              <span>10, Full av energi</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="pain-before-4">Smerter før økten: <span class="range-value" id="pain-before-4-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="pain-before-4" data-key="pain-before-4" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Ingen smerter</span>
+              <span>10, Verst tenkelige smerter</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Selve økten</h3>
+          <div class="field-grid">
+          <div class="field field-wide">
+            <label for="training-4">Hva trente du?</label>
+            <textarea id="training-4" data-key="training-4" placeholder="F.eks. knebøy til stol 2 x 10, roing med strikk 2 x 12, planke 3 x 20 sek"></textarea>
+          </div>
+          <div class="field">
+            <label for="duration-4">Hvor lenge (minutter)</label>
+            <input type="text" id="duration-4" data-key="duration-4" inputmode="numeric" placeholder="F.eks. 25">
+          </div>
+          <div class="field field-wide">
+            <label for="effort-4">Hvor hard føltes økten: <span class="range-value" id="effort-4-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="effort-4" data-key="effort-4" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Veldig lett</span>
+              <span>10, Maksimalt hardt</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Noen timer etterpå</h3>
+          <div class="field-grid">
+          <div class="field">
+            <label for="hours-after-4">Ca. hvor mange timer etter? <span class="hint">(valgfritt)</span></label>
+            <input type="text" id="hours-after-4" data-key="hours-after-4" inputmode="numeric" placeholder="F.eks. 3">
+          </div>
+          <div class="field field-wide">
+            <label for="energy-after-4">Energi noen timer etter: <span class="range-value" id="energy-after-4-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="energy-after-4" data-key="energy-after-4" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Helt tom</span>
+              <span>10, Full av energi</span>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="pain-after-4">Smerter noen timer etter: <span class="range-value" id="pain-after-4-value">Ikke satt</span> / 10</label>
+            <input type="range" min="0" max="10" step="1" value="5" id="pain-after-4" data-key="pain-after-4" data-touched="false">
+            <div class="range-anchors">
+              <span>0, Ingen smerter</span>
+              <span>10, Verst tenkelige smerter</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Neste morgen</h3>
+          <div class="field-grid">
+          <div class="field field-wide">
+            <label>Sammenlignet med før økten kjennes kroppen</label>
+            <div class="choice-row">
+              <label><input type="radio" name="morning-4" value="Bedre" data-radio="morning-4"> Bedre</label>
+              <label><input type="radio" name="morning-4" value="Omtrent som før" data-radio="morning-4"> Omtrent som før</label>
+              <label><input type="radio" name="morning-4" value="Dårligere" data-radio="morning-4"> Dårligere</label>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="morning-note-4">Hvordan kjennes kroppen neste morgen?</label>
+            <textarea id="morning-note-4" data-key="morning-note-4" placeholder="F.eks. litt støl i lårene, men uthvilt. Eller: tung i hele kroppen, trengte en rolig dag."></textarea>
+          </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <h3>Når du ser tilbake</h3>
+          <div class="field-grid">
+          <div class="field field-wide">
+            <label>Hvis du skulle gjort økten på nytt, ville du gjort mindre, det samme eller mer?</label>
+            <div class="choice-row">
+              <label><input type="radio" name="again-4" value="Mindre" data-radio="again-4"> Mindre</label>
+              <label><input type="radio" name="again-4" value="Det samme" data-radio="again-4"> Det samme</label>
+              <label><input type="radio" name="again-4" value="Mer" data-radio="again-4"> Mer</label>
+            </div>
+          </div>
+          <div class="field field-wide">
+            <label for="again-note-4">Hva ville du i så fall endret? <span class="hint">(valgfritt)</span></label>
+            <input type="text" id="again-note-4" data-key="again-note-4" placeholder="F.eks. én runde mindre, lengre pauser, lettere strikk">
+          </div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <section class="primer" id="summarySection">
+    <h2>Oversikt over øktene</h2>
+    <p class="muted-note">Tallene fylles inn automatisk. Se etter sammenhenger: hva skjer med energien og neste morgen når økten er lengre eller hardere?</p>
+    <div class="table-scroll">
+      <table class="overview">
+        <thead>
+          <tr>
+            <th>Økt</th>
+            <th>Min</th>
+            <th>Hard</th>
+            <th>Energi før → etter</th>
+            <th>Smerter før → etter</th>
+            <th>Neste morgen</th>
+            <th>På nytt</th>
+          </tr>
+        </thead>
+        <tbody id="overviewBody"></tbody>
+      </table>
+    </div>
+    <div class="field field-wide" style="margin-top: 1rem;">
+      <label for="reflection">Hva har du lagt merke til? Hvor tror du tålegrensen din ligger akkurat nå?</label>
+      <textarea id="reflection" data-key="reflection" placeholder="F.eks. Økter på rundt 20 minutter og anstrengelse 4 til 5 går fint. Når jeg går over 30 minutter, blir jeg dårlig dagen etter."></textarea>
+    </div>
+  </section>
+
+  <section class="primer">
+    <h2>Send inn registreringen</h2>
+    <p class="muted-note">
+      Du kan sende registreringen direkte fra din egen e-postapp, eller laste
+      den ned som en tekstfil du selv sender eller tar med til timen. Hvis
+      "Send på e-post" ikke åpner riktig på mobilen din, bruk nedlastingen i
+      stedet.
+    </p>
+    <div class="send-buttons">
+      <button type="button" id="sendEmail">Send på e-post</button>
+      <button type="button" id="downloadText" class="secondary">Last ned som tekstfil</button>
+    </div>
+  </section>
+
+  <footer class="closing">
+    Å finne sin egen dose er en ferdighet, ikke en prøve.<br>
+    <strong>Litt og ofte slår mye og sjelden.</strong>
+  </footer>
+
+</div>
+
+<script>
+  var SESSIONS = [
+    { n: 1, title: 'Uke 1, økt 1' },
+    { n: 2, title: 'Uke 1, økt 2' },
+    { n: 3, title: 'Uke 2, økt 1' },
+    { n: 4, title: 'Uke 2, økt 2' }
+  ];
+  var STORAGE_KEY = 'trening-energi-restitusjon-data';
+  var RECIPIENT = 'silje.merete.binder@gmail.com';
+  var RANGE_KEYS = ['energy-before', 'pain-before', 'effort', 'energy-after', 'pain-after'];
+
+  function readState() {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return {};
+    try {
+      return JSON.parse(raw) || {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveState() {
+    var data = {};
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      data[el.getAttribute('data-key')] = el.value;
+    });
+    document.querySelectorAll('input[type="range"]').forEach(function (el) {
+      data[el.id + '-touched'] = el.getAttribute('data-touched');
+    });
+    document.querySelectorAll('input[data-radio]:checked').forEach(function (el) {
+      data[el.getAttribute('data-radio')] = el.value;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function loadState() {
+    var data = readState();
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      var key = el.getAttribute('data-key');
+      if (data[key] !== undefined) el.value = data[key];
+    });
+    document.querySelectorAll('input[type="range"]').forEach(function (el) {
+      var display = document.getElementById(el.id + '-value');
+      if (data[el.id + '-touched'] === 'true') {
+        el.setAttribute('data-touched', 'true');
+        if (display) display.textContent = el.value;
+      } else if (display) {
+        display.textContent = 'Ikke satt';
+      }
+    });
+    document.querySelectorAll('input[data-radio]').forEach(function (el) {
+      el.checked = data[el.getAttribute('data-radio')] === el.value;
+    });
+  }
+
+  function rangeVal(id) {
+    var el = document.getElementById(id);
+    return el && el.getAttribute('data-touched') === 'true' ? el.value : '';
+  }
+
+  function radioVal(name) {
+    var el = document.querySelector('input[data-radio="' + name + '"]:checked');
+    return el ? el.value : '';
+  }
+
+  function textVal(id) {
+    var el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+
+  function pair(a, b) {
+    if (!a && !b) return '-';
+    return (a || '?') + ' → ' + (b || '?');
+  }
+
+  function hasData(n) {
+    var any = false;
+    RANGE_KEYS.forEach(function (k) { if (rangeVal(k + '-' + n)) any = true; });
+    document.querySelectorAll('[data-session="' + n + '"] [data-key]:not([type="range"])').forEach(function (el) {
+      if (el.value && el.value.trim() !== '') any = true;
+    });
+    if (radioVal('morning-' + n) || radioVal('again-' + n)) any = true;
+    return any;
+  }
+
+  function updateOverview() {
+    var body = document.getElementById('overviewBody');
+    body.innerHTML = '';
+    SESSIONS.forEach(function (s) {
+      var n = s.n;
+      var tr = document.createElement('tr');
+      var cells = [
+        s.title + (textVal('date-' + n) ? ' (' + textVal('date-' + n) + ')' : ''),
+        textVal('duration-' + n) || '-',
+        rangeVal('effort-' + n) || '-',
+        pair(rangeVal('energy-before-' + n), rangeVal('energy-after-' + n)),
+        pair(rangeVal('pain-before-' + n), rangeVal('pain-after-' + n)),
+        radioVal('morning-' + n) || '-',
+        radioVal('again-' + n) || '-'
+      ];
+      cells.forEach(function (c) {
+        var td = document.createElement('td');
+        td.textContent = c;
+        tr.appendChild(td);
+      });
+      if (!hasData(n)) tr.style.color = 'var(--muted)';
+      body.appendChild(tr);
+    });
+  }
+
+  function buildSummaryText() {
+    var lines = [];
+    lines.push('Trening, energi og restitusjon');
+    lines.push('');
+
+    SESSIONS.forEach(function (s) {
+      var n = s.n;
+      if (!hasData(n)) return;
+      var date = textVal('date-' + n);
+      lines.push(s.title + (date ? ' (' + date + ')' : ''));
+      lines.push('  Før økten');
+      lines.push('    Energi (0-10): ' + (rangeVal('energy-before-' + n) || '-'));
+      lines.push('    Smerter (0-10): ' + (rangeVal('pain-before-' + n) || '-'));
+      lines.push('  Økten');
+      lines.push('    Hva jeg trente: ' + (textVal('training-' + n) || '-'));
+      lines.push('    Varighet (min): ' + (textVal('duration-' + n) || '-'));
+      lines.push('    Hvor hard (0-10): ' + (rangeVal('effort-' + n) || '-'));
+      var hrs = textVal('hours-after-' + n);
+      lines.push('  Noen timer etterpå' + (hrs ? ' (ca. ' + hrs + ' t)' : ''));
+      lines.push('    Energi (0-10): ' + (rangeVal('energy-after-' + n) || '-'));
+      lines.push('    Smerter (0-10): ' + (rangeVal('pain-after-' + n) || '-'));
+      lines.push('  Neste morgen');
+      lines.push('    Sammenlignet med før: ' + (radioVal('morning-' + n) || '-'));
+      lines.push('    Hvordan kroppen kjennes: ' + (textVal('morning-note-' + n) || '-'));
+      lines.push('  Gjort økten på nytt: ' + (radioVal('again-' + n) || '-'));
+      var change = textVal('again-note-' + n);
+      if (change) lines.push('    Ville endret: ' + change);
+      lines.push('');
+    });
+
+    lines.push('Hva jeg har lagt merke til / min tålegrense nå: ' + (textVal('reflection') || '-'));
+    return lines.join('\n');
+  }
+
+  function sendEmail() {
+    var subject = encodeURIComponent('Trening, energi og restitusjon');
+    var body = encodeURIComponent(buildSummaryText());
+    window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
+  }
+
+  function downloadText() {
+    var blob = new Blob([buildSummaryText()], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'trening-energi-restitusjon.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    loadState();
+    updateOverview();
+
+    function onChange(e) {
+      var t = e.target;
+      if (!t.hasAttribute('data-key') && !t.hasAttribute('data-radio')) return;
+      if (t.type === 'range') {
+        t.setAttribute('data-touched', 'true');
+        var display = document.getElementById(t.id + '-value');
+        if (display) display.textContent = t.value;
+      }
+      saveState();
+      updateOverview();
+    }
+    document.body.addEventListener('input', onChange);
+    document.body.addEventListener('change', onChange);
+
+    document.getElementById('expandAll').addEventListener('click', function () {
+      document.querySelectorAll('details.topic').forEach(function (d) { d.open = true; });
+    });
+    document.getElementById('collapseAll').addEventListener('click', function () {
+      document.querySelectorAll('details.topic').forEach(function (d) { d.open = false; });
+    });
+    document.getElementById('resetAll').addEventListener('click', function () {
+      if (!confirm('Nullstille all registrert data i skjemaet? Dette kan ikke angres.')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    });
+
+    document.getElementById('sendEmail').addEventListener('click', sendEmail);
+    document.getElementById('downloadText').addEventListener('click', downloadText);
+  });
+</script>
+
+</body>
+</html>
