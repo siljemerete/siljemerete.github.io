@@ -751,6 +751,55 @@
     font-style: italic;
   }
 
+  /* Helhetlig helse-modellen */
+  .health-model {
+    margin: 1.75rem 0 1.25rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .health-model h3 {
+    margin: 0 0 0.5rem;
+    color: var(--accent-dark);
+    font-size: 1.2rem;
+    letter-spacing: 0.04em;
+  }
+
+  .health-model-figure {
+    margin: 0;
+  }
+
+  .health-model-figure svg {
+    display: block;
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .health-model-figure text {
+    font-family: inherit;
+    font-size: 21px;
+    fill: var(--ink);
+    stroke: none;
+  }
+
+  .health-model-figure .hm-center {
+    font-size: 24px;
+    font-weight: 700;
+    fill: var(--accent-dark);
+  }
+
+  @media (max-width: 640px) {
+    .health-model {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .quote-card {
     background: var(--accent-soft);
     border-radius: 12px;
@@ -989,6 +1038,50 @@
           <h3>4. Oppfølging over tid</h3>
           <p>Vaner som varer er ingen quick fix. Det krever at du er villig til å investere tid i din egen helse, og med faste, korte oppfølgingssamtaler bygger vi det steg for steg, slik at du faktisk får det livet du ønsker deg.</p>
         </div>
+      </div>
+    </div>
+
+    <div class="health-model">
+      <figure class="health-model-figure">
+        <svg viewBox="0 36 600 420" role="img" aria-labelledby="helsemodell-tittel">
+          <title id="helsemodell-tittel">Helhetlig helse: «Din helse» i midten av en sirkel med fem områder, stress, søvn, kosthold, bevegelse og trening, og relasjoner, der alle er forbundet med hverandre</title>
+          <circle cx="300" cy="250" r="150" fill="none" stroke="var(--accent)" stroke-width="2" opacity="0.45"/>
+          <g stroke="var(--muted)" stroke-width="1.1" opacity="0.35">
+            <line x1="300.0" y1="100.0" x2="442.7" y2="203.6"/>
+            <line x1="300.0" y1="100.0" x2="388.2" y2="371.4"/>
+            <line x1="300.0" y1="100.0" x2="211.8" y2="371.4"/>
+            <line x1="300.0" y1="100.0" x2="157.3" y2="203.6"/>
+            <line x1="442.7" y1="203.6" x2="388.2" y2="371.4"/>
+            <line x1="442.7" y1="203.6" x2="211.8" y2="371.4"/>
+            <line x1="442.7" y1="203.6" x2="157.3" y2="203.6"/>
+            <line x1="388.2" y1="371.4" x2="211.8" y2="371.4"/>
+            <line x1="388.2" y1="371.4" x2="157.3" y2="203.6"/>
+            <line x1="211.8" y1="371.4" x2="157.3" y2="203.6"/>
+          </g>
+          <circle cx="300" cy="250" r="62" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+          <text class="hm-center" x="300" y="250" text-anchor="middle"><tspan x="300" dy="-0.15em">Din</tspan><tspan x="300" dy="1.1em">helse</tspan></text>
+          <g stroke="#fff" stroke-width="3">
+            <circle cx="300.0" cy="100.0" r="17" fill="#a9c4da"/>
+            <circle cx="442.7" cy="203.6" r="17" fill="#e6d596"/>
+            <circle cx="388.2" cy="371.4" r="17" fill="#eeb7a2"/>
+            <circle cx="211.8" cy="371.4" r="17" fill="#93a7a6"/>
+            <circle cx="157.3" cy="203.6" r="17" fill="#bcae9f"/>
+          </g>
+          <g>
+            <text y="62.0" text-anchor="middle"><tspan x="300.0" dy="0.35em">Stress</tspan></text>
+            <text y="193.1" text-anchor="start"><tspan x="475.0" dy="0.35em">Søvn</tspan></text>
+            <text y="398.9" text-anchor="start"><tspan x="408.2" dy="0.35em">Kosthold</tspan></text>
+            <text y="398.9" text-anchor="end"><tspan x="191.8" dy="-0.25em">Bevegelse</tspan><tspan x="191.8" dy="1.20em">og trening</tspan></text>
+            <text y="193.1" text-anchor="end"><tspan x="125.0" dy="0.35em">Relasjoner</tspan></text>
+          </g>
+        </svg>
+      </figure>
+      <div class="health-model-text">
+        <p class="kicker">Min modell</p>
+        <h3>Helhetlig helse: alt henger sammen med alt</h3>
+        <p>I helseveiledningen ser jeg på helsen din som én helhet. Fem områder går igjen: <strong>stress, søvn, kosthold, bevegelse og trening, og relasjoner</strong>. De ligger i samme sirkel, og hvert av dem påvirker alle de andre.</p>
+        <p>Når du sover dårlig, tåler du mindre stress. Når du er stresset, spiser du gjerne annerledes og orker mindre bevegelse. Gode relasjoner gir overskudd som smitter over på alt det andre. Derfor ser vi alltid på helheten, og en liten endring på ett område kan merkes i hele sirkelen.</p>
+        <p>Vil du se hvor du står på hvert område? Prøv <a class="inline-link" href="livsstilhjul.html">Livsstilshjulet</a>.</p>
       </div>
     </div>
 
