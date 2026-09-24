@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Enkel styrke hjemme | Silje Merete SMART Helseveiledning</title>
-<meta name="description" content="To enkle styrkeprogram du kan gjøre hjemme: 15 minutter med strikk og lette manualer, og et minimumsprogram på 6 til 7 minutter uten utstyr. Med styrt tidtaker.">
+<meta name="description" content="To enkle styrkeprogram du kan gjøre hjemme: 15 minutter med strikk og lette manualer, og et minimumsprogram på 6 til 7 minutter uten utstyr.">
 <style>
   :root {
     --bg: #f0f7f9;
@@ -75,86 +75,6 @@
   .card > p.desc {
     margin: 0 0 1.25rem;
     color: var(--muted);
-  }
-
-  .timer-display {
-    text-align: center;
-  }
-
-  .timer-step-name {
-    font-weight: 700;
-    color: var(--accent-dark);
-    font-size: 1.15rem;
-    min-height: 1.5em;
-  }
-
-  .timer-clock {
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--accent-dark);
-    font-variant-numeric: tabular-nums;
-    letter-spacing: 0.02em;
-  }
-
-  .timer-progress {
-    width: 100%;
-    height: 8px;
-    background: var(--accent-soft);
-    border-radius: 999px;
-    margin: 0.9rem 0 1rem;
-    overflow: hidden;
-  }
-
-  .timer-progress-bar {
-    height: 100%;
-    width: 0%;
-    background: var(--accent);
-    transition: width 1s linear;
-  }
-
-  .timer-phrase {
-    min-height: 2.4em;
-    font-weight: 600;
-    color: var(--ink);
-    font-size: 1.02rem;
-  }
-
-  .timer-buttons {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    margin-top: 1.1rem;
-  }
-
-  .timer-buttons button {
-    font-size: 0.95rem;
-    padding: 0.65rem 1.3rem;
-    border-radius: 999px;
-    border: 1px solid var(--accent);
-    background: var(--accent);
-    color: #fff;
-    cursor: pointer;
-    font-weight: 600;
-  }
-
-  .timer-buttons button:hover {
-    background: var(--accent-dark);
-    border-color: var(--accent-dark);
-  }
-
-  .timer-buttons button.secondary {
-    background: var(--card);
-    color: var(--accent-dark);
-  }
-
-  .timer-buttons button.secondary:hover {
-    background: var(--accent-soft);
-  }
-
-  .timer-buttons button:disabled {
-    opacity: 0.5;
-    cursor: default;
   }
 
   .caution-card {
@@ -355,26 +275,6 @@
   </section>
 
   <section class="card">
-    <h2>Tidtaker</h2>
-    <p class="desc" id="timerDesc"></p>
-    <div class="timer-display">
-      <p class="timer-step-name" id="stepName">Klar til å starte</p>
-      <div class="timer-clock" id="timerClock">00:00</div>
-      <div class="timer-progress">
-        <div class="timer-progress-bar" id="timerProgressBar"></div>
-      </div>
-      <p class="timer-phrase" id="timerPhrase">Trykk start når du er klar</p>
-    </div>
-    <div class="timer-buttons">
-      <button type="button" id="timerStart">Start</button>
-      <button type="button" id="timerPause" class="secondary" disabled>Pause</button>
-      <button type="button" id="timerPrev" class="secondary">Forrige</button>
-      <button type="button" id="timerNext" class="secondary">Neste</button>
-      <button type="button" id="timerReset" class="secondary">Nullstill</button>
-    </div>
-  </section>
-
-  <section class="card">
     <h2>Etterpå: hva la du merke til?</h2>
     <p class="desc">Se på den første uka som en utforskning, ikke en prestasjon. Ta med deg tankene til neste samtale.</p>
     <ul class="reflect-list">
@@ -404,183 +304,19 @@
 </footer>
 
 <script>
-  var WORK = 40;
-  var REST = 20;
-
-  function buildSteps(warmup, exercises, rounds, cooldown) {
-    var steps = [warmup];
-    for (var r = 1; r <= rounds; r++) {
-      exercises.forEach(function (ex, i) {
-        var label = rounds > 1 ? ex.label + ' (runde ' + r + ')' : ex.label;
-        steps.push({ label: label, seconds: WORK, instruction: ex.instruction });
-        var isLast = r === rounds && i === exercises.length - 1;
-        if (!isLast) {
-          var next = i < exercises.length - 1 ? exercises[i + 1].label : exercises[0].label;
-          steps.push({ label: 'Hvil og bytt', seconds: REST, instruction: 'Pust rolig. Neste: ' + next + '.', rest: true });
-        }
-      });
-    }
-    steps.push(cooldown);
-    return steps;
-  }
-
-  var PROGRAMS = {
-    full: {
-      desc: 'Oppvarming, 2 runder med fem øvelser og rolig avslutning. Totalt ca. 14 minutter.',
-      steps: buildSteps(
-        { label: 'Oppvarming', seconds: 120, instruction: 'Gå på stedet, rull skuldrene, beveg armene og gjør noen rolige knebøy til stol.' },
-        [
-          { label: 'Knebøy til stol', instruction: 'Sett deg kontrollert ned mot stolen og reis deg opp igjen.' },
-          { label: 'Sittende roing med strikk', instruction: 'Trekk albuene bakover og hold brystet oppe.' },
-          { label: 'Skulderpress med manualer', instruction: 'Press manualene rolig opp over hodet og senk kontrollert.' },
-          { label: 'Seteløft', instruction: 'Press føttene i gulvet, løft hoften rolig og senk igjen.' },
-          { label: 'Dead bug', instruction: 'Stram magen lett og senk motsatt arm og bein kontrollert.' }
-        ],
-        2,
-        { label: 'Rolig avslutning', seconds: 120, instruction: 'Gå rolig rundt, rull skuldrene og pust dypt ut. Bra jobbet!' }
-      )
-    },
-    mini: {
-      desc: 'Oppvarming, én runde med fem øvelser og rolig avslutning. Totalt ca. 6–7 minutter.',
-      steps: buildSteps(
-        { label: 'Oppvarming', seconds: 60, instruction: 'Gå raskt på stedet og beveg armer og skuldre.' },
-        [
-          { label: 'Knebøy til stol', instruction: 'Sett deg kontrollert ned mot stolen og reis deg opp igjen.' },
-          { label: 'Armhevinger mot vegg eller benk', instruction: 'Bøy armene rolig og press deg ut igjen.' },
-          { label: 'Seteløft', instruction: 'Press føttene i gulvet, løft hoften rolig og senk igjen.' },
-          { label: 'Bird dog', instruction: 'På alle fire: strekk motsatt arm og bein, og bytt side.' },
-          { label: 'Dead bug', instruction: 'Stram magen lett og senk motsatt arm og bein kontrollert.' }
-        ],
-        1,
-        { label: 'Rolig avslutning', seconds: 45, instruction: 'Beveg deg rolig og pust dypt. Bra jobbet!' }
-      )
-    }
-  };
-
   (function () {
-    var STEPS = PROGRAMS.full.steps;
-    var index = 0;
-    var remaining = STEPS[0].seconds;
-    var timerInterval = null;
-    var timerRunning = false;
-    var finished = false;
-
-    var descEl = document.getElementById('timerDesc');
-    var stepNameEl = document.getElementById('stepName');
-    var clockEl = document.getElementById('timerClock');
-    var progressBarEl = document.getElementById('timerProgressBar');
-    var phraseEl = document.getElementById('timerPhrase');
-    var startBtn = document.getElementById('timerStart');
-    var pauseBtn = document.getElementById('timerPause');
-    var prevBtn = document.getElementById('timerPrev');
-    var nextBtn = document.getElementById('timerNext');
-    var resetBtn = document.getElementById('timerReset');
-
-    function formatClock(seconds) {
-      var m = Math.floor(seconds / 60);
-      var s = seconds % 60;
-      return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
-    }
-
-    function beep() {
-      try {
-        var ctx = new (window.AudioContext || window.webkitAudioContext)();
-        var osc = ctx.createOscillator();
-        var gain = ctx.createGain();
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.frequency.value = 660;
-        gain.gain.setValueAtTime(0.001, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.25, ctx.currentTime + 0.02);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.5);
-      } catch (e) { /* ignore if audio unavailable */ }
-    }
-
-    function updateDisplay() {
-      var step = STEPS[index];
-      stepNameEl.textContent = finished ? 'Ferdig!' : (index + 1) + ' / ' + STEPS.length + ': ' + step.label;
-      clockEl.textContent = formatClock(remaining);
-      var elapsed = step.seconds - remaining;
-      progressBarEl.style.width = ((elapsed / step.seconds) * 100) + '%';
-      phraseEl.textContent = finished ? 'Bra jobbet! Du gjorde det du bestemte deg for.' : step.instruction;
-      prevBtn.disabled = index === 0 && !finished;
-      nextBtn.disabled = finished;
-    }
-
-    function stopInterval() {
-      timerRunning = false;
-      clearInterval(timerInterval);
-      startBtn.disabled = false;
-      pauseBtn.disabled = true;
-    }
-
-    function goToStep(newIndex) {
-      stopInterval();
-      finished = false;
-      index = Math.max(0, Math.min(newIndex, STEPS.length - 1));
-      remaining = STEPS[index].seconds;
-      updateDisplay();
-    }
-
-    function advance() {
-      if (index >= STEPS.length - 1) {
-        stopInterval();
-        finished = true;
-        beep();
-        updateDisplay();
-        return;
-      }
-      index += 1;
-      remaining = STEPS[index].seconds;
-      beep();
-      updateDisplay();
-    }
-
-    function tick() {
-      remaining -= 1;
-      if (remaining <= 0) {
-        advance();
-      } else {
-        clockEl.textContent = formatClock(remaining);
-        var step = STEPS[index];
-        var elapsed = step.seconds - remaining;
-        progressBarEl.style.width = ((elapsed / step.seconds) * 100) + '%';
-      }
-    }
-
-    function startTimer() {
-      if (timerRunning) return;
-      if (finished) goToStep(0);
-      timerRunning = true;
-      startBtn.disabled = true;
-      pauseBtn.disabled = false;
-      timerInterval = setInterval(tick, 1000);
-    }
-
     function selectProgram(key) {
-      STEPS = PROGRAMS[key].steps;
-      descEl.textContent = PROGRAMS[key].desc;
       document.querySelectorAll('.program-switch button').forEach(function (btn) {
         btn.setAttribute('aria-pressed', btn.getAttribute('data-program') === key ? 'true' : 'false');
       });
       document.querySelectorAll('[data-panel]').forEach(function (panel) {
         panel.hidden = panel.getAttribute('data-panel') !== key;
       });
-      goToStep(0);
     }
 
     document.querySelectorAll('.program-switch button').forEach(function (btn) {
       btn.addEventListener('click', function () { selectProgram(btn.getAttribute('data-program')); });
     });
-    startBtn.addEventListener('click', startTimer);
-    pauseBtn.addEventListener('click', stopInterval);
-    resetBtn.addEventListener('click', function () { goToStep(0); });
-    prevBtn.addEventListener('click', function () { goToStep(index - 1); });
-    nextBtn.addEventListener('click', function () { advance(); });
-
-    selectProgram('full');
   })();
 </script>
 
