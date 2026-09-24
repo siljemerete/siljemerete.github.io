@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Helhetlig – i balanse | Silje Merete SMART Helseveiledning</title>
+<link rel="icon" href="images/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<meta name="description" content="Interaktiv modell: dra i bladene for søvn, stress, kosthold, bevegelse og relasjoner, og se hvordan de påvirker hverandre.">
+<style>
+  :root {
+    --bg: #f4f8fb;
+    --card: #ffffff;
+    --ink: #16283a;
+    --muted: #55697c;
+    --accent: #386ba0;
+    --accent-dark: #1f3c5c;
+    --accent-soft: #e7f0f8;
+    --border: #d6e3ee;
+    --shadow: 0 1px 3px rgba(22, 40, 58, 0.08), 0 1px 2px rgba(22, 40, 58, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--accent-soft), var(--bg));
+    padding: 1.5rem 0 2.25rem;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .back-link {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .back-link:hover { color: var(--accent-dark); }
+
+  .hero-top { text-align: left; }
+
+  .hero h1 {
+    margin: 0 0 0.6rem;
+    font-size: 1.8rem;
+    color: var(--accent-dark);
+  }
+
+  .hero p {
+    margin: 0 auto;
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 48ch;
+  }
+
+  .page-logo {
+    display: block;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 0.75rem;
+    padding: 5px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(22, 40, 58, 0.12);
+  }
+
+  .page-logo img {
+    display: block;
+    width: 46px;
+    height: 46px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 1.5rem 1.75rem;
+    margin: 2rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .card h2 {
+    margin: 0 0 0.5rem;
+    color: var(--accent-dark);
+    font-size: 1.25rem;
+  }
+
+  .card p { margin: 0.5rem 0; }
+
+  .how-to {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .model-wrap {
+    position: relative;
+    max-width: 560px;
+    margin: 0.5rem auto 0;
+  }
+
+  #model {
+    display: block;
+    width: 100%;
+    height: auto;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  #model .label {
+    font-size: 15px;
+    fill: var(--accent-dark);
+    font-weight: 600;
+  }
+
+  #model .value-label {
+    font-size: 12px;
+    fill: var(--muted);
+  }
+
+  #model .petal,
+  #model .handle-hit {
+    cursor: grab;
+  }
+
+  #model.dragging .petal,
+  #model.dragging .handle-hit {
+    cursor: grabbing;
+  }
+
+  #model .handle {
+    fill: #fff;
+    stroke-width: 2.5;
+    transition: r 0.15s;
+  }
+
+  #model .petal-group.active .handle { r: 12; }
+
+  #model .petal-group:focus { outline: none; }
+
+  #model .petal-group:focus-visible .handle {
+    stroke: var(--accent-dark);
+    stroke-width: 3.5;
+  }
+
+  .message {
+    margin: 1rem auto 0;
+    max-width: 52ch;
+    min-height: 4.8em;
+    padding: 0.85rem 1rem;
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    font-size: 0.97rem;
+  }
+
+  .message strong { color: var(--accent-dark); }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .toggle input {
+    width: 1.1rem;
+    height: 1.1rem;
+    accent-color: var(--accent);
+  }
+
+  .button {
+    background: transparent;
+    color: var(--accent-dark);
+    font: inherit;
+    font-weight: 600;
+    font-size: 0.92rem;
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    cursor: pointer;
+  }
+
+  .button:hover { background: var(--accent-soft); }
+
+  .sliders {
+    display: grid;
+    gap: 0.9rem;
+    margin-top: 0.5rem;
+  }
+
+  .slider-row {
+    display: grid;
+    grid-template-columns: 11rem 1fr 3.2rem;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .slider-row label {
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .slider-row .state {
+    display: block;
+    font-weight: 400;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  .slider-row output {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .slider-row input[type="range"] {
+    width: 100%;
+    accent-color: var(--accent);
+  }
+
+  @media (max-width: 520px) {
+    .card {
+      padding: 1.25rem 1rem 1.5rem;
+    }
+
+    .model-wrap {
+      margin-left: -0.75rem;
+      margin-right: -0.75rem;
+    }
+
+    #model .label { font-size: 23px; }
+    #model .value-label { font-size: 17px; }
+
+    .slider-row {
+      grid-template-columns: 1fr 2.8rem;
+    }
+
+    .slider-row label {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .closing {
+    text-align: center;
+    color: var(--muted);
+    padding: 0 1.25rem 2.5rem;
+    font-size: 0.95rem;
+  }
+
+  .closing a {
+    color: var(--accent-dark);
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-top"><a class="back-link" href="index.html#helhetlig-helse">← Til forsiden</a></div>
+    <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
+    <h1>Helhetlig – i balanse</h1>
+    <p>Dra i bladene og se hvordan søvn, stress, kosthold, bevegelse og relasjoner påvirker hverandre.</p>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <section class="card">
+    <p class="how-to">Jo større bladet er, jo bedre går det på det området. For <strong>stress</strong> betyr et stort blad at du har god ro og lite stress. Dra et blad innover eller utover, og se hvordan de andre følger etter.</p>
+
+    <div class="model-wrap">
+      <svg id="model" viewBox="-128 -44 656 494" role="group" aria-label="Interaktiv modell med fem blader">
+        <defs>
+          <radialGradient id="heartGlow">
+            <stop offset="0%" stop-color="#fff" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <g id="decor" fill="none" stroke="#9dbad6" stroke-width="1.2" opacity="0.55"></g>
+        <circle cx="200" cy="200" r="170" fill="none" stroke="#6f9cc6" stroke-width="2.5" opacity="0.8"/>
+        <g id="petals"></g>
+        <circle id="glow" cx="200" cy="200" r="46" fill="url(#heartGlow)"/>
+        <path id="heart" d="M200 214 C 186 203, 180 196, 180 189 C 180 182, 186 178, 191 178 C 195 178, 198 180, 200 184 C 202 180, 205 178, 209 178 C 214 178, 220 182, 220 189 C 220 196, 214 203, 200 214 Z" fill="#fff" stroke="#c9b48a" stroke-width="2"/>
+        <g id="nodes"></g>
+        <g id="labels"></g>
+      </svg>
+    </div>
+
+    <div class="message" id="message" aria-live="polite">
+      Prøv for eksempel å dra <strong>søvn</strong> innover, som etter noen netter med lite søvn. Se hva som skjer med stress og de andre områdene.
+    </div>
+
+    <div class="controls">
+      <label class="toggle"><input type="checkbox" id="ripple" checked> Vis ringvirkninger</label>
+      <button type="button" class="button" id="reset">Nullstill</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Juster med glidebrytere</h2>
+    <p class="how-to">Her kan du også stille inn hvert område fra 0 til 10. Skru av «Vis ringvirkninger» hvis du vil stille inn hvordan du har det nå, uten at de andre flytter seg.</p>
+    <div class="sliders" id="sliders"></div>
+  </section>
+
+  <section class="card">
+    <h2>Balanse, ikke perfeksjon</h2>
+    <p>Modellen er en forenkling, og alle mennesker er forskjellige. Poenget er å vise at områdene henger sammen. Du trenger ikke fulle blader overalt. Dagene går opp og ned, og når ett område er svakere en periode, kan de andre bære litt ekstra. Ofte er det der ett blad er minst at en liten endring gir størst ringvirkning.</p>
+  </section>
+
+</main>
+
+<p class="closing">Vil du utforske dette sammen med meg? <a href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post</a></p>
+
+<script>
+(function () {
+  var C = { x: 200, y: 200 };
+  var R = 170;          // ytre sirkel
+  var R_MIN = 40;       // bladlengde ved 0
+  var R_MAX = 162;      // bladlengde ved 10
+  var START = 6;
+  var SVG_NS = "http://www.w3.org/2000/svg";
+
+  var areas = [
+    { id: "stress", name: "Stress", lines: ["Stress"], angle: -90, color: "#8fb3cc",
+      states: ["Mye stress", "Noe stress", "God ro"],
+      down: "Når stresset øker, sover mange dårligere, spiser mer på autopilot og trekker seg unna både trening og venner.",
+      up: "Mer ro gjør det lettere å sove godt, ta gode valg og være til stede for dem rundt deg." },
+    { id: "sovn", name: "Søvn", lines: ["Søvn"], angle: -18, color: "#5b8fc2",
+      states: ["Lite søvn", "Ujevn søvn", "God søvn"],
+      down: "Når du sover lite, tåler du mindre stress, suget etter rask energi øker, og overskuddet til trening og andre mennesker blir mindre.",
+      up: "God søvn gir et roligere nervesystem, bedre matvalg og mer overskudd til bevegelse og relasjoner." },
+    { id: "kosthold", name: "Kosthold", lines: ["Kosthold"], angle: 54, color: "#3e72a8",
+      states: ["Uregelmessig", "Litt ujevnt", "Godt kosthold"],
+      down: "Uregelmessige måltider kan gi ujevn energi gjennom dagen, og det merkes på humør, søvn og lyst til å bevege seg.",
+      up: "Jevne, gode måltider gir stabil energi, og det gjør det lettere å være i aktivitet og holde humøret oppe." },
+    { id: "bevegelse", name: "Bevegelse og trening", lines: ["Bevegelse", "og trening"], angle: 126, color: "#5fa3a8",
+      states: ["Lite bevegelse", "Noe bevegelse", "Mye bevegelse"],
+      down: "Mindre bevegelse gir ofte dårligere søvn og mindre utløp for stress.",
+      up: "Bevegelse er en av de beste måtene å bearbeide stress på, og hjelper kroppen til å sove bedre." },
+    { id: "relasjoner", name: "Relasjoner", lines: ["Relasjoner"], angle: 198, color: "#8b9bbd",
+      states: ["Lite kontakt", "Noe kontakt", "Gode relasjoner"],
+      down: "Når vi har lite kontakt med andre, øker ofte stresset, og det blir vanskeligere å holde på gode vaner.",
+      up: "Gode relasjoner gir trygghet og overskudd, og demper stress." }
+  ];
+
+  // Hvor mye en endring i rad-området smitter over på kolonne-området (stress, søvn, kosthold, bevegelse, relasjoner)
+  var influence = {
+    stress:     { sovn: 0.5,  kosthold: 0.35, bevegelse: 0.25, relasjoner: 0.3 },
+    sovn:       { stress: 0.5, kosthold: 0.35, bevegelse: 0.35, relasjoner: 0.25 },
+    kosthold:   { stress: 0.2, sovn: 0.2,  bevegelse: 0.3,  relasjoner: 0.1 },
+    bevegelse:  { stress: 0.4, sovn: 0.35, kosthold: 0.2,  relasjoner: 0.15 },
+    relasjoner: { stress: 0.45, sovn: 0.2, kosthold: 0.15, bevegelse: 0.2 }
+  };
+
+  var target = {}, shown = {};
+  areas.forEach(function (a) {
+    target[a.id] = START;
+    shown[a.id] = START;
+    var rad = a.angle * Math.PI / 180;
+    a.u = { x: Math.cos(rad), y: Math.sin(rad) };
+    a.n = { x: -a.u.y, y: a.u.x };
+  });
+
+  var svg = document.getElementById("model");
+  var petalsG = document.getElementById("petals");
+  var nodesG = document.getElementById("nodes");
+  var labelsG = document.getElementById("labels");
+  var decorG = document.getElementById("decor");
+  var rippleBox = document.getElementById("ripple");
+  var message = document.getElementById("message");
+
+  function el(name, attrs, parent) {
+    var e = document.createElementNS(SVG_NS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  function clamp(v) { return Math.max(0, Math.min(10, v)); }
+  function lengthFor(v) { return R_MIN + (R_MAX - R_MIN) * v / 10; }
+  function stateFor(a, v) { return a.states[v < 3.5 ? 0 : v < 6.5 ? 1 : 2]; }
+
+  // Dekorative sirkler som vever områdene sammen
+  areas.forEach(function (a) {
+    el("circle", { cx: C.x + a.u.x * R / 2, cy: C.y + a.u.y * R / 2, r: R / 2 }, decorG);
+  });
+
+  areas.forEach(function (a, i) {
+    var g = el("g", { "class": "petal-group", tabindex: "0", role: "slider",
+      "aria-label": a.name, "aria-valuemin": "0", "aria-valuemax": "10" }, petalsG);
+    a.group = g;
+    a.petal = el("path", { "class": "petal", fill: a.color, "fill-opacity": "0.6", stroke: a.color, "stroke-width": "1.5" }, g);
+    a.handle = el("circle", { "class": "handle", r: "9", stroke: a.color }, g);
+    a.hit = el("circle", { "class": "handle-hit", r: "26", fill: "transparent" }, g);
+
+    var nx = C.x + a.u.x * R, ny = C.y + a.u.y * R;
+    el("circle", { cx: nx, cy: ny, r: "15", fill: a.color, stroke: "#fff", "stroke-width": "3" }, nodesG);
+
+    var lr = R + 34;
+    var lx = C.x + a.u.x * lr, ly = C.y + a.u.y * lr;
+    var anchor = Math.abs(a.u.x) < 0.2 ? "middle" : (a.u.x > 0 ? "start" : "end");
+    if (Math.abs(a.u.x) < 0.2) ly -= 8;
+    var t = el("text", { "class": "label", x: lx, y: ly, "text-anchor": anchor }, labelsG);
+    a.lines.forEach(function (line, k) {
+      var ts = el("tspan", { x: lx, dy: k === 0 ? (a.lines.length > 1 ? "-0.3em" : "0.35em") : "1.15em" }, t);
+      ts.textContent = line;
+    });
+    a.valueText = el("tspan", { "class": "value-label", x: lx, dy: "1.3em" }, t);
+
+    a.index = i;
+    attachDrag(a);
+    attachKeys(a);
+  });
+
+  // Glidebrytere
+  var slidersBox = document.getElementById("sliders");
+  areas.forEach(function (a) {
+    var row = document.createElement("div");
+    row.className = "slider-row";
+    row.innerHTML =
+      '<label for="s-' + a.id + '">' + a.name + '<span class="state" id="st-' + a.id + '"></span></label>' +
+      '<input type="range" id="s-' + a.id + '" min="0" max="10" step="0.5">' +
+      '<output id="o-' + a.id + '" for="s-' + a.id + '"></output>';
+    slidersBox.appendChild(row);
+    a.slider = row.querySelector("input");
+    a.output = row.querySelector("output");
+    a.stateText = row.querySelector(".state");
+    var before = null;
+    a.slider.addEventListener("pointerdown", function () { before = target[a.id]; });
+    a.slider.addEventListener("input", function () {
+      if (before === null) before = target[a.id];
+      setValue(a, parseFloat(a.slider.value));
+    });
+    a.slider.addEventListener("change", function () {
+      explain(a, before === null ? target[a.id] : before);
+      before = null;
+    });
+  });
+
+  function setValue(a, v) {
+    v = clamp(v);
+    var delta = v - target[a.id];
+    target[a.id] = v;
+    shown[a.id] = v;
+    if (rippleBox.checked && delta !== 0) {
+      var inf = influence[a.id];
+      for (var other in inf) {
+        target[other] = clamp(target[other] + inf[other] * delta);
+      }
+    }
+    kick();
+  }
+
+  function petalPath(a, v) {
+    var L = lengthFor(v);
+    var w = 14 + 0.3 * L;
+    var u = a.u, n = a.n;
+    function p(along, side) {
+      return (C.x + u.x * along + n.x * side).toFixed(1) + " " + (C.y + u.y * along + n.y * side).toFixed(1);
+    }
+    return "M" + p(14, 0) +
+      " C" + p(0.3 * L, w) + ", " + p(0.78 * L, 0.75 * w) + ", " + p(L, 0) +
+      " C" + p(0.78 * L, -0.75 * w) + ", " + p(0.3 * L, -w) + ", " + p(14, 0) + " Z";
+  }
+
+  function render() {
+    var sum = 0;
+    areas.forEach(function (a) {
+      var v = shown[a.id];
+      sum += v;
+      a.petal.setAttribute("d", petalPath(a, v));
+      var L = lengthFor(v);
+      var hx = C.x + a.u.x * L, hy = C.y + a.u.y * L;
+      a.handle.setAttribute("cx", hx); a.handle.setAttribute("cy", hy);
+      a.hit.setAttribute("cx", hx); a.hit.setAttribute("cy", hy);
+      var rounded = Math.round(target[a.id] * 2) / 2;
+      a.valueText.textContent = stateFor(a, target[a.id]);
+      a.group.setAttribute("aria-valuenow", rounded);
+      a.group.setAttribute("aria-valuetext", rounded + " av 10, " + stateFor(a, target[a.id]));
+      if (document.activeElement !== a.slider) a.slider.value = rounded;
+      a.output.textContent = rounded.toLocaleString("no") + " / 10";
+      a.stateText.textContent = stateFor(a, target[a.id]);
+    });
+    var avg = sum / areas.length;
+    document.getElementById("glow").setAttribute("r", (30 + avg * 4).toFixed(1));
+    document.getElementById("heart").setAttribute("fill-opacity", (0.55 + avg * 0.045).toFixed(2));
+  }
+
+  // Myk animasjon: de andre bladene glir etter
+  var animating = false;
+  function kick() {
+    if (!animating) { animating = true; requestAnimationFrame(step); }
+  }
+  function step() {
+    var moving = false;
+    areas.forEach(function (a) {
+      var d = target[a.id] - shown[a.id];
+      if (Math.abs(d) > 0.01) { shown[a.id] += d * 0.12; moving = true; }
+      else shown[a.id] = target[a.id];
+    });
+    render();
+    if (moving) requestAnimationFrame(step); else animating = false;
+  }
+
+  function toSvg(evt) {
+    var pt = svg.createSVGPoint();
+    pt.x = evt.clientX; pt.y = evt.clientY;
+    return pt.matrixTransform(svg.getScreenCTM().inverse());
+  }
+
+  function attachDrag(a) {
+    var start = null;
+    function down(evt) {
+      evt.preventDefault();
+      start = target[a.id];
+      a.group.classList.add("active");
+      svg.classList.add("dragging");
+      a.group.setPointerCapture(evt.pointerId);
+      move(evt);
+    }
+    function move(evt) {
+      if (start === null) return;
+      var p = toSvg(evt);
+      var along = (p.x - C.x) * a.u.x + (p.y - C.y) * a.u.y;
+      var v = (along - R_MIN) / (R_MAX - R_MIN) * 10;
+      setValue(a, Math.round(clamp(v) * 10) / 10);
+    }
+    function up() {
+      if (start === null) return;
+      a.group.classList.remove("active");
+      svg.classList.remove("dragging");
+      explain(a, start);
+      start = null;
+    }
+    a.group.addEventListener("pointerdown", down);
+    a.group.addEventListener("pointermove", move);
+    a.group.addEventListener("pointerup", up);
+    a.group.addEventListener("pointercancel", up);
+  }
+
+  function attachKeys(a) {
+    a.group.addEventListener("keydown", function (evt) {
+      var before = target[a.id], v = before;
+      if (evt.key === "ArrowUp" || evt.key === "ArrowRight") v += 0.5;
+      else if (evt.key === "ArrowDown" || evt.key === "ArrowLeft") v -= 0.5;
+      else if (evt.key === "Home") v = 0;
+      else if (evt.key === "End") v = 10;
+      else return;
+      evt.preventDefault();
+      setValue(a, Math.round(v * 2) / 2);
+      explain(a, before);
+    });
+  }
+
+  function fmt(v) { return (Math.round(v * 2) / 2).toLocaleString("no"); }
+
+  function explain(a, before) {
+    var after = target[a.id];
+    var diff = after - before;
+    if (Math.abs(diff) < 0.3) return;
+    var text = "<strong>" + a.name + "</strong> gikk fra " + fmt(before) + " til " + fmt(after) + ". " + (diff < 0 ? a.down : a.up);
+    if (!rippleBox.checked) {
+      text = "<strong>" + a.name + "</strong> er nå " + fmt(after) + " av 10. Ringvirkningene er skrudd av, så de andre bladene står stille.";
+    }
+    text += " " + balanceNote();
+    message.innerHTML = text;
+  }
+
+  function balanceNote() {
+    var vals = areas.map(function (a) { return target[a.id]; });
+    var min = Math.min.apply(null, vals);
+    if (min >= 7) return "Du trenger ikke fulle blader overalt. Når de fleste områdene er gode, har du et godt fundament.";
+    if (min <= 3) {
+      var lowest = areas.filter(function (a) { return target[a.id] === min; })[0];
+      return "Nå er <strong>" + lowest.name.toLowerCase() + "</strong> lavest. Ofte er det der en liten endring gir størst ringvirkning.";
+    }
+    return "Dagene går opp og ned, og det er helt normalt.";
+  }
+
+  rippleBox.addEventListener("change", function () {
+    message.innerHTML = rippleBox.checked
+      ? "Ringvirkningene er på igjen. Når du endrer ett blad, følger de andre etter."
+      : "Ringvirkningene er av. Nå kan du stille inn hvert område for seg, for eksempel slik du har det akkurat nå.";
+  });
+
+  document.getElementById("reset").addEventListener("click", function () {
+    areas.forEach(function (a) { target[a.id] = START; });
+    message.innerHTML = "Alle områdene er satt tilbake til 6. Prøv å dra i et blad og se hva som skjer.";
+    kick();
+  });
+
+  render();
+})();
+</script>
+
+</body>
+</html>
