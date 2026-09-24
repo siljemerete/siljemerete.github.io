@@ -269,22 +269,20 @@
     color: var(--accent-soft);
   }
 
-  .exercise-list {
-    margin: 0;
-    padding-left: 1.25rem;
+  .exercise-steps {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
   }
 
-  .exercise-list li {
-    margin: 0 0 0.9rem;
-  }
-
-  .exercise-list li:last-child { margin-bottom: 0; }
-
-  .exercise-list li strong { color: var(--accent-dark); }
-
-  .exercise-list li p {
-    margin: 0.2rem 0 0;
-    color: var(--muted);
+  .exercise-steps img {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border);
   }
 
   .meta {
@@ -315,24 +313,6 @@
 
   .step-list li.rest { font-size: 0.92rem; }
 
-  .exercise-figure {
-    margin: 0 0 1.5rem;
-  }
-
-  .exercise-figure img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-  }
-
-  .exercise-figure figcaption {
-    margin-top: 0.4rem;
-    font-size: 0.85rem;
-    color: var(--muted);
-    text-align: center;
-  }
 
   [hidden] { display: none !important; }
 </style>
@@ -376,23 +356,14 @@
       <p><strong>Utstyr:</strong> en stol, en treningsstrikk og lette manualer.</p>
       <p><strong>Slik gjør du det:</strong> 2 minutter rolig oppvarming, så 2 runder med de fem øvelsene. 40 sekunder arbeid og 20 sekunder til å hvile og bytte. Avslutt med litt rolig bevegelse.</p>
     </div>
-    <figure class="exercise-figure">
-      <a href="images/styrke-hjemme-5-ovelser.jpg"><img src="images/styrke-hjemme-5-ovelser.jpg" width="1536" height="1024" alt="Illustrasjon av de fem øvelsene: knebøy til stol, sittende roing med strikk, skulderpress med manualer, seteløft (glute bridge) og dead bug, med silhuetter og korte instruksjoner for hver øvelse."></a>
-      <figcaption>Trykk på bildet for å se det i full størrelse.</figcaption>
-    </figure>
     <p><strong>Oppvarming, ca. 2 min:</strong> Gå på stedet, rull skuldrene, beveg armene og gjør noen rolige knebøy til stol.</p>
-    <ol class="exercise-list">
-      <li><strong>Knebøy til stol</strong>
-        <p>Sett deg kontrollert ned mot stolen og reis deg opp igjen. En fin og trygg start for lår og sete.</p></li>
-      <li><strong>Sittende roing med strikk</strong>
-        <p>Sitt på stol eller gulv og fest strikken godt rundt føttene. Trekk albuene bakover og hold brystet oppe. Trener rygg og armer.</p></li>
-      <li><strong>Skulderpress med lette manualer</strong>
-        <p>Sitt eller stå. Press manualene rolig opp over hodet og senk dem kontrollert. Bruk lette vekter i starten.</p></li>
-      <li><strong>Seteløft (glute bridge)</strong>
-        <p>Ligg på ryggen med bøyde knær. Press føttene i gulvet, løft hoften rolig og senk igjen. Trener sete, bakside og stabilitet rundt bekken og kjerne.</p></li>
-      <li><strong>Dead bug (mage og kjerne)</strong>
-        <p>Ligg på ryggen med knærne bøyd. Stram magen lett og senk motsatt arm og bein kontrollert. Gjør bevegelsen mindre hvis korsryggen begynner å løfte seg fra gulvet.</p></li>
-    </ol>
+    <div class="exercise-steps">
+      <img src="images/styrke-15-1-kneboy.jpg" width="304" height="797" loading="lazy" alt="Knebøy til stol: illustrasjon med silhuetter og forklaring av øvelsen.">
+      <img src="images/styrke-15-2-roing.jpg" width="288" height="797" loading="lazy" alt="Sittende roing med strikk: illustrasjon med silhuetter og forklaring av øvelsen.">
+      <img src="images/styrke-15-3-skulderpress.jpg" width="292" height="797" loading="lazy" alt="Skulderpress med manualer: illustrasjon med silhuetter og forklaring av øvelsen.">
+      <img src="images/styrke-15-4-seteloft.jpg" width="292" height="797" loading="lazy" alt="Seteløft (glute bridge): illustrasjon med silhuetter og forklaring av øvelsen.">
+      <img src="images/styrke-15-5-deadbug.jpg" width="290" height="797" loading="lazy" alt="Dead bug (mage og kjerne): illustrasjon med silhuetter og forklaring av øvelsen.">
+    </div>
   </section>
 
   <section class="card" data-panel="mini" hidden>
@@ -401,23 +372,14 @@
       <p><strong>Utstyr:</strong> ingenting. Bare en stol og en vegg eller kjøkkenbenk.</p>
       <p><strong>Slik gjør du det:</strong> 1 minutt oppvarming, så én runde med de fem øvelsene. 40 sekunder arbeid og ca. 20 sekunder til å hvile og bytte. Avslutt med litt rolig bevegelse og pust.</p>
     </div>
-    <figure class="exercise-figure">
-      <a href="images/styrke-hjemme-minimum.jpg"><img src="images/styrke-hjemme-minimum.jpg" width="1312" height="1199" alt="Illustrasjon av minimumsprogrammet: oppvarming i ett minutt, knebøy til stol, armhevinger mot vegg eller kjøkkenbenk, seteløft, bird dog og dead bug, med silhuetter og korte instruksjoner for hver øvelse."></a>
-      <figcaption>Trykk på bildet for å se det i full størrelse.</figcaption>
-    </figure>
-    <p><strong>Oppvarming, 1 min:</strong> Gå raskt på stedet og beveg armer og skuldre.</p>
-    <ol class="exercise-list">
-      <li><strong>Knebøy til stol</strong>
-        <p>Sett deg kontrollert ned mot stolen og reis deg opp igjen.</p></li>
-      <li><strong>Armhevinger mot vegg eller kjøkkenbenk</strong>
-        <p>Stå et lite stykke unna, sett hendene mot veggen eller benken og bøy armene rolig. Jo mer oppreist du står, jo lettere blir det.</p></li>
-      <li><strong>Seteløft</strong>
-        <p>Ligg på ryggen med bøyde knær. Press føttene i gulvet, løft hoften rolig og senk igjen.</p></li>
-      <li><strong>Bird dog</strong>
-        <p>Stå på alle fire. Strekk motsatt arm og bein rolig ut, hold litt, og bytt side. Hold ryggen rolig.</p></li>
-      <li><strong>Dead bug</strong>
-        <p>Ligg på ryggen med knærne bøyd. Stram magen lett og senk motsatt arm og bein kontrollert.</p></li>
-    </ol>
+    <div class="exercise-steps">
+      <img src="images/styrke-mini-0-oppvarming.jpg" width="428" height="526" loading="lazy" alt="Oppvarming i ett minutt: illustrasjon med silhuetter og forklaring av øvelsen.">
+      <img src="images/styrke-mini-1-kneboy.jpg" width="406" height="526" loading="lazy" alt="Knebøy til stol: illustrasjon med silhuetter og forklaring av øvelsen.">
+      <img src="images/styrke-mini-2-armhevinger.jpg" width="424" height="526" loading="lazy" alt="Armhevinger mot vegg eller kjøkkenbenk: illustrasjon med silhuetter og forklaring av øvelsen.">
+      <img src="images/styrke-mini-3-seteloft.jpg" width="428" height="518" loading="lazy" alt="Seteløft: illustrasjon med silhuetter og forklaring av øvelsen.">
+      <img src="images/styrke-mini-4-birddog.jpg" width="406" height="518" loading="lazy" alt="Bird dog: illustrasjon med silhuetter og forklaring av øvelsen.">
+      <img src="images/styrke-mini-5-deadbug.jpg" width="424" height="518" loading="lazy" alt="Dead bug: illustrasjon med silhuetter og forklaring av øvelsen.">
+    </div>
   </section>
 
   <section class="card">
