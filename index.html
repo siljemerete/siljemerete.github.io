@@ -70,9 +70,18 @@
     color: var(--accent-dark);
     font-size: 1.02rem;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
-  .brand span {
+  .brand-logo {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+
+  .brand-name span {
     color: var(--accent);
     font-weight: 600;
   }
@@ -908,7 +917,7 @@
 
 <header class="site-header">
   <div class="nav-wrap">
-    <div class="brand">Silje Merete <span>SMART Helseveiledning</span></div>
+    <div class="brand"><img class="brand-logo" src="images/logo.png" width="36" height="36" alt=""><span class="brand-name">Silje Merete <span>SMART Helseveiledning</span></span></div>
     <nav class="site-nav">
       <a href="#om-meg">Om meg</a>
       <a href="min-historie.html">Min historie</a>
