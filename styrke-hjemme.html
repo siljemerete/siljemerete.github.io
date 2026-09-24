@@ -77,37 +77,6 @@
     color: var(--muted);
   }
 
-  .step-list {
-    margin: 0 0 1.5rem;
-    padding-left: 1.25rem;
-  }
-
-  .step-list li {
-    margin: 0 0 0.6rem;
-    color: var(--muted);
-  }
-
-  .step-list li:last-child {
-    margin-bottom: 0;
-  }
-
-  .step-list li strong {
-    color: var(--ink);
-  }
-
-  .step-list li.active {
-    color: var(--ink);
-  }
-
-  .step-list li.active strong {
-    color: var(--accent-dark);
-  }
-
-  .step-list li.done {
-    text-decoration: line-through;
-    opacity: 0.6;
-  }
-
   .timer-display {
     text-align: center;
   }
@@ -311,8 +280,6 @@
 
   .reflect-list li { margin: 0 0 0.5rem; }
 
-  .step-list li.rest { font-size: 0.92rem; }
-
 
   [hidden] { display: none !important; }
 </style>
@@ -400,7 +367,6 @@
       <button type="button" id="timerNext" class="secondary">Neste</button>
       <button type="button" id="timerReset" class="secondary">Nullstill</button>
     </div>
-    <ol class="step-list" style="margin:1.5rem 0 0" id="stepList"></ol>
   </section>
 
   <section class="card">
@@ -495,7 +461,6 @@
     var finished = false;
 
     var descEl = document.getElementById('timerDesc');
-    var stepListEl = document.getElementById('stepList');
     var stepNameEl = document.getElementById('stepName');
     var clockEl = document.getElementById('timerClock');
     var progressBarEl = document.getElementById('timerProgressBar');
@@ -505,20 +470,6 @@
     var prevBtn = document.getElementById('timerPrev');
     var nextBtn = document.getElementById('timerNext');
     var resetBtn = document.getElementById('timerReset');
-
-    function renderStepList() {
-      stepListEl.innerHTML = '';
-      STEPS.forEach(function (step, i) {
-        var li = document.createElement('li');
-        li.innerHTML = '<strong>' + step.label + '</strong>: ' + step.seconds + ' sek';
-        var classes = [];
-        if (step.rest) classes.push('rest');
-        if (i === index && !finished) classes.push('active');
-        else if (i < index || (i === index && finished)) classes.push('done');
-        li.className = classes.join(' ');
-        stepListEl.appendChild(li);
-      });
-    }
 
     function formatClock(seconds) {
       var m = Math.floor(seconds / 60);
@@ -549,7 +500,6 @@
       var elapsed = step.seconds - remaining;
       progressBarEl.style.width = ((elapsed / step.seconds) * 100) + '%';
       phraseEl.textContent = finished ? 'Bra jobbet! Du gjorde det du bestemte deg for.' : step.instruction;
-      renderStepList();
       prevBtn.disabled = index === 0 && !finished;
       nextBtn.disabled = finished;
     }
