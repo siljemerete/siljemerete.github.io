@@ -804,6 +804,81 @@
     }
   }
 
+  /* Livsfaser: bilde med tekst under */
+  .life-phases {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin: 2.25rem 0;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    scroll-margin-top: 5rem;
+  }
+
+  .life-phases-photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .life-phases-text {
+    padding: 1.6rem 1.85rem 1.85rem;
+    text-align: center;
+  }
+
+  .life-phases h2 {
+    margin: 0 auto 0.6rem;
+    max-width: 30ch;
+    color: var(--accent-dark);
+    font-size: 1.5rem;
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+
+  .life-phases p {
+    margin: 0.5rem auto 0;
+    max-width: 60ch;
+  }
+
+  .life-phases p.kicker {
+    margin: 0 auto 0.35rem;
+  }
+
+  @media (min-width: 720px) {
+    .life-phases {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      align-items: stretch;
+    }
+    .life-phases-photo {
+      height: 100%;
+      min-height: 320px;
+      aspect-ratio: auto;
+      object-position: 30% center;
+      order: 2;
+    }
+    .life-phases-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2rem 2rem 2.1rem;
+      text-align: left;
+    }
+    .life-phases h2,
+    .life-phases p,
+    .life-phases p.kicker {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .life-phases-text { padding: 1.3rem 1.25rem 1.5rem; }
+    .life-phases h2 { font-size: 1.3rem; }
+  }
+
   .quote-card {
     background: var(--accent-soft);
     border-radius: 12px;
@@ -1047,6 +1122,16 @@
 
     <p>Denne tilnærmingen bygger på metodikken fra <a class="inline-link" href="https://instituttet.abelhelse.no/" target="_blank" rel="noopener">Abel Instituttet</a>, som utdanner helseveiledere i Norge.</p>
   </section>
+
+  <div id="livsfaser" class="life-phases">
+    <img class="life-phases-photo" src="images/livsfaser-blader.jpg" width="1672" height="941" loading="lazy" alt="Høstblader i mange farger og former, friske grønne, gule, røde og visne, ligger sammen på en gammel treplatting i lavt sollys">
+    <div class="life-phases-text">
+      <p class="kicker">Helse i alle faser</p>
+      <h2>Livet har mange faser – og helse har mange nyanser.</h2>
+      <p>Vi møter endring, sykdom, vekst og motgang i alle aldre.</p>
+      <p>Vi står på ulike steder i livet, med ulik helse, ulike belastninger, ulike ressurser og ulike behov.</p>
+    </div>
+  </div>
 
   <section id="helhetlig-helse" class="card-section">
     <p class="kicker">Min modell</p>
