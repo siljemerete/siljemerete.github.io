@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vekt &amp; helse | Silje Merete SMART Helseveiledning</title>
+<meta name="description" content="Tallet på vekten forteller ikke hele historien. Om vekt, BMI, kroppssammensetning og hvorfor god helse handler om mer enn ett tall.">
+<meta property="og:title" content="Vekt & helse | Silje Merete SMART Helseveiledning">
+<meta property="og:description" content="Tallet på vekten forteller ikke hele historien. Om vekt, BMI, kroppssammensetning og hvorfor god helse handler om mer enn ett tall.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#1f3c5c">
+<link rel="icon" href="images/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<style>
+  :root {
+    --bg: #f4f8fb;
+    --card: #ffffff;
+    --ink: #16283a;
+    --muted: #55697c;
+    --accent: #386ba0;
+    --accent-dark: #1f3c5c;
+    --accent-soft: #e7f0f8;
+    --border: #d6e3ee;
+    --shadow: 0 1px 3px rgba(22, 40, 58, 0.08), 0 1px 2px rgba(22, 40, 58, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+    padding: 3rem 0 3.5rem;
+    text-align: center;
+  }
+
+  .hero .kicker {
+    margin: 0 0 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .hero h1 {
+    margin: 0 0 0.75rem;
+    font-size: 1.9rem;
+    line-height: 1.25;
+    color: #fff;
+  }
+
+  .hero p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1.05rem;
+    max-width: 46ch;
+    margin-inline: auto;
+  }
+
+  .card-section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.85rem 1.85rem 2.1rem;
+    margin: 2.25rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .card-section h2 {
+    margin: 0 0 0.9rem;
+    color: var(--accent-dark);
+    font-size: 1.35rem;
+    line-height: 1.3;
+  }
+
+  .card-section p {
+    margin: 0.75rem 0;
+  }
+
+  .card-section p:last-child {
+    margin-bottom: 0;
+  }
+
+  sup a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  sup a:hover { text-decoration: underline; }
+
+  .callout {
+    background: var(--accent-dark);
+    color: #fff;
+    border-radius: 10px;
+    padding: 1.1rem 1.3rem;
+    margin: 1.4rem 0;
+  }
+
+  .callout p {
+    margin: 0;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .quote-card {
+    background: var(--accent-soft);
+    border-radius: 12px;
+    padding: 1.75rem;
+    margin: 2.25rem 0;
+    text-align: center;
+  }
+
+  .quote-card blockquote {
+    margin: 0;
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--accent-dark);
+    max-width: 48ch;
+    margin-inline: auto;
+  }
+
+  .refs {
+    margin: 0.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: refcount;
+  }
+
+  .refs li {
+    counter-increment: refcount;
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--border);
+    font-size: 0.92rem;
+  }
+
+  .refs li:first-child {
+    border-top: none;
+    padding-top: 0.25rem;
+  }
+
+  .refs li::before {
+    content: "[" counter(refcount) "] ";
+    font-weight: 700;
+    color: var(--accent-dark);
+  }
+
+  .refs .ref-title {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .refs a {
+    display: block;
+    margin-top: 0.15rem;
+    color: var(--accent);
+    word-break: break-all;
+    font-size: 0.85rem;
+  }
+
+  .note-section p {
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .home-link {
+    display: block;
+    text-align: center;
+    margin: 0 0 3rem;
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .home-link:hover { text-decoration: underline; }
+
+  footer.closing {
+    margin: 2rem 0 1rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong { color: var(--accent-dark); }
+
+  @media (max-width: 560px) {
+    .hero h1 { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">Vekt &amp; helse</p>
+    <h1>Tallet på vekten forteller ikke hele historien</h1>
+    <p>Hvorfor vekt og BMI aldri kan stå alene</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section class="card-section">
+    <p>Da jeg selv gikk ned nær 20 kilo, var det selvfølgelig lett å se forandringen på vekten. Men etter hvert ble jeg mer opptatt av noe annet:</p>
+    <p>Hva er egentlig en sunn kropp, og kan vi lese svaret av et tall på vekten?</p>
+    <p>Vekt og BMI kan gi nyttig informasjon, men de forteller ikke hele historien. BMI skiller for eksempel ikke mellom fettmasse og muskelmasse, og sier heller ikke noe om hvor på kroppen fettvevet sitter.</p>
+    <p>Derfor kan to mennesker med samme BMI ha ganske forskjellig kroppssammensetning og ulik risiko for livsstilsrelatert sykdom.</p>
+    <p>For meg er det derfor mer interessant å se på helheten. Midjemål og kroppssammensetning, blodtrykk og metabolske markører, muskelstyrke og fysisk kapasitet er viktige deler av bildet. Det samme gjelder søvn, energi, stress, kosthold, bevegelse og hvordan du faktisk har det i kroppen din.</p>
+  </section>
+
+  <section class="card-section">
+    <h2>Når vektnedgang blir behandling</h2>
+    <p>For mennesker med overvekt eller fedme og økt helserisiko kan vektnedgang være en viktig del av behandlingen. I dag finnes det også effektive legemidler som hjelper mange mennesker med dette.</p>
+    <p>Det synes jeg vi skal kunne snakke om uten skam og uten å gjøre kroppsvekt til et spørsmål om viljestyrke.</p>
+    <p>Samtidig synes jeg vi skal stille et annet viktig spørsmål:</p>
+    <p>Hva ønsker vi egentlig å oppnå når vekten går ned?</p>
+    <p>Målet bør ikke bare være en mindre kropp. Målet bør være en kropp som fungerer godt.</p>
+  </section>
+
+  <section class="card-section">
+    <h2>Vi ønsker ikke bare å miste kilo</h2>
+    <p>Ved større vektnedgang forsvinner hovedsakelig fettmasse, men vanligvis også noe fettfri masse.</p>
+    <p>Det gjelder både ved vektnedgang gjennom endringer i levevaner og ved bruk av moderne GLP-1- og inkretinbaserte legemidler. Forskning viser at tap av fettfri masse kan utgjøre en del av det samlede vekttapet.<sup><a href="#ref1">1</a>,<a href="#ref2">2</a></sup></p>
+    <p>Det betyr ikke at slike legemidler er «dårlige for musklene». De kan gi betydelig reduksjon i fettmasse, og hvor mye fettfri masse som tapes varierer mellom mennesker og mellom studier.</p>
+    <p>Men det minner oss om noe viktig:</p>
+    <div class="callout">
+      <p>Når kroppen blir lettere, ønsker vi samtidig å bevare en kropp som er sterk.</p>
+    </div>
+    <p>Derfor blir styrketrening, fysisk aktivitet og tilstrekkelig ernæring og protein særlig viktig ved større vektnedgang, uansett hvordan vektnedgangen oppnås.</p>
+  </section>
+
+  <section class="card-section">
+    <h2>Min egen vektnedgang var en bonus</h2>
+    <p>Da jeg endret kostholdet mitt, var ikke målet først og fremst å bli tynnere. Jeg ønsket å finne ut om jeg kunne påvirke hvordan jeg hadde det i kroppen.</p>
+    <p>Vekten gikk betydelig ned. Men det jeg selv opplevde som viktigst, var mer energi, mer lyst til å bevege meg og følelsen av å fungere bedre i hverdagen.</p>
+    <p>Derfor ønsker jeg heller ikke å møte mennesker med én bestemt idé om hva de bør veie.</p>
+    <p>Noen ønsker å gå ned i vekt. Andre trenger først og fremst mer energi, bedre søvn, mer styrke, bedre matvaner eller en hverdag som gir litt mer rom for egen helse.</p>
+  </section>
+
+  <section class="card-section">
+    <h2>Helse er mer enn et tall</h2>
+    <p>Vekten kan være ett mål. BMI kan være ett verktøy. Midjemål kan fortelle oss noe mer. Blodprøver, blodtrykk og fysisk kapasitet kan gi ytterligere informasjon.</p>
+    <p>Men ingen av disse tallene alene forteller hele historien om et menneskes helse.</p>
+    <p>For meg handler god helse ikke først og fremst om å få kroppen ned til et bestemt tall. Det handler om å gi kroppen best mulige forutsetninger for å fungere godt, og om å finne vaner det faktisk går an å leve med over tid.</p>
+  </section>
+
+  <div class="quote-card">
+    <blockquote>Målet bør ikke bare være en mindre kropp. Målet bør være en kropp som fungerer godt.</blockquote>
+  </div>
+
+  <section class="card-section">
+    <p class="kicker">Kilder</p>
+    <h2>Forskning og kilder</h2>
+    <ol class="refs">
+      <li id="ref1"><span class="ref-title">Systematisk oversikt og metaanalyse, 2026. Vektnedgang og endringer i fettfri masse ved inkretinbasert behandling og livsstilsintervensjoner.</span><a href="https://pubmed.ncbi.nlm.nih.gov/41877354/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov/41877354</a></li>
+      <li id="ref2"><span class="ref-title">Systematisk oversikt og metaanalyse, 2025. GLP-1-baserte legemidler og endringer i kroppssammensetning.</span><a href="https://pubmed.ncbi.nlm.nih.gov/39719170/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov/39719170</a></li>
+    </ol>
+  </section>
+
+  <section class="card-section note-section">
+    <h2>Om artikkelen</h2>
+    <p>Denne artikkelen er skrevet som generell helseinformasjon og bygger på oppdatert forskning og faglige retningslinjer. Innholdet erstatter ikke individuell medisinsk vurdering, diagnostikk eller behandling. Ved spørsmål om medisiner, vektreduksjonsbehandling eller egen sykdom bør du rådføre deg med lege eller annet kvalifisert helsepersonell.</p>
+  </section>
+
+  <a class="home-link" href="min-historie.html">← Tilbake til min historie</a>
+
+</div>
+
+<footer class="closing">
+  Små skritt. Dine mål, ditt tempo.<br>
+  <strong>Du trenger ikke gjøre det alene.</strong>
+</footer>
+
+</body>
+</html>
