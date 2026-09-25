@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Overgangsalder &amp; hormonbehandling | Silje Merete SMART Helseveiledning</title>
+<meta name="description" content="Hormoner og aldring er ikke det samme. Om hva hormonbehandling kan og ikke kan gjøre i overgangsalderen, og hvorfor kosthold og livsstil fortsatt betyr mye.">
+<meta property="og:title" content="Overgangsalder & hormonbehandling | Silje Merete SMART Helseveiledning">
+<meta property="og:description" content="Hormoner og aldring er ikke det samme. Om hva hormonbehandling kan og ikke kan gjøre, og hvorfor kosthold og livsstil fortsatt betyr mye.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#1f3c5c">
+<link rel="icon" href="images/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<style>
+  :root {
+    --bg: #f4f8fb;
+    --card: #ffffff;
+    --ink: #16283a;
+    --muted: #55697c;
+    --accent: #386ba0;
+    --accent-dark: #1f3c5c;
+    --accent-soft: #e7f0f8;
+    --border: #d6e3ee;
+    --shadow: 0 1px 3px rgba(22, 40, 58, 0.08), 0 1px 2px rgba(22, 40, 58, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+    padding: 3rem 0 3.5rem;
+    text-align: center;
+  }
+
+  .hero .kicker {
+    margin: 0 0 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .hero h1 {
+    margin: 0 0 0.75rem;
+    font-size: 1.9rem;
+    line-height: 1.25;
+    color: #fff;
+  }
+
+  .hero p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1.05rem;
+    max-width: 46ch;
+    margin-inline: auto;
+  }
+
+  .card-section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.85rem 1.85rem 2.1rem;
+    margin: 2.25rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .card-section .kicker {
+    margin: 0 0 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .card-section h2 {
+    margin: 0 0 0.9rem;
+    color: var(--accent-dark);
+    font-size: 1.35rem;
+    line-height: 1.3;
+  }
+
+  .card-section h2:not(:first-child) {
+    margin-top: 0;
+  }
+
+  .card-section h3 {
+    margin: 1.6rem 0 0.6rem;
+    color: var(--accent-dark);
+    font-size: 1.08rem;
+    line-height: 1.35;
+  }
+
+  .card-section p {
+    margin: 0.75rem 0;
+  }
+
+  .card-section p:last-child {
+    margin-bottom: 0;
+  }
+
+  sup a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  sup a:hover { text-decoration: underline; }
+
+  .callout {
+    background: var(--accent-dark);
+    color: #fff;
+    border-radius: 10px;
+    padding: 1.1rem 1.3rem;
+    margin: 1.4rem 0;
+  }
+
+  .callout p {
+    margin: 0;
+    color: #fff;
+  }
+
+  .callout p + p {
+    margin-top: 0.5rem;
+  }
+
+  .quote-card {
+    background: var(--accent-soft);
+    border-radius: 12px;
+    padding: 1.75rem;
+    margin: 2.25rem 0;
+    text-align: center;
+  }
+
+  .quote-card blockquote {
+    margin: 0;
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--accent-dark);
+    max-width: 46ch;
+    margin-inline: auto;
+  }
+
+  .refs {
+    margin: 0.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: refcount;
+  }
+
+  .refs li {
+    counter-increment: refcount;
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--border);
+    font-size: 0.92rem;
+  }
+
+  .refs li:first-child {
+    border-top: none;
+    padding-top: 0.25rem;
+  }
+
+  .refs li::before {
+    content: "[" counter(refcount) "] ";
+    font-weight: 700;
+    color: var(--accent-dark);
+  }
+
+  .refs .ref-title {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .refs a {
+    display: block;
+    margin-top: 0.15rem;
+    color: var(--accent);
+    word-break: break-all;
+    font-size: 0.85rem;
+  }
+
+  .home-link {
+    display: block;
+    text-align: center;
+    margin: 0 0 3rem;
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .home-link:hover { text-decoration: underline; }
+
+  footer.closing {
+    margin: 2rem 0 1rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong { color: var(--accent-dark); }
+
+  @media (max-width: 560px) {
+    .hero h1 { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">Overgangsalder &amp; hormonbehandling</p>
+    <h1>Hormoner og aldring er ikke det samme</h1>
+    <p>Hva hormonbehandling kan og ikke kan gjøre, og hvorfor kosthold og livsstil fortsatt betyr mye</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section class="card-section">
+    <p>For mange kvinner kan overgangsalderen innebære store endringer. Hetetokter, nattesvette, søvnproblemer, endringer i slimhinner, seksuell helse, humør og energinivå kan påvirke både hverdagen og livskvaliteten.</p>
+    <p>Hormonbehandling kan være svært effektiv for mange av disse plagene. Samtidig er det viktig å skille mellom endringer som skyldes overgangsalderen og hormonelle endringer, og endringer som følger med aldring og livsstil.</p>
+    <p>Prosessene skjer samtidig, men de er ikke det samme.</p>
+  </section>
+
+  <section class="card-section">
+    <h2>Hva kan hormonbehandling hjelpe med?</h2>
+    <p>Menopausal hormonbehandling (MHT/HRT) er den mest effektive behandlingen mot hetetokter og nattesvette, og er også effektiv ved genitourinære plager knyttet til overgangsalderen. Systemisk hormonbehandling forebygger dessuten bentap og reduserer risikoen for brudd.<sup><a href="#ref1">1</a>,<a href="#ref2">2</a></sup></p>
+    <p>For kvinner under 60 år eller innen omtrent ti år etter menopause, uten kontraindikasjoner (uten sykdom), vurderer The Menopause Society forholdet mellom nytte og risiko som gunstig når hormonbehandling brukes mot plagsomme vasomotoriske symptomer eller for å forebygge bentap.<sup><a href="#ref1">1</a></sup></p>
+    <p>Det betyr ikke at behandlingen passer for alle. Risiko og nytte påvirkes blant annet av alder, tidspunkt for oppstart, preparat, dose, administrasjonsform og om østrogen brukes alene eller sammen med gestagen. Behandlingen bør derfor tilpasses den enkelte og vurderes på nytt over tid.<sup><a href="#ref1">1</a>,<a href="#ref2">2</a></sup></p>
+  </section>
+
+  <section class="card-section">
+    <h2>Men hormonbehandling stopper ikke aldringen</h2>
+    <p>Når søvn, hetetokter og andre symptomer bedres etter oppstart med hormoner, kan mange oppleve at de får tilbake energi og livskvalitet.</p>
+    <p>Men hormonbehandling erstatter ikke fysisk aktivitet, styrketrening, et godt kosthold eller restitusjon.</p>
+    <p>Når vi blir eldre, blir det stadig viktigere å bevare muskelmasse, styrke, balanse, skjelett og fysisk funksjon.</p>
+    <p>WHO anbefaler regelmessig fysisk aktivitet gjennom hele livet, og styrketrening av de store muskelgruppene minst to ganger i uken.<sup><a href="#ref3">3</a></sup></p>
+    <p>Protein og fysisk aktivitet er også viktige for å bevare muskelmasse. ESPEN anbefaler minst 1,0–1,2 gram protein per kilo kroppsvekt per dag for friske eldre mennesker, kombinert med fysisk aktivitet og trening.<sup><a href="#ref4">4</a></sup></p>
+    <div class="callout">
+      <p>Hormoner kan behandle hormonrelaterte plager.</p>
+      <p>De kan ikke bygge muskler, trene, spise eller restituere for oss.</p>
+    </div>
+    <p>Derfor handler god helse etter 50 om mer enn hormoner.</p>
+  </section>
+
+  <section class="card-section">
+    <h2>Kosthold og metabolsk helse</h2>
+    <p>Kostholdet er en viktig del av dette bildet.</p>
+    <p>Det finnes gode grunner til å være oppmerksom på hvor mye ultraprosessert mat vi spiser. I en kontrollert studie der deltakerne fikk spise så mye de ønsket, førte et ultraprosessert kosthold til høyere spontant energiinntak og vektøkning sammenlignet med et minimalt prosessert kosthold.<sup><a href="#ref5">5</a></sup></p>
+    <p>Dette betyr likevel ikke at alle karbohydrater har samme effekt, eller at frukt, grønnsaker, poteter og fullkorn bør sidestilles med sukkerholdige drikker, godteri og raffinerte ultraprosesserte produkter.</p>
+    <p>Det er kvaliteten og helheten i kostholdet som er viktig.</p>
+
+    <h3>Hvor passer lavkarbo og ketogent kosthold inn?</h3>
+    <p>For noen mennesker kan lavkarbo eller et ketogent kosthold være et nyttig verktøy for metabolsk helse.</p>
+    <p>Systematiske oversikter over randomiserte studier hos personer med type 2-diabetes viser at lavkarbokost kan gi forbedringer i blant annet blodsukker, vekt, triglyserider og insulinfølsomhet, særlig på kortere sikt.<sup><a href="#ref6">6</a></sup></p>
+    <p>For svært karbohydratreduserte/ketogene dietter er bildet mer nyansert. En systematisk gjennomgang av randomiserte studier fant blant annet lavere triglyserider, men konkluderte samtidig med at dokumentasjonen for at ketogen kost er bedre enn andre koststrategier over tid, er begrenset.<sup><a href="#ref7">7</a></sup></p>
+    <p>Det betyr at lavkarbo og keto kan være mulige verktøy, men ikke nødvendigvis riktig løsning for alle.</p>
+
+    <h3>Fettkvalitet og kolesterol må også tas med</h3>
+    <p>Responsen på ketogen kost varierer mellom mennesker.</p>
+    <p>En kontrollert studie av normalvektige kvinner viste for eksempel at et ketogent LCHF-kosthold med høyt fettinnhold økte både LDL-kolesterol og ApoB. LDL steg hos samtlige kvinner i studien.<sup><a href="#ref8">8</a></sup></p>
+    <p>Studien var liten og kortvarig, og ble utført på yngre kvinner, så resultatene kan ikke uten videre generaliseres til alle som spiser lavkarbo. Den illustrerer likevel hvorfor blodlipider og individuell respons bør følges, og hvorfor fettkvaliteten er viktig.</p>
+    <p>Lavkarbo trenger heller ikke bety et kosthold dominert av smør, fløte og store mengder mettet fett. Fisk, nøtter, frø, avokado og olivenolje kan være viktige fettkilder i et mer hjertevennlig lavkarbokosthold.</p>
+
+    <h3>Ketogen diett er også medisinsk behandling</h3>
+    <p>Ketogen diett er ikke bare en kostholdstrend.</p>
+    <p>Ved Spesialsykehuset for epilepsi ved Oslo universitetssykehus brukes medisinsk ketogen diett som etablert behandling ved vanskelig behandlingsbar epilepsi og enkelte sjeldne metabolske sykdommer, blant annet GLUT1-mangel og PDH-mangel.<sup><a href="#ref9">9</a></sup></p>
+    <p>Dette er strengt tilrettelagte dietter som gjennomføres under oppfølging av helsepersonell.</p>
+    <p>At ketogen diett har en dokumentert medisinsk anvendelse, betyr imidlertid ikke at dietten automatisk behandler andre sykdommer.</p>
+
+    <h3>Hva med ketogen kost og kreft?</h3>
+    <p>Dette er et spennende, men foreløpig eksperimentelt forskningsområde.</p>
+    <p>En del av interessen bygger på den såkalte Warburg-effekten. Mange kreftceller har økt glukoseopptak og bruker mye glykolyse selv når oksygen er tilgjengelig. Kreftmetabolismen er imidlertid langt mer kompleks enn at kreftceller ganske enkelt «lever av sukker». Mange kreftceller beholder mitokondriell respirasjon og kan bruke flere energikilder.<sup><a href="#ref10">10</a></sup></p>
+    <p>Derfor blir utsagnet om at man kan «sulte ut kreft ved å fjerne karbohydrater» for enkelt.</p>
+    <p>Ketogen kost undersøkes likevel som mulig tillegg til etablert kreftbehandling, særlig ved aggressive hjernesvulster som glioblastom.</p>
+    <p>En systematisk gjennomgang og metaanalyse publisert i 2026 fant at ketogen kost ser ut til å være gjennomførbart for mange pasienter med glioblastom, og at det finnes interessante signaler i forskningen. Studiene varierer imidlertid betydelig i kvalitet og design, og dokumentasjonen er foreløpig ikke tilstrekkelig til å etablere ketogen diett som standard kreftbehandling.<sup><a href="#ref11">11</a></sup></p>
+    <div class="callout">
+      <p>Det er derfor viktig å skille mellom: en biologisk interessant hypotese → lovende forskning → dokumentert behandling.</p>
+      <p>Dette er tre forskjellige nivåer av kunnskap.</p>
+    </div>
+  </section>
+
+  <section class="card-section">
+    <h2>Hormoner eller livsstil? Det trenger ikke være et enten-eller</h2>
+    <p>Hormonbehandling og livsstil gjør forskjellige ting.</p>
+    <p>Hormonbehandling kan behandle mange av plagene som oppstår som følge av hormonelle endringer i overgangsalderen.</p>
+    <p>Levevanene våre påvirker samtidig muskelmasse, fysisk kapasitet, metabolsk helse og hvordan kroppen fungerer gjennom resten av livet.</p>
+    <p>For kvinnen etter 50 kan derfor hormonbehandling, når det er riktig for henne, være én del av bildet.</p>
+    <p>Styrketrening, hverdagsaktivitet, søvn, restitusjon, stressmestring, tilstrekkelig protein og et kosthold tilpasset den enkelte er andre viktige deler.</p>
+    <p>Lavkarbo eller ketogen kost kan være ett mulig verktøy innenfor dette, særlig for enkelte mennesker med metabolsk sykdom, men det finnes ikke ett kosthold som passer alle.</p>
+    <p>Målet er heller ikke å spise, trene eller medisinere seg tilbake til 20-årsalderen.</p>
+  </section>
+
+  <div class="quote-card">
+    <blockquote>Målet er å gi kroppen best mulige forutsetninger for å være sterk, funksjonell og frisk gjennom årene som kommer.</blockquote>
+  </div>
+
+  <section class="card-section">
+    <p class="kicker">Kilder</p>
+    <h2>Forskning og kilder</h2>
+    <ol class="refs">
+      <li id="ref1"><span class="ref-title">The Menopause Society (tidligere NAMS), 2022. The 2022 Hormone Therapy Position Statement of The North American Menopause Society.</span><a href="https://pubmed.ncbi.nlm.nih.gov/35797481/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov/35797481</a></li>
+      <li id="ref2"><span class="ref-title">NICE, oppdatert 2024. Menopause: identification and management – recommendations.</span><a href="https://www.nice.org.uk/guidance/ng23/chapter/Recommendations" target="_blank" rel="noopener">nice.org.uk/guidance/ng23</a></li>
+      <li id="ref3"><span class="ref-title">World Health Organization. WHO Guidelines on Physical Activity and Sedentary Behaviour.</span><a href="https://www.who.int/publications/i/item/9789240015128" target="_blank" rel="noopener">who.int/publications/i/item/9789240015128</a></li>
+      <li id="ref4"><span class="ref-title">Deutz NEP et al., 2014. Protein intake and exercise for optimal muscle function with aging: recommendations from the ESPEN Expert Group.</span><a href="https://pubmed.ncbi.nlm.nih.gov/24814383/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov/24814383</a></li>
+      <li id="ref5"><span class="ref-title">Hall KD et al., 2019. Ultra-Processed Diets Cause Excess Calorie Intake and Weight Gain: An Inpatient Randomized Controlled Trial. Cell Metabolism.</span><a href="https://pubmed.ncbi.nlm.nih.gov/31269427/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov/31269427</a></li>
+      <li id="ref6"><span class="ref-title">Goldenberg JZ et al., 2021. Efficacy and safety of low and very low carbohydrate diets for type 2 diabetes remission: systematic review and meta-analysis of randomized trial data. BMJ.</span><a href="https://pubmed.ncbi.nlm.nih.gov/33441384/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov/33441384</a></li>
+      <li id="ref7"><span class="ref-title">Parry-Strong A et al., 2022. Very low carbohydrate (ketogenic) diets in type 2 diabetes: A systematic review and meta-analysis of randomized controlled trials.</span><a href="https://pubmed.ncbi.nlm.nih.gov/36064937/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov/36064937</a></li>
+      <li id="ref8"><span class="ref-title">Burén J et al., 2021. A Ketogenic Low-Carbohydrate High-Fat Diet Increases LDL Cholesterol in Healthy, Young, Normal-Weight Women: A Randomized Controlled Feeding Trial.</span><a href="https://pubmed.ncbi.nlm.nih.gov/33801247/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov/33801247</a></li>
+      <li id="ref9"><span class="ref-title">Oslo universitetssykehus, Spesialsykehuset for epilepsi. Ketogen diett.</span><a href="https://www.oslo-universitetssykehus.no/avdelinger/nevroklinikken/spesialsykehuset-for-epilepsi-sse/ketogen-diett" target="_blank" rel="noopener">oslo-universitetssykehus.no</a></li>
+      <li id="ref10"><span class="ref-title">Koppenol WH, Bounds PL, Dang CV, 2011. Otto Warburg's contributions to current concepts of cancer metabolism. Nature Reviews Cancer.</span><a href="https://www.nature.com/articles/nrc3038" target="_blank" rel="noopener">nature.com/articles/nrc3038</a></li>
+      <li id="ref11"><span class="ref-title">Firdous J et al., 2026. Efficacy and safety of ketogenic diet in glioblastoma: an updated systematic review and meta-analysis. Neurological Sciences.</span><a href="https://pubmed.ncbi.nlm.nih.gov/42032215/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov/42032215</a></li>
+    </ol>
+  </section>
+
+  <a class="home-link" href="min-historie.html">← Tilbake til min historie</a>
+
+</div>
+
+<footer class="closing">
+  Små skritt. Dine mål, ditt tempo.<br>
+  <strong>Du trenger ikke gjøre det alene.</strong>
+</footer>
+
+</body>
+</html>
