@@ -804,60 +804,51 @@
     }
   }
 
-  /* Livsfaser: bildebånd med blader */
+  /* Livsfaser: bilde med tekst under */
   .life-phases {
-    position: relative;
-    display: flex;
-    align-items: flex-start;
-    min-height: clamp(340px, 52vw, 520px);
-    margin: 2.25rem 0;
-    padding: 2.25rem 2rem;
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius: 12px;
+    margin: 2.25rem 0;
     overflow: hidden;
-    background-image:
-      linear-gradient(180deg, rgba(15, 28, 45, 0.72) 0%, rgba(15, 28, 45, 0.38) 38%, rgba(15, 28, 45, 0) 62%),
-      url('images/livsfaser-blader.jpg');
-    background-size: cover;
-    background-position: center 70%;
     box-shadow: var(--shadow);
     scroll-margin-top: 5rem;
   }
 
-  .life-phases-text {
-    max-width: 560px;
+  .life-phases-photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
   }
 
-  .life-phases .kicker {
-    color: var(--accent-soft);
+  .life-phases-text {
+    padding: 1.6rem 1.85rem 1.85rem;
+    text-align: center;
   }
 
   .life-phases h2 {
-    margin: 0 0 0.6rem;
-    color: #fff;
-    font-size: 1.75rem;
-    line-height: 1.2;
-    text-shadow: 0 2px 14px rgba(10, 22, 36, 0.5);
+    margin: 0 auto 0.6rem;
+    max-width: 30ch;
+    color: var(--accent-dark);
+    font-size: 1.5rem;
+    line-height: 1.25;
     text-wrap: balance;
   }
 
   .life-phases p {
-    margin: 0 0 0.5rem;
-    color: rgba(255, 255, 255, 0.94);
-    font-size: 1.05rem;
-    text-shadow: 0 1px 10px rgba(10, 22, 36, 0.5);
+    margin: 0.5rem auto 0;
+    max-width: 60ch;
+  }
+
+  .life-phases p.kicker {
+    margin: 0 auto 0.35rem;
   }
 
   @media (max-width: 640px) {
-    .life-phases {
-      padding: 1.6rem 1.25rem;
-      min-height: 480px;
-      background-image:
-        linear-gradient(180deg, rgba(15, 28, 45, 0.82) 0%, rgba(15, 28, 45, 0.6) 45%, rgba(15, 28, 45, 0) 72%),
-        url('images/livsfaser-blader.jpg');
-      background-position: 35% bottom;
-    }
-    .life-phases h2 { font-size: 1.4rem; }
-    .life-phases p { font-size: 1rem; }
+    .life-phases-text { padding: 1.3rem 1.25rem 1.5rem; }
+    .life-phases h2 { font-size: 1.3rem; }
   }
 
   .quote-card {
@@ -1104,7 +1095,8 @@
     <p>Denne tilnærmingen bygger på metodikken fra <a class="inline-link" href="https://instituttet.abelhelse.no/" target="_blank" rel="noopener">Abel Instituttet</a>, som utdanner helseveiledere i Norge.</p>
   </section>
 
-  <div id="livsfaser" class="life-phases" role="region" aria-label="Livet har mange faser">
+  <div id="livsfaser" class="life-phases">
+    <img class="life-phases-photo" src="images/livsfaser-blader.jpg" width="1672" height="941" loading="lazy" alt="Høstblader i mange farger og former, friske grønne, gule, røde og visne, ligger sammen på en gammel treplatting i lavt sollys">
     <div class="life-phases-text">
       <p class="kicker">Helse i alle faser</p>
       <h2>Livet har mange faser – og helse har mange nyanser.</h2>
