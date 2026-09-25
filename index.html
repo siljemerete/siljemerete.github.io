@@ -70,9 +70,18 @@
     color: var(--accent-dark);
     font-size: 1.02rem;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
-  .brand span {
+  .brand-logo {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+
+  .brand-name span {
     color: var(--accent);
     font-weight: 600;
   }
@@ -751,6 +760,50 @@
     font-style: italic;
   }
 
+  /* Helhetlig helse-modellen */
+  .health-model {
+    margin-top: 1.25rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .health-model-figure {
+    margin: 0;
+  }
+
+  .health-model-figure img {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    margin: 0 auto;
+    mix-blend-mode: multiply;
+  }
+
+  .health-model-link {
+    display: block;
+  }
+
+  .health-model-balance {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .health-model-balance h3 {
+    margin: 0 0 0.4rem;
+    color: var(--accent-dark);
+    font-size: 1.15rem;
+  }
+
+  @media (max-width: 640px) {
+    .health-model {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .quote-card {
     background: var(--accent-soft);
     border-radius: 12px;
@@ -880,7 +933,7 @@
 
 <header class="site-header">
   <div class="nav-wrap">
-    <div class="brand">Silje Merete <span>SMART Helseveiledning</span></div>
+    <div class="brand"><img class="brand-logo" src="images/logo.png" width="36" height="36" alt=""><span class="brand-name">Silje Merete <span>SMART Helseveiledning</span></span></div>
     <nav class="site-nav">
       <a href="#om-meg">Om meg</a>
       <a href="min-historie.html">Min historie</a>
@@ -993,6 +1046,27 @@
     </div>
 
     <p>Denne tilnærmingen bygger på metodikken fra <a class="inline-link" href="https://instituttet.abelhelse.no/" target="_blank" rel="noopener">Abel Instituttet</a>, som utdanner helseveiledere i Norge.</p>
+  </section>
+
+  <section id="helhetlig-helse" class="card-section">
+    <p class="kicker">Min modell</p>
+    <h2>Helhetlig – i balanse</h2>
+    <div class="health-model">
+      <figure class="health-model-figure">
+        <a class="health-model-link" href="helhetlig-balanse.html" title="Åpne den interaktive modellen"><img src="images/helhetlig-helse-modell.jpg" width="900" height="900" loading="lazy" alt="Modellen Helhetlig – i balanse: en sirkel med fem områder, stress, søvn, kosthold, bevegelse og trening, og relasjoner, som er vevd sammen i et blomstermønster med et hjerte i midten"></a>
+      </figure>
+      <div class="health-model-text">
+        <p>I helseveiledningen ser jeg på helsen din som én helhet. Fem områder går igjen: <strong>stress, søvn, kosthold, bevegelse og trening, og relasjoner</strong>. De ligger i samme sirkel, og hvert av dem påvirker alle de andre.</p>
+        <p>Når du sover dårlig, tåler du mindre stress. Når du er stresset, spiser du gjerne annerledes og orker mindre bevegelse. Gode relasjoner gir overskudd som smitter over på alt det andre. Derfor ser vi alltid på helheten, og en liten endring på ett område kan merkes i hele sirkelen.</p>
+        <p><a class="cta-button" href="helhetlig-balanse.html">Prøv modellen selv →</a></p>
+        <p>Vil du se hvor du står på hvert område? Prøv <a class="inline-link" href="livsstilhjul.html">Livsstilshjulet</a>.</p>
+      </div>
+    </div>
+    <div class="health-model-balance">
+      <h3>Balanse, ikke perfeksjon</h3>
+      <p>Målet er ikke å ha alle fem områdene på topp hver eneste dag. Livet går i bølger. Noen uker sover du godt og har overskudd til både trening og venner, andre uker tar jobb, familie eller sykdom mer plass. Det er helt normalt, og det betyr ikke at du har mislyktes.</p>
+      <p>Fordi områdene henger sammen, kan de andre bære litt ekstra når ett av dem er svakere en periode. Å jage det perfekte blir fort en ny kilde til stress. Derfor ser vi heller på retningen over tid enn på enkeltdager. Små vaner du klarer å holde de fleste dager, er verdt mer enn store planer som bare holder når alt klaffer.</p>
+    </div>
   </section>
 
   <div class="quote-card">
@@ -1138,6 +1212,15 @@
           <a class="resource-card" href="borg-rpe-test.html">
             <h3>Borg CR10-skala (0 til 10)</h3>
             <p>Registrer opplevd anstrengelse med Borgs CR10-skala, og følg utviklingen i treningsintensitet per aktivitet over tid.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="styrke-hjemme.html">
+            <h3>Enkel styrke hjemme</h3>
+            <p>To lavterskel styrkeprogram med illustrerte øvelser: 15 minutter med strikk og lette manualer, og et minimumsprogram på 6 til 7 minutter uten utstyr. Med skjema der du registrerer økta og sender den til meg.</p>
+          </a>
+          <a class="resource-card" href="trening-energi-restitusjon.html">
+            <h3>Trening, energi og restitusjon</h3>
+            <p>Skjema du fyller ut rundt treningsøktene: energi og smerter før og etter, hvor hard økten var og hvordan kroppen kjennes neste morgen. For å finne den dosen som gir deg overskudd.</p>
             <p class="note">Krever kode fra Silje Merete</p>
           </a>
         </div>

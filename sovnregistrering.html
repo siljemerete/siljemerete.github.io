@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Søvnregistrering | én uke</title>
+<link rel="icon" href="images/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <style>
   :root {
     --bg: #f0f7f9;
@@ -417,12 +419,30 @@
     .controls, .send-buttons, .muted-note { display: none; }
     .topic { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
   }
+
+  .page-logo {
+    display: block;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 0.75rem;
+    padding: 5px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(22, 40, 58, 0.12);
+  }
+
+  .page-logo img {
+    display: block;
+    width: 46px;
+    height: 46px;
+  }
 </style>
 </head>
 <body class="gate-locked">
 
 <div class="gate-overlay" id="gateOverlay">
   <div class="gate-box">
+    <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
     <h1>Tilgang til verktøyet</h1>
     <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
     <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
@@ -467,6 +487,7 @@
 <div class="wrap">
 
   <header class="page-header">
+    <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
     <h1>Søvnregistrering: én uke</h1>
     <p class="tagline">Et bilde av kveldene og nettene dine, dag for dag</p>
     <div class="reminder">
