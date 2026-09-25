@@ -19,6 +19,8 @@
     --accent: #386ba0;
     --accent-dark: #1f3c5c;
     --accent-soft: #e7f0f8;
+    --push: #c9823f;
+    --push-soft: #faf1e2;
     --border: #d6e3ee;
     --shadow: 0 1px 3px rgba(22, 40, 58, 0.08), 0 1px 2px rgba(22, 40, 58, 0.06);
   }
@@ -107,21 +109,29 @@
   }
 
   .resource-link {
-    display: inline-block;
-    background: #c9823f;
-    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--push-soft);
+    border: 1.5px solid var(--push);
+    color: var(--ink);
     font-weight: 700;
     text-decoration: none;
     font-size: 0.95rem;
     padding: 0.75rem 1.4rem;
     border-radius: 999px;
     box-shadow: var(--shadow);
-    transition: background 0.15s ease, transform 0.15s ease;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
   }
 
   .resource-link:hover {
-    background: #ad6c30;
+    background: var(--push);
+    color: #fff;
     transform: translateY(-1px);
+  }
+
+  .resource-link svg {
+    flex: 0 0 auto;
   }
 
   .story-photo {
@@ -302,7 +312,13 @@
   <section class="card-section">
     <img class="story-photo" src="images/min-historie-foto.jpg" alt="Silje Merete utendørs, smilende">
     <p>Jeg nærmet meg 50 år, midt i livet med ungdom hjemme og foreldre som begynte å bli gamle. Samtidig kjente jeg at overgangsalderen sakte snek seg innpå, en livsfase som ofte kommer gradvis og nesten umerkelig.</p>
-    <p class="resource-note"><a class="resource-link" href="overgangsalder-hormonbehandling.html">Kvinne 40+ · Overgangsalder &amp; hormoner →</a></p>
+    <p class="resource-note">
+      <a class="resource-link" href="overgangsalder-hormonbehandling.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--push)" stroke-width="1.8" aria-hidden="true"><path d="M12 6.5c-1.4-2-4-2.8-6-1.4-2.2 1.6-2.6 4.7-.6 6.8L12 19l6.6-7.1c2-2.1 1.6-5.2-.6-6.8-2-1.4-4.6-.6-6 1.4Z"/></svg>
+        <span>Kvinne 40+ · Overgangsalder &amp; hormoner</span>
+        <span aria-hidden="true">→</span>
+      </a>
+    </p>
     <p>Kroppen stilte meg stadig flere spørsmål, men jeg hadde få svar. Jeg hadde psoriasis, lichen planus, søvnproblemer og gjentatte betennelsestilstander, blant annet springfinger (stenoserende tenosynovitt). Flere episoder krevde spesialistbehandling, og jeg kjente på en uro for hva som ventet rundt neste sving. Var dette bare begynnelsen?</p>
     <p>Det var ikke ønsket om å gå ned i vekt som fikk meg til å endre kostholdet, det var ønsket om å få det bedre i min egen kropp. Jeg var desperat etter å finne ut om jeg selv kunne påvirke hvordan jeg hadde det, og la om til et ketogent/lavkarbo kosthold.</p>
     <p>At jeg samtidig gikk betydelig ned i vekt, og at kroppen fant en vekt den trivdes med og stabiliserte seg på, ble en stor og uventet bonus, men aldri drivkraften. Det viktigste var følelsen av å få tilbake en kropp i balanse. I dag har jeg verken lichen planus eller tilbakevendende springfinger, og psoriasisen har gått tilbake.</p>
