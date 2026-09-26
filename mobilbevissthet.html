@@ -6,9 +6,9 @@
 <title>Mobilbevissthet | Silje Merete SMART Helseveiledning</title>
 <link rel="icon" href="images/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-<meta name="description" content="Om mobilvaner, tilstedeværelse og selvledelse. Med en bevissthetssjekk og en 7-dagers mobil-reset.">
+<meta name="description" content="Om mobilvaner, tilstedeværelse og selvledelse. Med en bevissthetssjekk, en 7-dagers mobil-reset og skjemaet Selvledelse i praksis.">
 <meta property="og:title" content="Mobilbevissthet | Silje Merete SMART Helseveiledning">
-<meta property="og:description" content="Om mobilvaner, tilstedeværelse og selvledelse. Med en bevissthetssjekk og en 7-dagers mobil-reset.">
+<meta property="og:description" content="Om mobilvaner, tilstedeværelse og selvledelse. Med en bevissthetssjekk, en 7-dagers mobil-reset og skjemaet Selvledelse i praksis.">
 <meta property="og:type" content="article">
 <style>
   :root {
@@ -386,7 +386,7 @@
 
   .tool-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 0.9rem;
     margin-top: 1.2rem;
   }
@@ -436,6 +436,24 @@
   .tool-button.outline:hover { background: var(--accent-soft); }
 
   .tool-panel[hidden] { display: none; }
+
+  .selv-step {
+    border-top: 1px solid var(--border);
+    padding-top: 1.2rem;
+    margin-top: 1.5rem;
+  }
+
+  .selv-step h3 {
+    margin: 0 0 0.4rem;
+    color: var(--accent-dark);
+    font-size: 1.1rem;
+  }
+
+  .selv-step > p {
+    margin: 0 0 0.8rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
 
   .close-tool {
     display: block;
@@ -567,6 +585,11 @@
         <p>Velg små grep du ønsker å prøve, og finn ut hva som fungerer for deg.</p>
         <a class="tool-button" href="#mobil-reset" data-open="mobil-reset" aria-expanded="false">Start min 7-dagers mobil-reset</a>
       </div>
+      <div class="tool-card">
+        <h3>Selvledelse i praksis</h3>
+        <p>Seks grep fra observasjon til evaluering. Finn ut hva du ønsker mer av, og hva som gjør endringen lettere.</p>
+        <a class="tool-button" href="#selvledelse" data-open="selvledelse" aria-expanded="false">Start selvledelse i praksis</a>
+      </div>
     </div>
   </section>
 
@@ -623,6 +646,120 @@
       <textarea id="reset-continue" data-key="reset-continue"></textarea>
     </div>
     <button type="button" class="close-tool" data-close="mobil-reset">Lukk mobil-reseten</button>
+  </section>
+
+  <section class="card-section tool-panel" id="selvledelse" hidden>
+    <p class="kicker">Verktøy 3</p>
+    <h2>Selvledelse i praksis</h2>
+    <p class="subtext">En mobil-detox trenger ikke bety at mobilen skal bort. Målet er å gjenvinne valgfriheten. Gå gjennom de seks grepene i ditt eget tempo. Du trenger ikke fylle ut alt på en gang.</p>
+    <div class="selv-step">
+      <h3>1. Observer før du endrer</h3>
+      <p>Første steg er ikke å redusere skjermtiden, men å bli nysgjerrig. Se gjerne på skjermtiden din. Poenget er ikke å dømme det du oppdager, for det er vanskelig å endre en vane du ikke er bevisst på.</p>
+      <div class="field">
+        <label for="selv-mest">Når bruker jeg mobilen mest?</label>
+        <textarea id="selv-mest" data-key="selv-mest"></textarea>
+      </div>
+      <div class="field">
+        <label for="selv-apper">Hvilke apper bruker jeg mest tid på?</label>
+        <textarea id="selv-apper" data-key="selv-apper"></textarea>
+      </div>
+      <div class="field">
+        <label for="selv-uplanlagt">Når tar jeg mobilen opp uten at jeg egentlig hadde planlagt det?</label>
+        <textarea id="selv-uplanlagt" data-key="selv-uplanlagt"></textarea>
+      </div>
+      <div class="field">
+        <label for="selv-situasjoner">Er det bestemte situasjoner som går igjen?</label>
+        <textarea id="selv-situasjoner" data-key="selv-situasjoner"></textarea>
+      </div>
+    </div>
+    <div class="selv-step">
+      <h3>2. Spør hva du ønsker mer av</h3>
+      <p>«Jeg skal bruke mobilen mindre» er ikke et spesielt inspirerende mål. Når du vet hva du ønsker mer av, handler det ikke bare om hva du skal fjerne, men om hva du vil gi plass til.</p>
+      <div class="check-list">
+        <label class="check-item"><input type="checkbox" data-check="mer-ro"><span>Mer ro om morgenen</span></label>
+        <label class="check-item"><input type="checkbox" data-check="mer-sovn"><span>Bedre søvn</span></label>
+        <label class="check-item"><input type="checkbox" data-check="mer-lese"><span>Mer tid til å lese</span></label>
+        <label class="check-item"><input type="checkbox" data-check="mer-konsentrasjon"><span>Mer konsentrasjon</span></label>
+        <label class="check-item"><input type="checkbox" data-check="mer-aktivitet"><span>Mer fysisk aktivitet</span></label>
+        <label class="check-item"><input type="checkbox" data-check="mer-familie"><span>Mer tilstedeværelse sammen med familien</span></label>
+        <label class="check-item"><input type="checkbox" data-check="mer-turer"><span>Flere turer hvor jeg faktisk ser naturen rundt meg</span></label>
+      </div>
+      <div class="field">
+        <label for="selv-mer-annet">Annet jeg ønsker mer av</label>
+        <textarea id="selv-mer-annet" data-key="selv-mer-annet"></textarea>
+      </div>
+    </div>
+    <div class="selv-step">
+      <h3>3. Start smått</h3>
+      <p>Store, perfekte planer som skal endre alt fra mandag morgen holder sjelden. Velg heller én eller to ting. Små endringer er lettere å gjennomføre og gir mulighet til å oppleve mestring.</p>
+      <div class="check-list">
+        <label class="check-item"><input type="checkbox" data-check="smatt-morgen"><span>De første 30 minuttene etter at jeg står opp, er mobilfrie</span></label>
+        <label class="check-item"><input type="checkbox" data-check="smatt-spisebord"><span>Mobilen ligger ikke på spisebordet</span></label>
+        <label class="check-item"><input type="checkbox" data-check="smatt-kveld"><span>Den siste timen før jeg legger meg, legger jeg mobilen bort</span></label>
+        <label class="check-item"><input type="checkbox" data-check="smatt-tur"><span>Jeg går én tur uten å ta mobilen opp av lommen</span></label>
+        <label class="check-item"><input type="checkbox" data-check="smatt-jobbmail"><span>Jeg sjekker jobbmail på bestemte tidspunkt i stedet for hele tiden</span></label>
+      </div>
+      <div class="field">
+        <label for="selv-eget-grep">Mitt eget lille grep</label>
+        <textarea id="selv-eget-grep" data-key="selv-eget-grep"></textarea>
+      </div>
+    </div>
+    <div class="selv-step">
+      <h3>4. Endre miljøet – ikke stol bare på viljestyrken</h3>
+      <p>Omgivelsene påvirker oss hele tiden. God selvledelse handler ikke nødvendigvis om sterkere viljestyrke, men om å gjøre det ønskede valget lettere. Hva kan du prøve?</p>
+      <div class="check-list">
+        <label class="check-item"><input type="checkbox" data-check="miljo-varsler"><span>Slå av varsler jeg ikke trenger</span></label>
+        <label class="check-item"><input type="checkbox" data-check="miljo-apper"><span>Flytte de mest fristende appene bort fra startskjermen</span></label>
+        <label class="check-item"><input type="checkbox" data-check="miljo-rom"><span>Legge mobilen i et annet rom når jeg skal konsentrere meg</span></label>
+        <label class="check-item"><input type="checkbox" data-check="miljo-soner"><span>Ha mobilfrie soner hjemme</span></label>
+        <label class="check-item"><input type="checkbox" data-check="miljo-lade"><span>Lade mobilen et annet sted enn rett ved sengen</span></label>
+        <label class="check-item"><input type="checkbox" data-check="miljo-graatoner"><span>Prøve gråtoner på skjermen</span></label>
+      </div>
+    </div>
+    <div class="selv-step">
+      <h3>5. Øv på tomrommet</h3>
+      <p>Vi trenger ikke fylle hvert eneste ledige øyeblikk med stimuli. Når det blir stille, får tankene vandre, og vi kjenner kanskje litt mer etter hvordan vi har det. Kanskje ti minutter er et godt sted å begynne.</p>
+      <div class="check-list">
+        <label class="check-item"><input type="checkbox" data-check="tom-kaffe"><span>Drikke kaffen uten mobilen</span></label>
+        <label class="check-item"><input type="checkbox" data-check="tom-ko"><span>Stå i kø uten å scrolle</span></label>
+        <label class="check-item"><input type="checkbox" data-check="tom-buss"><span>Sitte på bussen og se ut av vinduet</span></label>
+        <label class="check-item"><input type="checkbox" data-check="tom-tur"><span>Gå en tur uten å dokumentere den</span></label>
+        <label class="check-item"><input type="checkbox" data-check="tom-minutter"><span>Sitte noen minutter uten å gjøre noe spesielt</span></label>
+      </div>
+      <div class="field">
+        <label for="selv-tomrom">Hvordan var det å kjenne på tomrommet?</label>
+        <textarea id="selv-tomrom" data-key="selv-tomrom"></textarea>
+      </div>
+    </div>
+    <div class="selv-step">
+      <h3>6. Evaluer – ikke døm</h3>
+      <p>Etter en uke kan du stoppe opp igjen. Har du sittet og scrollet i en time igjen, har du ikke mislyktes. Du har fått informasjon, og kan justere.</p>
+      <div class="field">
+        <label for="selv-fungerte">Hva fungerte?</label>
+        <textarea id="selv-fungerte" data-key="selv-fungerte"></textarea>
+      </div>
+      <div class="field">
+        <label for="selv-vanskelig">Hva var vanskelig?</label>
+        <textarea id="selv-vanskelig" data-key="selv-vanskelig"></textarea>
+      </div>
+      <div class="field">
+        <label for="selv-savnet">Når savnet jeg mobilen mest?</label>
+        <textarea id="selv-savnet" data-key="selv-savnet"></textarea>
+      </div>
+      <div class="field">
+        <label for="selv-mer-tid">Hva fikk jeg mer tid til?</label>
+        <textarea id="selv-mer-tid" data-key="selv-mer-tid"></textarea>
+      </div>
+      <div class="field">
+        <label for="selv-merket">Merket jeg noe på søvn, konsentrasjon eller ro?</label>
+        <textarea id="selv-merket" data-key="selv-merket"></textarea>
+      </div>
+      <div class="field">
+        <label for="selv-fortsette">Hva ønsker jeg å fortsette med?</label>
+        <textarea id="selv-fortsette" data-key="selv-fortsette"></textarea>
+      </div>
+    </div>
+    <button type="button" class="close-tool" data-close="selvledelse">Lukk selvledelse i praksis</button>
   </section>
 
   <section class="card-section tool-panel" id="send-inn" hidden>
@@ -704,6 +841,7 @@
 
   var awarenessChecked = [];
   var detoxChecked = [];
+  var selvChecked = {};
 
   function escapeHtml(str) {
     var div = document.createElement('div');
@@ -713,16 +851,17 @@
 
   function readState() {
     var raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return { fields: {}, awareness: [], detox: [] };
+    if (!raw) return { fields: {}, awareness: [], detox: [], selv: {} };
     try {
       var data = JSON.parse(raw);
       return {
         fields: data.fields || {},
         awareness: data.awareness || [],
-        detox: data.detox || []
+        detox: data.detox || [],
+        selv: data.selv || {}
       };
     } catch (e) {
-      return { fields: {}, awareness: [], detox: [] };
+      return { fields: {}, awareness: [], detox: [], selv: {} };
     }
   }
 
@@ -734,7 +873,8 @@
     localStorage.setItem(STORAGE_KEY, JSON.stringify({
       fields: fields,
       awareness: awarenessChecked,
-      detox: detoxChecked
+      detox: detoxChecked,
+      selv: selvChecked
     }));
   }
 
@@ -818,6 +958,11 @@
     });
     awarenessChecked = data.awareness || [];
     detoxChecked = data.detox || [];
+    selvChecked = data.selv || {};
+    document.querySelectorAll('[data-check]').forEach(function (input) {
+      input.checked = !!selvChecked[input.getAttribute('data-check')];
+      input.parentNode.classList.toggle('checked', input.checked);
+    });
   }
 
   function buildSummaryText() {
@@ -845,6 +990,23 @@
     lines.push('  Hva fikk jeg mer plass til: ' + (document.getElementById('reset-space').value || '-'));
     lines.push('  Hva vil jeg fortsette med: ' + (document.getElementById('reset-continue').value || '-'));
 
+    lines.push('');
+    lines.push('Selvledelse i praksis:');
+    document.querySelectorAll('#selvledelse .selv-step').forEach(function (stepEl) {
+      lines.push('');
+      lines.push('  ' + stepEl.querySelector('h3').textContent);
+      var before = lines.length;
+      stepEl.querySelectorAll('[data-check]').forEach(function (input) {
+        if (input.checked) lines.push('    [x] ' + input.parentNode.textContent.trim());
+      });
+      stepEl.querySelectorAll('textarea').forEach(function (ta) {
+        if (!ta.value) return;
+        var label = stepEl.querySelector('label[for="' + ta.id + '"]').textContent;
+        lines.push('    ' + label + (/[?]$/.test(label) ? ' ' : ': ') + ta.value);
+      });
+      if (lines.length === before) lines.push('    (ikke fylt ut)');
+    });
+
     return lines.join('\n');
   }
 
@@ -867,7 +1029,7 @@
   }
 
   function updateSendPanel() {
-    var anyOpen = ['bevissthetssjekk', 'mobil-reset'].some(function (id) {
+    var anyOpen = ['bevissthetssjekk', 'mobil-reset', 'selvledelse'].some(function (id) {
       return !document.getElementById(id).hidden;
     });
     document.getElementById('send-inn').hidden = !anyOpen;
@@ -900,7 +1062,7 @@
     });
     function openFromHash() {
       var hash = window.location.hash.replace('#', '');
-      if (hash === 'bevissthetssjekk' || hash === 'mobil-reset') {
+      if (hash === 'bevissthetssjekk' || hash === 'mobil-reset' || hash === 'selvledelse') {
         setTool(hash, true);
         setTimeout(function () { document.getElementById(hash).scrollIntoView(); }, 0);
       }
@@ -915,6 +1077,14 @@
     document.body.addEventListener('input', function (e) {
       if (!e.target.hasAttribute('data-key')) return;
       saveState();
+    });
+
+    document.querySelectorAll('[data-check]').forEach(function (input) {
+      input.addEventListener('change', function () {
+        selvChecked[input.getAttribute('data-check')] = input.checked;
+        input.parentNode.classList.toggle('checked', input.checked);
+        saveState();
+      });
     });
 
     document.getElementById('resetAll').addEventListener('click', function () {
