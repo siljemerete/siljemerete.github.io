@@ -435,6 +435,20 @@
 
   .tool-button.outline:hover { background: var(--accent-soft); }
 
+  .tool-panel[hidden] { display: none; }
+
+  .close-tool {
+    display: block;
+    margin: 1.4rem auto 0;
+    background: none;
+    border: none;
+    color: var(--accent-dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
   .deeper-link {
     display: inline-block;
     margin-top: 0.6rem;
@@ -546,12 +560,12 @@
       <div class="tool-card">
         <h3>Bevissthetssjekk</h3>
         <p>Seks enkle punkter som hjelper deg å legge merke til egne mobilvaner.</p>
-        <a class="tool-button" href="#bevissthetssjekk">Ta bevissthetssjekken</a>
+        <a class="tool-button" href="#bevissthetssjekk" data-open="bevissthetssjekk" aria-expanded="false">Ta bevissthetssjekken</a>
       </div>
       <div class="tool-card">
         <h3>Min mobil-reset</h3>
         <p>Velg små grep du ønsker å prøve, og finn ut hva som fungerer for deg.</p>
-        <a class="tool-button" href="#mobil-reset">Start min 7-dagers mobil-reset</a>
+        <a class="tool-button" href="#mobil-reset" data-open="mobil-reset" aria-expanded="false">Start min 7-dagers mobil-reset</a>
       </div>
       <div class="tool-card">
         <h3>Test dine mobilvaner</h3>
@@ -561,7 +575,7 @@
     </div>
   </section>
 
-  <section class="card-section" id="bevissthetssjekk">
+  <section class="card-section tool-panel" id="bevissthetssjekk" hidden>
     <p class="kicker">Verktøy 1</p>
     <h2>Bevissthetssjekk</h2>
     <p>For de fleste av oss krever det litt mot å innrømme hvor avhengige vi faktisk er blitt av mobilen. Men det er først når vi tør å se det ærlig i øynene, at vi kan velge å gjøre noe annerledes. Bevissthet kommer før handling. Kryss av det du kjenner deg igjen i under, helt uten å dømme deg selv.</p>
@@ -583,9 +597,10 @@
       <label for="reflect-deserve">Hvem eller hva fortjener oppmerksomheten din mer enn mobilen, akkurat nå?</label>
       <textarea id="reflect-deserve" data-key="reflect-deserve"></textarea>
     </div>
+    <button type="button" class="close-tool" data-close="bevissthetssjekk">Lukk bevissthetssjekken</button>
   </section>
 
-  <section class="card-section" id="mobil-reset">
+  <section class="card-section tool-panel" id="mobil-reset" hidden>
     <p class="kicker">Verktøy 2</p>
     <h2>Min 7-dagers mobil-reset</h2>
     <p class="subtext">Velg ett eller to grep du vil prøve de neste sju dagene, og kryss av for dem. Du trenger ikke gjøre alt på en gang. Små endringer er lettere å gjennomføre, og derfra kan du bygge videre.</p>
@@ -612,9 +627,10 @@
       <label for="reset-continue">Hva vil jeg fortsette med?</label>
       <textarea id="reset-continue" data-key="reset-continue"></textarea>
     </div>
+    <button type="button" class="close-tool" data-close="mobil-reset">Lukk mobil-reseten</button>
   </section>
 
-  <section class="card-section">
+  <section class="card-section tool-panel" id="send-inn" hidden>
     <h2>Send inn skjemaet</h2>
     <p class="muted-note">Du kan sende skjemaet direkte fra din egen e-postapp, eller laste det ned som en tekstfil du selv sender eller tar med til timen. Alt du fyller ut lagres i denne nettleseren, så du kan lukke siden og fortsette senere.</p>
     <div class="send-buttons">
@@ -850,7 +866,48 @@
     URL.revokeObjectURL(url);
   }
 
+  function updateSendPanel() {
+    var anyOpen = ['bevissthetssjekk', 'mobil-reset'].some(function (id) {
+      return !document.getElementById(id).hidden;
+    });
+    document.getElementById('send-inn').hidden = !anyOpen;
+  }
+
+  function setTool(id, open) {
+    document.getElementById(id).hidden = !open;
+    var btn = document.querySelector('[data-open="' + id + '"]');
+    if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    updateSendPanel();
+  }
+
+  function openTool(id) {
+    setTool(id, true);
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('[data-open]').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        openTool(btn.getAttribute('data-open'));
+      });
+    });
+    document.querySelectorAll('[data-close]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        setTool(btn.getAttribute('data-close'), false);
+        document.getElementById('utforsk').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+    function openFromHash() {
+      var hash = window.location.hash.replace('#', '');
+      if (hash === 'bevissthetssjekk' || hash === 'mobil-reset') {
+        setTool(hash, true);
+        setTimeout(function () { document.getElementById(hash).scrollIntoView(); }, 0);
+      }
+    }
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+
     loadState();
     renderAwareness();
     renderDetox();
