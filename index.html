@@ -436,6 +436,30 @@
   }
 
   /* Om meg */
+  #om-meg {
+    position: relative;
+    overflow: hidden;
+  }
+
+  #om-meg::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 520px;
+    height: 520px;
+    transform: translate(-50%, -50%);
+    background: url('images/vannmerke-blomst.png') center / contain no-repeat;
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  #om-meg > * {
+    position: relative;
+    z-index: 1;
+  }
+
   .about-grid {
     display: flex;
     gap: 1.5rem;
