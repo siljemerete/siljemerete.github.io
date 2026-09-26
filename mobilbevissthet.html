@@ -386,7 +386,7 @@
 
   .tool-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.9rem;
     margin-top: 1.2rem;
   }
@@ -559,18 +559,13 @@
     <div class="tool-grid">
       <div class="tool-card">
         <h3>Bevissthetssjekk</h3>
-        <p>Seks enkle punkter som hjelper deg å legge merke til egne mobilvaner.</p>
+        <p>Elleve korte punkter som hjelper deg å legge merke til egne mobilvaner.</p>
         <a class="tool-button" href="#bevissthetssjekk" data-open="bevissthetssjekk" aria-expanded="false">Ta bevissthetssjekken</a>
       </div>
       <div class="tool-card">
         <h3>Min mobil-reset</h3>
         <p>Velg små grep du ønsker å prøve, og finn ut hva som fungerer for deg.</p>
         <a class="tool-button" href="#mobil-reset" data-open="mobil-reset" aria-expanded="false">Start min 7-dagers mobil-reset</a>
-      </div>
-      <div class="tool-card">
-        <h3>Test dine mobilvaner</h3>
-        <p>Ønsker du en litt mer omfattende selvtest? Rotfri har utviklet en test som kan brukes som et refleksjonsverktøy.</p>
-        <a class="tool-button outline" href="https://rotfri.no/test/meg" target="_blank" rel="noopener">Ta testen hos Rotfri →</a>
       </div>
     </div>
   </section>
@@ -582,7 +577,7 @@
 
     <div class="check-list" id="awarenessList"></div>
 
-    <p class="progress-note" id="awarenessProgress">0 av 6 punkter</p>
+    <p class="progress-note" id="awarenessProgress">0 av 11 punkter</p>
     <div class="progress-bar-track"><div class="progress-bar-fill" id="awarenessBar"></div></div>
 
     <div class="field">
@@ -647,6 +642,8 @@
     <h2>Vil du gå litt dypere?</h2>
     <p>Les om hvordan vaner, triggere og selvledelse påvirker mobilbruken vår, hva mobilvaner har med avhengighet å gjøre, og sju steg fra autopilot til bevisste valg.</p>
     <a class="deeper-link" href="mobilavhengighet.html">Les artikkelen: Når mobilen tar mer plass enn jeg ønsker →</a>
+    <p style="margin-top: 1.4rem;">Ønsker du en litt mer omfattende selvtest? Rotfri har utviklet en test som kan brukes som et refleksjonsverktøy. Den er ikke diagnostisk, og svarene blir værende hos deg.</p>
+    <a class="deeper-link" href="https://rotfri.no/test/meg" target="_blank" rel="noopener">Ta testen hos Rotfri →</a>
   </section>
 
   <a class="home-link" href="index.html">← Tilbake til hjemmesiden</a>
@@ -668,7 +665,12 @@
     'Jeg kjenner uro eller rastløshet hvis jeg er uten mobilen en stund.',
     'Jeg tar bilde av en opplevelse før jeg faktisk har kjent på den selv.',
     'Jeg har mistet tråden i en samtale fordi jeg sjekket mobilen.',
-    'Jeg bruker mobilen for å slippe å kjede meg eller dagdrømme.'
+    'Jeg bruker mobilen for å slippe å kjede meg eller dagdrømme.',
+    'Jeg tar opp mobilen uten at jeg egentlig har bestemt meg for det.',
+    'Jeg bruker mer tid på mobilen enn jeg hadde tenkt.',
+    'Jeg synes det er vanskelig å legge bort mobilen når jeg ønsker det.',
+    'Jeg strekker meg etter mobilen når jeg kjenner uro, stress eller er sliten.',
+    'Mobilbruken går utover søvn, konsentrasjon eller fysisk aktivitet.'
   ];
 
   var DETOX_ITEMS = [
