@@ -777,6 +777,27 @@
     padding: 1.1rem 1.1rem 1.25rem;
   }
 
+  .resource-subhead {
+    margin: 1.5rem 0 0;
+    font-size: 0.95rem;
+    color: var(--accent-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .resource-subhead:first-child { margin-top: 0; }
+
+  .resource-subhead span {
+    margin-left: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+
+  .resource-subhead span::before { content: "· "; }
+
   .resource-toggle .coming-soon {
     margin: 0.9rem 0 0;
     font-size: 0.9rem;
@@ -1249,6 +1270,7 @@
     <details class="resource-toggle">
       <summary>Stressmestring og søvn <span class="chevron">▸</span></summary>
       <div class="resource-toggle-body">
+        <h3 class="resource-subhead">Stress</h3>
         <div class="resource-grid">
           <a class="resource-card" href="dagbok-stresskoppen.html">
             <h3>Dagbok for stresskoppen</h3>
@@ -1270,6 +1292,9 @@
             <p>Tegn tidslinjen for dagen din, se hva den forteller deg, og finn konkrete justeringer: hva må være der, hva kan endres, og hvor du trenger restitusjon og margin.</p>
             <p class="note">Krever kode fra Silje Merete</p>
           </a>
+        </div>
+        <h3 class="resource-subhead">Søvn</h3>
+        <div class="resource-grid">
           <a class="resource-card" href="sovn-stress-logg.html">
             <h3>Søvn og stress</h3>
             <p>Ukentlig logg der du registrerer søvnkvalitet og stressnivå side om side, for å se sammenhengen mellom dem.</p>
@@ -1287,54 +1312,53 @@
     <details class="resource-toggle">
       <summary>Fysisk aktivitet og trening <span class="chevron">▸</span></summary>
       <div class="resource-toggle-body">
+        <h3 class="resource-subhead">Treningsopplegg</h3>
         <div class="resource-grid">
-          <a class="resource-card" href="1rm-testing.html">
-            <h3>1RM-testing</h3>
-            <p>Beregn estimert 1RM med Brzycki-formelen, og følg utviklingen i maksimal styrke per øvelse over tid.</p>
-            <p class="note">Krever kode fra Silje Merete</p>
-          </a>
-          <a class="resource-card" href="6mwt.html">
-            <h3>6-minutters gangtest (6MWT)</h3>
-            <p>Tidtaker og loggverktøy for 6-minutters gangtest. Mål utholdenhet og følg utviklingen over tid.</p>
-            <p class="note">Krever kode fra Silje Merete</p>
-          </a>
-          <a class="resource-card" href="aktivitetsdagbok.html">
-            <h3>Aktivitetsdagbok</h3>
-            <p>Skjema for 7 dagers registrering av fysisk aktivitet, varighet og opplevd anstrengelse, og hva som gjør det lettere eller vanskeligere å være i bevegelse.</p>
-            <p class="note">Krever kode fra Silje Merete</p>
-          </a>
-          <a class="resource-card" href="borg-rpe-test.html">
-            <h3>Borg CR10-skala (0 til 10)</h3>
-            <p>Registrer opplevd anstrengelse med Borgs CR10-skala, og følg utviklingen i treningsintensitet per aktivitet over tid.</p>
-            <p class="note">Krever kode fra Silje Merete</p>
-          </a>
-          <a class="resource-card" href="aktivitetsklokke-data.html">
-            <h3>Data fra telefon eller aktivitetsklokke</h3>
-            <p>Skjema for 7 dagers avskrift av skritt, aktive minutter, hvilepuls og søvn fra egen helse-app eller aktivitetsklokke.</p>
-            <p class="note">Krever kode fra Silje Merete</p>
-          </a>
           <a class="resource-card" href="styrke-hjemme.html">
             <h3>Enkel styrke hjemme</h3>
             <p>To lavterskel styrkeprogram med illustrerte øvelser: 15 minutter med strikk og lette manualer, og et minimumsprogram på 6 til 7 minutter uten utstyr. Med skjema der du registrerer økta og sender den til meg.</p>
-          </a>
-          <a class="resource-card" href="sit-to-stand-test.html">
-            <h3>Sit-to-stand-test (30 sekunder)</h3>
-            <p>Tidtaker og telleknapp for 30-sekunders sit-to-stand-test. Mål benstyrke og funksjon, og følg utviklingen over tid.</p>
-            <p class="note">Krever kode fra Silje Merete</p>
-          </a>
-          <a class="resource-card" href="trening-energi-restitusjon.html">
-            <h3>Trening, energi og restitusjon</h3>
-            <p>Skjema du fyller ut rundt treningsøktene: energi og smerter før og etter, hvor hard økten var og hvordan kroppen kjennes neste morgen. For å finne den dosen som gir deg overskudd.</p>
-            <p class="note">Krever kode fra Silje Merete</p>
           </a>
           <a class="resource-card" href="ukeplan-kvinne-40.html">
             <h3>Ukeplan for kvinner 40+</h3>
             <p>En enkel ukeplan inspirert av Stacy Sims: to styrkeøkter, én kort intervalløkt, mye hverdagsaktivitet og nok restitusjon. Med øvelser for treningssenter eller hjemme, intervalløkt og råd om mat rundt treningen.</p>
           </a>
+        </div>
+        <h3 class="resource-subhead">Registrering og oppfølging <span>Krever kode</span></h3>
+        <div class="resource-grid">
+          <a class="resource-card" href="aktivitetsdagbok.html">
+            <h3>Aktivitetsdagbok</h3>
+            <p>Skjema for 7 dagers registrering av fysisk aktivitet, varighet og opplevd anstrengelse, og hva som gjør det lettere eller vanskeligere å være i bevegelse.</p>
+          </a>
+          <a class="resource-card" href="borg-rpe-test.html">
+            <h3>Borg CR10-skala (0 til 10)</h3>
+            <p>Registrer opplevd anstrengelse med Borgs CR10-skala, og følg utviklingen i treningsintensitet per aktivitet over tid.</p>
+          </a>
+          <a class="resource-card" href="aktivitetsklokke-data.html">
+            <h3>Data fra telefon eller aktivitetsklokke</h3>
+            <p>Skjema for 7 dagers avskrift av skritt, aktive minutter, hvilepuls og søvn fra egen helse-app eller aktivitetsklokke.</p>
+          </a>
+          <a class="resource-card" href="trening-energi-restitusjon.html">
+            <h3>Trening, energi og restitusjon</h3>
+            <p>Skjema du fyller ut rundt treningsøktene: energi og smerter før og etter, hvor hard økten var og hvordan kroppen kjennes neste morgen. For å finne den dosen som gir deg overskudd.</p>
+          </a>
+        </div>
+        <h3 class="resource-subhead">Tester <span>Krever kode</span></h3>
+        <div class="resource-grid">
+          <a class="resource-card" href="1rm-testing.html">
+            <h3>1RM-testing</h3>
+            <p>Beregn estimert 1RM med Brzycki-formelen, og følg utviklingen i maksimal styrke per øvelse over tid.</p>
+          </a>
+          <a class="resource-card" href="6mwt.html">
+            <h3>6-minutters gangtest (6MWT)</h3>
+            <p>Tidtaker og loggverktøy for 6-minutters gangtest. Mål utholdenhet og følg utviklingen over tid.</p>
+          </a>
+          <a class="resource-card" href="sit-to-stand-test.html">
+            <h3>Sit-to-stand-test (30 sekunder)</h3>
+            <p>Tidtaker og telleknapp for 30-sekunders sit-to-stand-test. Mål benstyrke og funksjon, og følg utviklingen over tid.</p>
+          </a>
           <a class="resource-card" href="ymca-step-test.html">
             <h3>YMCA step-test</h3>
             <p>Metronom, tidtaker og loggverktøy for YMCA 3-minutters step-test. Mål kondisjon og følg utviklingen over tid.</p>
-            <p class="note">Krever kode fra Silje Merete</p>
           </a>
         </div>
       </div>
@@ -1343,6 +1367,7 @@
     <details class="resource-toggle">
       <summary>Kosthold <span class="chevron">▸</span></summary>
       <div class="resource-toggle-body">
+        <h3 class="resource-subhead">Kartlegging av kostholdet</h3>
         <div class="resource-grid">
           <a class="resource-card" href="kosthold-spisevaner.html">
             <h3>Kosthold og spisevaner</h3>
@@ -1354,6 +1379,9 @@
             <p>Grundigere skjema for kartlegging av hva, hvor mye, når og hvorfor du spiser, for 3 vanlige hverdager og 1 vanlig helgedag.</p>
             <p class="note">Krever kode fra Silje Merete</p>
           </a>
+        </div>
+        <h3 class="resource-subhead">Enkeltområder</h3>
+        <div class="resource-grid">
           <a class="resource-card" href="maltidsinnhold.html">
             <h3>Måltidsinnhold: tallerkenmodellen</h3>
             <p>Skjema for 3 dagers avkrysning av hvilke matvaregrupper som var med i måltidene dine, ut fra tallerkenmodellen.</p>
