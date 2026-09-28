@@ -156,7 +156,8 @@
     object-fit: cover;
   }
 
-  span.thumb { background: transparent; }
+  .thumb-link { display: block; border-radius: 6px; }
+  .thumb-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   .exercises li:nth-child(odd) { background: var(--accent-soft); }
 
@@ -291,7 +292,8 @@
 
   @media (max-width: 420px) {
     .exercises li { grid-template-columns: 64px 1fr; }
-    .exercises .thumb { width: 64px; height: 54px; grid-row: span 2; }
+    .exercises .thumb { width: 64px; height: 54px; }
+    .exercises .thumb-link, .exercises li > .thumb { grid-row: span 2; }
     .exercises .sets { grid-column: 2; }
     .week li { grid-template-columns: 1fr; gap: 0.15rem; }
   }
@@ -336,11 +338,11 @@
     <div data-place-panel="gym">
       <ul class="exercises">
         <li><img class="thumb" src="images/ukeplan-kneboy.jpg" width="120" height="100" loading="lazy" alt="Knebøy: illustrasjon med silhuetter."><span>Knebøy eller beinpress</span><span class="sets">3 × 6–8</span></li>
-        <li><img class="thumb" src="images/ukeplan-seteloft.jpg" width="120" height="100" loading="lazy" alt="Seteløft, en hofteøvelse: illustrasjon med silhuetter."><span>Rumensk markløft eller annen hofteøvelse</span><span class="sets">3 × 6–8</span></li>
-        <li><img class="thumb" src="images/ukeplan-roing.jpg" width="120" height="100" loading="lazy" alt="Roing med strikk: illustrasjon med silhuetter."><span>Roing eller nedtrekk</span><span class="sets">3 × 6–8</span></li>
-        <li><img class="thumb" src="images/ukeplan-pushups.jpg" width="120" height="100" loading="lazy" alt="Armhevinger mot vegg: illustrasjon med silhuetter."><span>Brystpress eller push-ups</span><span class="sets">3 × 6–8</span></li>
-        <li><img class="thumb" src="images/ukeplan-skulderpress.jpg" width="120" height="100" loading="lazy" alt="Skulderpress med manualer: illustrasjon med silhuetter."><span>Skulderpress</span><span class="sets">2–3 × 6–8</span></li>
-        <li><span class="thumb" aria-hidden="true"></span><span>Enbensøvelse, for eksempel utfall eller step-up</span><span class="sets">2 × 6–8 per bein</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-markloft-stor.jpg" aria-label="Se større bilde: Rumensk markløft"><img class="thumb" src="images/ukeplan-markloft-senter.jpg" width="120" height="100" loading="lazy" alt="Rumensk markløft på treningssenter: illustrasjon med silhuetter."></a><span>Rumensk markløft eller annen hofteøvelse</span><span class="sets">3 × 6–8</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-roing-stor.jpg" aria-label="Se større bilde: Roing"><img class="thumb" src="images/ukeplan-roing-senter.jpg" width="120" height="100" loading="lazy" alt="Roing på treningssenter: illustrasjon med silhuetter."></a><span>Roing eller nedtrekk</span><span class="sets">3 × 6–8</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-bryst-stor.jpg" aria-label="Se større bilde: Brystpress og push-ups"><img class="thumb" src="images/ukeplan-bryst-senter.jpg" width="120" height="100" loading="lazy" alt="Brystpress og push-ups på treningssenter: illustrasjon med silhuetter."></a><span>Brystpress eller push-ups</span><span class="sets">3 × 6–8</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-skulderpress-stor.jpg" aria-label="Se større bilde: Skulderpress"><img class="thumb" src="images/ukeplan-skulderpress-senter.jpg" width="120" height="100" loading="lazy" alt="Skulderpress på treningssenter: illustrasjon med silhuetter."></a><span>Skulderpress</span><span class="sets">2–3 × 6–8</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-enbens-stor.jpg" aria-label="Se større bilde: Enbensøvelse"><img class="thumb" src="images/ukeplan-enbens-senter.jpg" width="120" height="100" loading="lazy" alt="Enbensøvelse på treningssenter: illustrasjon med silhuetter."></a><span>Enbensøvelse, for eksempel utfall eller step-up</span><span class="sets">2 × 6–8 per bein</span></li>
       </ul>
       <p>Avslutt gjerne med litt mage- og kjernestyrke.</p>
     </div>
@@ -351,11 +353,11 @@
       </div>
       <ul class="exercises">
         <li><img class="thumb" src="images/ukeplan-kneboy.jpg" width="120" height="100" loading="lazy" alt="Knebøy: illustrasjon med silhuetter."><span>Knebøy med manual eller kettlebell<span class="how">Hold vekten foran brystet (goblet-knebøy). For mer: bulgarsk utfall med bakre fot på en stol.</span></span><span class="sets">3 × 6–8</span></li>
-        <li><img class="thumb" src="images/ukeplan-seteloft.jpg" width="120" height="100" loading="lazy" alt="Seteløft, en hofteøvelse: illustrasjon med silhuetter."><span>Rumensk markløft med manualer<span class="how">Eller seteløft med skuldrene mot sofaen og vekt på hoftene. For mer: markløft på ett bein.</span></span><span class="sets">3 × 6–8</span></li>
-        <li><img class="thumb" src="images/ukeplan-roing.jpg" width="120" height="100" loading="lazy" alt="Roing med strikk: illustrasjon med silhuetter."><span>Roing med manual eller strikk<span class="how">Én arm av gangen med støtte på en stol, eller strikk festet i døra.</span></span><span class="sets">3 × 6–8</span></li>
-        <li><img class="thumb" src="images/ukeplan-pushups.jpg" width="120" height="100" loading="lazy" alt="Armhevinger mot vegg: illustrasjon med silhuetter."><span>Push-ups<span class="how">Mot kjøkkenbenken, så på knærne, så på gulvet. Eller brystpress med manualer liggende på gulvet.</span></span><span class="sets">3 × 6–8</span></li>
-        <li><img class="thumb" src="images/ukeplan-skulderpress.jpg" width="120" height="100" loading="lazy" alt="Skulderpress med manualer: illustrasjon med silhuetter."><span>Skulderpress med manualer eller strikk<span class="how">Sittende eller stående.</span></span><span class="sets">2–3 × 6–8</span></li>
-        <li><span class="thumb" aria-hidden="true"></span><span>Step-up eller utfall bakover<span class="how">På et trappetrinn eller en stødig stol, gjerne med manualer i hendene.</span></span><span class="sets">2 × 6–8 per bein</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-markloft-stor.jpg" aria-label="Se større bilde: Rumensk markløft"><img class="thumb" src="images/ukeplan-markloft-hjemme.jpg" width="120" height="100" loading="lazy" alt="Rumensk markløft hjemme: illustrasjon med silhuetter."></a><span>Rumensk markløft med manualer<span class="how">Eller seteløft med skuldrene mot sofaen og vekt på hoftene. For mer: markløft på ett bein.</span></span><span class="sets">3 × 6–8</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-roing-stor.jpg" aria-label="Se større bilde: Roing"><img class="thumb" src="images/ukeplan-roing-hjemme.jpg" width="120" height="100" loading="lazy" alt="Roing hjemme: illustrasjon med silhuetter."></a><span>Roing med manual eller strikk<span class="how">Én arm av gangen med støtte på en stol, eller strikk festet i døra.</span></span><span class="sets">3 × 6–8</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-bryst-stor.jpg" aria-label="Se større bilde: Brystpress og push-ups"><img class="thumb" src="images/ukeplan-bryst-hjemme.jpg" width="120" height="100" loading="lazy" alt="Brystpress og push-ups hjemme: illustrasjon med silhuetter."></a><span>Push-ups<span class="how">Mot kjøkkenbenken, så på knærne, så på gulvet. Eller brystpress med manualer liggende på gulvet.</span></span><span class="sets">3 × 6–8</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-skulderpress-stor.jpg" aria-label="Se større bilde: Skulderpress"><img class="thumb" src="images/ukeplan-skulderpress-hjemme.jpg" width="120" height="100" loading="lazy" alt="Skulderpress hjemme: illustrasjon med silhuetter."></a><span>Skulderpress med manualer eller strikk<span class="how">Sittende eller stående.</span></span><span class="sets">2–3 × 6–8</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-enbens-stor.jpg" aria-label="Se større bilde: Enbensøvelse"><img class="thumb" src="images/ukeplan-enbens-hjemme.jpg" width="120" height="100" loading="lazy" alt="Enbensøvelse hjemme: illustrasjon med silhuetter."></a><span>Step-up eller utfall bakover<span class="how">På et trappetrinn eller en stødig stol, gjerne med manualer i hendene.</span></span><span class="sets">2 × 6–8 per bein</span></li>
       </ul>
       <p>Avslutt gjerne med litt mage- og kjernestyrke, for eksempel dead bug, bird dog eller planke.</p>
 
