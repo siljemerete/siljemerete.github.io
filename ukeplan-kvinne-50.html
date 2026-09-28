@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ukeplan for kvinner 50+ | Silje Merete SMART Helseveiledning</title>
+<link rel="icon" href="images/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<meta name="description" content="En enkel ukeplan for kvinner 50+, inspirert av Stacy Sims: to styrkeøkter, én kort intervalløkt, mye hverdagsaktivitet og nok restitusjon.">
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --warn: #c9823f;
+    --warn-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--accent-soft), var(--bg));
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .hero h1 {
+    margin: 0 0 0.75rem;
+    font-size: 1.8rem;
+    color: var(--accent-dark);
+  }
+
+  .hero p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 46ch;
+    margin-inline: auto;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem 2rem;
+    margin: 2rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .card h2 {
+    margin: 0 0 0.6rem;
+    color: var(--accent-dark);
+    font-size: 1.3rem;
+  }
+
+  .card h3 {
+    margin: 1.25rem 0 0.4rem;
+    color: var(--accent-dark);
+    font-size: 1.05rem;
+  }
+
+  .card p { margin: 0 0 0.75rem; }
+  .card p:last-child { margin-bottom: 0; }
+
+  .card > p.desc {
+    margin: 0 0 1.25rem;
+    color: var(--muted);
+  }
+
+  .message-card {
+    border-left: 4px solid var(--accent);
+  }
+
+  .week {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .week li {
+    display: grid;
+    grid-template-columns: 5.5rem 1fr;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .week li:last-child { border-bottom: 0; }
+
+  .week .day {
+    font-weight: 700;
+    color: var(--accent-dark);
+  }
+
+  .week .tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    margin-left: 0.3rem;
+    vertical-align: 0.1em;
+  }
+
+  .tag.strength { background: var(--accent); color: #fff; }
+  .tag.hard { background: var(--warn); color: #fff; }
+  .tag.easy { background: var(--accent-soft); color: var(--accent-dark); }
+
+  .week .detail {
+    display: block;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .exercises {
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+  }
+
+  .exercises li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.55rem 0.9rem;
+    border-radius: 8px;
+  }
+
+  .exercises li:nth-child(odd) { background: var(--accent-soft); }
+
+  .exercises .sets {
+    white-space: nowrap;
+    font-weight: 600;
+    color: var(--accent-dark);
+  }
+
+  .meta {
+    margin: 0 0 1.25rem;
+    padding: 0.75rem 1rem;
+    background: var(--accent-soft);
+    border-radius: 8px;
+    color: var(--ink);
+    font-size: 0.95rem;
+  }
+
+  .formula {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+    margin: 0.5rem 0 1rem;
+  }
+
+  .formula.not {
+    color: var(--muted);
+    background: #f4f6f7;
+    font-weight: 600;
+    text-decoration: line-through;
+    text-decoration-color: rgba(79, 112, 128, 0.5);
+  }
+
+  .plain-list {
+    margin: 0 0 0.75rem;
+    padding-left: 1.25rem;
+  }
+
+  .plain-list li { margin: 0 0 0.5rem; }
+
+  .caution-card {
+    background: var(--warn-soft);
+    border: 1px solid #ecd3ac;
+    border-left: 4px solid var(--warn);
+  }
+
+  .caution-card h2 { color: #8a5a25; }
+
+  .home-link {
+    display: block;
+    text-align: center;
+    margin: 1rem 0 3rem;
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .home-link:hover { text-decoration: underline; }
+
+  footer.closing {
+    margin: 2rem 0 1rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong { color: var(--accent-dark); }
+
+  .page-logo {
+    display: block;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 0.75rem;
+    padding: 5px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(22, 40, 58, 0.12);
+  }
+
+  .page-logo img {
+    display: block;
+    width: 46px;
+    height: 46px;
+  }
+
+  @media (max-width: 420px) {
+    .week li { grid-template-columns: 1fr; gap: 0.15rem; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
+    <h1>Ukeplan for kvinner 50+</h1>
+    <p>En enkel plan inspirert av Stacy Sims, med hovedvekt på styrke, korte intervaller, hverdagsaktivitet og nok restitusjon.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section class="card">
+    <h2>Uka i korte trekk</h2>
+    <ul class="week">
+      <li><span class="day">Mandag</span><span>Styrke 45–60 min <span class="tag strength">Styrke</span><span class="detail">Hele kroppen, relativt tungt</span></span></li>
+      <li><span class="day">Tirsdag</span><span>Rolig aktivitet <span class="tag easy">Rolig</span><span class="detail">30–60 min gåtur</span></span></li>
+      <li><span class="day">Onsdag</span><span>Korte intervaller <span class="tag hard">Intervall</span><span class="detail">20–30 min totalt</span></span></li>
+      <li><span class="day">Torsdag</span><span>Hvile <span class="tag easy">Rolig</span><span class="detail">Yoga, mobilitet eller rolig gåtur</span></span></li>
+      <li><span class="day">Fredag</span><span>Styrke 45–60 min <span class="tag strength">Styrke</span><span class="detail">Hele kroppen</span></span></li>
+      <li><span class="day">Lørdag</span><span>Tur <span class="tag easy">Lyst</span><span class="detail">Tur, fjelltur eller annen aktivitet du liker</span></span></li>
+      <li><span class="day">Søndag</span><span>Hvile <span class="tag easy">Rolig</span><span class="detail">Hvile eller lett aktivitet</span></span></li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Styrkeøktene</h2>
+    <p class="desc">Tanken er ikke å gjøre mange øvelser, men å gjøre noen grunnbevegelser ordentlig.</p>
+    <div class="meta">
+      <strong>Oppvarming, 5–10 min:</strong> litt rolig kondisjon (sykkel, rask gange eller trapp), og deretter et lett oppvarmingssett av de første øvelsene før du tar i.
+    </div>
+    <ul class="exercises">
+      <li><span>Knebøy eller beinpress</span><span class="sets">3 × 6–10</span></li>
+      <li><span>Rumensk markløft eller annen hofteøvelse</span><span class="sets">3 × 6–10</span></li>
+      <li><span>Roing eller nedtrekk</span><span class="sets">3 × 8–10</span></li>
+      <li><span>Brystpress eller push-ups</span><span class="sets">3 × 8–10</span></li>
+      <li><span>Skulderpress</span><span class="sets">2–3 × 8–10</span></li>
+      <li><span>Enbensøvelse, for eksempel utfall eller step-up</span><span class="sets">2 × 8 per bein</span></li>
+    </ul>
+    <p>Avslutt gjerne med litt mage- og kjernestyrke.</p>
+
+    <h3>Hvor tungt?</h3>
+    <p>Siste repetisjonene i hvert sett skal kjennes tunge, men teknikken skal holde. En god tommelfingerregel er at du kunne klart 1–2 repetisjoner til. Hvil gjerne 1,5–2 minutter mellom settene, så du orker å løfte ordentlig i neste sett.</p>
+
+    <h3>Slik øker du</h3>
+    <p>Når du klarer øvre del av repetisjonsområdet med god teknikk, øker du vekten litt. Det er dette som gjør at kroppen fortsatt får et signal om å bevare og bygge muskelmasse.</p>
+
+    <h3>Ny med styrketrening?</h3>
+    <p>Begynn med lettere vekter og 2 sett de første ukene, og bruk tiden på å lære teknikken. Vekten kommer etter hvert.</p>
+  </section>
+
+  <section class="card">
+    <h2>Intervalløkten</h2>
+    <p class="desc">Her er det lurt å begynne litt mer moderat enn mange av Sims’ «sprint»-økter. Gå, sykle, gå i motbakke, ro eller svøm, det du liker og tåler.</p>
+    <div class="meta"><strong>Oppvarming:</strong> 10 min rolig.</div>
+
+    <h3>Start her</h3>
+    <p><strong>4 × 3 minutter ganske hardt</strong>, med 2 minutter rolig aktivitet mellom hvert drag. Omtrent 7 av 10 på en anstrengelsesskala: du kan si noen få ord, men ikke føre en samtale.</p>
+
+    <h3>Når kroppen er vant til høyere intensitet</h3>
+    <p><strong>6–8 × 30 sekunder hardt</strong>, med 60–90 sekunder rolig mellom. Nå er det mer som 8–9 av 10.</p>
+
+    <p>Avslutt med 5 minutter rolig nedtrapping.</p>
+    <p>Du trenger ikke kjøre deg helt tom. Målet er et tydelig intensivt stimulus, ikke maksimal utmattelse.</p>
+  </section>
+
+  <section class="card message-card">
+    <h2>Det viktigste prinsippet</h2>
+    <p>For kvinner rundt overgangsalderen er det bedre å tenke:</p>
+    <p class="formula">2 gode styrkeøkter + 1 intensiv økt + mye vanlig bevegelse</p>
+    <p>enn:</p>
+    <p class="formula not">5–6 middels harde treningsøkter hver uke</p>
+    <p>Det siste kan lett bli mye «gråsone-trening»: hardt nok til å koste restitusjon, men ikke hardt nok til å gi samme stimulus som ordentlig styrke eller intervaller.</p>
+    <p><strong>Travel uke?</strong> På uker der livet ellers krever mye, kan du redusere til to styrkeøkter og gåturer. Det er fortsatt en veldig god treningsuke.</p>
+  </section>
+
+  <section class="card">
+    <h2>Maten rundt treningen</h2>
+    <ul class="plain-list">
+      <li><strong>Ikke kombiner med streng slanking.</strong> Denne typen trening passer dårlig sammen med aggressiv kalorirestriksjon.</li>
+      <li><strong>Protein til hvert hovedmåltid.</strong> For en aktiv kvinne 50+ er et praktisk mål ofte omtrent 25–35 g protein per hovedmåltid, slik at proteinet fordeles utover dagen. Et måltid med protein innen et par timer etter styrkeøkta er også lurt.</li>
+      <li><strong>Litt mat før hard trening.</strong> Du trenger ikke et stort måltid, men hvis du blir tom, svak eller veldig sulten etterpå, er litt mat før trening bedre enn å insistere på å trene fastende.</li>
+    </ul>
+  </section>
+
+  <section class="card message-card">
+    <h2>Restitusjon er en del av programmet</h2>
+    <p>Søvn og restitusjon er ikke noe som kommer i tillegg. Det er der kroppen faktisk bygger seg opp etter øktene.</p>
+    <p>Kjenner du deg fortsatt sliten, sover dårlig eller har lav energi flere dager på rad, er det et signal om å ta ned intensiteten en uke, ikke å presse på.</p>
+  </section>
+
+  <section class="card caution-card">
+    <h2>Viktige forholdsregler</h2>
+    <ul class="plain-list">
+      <li>Ingen øvelser skal gjøre vondt i ledd. Gjør bevegelsen mindre, velg en annen variant, eller hopp over øvelsen hvis noe kjennes feil.</li>
+      <li>Har du hjerte- eller karsykdom, høyt blodtrykk eller andre helseplager, snakk med legen din før du begynner med tung styrke eller harde intervaller.</li>
+      <li>Stopp og ta kontakt med lege hvis du får brystsmerter, uvanlig tungpust eller blir svimmel.</li>
+    </ul>
+  </section>
+
+  <a class="home-link" href="index.html">Se hjemmesiden min →</a>
+
+</div>
+
+<footer class="closing">
+  Små skritt. Dine mål, ditt tempo.<br>
+  <strong>Du trenger ikke gjøre det alene.</strong>
+</footer>
+
+</body>
+</html>
