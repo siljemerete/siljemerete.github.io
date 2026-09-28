@@ -288,6 +288,49 @@
     color: var(--muted);
   }
 
+  .about-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+    margin: 2rem 0 0;
+    box-shadow: var(--shadow);
+  }
+
+  .about-box summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+  }
+
+  .about-box summary::-webkit-details-marker { display: none; }
+
+  .about-box summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 10px;
+  }
+
+  .about-box .chevron { transition: transform 0.2s; }
+  .about-box[open] .chevron { transform: rotate(90deg); }
+
+  .about-body { padding: 0 1.25rem 1.25rem; }
+  .about-body p { margin: 0 0 0.75rem; }
+  .about-body p:last-child { margin-bottom: 0; }
+
+  .about-body .source {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .about-body .source a { color: var(--accent-dark); font-weight: 600; }
+
   [hidden] { display: none !important; }
 
   @media (max-width: 420px) {
@@ -310,6 +353,16 @@
 </section>
 
 <div class="wrap">
+
+  <details class="about-box">
+    <summary>Hvem er Dr. Stacy Sims? <span class="chevron" aria-hidden="true">▸</span></summary>
+    <div class="about-body">
+      <p>Dr. Stacy Sims er en amerikansk treningsfysiolog og ernæringsforsker med doktorgrad, kjent for forskning og formidling om hvordan biologiske forskjeller mellom kvinner og menn kan ha betydning for trening, ernæring, restitusjon og prestasjon. Hun har arbeidet med forskning ved blant annet Stanford University, Auckland University of Technology (AUT) og University of Waikato, og har publisert en rekke fagfellevurderte vitenskapelige artikler.</p>
+      <p>Hun er særlig kjent for uttrykket «Women are not small men». Bakgrunnen er at mye av den tradisjonelle forskningen innen trening og idrettsfysiologi historisk har vært basert på mannlige deltakere. Sims argumenterer derfor for at kunnskap om blant annet kjønnshormoner, livsfaser, muskelmasse, energibehov og restitusjon også bør tas med når trening tilpasses kvinner.</p>
+      <p>Tilnærmingen hennes er interessant fordi den retter oppmerksomheten mot områder som lenge har vært mindre undersøkt, blant annet trening gjennom menstruasjonssyklus, perimenopause og overgangsalder. Samtidig understreker nyere forskning, og Sims selv, at det ikke finnes én treningsmodell som passer alle kvinner. Individuell respons, treningsbakgrunn, helse, alder og livssituasjon er fortsatt viktig når trening planlegges.</p>
+      <p class="source">Kilde: <a href="https://www.drstacysims.com/" target="_blank" rel="noopener">drstacysims.com</a></p>
+    </div>
+  </details>
 
   <section class="card">
     <h2>Uka i korte trekk</h2>
