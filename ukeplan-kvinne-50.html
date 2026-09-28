@@ -236,6 +236,48 @@
     height: 46px;
   }
 
+  .place-switch {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0 0 1.25rem;
+  }
+
+  .place-switch button {
+    flex: 1;
+    font-size: 0.98rem;
+    padding: 0.7rem 0.75rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .place-switch button span {
+    display: block;
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .place-switch button[aria-pressed="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .place-switch button[aria-pressed="true"] span { color: var(--accent-soft); }
+
+  .exercises .how {
+    display: block;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  [hidden] { display: none !important; }
+
   @media (max-width: 420px) {
     .week li { grid-template-columns: 1fr; gap: 0.15rem; }
   }
@@ -268,19 +310,50 @@
 
   <section class="card">
     <h2>Styrkeøktene</h2>
-    <p class="desc">Tanken er ikke å gjøre mange øvelser, men å gjøre noen grunnbevegelser ordentlig.</p>
+    <p class="desc">Tanken er ikke å gjøre mange øvelser, men å gjøre noen grunnbevegelser ordentlig. Det kan du gjøre både på treningssenter og hjemme.</p>
     <div class="meta">
       <strong>Oppvarming, 5–10 min:</strong> litt rolig kondisjon (sykkel, rask gange eller trapp), og deretter et lett oppvarmingssett av de første øvelsene før du tar i.
     </div>
-    <ul class="exercises">
-      <li><span>Knebøy eller beinpress</span><span class="sets">3 × 6–10</span></li>
-      <li><span>Rumensk markløft eller annen hofteøvelse</span><span class="sets">3 × 6–10</span></li>
-      <li><span>Roing eller nedtrekk</span><span class="sets">3 × 8–10</span></li>
-      <li><span>Brystpress eller push-ups</span><span class="sets">3 × 8–10</span></li>
-      <li><span>Skulderpress</span><span class="sets">2–3 × 8–10</span></li>
-      <li><span>Enbensøvelse, for eksempel utfall eller step-up</span><span class="sets">2 × 8 per bein</span></li>
-    </ul>
-    <p>Avslutt gjerne med litt mage- og kjernestyrke.</p>
+    <div class="place-switch" role="group" aria-label="Velg hvor du trener">
+      <button type="button" data-place="gym" aria-pressed="true">Treningssenter<span>Stang, apparater og manualer</span></button>
+      <button type="button" data-place="home" aria-pressed="false">Hjemme<span>Manualer, strikk og en stol</span></button>
+    </div>
+
+    <div data-place-panel="gym">
+      <ul class="exercises">
+        <li><span>Knebøy eller beinpress</span><span class="sets">3 × 6–10</span></li>
+        <li><span>Rumensk markløft eller annen hofteøvelse</span><span class="sets">3 × 6–10</span></li>
+        <li><span>Roing eller nedtrekk</span><span class="sets">3 × 8–10</span></li>
+        <li><span>Brystpress eller push-ups</span><span class="sets">3 × 8–10</span></li>
+        <li><span>Skulderpress</span><span class="sets">2–3 × 8–10</span></li>
+        <li><span>Enbensøvelse, for eksempel utfall eller step-up</span><span class="sets">2 × 8 per bein</span></li>
+      </ul>
+      <p>Avslutt gjerne med litt mage- og kjernestyrke.</p>
+    </div>
+
+    <div data-place-panel="home" hidden>
+      <div class="meta">
+        <strong>Utstyr som holder lenge:</strong> et par manualer eller en kettlebell (gjerne justerbare manualer, så du kan øke vekten), et par treningsstrikk med ulik motstand, en stødig stol og en trapp. Har du ikke vekter ennå, fungerer en ryggsekk med bøker eller vannflasker.
+      </div>
+      <ul class="exercises">
+        <li><span>Knebøy med manual eller kettlebell<span class="how">Hold vekten foran brystet (goblet-knebøy). For mer: bulgarsk utfall med bakre fot på en stol.</span></span><span class="sets">3 × 6–10</span></li>
+        <li><span>Rumensk markløft med manualer<span class="how">Eller seteløft med skuldrene mot sofaen og vekt på hoftene. For mer: markløft på ett bein.</span></span><span class="sets">3 × 6–10</span></li>
+        <li><span>Roing med manual eller strikk<span class="how">Én arm av gangen med støtte på en stol, eller strikk festet i døra.</span></span><span class="sets">3 × 8–10</span></li>
+        <li><span>Push-ups<span class="how">Mot kjøkkenbenken, så på knærne, så på gulvet. Eller brystpress med manualer liggende på gulvet.</span></span><span class="sets">3 × 8–10</span></li>
+        <li><span>Skulderpress med manualer eller strikk<span class="how">Sittende eller stående.</span></span><span class="sets">2–3 × 8–10</span></li>
+        <li><span>Step-up eller utfall bakover<span class="how">På et trappetrinn eller en stødig stol, gjerne med manualer i hendene.</span></span><span class="sets">2 × 8 per bein</span></li>
+      </ul>
+      <p>Avslutt gjerne med litt mage- og kjernestyrke, for eksempel dead bug, bird dog eller planke.</p>
+
+      <h3>Når vektene blir for lette</h3>
+      <p>Hjemme er utfordringen ofte at du ikke har tunge nok vekter. Du kan fortsatt gjøre øvelsene tunge nok:</p>
+      <ul class="plain-list">
+        <li><strong>Bytt til ett bein eller én arm.</strong> Da blir samme vekt nesten dobbelt så tung.</li>
+        <li><strong>Senk sakte.</strong> Bruk 3 sekunder på vei ned, og hold en kort pause i bunnen.</li>
+        <li><strong>Ta flere repetisjoner.</strong> Går du opp mot 12–15 repetisjoner, virker det fortsatt, så lenge de siste kjennes virkelig tunge.</li>
+        <li><strong>Kjøp neste vekt.</strong> Når alt dette blir lett, er det tid for tyngre manualer.</li>
+      </ul>
+    </div>
 
     <h3>Hvor tungt?</h3>
     <p>Siste repetisjonene i hvert sett skal kjennes tunge, men teknikken skal holde. En god tommelfingerregel er at du kunne klart 1–2 repetisjoner til. Hvil gjerne 1,5–2 minutter mellom settene, så du orker å løfte ordentlig i neste sett.</p>
@@ -289,7 +362,7 @@
     <p>Når du klarer øvre del av repetisjonsområdet med god teknikk, øker du vekten litt. Det er dette som gjør at kroppen fortsatt får et signal om å bevare og bygge muskelmasse.</p>
 
     <h3>Ny med styrketrening?</h3>
-    <p>Begynn med lettere vekter og 2 sett de første ukene, og bruk tiden på å lære teknikken. Vekten kommer etter hvert.</p>
+    <p>Begynn med lettere vekter (eller bare kroppsvekten hjemme) og 2 sett de første ukene, og bruk tiden på å lære teknikken. Vekten kommer etter hvert.</p>
   </section>
 
   <section class="card">
@@ -349,6 +422,22 @@
   Små skritt. Dine mål, ditt tempo.<br>
   <strong>Du trenger ikke gjøre det alene.</strong>
 </footer>
+
+<script>
+  (function () {
+    document.querySelectorAll('.place-switch button').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var key = btn.getAttribute('data-place');
+        document.querySelectorAll('.place-switch button').forEach(function (b) {
+          b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+        });
+        document.querySelectorAll('[data-place-panel]').forEach(function (panel) {
+          panel.hidden = panel.getAttribute('data-place-panel') !== key;
+        });
+      });
+    });
+  })();
+</script>
 
 </body>
 </html>
