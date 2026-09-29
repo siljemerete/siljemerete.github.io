@@ -552,10 +552,12 @@
     <p class="tagline">Anslå maksimal styrke, og følg utviklingen din over tid</p>
     <div class="reminder">
       Dette er en enkel måte å følge utviklingen av maksimal styrke over tid,
-      ikke en medisinsk vurdering. <strong>Du skal ikke teste et reelt
-      maksløft.</strong> Bruk i stedet en submaksimal belastning du klarer å
-      løfte kontrollert et visst antall repetisjoner, og la verktøyet beregne
-      estimert 1RM. Bruk alltid god oppvarming og riktig teknikk, og la deg
+      ikke en medisinsk vurdering. Du kan teste 1RM på to måter: direkte, ved
+      å løfte tyngste vekt én gang, eller indirekte, ved å løfte en
+      submaksimal belastning kontrollert et visst antall repetisjoner og la
+      verktøyet beregne estimert 1RM. Et reelt maksløft krever korrekt
+      teknikk og innebærer risiko for overbelastning, så for de fleste er den
+      submaksimale metoden tryggere. Bruk alltid god oppvarming og riktig teknikk, og la deg
       gjerne veilede av en trent person. Resultatene dine lagres kun i denne
       nettleseren.
     </div>
@@ -564,10 +566,12 @@
   <section class="primer">
     <h2>Om 1RM-testing</h2>
     <p>1RM (one repetition maximum) er den tyngste belastningen en person klarer å løfte én gang med korrekt teknikk, og den mest brukte metoden for å vurdere maksimal dynamisk styrke.</p>
-    <p>Et reelt maksløft krever korrekt teknikk og innebærer risiko for overbelastning og skade, og er derfor ikke nødvendig for å følge utviklingen din. Her brukes i stedet en indirekte metode: du løfter en submaksimal belastning, registrerer hvor mange repetisjoner du klarer kontrollert, og estimerer 1RM ved hjelp av en formel.</p>
+    <p>Du kan teste på to måter:</p>
+    <p><strong>Direkte 1RM:</strong> du løfter den tyngste vekten du klarer én gang med korrekt teknikk. Dette gir mest presise resultater, men krever god teknikk, grundig oppvarming og helst en erfaren testleder, fordi det innebærer risiko for overbelastning.</p>
+    <p><strong>Estimert 1RM (submaksimal):</strong> du løfter en lettere vekt, registrerer hvor mange repetisjoner du klarer kontrollert, og estimerer 1RM ved hjelp av en formel. Dette er tryggere og anbefales for de fleste, særlig om du ikke er vant til tunge løft.</p>
     <p>Verktøyet under bruker Brzycki-formelen, som er blant de mest brukte og mest pålitelige dersom antall repetisjoner ligger mellom 10 og 15:</p>
     <div class="formula-box">1RM = Vekt ÷ (1,0278 − 0,0278 × Antall repetisjoner)</div>
-    <p>Slik gjør du det: velg en vekt du klarer å løfte 10 til 15 ganger kontrollert og med god teknikk, uten å gå helt til utmattelse. Fyll inn øvelse, vekt og antall repetisjoner under, så regner verktøyet automatisk ut din estimerte 1RM.</p>
+    <p>Slik gjør du det: ved estimert 1RM velger du en vekt du klarer å løfte 10 til 15 ganger kontrollert og med god teknikk. Ved direkte 1RM skriver du inn vekten og 1 repetisjon. Fyll inn øvelse, vekt og antall repetisjoner under, så regner verktøyet automatisk ut 1RM.</p>
     <p><strong>Anbefalt:</strong> test én beinøvelse og én overkroppsøvelse, for eksempel beinpress eller knebøy for bein, og brystpress eller nedtrekk for overkropp. Da får du et godt utgangspunkt for styrken din i både under- og overkropp. Bruk de samme øvelsene hver gang du tester, slik at resultatene kan sammenlignes.</p>
   </section>
 
@@ -596,8 +600,8 @@
       </div>
       <div class="field">
         <label for="entry-reps">Antall repetisjoner</label>
-        <input type="number" min="2" max="20" step="1" id="entry-reps" placeholder="F.eks. 12">
-        <p class="hint">Antall kontrollerte repetisjoner med submaksimal vekt. Formelen er mest pålitelig ved 10 til 15 repetisjoner.</p>
+        <input type="number" min="1" max="20" step="1" id="entry-reps" placeholder="F.eks. 12">
+        <p class="hint">Bruk 1 for et direkte testet 1RM. Ved submaksimal vekt er formelen mest pålitelig ved 10 til 15 repetisjoner.</p>
       </div>
       <div class="field field-wide">
         <label for="entry-note">Notat, teknikk, følelse, annet</label>
@@ -678,7 +682,7 @@
     var weight = parseFloat(document.getElementById('entry-weight').value);
     var reps = parseInt(document.getElementById('entry-reps').value, 10);
     var el = document.getElementById('estimateValue');
-    if (isNaN(weight) || isNaN(reps) || reps < 2 || weight <= 0) {
+    if (isNaN(weight) || isNaN(reps) || reps < 1 || weight <= 0) {
       el.textContent = '-';
       return;
     }
@@ -810,11 +814,6 @@
 
     if (!exercise || !date || isNaN(weight) || weight <= 0 || isNaN(reps) || reps < 1) {
       alert('Fyll ut øvelse, dato, vekt og repetisjoner for å legge til resultatet.');
-      return;
-    }
-
-    if (reps < 2) {
-      alert('Ikke test et reelt maksløft. Bruk en submaksimal vekt du klarer å løfte kontrollert flere ganger, helst 10 til 15 repetisjoner.');
       return;
     }
 
