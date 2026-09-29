@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Er vi avhengige av mobilen? | Silje Merete SMART Helseveiledning</title>
+<meta name="description" content="Om forskjellen på problematisk mobilbruk og avhengighet, hva vi kan lære av Anonyme Alkoholikere, og seks praktiske grep for å endre mobilvanene dine.">
+<meta property="og:title" content="Er vi avhengige av mobilen? | Silje Merete SMART Helseveiledning">
+<meta property="og:description" content="Om forskjellen på problematisk mobilbruk og avhengighet, hva vi kan lære av Anonyme Alkoholikere, og seks praktiske grep for å endre mobilvanene dine.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#145868">
+<link rel="icon" href="images/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+    padding: 3rem 0 3.5rem;
+    text-align: center;
+  }
+
+  .hero .kicker {
+    margin: 0 0 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .hero h1 {
+    margin: 0 0 0.75rem;
+    font-size: 1.9rem;
+    line-height: 1.25;
+    color: #fff;
+  }
+
+  .hero p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1.05rem;
+    max-width: 46ch;
+    margin-inline: auto;
+  }
+
+  .card-section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.85rem 1.85rem 2.1rem;
+    margin: 2.25rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .card-section h2 {
+    margin: 0 0 0.9rem;
+    color: var(--accent-dark);
+    font-size: 1.35rem;
+    line-height: 1.3;
+  }
+
+  .card-section p {
+    margin: 0.75rem 0;
+  }
+
+  .card-section p:last-child {
+    margin-bottom: 0;
+  }
+
+  sup a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  sup a:hover { text-decoration: underline; }
+
+  .callout {
+    background: var(--accent-dark);
+    color: #fff;
+    border-radius: 10px;
+    padding: 1.1rem 1.3rem;
+    margin: 1.4rem 0;
+  }
+
+  .callout p {
+    margin: 0;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .quote-card {
+    background: var(--accent-soft);
+    border-radius: 12px;
+    padding: 1.75rem;
+    margin: 2.25rem 0;
+    text-align: center;
+  }
+
+  .quote-card blockquote {
+    margin: 0;
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--accent-dark);
+    max-width: 48ch;
+    margin-inline: auto;
+  }
+
+  .refs {
+    margin: 0.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: refcount;
+  }
+
+  .refs li {
+    counter-increment: refcount;
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--border);
+    font-size: 0.92rem;
+  }
+
+  .refs li:first-child {
+    border-top: none;
+    padding-top: 0.25rem;
+  }
+
+  .refs li::before {
+    content: "[" counter(refcount) "] ";
+    font-weight: 700;
+    color: var(--accent-dark);
+  }
+
+  .refs .ref-title {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .refs a {
+    display: block;
+    margin-top: 0.15rem;
+    color: var(--accent);
+    word-break: break-all;
+    font-size: 0.85rem;
+  }
+
+  .note-section p {
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .home-link {
+    display: block;
+    text-align: center;
+    margin: 0 0 3rem;
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .home-link:hover { text-decoration: underline; }
+
+  footer.closing {
+    margin: 2rem 0 1rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong { color: var(--accent-dark); }
+
+  .card-section .kicker {
+    margin: 0 0 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .card-section ul.plain {
+    margin: 0.75rem 0;
+    padding-left: 1.2rem;
+  }
+
+  .card-section ul.plain li { margin: 0.4rem 0; }
+
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin: 1.2rem 0;
+  }
+
+  .compare div {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .compare strong {
+    display: block;
+    color: var(--accent-dark);
+    margin-bottom: 0.25rem;
+  }
+
+  .cta-link {
+    display: inline-block;
+    margin-top: 0.75rem;
+    background: var(--accent-dark);
+    color: #fff;
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .cta-link:hover { background: var(--accent); }
+
+  .flow {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin: 1.2rem 0;
+    font-weight: 600;
+    color: var(--accent-dark);
+    text-align: center;
+    line-height: 1.9;
+  }
+
+  .step {
+    border-top: 1px solid var(--border);
+    padding-top: 1.1rem;
+    margin-top: 1.4rem;
+  }
+
+  .step h3 {
+    margin: 0 0 0.5rem;
+    color: var(--accent-dark);
+    font-size: 1.1rem;
+  }
+
+  .step h3 span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.7rem;
+    height: 1.7rem;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.9rem;
+  }
+
+  .question {
+    font-weight: 600;
+    color: var(--accent-dark);
+  }
+
+  .card-section a:not(.cta-link) { color: var(--accent); }
+
+  @media (max-width: 560px) {
+    .hero h1 { font-size: 1.5rem; }
+    .compare { grid-template-columns: 1fr; }
+    .card-section { padding: 1.4rem 1.2rem 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">Mobilbevissthet · Fordypning</p>
+    <h1>Er vi avhengige av mobilen?</h1>
+    <p>Om avhengighet, selvledelse og praktiske grep</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section class="card-section">
+    <p>Dette er en fordypning til <a href="mobilbevissthet.html">Mobilbevissthet</a>. Der skrev jeg om hvordan mobilen kan gå fra å være et valg til å bli en vane, og om det lille mellomrommet mellom trigger og valg.</p>
+    <p>Her ser jeg nærmere på hva mobilvaner har med avhengighet å gjøre, og på noen praktiske grep som kan gjøre det lettere å bruke mobilen slik du selv ønsker.</p>
+  </section>
+
+  <section class="card-section">
+    <h2>Er vi egentlig mobilavhengige?</h2>
+    <p>Begrepet «mobilavhengighet» brukes mye, men faglig er bildet mer nyansert.</p>
+    <p>Smarttelefonavhengighet er ikke en egen diagnose på samme måte som for eksempel alkoholavhengighet. I ICD-11 finnes blant annet diagnoser knyttet til gambling og gaming, men ikke smarttelefonbruk.</p>
+    <p>Derfor brukes også begrepet <em>problematisk smarttelefonbruk</em>.</p>
+    <p>Det synes jeg egentlig er et godt uttrykk.</p>
+    <p>For dette handler ikke nødvendigvis om hvor mange timer vi bruker mobilen. Mobilen kan være både arbeidsverktøy, kamera, avis, kalender og kontakt med mennesker vi er glad i.</p>
+    <p>Det interessante er heller hvordan bruken påvirker livet vårt og hvor mye kontroll vi opplever å ha over den.</p>
+    <ul class="plain">
+      <li>Klarer jeg å legge mobilen bort når jeg ønsker det?</li>
+      <li>Tar jeg den opp uten at jeg egentlig har bestemt meg for det?</li>
+      <li>Bruker jeg mer tid enn jeg hadde tenkt?</li>
+      <li>Går det utover søvn, konsentrasjon, aktivitet eller mennesker jeg er sammen med?</li>
+      <li>Blir jeg rastløs når mobilen ikke er tilgjengelig?</li>
+    </ul>
+    <p>Dette er spørsmål jeg synes er langt mer interessante enn bare å telle skjermtimer.</p>
+  </section>
+
+  <section class="card-section">
+    <h2>Hva har dette med avhengighet å gjøre?</h2>
+    <p>Jeg synes det er interessant å se mobilvanene våre i lys av det vi vet om avhengighet generelt.</p>
+    <p>Men her er det viktig å være tydelig:</p>
+    <div class="callout">
+      <p>Mobilbruk og alkoholavhengighet er ikke det samme.</p>
+    </div>
+    <p>Alkoholavhengighet er en ruslidelse som kan få alvorlige fysiske, psykiske og sosiale konsekvenser.</p>
+    <p>Likevel finnes det noen spørsmål rundt kontroll og atferd som kan være relevante på tvers av ulike vaner.</p>
+    <p>Anonyme Alkoholikere beskriver blant annet erfaringen av at det blir vanskelig å kontrollere egen drikking og at man kan drikke mer enn man egentlig hadde tenkt eller ønsket.</p>
+    <p>Det fikk meg til å tenke.</p>
+    <p>For når blir egentlig en vane et problem?</p>
+    <p>Kanskje ikke først og fremst når vi gjør noe ofte, men når vi stadig gjør noe mer enn vi selv ønsker, eller opplever at det er vanskelig å stoppe.</p>
+    <p>Det kan være nyttig å stille seg noen enkle spørsmål:</p>
+    <ul class="plain">
+      <li>Kan jeg la være når jeg bestemmer meg for det?</li>
+      <li>Bruker jeg dette mer enn jeg egentlig ønsker?</li>
+      <li>Fortsetter jeg selv om jeg ser at det går utover noe som er viktig for meg?</li>
+      <li>Hva er det jeg egentlig søker akkurat nå?</li>
+    </ul>
+    <p>For meg handler dette ikke om å sette diagnoser på normale hverdagsvaner.</p>
+    <p>Det handler om bevissthet.</p>
+    <p>Og det er her selvledelse kommer inn.</p>
+  </section>
+
+  <section class="card-section">
+    <p class="kicker">Seks grep</p>
+    <h2>Selvledelse i praksis</h2>
+    <p>En mobil-detox trenger ikke bety at mobilen skal bort. Målet er å gjenvinne valgfriheten. Her er seks grep som kan hjelpe deg på veien:</p>
+    <ul class="plain">
+      <li><strong>Observer før du endrer.</strong> Bli nysgjerrig på når og hvordan du bruker mobilen.</li>
+      <li><strong>Spør hva du ønsker mer av.</strong> Hva vil du gi plass til?</li>
+      <li><strong>Start smått.</strong> Velg én eller to ting.</li>
+      <li><strong>Endre miljøet.</strong> Gjør det ønskede valget lettere, i stedet for å stole bare på viljestyrken.</li>
+      <li><strong>Øv på tomrommet.</strong> Du trenger ikke fylle hvert ledige øyeblikk.</li>
+      <li><strong>Evaluer, ikke døm.</strong> Et tilbakefall er informasjon, ikke et nederlag.</li>
+    </ul>
+    <p>Alle seks grepene finnes som et skjema du kan fylle ut i ditt eget tempo og sende til meg.</p>
+    <a class="cta-link" href="mobilbevissthet.html#selvledelse">Fyll ut skjemaet: Selvledelse i praksis →</a>
+  </section>
+
+  <section class="card-section">
+    <h2>Når det handler om mer enn mobilen</h2>
+    <p>Noen ganger handler tap av kontroll om noe langt mer alvorlig enn mobilvaner.</p>
+    <p>Hvis du kjenner igjen følelsen av manglende kontroll i forholdet ditt til alkohol, finnes det hjelp og fellesskap for mennesker som ønsker å slutte å drikke.</p>
+    <a class="cta-link" href="https://www.anonymealkoholikere.no/" target="_blank" rel="noopener">Anonyme Alkoholikere Norge →</a>
+    <p>Jeg synes det er viktig å understreke forskjellen mellom alkoholavhengighet og problematisk mobilbruk.</p>
+    <p>Samtidig kan begge temaene minne oss om verdien av å stoppe opp og undersøke våre egne mønstre.</p>
+    <p class="question">Har jeg fortsatt den kontrollen jeg ønsker å ha?</p>
+    <p>For meg er det kanskje kjernen i selvledelse.</p>
+    <p>Ikke å kontrollere hvert minutt av livet.</p>
+    <p>Ikke å gjøre alt riktig.</p>
+    <p>Og heller ikke å koble seg av verden.</p>
+    <p>Men å bli mer bevisst på hva som får oppmerksomheten min, hva jeg bruker tiden min på og hvilke valg jeg ønsker å ta.</p>
+  </section>
+
+  <div class="quote-card">
+    <blockquote>Kanskje trenger vi ikke først og fremst å koble oss av. Kanskje trenger vi innimellom å koble oss litt mer på vårt eget liv.</blockquote>
+  </div>
+
+  <section class="card-section">
+    <p class="kicker">Kilder</p>
+    <h2>Kilder og videre lesning</h2>
+    <ol class="refs">
+      <li id="ref1"><span class="ref-title">Tidsskrift for Den norske legeforening (2025)</span><br>Olaf Gjerløw Aasland: <em>Smarttelefonavhengighetssyndromet</em>. Om smarttelefonbruk sett i lys av avhengighetsbegrepet.<a href="https://tidsskriftet.no/2025/11/legelivet/smarttelefonavhengighetssyndromet" target="_blank" rel="noopener">Les artikkelen i Tidsskrift for Den norske legeforening</a></li>
+      <li id="ref2"><span class="ref-title">Psykologkontakten</span><br><em>Mobilavhengighet</em>. Om problematisk mobilbruk, tegn man kan være oppmerksom på og konkrete tiltak for å redusere skjermbruk.<a href="https://www.psykologkontakten.no/post/mobilavhengighet" target="_blank" rel="noopener">Les om mobilavhengighet hos Psykologkontakten</a></li>
+      <li id="ref3"><span class="ref-title">NRK – Avlogga</span><br>Om Sven Bisgaard Sundet og Michael Stilson, som levde uten smarttelefon i ett år, og hva de erfarte underveis.<a href="https://www.nrk.no/trondelag/avlogga_-var-mobilfri-i-ett-ar-_-dette-gjorde-det-med-hjernene-til-sven-sundet-og-mike-stilson-1.17065048" target="_blank" rel="noopener">Les NRKs sak om Avlogga</a></li>
+      <li id="ref4"><span class="ref-title">Anonyme Alkoholikere Norge</span><br>Informasjon om alkoholproblemer, AA og muligheter for hjelp og fellesskap.<a href="https://www.anonymealkoholikere.no/" target="_blank" rel="noopener">Anonyme Alkoholikere Norge</a></li>
+    </ol>
+  </section>
+
+  <section class="card-section note-section">
+    <h2>Viktig å vite</h2>
+    <p>Denne artikkelen er skrevet som generell helseinformasjon og refleksjon rundt mobilvaner, selvledelse og atferdsendring. Begrepet mobilavhengighet brukes ulikt og er ikke en egen medisinsk diagnose. Innholdet erstatter ikke individuell medisinsk eller psykologisk vurdering, diagnostikk eller behandling. Ved bekymring for avhengighet, psykisk helse eller rusproblemer bør du kontakte lege eller annet kvalifisert helsepersonell.</p>
+  </section>
+
+  <a class="home-link" href="mobilbevissthet.html">← Tilbake til mobilbevissthet</a>
+
+</div>
+
+<footer class="closing">
+  Små skritt. Dine mål, ditt tempo.<br>
+  <strong>Du trenger ikke gjøre det alene.</strong>
+</footer>
+
+</body>
+</html>

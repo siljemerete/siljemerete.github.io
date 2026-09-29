@@ -1,0 +1,1102 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobilbevissthet | Silje Merete SMART Helseveiledning</title>
+<link rel="icon" href="images/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<meta name="description" content="Om mobilvaner, tilstedeværelse og selvledelse. Med en bevissthetssjekk, en 7-dagers mobil-reset og skjemaet Selvledelse i praksis.">
+<meta property="og:title" content="Mobilbevissthet | Silje Merete SMART Helseveiledning">
+<meta property="og:description" content="Om mobilvaner, tilstedeværelse og selvledelse. Med en bevissthetssjekk, en 7-dagers mobil-reset og skjemaet Selvledelse i praksis.">
+<meta property="og:type" content="article">
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --push: #c9823f;
+    --push-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+    padding: 3rem 0 3.5rem;
+    text-align: center;
+  }
+
+  .hero .kicker {
+    margin: 0 0 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .hero h1 {
+    margin: 0 0 0.75rem;
+    font-size: 2rem;
+    color: #fff;
+  }
+
+  .hero p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1.05rem;
+    max-width: 46ch;
+    margin-inline: auto;
+  }
+
+  .card-section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.85rem 1.85rem 2.1rem;
+    margin: 2.25rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .card-section .kicker {
+    margin: 0 0 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .card-section h2 {
+    margin-top: 0;
+    color: var(--accent-dark);
+    font-size: 1.4rem;
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+
+  .card-section p {
+    margin: 0.75rem 0;
+  }
+
+  .card-section p:last-child {
+    margin-bottom: 0;
+  }
+
+  .card-section p.subtext {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .quote-card {
+    background: var(--accent-soft);
+    border-radius: 12px;
+    padding: 1.75rem;
+    margin: 2.25rem 0;
+    text-align: center;
+  }
+
+  .quote-card blockquote {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--accent-dark);
+    max-width: 40ch;
+    margin-inline: auto;
+  }
+
+  /* Awareness checklist */
+  .check-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    margin: 1rem 0 0;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .check-item input[type="checkbox"] {
+    margin-top: 0.2rem;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    accent-color: var(--accent);
+  }
+
+  .check-item.checked {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+  }
+
+  .progress-note {
+    margin-top: 0.9rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+  }
+
+  .progress-bar-track {
+    margin-top: 0.4rem;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    border-radius: 999px;
+    transition: width 0.25s ease;
+  }
+
+  .field {
+    margin-top: 1.1rem;
+  }
+
+  .field label {
+    display: block;
+    font-weight: 600;
+    color: var(--accent-dark);
+    margin-bottom: 0.35rem;
+    font-size: 0.92rem;
+  }
+
+  .field textarea {
+    width: 100%;
+    min-height: 70px;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--ink);
+    resize: vertical;
+  }
+
+  .field textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  /* Detox steps */
+  .detox-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 1rem 0 0;
+  }
+
+  .detox-step {
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    background: var(--bg);
+  }
+
+  .detox-step.done {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+  }
+
+  .detox-check {
+    flex-shrink: 0;
+    padding-top: 0.15rem;
+  }
+
+  .detox-check input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+
+  .detox-body h3 {
+    margin: 0 0 0.3rem;
+    font-size: 1rem;
+    color: var(--accent-dark);
+  }
+
+  .detox-body p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--ink);
+  }
+
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+  }
+
+  .controls button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .controls button:hover {
+    background: var(--accent-soft);
+  }
+
+  .controls button.danger {
+    color: var(--push);
+  }
+
+  .controls button.danger:hover {
+    background: var(--push-soft);
+  }
+
+  .send-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1.1rem 0 0.25rem;
+  }
+
+  .send-buttons button {
+    font-size: 0.92rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .send-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .muted-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+  }
+
+  .source-note {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 1rem;
+  }
+
+  .reminder {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.85rem 1.05rem;
+    margin-top: 1rem;
+    font-size: 0.92rem;
+    color: var(--accent-dark);
+  }
+
+  .home-link {
+    display: block;
+    text-align: center;
+    margin: 0 0 3rem;
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .home-link:hover { text-decoration: underline; }
+
+  footer.closing {
+    margin: 2rem 0 1rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong { color: var(--accent-dark); }
+
+  .flow {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin: 1.2rem 0;
+    font-weight: 600;
+    color: var(--accent-dark);
+    text-align: center;
+    line-height: 1.9;
+  }
+
+  .card-section ul.plain {
+    margin: 0.75rem 0;
+    padding-left: 1.2rem;
+  }
+
+  .card-section ul.plain li { margin: 0.35rem 0; }
+
+  .tool-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.9rem;
+    margin-top: 1.2rem;
+  }
+
+  .tool-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.1rem 1.1rem 1.2rem;
+  }
+
+  .tool-card h3 {
+    margin: 0 0 0.45rem;
+    color: var(--accent-dark);
+    font-size: 1.05rem;
+  }
+
+  .tool-card p {
+    margin: 0 0 1rem;
+    font-size: 0.93rem;
+    color: var(--muted);
+    flex: 1;
+  }
+
+  .tool-button {
+    display: block;
+    text-align: center;
+    background: var(--accent-dark);
+    color: #fff;
+    padding: 0.65rem 0.9rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.93rem;
+    text-decoration: none;
+  }
+
+  .tool-button:hover { background: var(--accent); }
+
+  .tool-button.outline {
+    background: #fff;
+    color: var(--accent-dark);
+    border: 1px solid var(--accent);
+  }
+
+  .tool-button.outline:hover { background: var(--accent-soft); }
+
+  .tool-panel[hidden] { display: none; }
+
+  .selv-step {
+    border-top: 1px solid var(--border);
+    padding-top: 1.2rem;
+    margin-top: 1.5rem;
+  }
+
+  .selv-step h3 {
+    margin: 0 0 0.4rem;
+    color: var(--accent-dark);
+    font-size: 1.1rem;
+  }
+
+  .selv-step > p {
+    margin: 0 0 0.8rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .close-tool {
+    display: block;
+    margin: 1.4rem auto 0;
+    background: none;
+    border: none;
+    color: var(--accent-dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .deeper-link {
+    display: inline-block;
+    margin-top: 0.6rem;
+    color: var(--accent-dark);
+    font-weight: 600;
+  }
+
+  @media (max-width: 720px) {
+    .tool-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 560px) {
+    .hero h1 { font-size: 1.6rem; }
+  }
+
+  @media print {
+    .controls, .send-buttons, .muted-note, .home-link { display: none; }
+    .card-section { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  }
+
+  .page-logo {
+    display: block;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 0.75rem;
+    padding: 5px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(22, 40, 58, 0.12);
+  }
+
+  .page-logo img {
+    display: block;
+    width: 46px;
+    height: 46px;
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
+    <p class="kicker">Refleksjon og verktøy</p>
+    <h1>Mobilbevissthet</h1>
+    <p>Når mobilen tar mer plass enn jeg ønsker. Om mobilvaner, tilstedeværelse og selvledelse.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section class="card-section">
+    <p class="kicker">Fra brygga til i dag</p>
+    <h2>Det begynte ved et bord på brygga</h2>
+    <p>Jeg husker en sommerdag for noen år siden. Jeg satt på en restaurant nede ved brygga sammen med min beste venninne. Sola varmet, praten gikk lett, og vi hadde endelig tid sammen.</p>
+    <p>Så sa hun plutselig: «Kan du legge bort mobilen når vi er sammen?»</p>
+    <p>Ordene traff hardere enn jeg klarte å vise der og da. Jeg ble støtt, kanskje til og med litt fornærmet. Men i dagene som fulgte, ble setningen værende hos meg. Den dukket opp igjen og igjen og fikk meg til å se på min egen mobilbruk med et litt annet blikk.</p>
+    <p>Det er kanskje seks&ndash;sju år siden nå, men jeg tror det var akkurat der, ved det bordet på brygga, at jeg for alvor begynte å bli bevisst på hvor stor plass mobilen hadde fått i livet mitt.</p>
+    <p>Men egentlig begynte historien lenge før det.</p>
+    <p>Våren 2001 gikk jeg en tur langs elven sammen med broren min. Det var ikke så ofte vi hadde slik tid alene, og jeg hadde gledet meg til turen og til praten. Men ved siden av meg gikk han med mobilen mot øret. Samtalen fortsatte og fortsatte, mens jeg gikk der og ventet.</p>
+    <p>Jeg husker fortsatt hva jeg tenkte:</p>
+    <p>«En mobiltelefon skal jeg aldri skaffe meg. Så unødvendig. Og så uhøflig.»</p>
+    <p>Lite ante jeg hvor feil jeg skulle ta.</p>
+    <p>Sommeren etter, i 2002, fikk jeg min første mobiltelefon. Jeg var 27 år. Da iPhonen kom til Norge i 2008, hadde jeg allerede rukket å passere 30.</p>
+    <p>Det betyr at jeg husker et helt liv før smarttelefonen. En barndom, en ungdomstid og mange år som voksen uten å være tilgjengelig hele tiden. Uten varsler. Uten sosiale medier i lomma. Uten følelsen av at hvert ledige øyeblikk kunne, eller kanskje burde, fylles med noe.</p>
+    <p>Når jeg tenker på det i dag, kjenner jeg meg nesten privilegert som fikk oppleve den tiden.</p>
+    <p>Ikke fordi alt nødvendigvis var bedre før, eller fordi jeg ønsker meg tilbake til et liv uten mobil. Mobilen har gitt oss utrolig mye. Men jeg tror det å huske hvordan livet også kan være uten den konstante tilkoblingen, har gjort meg mer nysgjerrig på hva mobilbruken gjør med oss.</p>
+    <p>Med oppmerksomheten vår. Med pausene våre. Med samtalene våre. Med evnen til bare å være et sted uten samtidig å være et annet.</p>
+    <p>Og kanskje særlig med barna som vokser opp nå, og som aldri har kjent en verden uten.</p>
+    <p>Det får meg til å stille et spørsmål jeg stadig vender tilbake til:</p>
+    <p><strong>Er det fortsatt jeg som bestemmer når mobilen skal få oppmerksomheten min, eller har den begynt å bestemme litt for meg?</strong></p>
+  </section>
+
+  <section class="card-section">
+    <p class="kicker">Da og nå</p>
+    <h2>Mindre skjerm, mer tilstedeværelse</h2>
+    <p>Det er noe eget med de aller første minuttene etter at vi våkner. Før var det gjerne stille der. Kroppen fikk våkne i sitt eget tempo, og tankene fikk vandre litt før dagen for alvor begynte.</p>
+    <p>I dag ligger mobilen ofte klar på nattbordet. For mange av oss er den noe av det første vi strekker oss etter, nesten før vi selv har rukket å bli ordentlig til stede.</p>
+    <p>På bare noen få minutter kan vi ha tatt inn nyheter fra hele verden, sett hva andre mennesker har gjort, sjekket innboksen og blitt minnet på alt som venter på oss. Dagen har knapt begynt, men oppmerksomheten vår er allerede sendt i mange forskjellige retninger.</p>
+    <p>Det er ikke nødvendigvis et valg vi tar. Det har bare blitt en vane.</p>
+    <p>Og kanskje er det nettopp derfor det er verdt å stoppe opp innimellom og legge merke til hva som skjer.</p>
+    <p>For når hvert lille tomrom fylles av mobilen, kan noe annet få mindre plass. Stillheten. Tankene som får vandre uten mål. En kaffekopp uten andre inntrykk. Blikket ut av vinduet. En samtale som får hele oppmerksomheten vår. Eller bare noen minutter hvor vi ikke trenger å gjøre noe som helst.</p>
+    <p>Jeg legger også merke til det når mennesker er sammen. En familie rundt et bord. Venner på kafé. Vi kan være fysisk nær hverandre, men samtidig befinne oss hvert vårt sted, med blikket rettet ned mot hver vår skjerm.</p>
+    <p>Det er kanskje noe av det mest paradoksale ved mobilen. Den gjør det mulig å være i kontakt med mennesker nesten hvor som helst, samtidig som den noen ganger kan trekke oppmerksomheten vår bort fra dem som faktisk er rett foran oss.</p>
+  </section>
+
+  <section class="card-section">
+    <p class="kicker">Fra autopilot til bevisste valg</p>
+    <h2>Er det jeg som velger?</h2>
+    <p>Mobilen trenger ikke være et problem for at det kan være nyttig å stoppe opp og se på egne vaner. Målet er ikke å bli mobilfri, men å bli mer bevisst på når mobilen er et verktøy vi velger å bruke, og når vanen begynner å velge for oss.</p>
+    <p>Vaner er en naturlig del av livet. De gjør at vi slipper å ta bevisste beslutninger om alt vi gjør gjennom dagen. Men mobilen er litt annerledes, fordi den alltid er tilgjengelig. Når vi kjeder oss, når en oppgave blir vanskelig, når vi kjenner uro, når vi venter eller trenger en pause, kan vi ta den frem.</p>
+    <p>Når det gjentas mange nok ganger, kan handlingen bli ganske automatisk:</p>
+    <div class="flow">Uro → mobil<br>Kjedsomhet → mobil<br>Pause → mobil</div>
+    <p>Neste gang du automatisk strekker deg etter mobilen, kan du prøve å stoppe opp i noen sekunder.</p>
+    <p>Hva skjedde akkurat nå? Kjedet du deg, kjente du uro, var du sliten, eller trengte du egentlig bare en pause?</p>
+    <p>I stedet for:</p>
+    <div class="flow">trigger → mobil</div>
+    <p>kan du øve på:</p>
+    <div class="flow">trigger → stopp → bevissthet → valg</div>
+    <p>Det lille mellomrommet kan være starten på endring. Det gir deg mulighet til å legge merke til hva som skjer, før du bestemmer deg for hva du vil gjøre.</p>
+    <p>Og det er her selvledelse kommer inn. For meg handler ikke selvledelse om å være streng med seg selv eller om perfekt selvdisiplin. Det handler om å bli kjent med egne mønstre og lage rammer som gjør det lettere å leve slik jeg faktisk ønsker.</p>
+    <p>Målet er ikke å kontrollere hvert eneste valg, men å gjenvinne valgfriheten.</p>
+  </section>
+
+  <section class="card-section" id="utforsk">
+    <p class="kicker">Velg et verktøy</p>
+    <h2>Utforsk dine egne mobilvaner</h2>
+    <div class="tool-grid">
+      <div class="tool-card">
+        <h3>Bevissthetssjekk</h3>
+        <p>Elleve korte punkter som hjelper deg å legge merke til egne mobilvaner.</p>
+        <a class="tool-button" href="#bevissthetssjekk" data-open="bevissthetssjekk" aria-expanded="false">Ta bevissthetssjekken</a>
+      </div>
+      <div class="tool-card">
+        <h3>Min mobil-reset</h3>
+        <p>Velg små grep du ønsker å prøve, og finn ut hva som fungerer for deg.</p>
+        <a class="tool-button" href="#mobil-reset" data-open="mobil-reset" aria-expanded="false">Start min 7-dagers mobil-reset</a>
+      </div>
+      <div class="tool-card">
+        <h3>Selvledelse i praksis</h3>
+        <p>Seks grep fra observasjon til evaluering. Finn ut hva du ønsker mer av, og hva som gjør endringen lettere.</p>
+        <a class="tool-button" href="#selvledelse" data-open="selvledelse" aria-expanded="false">Start selvledelse i praksis</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="card-section tool-panel" id="bevissthetssjekk" hidden>
+    <p class="kicker">Verktøy 1</p>
+    <h2>Bevissthetssjekk</h2>
+    <p>For de fleste av oss krever det litt mot å innrømme hvor avhengige vi faktisk er blitt av mobilen. Men det er først når vi tør å se det ærlig i øynene, at vi kan velge å gjøre noe annerledes. Bevissthet kommer før handling. Kryss av det du kjenner deg igjen i under, helt uten å dømme deg selv.</p>
+
+    <div class="check-list" id="awarenessList"></div>
+
+    <p class="progress-note" id="awarenessProgress">0 av 11 punkter</p>
+    <div class="progress-bar-track"><div class="progress-bar-fill" id="awarenessBar"></div></div>
+
+    <div class="field">
+      <label for="reflect-notice">Hva la du merke til om din egen mobilbruk mens du leste dette?</label>
+      <textarea id="reflect-notice" data-key="reflect-notice"></textarea>
+    </div>
+    <div class="field">
+      <label for="reflect-lose">Hva mister du, når mobilen tar oppmerksomheten din?</label>
+      <textarea id="reflect-lose" data-key="reflect-lose"></textarea>
+    </div>
+    <div class="field">
+      <label for="reflect-deserve">Hvem eller hva fortjener oppmerksomheten din mer enn mobilen, akkurat nå?</label>
+      <textarea id="reflect-deserve" data-key="reflect-deserve"></textarea>
+    </div>
+    <button type="button" class="close-tool" data-close="bevissthetssjekk">Lukk bevissthetssjekken</button>
+  </section>
+
+  <section class="card-section tool-panel" id="mobil-reset" hidden>
+    <p class="kicker">Verktøy 2</p>
+    <h2>Min 7-dagers mobil-reset</h2>
+    <p class="subtext">Velg ett eller to grep du vil prøve de neste sju dagene, og kryss av for dem. Du trenger ikke gjøre alt på en gang. Små endringer er lettere å gjennomføre, og derfra kan du bygge videre.</p>
+
+    <div class="detox-steps" id="detoxList"></div>
+
+    <p class="progress-note" id="detoxProgress">0 av 7 grep valgt</p>
+    <div class="progress-bar-track"><div class="progress-bar-fill" id="detoxBar"></div></div>
+
+    <p style="margin-top: 1.6rem;"><strong>Etter sju dager:</strong> Stopp opp og se tilbake, uten å dømme deg selv. Har du scrollet en time igjen, har du ikke mislyktes. Du har fått informasjon, og kan justere.</p>
+    <div class="field">
+      <label for="reset-notice">Hva merket jeg?</label>
+      <textarea id="reset-notice" data-key="reset-notice"></textarea>
+    </div>
+    <div class="field">
+      <label for="reset-hard">Hva var vanskelig?</label>
+      <textarea id="reset-hard" data-key="reset-hard"></textarea>
+    </div>
+    <div class="field">
+      <label for="reset-space">Hva fikk jeg mer plass til?</label>
+      <textarea id="reset-space" data-key="reset-space"></textarea>
+    </div>
+    <div class="field">
+      <label for="reset-continue">Hva vil jeg fortsette med?</label>
+      <textarea id="reset-continue" data-key="reset-continue"></textarea>
+    </div>
+    <button type="button" class="close-tool" data-close="mobil-reset">Lukk mobil-reseten</button>
+  </section>
+
+  <section class="card-section tool-panel" id="selvledelse" hidden>
+    <p class="kicker">Verktøy 3</p>
+    <h2>Selvledelse i praksis</h2>
+    <p class="subtext">En mobil-detox trenger ikke bety at mobilen skal bort. Målet er å gjenvinne valgfriheten. Gå gjennom de seks grepene i ditt eget tempo. Du trenger ikke fylle ut alt på en gang.</p>
+    <div class="selv-step">
+      <h3>1. Observer før du endrer</h3>
+      <p>Første steg er ikke å redusere skjermtiden, men å bli nysgjerrig. Se gjerne på skjermtiden din. Poenget er ikke å dømme det du oppdager, for det er vanskelig å endre en vane du ikke er bevisst på.</p>
+      <div class="field">
+        <label for="selv-mest">Når bruker jeg mobilen mest?</label>
+        <textarea id="selv-mest" data-key="selv-mest"></textarea>
+      </div>
+      <div class="field">
+        <label for="selv-apper">Hvilke apper bruker jeg mest tid på?</label>
+        <textarea id="selv-apper" data-key="selv-apper"></textarea>
+      </div>
+      <div class="field">
+        <label for="selv-uplanlagt">Når tar jeg mobilen opp uten at jeg egentlig hadde planlagt det?</label>
+        <textarea id="selv-uplanlagt" data-key="selv-uplanlagt"></textarea>
+      </div>
+      <div class="field">
+        <label for="selv-situasjoner">Er det bestemte situasjoner som går igjen?</label>
+        <textarea id="selv-situasjoner" data-key="selv-situasjoner"></textarea>
+      </div>
+    </div>
+    <div class="selv-step">
+      <h3>2. Spør hva du ønsker mer av</h3>
+      <p>«Jeg skal bruke mobilen mindre» er ikke et spesielt inspirerende mål. Når du vet hva du ønsker mer av, handler det ikke bare om hva du skal fjerne, men om hva du vil gi plass til.</p>
+      <div class="check-list">
+        <label class="check-item"><input type="checkbox" data-check="mer-ro"><span>Mer ro om morgenen</span></label>
+        <label class="check-item"><input type="checkbox" data-check="mer-sovn"><span>Bedre søvn</span></label>
+        <label class="check-item"><input type="checkbox" data-check="mer-lese"><span>Mer tid til å lese</span></label>
+        <label class="check-item"><input type="checkbox" data-check="mer-konsentrasjon"><span>Mer konsentrasjon</span></label>
+        <label class="check-item"><input type="checkbox" data-check="mer-aktivitet"><span>Mer fysisk aktivitet</span></label>
+        <label class="check-item"><input type="checkbox" data-check="mer-familie"><span>Mer tilstedeværelse sammen med familien</span></label>
+        <label class="check-item"><input type="checkbox" data-check="mer-turer"><span>Flere turer hvor jeg faktisk ser naturen rundt meg</span></label>
+      </div>
+      <div class="field">
+        <label for="selv-mer-annet">Annet jeg ønsker mer av</label>
+        <textarea id="selv-mer-annet" data-key="selv-mer-annet"></textarea>
+      </div>
+    </div>
+    <div class="selv-step">
+      <h3>3. Start smått</h3>
+      <p>Store, perfekte planer som skal endre alt fra mandag morgen holder sjelden. Velg heller én eller to ting. Små endringer er lettere å gjennomføre og gir mulighet til å oppleve mestring.</p>
+      <div class="check-list">
+        <label class="check-item"><input type="checkbox" data-check="smatt-morgen"><span>De første 30 minuttene etter at jeg står opp, er mobilfrie</span></label>
+        <label class="check-item"><input type="checkbox" data-check="smatt-spisebord"><span>Mobilen ligger ikke på spisebordet</span></label>
+        <label class="check-item"><input type="checkbox" data-check="smatt-kveld"><span>Den siste timen før jeg legger meg, legger jeg mobilen bort</span></label>
+        <label class="check-item"><input type="checkbox" data-check="smatt-tur"><span>Jeg går én tur uten å ta mobilen opp av lommen</span></label>
+        <label class="check-item"><input type="checkbox" data-check="smatt-jobbmail"><span>Jeg sjekker jobbmail på bestemte tidspunkt i stedet for hele tiden</span></label>
+      </div>
+      <div class="field">
+        <label for="selv-eget-grep">Mitt eget lille grep</label>
+        <textarea id="selv-eget-grep" data-key="selv-eget-grep"></textarea>
+      </div>
+    </div>
+    <div class="selv-step">
+      <h3>4. Endre miljøet – ikke stol bare på viljestyrken</h3>
+      <p>Omgivelsene påvirker oss hele tiden. God selvledelse handler ikke nødvendigvis om sterkere viljestyrke, men om å gjøre det ønskede valget lettere. Hva kan du prøve?</p>
+      <div class="check-list">
+        <label class="check-item"><input type="checkbox" data-check="miljo-varsler"><span>Slå av varsler jeg ikke trenger</span></label>
+        <label class="check-item"><input type="checkbox" data-check="miljo-apper"><span>Flytte de mest fristende appene bort fra startskjermen</span></label>
+        <label class="check-item"><input type="checkbox" data-check="miljo-rom"><span>Legge mobilen i et annet rom når jeg skal konsentrere meg</span></label>
+        <label class="check-item"><input type="checkbox" data-check="miljo-soner"><span>Ha mobilfrie soner hjemme</span></label>
+        <label class="check-item"><input type="checkbox" data-check="miljo-lade"><span>Lade mobilen et annet sted enn rett ved sengen</span></label>
+        <label class="check-item"><input type="checkbox" data-check="miljo-graatoner"><span>Prøve gråtoner på skjermen</span></label>
+      </div>
+    </div>
+    <div class="selv-step">
+      <h3>5. Øv på tomrommet</h3>
+      <p>Vi trenger ikke fylle hvert eneste ledige øyeblikk med stimuli. Når det blir stille, får tankene vandre, og vi kjenner kanskje litt mer etter hvordan vi har det. Kanskje ti minutter er et godt sted å begynne.</p>
+      <div class="check-list">
+        <label class="check-item"><input type="checkbox" data-check="tom-kaffe"><span>Drikke kaffen uten mobilen</span></label>
+        <label class="check-item"><input type="checkbox" data-check="tom-ko"><span>Stå i kø uten å scrolle</span></label>
+        <label class="check-item"><input type="checkbox" data-check="tom-buss"><span>Sitte på bussen og se ut av vinduet</span></label>
+        <label class="check-item"><input type="checkbox" data-check="tom-tur"><span>Gå en tur uten å dokumentere den</span></label>
+        <label class="check-item"><input type="checkbox" data-check="tom-minutter"><span>Sitte noen minutter uten å gjøre noe spesielt</span></label>
+      </div>
+      <div class="field">
+        <label for="selv-tomrom">Hvordan var det å kjenne på tomrommet?</label>
+        <textarea id="selv-tomrom" data-key="selv-tomrom"></textarea>
+      </div>
+    </div>
+    <div class="selv-step">
+      <h3>6. Evaluer – ikke døm</h3>
+      <p>Etter en uke kan du stoppe opp igjen. Har du sittet og scrollet i en time igjen, har du ikke mislyktes. Du har fått informasjon, og kan justere.</p>
+      <div class="field">
+        <label for="selv-fungerte">Hva fungerte?</label>
+        <textarea id="selv-fungerte" data-key="selv-fungerte"></textarea>
+      </div>
+      <div class="field">
+        <label for="selv-vanskelig">Hva var vanskelig?</label>
+        <textarea id="selv-vanskelig" data-key="selv-vanskelig"></textarea>
+      </div>
+      <div class="field">
+        <label for="selv-savnet">Når savnet jeg mobilen mest?</label>
+        <textarea id="selv-savnet" data-key="selv-savnet"></textarea>
+      </div>
+      <div class="field">
+        <label for="selv-mer-tid">Hva fikk jeg mer tid til?</label>
+        <textarea id="selv-mer-tid" data-key="selv-mer-tid"></textarea>
+      </div>
+      <div class="field">
+        <label for="selv-merket">Merket jeg noe på søvn, konsentrasjon eller ro?</label>
+        <textarea id="selv-merket" data-key="selv-merket"></textarea>
+      </div>
+      <div class="field">
+        <label for="selv-fortsette">Hva ønsker jeg å fortsette med?</label>
+        <textarea id="selv-fortsette" data-key="selv-fortsette"></textarea>
+      </div>
+    </div>
+    <button type="button" class="close-tool" data-close="selvledelse">Lukk selvledelse i praksis</button>
+  </section>
+
+  <section class="card-section tool-panel" id="send-inn" hidden>
+    <h2>Send inn skjemaet</h2>
+    <p class="muted-note">Du kan sende skjemaet direkte fra din egen e-postapp, eller laste det ned som en tekstfil du selv sender eller tar med til timen. Alt du fyller ut lagres i denne nettleseren, så du kan lukke siden og fortsette senere.</p>
+    <div class="send-buttons">
+      <button type="button" id="sendEmail">Send på e-post</button>
+      <button type="button" id="downloadText" class="secondary">Last ned som tekstfil</button>
+    </div>
+    <div class="controls">
+      <button type="button" id="resetAll" class="danger">Nullstill skjema</button>
+    </div>
+  </section>
+
+  <section class="card-section">
+    <p class="kicker">Fordypning</p>
+    <h2>Vil du gå litt dypere?</h2>
+    <p>Om forskjellen på problematisk mobilbruk og avhengighet, hva vi kan lære av Anonyme Alkoholikere, og seks praktiske grep for å endre mobilvanene dine.</p>
+    <a class="deeper-link" href="mobilavhengighet.html">Les artikkelen: Er vi avhengige av mobilen? →</a>
+  </section>
+
+  <a class="home-link" href="index.html">← Tilbake til hjemmesiden</a>
+
+</div>
+
+<footer class="closing">
+  Små skritt. Dine mål, ditt tempo.<br>
+  <strong>Du trenger ikke gjøre det alene.</strong>
+</footer>
+
+<script>
+  var STORAGE_KEY = 'mobilbevissthet-data';
+  var RECIPIENT = 'silje.merete.binder@gmail.com';
+
+  var AWARENESS_ITEMS = [
+    'Jeg sjekker mobilen i løpet av det første minuttet etter jeg våkner.',
+    'Jeg har mobilen med til spisebordet.',
+    'Jeg kjenner uro eller rastløshet hvis jeg er uten mobilen en stund.',
+    'Jeg tar bilde av en opplevelse før jeg faktisk har kjent på den selv.',
+    'Jeg har mistet tråden i en samtale fordi jeg sjekket mobilen.',
+    'Jeg bruker mobilen for å slippe å kjede meg eller dagdrømme.',
+    'Jeg tar opp mobilen uten at jeg egentlig har bestemt meg for det.',
+    'Jeg bruker mer tid på mobilen enn jeg hadde tenkt.',
+    'Jeg synes det er vanskelig å legge bort mobilen når jeg ønsker det.',
+    'Jeg strekker meg etter mobilen når jeg kjenner uro, stress eller er sliten.',
+    'Mobilbruken går utover søvn, konsentrasjon eller fysisk aktivitet.'
+  ];
+
+  var DETOX_ITEMS = [
+    {
+      title: '1. Skaff deg en vekkerklokke',
+      desc: 'Flytt mobilen ut av soverommet om natten, eller sett den på flymodus og legg den langt nok unna at du må ut av sengen for å skru den av. En enkel vekkerklokke gjør at du slipper å begynne dagen med skjermen i hånden.'
+    },
+    {
+      title: '2. Møt deg selv før du møter verden',
+      desc: 'Gi deg selv en liten stund alene før mobilen slippes til, enten det går med til å strekke på kroppen, puste rolig, lage noe varmt å drikke eller bare ligge stille og kjenne etter. La morgenrutinen din komme først.'
+    },
+    {
+      title: '3. Rydd mobilen bort fra måltidene',
+      desc: 'La telefonen ligge i et annet rom når dere spiser, slik at måltidet blir en stund dere faktisk har sammen. Spiser du alene, gjelder det samme: bruk stunden på å være til stede med deg selv.'
+    },
+    {
+      title: '4. Gi hjernen en pause før leggetid',
+      desc: 'Legg bort skjermen et par timer før du skal sove. Uten skjermlys og nye inntrykk like før leggetid faller kroppen lettere til ro, og søvnen blir bedre.'
+    },
+    {
+      title: '5. Sett en tydelig grense for jobb',
+      desc: 'Bestem deg for et tidspunkt der arbeidsdagen faktisk er ferdig, og hold deg til det. Skru av varsler fra jobbmail og andre apper utenfor den tiden, så du slipper å være tilgjengelig døgnet rundt.'
+    },
+    {
+      title: '6. La egne sanser ta over av og til',
+      desc: 'Gå en tur uten mobilen med jevne mellomrom. La deg selv oppleve ting uten å dokumentere det først med bilde eller video, og kjenn etter hvordan det faktisk føles bare å være der.'
+    },
+    {
+      title: '7. Vis vei for andre også',
+      desc: 'Løft blikket når du går, reiser kollektivt eller er sammen med folk. Legg bort mobilen mens du snakker med noen. Legg merke til menneskene rundt deg, ikke bare det som skjer på skjermen.'
+    }
+  ];
+
+  var awarenessChecked = [];
+  var detoxChecked = [];
+  var selvChecked = {};
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str == null ? '' : str;
+    return div.innerHTML;
+  }
+
+  function readState() {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return { fields: {}, awareness: [], detox: [], selv: {} };
+    try {
+      var data = JSON.parse(raw);
+      return {
+        fields: data.fields || {},
+        awareness: data.awareness || [],
+        detox: data.detox || [],
+        selv: data.selv || {}
+      };
+    } catch (e) {
+      return { fields: {}, awareness: [], detox: [], selv: {} };
+    }
+  }
+
+  function saveState() {
+    var fields = {};
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      fields[el.getAttribute('data-key')] = el.value;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      fields: fields,
+      awareness: awarenessChecked,
+      detox: detoxChecked,
+      selv: selvChecked
+    }));
+  }
+
+  function renderAwareness() {
+    var list = document.getElementById('awarenessList');
+    list.innerHTML = '';
+    AWARENESS_ITEMS.forEach(function (text, i) {
+      var checked = !!awarenessChecked[i];
+      var item = document.createElement('label');
+      item.className = 'check-item' + (checked ? ' checked' : '');
+
+      var input = document.createElement('input');
+      input.type = 'checkbox';
+      input.checked = checked;
+      input.addEventListener('change', function () {
+        awarenessChecked[i] = input.checked;
+        saveState();
+        renderAwareness();
+      });
+
+      var span = document.createElement('span');
+      span.textContent = text;
+
+      item.appendChild(input);
+      item.appendChild(span);
+      list.appendChild(item);
+    });
+
+    var count = awarenessChecked.filter(Boolean).length;
+    document.getElementById('awarenessProgress').textContent = count + ' av ' + AWARENESS_ITEMS.length + ' punkter';
+    document.getElementById('awarenessBar').style.width = (count / AWARENESS_ITEMS.length * 100) + '%';
+  }
+
+  function renderDetox() {
+    var list = document.getElementById('detoxList');
+    list.innerHTML = '';
+    DETOX_ITEMS.forEach(function (step, i) {
+      var checked = !!detoxChecked[i];
+      var row = document.createElement('div');
+      row.className = 'detox-step' + (checked ? ' done' : '');
+
+      var checkWrap = document.createElement('div');
+      checkWrap.className = 'detox-check';
+      var input = document.createElement('input');
+      input.type = 'checkbox';
+      input.checked = checked;
+      input.setAttribute('aria-label', 'Jeg velger: ' + step.title);
+      input.addEventListener('change', function () {
+        detoxChecked[i] = input.checked;
+        saveState();
+        renderDetox();
+      });
+      checkWrap.appendChild(input);
+
+      var body = document.createElement('div');
+      body.className = 'detox-body';
+      var h3 = document.createElement('h3');
+      h3.textContent = step.title;
+      var p = document.createElement('p');
+      p.textContent = step.desc;
+      body.appendChild(h3);
+      body.appendChild(p);
+
+      row.appendChild(checkWrap);
+      row.appendChild(body);
+      list.appendChild(row);
+    });
+
+    var count = detoxChecked.filter(Boolean).length;
+    document.getElementById('detoxProgress').textContent = count + ' av ' + DETOX_ITEMS.length + ' grep valgt';
+    document.getElementById('detoxBar').style.width = (count / DETOX_ITEMS.length * 100) + '%';
+  }
+
+  function loadState() {
+    var data = readState();
+    document.querySelectorAll('[data-key]').forEach(function (el) {
+      var key = el.getAttribute('data-key');
+      if (data.fields[key] !== undefined) {
+        el.value = data.fields[key];
+      }
+    });
+    awarenessChecked = data.awareness || [];
+    detoxChecked = data.detox || [];
+    selvChecked = data.selv || {};
+    document.querySelectorAll('[data-check]').forEach(function (input) {
+      input.checked = !!selvChecked[input.getAttribute('data-check')];
+      input.parentNode.classList.toggle('checked', input.checked);
+    });
+  }
+
+  function buildSummaryText() {
+    var lines = [];
+    lines.push('Mobilbevissthet');
+    lines.push('');
+
+    lines.push('Bevissthetssjekk:');
+    AWARENESS_ITEMS.forEach(function (text, i) {
+      lines.push('  [' + (awarenessChecked[i] ? 'x' : ' ') + '] ' + text);
+    });
+    lines.push('');
+    lines.push('  Hva la du merke til om din egen mobilbruk: ' + (document.getElementById('reflect-notice').value || '-'));
+    lines.push('  Hva mister du når mobilen tar oppmerksomheten din: ' + (document.getElementById('reflect-lose').value || '-'));
+    lines.push('  Hvem eller hva fortjener oppmerksomheten din mer: ' + (document.getElementById('reflect-deserve').value || '-'));
+    lines.push('');
+
+    lines.push('Min 7-dagers mobil-reset, valgte grep:');
+    DETOX_ITEMS.forEach(function (step, i) {
+      lines.push('  [' + (detoxChecked[i] ? 'x' : ' ') + '] ' + step.title);
+    });
+    lines.push('');
+    lines.push('  Hva merket jeg: ' + (document.getElementById('reset-notice').value || '-'));
+    lines.push('  Hva var vanskelig: ' + (document.getElementById('reset-hard').value || '-'));
+    lines.push('  Hva fikk jeg mer plass til: ' + (document.getElementById('reset-space').value || '-'));
+    lines.push('  Hva vil jeg fortsette med: ' + (document.getElementById('reset-continue').value || '-'));
+
+    lines.push('');
+    lines.push('Selvledelse i praksis:');
+    document.querySelectorAll('#selvledelse .selv-step').forEach(function (stepEl) {
+      lines.push('');
+      lines.push('  ' + stepEl.querySelector('h3').textContent);
+      var before = lines.length;
+      stepEl.querySelectorAll('[data-check]').forEach(function (input) {
+        if (input.checked) lines.push('    [x] ' + input.parentNode.textContent.trim());
+      });
+      stepEl.querySelectorAll('textarea').forEach(function (ta) {
+        if (!ta.value) return;
+        var label = stepEl.querySelector('label[for="' + ta.id + '"]').textContent;
+        lines.push('    ' + label + (/[?]$/.test(label) ? ' ' : ': ') + ta.value);
+      });
+      if (lines.length === before) lines.push('    (ikke fylt ut)');
+    });
+
+    return lines.join('\n');
+  }
+
+  function sendEmail() {
+    var subject = encodeURIComponent('Mobilbevissthet');
+    var body = encodeURIComponent(buildSummaryText());
+    window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
+  }
+
+  function downloadText() {
+    var blob = new Blob([buildSummaryText()], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'mobilbevissthet.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function updateSendPanel() {
+    var anyOpen = ['bevissthetssjekk', 'mobil-reset', 'selvledelse'].some(function (id) {
+      return !document.getElementById(id).hidden;
+    });
+    document.getElementById('send-inn').hidden = !anyOpen;
+  }
+
+  function setTool(id, open) {
+    document.getElementById(id).hidden = !open;
+    var btn = document.querySelector('[data-open="' + id + '"]');
+    if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    updateSendPanel();
+  }
+
+  function openTool(id) {
+    setTool(id, true);
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('[data-open]').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        openTool(btn.getAttribute('data-open'));
+      });
+    });
+    document.querySelectorAll('[data-close]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        setTool(btn.getAttribute('data-close'), false);
+        document.getElementById('utforsk').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+    function openFromHash() {
+      var hash = window.location.hash.replace('#', '');
+      if (hash === 'bevissthetssjekk' || hash === 'mobil-reset' || hash === 'selvledelse') {
+        setTool(hash, true);
+        setTimeout(function () { document.getElementById(hash).scrollIntoView(); }, 0);
+      }
+    }
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+
+    loadState();
+    renderAwareness();
+    renderDetox();
+
+    document.body.addEventListener('input', function (e) {
+      if (!e.target.hasAttribute('data-key')) return;
+      saveState();
+    });
+
+    document.querySelectorAll('[data-check]').forEach(function (input) {
+      input.addEventListener('change', function () {
+        selvChecked[input.getAttribute('data-check')] = input.checked;
+        input.parentNode.classList.toggle('checked', input.checked);
+        saveState();
+      });
+    });
+
+    document.getElementById('resetAll').addEventListener('click', function () {
+      if (!confirm('Nullstille hele skjemaet? Alt du har fylt ut blir slettet, og dette kan ikke angres.')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    });
+
+    document.getElementById('sendEmail').addEventListener('click', sendEmail);
+    document.getElementById('downloadText').addEventListener('click', downloadText);
+  });
+</script>
+
+</body>
+</html>

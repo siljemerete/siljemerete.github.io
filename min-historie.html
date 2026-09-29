@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Min historie | Silje Merete SMART Helseveiledning</title>
+<link rel="icon" href="images/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <meta name="description" content="Fra egen erfaring til fag: hvorfor Silje Merete ble helseveileder, og reisen som ligger bak, fortalt med tall og egne erfaringer.">
 <meta property="og:title" content="Min historie | Silje Merete SMART Helseveiledning">
 <meta property="og:description" content="Fra egen erfaring til fag: hvorfor Silje Merete ble helseveileder, og reisen som ligger bak.">
@@ -17,6 +19,8 @@
     --accent: #386ba0;
     --accent-dark: #1f3c5c;
     --accent-soft: #e7f0f8;
+    --push: #c9823f;
+    --push-soft: #faf1e2;
     --border: #d6e3ee;
     --shadow: 0 1px 3px rgba(22, 40, 58, 0.08), 0 1px 2px rgba(22, 40, 58, 0.06);
   }
@@ -98,6 +102,36 @@
 
   .card-section p:last-child {
     margin-bottom: 0;
+  }
+
+  .resource-note {
+    margin: 0.9rem 0 !important;
+  }
+
+  .resource-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--push-soft);
+    border: 1.5px solid var(--push);
+    color: var(--ink);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 0.75rem 1.4rem;
+    border-radius: 999px;
+    box-shadow: var(--shadow);
+    transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  }
+
+  .resource-link:hover {
+    background: var(--push);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+
+  .resource-link svg {
+    flex: 0 0 auto;
   }
 
   .story-photo {
@@ -187,6 +221,15 @@
     margin-inline: auto;
   }
 
+  .quote-label {
+    margin: 0 0 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
   .cta-section {
     text-align: center;
     margin: 2.5rem 0;
@@ -234,12 +277,30 @@
     .hero h1 { font-size: 1.6rem; }
     .milestones li { flex-direction: column; gap: 0.15rem; }
   }
+
+  .page-logo {
+    display: block;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 0.75rem;
+    padding: 5px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(22, 40, 58, 0.12);
+  }
+
+  .page-logo img {
+    display: block;
+    width: 46px;
+    height: 46px;
+  }
 </style>
 </head>
 <body>
 
 <section class="hero">
   <div class="wrap">
+    <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
     <p class="kicker">Min historie</p>
     <h1>Fra egen erfaring til fag</h1>
     <p>Hvorfor jeg ble helseveileder</p>
@@ -250,13 +311,31 @@
 
   <section class="card-section">
     <img class="story-photo" src="images/min-historie-foto.jpg" alt="Silje Merete utendørs, smilende">
-    <p>Jeg nærmet meg 50 år. Jeg var midt i livet, med ungdom hjemme og foreldre som begynte å bli gamle. Samtidig kjente jeg at overgangsalderen sakte snek seg innpå, en livsfase som ofte kommer gradvis og nesten umerkelig, før man plutselig befinner seg midt i den.</p>
-    <p>Kroppen hadde etter hvert begynt å stille meg stadig flere spørsmål, men jeg opplevde at jeg hadde få svar. Jeg hadde psoriasis, lichen planus, søvnproblemer og gjentatte betennelsestilstander, blant annet springfinger (stenoserende tenosynovitt). Flere episoder krevde behandling hos spesialist, og jeg begynte å kjenne på en uro for hva som ventet rundt neste sving. Var dette bare begynnelsen? Skulle det bli flere og flere helseplager for hvert år som gikk?</p>
-    <p>Det var ikke ønsket om å gå ned i vekt som fikk meg til å endre kostholdet. Det var ønsket om å få det bedre i min egen kropp. Jeg var rett og slett desperat etter å finne ut om jeg selv kunne gjøre noe for å påvirke hvordan jeg hadde det. Derfor la jeg om til et ketogent/lavkarbo kosthold og begynte å følge nøye med på hvordan kroppen reagerte.</p>
-    <p>At jeg samtidig skulle gå betydelig ned i vekt, og at kroppen etter hvert fant en vekt den trivdes med og stabiliserte seg på, ble en stor og uventet bonus. Men det var aldri det som var drivkraften i utgangspunktet. Det viktigste var følelsen av å få tilbake en kropp jeg opplevde som mer i balanse. I dag har jeg verken hudsykdommen lichen planus eller tilbakevendende springfinger, og psoriasisen har gått tilbake.</p>
-    <p>Denne erfaringen er en viktig del av grunnen til at jeg i dag ønsker å arbeide som helseveileder. Jeg har ikke bare lest meg til hvordan kosthold og livsstil kan påvirke helse, betennelsesprosesser og kroniske tilstander. Jeg har selv stått i det. Jeg har prøvd, observert, målt og fulgt utviklingen tett over flere år.</p>
-    <p>Det har gitt meg en helt annen forståelse av hvor mye kunnskap, nysgjerrighet og bevisste valg kan bety, og hvor viktig det er å møte mennesker der de faktisk er, med deres kropp, deres liv og deres erfaringer.</p>
+    <p>Jeg nærmet meg 50 år, midt i livet med ungdom hjemme og foreldre som begynte å bli gamle. Samtidig kjente jeg at overgangsalderen sakte snek seg innpå, en livsfase som ofte kommer gradvis og nesten umerkelig.</p>
+    <p class="resource-note">
+      <a class="resource-link" href="overgangsalder-hormonbehandling.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--push)" stroke-width="1.8" aria-hidden="true"><path d="M12 6.5c-1.4-2-4-2.8-6-1.4-2.2 1.6-2.6 4.7-.6 6.8L12 19l6.6-7.1c2-2.1 1.6-5.2-.6-6.8-2-1.4-4.6-.6-6 1.4Z"/></svg>
+        <span>Kvinne 40+ · Overgangsalder &amp; hormoner</span>
+        <span aria-hidden="true">→</span>
+      </a>
+    </p>
+    <p>Kroppen stilte meg stadig flere spørsmål, men jeg hadde få svar. Jeg hadde psoriasis, lichen planus, søvnproblemer og gjentatte betennelsestilstander, blant annet springfinger (stenoserende tenosynovitt). Flere episoder krevde spesialistbehandling, og jeg kjente på en uro for hva som ventet rundt neste sving. Var dette bare begynnelsen?</p>
+    <p>Det var ikke ønsket om å gå ned i vekt som fikk meg til å endre kostholdet, det var ønsket om å få det bedre i min egen kropp. Jeg var desperat etter å finne ut om jeg selv kunne påvirke hvordan jeg hadde det, og la om til et ketogent/lavkarbo kosthold.</p>
+    <p class="resource-note">
+      <a class="resource-link" href="kosthold-tilnaerming.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--push)" stroke-width="1.8" aria-hidden="true"><path d="M4 13a8 8 0 1 1 16 0c0 4.4-3.6 8-8 8s-8-3.6-8-8Z"/><path d="M12 5v16M6 8c2-1.5 4-1.5 6 0s4 1.5 6 0"/></svg>
+        <span>Min tilnærming til kosthold</span>
+        <span aria-hidden="true">→</span>
+      </a>
+    </p>
+    <p>At jeg samtidig gikk betydelig ned i vekt, og at kroppen fant en vekt den trivdes med og stabiliserte seg på, ble en stor og uventet bonus, men aldri drivkraften. Det viktigste var følelsen av å få tilbake en kropp i balanse. I dag har jeg verken lichen planus eller tilbakevendende springfinger, og psoriasisen har gått tilbake.</p>
+    <p>Denne erfaringen er en viktig del av grunnen til at jeg i dag ønsker å arbeide som helseveileder. Jeg har ikke bare lest meg til hvordan kosthold og livsstil kan påvirke helse og kroniske tilstander, jeg har selv stått i det og fulgt utviklingen tett over flere år. I tillegg tar jeg med meg over 20 år som pedagog og leder, der jeg har veiledet mennesker som ønsket å endre noe i livet sitt. Jeg vet både hvordan det er å stå midt i en slik prosess selv, og hvordan jeg kan støtte andre gjennom den. Til sammen har det gitt meg en forståelse av hvor mye kunnskap, nysgjerrighet og bevisste valg kan bety, og hvor viktig det er å møte mennesker der de faktisk er.</p>
   </section>
+
+  <div class="quote-card">
+    <p class="quote-label">Min erfaring</p>
+    <blockquote>Tankene dine blir til vaner. Vanene dine blir til helsen din. Helsen din blir fremtiden din.</blockquote>
+  </div>
 
   <section class="card-section">
     <p class="kicker">Tallene</p>
@@ -264,28 +343,39 @@
     <img class="story-graph" src="images/vektutvikling-graf.png" alt="Graf som viser vektutvikling fra januar 2024 til juli 2025, fra 80 kg til en stabil vekt rundt 62-63 kg">
     <p class="graph-caption">Vektutvikling, januar 2024 til juli 2025 (ukentlig veiing)</p>
 
-    <p>Da jeg startet 22. januar 2024, veide jeg mellom 80 og 82 kilo. De første 16 ukene fulgte jeg kostholdsplanen ganske strengt, og hver lørdag veide jeg meg. Ikke fordi tallet på vekten var det viktigste, men fordi jeg ønsket å følge utviklingen ærlig og se hva som faktisk skjedde med kroppen min over tid.</p>
+    <p>Da jeg startet 22. januar 2024, veide jeg rundt 80 kilo. De første 16 ukene fulgte jeg kostholdsplanen ganske strengt og veide meg én gang i uken for å følge utviklingen.</p>
+
+    <p>Grafen viser det som er vanskeligere å se fra uke til uke: Vekten gikk ikke jevnt ned. Noen perioder gikk det raskt, andre ganger sto den nesten stille eller gikk litt opp. Likevel var retningen tydelig over tid.</p>
+
+    <p>Etter hvert flatet kurven ut, og vekten stabiliserte seg rundt 61 til 63 kilo. For meg er det kanskje den viktigste delen av grafen. Endringen ble ikke bare noe jeg gjennomførte en periode, men noe jeg klarte å leve videre med.</p>
 
     <ul class="milestones">
-      <li><strong>Uke 0–4</strong> Rask nedgang, fra 80 til 75,5 kg</li>
-      <li><strong>Uke 4–15</strong> Jevn nedgang ned til rundt 69 kg</li>
-      <li><strong>Uke 16–50</strong> Fortsatt gradvis nedgang, mot 64 kg</li>
-      <li><strong>Etter ca. 1 år</strong> Bunn-notering på 60,9 kg</li>
-      <li><strong>I dag</strong> Stabilisert seg naturlig rundt 62–63 kg, helt av seg selv</li>
+      <li><strong>Uke 0 til 4</strong> Rask nedgang i starten</li>
+      <li><strong>Uke 4 til 15</strong> Jevn videre nedgang mot ca. 69 kg</li>
+      <li><strong>Uke 16 til 50</strong> Langsommere nedgang og perioder med stabil vekt</li>
+      <li><strong>Videre</strong> Vekten finner etter hvert et stabilt nivå rundt 61 til 63 kg</li>
     </ul>
 
     <div class="total-figure">
-      <p>Totalt en nedgang på rundt <strong>18–20 kg</strong> over halvannet år. Men det viktigste tallet var ikke vekten, det var hvor mye bedre jeg begynte å kjenne meg i kroppen.</p>
+      <p>Totalt en nedgang på rundt <strong>18 til 20 kg</strong> over halvannet år. Men tallet jeg egentlig bryr meg om, er hvor mye bedre jeg kjenner meg i kroppen i dag.</p>
     </div>
   </section>
+
+  <p class="resource-note" style="text-align: center;">
+    <a class="resource-link" href="vekt-og-helse.html">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--push)" stroke-width="1.8" aria-hidden="true"><path d="M12 3v3M7 6h10l1.5 8a5.5 5.5 0 0 1-11 0L9 6Z"/><path d="M9 21h6"/></svg>
+      <span>Vekt &amp; helse · Tallet på vekten forteller ikke hele historien</span>
+      <span aria-hidden="true">→</span>
+    </a>
+  </p>
 
   <section class="card-section">
     <p class="kicker">Bonusen jeg ikke ventet</p>
     <h2>Mer energi. Mer bevegelse. Mer overskudd.</h2>
     <p>Det som overrasket meg mest, var ikke vektnedgangen, men det som skjedde med energien min.</p>
     <p>Da jeg begynte å føle meg bedre, fikk jeg også lyst til å bevege meg mer. Ikke fordi jeg måtte eller tvang meg selv til trening, men fordi kroppen plutselig ga meg lyst. Bevegelse begynte å føles godt. Det som tidligere kunne oppleves tungt og krevende, ble gradvis enklere, og ikke minst mer lystbetont.</p>
-    <p>Det ble en positiv spiral. Mer energi ga mer bevegelse, og mer bevegelse ga meg enda mer overskudd.</p>
-    <p>Livet skjer fortsatt. Det kommer gode dager og vanskelige dager, akkurat som før. Forskjellen er hvordan jeg møter dem. I dag har jeg langt mer overskudd, og jeg ser på årene som kommer med nysgjerrighet og muligheter, ikke med den samme bekymringen for hvilken helseplage som kanskje venter rundt neste sving.</p>
+    <p>Det ble en positiv spiral jeg ikke hadde regnet med: overskuddet ga meg lyst til å bevege meg, og bevegelsen ga meg enda mer overskudd tilbake.</p>
+    <p>Livet skjer fortsatt, med gode og vanskelige dager som før. Forskjellen er hvordan jeg møter dem. I dag har jeg langt mer overskudd, og jeg ser fremover med nysgjerrighet i stedet for den gamle bekymringen for hva som skulle komme av nytt.</p>
   </section>
 
   <section class="card-section">
@@ -294,17 +384,14 @@
     <p>Jeg vet hvor tungt det kan føles å stå helt i starten og ikke vite hvor man skal begynne. Jeg vet hvordan det er å stå i matbutikken med en handleliste og føle at det finnes tusen råd, men ingen som helt forteller deg hva som faktisk kan passe for deg.</p>
     <p>Jeg vet også at endring ikke handler om å være perfekt. Det handler om å finne små og store grep som er mulig å leve med over tid.</p>
     <p>Som helseveileder ønsker jeg å bruke både kunnskapen jeg har tilegnet meg, og mine egne erfaringer, til å møte deg der du er. Ikke med en ferdig fasit, men med nysgjerrighet, støtte og et ønske om å finne ut hva som kan fungere for akkurat deg.</p>
-    <p>Kjenner du deg igjen i tanken om at det bare blir flere helseplager med årene, enten du er i 30-årene, 40-årene eller senere i livet?</p>
-    <p>Jeg var nesten 50 da jeg tenkte akkurat det samme.</p>
-    <p>I dag tenker jeg annerledes.</p>
-    <p>Livet er fortsatt fullt av muligheter, uansett hvor i livet du befinner deg. Noen ganger trenger vi kanskje bare å stoppe opp, lytte litt mer til kroppen og våge å velge en annen vei enn den vi har gått før.</p>
-    <p>Det er ikke nødvendigvis enkelt. Men det er mulig å begynne.</p>
+    <p>Kanskje kjenner du deg igjen i noe av dette: søvnen som ikke strekker til, stresset som har tatt for stor plass, vaner du gjerne skulle endret, eller bare en følelse av at det blir flere helseplager med årene. Uansett hva som er din grunn, og om du er i 30-årene, 40-årene eller senere i livet, er det lov å ønske seg noe annet.</p>
+    <p>Jeg var nesten 50 da jeg selv kjente på den følelsen. I dag tenker jeg annerledes.</p>
+    <p>Livet er fortsatt fullt av muligheter, uansett hvor i livet du befinner deg. Det er ikke nødvendigvis enkelt å stoppe opp, lytte til kroppen og velge en annen vei enn den du har gått før, men det er mulig å begynne.</p>
     <p>Og det er nettopp det jeg ønsker å hjelpe andre med: å finne tilbake til sin egen styrke, forstå kroppen sin bedre og finne en vei videre som faktisk kan fungere i deres liv.</p>
-    <p>For jeg har selv erfart hvor mye som kan forandre seg når man begynner å tro på at endring faktisk er mulig.</p>
   </section>
 
   <div class="quote-card">
-    <blockquote>Jeg er selv beviset på at det er mulig, uansett alder.</blockquote>
+    <blockquote>Livet er fullt av muligheter, uansett alder.</blockquote>
   </div>
 
   <div class="cta-section">

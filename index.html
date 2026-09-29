@@ -8,6 +8,9 @@
 <meta property="og:title" content="Silje Merete SMART Helseveiledning">
 <meta property="og:description" content="Personlig helseveiledning for privatpersoner og bedrifter, med fokus på søvn, stress, kosthold og fysisk aktivitet.">
 <meta property="og:type" content="website">
+<meta name="theme-color" content="#1f3c5c">
+<link rel="icon" href="images/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <style>
   :root {
     --bg: #f4f8fb;
@@ -67,9 +70,18 @@
     color: var(--accent-dark);
     font-size: 1.02rem;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
-  .brand span {
+  .brand-logo {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+
+  .brand-name span {
     color: var(--accent);
     font-weight: 600;
   }
@@ -424,6 +436,30 @@
   }
 
   /* Om meg */
+  #om-meg {
+    position: relative;
+    overflow: hidden;
+  }
+
+  #om-meg::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 520px;
+    height: 520px;
+    transform: translate(-50%, -50%);
+    background: url('images/vannmerke-blomst-v2.png') center / contain no-repeat;
+    opacity: 0.31;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  #om-meg > * {
+    position: relative;
+    z-index: 1;
+  }
+
   .about-grid {
     display: flex;
     gap: 1.5rem;
@@ -435,8 +471,8 @@
   .photo-placeholder,
   .profile-photo {
     flex: 0 0 auto;
-    width: 200px;
-    height: 240px;
+    width: 150px;
+    height: 180px;
     border-radius: 16px;
   }
 
@@ -741,11 +777,147 @@
     padding: 1.1rem 1.1rem 1.25rem;
   }
 
+  .resource-subhead {
+    margin: 1.5rem 0 0;
+    font-size: 0.95rem;
+    color: var(--accent-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .resource-subhead:first-child { margin-top: 0; }
+
+  .resource-subhead span {
+    margin-left: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+
+  .resource-subhead span::before { content: "· "; }
+
   .resource-toggle .coming-soon {
     margin: 0.9rem 0 0;
     font-size: 0.9rem;
     color: var(--muted);
     font-style: italic;
+  }
+
+  /* Helhetlig helse-modellen */
+  .health-model {
+    margin-top: 1.25rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .health-model-figure {
+    margin: 0;
+  }
+
+  .health-model-figure img {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    margin: 0 auto;
+    mix-blend-mode: multiply;
+  }
+
+  .health-model-balance {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .health-model-balance h3 {
+    margin: 0 0 0.4rem;
+    color: var(--accent-dark);
+    font-size: 1.15rem;
+  }
+
+  @media (max-width: 640px) {
+    .health-model {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Livsfaser: bilde med tekst under */
+  .life-phases {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin: 2.25rem 0;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    scroll-margin-top: 5rem;
+  }
+
+  .life-phases-photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .life-phases-text {
+    padding: 1.6rem 1.85rem 1.85rem;
+    text-align: center;
+  }
+
+  .life-phases h2 {
+    margin: 0 auto 0.6rem;
+    max-width: 30ch;
+    color: var(--accent-dark);
+    font-size: 1.5rem;
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+
+  .life-phases p {
+    margin: 0.5rem auto 0;
+    max-width: 60ch;
+  }
+
+  .life-phases p.kicker {
+    margin: 0 auto 0.35rem;
+  }
+
+  @media (min-width: 720px) {
+    .life-phases {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      align-items: stretch;
+    }
+    .life-phases-photo {
+      height: 100%;
+      min-height: 320px;
+      aspect-ratio: auto;
+      object-position: 30% center;
+      order: 2;
+    }
+    .life-phases-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2rem 2rem 2.1rem;
+      text-align: left;
+    }
+    .life-phases h2,
+    .life-phases p,
+    .life-phases p.kicker {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .life-phases-text { padding: 1.3rem 1.25rem 1.5rem; }
+    .life-phases h2 { font-size: 1.3rem; }
   }
 
   .quote-card {
@@ -877,7 +1049,7 @@
 
 <header class="site-header">
   <div class="nav-wrap">
-    <div class="brand">Silje Merete <span>SMART Helseveiledning</span></div>
+    <div class="brand"><img class="brand-logo" src="images/logo.png" width="36" height="36" alt=""><span class="brand-name">Silje Merete <span>SMART Helseveiledning</span></span></div>
     <nav class="site-nav">
       <a href="#om-meg">Om meg</a>
       <a href="min-historie.html">Min historie</a>
@@ -931,14 +1103,16 @@
     <div class="about-grid">
       <img class="profile-photo" src="images/profilbilde.jpg" alt="Silje Merete Binder">
       <div class="about-text">
-        <p>Hei, og velkommen til deg! <svg class="flower-icon" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><g fill="#8fd3e0"><circle cx="10" cy="4" r="4"/><circle cx="16" cy="8" r="4"/><circle cx="14" cy="15" r="4"/><circle cx="6" cy="15" r="4"/><circle cx="4" cy="8" r="4"/></g><circle cx="10" cy="10" r="3" fill="var(--accent)"/></svg> Jeg heter Silje Merete og er utdannet pedagog og leder. Jeg har i over 20 år veiledet mennesker gjennom prosesser der de ønsker endring i livet sitt. Det å få være med på reisen når mennesker finner sin nye hverdag, er det som driver meg.</p>
+        <p>Hei, og velkommen til deg! <svg class="flower-icon" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><g fill="#8fd3e0"><circle cx="10" cy="4" r="4"/><circle cx="16" cy="8" r="4"/><circle cx="14" cy="15" r="4"/><circle cx="6" cy="15" r="4"/><circle cx="4" cy="8" r="4"/></g><circle cx="10" cy="10" r="3" fill="var(--accent)"/></svg> Jeg heter Silje Merete og er utdannet pedagog og leder. Jeg har i over 20 år veiledet mennesker gjennom prosesser der de ønsker endring i livet sitt.</p>
+        <p><strong>Denne høsten er jeg i gang med et individuelt veiledningsprosjekt med mennesker som ønsker personlig helseveiledning. Nå har jeg ingen flere plasser ledig.</strong></p>
+        <p>Til neste år fra februar får de som ønsker det en ny mulighet til å være med i mitt siste veiledningsprosjekt før jeg blir ferdig sertifisert helseveileder. Det passer like godt for deg som ønsker å ta tak i noen små justeringer, som for deg som er langtidssykemeldt og trenger noen å følge deg opp videre. Meld din interesse hvis du er nysgjerrig, så tar jeg kontakt.</p>
         <p>Sammen ser vi på hvordan søvn, stress, kosthold, fysisk aktivitet og andre vaner påvirker hverdagen din, og finner fram til det som passer for akkurat ditt liv, i ditt eget tempo, og med respekt for at du kjenner deg selv best. Alt vi snakker om er underlagt taushetsplikt, så du kan kjenne deg trygg.</p>
         <details class="edu-toggle">
           <summary>Utdanning og bakgrunn <span class="chevron">▸</span></summary>
           <div class="edu-toggle-body">
             <p>Jeg har en cand.mag. i barnevernspedagogikk og utviklingsstudier, med videreutdanning i veiledning og ledelse.</p>
             <p>Jeg har hele tiden arbeidet tett med mennesker i utvikling, blant annet som leder i barnehage, og det har gitt meg god trening i å møte mennesker der de er, og i å skape rom hvor det er trygt å snakke om endring.</p>
-            <p>I dag er jeg i siste avsluttende del av videreutdanningen som helseveileder, der jeg bygger videre på pedagogikk- og ledelseserfaringen min, med et konkret fokus på hvordan man kartlegger vaner og støtter varig endring over tid.</p>
+            <p>Videreutdanningen som helseveileder bygger videre på pedagogikk- og ledelseserfaringen min, med et konkret fokus på hvordan man kartlegger vaner og støtter varig endring over tid.</p>
           </div>
         </details>
       </div>
@@ -988,6 +1162,37 @@
     </div>
 
     <p>Denne tilnærmingen bygger på metodikken fra <a class="inline-link" href="https://instituttet.abelhelse.no/" target="_blank" rel="noopener">Abel Instituttet</a>, som utdanner helseveiledere i Norge.</p>
+  </section>
+
+  <div id="livsfaser" class="life-phases">
+    <img class="life-phases-photo" src="images/livsfaser-blader-hav.jpg" width="1672" height="941" loading="lazy" alt="Høstblader i mange farger og former, friske grønne, gule, røde og visne, ligger sammen på en gammel treplatting ved sjøen i lavt sollys">
+    <div class="life-phases-text">
+      <p class="kicker">Helse i alle faser</p>
+      <h2>Livet forandrer seg. Det gjør behovene våre også.</h2>
+      <p>Noen perioder har vi overskudd. Andre ganger møter vi sykdom, stress eller store endringer.</p>
+      <p>God helse handler ikke om å gjøre alt riktig, men om å finne det som fungerer for deg – akkurat nå.</p>
+    </div>
+  </div>
+
+  <section id="helhetlig-helse" class="card-section">
+    <p class="kicker">Min modell</p>
+    <h2>Helhetlig – i balanse</h2>
+    <div class="health-model">
+      <figure class="health-model-figure">
+        <img src="images/helhetlig-helse-modell-v3.jpg" width="1028" height="1028" loading="lazy" alt="Modellen Helhetlig – i balanse: en sirkel med fem områder, stress, søvn og restitusjon, kosthold, fysisk aktivitet og trening, og relasjoner, som er vevd sammen i et blomstermønster med et hjerte i midten">
+      </figure>
+      <div class="health-model-text">
+        <p>I helseveiledningen ser jeg på helsen din som én helhet. Fem områder går igjen: <strong>stress, søvn og restitusjon, kosthold, fysisk aktivitet og trening, og relasjoner</strong>. De ligger i samme sirkel, og hvert av dem påvirker alle de andre.</p>
+        <p>Når du sover dårlig, tåler du mindre stress. Når du er stresset, spiser du gjerne annerledes og orker mindre bevegelse. Gode relasjoner gir overskudd som smitter over på alt det andre. Derfor ser vi alltid på helheten, og en liten endring på ett område kan merkes i hele sirkelen.</p>
+        <p>Vil du se hvor du står på hvert område?</p>
+        <p><a class="cta-button" href="livsstilhjul.html">Prøv Livsstilshjulet →</a></p>
+      </div>
+    </div>
+    <div class="health-model-balance">
+      <h3>Balanse, ikke perfeksjon</h3>
+      <p>Målet er ikke å ha alle fem områdene på topp hver eneste dag. Livet går i bølger. Noen uker sover du godt og har overskudd til både trening og venner, andre uker tar jobb, familie eller sykdom mer plass. Det er helt normalt, og det betyr ikke at du har mislyktes.</p>
+      <p>Fordi områdene henger sammen, kan de andre bære litt ekstra når ett av dem er svakere en periode. Å jage det perfekte blir fort en ny kilde til stress. Derfor ser vi heller på retningen over tid enn på enkeltdager. Små vaner du klarer å holde de fleste dager, er verdt mer enn store planer som bare holder når alt klaffer.</p>
+    </div>
   </section>
 
   <div class="quote-card">
@@ -1061,20 +1266,16 @@
     <details class="resource-toggle">
       <summary>Stressmestring og søvn <span class="chevron">▸</span></summary>
       <div class="resource-toggle-body">
+        <h3 class="resource-subhead">Stress</h3>
         <div class="resource-grid">
-          <a class="resource-card" href="sovnregistrering.html">
-            <h3>Søvnregistrering</h3>
-            <p>Skjema for én ukes selvregistrering av søvn og kveldsvaner.</p>
-            <p class="note">Krever kode fra Silje Merete</p>
-          </a>
-          <a class="resource-card" href="sovn-stress-logg.html">
-            <h3>Søvn og stress</h3>
-            <p>Ukentlig logg der du registrerer søvnkvalitet og stressnivå side om side, for å se sammenhengen mellom dem.</p>
-            <p class="note">Krever kode fra Silje Merete</p>
-          </a>
           <a class="resource-card" href="dagbok-stresskoppen.html">
             <h3>Dagbok for stresskoppen</h3>
             <p>Skjema for 7 dagers selvregistrering av situasjon, intensitet og hva som fyller og tømmer stresskoppen.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="kat-skjema.html">
+            <h3>KAT-skjema: tankeregistrering</h3>
+            <p>Skjema for å registrere situasjon, automatisk tanke, følelse og atferd, og prøve ut en mer balansert alternativ tanke.</p>
             <p class="note">Krever kode fra Silje Merete</p>
           </a>
           <a class="resource-card" href="pss10.html">
@@ -1082,9 +1283,22 @@
             <p>Cohens validerte spørreskjema med 10 spørsmål om hvor stresset du har opplevd den siste måneden.</p>
             <p class="note">Krever kode fra Silje Merete</p>
           </a>
-          <a class="resource-card" href="kat-skjema.html">
-            <h3>KAT-skjema: tankeregistrering</h3>
-            <p>Skjema for å registrere situasjon, automatisk tanke, følelse og atferd, og prøve ut en mer balansert alternativ tanke.</p>
+          <a class="resource-card" href="redesign-dagen.html">
+            <h3>Re-design dagen din</h3>
+            <p>Tegn tidslinjen for dagen din, se hva den forteller deg, og finn konkrete justeringer: hva må være der, hva kan endres, og hvor du trenger restitusjon og margin.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+        </div>
+        <h3 class="resource-subhead">Søvn</h3>
+        <div class="resource-grid">
+          <a class="resource-card" href="sovn-stress-logg.html">
+            <h3>Søvn og stress</h3>
+            <p>Ukentlig logg der du registrerer søvnkvalitet og stressnivå side om side, for å se sammenhengen mellom dem.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="sovnregistrering.html">
+            <h3>Søvnregistrering</h3>
+            <p>Skjema for én ukes selvregistrering av søvn og kveldsvaner.</p>
             <p class="note">Krever kode fra Silje Merete</p>
           </a>
         </div>
@@ -1094,41 +1308,57 @@
     <details class="resource-toggle">
       <summary>Fysisk aktivitet og trening <span class="chevron">▸</span></summary>
       <div class="resource-toggle-body">
+        <h3 class="resource-subhead">Treningsopplegg</h3>
+        <div class="resource-grid">
+          <a class="resource-card" href="styrke-hjemme.html">
+            <h3>Enkel styrke hjemme</h3>
+            <p>To lavterskel styrkeprogram med illustrerte øvelser: 15 minutter med strikk og lette manualer, og et minimumsprogram på 6 til 7 minutter uten utstyr. Med skjema der du registrerer økta og sender den til meg.</p>
+          </a>
+          <a class="resource-card" href="ukeplan-kvinne-40.html">
+            <h3>Ukeplan for kvinner 40+</h3>
+            <p>En enkel ukeplan inspirert av Stacy Sims: to styrkeøkter, én kort intervalløkt, mye hverdagsaktivitet og nok restitusjon. Med øvelser for treningssenter eller hjemme, intervalløkt og råd om mat rundt treningen.</p>
+          </a>
+        </div>
+        <h3 class="resource-subhead">Registrering og oppfølging <span>Krever kode</span></h3>
         <div class="resource-grid">
           <a class="resource-card" href="aktivitetsdagbok.html">
             <h3>Aktivitetsdagbok</h3>
             <p>Skjema for 7 dagers registrering av fysisk aktivitet, varighet og opplevd anstrengelse, og hva som gjør det lettere eller vanskeligere å være i bevegelse.</p>
-            <p class="note">Krever kode fra Silje Merete</p>
-          </a>
-          <a class="resource-card" href="aktivitetsklokke-data.html">
-            <h3>Data fra telefon eller aktivitetsklokke</h3>
-            <p>Skjema for 7 dagers avskrift av skritt, aktive minutter, hvilepuls og søvn fra egen helse-app eller aktivitetsklokke.</p>
-            <p class="note">Krever kode fra Silje Merete</p>
-          </a>
-          <a class="resource-card" href="6mwt.html">
-            <h3>6-minutters gangtest (6MWT)</h3>
-            <p>Tidtaker og loggverktøy for 6-minutters gangtest. Mål utholdenhet og følg utviklingen over tid.</p>
-            <p class="note">Krever kode fra Silje Merete</p>
-          </a>
-          <a class="resource-card" href="ymca-step-test.html">
-            <h3>YMCA step-test</h3>
-            <p>Metronom, tidtaker og loggverktøy for YMCA 3-minutters step-test. Mål kondisjon og følg utviklingen over tid.</p>
-            <p class="note">Krever kode fra Silje Merete</p>
-          </a>
-          <a class="resource-card" href="1rm-testing.html">
-            <h3>1RM-testing</h3>
-            <p>Beregn estimert 1RM med Brzycki-formelen, og følg utviklingen i maksimal styrke per øvelse over tid.</p>
-            <p class="note">Krever kode fra Silje Merete</p>
-          </a>
-          <a class="resource-card" href="sit-to-stand-test.html">
-            <h3>Sit-to-stand-test (30 sekunder)</h3>
-            <p>Tidtaker og telleknapp for 30-sekunders sit-to-stand-test. Mål benstyrke og funksjon, og følg utviklingen over tid.</p>
-            <p class="note">Krever kode fra Silje Merete</p>
           </a>
           <a class="resource-card" href="borg-rpe-test.html">
             <h3>Borg CR10-skala (0 til 10)</h3>
             <p>Registrer opplevd anstrengelse med Borgs CR10-skala, og følg utviklingen i treningsintensitet per aktivitet over tid.</p>
-            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
+          <a class="resource-card" href="aktivitetsklokke-data.html">
+            <h3>Data fra telefon eller aktivitetsklokke</h3>
+            <p>Skjema for 7 dagers avskrift av skritt, aktive minutter, hvilepuls og søvn fra egen helse-app eller aktivitetsklokke.</p>
+          </a>
+          <a class="resource-card" href="trening-energi-restitusjon.html">
+            <h3>Trening, energi og restitusjon</h3>
+            <p>Skjema du fyller ut rundt treningsøktene: energi og smerter før og etter, hvor hard økten var og hvordan kroppen kjennes neste morgen. For å finne den dosen som gir deg overskudd.</p>
+          </a>
+        </div>
+        <h3 class="resource-subhead">Tester <span>Krever kode</span></h3>
+        <div class="resource-grid">
+          <a class="resource-card" href="1rm-testing.html">
+            <h3>1RM-testing</h3>
+            <p>Test 1RM direkte eller estimer det fra en submaksimal belastning, gjerne én beinøvelse og én overkroppsøvelse, og følg utviklingen over tid.</p>
+          </a>
+          <a class="resource-card" href="6mwt.html">
+            <h3>6-minutters gangtest (6MWT)</h3>
+            <p>Tidtaker og loggverktøy for 6-minutters gangtest. Mål utholdenhet og følg utviklingen over tid.</p>
+          </a>
+          <a class="resource-card" href="cooper-test.html">
+            <h3>Cooper-test (12 minutter)</h3>
+            <p>Tidtaker og loggverktøy for 12-minutters løpetest. Estimer VO<sub>2</sub>maks, sammenlign med normer og følg kondisjonen over tid.</p>
+          </a>
+          <a class="resource-card" href="sit-to-stand-test.html">
+            <h3>Sit-to-stand-test (30 sekunder)</h3>
+            <p>Tidtaker og telleknapp for 30-sekunders sit-to-stand-test. Mål benstyrke og funksjon, og følg utviklingen over tid.</p>
+          </a>
+          <a class="resource-card" href="ymca-step-test.html">
+            <h3>YMCA step-test</h3>
+            <p>Metronom, tidtaker og loggverktøy for YMCA 3-minutters step-test. Mål kondisjon og følg utviklingen over tid.</p>
           </a>
         </div>
       </div>
@@ -1137,6 +1367,7 @@
     <details class="resource-toggle">
       <summary>Kosthold <span class="chevron">▸</span></summary>
       <div class="resource-toggle-body">
+        <h3 class="resource-subhead">Kartlegging av kostholdet</h3>
         <div class="resource-grid">
           <a class="resource-card" href="kosthold-spisevaner.html">
             <h3>Kosthold og spisevaner</h3>
@@ -1148,6 +1379,14 @@
             <p>Grundigere skjema for kartlegging av hva, hvor mye, når og hvorfor du spiser, for 3 vanlige hverdager og 1 vanlig helgedag.</p>
             <p class="note">Krever kode fra Silje Merete</p>
           </a>
+        </div>
+        <h3 class="resource-subhead">Enkeltområder</h3>
+        <div class="resource-grid">
+          <a class="resource-card" href="maltidsinnhold.html">
+            <h3>Måltidsinnhold: tallerkenmodellen</h3>
+            <p>Skjema for 3 dagers avkrysning av hvilke matvaregrupper som var med i måltidene dine, ut fra tallerkenmodellen.</p>
+            <p class="note">Krever kode fra Silje Merete</p>
+          </a>
           <a class="resource-card" href="oppmerksom-spising.html">
             <h3>Oppmerksom spising</h3>
             <p>Skjema for 3 dagers registrering av sult- og metthetsskala før og etter måltider, samt hvor tilstedeværende du var mens du spiste.</p>
@@ -1156,11 +1395,6 @@
           <a class="resource-card" href="porsjonskontroll.html">
             <h3>Porsjonskontroll: håndmodellen</h3>
             <p>Skjema for 3 dagers registrering av porsjonsstørrelser med hånden som målestokk: grønnsaker, protein, karbohydrater og fett.</p>
-            <p class="note">Krever kode fra Silje Merete</p>
-          </a>
-          <a class="resource-card" href="maltidsinnhold.html">
-            <h3>Måltidsinnhold: tallerkenmodellen</h3>
-            <p>Skjema for 3 dagers avkrysning av hvilke matvaregrupper som var med i måltidene dine, ut fra tallerkenmodellen.</p>
             <p class="note">Krever kode fra Silje Merete</p>
           </a>
           <a class="resource-card" href="spisepauser.html">
@@ -1176,10 +1410,6 @@
       <summary>Yoga &amp; mindfulness <span class="chevron">▸</span></summary>
       <div class="resource-toggle-body">
         <div class="resource-grid">
-          <a class="resource-card" href="pusteovelser.html">
-            <h3>Pusteøvelser</h3>
-            <p>To enkle, animerte pusteøvelser for ro og stressmestring: firkantpusting (4×4) og pust inn på 2, ut på 4.</p>
-          </a>
           <a class="resource-card" href="beina-opp-veggen.html">
             <h3>Beina opp etter veggen</h3>
             <p>Viparita Karani (en enkel, passiv øvelse som roer nervesystemet raskt ved akutt stress og uro), med forklaring og tidtaker.</p>
@@ -1188,9 +1418,9 @@
             <h3>Morgen- og kveldsstrekk</h3>
             <p>Rolig yoga-inspirert strekk-sekvens for hele kroppen, med styrt tidtaker gjennom hver øvelse. Fin å starte eller avslutte dagen med.</p>
           </a>
-          <a class="resource-card" href="tennisball-fotsale.html">
-            <h3>Tennisball under foten</h3>
-            <p>Egenmassasje for bindevev og fotsåle, med tidtaker per fot. Bra for stram muskulatur og til forebygging av hælsmerter.</p>
+          <a class="resource-card" href="pusteovelser.html">
+            <h3>Pusteøvelser</h3>
+            <p>To enkle, animerte pusteøvelser for ro og stressmestring: firkantpusting (4×4) og pust inn på 2, ut på 4.</p>
           </a>
           <a class="resource-card" href="skulder-nakke-ovelser.html">
             <h3>Skulder- og nakkeøvelser</h3>
@@ -1199,6 +1429,26 @@
           <a class="resource-card" href="solhilsen.html">
             <h3>Solhilsen</h3>
             <p>Den klassiske solhilsen fra yoga (Surya Namaskar), 12 øvelser knyttet sammen med pusten, med forklaring og illustrert oversikt i sirkel rundt sola.</p>
+          </a>
+          <a class="resource-card" href="tennisball-fotsale.html">
+            <h3>Tennisball under foten</h3>
+            <p>Egenmassasje for bindevev og fotsåle, med tidtaker per fot. Bra for stram muskulatur og til forebygging av hælsmerter.</p>
+          </a>
+        </div>
+      </div>
+    </details>
+
+    <details class="resource-toggle">
+      <summary>Mobilbruk <span class="chevron">▸</span></summary>
+      <div class="resource-toggle-body">
+        <div class="resource-grid">
+          <a class="resource-card" href="mobilbevissthet.html">
+            <h3>Mobilbevissthet</h3>
+            <p>Når mobilen tar mer plass enn jeg ønsker. Om mobilvaner, tilstedeværelse og selvledelse, med bevissthetssjekk og 7-dagers mobil-reset.</p>
+          </a>
+          <a class="resource-card" href="mobilavhengighet.html">
+            <h3>Er vi avhengige av mobilen?</h3>
+            <p>Om forskjellen på problematisk mobilbruk og avhengighet, hva vi kan lære av Anonyme Alkoholikere, og seks praktiske grep for å endre mobilvanene dine.</p>
           </a>
         </div>
       </div>

@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>1RM-testing</title>
+<link rel="icon" href="images/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <meta name="description" content="Beregn estimert 1RM med Brzycki-formelen, og følg utviklingen i maksimal styrke over tid.">
 <style>
   :root {
@@ -476,12 +478,30 @@
     .controls, .send-buttons, .muted-note, header.page-header a.back-link { display: none; }
     section.primer { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
   }
+
+  .page-logo {
+    display: block;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 0.75rem;
+    padding: 5px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(22, 40, 58, 0.12);
+  }
+
+  .page-logo img {
+    display: block;
+    width: 46px;
+    height: 46px;
+  }
 </style>
 </head>
 <body class="gate-locked">
 
 <div class="gate-overlay" id="gateOverlay">
   <div class="gate-box">
+    <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
     <h1>Tilgang til verktøyet</h1>
     <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
     <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
@@ -527,16 +547,18 @@
 
   <header class="page-header">
     <a class="back-link" href="index.html">← Til forsiden</a>
+    <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
     <h1>1RM-testing</h1>
     <p class="tagline">Anslå maksimal styrke, og følg utviklingen din over tid</p>
     <div class="reminder">
-      Dette er en enkel måte å følge utviklingen av maksimal styrke over tid
-     , ikke en medisinsk vurdering. Direkte testing av 1RM (å løfte
-      tyngste vekt én gang) krever korrekt teknikk og innebærer risiko for
-      overbelastning eller feil teknikk. For de fleste er det tryggere og
-      mer praktisk å estimere 1RM ut fra en litt lettere vekt løftet flere
-      ganger. Bruk alltid god oppvarming og riktig teknikk, og la deg gjerne
-      veilede av en trent person. Resultatene dine lagres kun i denne
+      Dette er en enkel måte å følge utviklingen av maksimal styrke over tid,
+      ikke en medisinsk vurdering. Du kan teste 1RM på to måter: direkte, ved
+      å løfte tyngste vekt én gang, eller indirekte, ved å løfte en
+      submaksimal belastning kontrollert et visst antall repetisjoner og la
+      verktøyet beregne estimert 1RM. Et reelt maksløft krever korrekt
+      teknikk og innebærer risiko for overbelastning, så for de fleste er den
+      submaksimale metoden tryggere. Bruk alltid god oppvarming og riktig teknikk, og la deg
+      gjerne veilede av en trent person. Resultatene dine lagres kun i denne
       nettleseren.
     </div>
   </header>
@@ -544,10 +566,13 @@
   <section class="primer">
     <h2>Om 1RM-testing</h2>
     <p>1RM (one repetition maximum) er den tyngste belastningen en person klarer å løfte én gang med korrekt teknikk, og den mest brukte metoden for å vurdere maksimal dynamisk styrke.</p>
-    <p>Direkte testing av 1RM kan gi mer presise resultater, men krever korrekt teknikk og innebærer risiko for overbelastning eller feil teknikk hvis testleder ikke har erfaring med å gjennomføre slike tester. I praksis benyttes derfor ofte indirekte metoder, hvor man utfører en moderat belastning og registrerer hvor mange repetisjoner man klarer kontrollert. Deretter estimeres 1RM ved hjelp av en formel.</p>
+    <p>Du kan teste på to måter:</p>
+    <p><strong>Direkte 1RM:</strong> du løfter den tyngste vekten du klarer én gang med korrekt teknikk. Dette gir mest presise resultater, men krever god teknikk, grundig oppvarming og helst en erfaren testleder, fordi det innebærer risiko for overbelastning.</p>
+    <p><strong>Estimert 1RM (submaksimal):</strong> du løfter en lettere vekt, registrerer hvor mange repetisjoner du klarer kontrollert, og estimerer 1RM ved hjelp av en formel. Dette er tryggere og anbefales for de fleste, særlig om du ikke er vant til tunge løft.</p>
     <p>Verktøyet under bruker Brzycki-formelen, som er blant de mest brukte og mest pålitelige dersom antall repetisjoner ligger mellom 10 og 15:</p>
     <div class="formula-box">1RM = Vekt ÷ (1,0278 − 0,0278 × Antall repetisjoner)</div>
-    <p>Slik gjør du det: velg en øvelse, og løft en vekt du klarer å ta i 10 til 15 kontrollerte repetisjoner med god teknikk. Fyll inn øvelse, vekt og antall repetisjoner under, så regner verktøyet automatisk ut din estimerte 1RM.</p>
+    <p>Slik gjør du det: ved estimert 1RM velger du en vekt du klarer å løfte 10 til 15 ganger kontrollert og med god teknikk. Ved direkte 1RM skriver du inn vekten og 1 repetisjon. Fyll inn øvelse, vekt og antall repetisjoner under, så regner verktøyet automatisk ut 1RM.</p>
+    <p><strong>Anbefalt:</strong> test én beinøvelse og én overkroppsøvelse, for eksempel beinpress eller knebøy for bein, og brystpress eller nedtrekk for overkropp. Da får du et godt utgangspunkt for styrken din i både under- og overkropp. Bruk de samme øvelsene hver gang du tester, slik at resultatene kan sammenlignes.</p>
   </section>
 
   <section class="primer">
@@ -555,7 +580,15 @@
     <div class="field-grid">
       <div class="field field-wide">
         <label for="entry-exercise">Øvelse</label>
-        <input type="text" id="entry-exercise" placeholder="F.eks. Knebøy, Benkpress, Markløft">
+        <input type="text" id="entry-exercise" list="exercise-suggestions" placeholder="F.eks. Beinpress (bein) eller Brystpress (overkropp)">
+        <datalist id="exercise-suggestions">
+          <option value="Beinpress">
+          <option value="Knebøy">
+          <option value="Brystpress">
+          <option value="Nedtrekk">
+          <option value="Sittende roing">
+        </datalist>
+        <p class="hint">Velg gjerne én beinøvelse og én overkroppsøvelse, og registrer dem hver for seg.</p>
       </div>
       <div class="field">
         <label for="entry-date">Dato</label>
@@ -568,7 +601,7 @@
       <div class="field">
         <label for="entry-reps">Antall repetisjoner</label>
         <input type="number" min="1" max="20" step="1" id="entry-reps" placeholder="F.eks. 12">
-        <p class="hint">Bruk 1 for et direkte testet 1RM. Formelen er mest pålitelig ved 10 til 15 repetisjoner.</p>
+        <p class="hint">Bruk 1 for et direkte testet 1RM. Ved submaksimal vekt er formelen mest pålitelig ved 10 til 15 repetisjoner.</p>
       </div>
       <div class="field field-wide">
         <label for="entry-note">Notat, teknikk, følelse, annet</label>
