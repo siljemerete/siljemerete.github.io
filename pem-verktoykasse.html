@@ -1,0 +1,1773 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verktøykasse for å unngå PEM</title>
+<link rel="icon" href="images/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<meta name="description" content="Finn dine PEM-triggere og utfordringer, velg strategier, lag din egen plan for å unngå PEM og kartlegg aktivitet og symptomer uke for uke.">
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --push: #c9823f;
+    --push-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+    --s0: #d8eedc;
+    --s1: #e8f1c9;
+    --s4: #fbefb8;
+    --s7: #f8d3ad;
+    --s10: #f1b3a8;
+    --pem: #b5473a;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 2rem 1rem 4rem;
+  }
+
+  header.page-header { margin-bottom: 1.25rem; }
+
+  header.page-header a.back-link {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    margin-bottom: 0.75rem;
+  }
+
+  header.page-header a.back-link:hover { color: var(--accent-dark); }
+
+  header.page-header h1 {
+    font-size: 1.7rem;
+    margin: 0 0 0.35rem;
+    color: var(--accent-dark);
+  }
+
+  header.page-header p.tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  .reminder {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    color: var(--accent-dark);
+  }
+
+  /* Faner */
+  .tabs {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    gap: 0.35rem;
+    overflow-x: auto;
+    padding: 0.6rem 0.1rem;
+    margin: 0 0 1rem;
+    background: var(--bg);
+    scrollbar-width: thin;
+  }
+
+  .tabs button {
+    flex: 0 0 auto;
+    font-size: 0.88rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+  }
+
+  .tabs button:hover { background: var(--accent-soft); }
+
+  .tabs button[aria-selected="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .tabs .badge {
+    display: inline-block;
+    min-width: 1.3em;
+    margin-left: 0.3rem;
+    padding: 0 0.35em;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    font-size: 0.75rem;
+    text-align: center;
+  }
+
+  .tabs button[aria-selected="true"] .badge {
+    background: rgba(255, 255, 255, 0.25);
+    color: #fff;
+  }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  section.primer {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
+  }
+
+  section.primer h2 {
+    margin-top: 0;
+    font-size: 1.15rem;
+    color: var(--accent-dark);
+  }
+
+  section.primer h3 {
+    font-size: 1rem;
+    color: var(--accent-dark);
+    margin: 1.1rem 0 0.3rem;
+  }
+
+  section.primer p { margin: 0.6rem 0 0; }
+  section.primer ul, section.primer ol { margin: 0.5rem 0 0; padding-left: 1.3rem; }
+  section.primer li { margin-bottom: 0.3rem; }
+
+  .source-box {
+    font-size: 0.85rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+  }
+
+  .source-box a { color: var(--accent-dark); }
+
+  .steps {
+    counter-reset: step;
+    list-style: none;
+    padding: 0 !important;
+  }
+
+  .steps li {
+    position: relative;
+    padding-left: 2.4rem;
+    margin-bottom: 0.85rem !important;
+  }
+
+  .steps li::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .steps strong { color: var(--accent-dark); }
+
+  /* Sjekklister */
+  .topic {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 0.7rem;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .topic > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.9rem 1.15rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .topic > summary::-webkit-details-marker { display: none; }
+
+  .topic > summary .sum-right {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-shrink: 0;
+  }
+
+  .topic > summary .count {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    background: var(--accent-soft);
+    border-radius: 999px;
+    padding: 0.1rem 0.55rem;
+  }
+
+  .topic > summary .count:empty { display: none; }
+
+  .topic > summary .chevron {
+    transition: transform 0.15s ease;
+    color: var(--accent);
+    font-size: 1rem;
+  }
+
+  .topic[open] > summary .chevron { transform: rotate(90deg); }
+  .topic > summary:hover { background: var(--accent-soft); }
+
+  .topic-body { padding: 0.1rem 1.15rem 1.1rem; }
+
+  .check-item {
+    display: flex;
+    gap: 0.65rem;
+    align-items: flex-start;
+    padding: 0.55rem 0.6rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 0 -0.6rem;
+  }
+
+  .check-item:hover { background: var(--bg); }
+
+  .check-item input {
+    margin-top: 0.25rem;
+    width: 1.15rem;
+    height: 1.15rem;
+    accent-color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .check-item.checked { background: var(--accent-soft); }
+
+  .check-item .lead { font-weight: 600; }
+
+  .custom-list input {
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    margin-bottom: 0.45rem;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .link-button {
+    background: none;
+    border: none;
+    color: var(--accent-dark);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 0.2rem 0;
+    font-family: inherit;
+  }
+
+  .link-button:hover { text-decoration: underline; }
+
+  .next-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  .btn {
+    font-size: 0.92rem;
+    padding: 0.6rem 1.05rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: inherit;
+  }
+
+  .btn:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+
+  .btn.secondary { background: var(--card); color: var(--accent-dark); }
+  .btn.secondary:hover { background: var(--accent-soft); }
+
+  .btn.danger { background: var(--card); color: var(--push); border-color: var(--border); }
+  .btn.danger:hover { background: var(--push-soft); }
+
+  .btn.small { font-size: 0.82rem; padding: 0.4rem 0.8rem; }
+
+  /* Plan */
+  .plan-row {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.9rem 1.1rem 1rem;
+    margin-bottom: 0.8rem;
+    box-shadow: var(--shadow);
+  }
+
+  .plan-row-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.4rem;
+  }
+
+  .plan-row-head strong { color: var(--accent-dark); }
+
+  .plan-cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .field label {
+    display: block;
+    font-weight: 600;
+    color: var(--accent-dark);
+    margin-bottom: 0.3rem;
+    font-size: 0.88rem;
+  }
+
+  .field textarea, .field input[type="text"], .field input[type="date"] {
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .field textarea { min-height: 78px; resize: vertical; }
+
+  .field select.pick {
+    width: 100%;
+    margin-top: 0.35rem;
+    font-size: 0.82rem;
+    padding: 0.3rem 0.4rem;
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--muted);
+    font-family: inherit;
+  }
+
+  .example-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin-top: 0.6rem;
+  }
+
+  .example-table th, .example-table td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .example-table th { color: var(--accent-dark); }
+
+  /* Kartlegging */
+  .week-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .week-nav .week-title { text-align: center; }
+  .week-nav .week-title strong { display: block; color: var(--accent-dark); font-size: 1.1rem; }
+  .week-nav .week-title span { color: var(--muted); font-size: 0.88rem; }
+
+  .day-chips {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.3rem;
+    margin: 0.9rem 0 0.2rem;
+  }
+
+  .day-chips button {
+    position: relative;
+    padding: 0.45rem 0 0.4rem;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    font-family: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+    line-height: 1.2;
+  }
+
+  .day-chips button small { display: block; font-size: 0.7rem; color: var(--muted); }
+
+  .day-chips button.filled { background: var(--accent-soft); }
+
+  .day-chips button[aria-pressed="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .day-chips button[aria-pressed="true"] small { color: rgba(255,255,255,0.85); }
+
+  .day-chips .pem-dot {
+    position: absolute;
+    top: 3px;
+    right: 4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--pem);
+  }
+
+  .log-row {
+    display: grid;
+    grid-template-columns: minmax(130px, 1fr) 2fr;
+    gap: 0.6rem;
+    align-items: center;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .log-row:last-child { border-bottom: none; }
+
+  .log-row .lbl { font-weight: 600; color: var(--accent-dark); font-size: 0.92rem; }
+  .log-row .lbl small { display: block; font-weight: 400; color: var(--muted); font-size: 0.78rem; }
+  .log-row .lbl .req { color: var(--push); font-weight: 600; }
+
+  .log-row.group-start { border-top: 2px solid var(--accent-soft); margin-top: 0.3rem; }
+
+  .mdk {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.35rem;
+  }
+
+  .mdk label { font-size: 0.72rem; color: var(--muted); display: block; text-align: center; }
+
+  select.num {
+    width: 100%;
+    padding: 0.4rem 0.3rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--ink);
+    text-align: center;
+  }
+
+  select.num.single { max-width: 110px; }
+
+  .sv0 { background: var(--s0) !important; }
+  .sv1 { background: var(--s1) !important; }
+  .sv4 { background: var(--s4) !important; }
+  .sv7 { background: var(--s7) !important; }
+  .sv10 { background: var(--s10) !important; }
+
+  .yn { display: flex; gap: 0.35rem; }
+
+  .yn button {
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--accent-dark);
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  .yn button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  .yn.pem button[data-v="ja"][aria-pressed="true"] { background: var(--pem); border-color: var(--pem); }
+
+  .log-row textarea {
+    width: 100%;
+    min-height: 56px;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    resize: vertical;
+    color: var(--ink);
+  }
+
+  .annet-name {
+    width: 100%;
+    margin-top: 0.25rem;
+    padding: 0.3rem 0.45rem;
+    border: 1px dashed var(--border);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-family: inherit;
+    color: var(--ink);
+  }
+
+  .scale-bar {
+    display: grid;
+    grid-template-columns: 1fr 3fr 3fr 3fr 1fr;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0.7rem 0 0.3rem;
+    font-size: 0.78rem;
+    text-align: center;
+  }
+
+  .scale-bar div { padding: 0.45rem 0.2rem; line-height: 1.25; }
+  .scale-bar strong { display: block; font-size: 0.9rem; }
+
+  .table-scroll { overflow-x: auto; margin-top: 0.6rem; }
+
+  table.overview {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 560px;
+    font-size: 0.8rem;
+  }
+
+  table.overview th, table.overview td {
+    border: 1px solid var(--border);
+    padding: 0.3rem 0.25rem;
+    text-align: center;
+  }
+
+  table.overview th { background: var(--accent-soft); color: var(--accent-dark); }
+  table.overview td.rl { text-align: left; font-weight: 600; color: var(--accent-dark); background: #fafdfe; white-space: nowrap; }
+  table.overview td.pem-yes { background: var(--pem); color: #fff; font-weight: 700; }
+  table.overview td.cm { font-size: 0.72rem; text-align: left; color: var(--muted); max-width: 90px; }
+
+  .chart-wrap { margin-top: 0.6rem; }
+  .chart-wrap svg { width: 100%; height: auto; display: block; }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.35rem;
+  }
+
+  .legend i {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    vertical-align: -1px;
+    margin-right: 0.3rem;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.6rem;
+    margin: 0.75rem 0 0.25rem;
+  }
+
+  .stat-item {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.83rem;
+  }
+
+  .stat-item strong { display: block; color: var(--accent-dark); font-size: 1.35rem; }
+
+  .muted-note { font-size: 0.85rem; color: var(--muted); }
+
+  .send-buttons { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 0 0.25rem; }
+
+  .case {
+    background: var(--push-soft);
+    border-left: 4px solid var(--push);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 0.8rem;
+  }
+
+  .case p { margin: 0.55rem 0 0; }
+  .case p:first-child { margin-top: 0; }
+
+  footer.closing {
+    margin-top: 1.75rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong { color: var(--accent-dark); }
+
+  body.gate-locked .wrap,
+  body.gate-locked footer.closing { display: none; }
+
+  .gate-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 100;
+  }
+
+  body.gate-locked .gate-overlay { display: flex; }
+
+  .gate-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 2rem 1.75rem;
+    max-width: 340px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .gate-box h1 { margin: 0 0 0.5rem; font-size: 1.25rem; color: var(--accent-dark); }
+  .gate-box p { margin: 0 0 1rem; color: var(--muted); font-size: 0.92rem; }
+
+  .gate-box input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    font-family: inherit;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  .gate-box button {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .gate-box button:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+
+  .gate-error { display: none; color: var(--push); font-size: 0.85rem; margin: 0.7rem 0 0; }
+  .gate-contact { margin-top: 0.9rem; font-size: 0.85rem; color: var(--muted); }
+  .gate-contact a { color: var(--accent-dark); font-weight: 600; text-decoration: none; }
+  .gate-contact a:hover { text-decoration: underline; }
+
+  .page-logo {
+    display: block;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 0.75rem;
+    padding: 5px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(22, 40, 58, 0.12);
+  }
+
+  .page-logo img { display: block; width: 46px; height: 46px; }
+
+  .print-only { display: none; }
+
+  @media (max-width: 520px) {
+    .log-row { grid-template-columns: 1fr; gap: 0.35rem; }
+    header.page-header h1 { font-size: 1.45rem; }
+    .day-chips button { font-size: 0.78rem; }
+  }
+
+  @media print {
+    body { background: #fff; }
+    .tabs, .next-row, .send-buttons, .muted-note, .no-print,
+    header.page-header a.back-link, .day-chips, #dayForm, .pick, .plan-add,
+    .remove-row { display: none !important; }
+    .panel { display: block !important; break-before: page; }
+    .panel:first-of-type { break-before: auto; }
+    .print-only { display: block; }
+    .panel[data-panel="start"] { display: none !important; }
+    section.primer, .topic, .plan-row { box-shadow: none; break-inside: avoid; }
+    .check-item:not(.checked) { display: none; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body class="gate-locked">
+
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box">
+    <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
+    <h1>Tilgang til verktøyet</h1>
+    <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
+    <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
+    <button type="button" id="gateSubmit">Lås opp</button>
+    <p class="gate-error" id="gateError">Feil kode, prøv igjen.</p>
+    <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20PEM-verkt%C3%B8ykassen">Kontakt meg for å få kode →</a></p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var GATE_KEY = 'gate-pem-unlocked';
+    var CODE = 'nyevaner';
+
+    function unlock() {
+      localStorage.setItem(GATE_KEY, 'true');
+      document.body.classList.remove('gate-locked');
+    }
+
+    if (localStorage.getItem(GATE_KEY) === 'true') {
+      unlock();
+    }
+
+    function trySubmit() {
+      var input = document.getElementById('gateCode');
+      var error = document.getElementById('gateError');
+      if (input.value.trim().toLowerCase() === CODE) {
+        error.style.display = 'none';
+        unlock();
+      } else {
+        error.style.display = 'block';
+      }
+    }
+
+    document.getElementById('gateSubmit').addEventListener('click', trySubmit);
+    document.getElementById('gateCode').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') trySubmit();
+    });
+  })();
+</script>
+
+<div class="wrap">
+
+  <header class="page-header">
+    <a class="back-link" href="index.html">← Til forsiden</a>
+    <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
+    <h1>Verktøykasse for å unngå PEM</h1>
+    <p class="tagline">Finn dine triggere, velg strategier, lag din egen plan og følg med på aktivitet og symptomer</p>
+    <div class="reminder">
+      Ta det i ditt eget tempo. Du trenger ikke gjøre alt på én gang, og det er
+      helt greit å fylle ut litt i dag og litt en annen dag. Alt du legger inn
+      lagres i denne nettleseren, så du kan lukke siden og fortsette senere.
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs" role="tablist" aria-label="Deler av verktøykassen">
+    <button type="button" role="tab" data-tab="start">Start</button>
+    <button type="button" role="tab" data-tab="triggere">1 Triggere <span class="badge" id="badge-triggere"></span></button>
+    <button type="button" role="tab" data-tab="utfordringer">2 Utfordringer <span class="badge" id="badge-utfordringer"></span></button>
+    <button type="button" role="tab" data-tab="strategier">3 Strategier <span class="badge" id="badge-strategier"></span></button>
+    <button type="button" role="tab" data-tab="plan">4 Min plan</button>
+    <button type="button" role="tab" data-tab="kartlegging">5 Kartlegging</button>
+  </nav>
+
+  <!-- START -->
+  <div class="panel" data-panel="start">
+    <section class="primer">
+      <h2>Om verktøyet</h2>
+      <p>PEM (post-exertional malaise) betyr at symptomene blir verre etter en belastning, enten den er fysisk, mental eller følelsesmessig. Forverringen kommer ofte først etter et døgn eller to, og kan vare lenge. Jo bedre du kjenner dine egne mønstre, jo lettere blir det å legge opp hverdagen slik at du får færre slike tilbakefall.</p>
+      <p>Verktøyet hjelper deg å samle det du vet om deg selv på ett sted: hva som pleier å utløse forverring, hva som gjør det vanskelig å unngå, og hva du vil prøve. Etterpå kan du følge med på aktivitet og symptomer uke for uke.</p>
+    </section>
+
+    <section class="primer">
+      <h2>Slik bruker du det</h2>
+      <ol class="steps">
+        <li><strong>Triggere.</strong> Kryss av for det som pleier å gi deg forverring, og legg til egne punkter.</li>
+        <li><strong>Utfordringer.</strong> Hva står i veien for at du kan skjerme deg?</li>
+        <li><strong>Strategier.</strong> Velg noen få grep du vil prøve. Start i det små.</li>
+        <li><strong>Min plan.</strong> Koble trigger, utfordring og strategi sammen, og del planen med dem som kan hjelpe deg.</li>
+        <li><strong>Kartlegging.</strong> Logg aktivitet og symptomer, og se hva som skjer dagene før en forverring.</li>
+      </ol>
+      <div class="next-row">
+        <span></span>
+        <button type="button" class="btn" data-goto="triggere">Start med triggerne dine →</button>
+      </div>
+    </section>
+
+    <p class="source-box">
+      Inspirert av «Verktøykasse for å unngå PEM» fra Stanford-universitetets ME/CFS-senter, i norsk versjon fra Norges ME-forening. Les gjerne originalen, som har flere eksempler og en pasienthistorie:
+      <a href="https://www.me-foreningen.no/wp-content/uploads/2019/11/PEM-verkt%C3%B8ykasse.pdf" target="_blank" rel="noopener">PEM-verktøykasse (PDF, Norges ME-forening)</a>.
+    </p>
+  </div>
+
+  <!-- 1 TRIGGERE -->
+  <div class="panel" data-panel="triggere">
+    <h2 class="print-only">Mine triggere for PEM</h2>
+    <section class="primer no-print">
+      <h2>Steg 1: Hva utløser forverring hos deg?</h2>
+      <p>Kryss av for det du kjenner igjen. Mangler noe, legger du det til nederst.</p>
+    </section>
+    <div id="list-triggere"></div>
+    <div class="next-row">
+      <button type="button" class="btn secondary" data-goto="start">← Start</button>
+      <button type="button" class="btn" data-goto="utfordringer">Neste: utfordringer →</button>
+    </div>
+  </div>
+
+  <!-- 2 UTFORDRINGER -->
+  <div class="panel" data-panel="utfordringer">
+    <h2 class="print-only">Mine utfordringer for å unngå PEM</h2>
+    <section class="primer no-print">
+      <h2>Steg 2: Hva gjør det vanskelig å unngå PEM?</h2>
+      <p>Å vite hva som utløser PEM er én ting, å klare å unngå det er noe annet. Hva gjør det vanskelig for deg?</p>
+    </section>
+    <div id="list-utfordringer"></div>
+    <div class="next-row">
+      <button type="button" class="btn secondary" data-goto="triggere">← Triggere</button>
+      <button type="button" class="btn" data-goto="strategier">Neste: strategier →</button>
+    </div>
+  </div>
+
+  <!-- 3 STRATEGIER -->
+  <div class="panel" data-panel="strategier">
+    <h2 class="print-only">Mine strategier</h2>
+    <section class="primer no-print">
+      <h2>Steg 3: Hva vil du prøve?</h2>
+      <p>Velg gjerne bare noen få til å begynne med. Det du krysser av, kan du hente rett inn i planen i neste steg.</p>
+    </section>
+    <div id="list-strategier"></div>
+    <div class="next-row">
+      <button type="button" class="btn secondary" data-goto="utfordringer">← Utfordringer</button>
+      <button type="button" class="btn" data-goto="plan">Neste: min plan →</button>
+    </div>
+  </div>
+
+  <!-- 4 PLAN -->
+  <div class="panel" data-panel="plan">
+    <section class="primer">
+      <h2>Steg 4: Min plan for å unngå PEM</h2>
+      <p class="no-print">Én rad per trigger: hva som utløser, hva som gjør det vanskelig, og hva du vil gjøre. Under hvert felt kan du hente det du krysset av tidligere.</p>
+      <details class="topic no-print" style="margin-top:0.9rem;box-shadow:none;">
+        <summary>Se et eksempel <span class="sum-right"><span class="chevron">▸</span></span></summary>
+        <div class="topic-body">
+          <table class="example-table">
+            <thead><tr><th>Mine triggere for PEM</th><th>Mine utfordringer for å unngå PEM</th><th>Mine strategier</th></tr></thead>
+            <tbody>
+              <tr><td>Lange dager på jobb</td><td>Vil ikke virke lat overfor kollegene</td><td>Avtale faste pauser med leder.<br>Ingen avtaler kvelden etter lange dager.</td></tr>
+              <tr><td>Selskap og mye lyd</td><td>Redd for å bli glemt hvis jeg sier nei</td><td>Gå tidlig, med sluttid bestemt på forhånd.<br>Hvile dagen før og dagen etter.</td></tr>
+              <tr><td>Glemmer å spise og drikke</td><td>Merker ikke sult før det er for sent</td><td>Ha snacks og vannflaske i veska.<br>Påminnelse på mobilen.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <div id="planRows"></div>
+
+    <div class="plan-add" style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:1rem;">
+      <button type="button" class="btn secondary" id="addRow">+ Ny rad</button>
+      <button type="button" class="btn secondary" id="rowsFromTriggers">Lag rader fra triggerne jeg har krysset av</button>
+    </div>
+
+    <section class="primer">
+      <h2>Del med støttegruppen din</h2>
+      <div class="field">
+        <label for="support">Hvem er i støttegruppen min, og hva kan de hjelpe meg med?</label>
+        <textarea id="support" data-key="support" placeholder="For eksempel: Mamma (handling på torsdager), Kari (følge til legen) ..."></textarea>
+      </div>
+      <p class="muted-note">Bruk knappene nederst på siden for å skrive ut planen eller sende den på e-post.</p>
+    </section>
+
+    <div class="next-row">
+      <button type="button" class="btn secondary" data-goto="strategier">← Strategier</button>
+      <button type="button" class="btn" data-goto="kartlegging">Neste: kartlegging →</button>
+    </div>
+  </div>
+
+  <!-- 5 KARTLEGGING -->
+  <div class="panel" data-panel="kartlegging">
+    <section class="primer no-print">
+      <h2>Steg 5: Aktivitets- og symptommåling</h2>
+      <p>Fyll ut litt hver dag, gjerne om kvelden. Orker du ikke alt, holder det med de to feltene merket med stjerne: hvor aktiv dagen var totalt, og hvor sterke symptomene var.</p>
+      <details class="topic" style="margin-top:0.9rem;box-shadow:none;">
+        <summary>Slik fyller du ut <span class="sum-right"><span class="chevron">▸</span></span></summary>
+        <div class="topic-body">
+          <ul>
+            <li><strong>Aktivitet (0–10):</strong> 0 er nesten ingenting, 10 er det du klarte før du ble syk. Fysisk, mentalt og følelsesmessig kan vurderes hver for seg, og «helhetlig» er hele dagen samlet.</li>
+            <li><strong>Søvn:</strong> våknet du uthvilt? Ja eller nei.</li>
+            <li><strong>Symptomer (0–10):</strong> 0 er ingen plager, 10 er det verste du har kjent. Gi tall for morgen, dag og kveld. Bruk «Annet» til et symptom som er viktig for deg.</li>
+            <li><strong>PEM:</strong> ja hvis du hadde en tydelig forverring som gjorde hverdagen vanskeligere.</li>
+            <li><strong>Kommentar:</strong> et par stikkord om hva dagen inneholdt.</li>
+          </ul>
+        </div>
+      </details>
+      <p><strong>Symptomskala</strong></p>
+      <div class="scale-bar" aria-label="Symptomskala fra 0 til 10">
+        <div class="sv0"><strong>0</strong>Ingen</div>
+        <div class="sv1"><strong>1–3</strong>Mild</div>
+        <div class="sv4"><strong>4–6</strong>Moderat</div>
+        <div class="sv7"><strong>7–9</strong>Alvorlig</div>
+        <div class="sv10"><strong>10</strong>Verst</div>
+      </div>
+      <p class="muted-note" style="margin-top:0.2rem;">0 er ingen plage, og 10 er det verste du har opplevd av symptomet.</p>
+    </section>
+
+    <section class="primer">
+      <div class="week-nav">
+        <button type="button" class="btn secondary small no-print" id="prevWeek" aria-label="Forrige uke">‹ Forrige</button>
+        <div class="week-title"><strong id="weekTitle">Uke</strong><span id="weekRange"></span></div>
+        <button type="button" class="btn secondary small no-print" id="nextWeek" aria-label="Neste uke">Neste ›</button>
+      </div>
+      <div class="day-chips" id="dayChips"></div>
+      <div id="dayForm"></div>
+    </section>
+
+    <section class="primer">
+      <h2>Ukeoversikt</h2>
+      <div class="stat-grid">
+        <div class="stat-item"><strong id="st-days">-</strong>Dager logget</div>
+        <div class="stat-item"><strong id="st-act">-</strong>Snitt helhetlig aktivitet</div>
+        <div class="stat-item"><strong id="st-sym">-</strong>Snitt symptomtrykk</div>
+        <div class="stat-item"><strong id="st-pem">-</strong>Dager med PEM</div>
+      </div>
+      <div class="chart-wrap" id="chart"></div>
+      <div class="legend">
+        <span><i style="background:var(--accent);opacity:0.75"></i>Helhetlig aktivitetsnivå</span>
+        <span><i style="background:var(--push)"></i>Helhetlig symptomtrykk (snitt)</span>
+        <span><i style="background:var(--pem);border-radius:50%"></i>PEM / symptomøkning</span>
+      </div>
+      <p class="muted-note">PEM kommer ofte ikke med en gang, men 1 til 3 dager etter anstrengelsen. Se derfor etter topper i aktivitet <em>dagene før</em> en PEM-dag.</p>
+      <div class="table-scroll" id="overview"></div>
+      <div class="field" style="margin-top:1rem;">
+        <label for="weekReflection">Hva ser du denne uken? Noe du vil gjøre annerledes neste uke?</label>
+        <textarea id="weekReflection" placeholder="Skriv gjerne fritt her..."></textarea>
+      </div>
+    </section>
+
+    <div class="next-row">
+      <button type="button" class="btn secondary" data-goto="plan">← Min plan</button>
+      <span></span>
+    </div>
+  </div>
+
+  <section class="primer no-print" style="margin-top:1.5rem;">
+    <h2>Lagre, skriv ut eller send</h2>
+    <p class="muted-note">Du kan skrive ut plan og ukeskjema, sende alt fra din egen e-postapp, eller laste det ned som en tekstfil du tar med til timen. Hvis «Send på e-post» ikke åpner riktig på mobilen, bruk nedlastingen i stedet.</p>
+    <div class="send-buttons">
+      <button type="button" class="btn" id="sendEmail">Send på e-post</button>
+      <button type="button" class="btn secondary" id="downloadText">Last ned som tekstfil</button>
+      <button type="button" class="btn secondary" id="printPage">Skriv ut</button>
+      <button type="button" class="btn danger" id="resetAll">Nullstill alt</button>
+    </div>
+  </section>
+
+  <footer class="closing">
+    Planlegg for overskudd, ikke for å tømme deg.<br>
+    <strong>Vær snill med deg selv. Du trenger ikke gjøre det alene.</strong>
+  </footer>
+
+</div>
+
+<script>
+  var STORAGE_KEY = 'pem-verktoykasse-v2';
+  var RECIPIENT = 'silje.merete.binder@gmail.com';
+
+  var LISTS = {
+    triggere: {
+      customTitle: 'Egne triggere',
+      cats: [
+        { title: 'Kropp og bevegelse', items: [
+          ['For mye på én dag', '(jobb, husarbeid, ærender, barn)'],
+          ['For høyt tempo', ''],
+          ['Lenge stående eller oppreist', ''],
+          ['Høy puls', ''],
+          ['Varme, kulde eller brå temperaturskifter', ''],
+          ['Menstruasjon, infeksjon eller medisinske undersøkelser', '']
+        ]},
+        { title: 'Hode og konsentrasjon', items: [
+          ['Lange økter med skjerm, lesing eller jobb', ''],
+          ['Krevende oppgaver som tar mye fokus', ''],
+          ['Tankearbeid rett etter fysisk aktivitet', '']
+        ]},
+        { title: 'Følelser og sanser', items: [
+          ['Sorg, sjokk eller store endringer', ''],
+          ['Konflikter og krangel', ''],
+          ['Sterk glede eller spenning', ''],
+          ['Langvarig stress eller bekymring', ''],
+          ['Mye lyd, lys eller mange folk', '']
+        ]},
+        { title: 'Søvn, mat og drikke', items: [
+          ['Uregelmessig døgnrytme', ''],
+          ['For lite eller urolig søvn', ''],
+          ['Hoppet over måltider', ''],
+          ['For lite å drikke eller salt', '']
+        ]},
+        { title: 'Andre helseplager', items: [
+          ['Smerter', ''],
+          ['Mageplager', ''],
+          ['Nedstemthet eller angst', ''],
+          ['Ny medisin eller endret dose', ''],
+          ['Svimmelhet eller hjertebank når du reiser deg', '']
+        ]}
+      ]
+    },
+    utfordringer: {
+      customTitle: 'Egne utfordringer',
+      cats: [
+        { title: 'Vanskelig å kjenne grensene', items: [
+          ['Forverringen kommer først dagen(e) etter', ''],
+          ['Merker ikke at det er nok før det er for sent', ''],
+          ['Formen varierer mye fra dag til dag', '']
+        ]},
+        { title: 'Lite hjelp og avlastning', items: [
+          ['Ingen å fordele oppgaver på', ''],
+          ['Vanskelig å be om hjelp', ''],
+          ['Dårlig samvittighet overfor familien', '']
+        ]},
+        { title: 'Andre mennesker', items: [
+          ['Vil ikke virke syk eller lat', ''],
+          ['Redd for å gå glipp av ting', ''],
+          ['Vanskelig å forklare en usynlig sykdom', ''],
+          ['Mangler kontroll over når jeg kommer meg hjem', '']
+        ]},
+        { title: 'Motivasjon og psyke', items: [
+          ['Lei av å si nei til det som er gøy', ''],
+          ['Bekymring for fremtiden', ''],
+          ['Prøver å holde tritt med skole eller jobb', '']
+        ]},
+        { title: 'Økonomi og praktiske ting', items: [
+          ['Må jobbe for å klare meg økonomisk', ''],
+          ['Sunn mat, medisiner eller hjelp koster', ''],
+          ['Legetimer, resepter og medisiner tar mye energi', ''],
+          ['Reiser bryter rutinene', '']
+        ]}
+      ]
+    },
+    strategier: {
+      customTitle: 'Egne strategier',
+      cats: [
+        { title: 'Planlegging', items: [
+          ['Legg lista lavere enn du tror du klarer', ''],
+          ['Del opp oppgaver og legg inn pauser', ''],
+          ['Legg krevende ting til tidspunktet du har mest energi', ''],
+          ['Planlegg hviledager før og etter store hendelser', '']
+        ]},
+        { title: 'Aktivitetsavpasning', items: [
+          ['Bestem sluttid før du starter', ''],
+          ['Bruk alarm eller tidtaker', ''],
+          ['Stopp ved første tegn på at det blir for mye', ''],
+          ['Veksle mellom fysiske og mentale oppgaver', ''],
+          ['Kutt ut eller forenkle det som ikke er nødvendig', '']
+        ]},
+        { title: 'Kjenn mønstrene dine', items: [
+          ['Logg aktivitet og symptomer daglig', ''],
+          ['Bruk pulsklokke eller skritteller', ''],
+          ['Se gjennom uka sammen med noen du stoler på', '']
+        ]},
+        { title: 'Hjelp og støtte', items: [
+          ['Lag en liste over hvem som kan hjelpe med hva', ''],
+          ['Bruk hjemmetjenester, matlevering eller apotekutkjøring', ''],
+          ['Gi dem rundt deg informasjon om ME', ''],
+          ['Fordel hjelpen på flere personer', '']
+        ]},
+        { title: 'Mat, drikke og søvn', items: [
+          ['Spis små, faste måltider', ''],
+          ['Ha mat og drikke lett tilgjengelig', ''],
+          ['Drikk jevnt gjennom dagen', ''],
+          ['Hold fast på leggetid og stå-opp-tid', ''],
+          ['Mørkt, stille og svalt soverom', ''],
+          ['Spør fastlegen om henvisning til ernæringsfysiolog ved behov', '']
+        ]},
+        { title: 'Ro og psykisk helse', items: [
+          ['Pusteøvelser, avspenning eller rolig yoga', ''],
+          ['Planlegg noe lystbetont som ikke tapper deg', ''],
+          ['Ta kontakt med andre i samme situasjon', ''],
+          ['Få hjelp for angst eller nedstemthet', ''],
+          ['Vær raus med deg selv når forverringen kommer likevel', '']
+        ]},
+        { title: 'Andre helseplager', items: [
+          ['Få utredet og behandlet andre plager', '(søvn, smerter, hormoner, puls)'],
+          ['Ta opp svimmelhet ved oppreist stilling med legen', '']
+        ]}
+      ]
+    }
+  };
+
+  var DAYS = ['Man', 'Tirs', 'Ons', 'Tors', 'Fre', 'Lør', 'Søn'];
+  var DAYS_LONG = ['Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag', 'Søndag'];
+  var MONTHS = ['jan.', 'feb.', 'mars', 'apr.', 'mai', 'juni', 'juli', 'aug.', 'sep.', 'okt.', 'nov.', 'des.'];
+
+  var ROWS = [
+    { k: 'fys', label: 'Fysisk aktivitetsnivå', type: 'num' },
+    { k: 'men', label: 'Mentalt aktivitetsnivå', type: 'num' },
+    { k: 'fol', label: 'Følelsesmessig belastning', type: 'num' },
+    { k: 'hel', label: 'Helhetlig aktivitetsnivå', type: 'num', req: true },
+    { k: 'sovn', label: 'Oppfriskende søvn', hint: 'sist natt', type: 'yn', group: true },
+    { k: 'utm', label: 'Utmattelse', type: 'mdk', group: true },
+    { k: 'kva', label: 'Kvalme eller mage-/tarmproblemer', type: 'mdk' },
+    { k: 'hje', label: 'Hjernetåke', type: 'mdk' },
+    { k: 'ann', label: 'Annet', type: 'mdk', annet: true },
+    { k: 'sym', label: 'Helhetlig symptomtrykk', type: 'mdk', req: true },
+    { k: 'pem', label: 'PEM / symptomøkning', type: 'yn', group: true },
+    { k: 'kom', label: 'Kommentarer', hint: 'stikkord om dagen', type: 'text' }
+  ];
+
+  var state;
+  var currentTab = 'start';
+  var weekStart;   // Date, mandag
+  var currentDay = 0;
+
+  // ---------- lagring ----------
+  function emptyState() {
+    return { checks: {}, custom: { triggere: ['', '', ''], utfordringer: ['', '', ''], strategier: ['', '', ''] }, plan: [], support: '', weeks: {}, tab: 'start' };
+  }
+
+  function load() {
+    var s = null;
+    try { s = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch (e) { s = null; }
+    var base = emptyState();
+    if (!s || typeof s !== 'object') return base;
+    for (var k in base) if (s[k] === undefined) s[k] = base[k];
+    ['triggere', 'utfordringer', 'strategier'].forEach(function (sec) {
+      if (!Array.isArray(s.custom[sec])) s.custom[sec] = ['', '', ''];
+    });
+    return s;
+  }
+
+  function save() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  function esc(t) {
+    return String(t).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+
+  // ---------- sjekklister ----------
+  function itemId(sec, ci, ii) { return sec + '-' + ci + '-' + ii; }
+
+  function itemText(item) { return (item[0] + ' ' + item[1]).trim(); }
+
+  function checkedItems(sec) {
+    var out = [];
+    LISTS[sec].cats.forEach(function (cat, ci) {
+      cat.items.forEach(function (item, ii) {
+        if (state.checks[itemId(sec, ci, ii)]) out.push({ cat: cat.title, text: itemText(item) });
+      });
+    });
+    state.custom[sec].forEach(function (t) {
+      if (t && t.trim()) out.push({ cat: LISTS[sec].customTitle, text: t.trim() });
+    });
+    return out;
+  }
+
+  function renderList(sec) {
+    var host = document.getElementById('list-' + sec);
+    var html = '';
+    LISTS[sec].cats.forEach(function (cat, ci) {
+      html += '<details class="topic" data-cat="' + sec + '-' + ci + '"><summary>' + esc(cat.title) +
+        ' <span class="sum-right"><span class="count"></span><span class="chevron">▸</span></span></summary><div class="topic-body">';
+      cat.items.forEach(function (item, ii) {
+        var id = itemId(sec, ci, ii);
+        var on = !!state.checks[id];
+        html += '<label class="check-item' + (on ? ' checked' : '') + '"><input type="checkbox" data-check="' + id + '"' + (on ? ' checked' : '') + '>' +
+          '<span><span class="lead">' + esc(item[0]) + '</span> ' + esc(item[1]) + '</span></label>';
+      });
+      html += '</div></details>';
+    });
+    html += '<details class="topic" data-cat="' + sec + '-custom"><summary>' + esc(LISTS[sec].customTitle) +
+      ' <span class="sum-right"><span class="count"></span><span class="chevron">▸</span></span></summary><div class="topic-body custom-list" data-custom="' + sec + '">';
+    state.custom[sec].forEach(function (t, i) {
+      html += '<input type="text" data-custom-i="' + i + '" value="' + esc(t) + '" placeholder="Skriv ditt eget punkt ...">';
+    });
+    html += '<button type="button" class="link-button" data-add-custom="' + sec + '">+ Legg til linje</button></div></details>';
+    host.innerHTML = html;
+    updateCounts(sec);
+  }
+
+  function updateCounts(sec) {
+    var total = 0;
+    LISTS[sec].cats.forEach(function (cat, ci) {
+      var n = 0;
+      cat.items.forEach(function (item, ii) { if (state.checks[itemId(sec, ci, ii)]) n++; });
+      total += n;
+      var el = document.querySelector('[data-cat="' + sec + '-' + ci + '"] .count');
+      if (el) el.textContent = n ? n + ' valgt' : '';
+    });
+    var c = state.custom[sec].filter(function (t) { return t && t.trim(); }).length;
+    total += c;
+    var ce = document.querySelector('[data-cat="' + sec + '-custom"] .count');
+    if (ce) ce.textContent = c ? c + ' lagt til' : '';
+    document.getElementById('badge-' + sec).textContent = total ? total : '';
+  }
+
+  // ---------- plan ----------
+  var PLAN_COLS = [
+    { k: 't', label: 'Mine triggere for PEM', src: 'triggere', ph: 'Hva utløser PEM for deg?' },
+    { k: 'u', label: 'Mine utfordringer for å unngå PEM', src: 'utfordringer', ph: 'Hva gjør det vanskelig?' },
+    { k: 's', label: 'Mine strategier', src: 'strategier', ph: 'Hva vil du gjøre?' }
+  ];
+
+  function pickOptions(sec) {
+    var items = checkedItems(sec);
+    var html = '<option value="">' + (items.length ? '＋ Hent fra det du har krysset av ...' : '(kryss av i steg ' + ({ triggere: 1, utfordringer: 2, strategier: 3 })[sec] + ' for å hente herfra)') + '</option>';
+    items.forEach(function (it, i) {
+      html += '<option value="' + i + '">' + esc(it.text.length > 90 ? it.text.slice(0, 88) + '…' : it.text) + '</option>';
+    });
+    return html;
+  }
+
+  function renderPlan() {
+    if (!state.plan.length) state.plan.push({ t: '', u: '', s: '' });
+    var host = document.getElementById('planRows');
+    var html = '';
+    state.plan.forEach(function (row, ri) {
+      html += '<div class="plan-row" data-row="' + ri + '"><div class="plan-row-head"><strong>Trigger ' + (ri + 1) + '</strong>' +
+        '<button type="button" class="link-button remove-row" data-remove="' + ri + '">Fjern</button></div><div class="plan-cols">';
+      PLAN_COLS.forEach(function (col) {
+        var id = 'plan-' + ri + '-' + col.k;
+        html += '<div class="field"><label for="' + id + '">' + col.label + '</label>' +
+          '<textarea id="' + id + '" data-plan="' + ri + '" data-col="' + col.k + '" placeholder="' + col.ph + '">' + esc(row[col.k] || '') + '</textarea>' +
+          '<select class="pick" data-pick="' + ri + '" data-col="' + col.k + '" data-src="' + col.src + '" aria-label="Hent fra avkrysning">' + pickOptions(col.src) + '</select></div>';
+      });
+      html += '</div></div>';
+    });
+    host.innerHTML = html;
+  }
+
+  // ---------- kartlegging ----------
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function iso(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+
+  function mondayOf(d) {
+    var x = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    var wd = (x.getDay() + 6) % 7;
+    x.setDate(x.getDate() - wd);
+    return x;
+  }
+
+  function addDays(d, n) { var x = new Date(d); x.setDate(x.getDate() + n); return x; }
+
+  function isoWeek(d) {
+    var t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    var day = t.getUTCDay() || 7;
+    t.setUTCDate(t.getUTCDate() + 4 - day);
+    var y0 = new Date(Date.UTC(t.getUTCFullYear(), 0, 1));
+    return Math.ceil(((t - y0) / 86400000 + 1) / 7);
+  }
+
+  function fmtShort(d) { return d.getDate() + '. ' + MONTHS[d.getMonth()]; }
+
+  function weekKey() { return iso(weekStart); }
+
+  function weekData(create) {
+    var k = weekKey();
+    if (!state.weeks[k] && create) state.weeks[k] = { annet: '', refl: '', days: [{}, {}, {}, {}, {}, {}, {}] };
+    return state.weeks[k];
+  }
+
+  function dayData(i, create) {
+    var w = weekData(create);
+    return w ? w.days[i] : {};
+  }
+
+  function sevClass(v) {
+    if (v === '' || v === undefined || v === null) return '';
+    v = +v;
+    if (v === 0) return 'sv0';
+    if (v <= 3) return 'sv1';
+    if (v <= 6) return 'sv4';
+    if (v <= 9) return 'sv7';
+    return 'sv10';
+  }
+
+  function numSelect(key, val, isSym, extraClass) {
+    var html = '<select class="num ' + (extraClass || '') + ' ' + (isSym ? sevClass(val) : '') + '" data-f="' + key + '"' + (isSym ? ' data-sym="1"' : '') + '><option value="">–</option>';
+    for (var i = 0; i <= 10; i++) {
+      html += '<option value="' + i + '"' + (String(val) === String(i) ? ' selected' : '') + '>' + i + '</option>';
+    }
+    return html + '</select>';
+  }
+
+  function dayHasData(d) {
+    if (!d) return false;
+    for (var k in d) if (d[k] !== '' && d[k] !== undefined) return true;
+    return false;
+  }
+
+  function avgMdk(d, k) {
+    var s = 0, n = 0;
+    ['m', 'd', 'k'].forEach(function (p) {
+      var v = d[k + '_' + p];
+      if (v !== '' && v !== undefined) { s += +v; n++; }
+    });
+    return n ? s / n : null;
+  }
+
+  function renderWeekHeader() {
+    var end = addDays(weekStart, 6);
+    document.getElementById('weekTitle').textContent = 'Uke ' + isoWeek(weekStart);
+    document.getElementById('weekRange').textContent = fmtShort(weekStart) + ' – ' + fmtShort(end) + ' ' + end.getFullYear();
+    var w = weekData(false);
+    document.getElementById('weekReflection').value = w ? (w.refl || '') : '';
+  }
+
+  function renderChips() {
+    var w = weekData(false);
+    var today = iso(new Date());
+    var html = '';
+    for (var i = 0; i < 7; i++) {
+      var d = w ? w.days[i] : {};
+      var date = addDays(weekStart, i);
+      html += '<button type="button" data-day="' + i + '" aria-pressed="' + (i === currentDay) + '" class="' + (dayHasData(d) ? 'filled' : '') + '"' +
+        (iso(date) === today ? ' style="font-weight:700"' : '') + '>' +
+        (d && d.pem === 'ja' ? '<span class="pem-dot" title="PEM"></span>' : '') +
+        DAYS[i] + '<small>' + date.getDate() + '.' + (date.getMonth() + 1) + '</small></button>';
+    }
+    document.getElementById('dayChips').innerHTML = html;
+  }
+
+  function renderDayForm() {
+    var d = dayData(currentDay, false) || {};
+    var w = weekData(false);
+    var date = addDays(weekStart, currentDay);
+    var html = '<h3 style="margin:1rem 0 0.3rem;color:var(--accent-dark);font-size:1.05rem;">' + DAYS_LONG[currentDay] + ' ' + fmtShort(date) + '</h3>';
+    ROWS.forEach(function (r) {
+      html += '<div class="log-row' + (r.group ? ' group-start' : '') + '"><div class="lbl">';
+      if (r.annet) {
+        html += 'Annet symptom<input type="text" class="annet-name" id="annetName" placeholder="Hvilket? (f.eks. svimmelhet)" value="' + esc(w ? w.annet || '' : '') + '">';
+      } else {
+        html += esc(r.label) + (r.req ? ' <span class="req" title="Nødvendig">*</span>' : '');
+        if (r.type === 'num') html += '<small>0–10</small>';
+        if (r.hint) html += '<small>' + esc(r.hint) + '</small>';
+      }
+      html += '</div><div>';
+      if (r.type === 'num') {
+        html += numSelect(r.k, d[r.k], false, 'single');
+      } else if (r.type === 'mdk') {
+        html += '<div class="mdk">';
+        [['m', 'Morgen'], ['d', 'Dag'], ['k', 'Kveld']].forEach(function (p) {
+          html += '<div><label>' + p[1] + '</label>' + numSelect(r.k + '_' + p[0], d[r.k + '_' + p[0]], true) + '</div>';
+        });
+        html += '</div>';
+      } else if (r.type === 'yn') {
+        html += '<div class="yn' + (r.k === 'pem' ? ' pem' : '') + '" data-yn="' + r.k + '">' +
+          '<button type="button" data-v="ja" aria-pressed="' + (d[r.k] === 'ja') + '">Ja</button>' +
+          '<button type="button" data-v="nei" aria-pressed="' + (d[r.k] === 'nei') + '">Nei</button></div>';
+      } else {
+        html += '<textarea data-f="' + r.k + '" placeholder="F.eks. tre timer med handling">' + esc(d[r.k] || '') + '</textarea>';
+      }
+      html += '</div></div>';
+    });
+    html += '<p class="muted-note" style="margin-top:0.6rem;"><span style="color:var(--push);font-weight:600">*</span> Fyll i hvert fall ut disse to hvis du ikke orker alt.</p>';
+    html += '<div class="next-row no-print" style="margin-top:0.5rem;">' +
+      (currentDay > 0 ? '<button type="button" class="btn secondary small" data-day-step="-1">‹ ' + DAYS_LONG[currentDay - 1] + '</button>' : '<span></span>') +
+      (currentDay < 6 ? '<button type="button" class="btn secondary small" data-day-step="1">' + DAYS_LONG[currentDay + 1] + ' ›</button>' : '<span></span>') + '</div>';
+    document.getElementById('dayForm').innerHTML = html;
+  }
+
+  function cellVal(v) { return (v === '' || v === undefined) ? '' : v; }
+
+  function renderOverview() {
+    var w = weekData(false);
+    var days = w ? w.days : [{}, {}, {}, {}, {}, {}, {}];
+    var html = '<table class="overview"><thead><tr><th></th>';
+    for (var i = 0; i < 7; i++) html += '<th>' + DAYS[i] + '<br><small>' + addDays(weekStart, i).getDate() + '.' + (addDays(weekStart, i).getMonth() + 1) + '</small></th>';
+    html += '</tr></thead><tbody>';
+    ROWS.forEach(function (r) {
+      var label = r.annet ? ('Annet' + (w && w.annet ? ': ' + w.annet : '')) : r.label;
+      html += '<tr><td class="rl">' + esc(label) + (r.type === 'mdk' ? ' <small style="font-weight:400;color:var(--muted)">M/D/K</small>' : '') + '</td>';
+      days.forEach(function (d) {
+        if (r.type === 'num') {
+          html += '<td>' + cellVal(d[r.k]) + '</td>';
+        } else if (r.type === 'mdk') {
+          var vals = ['m', 'd', 'k'].map(function (p) { return cellVal(d[r.k + '_' + p]); });
+          var nums = vals.filter(function (v) { return v !== ''; }).map(Number);
+          var mx = nums.length ? Math.max.apply(null, nums) : '';
+          html += '<td class="' + sevClass(mx) + '">' + (nums.length ? vals.map(function (v) { return v === '' ? '–' : v; }).join('/') : '') + '</td>';
+        } else if (r.type === 'yn') {
+          var v = d[r.k];
+          html += '<td class="' + (r.k === 'pem' && v === 'ja' ? 'pem-yes' : '') + '">' + (v === 'ja' ? 'Ja' : v === 'nei' ? 'Nei' : '') + '</td>';
+        } else {
+          html += '<td class="cm">' + esc(d[r.k] || '') + '</td>';
+        }
+      });
+      html += '</tr>';
+    });
+    html += '</tbody></table>';
+    document.getElementById('overview').innerHTML = html;
+
+    // statistikk
+    var nDays = 0, aSum = 0, aN = 0, sSum = 0, sN = 0, pem = 0;
+    days.forEach(function (d) {
+      if (dayHasData(d)) nDays++;
+      if (d.hel !== '' && d.hel !== undefined) { aSum += +d.hel; aN++; }
+      var s = avgMdk(d, 'sym');
+      if (s !== null) { sSum += s; sN++; }
+      if (d.pem === 'ja') pem++;
+    });
+    document.getElementById('st-days').textContent = nDays + ' / 7';
+    document.getElementById('st-act').textContent = aN ? (aSum / aN).toFixed(1) : '-';
+    document.getElementById('st-sym').textContent = sN ? (sSum / sN).toFixed(1) : '-';
+    document.getElementById('st-pem').textContent = pem;
+
+    renderChart(days);
+  }
+
+  function renderChart(days) {
+    var W = 700, H = 230, L = 34, R = 12, T = 22, B = 34;
+    var cw = (W - L - R) / 7;
+    var y = function (v) { return T + (H - T - B) * (1 - v / 10); };
+    var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Diagram over aktivitet, symptomtrykk og PEM denne uken">';
+    [0, 2, 4, 6, 8, 10].forEach(function (g) {
+      svg += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(g) + '" y2="' + y(g) + '" stroke="#cfe3e8" stroke-width="1"/>' +
+        '<text x="' + (L - 8) + '" y="' + (y(g) + 4) + '" font-size="11" fill="#4f7080" text-anchor="end">' + g + '</text>';
+    });
+    var pts = [];
+    days.forEach(function (d, i) {
+      var cx = L + cw * i + cw / 2;
+      if (d.hel !== '' && d.hel !== undefined) {
+        var bw = cw * 0.46;
+        svg += '<rect x="' + (cx - bw / 2) + '" y="' + y(+d.hel) + '" width="' + bw + '" height="' + (y(0) - y(+d.hel)) + '" rx="3" fill="#1f7a8c" opacity="0.75"><title>Aktivitet ' + d.hel + '</title></rect>';
+      }
+      var s = avgMdk(d, 'sym');
+      if (s !== null) pts.push([cx, y(s), s]);
+      if (d.pem === 'ja') {
+        svg += '<circle cx="' + cx + '" cy="' + (T - 9) + '" r="6" fill="#b5473a"><title>PEM</title></circle>';
+      }
+      svg += '<text x="' + cx + '" y="' + (H - 12) + '" font-size="12" fill="#145868" text-anchor="middle">' + DAYS[i] + '</text>';
+    });
+    if (pts.length > 1) {
+      svg += '<polyline fill="none" stroke="#c9823f" stroke-width="2.5" stroke-linejoin="round" points="' + pts.map(function (p) { return p[0] + ',' + p[1]; }).join(' ') + '"/>';
+    }
+    pts.forEach(function (p) {
+      svg += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="4.5" fill="#fff" stroke="#c9823f" stroke-width="2.5"><title>Symptomtrykk ' + p[2].toFixed(1) + '</title></circle>';
+    });
+    svg += '</svg>';
+    document.getElementById('chart').innerHTML = svg;
+  }
+
+  function refreshWeek(full) {
+    renderWeekHeader();
+    renderChips();
+    if (full) renderDayForm();
+    renderOverview();
+  }
+
+  function setField(key, val) {
+    var d = dayData(currentDay, true);
+    d[key] = val;
+    save();
+  }
+
+  // ---------- faner ----------
+  function showTab(tab, scroll) {
+    currentTab = tab;
+    state.tab = tab;
+    save();
+    document.querySelectorAll('.tabs button').forEach(function (b) {
+      b.setAttribute('aria-selected', b.getAttribute('data-tab') === tab ? 'true' : 'false');
+    });
+    document.querySelectorAll('.panel').forEach(function (p) {
+      p.classList.toggle('active', p.getAttribute('data-panel') === tab);
+    });
+    if (tab === 'plan') renderPlan();
+    if (scroll) {
+      var tabs = document.getElementById('tabs');
+      window.scrollTo({ top: tabs.getBoundingClientRect().top + window.pageYOffset - 4, behavior: 'smooth' });
+    }
+    var active = document.querySelector('.tabs button[data-tab="' + tab + '"]');
+    if (active && active.scrollIntoView) active.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  }
+
+  // ---------- tekst ----------
+  function buildText() {
+    var L = [];
+    L.push('Verktøykasse for å unngå PEM');
+    L.push('');
+    [['triggere', 'MINE TRIGGERE FOR PEM'], ['utfordringer', 'MINE UTFORDRINGER FOR Å UNNGÅ PEM'], ['strategier', 'MINE STRATEGIER']].forEach(function (p) {
+      L.push(p[1]);
+      var items = checkedItems(p[0]);
+      if (!items.length) L.push('  -');
+      var last = '';
+      items.forEach(function (it) {
+        if (it.cat !== last) { L.push('  ' + it.cat + ':'); last = it.cat; }
+        L.push('   - ' + it.text);
+      });
+      L.push('');
+    });
+    L.push('MIN PLAN FOR Å UNNGÅ PEM');
+    var any = false;
+    state.plan.forEach(function (r, i) {
+      if (!(r.t || r.u || r.s)) return;
+      any = true;
+      L.push('  ' + (i + 1) + ') Trigger: ' + (r.t || '-').replace(/\n/g, '; '));
+      L.push('     Utfordring: ' + (r.u || '-').replace(/\n/g, '; '));
+      L.push('     Strategier: ' + (r.s || '-').replace(/\n/g, '; '));
+    });
+    if (!any) L.push('  -');
+    L.push('');
+    L.push('Støttegruppe: ' + (state.support || '-'));
+    L.push('');
+
+    var keys = Object.keys(state.weeks).sort();
+    keys.forEach(function (k) {
+      var w = state.weeks[k];
+      if (!w.days.some(dayHasData) && !w.refl) return;
+      var ws = new Date(k + 'T00:00:00');
+      L.push('KARTLEGGING UKE ' + isoWeek(ws) + ' (' + fmtShort(ws) + ' – ' + fmtShort(addDays(ws, 6)) + ' ' + addDays(ws, 6).getFullYear() + ')');
+      w.days.forEach(function (d, i) {
+        if (!dayHasData(d)) return;
+        var parts = [];
+        ROWS.forEach(function (r) {
+          var name = r.annet ? ('Annet' + (w.annet ? ' (' + w.annet + ')' : '')) : r.label;
+          if (r.type === 'mdk') {
+            var vals = ['m', 'd', 'k'].map(function (p) { var v = d[r.k + '_' + p]; return (v === '' || v === undefined) ? '-' : v; });
+            if (vals.join('') !== '---') parts.push(name + ' M/D/K: ' + vals.join('/'));
+          } else if (d[r.k] !== '' && d[r.k] !== undefined) {
+            parts.push(name + ': ' + d[r.k]);
+          }
+        });
+        L.push('  ' + DAYS_LONG[i] + ' ' + fmtShort(addDays(ws, i)) + ': ' + parts.join(' | '));
+      });
+      if (w.refl) L.push('  Refleksjon: ' + w.refl);
+      L.push('');
+    });
+    return L.join('\n');
+  }
+
+  // ---------- oppstart ----------
+  document.addEventListener('DOMContentLoaded', function () {
+    state = load();
+    weekStart = mondayOf(new Date());
+    currentDay = (new Date().getDay() + 6) % 7;
+
+    ['triggere', 'utfordringer', 'strategier'].forEach(renderList);
+    document.getElementById('support').value = state.support || '';
+    renderPlan();
+    refreshWeek(true);
+    showTab(state.tab || 'start', false);
+
+    document.getElementById('tabs').addEventListener('click', function (e) {
+      var b = e.target.closest('button[data-tab]');
+      if (b) showTab(b.getAttribute('data-tab'), false);
+    });
+
+    document.body.addEventListener('click', function (e) {
+      var g = e.target.closest('[data-goto]');
+      if (g) { showTab(g.getAttribute('data-goto'), true); return; }
+
+      var add = e.target.closest('[data-add-custom]');
+      if (add) {
+        var sec = add.getAttribute('data-add-custom');
+        state.custom[sec].push('');
+        save();
+        renderList(sec);
+        var det = document.querySelector('[data-cat="' + sec + '-custom"]');
+        det.open = true;
+        var inputs = det.querySelectorAll('input');
+        inputs[inputs.length - 1].focus();
+        return;
+      }
+
+      var rm = e.target.closest('[data-remove]');
+      if (rm) {
+        var ri = +rm.getAttribute('data-remove');
+        var r = state.plan[ri];
+        if ((r.t || r.u || r.s) && !confirm('Fjerne denne raden fra planen?')) return;
+        state.plan.splice(ri, 1);
+        save();
+        renderPlan();
+        return;
+      }
+
+      var dayBtn = e.target.closest('#dayChips button[data-day]');
+      if (dayBtn) { currentDay = +dayBtn.getAttribute('data-day'); renderChips(); renderDayForm(); return; }
+
+      var step = e.target.closest('[data-day-step]');
+      if (step) { currentDay += +step.getAttribute('data-day-step'); renderChips(); renderDayForm(); return; }
+
+      var yn = e.target.closest('.yn button');
+      if (yn) {
+        var key = yn.parentNode.getAttribute('data-yn');
+        var v = yn.getAttribute('data-v');
+        var d = dayData(currentDay, true);
+        setField(key, d[key] === v ? '' : v);
+        yn.parentNode.querySelectorAll('button').forEach(function (b) {
+          b.setAttribute('aria-pressed', b.getAttribute('data-v') === d[key] ? 'true' : 'false');
+        });
+        renderChips();
+        renderOverview();
+      }
+    });
+
+    document.body.addEventListener('change', function (e) {
+      var t = e.target;
+      if (t.hasAttribute('data-check')) {
+        var id = t.getAttribute('data-check');
+        if (t.checked) state.checks[id] = true; else delete state.checks[id];
+        t.closest('.check-item').classList.toggle('checked', t.checked);
+        save();
+        updateCounts(id.split('-')[0]);
+        return;
+      }
+      if (t.hasAttribute('data-pick')) {
+        if (t.value === '') return;
+        var ri = +t.getAttribute('data-pick');
+        var col = t.getAttribute('data-col');
+        var item = checkedItems(t.getAttribute('data-src'))[+t.value];
+        var cur = state.plan[ri][col] || '';
+        state.plan[ri][col] = cur ? cur.replace(/\s+$/, '') + '\n' + item.text : item.text;
+        save();
+        document.getElementById('plan-' + ri + '-' + col).value = state.plan[ri][col];
+        t.value = '';
+        return;
+      }
+      if (t.matches('#dayForm select[data-f]')) {
+        setField(t.getAttribute('data-f'), t.value);
+        if (t.hasAttribute('data-sym')) {
+          t.classList.remove('sv0', 'sv1', 'sv4', 'sv7', 'sv10');
+          var c = sevClass(t.value);
+          if (c) t.classList.add(c);
+        }
+        renderChips();
+        renderOverview();
+      }
+    });
+
+    document.body.addEventListener('input', function (e) {
+      var t = e.target;
+      if (t.hasAttribute('data-custom-i')) {
+        var sec = t.closest('[data-custom]').getAttribute('data-custom');
+        state.custom[sec][+t.getAttribute('data-custom-i')] = t.value;
+        save();
+        updateCounts(sec);
+        return;
+      }
+      if (t.hasAttribute('data-plan')) {
+        state.plan[+t.getAttribute('data-plan')][t.getAttribute('data-col')] = t.value;
+        save();
+        return;
+      }
+      if (t.id === 'support') { state.support = t.value; save(); return; }
+      if (t.id === 'annetName') { weekData(true).annet = t.value; save(); renderOverview(); return; }
+      if (t.id === 'weekReflection') { weekData(true).refl = t.value; save(); return; }
+      if (t.matches('#dayForm textarea[data-f]')) {
+        setField(t.getAttribute('data-f'), t.value);
+        renderChips();
+        renderOverview();
+      }
+    });
+
+    document.getElementById('addRow').addEventListener('click', function () {
+      state.plan.push({ t: '', u: '', s: '' });
+      save();
+      renderPlan();
+      var rows = document.querySelectorAll('.plan-row');
+      rows[rows.length - 1].querySelector('textarea').focus();
+    });
+
+    document.getElementById('rowsFromTriggers').addEventListener('click', function () {
+      var trig = checkedItems('triggere');
+      if (!trig.length) { alert('Du har ikke krysset av for noen triggere ennå. Gå til steg 1 først.'); return; }
+      var existing = state.plan.map(function (r) { return (r.t || '').trim(); });
+      state.plan = state.plan.filter(function (r) { return r.t || r.u || r.s; });
+      var added = 0;
+      trig.forEach(function (it) {
+        if (existing.indexOf(it.text) === -1) { state.plan.push({ t: it.text, u: '', s: '' }); added++; }
+      });
+      save();
+      renderPlan();
+      if (!added) alert('Alle triggerne dine ligger allerede i planen.');
+    });
+
+    document.getElementById('prevWeek').addEventListener('click', function () {
+      weekStart = addDays(weekStart, -7); currentDay = 0; refreshWeek(true);
+    });
+    document.getElementById('nextWeek').addEventListener('click', function () {
+      weekStart = addDays(weekStart, 7); currentDay = 0; refreshWeek(true);
+    });
+
+    document.getElementById('sendEmail').addEventListener('click', function () {
+      window.location.href = 'mailto:' + RECIPIENT + '?subject=' + encodeURIComponent('Verktøykasse for å unngå PEM') + '&body=' + encodeURIComponent(buildText());
+    });
+
+    document.getElementById('downloadText').addEventListener('click', function () {
+      var blob = new Blob([buildText()], { type: 'text/plain;charset=utf-8' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'pem-verktoykasse.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+
+    var openedForPrint = [];
+    window.addEventListener('beforeprint', function () {
+      openedForPrint = [];
+      document.querySelectorAll('[data-panel="triggere"] details, [data-panel="utfordringer"] details, [data-panel="strategier"] details').forEach(function (d) {
+        if (!d.open) { d.open = true; openedForPrint.push(d); }
+      });
+    });
+    window.addEventListener('afterprint', function () {
+      openedForPrint.forEach(function (d) { d.open = false; });
+    });
+    document.getElementById('printPage').addEventListener('click', function () { window.print(); });
+
+    document.getElementById('resetAll').addEventListener('click', function () {
+      if (!confirm('Nullstille alt du har krysset av, planen og alle ukeskjemaene? Dette kan ikke angres.')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    });
+  });
+</script>
+
+</body>
+</html>
