@@ -372,6 +372,19 @@
   .equip-button:hover { background: var(--accent-dark); }
   .equip-button:focus-visible { outline: 2px solid var(--accent-dark); outline-offset: 2px; }
 
+  .card .source {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-top: 0.75rem;
+  }
+
+  .card .source a, .sources a { color: var(--accent-dark); font-weight: 600; }
+
+  .level-switch button { font-size: 0.92rem; padding: 0.65rem 0.4rem; }
+
+  .sources { margin: 0; padding-left: 1.1rem; font-size: 0.9rem; }
+  .sources li { margin: 0 0 0.6rem; }
+
   [hidden] { display: none !important; }
 
   @media (max-width: 420px) {
@@ -401,28 +414,72 @@
 <div class="wrap">
 
   <section class="card">
-    <h2>Uka i korte trekk</h2>
-    <ul class="week">
-      <li><span class="day">Mandag</span><span>Styrke 45–60 min <span class="tag strength">Styrke</span><span class="detail">Hele kroppen: bein, hofte, press, trekk og kjerne</span></span></li>
-      <li><span class="day">Tirsdag</span><span>Rolig aktivitet <span class="tag easy">Rolig</span><span class="detail">30–60 min rask gange, lett sykling eller annet i rolig tempo</span></span></li>
-      <li><span class="day">Onsdag</span><span>Kondisjon <span class="tag hard">Kondisjon</span><span class="detail">25–40 min moderat, eller intervaller som 4 × 3 min</span></span></li>
-      <li><span class="day">Torsdag</span><span>Restitusjon <span class="tag easy">Rolig</span><span class="detail">Hvile, lett gåtur, mobilitet eller yoga</span></span></li>
-      <li><span class="day">Fredag</span><span>Styrke 45–60 min <span class="tag strength">Styrke</span><span class="detail">Hele kroppen, gjerne andre varianter enn mandag</span></span></li>
-      <li><span class="day">Lørdag</span><span>Valgfri aktivitet <span class="tag easy">Lyst</span><span class="detail">Tur, løping, sykling, ski, padel, svømming eller noe du liker</span></span></li>
-      <li><span class="day">Søndag</span><span>Rolig dag <span class="tag easy">Rolig</span><span class="detail">Hvile eller lett aktivitet</span></span></li>
-    </ul>
+    <h2>Hvor starter du?</h2>
+    <p class="desc">Ukeplanen endrer seg litt etter hvor du er nå. Velg det som passer best, og gå videre til neste nivå når kroppen er klar for det.</p>
+    <div class="place-switch level-switch" role="group" aria-label="Velg nivå">
+      <button type="button" data-level="1" aria-pressed="true">Helt utrent<span>eller etter opphold</span></button>
+      <button type="button" data-level="2" aria-pressed="false">Kommet i gang<span>etter noen uker</span></button>
+      <button type="button" data-level="3" aria-pressed="false">Trener jevnlig<span>og restituerer godt</span></button>
+    </div>
+
+    <div data-level-panel="1">
+      <p>Du trenger ikke starte med hele ukeplanen med én gang. Kroppen tilpasser seg best når belastningen økes gradvis.</p>
+      <div class="meta">
+        <strong>Et godt sted å begynne:</strong> 1–2 helkroppsøkter i uka, 1–2 sett per øvelse, rolige gåturer eller annen aktivitet du liker, og minst én hviledag mellom styrkeøktene.
+      </div>
+      <ul class="week">
+        <li><span class="day">Mandag</span><span>Styrke 30–45 min <span class="tag strength">Styrke</span><span class="detail">Økt A, 1–2 sett per øvelse</span></span></li>
+        <li><span class="day">Tirsdag</span><span>Gåtur <span class="tag easy">Rolig</span><span class="detail">20–40 min i rolig tempo</span></span></li>
+        <li><span class="day">Onsdag</span><span>Hvile <span class="tag easy">Rolig</span><span class="detail">Eller lett aktivitet</span></span></li>
+        <li><span class="day">Torsdag</span><span>Styrke, hvis det kjennes greit <span class="tag strength">Styrke</span><span class="detail">Økt B, 1–2 sett per øvelse</span></span></li>
+        <li><span class="day">Fredag</span><span>Gåtur <span class="tag easy">Rolig</span><span class="detail">20–40 min</span></span></li>
+        <li><span class="day">Lørdag</span><span>Aktivitet du liker <span class="tag easy">Lyst</span><span class="detail">Tur, sykling, svømming eller annet i rolig tempo</span></span></li>
+        <li><span class="day">Søndag</span><span>Hvile <span class="tag easy">Rolig</span><span class="detail">Hvile eller lett aktivitet</span></span></li>
+      </ul>
+      <p>Etter noen uker kan du gradvis øke til to faste styrkeøkter, og deretter legge til mer kondisjonstrening eller en tredje styrkeøkt dersom kroppen responderer godt.</p>
+      <p><strong>Målet i starten er ikke å gjøre mest mulig, men å etablere en vane du klarer å fortsette med.</strong></p>
+      <p class="source">Forskning: <a href="https://journals.lww.com/acsm-msse/fulltext/2026/04000/american_college_of_sports_medicine_position.21.aspx" target="_blank" rel="noopener">ACSM 2026</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/34822137/" target="_blank" rel="noopener">Minimal-dose styrketrening (Fyfe mfl. 2022)</a></p>
+    </div>
+
+    <div data-level-panel="2" hidden>
+      <p>Nå har du to faste styrkeøkter i uka og legger til én rolig kondisjonsøkt. Fortsett å øke vektene litt når øvelsene blir lette, før du legger til flere økter.</p>
+      <ul class="week">
+        <li><span class="day">Mandag</span><span>Styrke 40–50 min <span class="tag strength">Styrke</span><span class="detail">Økt A, 2 sett per øvelse</span></span></li>
+        <li><span class="day">Tirsdag</span><span>Rolig aktivitet <span class="tag easy">Rolig</span><span class="detail">30–45 min rask gange eller lett sykling</span></span></li>
+        <li><span class="day">Onsdag</span><span>Kondisjon <span class="tag hard">Kondisjon</span><span class="detail">25–30 min moderat tempo</span></span></li>
+        <li><span class="day">Torsdag</span><span>Hvile <span class="tag easy">Rolig</span><span class="detail">Lett gåtur, mobilitet eller yoga</span></span></li>
+        <li><span class="day">Fredag</span><span>Styrke 40–50 min <span class="tag strength">Styrke</span><span class="detail">Økt B, 2 sett per øvelse</span></span></li>
+        <li><span class="day">Lørdag</span><span>Aktivitet du liker <span class="tag easy">Lyst</span><span class="detail">Tur, sykling, ski, padel eller annet</span></span></li>
+        <li><span class="day">Søndag</span><span>Hvile <span class="tag easy">Rolig</span><span class="detail">Hvile eller lett aktivitet</span></span></li>
+      </ul>
+    </div>
+
+    <div data-level-panel="3" hidden>
+      <p>Har du trent jevnlig en stund og restituerer godt, kan uka se slik ut. Kondisjonsøkta kan nå også være intervaller.</p>
+      <ul class="week">
+        <li><span class="day">Mandag</span><span>Styrke 45–60 min <span class="tag strength">Styrke</span><span class="detail">Økt A, 2–3 sett per øvelse</span></span></li>
+        <li><span class="day">Tirsdag</span><span>Rolig aktivitet <span class="tag easy">Rolig</span><span class="detail">30–60 min rask gange, lett sykling eller annet i rolig tempo</span></span></li>
+        <li><span class="day">Onsdag</span><span>Kondisjon <span class="tag hard">Kondisjon</span><span class="detail">25–40 min moderat, eller intervaller som 4 × 3 min</span></span></li>
+        <li><span class="day">Torsdag</span><span>Restitusjon <span class="tag easy">Rolig</span><span class="detail">Hvile, lett gåtur, mobilitet eller yoga</span></span></li>
+        <li><span class="day">Fredag</span><span>Styrke 45–60 min <span class="tag strength">Styrke</span><span class="detail">Økt B, 2–3 sett per øvelse</span></span></li>
+        <li><span class="day">Lørdag</span><span>Valgfri aktivitet <span class="tag easy">Lyst</span><span class="detail">Tur, løping, sykling, ski, padel, svømming eller noe du liker</span></span></li>
+        <li><span class="day">Søndag</span><span>Rolig dag <span class="tag easy">Rolig</span><span class="detail">Hvile, eller en tredje styrkeøkt hvis du restituerer godt</span></span></li>
+      </ul>
+    </div>
   </section>
 
   <section class="card message-card">
-    <h2>Et godt utgangspunkt</h2>
-    <p>For mange menn fra 30-årene og videre fungerer denne strukturen godt:</p>
+    <h2>Når du har kommet litt i gang</h2>
+    <p>For mange menn fra 30-årene og videre fungerer denne strukturen godt på sikt:</p>
     <ul class="plain-list">
       <li><strong>2–3 styrkeøkter</strong> i uka</li>
       <li><strong>1–2 kondisjonsøkter</strong></li>
       <li><strong>Regelmessig hverdagsaktivitet</strong></li>
       <li><strong>Nok restitusjon</strong> mellom øktene</li>
     </ul>
-    <p>To gode helkroppsøkter i uka er et godt minimum. Restituerer du godt og vil trene mer, kan du legge til en tredje styrkeøkt eller en ekstra kondisjonsøkt.</p>
+    <p>Verdens helseorganisasjon (WHO) anbefaler minst to dager med muskelstyrkende aktivitet og 150–300 minutter moderat aktivitet i uka. Samtidig er noe aktivitet bedre enn ingen, og det er helt greit å starte med små mengder og øke gradvis.</p>
+    <p>Store befolkningsstudier tyder på at allerede 30–60 minutter styrketrening i uka henger sammen med lavere risiko for hjerte- og karsykdom, diabetes og tidlig død.</p>
+    <p class="source">Forskning: <a href="https://www.who.int/publications/i/item/9789240015128" target="_blank" rel="noopener">WHO-retningslinjene 2020</a> · <a href="https://bjsm.bmj.com/content/56/13/755" target="_blank" rel="noopener">Styrketrening og helse (Momma mfl. 2022)</a></p>
   </section>
 
   <section class="card">
@@ -430,6 +487,9 @@
     <p class="desc">Fra 30-årene blir det gradvis viktigere å ta vare på muskelstyrke og muskelmasse. Økt A og økt B trener de samme grunnbevegelsene med ulike varianter, så kroppen får litt variasjon gjennom uka.</p>
     <div class="meta">
       <strong>Oppvarming, 5–10 min:</strong> litt rolig kondisjon (sykkel, rask gange eller trapp), og deretter et lett oppvarmingssett av de første øvelsene før du tar i.
+    </div>
+    <div class="meta">
+      <strong>Antall sett:</strong> helt utrent 1–2 sett per øvelse, kommet i gang 2 sett, trener jevnlig 2–3 sett. Hvil 1,5–2 minutter mellom settene.
     </div>
     <div class="place-switch" role="group" aria-label="Velg hvor du trener">
       <button type="button" data-place="gym" aria-pressed="true">Treningssenter<span>Stang, apparater og manualer</span></button>
@@ -439,22 +499,22 @@
     <div data-place-panel="gym">
       <h3>Økt A – mandag</h3>
       <ul class="exercises">
-        <li><a class="thumb-link" href="images/ukeplan-mann-kneboy-stor.jpg" aria-label="Se større bilde: Knebøy"><img class="thumb" src="images/ukeplan-mann-kneboy-senter.jpg" width="120" height="100" loading="lazy" alt="Knebøy på treningssenter: illustrasjon med silhuetter."></a><span>Knebøy med stang</span><span class="sets">2–3 × 6–10</span></li>
-        <li><a class="thumb-link" href="images/ukeplan-mann-hipthrust-stor.jpg" aria-label="Se større bilde: Hip thrust og seteløft"><img class="thumb" src="images/ukeplan-mann-hipthrust-senter.jpg" width="120" height="100" loading="lazy" alt="Hip thrust og seteløft på treningssenter: illustrasjon med silhuetter."></a><span>Hip thrust<span class="how">Med ryggen mot en benk og stang over hoftene.</span></span><span class="sets">2–3 × 8–12</span></li>
-        <li><a class="thumb-link" href="images/ukeplan-mann-roing-stor.jpg" aria-label="Se større bilde: Roing"><img class="thumb" src="images/ukeplan-mann-roing-senter.jpg" width="120" height="100" loading="lazy" alt="Roing på treningssenter: illustrasjon med silhuetter."></a><span>Sittende roing</span><span class="sets">2–3 × 8–12</span></li>
-        <li><a class="thumb-link" href="images/ukeplan-mann-bryst-stor.jpg" aria-label="Se større bilde: Brystpress og push-ups"><img class="thumb" src="images/ukeplan-mann-bryst-senter.jpg" width="120" height="100" loading="lazy" alt="Brystpress og push-ups på treningssenter: illustrasjon med silhuetter."></a><span>Benkpress</span><span class="sets">2–3 × 6–10</span></li>
-        <li><a class="thumb-link" href="images/ukeplan-mann-skulderpress-stor.jpg" aria-label="Se større bilde: Skulderpress"><img class="thumb" src="images/ukeplan-mann-skulderpress-senter.jpg" width="120" height="100" loading="lazy" alt="Skulderpress på treningssenter: illustrasjon med silhuetter."></a><span>Skulderpress med manualer<span class="how">Sittende eller stående.</span></span><span class="sets">2–3 × 8–12</span></li>
-        <li><a class="thumb-link" href="images/ukeplan-mann-planke-stor.jpg" aria-label="Se større bilde: Planke"><img class="thumb" src="images/ukeplan-mann-planke-senter.jpg" width="120" height="100" loading="lazy" alt="Planke på treningssenter: illustrasjon med silhuetter."></a><span>Planke<span class="how">Rett linje fra hode til hæler. Start på knærne om nødvendig.</span></span><span class="sets">2–3 × 20–40 sek</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-kneboy-stor.jpg" aria-label="Se større bilde: Knebøy"><img class="thumb" src="images/ukeplan-mann-kneboy-senter.jpg" width="120" height="100" loading="lazy" alt="Knebøy på treningssenter: illustrasjon med silhuetter."></a><span>Knebøy med stang</span><span class="sets">6–10 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-hipthrust-stor.jpg" aria-label="Se større bilde: Hip thrust og seteløft"><img class="thumb" src="images/ukeplan-mann-hipthrust-senter.jpg" width="120" height="100" loading="lazy" alt="Hip thrust og seteløft på treningssenter: illustrasjon med silhuetter."></a><span>Hip thrust<span class="how">Med ryggen mot en benk og stang over hoftene.</span></span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-roing-stor.jpg" aria-label="Se større bilde: Roing"><img class="thumb" src="images/ukeplan-mann-roing-senter.jpg" width="120" height="100" loading="lazy" alt="Roing på treningssenter: illustrasjon med silhuetter."></a><span>Sittende roing</span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-bryst-stor.jpg" aria-label="Se større bilde: Brystpress og push-ups"><img class="thumb" src="images/ukeplan-mann-bryst-senter.jpg" width="120" height="100" loading="lazy" alt="Brystpress og push-ups på treningssenter: illustrasjon med silhuetter."></a><span>Benkpress</span><span class="sets">6–10 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-skulderpress-stor.jpg" aria-label="Se større bilde: Skulderpress"><img class="thumb" src="images/ukeplan-mann-skulderpress-senter.jpg" width="120" height="100" loading="lazy" alt="Skulderpress på treningssenter: illustrasjon med silhuetter."></a><span>Skulderpress med manualer<span class="how">Sittende eller stående.</span></span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-planke-stor.jpg" aria-label="Se større bilde: Planke"><img class="thumb" src="images/ukeplan-mann-planke-senter.jpg" width="120" height="100" loading="lazy" alt="Planke på treningssenter: illustrasjon med silhuetter."></a><span>Planke<span class="how">Rett linje fra hode til hæler. Start på knærne om nødvendig.</span></span><span class="sets">20–40 sek</span></li>
       </ul>
       <h3>Økt B – fredag</h3>
       <ul class="exercises">
-        <li><a class="thumb-link" href="images/ukeplan-mann-beinpress-stor.jpg" aria-label="Se større bilde: Beinpress"><img class="thumb" src="images/ukeplan-mann-beinpress-senter.jpg" width="120" height="100" loading="lazy" alt="Beinpress på treningssenter: illustrasjon med silhuetter."></a><span>Beinpress</span><span class="sets">2–3 × 8–12</span></li>
-        <li><a class="thumb-link" href="images/ukeplan-mann-markloft-stor.jpg" aria-label="Se større bilde: Rumensk markløft"><img class="thumb" src="images/ukeplan-mann-markloft-senter.jpg" width="120" height="100" loading="lazy" alt="Rumensk markløft på treningssenter: illustrasjon med silhuetter."></a><span>Rumensk markløft<span class="how">Eller markløft med trap bar.</span></span><span class="sets">2–3 × 6–10</span></li>
-        <li><a class="thumb-link" href="images/ukeplan-mann-nedtrekk-stor.jpg" aria-label="Se større bilde: Nedtrekk"><img class="thumb" src="images/ukeplan-mann-nedtrekk-senter.jpg" width="120" height="100" loading="lazy" alt="Nedtrekk på treningssenter: illustrasjon med silhuetter."></a><span>Nedtrekk eller pull-ups<span class="how">Trekk stanga ned mot øvre del av brystet. Klarer du pull-ups, kan du bytte til det.</span></span><span class="sets">2–3 × 8–12</span></li>
-        <li><a class="thumb-link" href="images/ukeplan-mann-bryst-stor.jpg" aria-label="Se større bilde: Brystpress og push-ups"><img class="thumb" src="images/ukeplan-mann-bryst-senter.jpg" width="120" height="100" loading="lazy" alt="Brystpress og push-ups på treningssenter: illustrasjon med silhuetter."></a><span>Push-ups eller skrå benkpress med manualer</span><span class="sets">2–3 × 8–12</span></li>
-        <li><a class="thumb-link" href="images/ukeplan-mann-enbens-stor.jpg" aria-label="Se større bilde: Enbensøvelse"><img class="thumb" src="images/ukeplan-mann-enbens-senter.jpg" width="120" height="100" loading="lazy" alt="Enbensøvelse på treningssenter: illustrasjon med silhuetter."></a><span>Utfall med manualer</span><span class="sets">2 × 8–10 per bein</span></li>
-        <li><a class="thumb-link" href="images/ukeplan-mann-sideplanke-stor.jpg" aria-label="Se større bilde: Sideplanke"><img class="thumb" src="images/ukeplan-mann-sideplanke-senter.jpg" width="120" height="100" loading="lazy" alt="Sideplanke på treningssenter: illustrasjon med silhuetter."></a><span>Sideplanke</span><span class="sets">2 × 20–30 sek per side</span></li>
-        <li><a class="thumb-link" href="images/ukeplan-mann-farmerswalk-stor.jpg" aria-label="Se større bilde: Farmer’s walk"><img class="thumb" src="images/ukeplan-mann-farmerswalk-senter.jpg" width="120" height="100" loading="lazy" alt="Farmer’s walk på treningssenter: illustrasjon med silhuetter."></a><span>Farmer’s walk<span class="how">Gå rolig med en tung manual i hver hånd, rak rygg.</span></span><span class="sets">2–3 × 30–40 m</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-beinpress-stor.jpg" aria-label="Se større bilde: Beinpress"><img class="thumb" src="images/ukeplan-mann-beinpress-senter.jpg" width="120" height="100" loading="lazy" alt="Beinpress på treningssenter: illustrasjon med silhuetter."></a><span>Beinpress</span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-markloft-stor.jpg" aria-label="Se større bilde: Rumensk markløft"><img class="thumb" src="images/ukeplan-mann-markloft-senter.jpg" width="120" height="100" loading="lazy" alt="Rumensk markløft på treningssenter: illustrasjon med silhuetter."></a><span>Rumensk markløft<span class="how">Eller markløft med trap bar.</span></span><span class="sets">6–10 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-nedtrekk-stor.jpg" aria-label="Se større bilde: Nedtrekk"><img class="thumb" src="images/ukeplan-mann-nedtrekk-senter.jpg" width="120" height="100" loading="lazy" alt="Nedtrekk på treningssenter: illustrasjon med silhuetter."></a><span>Nedtrekk eller pull-ups<span class="how">Trekk stanga ned mot øvre del av brystet. Klarer du pull-ups, kan du bytte til det.</span></span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-bryst-stor.jpg" aria-label="Se større bilde: Brystpress og push-ups"><img class="thumb" src="images/ukeplan-mann-bryst-senter.jpg" width="120" height="100" loading="lazy" alt="Brystpress og push-ups på treningssenter: illustrasjon med silhuetter."></a><span>Push-ups eller skrå benkpress med manualer</span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-enbens-stor.jpg" aria-label="Se større bilde: Enbensøvelse"><img class="thumb" src="images/ukeplan-mann-enbens-senter.jpg" width="120" height="100" loading="lazy" alt="Enbensøvelse på treningssenter: illustrasjon med silhuetter."></a><span>Utfall med manualer</span><span class="sets">8–10 per bein</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-sideplanke-stor.jpg" aria-label="Se større bilde: Sideplanke"><img class="thumb" src="images/ukeplan-mann-sideplanke-senter.jpg" width="120" height="100" loading="lazy" alt="Sideplanke på treningssenter: illustrasjon med silhuetter."></a><span>Sideplanke</span><span class="sets">20–30 sek per side</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-farmerswalk-stor.jpg" aria-label="Se større bilde: Farmer’s walk"><img class="thumb" src="images/ukeplan-mann-farmerswalk-senter.jpg" width="120" height="100" loading="lazy" alt="Farmer’s walk på treningssenter: illustrasjon med silhuetter."></a><span>Farmer’s walk<span class="how">Gå rolig med en tung manual i hver hånd, rak rygg.</span></span><span class="sets">30–40 m</span></li>
       </ul>
     </div>
 
@@ -465,21 +525,21 @@
       </div>
       <h3>Økt A – mandag</h3>
       <ul class="exercises">
-        <li><a class="thumb-link" href="images/ukeplan-mann-kneboy-stor.jpg" aria-label="Se større bilde: Knebøy"><img class="thumb" src="images/ukeplan-mann-kneboy-hjemme.jpg" width="120" height="100" loading="lazy" alt="Knebøy hjemme: illustrasjon med silhuetter."></a><span>Knebøy med manual eller kettlebell<span class="how">Hold vekten foran brystet (goblet-knebøy).</span></span><span class="sets">2–3 × 8–12</span></li>
-        <li><a class="thumb-link" href="images/ukeplan-mann-hipthrust-stor.jpg" aria-label="Se større bilde: Hip thrust og seteløft"><img class="thumb" src="images/ukeplan-mann-hipthrust-hjemme.jpg" width="120" height="100" loading="lazy" alt="Hip thrust og seteløft hjemme: illustrasjon med silhuetter."></a><span>Seteløft med skuldrene mot sofaen<span class="how">Legg en manual eller kettlebell på hoftene for mer.</span></span><span class="sets">2–3 × 10–15</span></li>
-        <li><a class="thumb-link" href="images/ukeplan-mann-roing-stor.jpg" aria-label="Se større bilde: Roing"><img class="thumb" src="images/ukeplan-mann-roing-hjemme.jpg" width="120" height="100" loading="lazy" alt="Roing hjemme: illustrasjon med silhuetter."></a><span>Roing med manual<span class="how">Én arm av gangen med støtte på en stol.</span></span><span class="sets">2–3 × 8–12</span></li>
-        <li><a class="thumb-link" href="images/ukeplan-mann-bryst-stor.jpg" aria-label="Se større bilde: Brystpress og push-ups"><img class="thumb" src="images/ukeplan-mann-bryst-hjemme.jpg" width="120" height="100" loading="lazy" alt="Brystpress og push-ups hjemme: illustrasjon med silhuetter."></a><span>Push-ups<span class="how">På gulvet, eller mot benken eller på knærne hvis det er for tungt.</span></span><span class="sets">2–3 × 8–15</span></li>
-        <li><a class="thumb-link" href="images/ukeplan-mann-skulderpress-stor.jpg" aria-label="Se større bilde: Skulderpress"><img class="thumb" src="images/ukeplan-mann-skulderpress-hjemme.jpg" width="120" height="100" loading="lazy" alt="Skulderpress hjemme: illustrasjon med silhuetter."></a><span>Skulderpress med manualer eller strikk</span><span class="sets">2–3 × 8–12</span></li>
-        <li><a class="thumb-link" href="images/ukeplan-mann-planke-stor.jpg" aria-label="Se større bilde: Planke"><img class="thumb" src="images/ukeplan-mann-planke-hjemme.jpg" width="120" height="100" loading="lazy" alt="Planke hjemme: illustrasjon med silhuetter."></a><span>Planke<span class="how">Start på knærne om nødvendig.</span></span><span class="sets">2–3 × 20–40 sek</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-kneboy-stor.jpg" aria-label="Se større bilde: Knebøy"><img class="thumb" src="images/ukeplan-mann-kneboy-hjemme.jpg" width="120" height="100" loading="lazy" alt="Knebøy hjemme: illustrasjon med silhuetter."></a><span>Knebøy med manual eller kettlebell<span class="how">Hold vekten foran brystet (goblet-knebøy).</span></span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-hipthrust-stor.jpg" aria-label="Se større bilde: Hip thrust og seteløft"><img class="thumb" src="images/ukeplan-mann-hipthrust-hjemme.jpg" width="120" height="100" loading="lazy" alt="Hip thrust og seteløft hjemme: illustrasjon med silhuetter."></a><span>Seteløft med skuldrene mot sofaen<span class="how">Legg en manual eller kettlebell på hoftene for mer.</span></span><span class="sets">10–15 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-roing-stor.jpg" aria-label="Se større bilde: Roing"><img class="thumb" src="images/ukeplan-mann-roing-hjemme.jpg" width="120" height="100" loading="lazy" alt="Roing hjemme: illustrasjon med silhuetter."></a><span>Roing med manual<span class="how">Én arm av gangen med støtte på en stol.</span></span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-bryst-stor.jpg" aria-label="Se større bilde: Brystpress og push-ups"><img class="thumb" src="images/ukeplan-mann-bryst-hjemme.jpg" width="120" height="100" loading="lazy" alt="Brystpress og push-ups hjemme: illustrasjon med silhuetter."></a><span>Push-ups<span class="how">På gulvet, eller mot benken eller på knærne hvis det er for tungt.</span></span><span class="sets">8–15 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-skulderpress-stor.jpg" aria-label="Se større bilde: Skulderpress"><img class="thumb" src="images/ukeplan-mann-skulderpress-hjemme.jpg" width="120" height="100" loading="lazy" alt="Skulderpress hjemme: illustrasjon med silhuetter."></a><span>Skulderpress med manualer eller strikk</span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-planke-stor.jpg" aria-label="Se større bilde: Planke"><img class="thumb" src="images/ukeplan-mann-planke-hjemme.jpg" width="120" height="100" loading="lazy" alt="Planke hjemme: illustrasjon med silhuetter."></a><span>Planke<span class="how">Start på knærne om nødvendig.</span></span><span class="sets">20–40 sek</span></li>
       </ul>
       <h3>Økt B – fredag</h3>
       <ul class="exercises">
-        <li><a class="thumb-link" href="images/ukeplan-mann-enbens-stor.jpg" aria-label="Se større bilde: Enbensøvelse"><img class="thumb" src="images/ukeplan-mann-enbens-hjemme.jpg" width="120" height="100" loading="lazy" alt="Enbensøvelse hjemme: illustrasjon med silhuetter."></a><span>Step-up eller utfall bakover<span class="how">På et trappetrinn eller en stødig stol, gjerne med manualer. For mer: bulgarsk utfall med bakre fot på stolen.</span></span><span class="sets">2 × 8–12 per bein</span></li>
-        <li><a class="thumb-link" href="images/ukeplan-mann-markloft-stor.jpg" aria-label="Se større bilde: Rumensk markløft"><img class="thumb" src="images/ukeplan-mann-markloft-hjemme.jpg" width="120" height="100" loading="lazy" alt="Rumensk markløft hjemme: illustrasjon med silhuetter."></a><span>Rumensk markløft med manualer<span class="how">For mer: markløft på ett bein.</span></span><span class="sets">2–3 × 8–12</span></li>
-        <li><a class="thumb-link" href="images/ukeplan-mann-pullups-stor.jpg" aria-label="Se større bilde: Pull-ups"><img class="thumb" src="images/ukeplan-mann-pullups-hjemme.jpg" width="120" height="100" loading="lazy" alt="Pull-ups hjemme: illustrasjon med silhuetter."></a><span>Pull-ups i dørstang eller nedtrekk med strikk<span class="how">Uten dørstang, eller hvis pull-ups er for tungt: strikk festet øverst i døra.</span></span><span class="sets">2–3 × 8–12</span></li>
-        <li><a class="thumb-link" href="images/ukeplan-mann-bryst-stor.jpg" aria-label="Se større bilde: Brystpress og push-ups"><img class="thumb" src="images/ukeplan-mann-bryst-hjemme.jpg" width="120" height="100" loading="lazy" alt="Brystpress og push-ups hjemme: illustrasjon med silhuetter."></a><span>Push-ups med føttene på en stol<span class="how">Eller vanlige push-ups med sakte senking.</span></span><span class="sets">2–3 × 8–12</span></li>
-        <li><a class="thumb-link" href="images/ukeplan-mann-sideplanke-stor.jpg" aria-label="Se større bilde: Sideplanke"><img class="thumb" src="images/ukeplan-mann-sideplanke-hjemme.jpg" width="120" height="100" loading="lazy" alt="Sideplanke hjemme: illustrasjon med silhuetter."></a><span>Sideplanke<span class="how">På knærne eller med strake bein.</span></span><span class="sets">2 × 20–30 sek per side</span></li>
-        <li><a class="thumb-link" href="images/ukeplan-mann-farmerswalk-stor.jpg" aria-label="Se større bilde: Farmer’s walk"><img class="thumb" src="images/ukeplan-mann-farmerswalk-hjemme.jpg" width="120" height="100" loading="lazy" alt="Farmer’s walk hjemme: illustrasjon med silhuetter."></a><span>Farmer’s walk<span class="how">Med kettlebells, manualer eller tunge handleposer.</span></span><span class="sets">2–3 × 30–40 m</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-enbens-stor.jpg" aria-label="Se større bilde: Enbensøvelse"><img class="thumb" src="images/ukeplan-mann-enbens-hjemme.jpg" width="120" height="100" loading="lazy" alt="Enbensøvelse hjemme: illustrasjon med silhuetter."></a><span>Step-up eller utfall bakover<span class="how">På et trappetrinn eller en stødig stol, gjerne med manualer. For mer: bulgarsk utfall med bakre fot på stolen.</span></span><span class="sets">8–12 per bein</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-markloft-stor.jpg" aria-label="Se større bilde: Rumensk markløft"><img class="thumb" src="images/ukeplan-mann-markloft-hjemme.jpg" width="120" height="100" loading="lazy" alt="Rumensk markløft hjemme: illustrasjon med silhuetter."></a><span>Rumensk markløft med manualer<span class="how">For mer: markløft på ett bein.</span></span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-pullups-stor.jpg" aria-label="Se større bilde: Pull-ups"><img class="thumb" src="images/ukeplan-mann-pullups-hjemme.jpg" width="120" height="100" loading="lazy" alt="Pull-ups hjemme: illustrasjon med silhuetter."></a><span>Pull-ups i dørstang eller nedtrekk med strikk<span class="how">Uten dørstang, eller hvis pull-ups er for tungt: strikk festet øverst i døra.</span></span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-bryst-stor.jpg" aria-label="Se større bilde: Brystpress og push-ups"><img class="thumb" src="images/ukeplan-mann-bryst-hjemme.jpg" width="120" height="100" loading="lazy" alt="Brystpress og push-ups hjemme: illustrasjon med silhuetter."></a><span>Push-ups med føttene på en stol<span class="how">Eller vanlige push-ups med sakte senking.</span></span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-sideplanke-stor.jpg" aria-label="Se større bilde: Sideplanke"><img class="thumb" src="images/ukeplan-mann-sideplanke-hjemme.jpg" width="120" height="100" loading="lazy" alt="Sideplanke hjemme: illustrasjon med silhuetter."></a><span>Sideplanke<span class="how">På knærne eller med strake bein.</span></span><span class="sets">20–30 sek per side</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-mann-farmerswalk-stor.jpg" aria-label="Se større bilde: Farmer’s walk"><img class="thumb" src="images/ukeplan-mann-farmerswalk-hjemme.jpg" width="120" height="100" loading="lazy" alt="Farmer’s walk hjemme: illustrasjon med silhuetter."></a><span>Farmer’s walk<span class="how">Med kettlebells, manualer eller tunge handleposer.</span></span><span class="sets">30–40 m</span></li>
       </ul>
 
       <h3>Når vektene blir for lette</h3>
@@ -511,13 +571,12 @@
     </div>
 
     <h3>Hvor tungt?</h3>
-    <p>For mange passer 2–3 sett med 6–12 repetisjoner. Belastningen skal være utfordrende, men teknikken kontrollert og god. En god tommelfingerregel er at du kunne klart 1–3 repetisjoner til når settet er ferdig. Hvil 1,5–2 minutter mellom settene.</p>
+    <p><strong>I starten:</strong> velg en moderat vekt der du klarer 10–15 repetisjoner, og stopp mens du fortsatt kunne tatt 2–4 til. Du trenger ikke trene til utmattelse for å få fremgang.</p>
+    <p><strong>Når du har trent en stund:</strong> 6–12 repetisjoner med en vekt der du kunne klart 1–3 til. Belastningen skal være utfordrende, men teknikken kontrollert og god.</p>
 
     <h3>Slik øker du</h3>
-    <p>Når du klarer øvre del av repetisjonsområdet med god teknikk, øker du vekten litt. Det er dette som gir kroppen et signal om å bevare og bygge muskelmasse.</p>
-
-    <h3>Ny med styrketrening?</h3>
-    <p>Begynn med lettere vekter, 2 sett og 10–12 repetisjoner de første ukene, og bruk tiden på å lære teknikken. Øk deretter gradvis.</p>
+    <p>Når du klarer øvre del av repetisjonsområdet med god teknikk, øker du vekten litt. Mer trening gir mer fremgang opp til et punkt, men gevinsten av hvert ekstra sett blir gradvis mindre. Derfor er noen få grunnøvelser og 1–2 sett mer enn nok i starten.</p>
+    <p class="source">Forskning: <a href="https://journals.lww.com/acsm-msse/fulltext/2026/04000/american_college_of_sports_medicine_position.21.aspx" target="_blank" rel="noopener">ACSM 2026</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/34822137/" target="_blank" rel="noopener">Minimal-dose styrketrening (Fyfe mfl. 2022)</a></p>
   </section>
 
   <section class="card">
@@ -532,18 +591,21 @@
     <h3>Intervaller</h3>
     <p><strong>4 × 3 minutter ganske hardt</strong>, med 2 minutter rolig mellom hvert drag. Omtrent 7–8 av 10 på en anstrengelsesskala: du kan si noen få ord, men ikke føre en samtale.</p>
     <p>Avslutt med 5 minutter rolig nedtrapping.</p>
+    <p>Er du utrent, start med rolige og moderate økter. Intervaller passer best når du har trent jevnlig en stund.</p>
+    <p>I den norske Generasjon 100-studien fra NTNU trente eldre voksne blant annet intervaller med 4 × 4 minutter. Studien viser at intervaller kan være trygt og nyttig også senere i livet.</p>
+    <p class="source">Forskning: <a href="https://www.bmj.com/content/371/bmj.m3485" target="_blank" rel="noopener">Generasjon 100 (Stensvold mfl., BMJ 2020)</a> · <a href="https://www.who.int/publications/i/item/9789240015128" target="_blank" rel="noopener">WHO-retningslinjene 2020</a></p>
   </section>
 
   <section class="card message-card">
-    <h2>Fra 40–50-årene kan restitusjon bli enda viktigere</h2>
-    <p>Mange opplever at kroppen ikke tåler samme treningsmengde, søvnmangel eller stress like godt som tidligere. Det betyr ikke at man skal trene mindre, men at det er nyttig å være bevisst på balansen mellom:</p>
+    <h2>Fra 40–50-årene kan det være ekstra nyttig å følge med på restitusjonen</h2>
+    <p>Med økende alder kan restitusjonsevnen gradvis endres, men forskjellene mellom personer er store. Søvn, stress, arbeid, kosthold og samlet treningsbelastning påvirker hvor raskt kroppen restituerer seg. Det er derfor nyttig å være bevisst på balansen mellom:</p>
     <p class="formula">belastning – restitusjon – søvn – stress – kosthold</p>
     <p>På gode uker kan du gjøre mer. I travle eller krevende perioder kan det være klokt å redusere mengden litt, for eksempel ved å ta ett sett mindre per øvelse i stedet for å droppe økta.</p>
   </section>
 
   <section class="card message-card">
     <h2>Husk</h2>
-    <p><strong>Kontinuitet er viktigere enn perfekte treningsuker.</strong> En plan som kan tilpasses livet, er ofte lettere å følge over tid.</p>
+    <p><strong>Kontinuitet er viktigere enn perfekte treningsuker.</strong> Den største gevinsten kommer når du går fra ingen styrketrening til litt styrketrening, og det beste programmet er det du faktisk klarer å følge. En plan som kan tilpasses livet, er ofte lettere å følge over tid.</p>
     <p>Treningen bør alltid tilpasses individuell helse, treningsbakgrunn, eventuelle skader og egne mål.</p>
   </section>
 
@@ -556,6 +618,19 @@
     </ul>
   </section>
 
+  <details class="about-box">
+    <summary>Kilder <span class="chevron" aria-hidden="true">▸</span></summary>
+    <div class="about-body">
+      <ul class="sources">
+        <li>American College of Sports Medicine (2026). Resistance training prescription for muscle function, hypertrophy, and physical performance in healthy adults. <em>Medicine &amp; Science in Sports &amp; Exercise.</em> <a href="https://journals.lww.com/acsm-msse/fulltext/2026/04000/american_college_of_sports_medicine_position.21.aspx" target="_blank" rel="noopener">Les artikkelen</a></li>
+        <li>Verdens helseorganisasjon (2020). <em>WHO guidelines on physical activity and sedentary behaviour.</em> <a href="https://www.who.int/publications/i/item/9789240015128" target="_blank" rel="noopener">Les retningslinjene</a></li>
+        <li>Fyfe, J.J., Hamilton, D.L. og Daly, R.M. (2022). Minimal-dose resistance training for improving muscle mass, strength, and function. <em>Sports Medicine.</em> <a href="https://pubmed.ncbi.nlm.nih.gov/34822137/" target="_blank" rel="noopener">Les sammendraget</a></li>
+        <li>Momma, H. mfl. (2022). Muscle-strengthening activities are associated with lower risk and mortality in major non-communicable diseases. <em>British Journal of Sports Medicine.</em> <a href="https://bjsm.bmj.com/content/56/13/755" target="_blank" rel="noopener">Les artikkelen</a></li>
+        <li>Stensvold, D. mfl. (2020). Effect of exercise training for five years on all cause mortality in older adults – the Generation 100 study. <em>BMJ.</em> <a href="https://www.bmj.com/content/371/bmj.m3485" target="_blank" rel="noopener">Les artikkelen</a></li>
+      </ul>
+    </div>
+  </details>
+
   <a class="home-link" href="index.html">Se hjemmesiden min →</a>
 
 </div>
@@ -567,14 +642,26 @@
 
 <script>
   (function () {
-    document.querySelectorAll('.place-switch button').forEach(function (btn) {
+    document.querySelectorAll('.place-switch:not(.level-switch) button').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var key = btn.getAttribute('data-place');
-        document.querySelectorAll('.place-switch button').forEach(function (b) {
+        document.querySelectorAll('.place-switch:not(.level-switch) button').forEach(function (b) {
           b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
         });
         document.querySelectorAll('[data-place-panel]').forEach(function (panel) {
           panel.hidden = panel.getAttribute('data-place-panel') !== key;
+        });
+      });
+    });
+  })();
+  (function () {
+    var btns = document.querySelectorAll('.level-switch button');
+    btns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var key = btn.getAttribute('data-level');
+        btns.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+        document.querySelectorAll('[data-level-panel]').forEach(function (panel) {
+          panel.hidden = panel.getAttribute('data-level-panel') !== key;
         });
       });
     });
