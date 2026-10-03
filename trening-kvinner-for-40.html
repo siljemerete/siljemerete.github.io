@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trening for kvinner før 40 | Silje Merete SMART Helseveiledning</title>
+<link rel="icon" href="images/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<meta name="description" content="En treningsuke i tre nivåer for kvinner i 20- og 30-årene: styrke, kondisjon, hverdagsaktivitet og restitusjon, tilpasset utgangspunktet ditt.">
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --warn: #c9823f;
+    --warn-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--accent-soft), var(--bg));
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .hero h1 {
+    margin: 0 0 0.75rem;
+    font-size: 1.8rem;
+    color: var(--accent-dark);
+  }
+
+  .hero p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 46ch;
+    margin-inline: auto;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem 2rem;
+    margin: 2rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .card h2 {
+    margin: 0 0 0.6rem;
+    color: var(--accent-dark);
+    font-size: 1.3rem;
+  }
+
+  .card h3 {
+    margin: 1.25rem 0 0.4rem;
+    color: var(--accent-dark);
+    font-size: 1.05rem;
+  }
+
+  .card p { margin: 0 0 0.75rem; }
+  .card p:last-child { margin-bottom: 0; }
+
+  .card > p.desc {
+    margin: 0 0 1.25rem;
+    color: var(--muted);
+  }
+
+  .message-card {
+    border-left: 4px solid var(--accent);
+  }
+
+  .week {
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+  }
+
+  .week li {
+    display: grid;
+    grid-template-columns: 5.5rem 1fr;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .week li:last-child { border-bottom: 0; }
+
+  .week .day {
+    font-weight: 700;
+    color: var(--accent-dark);
+  }
+
+  .week .tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    margin-left: 0.3rem;
+    vertical-align: 0.1em;
+  }
+
+  .tag.strength { background: var(--accent); color: #fff; }
+  .tag.hard { background: var(--warn); color: #fff; }
+  .tag.easy { background: var(--accent-soft); color: var(--accent-dark); }
+
+  .week .detail {
+    display: block;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .exercises {
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+  }
+
+  .exercises li {
+    display: grid;
+    grid-template-columns: 72px 1fr auto;
+    align-items: center;
+    gap: 0.4rem 0.9rem;
+    padding: 0.55rem 0.9rem 0.55rem 0.55rem;
+    border-radius: 8px;
+  }
+
+  .exercises li.plain {
+    grid-template-columns: 1fr auto;
+    padding-left: 0.9rem;
+  }
+
+  .exercises .thumb {
+    display: block;
+    width: 72px;
+    height: 60px;
+    border-radius: 6px;
+    object-fit: cover;
+  }
+
+  .thumb-link { display: block; border-radius: 6px; }
+  .thumb-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .exercises li:nth-child(odd) { background: var(--accent-soft); }
+
+  .exercises .sets {
+    white-space: nowrap;
+    font-weight: 600;
+    color: var(--accent-dark);
+  }
+
+  .exercises .how {
+    display: block;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  .meta {
+    margin: 0 0 1.25rem;
+    padding: 0.75rem 1rem;
+    background: var(--accent-soft);
+    border-radius: 8px;
+    color: var(--ink);
+    font-size: 0.95rem;
+  }
+
+  .meta ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
+  .meta li { margin: 0 0 0.2rem; }
+
+  .plain-list {
+    margin: 0 0 0.75rem;
+    padding-left: 1.25rem;
+  }
+
+  .plain-list li { margin: 0 0 0.5rem; }
+
+  .levels {
+    margin: 0 0 1rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .levels li {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .levels li:last-child { border-bottom: 0; }
+  .levels strong { color: var(--accent-dark); }
+
+  .highlight {
+    font-weight: 700;
+    color: var(--accent-dark);
+  }
+
+  .caution-card {
+    background: var(--warn-soft);
+    border: 1px solid #ecd3ac;
+    border-left: 4px solid var(--warn);
+  }
+
+  .caution-card h2 { color: #8a5a25; }
+
+  .home-link {
+    display: block;
+    text-align: center;
+    margin: 1rem 0 3rem;
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .home-link:hover { text-decoration: underline; }
+
+  footer.closing {
+    margin: 2rem 0 1rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong { color: var(--accent-dark); }
+
+  .page-logo {
+    display: block;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 0.75rem;
+    padding: 5px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(22, 40, 58, 0.12);
+  }
+
+  .page-logo img {
+    display: block;
+    width: 46px;
+    height: 46px;
+  }
+
+  .place-switch {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0 0 1.25rem;
+  }
+
+  .place-switch button {
+    flex: 1;
+    font-size: 0.98rem;
+    padding: 0.7rem 0.75rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .place-switch button span {
+    display: block;
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .place-switch button[aria-pressed="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .place-switch button[aria-pressed="true"] span { color: var(--accent-soft); }
+
+  .level-switch button { font-size: 0.92rem; padding: 0.65rem 0.4rem; }
+
+  .about-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+    margin: 2rem 0 0;
+    box-shadow: var(--shadow);
+  }
+
+  .about-box summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+  }
+
+  .about-box summary::-webkit-details-marker { display: none; }
+
+  .about-box summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 10px;
+  }
+
+  .about-box .chevron { transition: transform 0.2s; }
+  .about-box[open] .chevron { transform: rotate(90deg); }
+
+  .about-body { padding: 0 1.25rem 1.25rem; }
+
+  .card .source {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-top: 0.75rem;
+  }
+
+  .card .source a, .sources a { color: var(--accent-dark); font-weight: 600; }
+
+  .sources { margin: 0; padding-left: 1.1rem; font-size: 0.9rem; }
+  .sources li { margin: 0 0 0.6rem; }
+
+  [hidden] { display: none !important; }
+
+  @media (max-width: 420px) {
+    .exercises li { grid-template-columns: 64px 1fr; }
+    .exercises li.plain { grid-template-columns: 1fr; gap: 0.15rem; }
+    .exercises .thumb { width: 64px; height: 54px; }
+    .exercises .thumb-link { grid-row: span 2; }
+    .exercises .sets { grid-column: 2; }
+    .exercises li.plain .sets { grid-column: 1; }
+    .week li { grid-template-columns: 1fr; gap: 0.15rem; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
+    <h1>Trening for kvinner før 40</h1>
+    <p>I 20- og 30-årene er det et godt tidspunkt å bygge opp styrke, muskelmasse, kondisjon og gode treningsvaner som kroppen kan ha nytte av senere i livet. Du trenger ikke trene hver dag eller følge et avansert program. Det viktigste er å finne et nivå du kan gjennomføre jevnlig og utvikle gradvis.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section class="card message-card">
+    <h2>Hvilket nivå skal jeg velge?</h2>
+    <ul class="levels">
+      <li><strong>Utrent:</strong> Du trener lite eller har hatt et lengre opphold.</li>
+      <li><strong>Litt trening:</strong> Du er aktiv og trener noe, men ikke helt regelmessig.</li>
+      <li><strong>Trener jevnlig:</strong> Du har allerede en fast treningsrutine og tåler flere økter i uka.</li>
+    </ul>
+    <p class="highlight">Start heller litt lettere enn for hardt. Du kan alltid bygge videre.</p>
+    <p>Styrketrening bør gjerne være en sentral del av treningen, sammen med kondisjon og vanlig hverdagsaktivitet.</p>
+  </section>
+
+  <section class="card">
+    <h2>Ukeplanen</h2>
+    <p class="desc">Velg nivået som passer best for deg nå, og gå videre til neste når kroppen er klar for det.</p>
+    <div class="place-switch level-switch" role="group" aria-label="Velg nivå">
+      <button type="button" data-level="1" aria-pressed="true">Utrent<span>eller etter opphold</span></button>
+      <button type="button" data-level="2" aria-pressed="false">Litt trening<span>men ikke jevnlig</span></button>
+      <button type="button" data-level="3" aria-pressed="false">Trener jevnlig<span>fast rutine</span></button>
+    </div>
+
+    <div data-level-panel="1">
+      <p><strong>Mål:</strong> komme i gang og etablere en vane.</p>
+      <ul class="week">
+        <li><span class="day">Mandag</span><span>Helkropp styrke 30–40 min <span class="tag strength">Styrke</span><span class="detail">Økt A</span></span></li>
+        <li><span class="day">Tirsdag</span><span>Rolig gåtur <span class="tag easy">Rolig</span><span class="detail">Eller annen hverdagsaktivitet</span></span></li>
+        <li><span class="day">Onsdag</span><span>Hvile <span class="tag easy">Rolig</span><span class="detail">Eller lett aktivitet</span></span></li>
+        <li><span class="day">Torsdag</span><span>Rolig aktivitet 20–30 min <span class="tag easy">Rolig</span><span class="detail">Gåtur, sykkel eller annen aktivitet du liker</span></span></li>
+        <li><span class="day">Fredag</span><span>Hvile <span class="tag easy">Rolig</span></span></li>
+        <li><span class="day">Lørdag</span><span>Helkropp styrke 30–40 min <span class="tag strength">Styrke</span><span class="detail">Økt B, når du er klar for to økter i uka</span></span></li>
+        <li><span class="day">Søndag</span><span>Rolig dag <span class="tag easy">Rolig</span><span class="detail">Lett aktivitet</span></span></li>
+      </ul>
+      <div class="meta">
+        <strong>Start gjerne med:</strong>
+        <ul>
+          <li>1–2 styrkeøkter i uka</li>
+          <li>5–7 øvelser for hele kroppen</li>
+          <li>1–2 sett per øvelse</li>
+          <li>ca. 8–12 repetisjoner</li>
+          <li>belastning som kjennes utfordrende, men der du fortsatt har god teknikk</li>
+        </ul>
+      </div>
+      <p><strong>Du trenger ikke starte med alt på én gang.</strong> For en som har vært lite aktiv, kan én styrkeøkt og noen gåturer være et godt utgangspunkt. Når kroppen venner seg til belastningen, kan du legge til økt nummer to.</p>
+    </div>
+
+    <div data-level-panel="2" hidden>
+      <p><strong>Mål:</strong> få regelmessighet og gradvis bedre styrke og kondisjon.</p>
+      <ul class="week">
+        <li><span class="day">Mandag</span><span>Helkropp styrke <span class="tag strength">Styrke</span><span class="detail">Økt A</span></span></li>
+        <li><span class="day">Tirsdag</span><span>Rolig aktivitet <span class="tag easy">Rolig</span><span class="detail">Gåtur eller annen hverdagsaktivitet</span></span></li>
+        <li><span class="day">Onsdag</span><span>Kondisjon 25–40 min <span class="tag hard">Kondisjon</span><span class="detail">Rask gange, sykling, svømming, dans, jogg eller annet du liker</span></span></li>
+        <li><span class="day">Torsdag</span><span>Hvile <span class="tag easy">Rolig</span><span class="detail">Eller lett aktivitet</span></span></li>
+        <li><span class="day">Fredag</span><span>Helkropp styrke <span class="tag strength">Styrke</span><span class="detail">Økt B</span></span></li>
+        <li><span class="day">Lørdag</span><span>Valgfri aktivitet <span class="tag easy">Lyst</span><span class="detail">Hverdagsaktivitet, tur eller noe du liker</span></span></li>
+        <li><span class="day">Søndag</span><span>Rolig dag <span class="tag easy">Rolig</span></span></li>
+      </ul>
+      <div class="meta">
+        <strong>Styrkeøktene:</strong> 6–8 øvelser × 2–3 sett × 6–12 repetisjoner.
+      </div>
+      <p>Kondisjonsøkten trenger ikke være hard. Det kan være rask gange, sykling, svømming, dans, jogg eller annet du liker. Vil du prøve intervaller, finner du en enkel variant lenger ned.</p>
+    </div>
+
+    <div data-level-panel="3" hidden>
+      <p><strong>Mål:</strong> videreutvikle styrke, kondisjon og fysisk kapasitet.</p>
+      <ul class="week">
+        <li><span class="day">Mandag</span><span>Styrke <span class="tag strength">Styrke</span><span class="detail">Økt A</span></span></li>
+        <li><span class="day">Tirsdag</span><span>Rolig kondisjon <span class="tag easy">Rolig</span><span class="detail">Eller hverdagsaktivitet</span></span></li>
+        <li><span class="day">Onsdag</span><span>Kort intervalløkt <span class="tag hard">Intervall</span><span class="detail">Se forslag lenger ned</span></span></li>
+        <li><span class="day">Torsdag</span><span>Hvile <span class="tag easy">Rolig</span><span class="detail">Restitusjon</span></span></li>
+        <li><span class="day">Fredag</span><span>Styrke <span class="tag strength">Styrke</span><span class="detail">Økt B</span></span></li>
+        <li><span class="day">Lørdag</span><span>Styrke eller lengre rolig kondisjon <span class="tag strength">Valgfri</span><span class="detail">En tredje styrkeøkt (økt A eller B), eller en lengre rolig tur</span></span></li>
+        <li><span class="day">Søndag</span><span>Rolig dag <span class="tag easy">Rolig</span></span></li>
+      </ul>
+      <div class="meta">
+        <strong>I løpet av uka:</strong>
+        <ul>
+          <li>2–3 styrkeøkter</li>
+          <li>1–2 kondisjonsøkter</li>
+          <li>regelmessig hverdagsaktivitet</li>
+          <li>minst én roligere dag</li>
+        </ul>
+      </div>
+      <p><strong>To gode styrkeøkter i uka er et solid utgangspunkt.</strong> Trener du allerede jevnlig og restituerer godt, kan du legge til en tredje økt.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Styrkeøktene</h2>
+    <p class="desc">Økt A og økt B er helkroppsøkter som trener de samme grunnbevegelsene med litt ulike varianter. Er sju øvelser mye i starten, velg fem av dem.</p>
+    <div class="meta">
+      <strong>Oppvarming, 5–10 min:</strong> litt rolig kondisjon (sykkel, rask gange eller trapp), og deretter et lett oppvarmingssett av de første øvelsene før du tar i.
+    </div>
+    <div class="meta">
+      <strong>Antall sett:</strong> utrent 1–2 sett per øvelse, litt trening 2–3 sett, trener jevnlig 2–3 sett. Hvil 1–2 minutter mellom settene.
+    </div>
+    <div class="place-switch" role="group" aria-label="Velg hvor du trener">
+      <button type="button" data-place="gym" aria-pressed="true">Treningssenter<span>Apparater og manualer</span></button>
+      <button type="button" data-place="home" aria-pressed="false">Hjemme<span>Manualer, strikk og en stol</span></button>
+    </div>
+
+    <div data-place-panel="gym">
+      <h3>Økt A</h3>
+      <ul class="exercises">
+        <li><a class="thumb-link" href="images/ukeplan-kneboy-stor.jpg" aria-label="Se større bilde: Knebøy"><img class="thumb" src="images/ukeplan-kneboy-senter.jpg" width="120" height="100" loading="lazy" alt="Knebøy på treningssenter: illustrasjon med silhuetter."></a><span>Knebøy eller beinpress</span><span class="sets">8–12 rep</span></li>
+        <li class="plain"><span>Hip thrust<span class="how">Med ryggen mot en benk og stang eller manual over hoftene.</span></span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-bryst-stor.jpg" aria-label="Se større bilde: Brystpress og push-ups"><img class="thumb" src="images/ukeplan-bryst-senter.jpg" width="120" height="100" loading="lazy" alt="Brystpress og push-ups på treningssenter: illustrasjon med silhuetter."></a><span>Brystpress eller push-ups</span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-roing-stor.jpg" aria-label="Se større bilde: Roing"><img class="thumb" src="images/ukeplan-roing-senter.jpg" width="120" height="100" loading="lazy" alt="Roing på treningssenter: illustrasjon med silhuetter."></a><span>Sittende roing</span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-skulderpress-stor.jpg" aria-label="Se større bilde: Skulderpress"><img class="thumb" src="images/ukeplan-skulderpress-senter.jpg" width="120" height="100" loading="lazy" alt="Skulderpress på treningssenter: illustrasjon med silhuetter."></a><span>Skulderpress<span class="how">Sittende eller stående, med manualer.</span></span><span class="sets">8–12 rep</span></li>
+        <li class="plain"><span>Nedtrekk<span class="how">Trekk stanga ned mot øvre del av brystet.</span></span><span class="sets">8–12 rep</span></li>
+        <li class="plain"><span>Mage og kjerne<span class="how">For eksempel planke. Start på knærne om nødvendig.</span></span><span class="sets">20–40 sek</span></li>
+      </ul>
+      <h3>Økt B</h3>
+      <ul class="exercises">
+        <li><a class="thumb-link" href="images/ukeplan-enbens-stor.jpg" aria-label="Se større bilde: Enbensøvelse"><img class="thumb" src="images/ukeplan-enbens-senter.jpg" width="120" height="100" loading="lazy" alt="Enbensøvelse på treningssenter: illustrasjon med silhuetter."></a><span>Utfall eller step-up</span><span class="sets">8–12 per bein</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-markloft-stor.jpg" aria-label="Se større bilde: Rumensk markløft"><img class="thumb" src="images/ukeplan-markloft-senter.jpg" width="120" height="100" loading="lazy" alt="Rumensk markløft på treningssenter: illustrasjon med silhuetter."></a><span>Leg curl eller rumensk markløft<span class="how">Eller en annen øvelse for baksiden av låret.</span></span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-bryst-stor.jpg" aria-label="Se større bilde: Brystpress og push-ups"><img class="thumb" src="images/ukeplan-bryst-senter.jpg" width="120" height="100" loading="lazy" alt="Brystpress og push-ups på treningssenter: illustrasjon med silhuetter."></a><span>Brystpress med manualer</span><span class="sets">8–12 rep</span></li>
+        <li class="plain"><span>Nedtrekk</span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-roing-stor.jpg" aria-label="Se større bilde: Roing"><img class="thumb" src="images/ukeplan-roing-senter.jpg" width="120" height="100" loading="lazy" alt="Roing på treningssenter: illustrasjon med silhuetter."></a><span>Roing<span class="how">I kabel, apparat eller med manual.</span></span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-skulderpress-stor.jpg" aria-label="Se større bilde: Skulderpress"><img class="thumb" src="images/ukeplan-skulderpress-senter.jpg" width="120" height="100" loading="lazy" alt="Skulderpress på treningssenter: illustrasjon med silhuetter."></a><span>Sidehev eller skulderpress</span><span class="sets">10–15 rep</span></li>
+        <li class="plain"><span>Kjerne<span class="how">For eksempel sideplanke eller dead bug.</span></span><span class="sets">20–30 sek</span></li>
+      </ul>
+    </div>
+
+    <div data-place-panel="home" hidden>
+      <div class="meta">
+        <strong>Utstyr:</strong> to manualer (helst justerbare), et par treningsstrikk og en stødig stol. Strikket kan festes øverst i døra for nedtrekk.
+      </div>
+      <h3>Økt A</h3>
+      <ul class="exercises">
+        <li><a class="thumb-link" href="images/ukeplan-kneboy-stor.jpg" aria-label="Se større bilde: Knebøy"><img class="thumb" src="images/ukeplan-kneboy-hjemme.jpg" width="120" height="100" loading="lazy" alt="Knebøy hjemme: illustrasjon med silhuetter."></a><span>Knebøy med manual eller kettlebell<span class="how">Hold vekten foran brystet (goblet-knebøy).</span></span><span class="sets">8–12 rep</span></li>
+        <li class="plain"><span>Hoftehev eller seteløft<span class="how">På gulvet, eller med skuldrene mot sofaen. Legg en manual på hoftene for mer.</span></span><span class="sets">10–15 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-bryst-stor.jpg" aria-label="Se større bilde: Brystpress og push-ups"><img class="thumb" src="images/ukeplan-bryst-hjemme.jpg" width="120" height="100" loading="lazy" alt="Brystpress og push-ups hjemme: illustrasjon med silhuetter."></a><span>Push-ups<span class="how">Mot kjøkkenbenken, så på knærne, så på gulvet.</span></span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-roing-stor.jpg" aria-label="Se større bilde: Roing"><img class="thumb" src="images/ukeplan-roing-hjemme.jpg" width="120" height="100" loading="lazy" alt="Roing hjemme: illustrasjon med silhuetter."></a><span>Roing med manual eller strikk<span class="how">Én arm av gangen med støtte på en stol, eller strikk festet i døra.</span></span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-skulderpress-stor.jpg" aria-label="Se større bilde: Skulderpress"><img class="thumb" src="images/ukeplan-skulderpress-hjemme.jpg" width="120" height="100" loading="lazy" alt="Skulderpress hjemme: illustrasjon med silhuetter."></a><span>Skulderpress med manualer eller strikk</span><span class="sets">8–12 rep</span></li>
+        <li class="plain"><span>Nedtrekk med strikk<span class="how">Strikket festet øverst i døra.</span></span><span class="sets">10–15 rep</span></li>
+        <li class="plain"><span>Mage og kjerne<span class="how">For eksempel planke. Start på knærne om nødvendig.</span></span><span class="sets">20–40 sek</span></li>
+      </ul>
+      <h3>Økt B</h3>
+      <ul class="exercises">
+        <li><a class="thumb-link" href="images/ukeplan-enbens-stor.jpg" aria-label="Se større bilde: Enbensøvelse"><img class="thumb" src="images/ukeplan-enbens-hjemme.jpg" width="120" height="100" loading="lazy" alt="Enbensøvelse hjemme: illustrasjon med silhuetter."></a><span>Step-up eller utfall bakover<span class="how">På et trappetrinn eller en stødig stol, gjerne med manualer i hendene.</span></span><span class="sets">8–12 per bein</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-markloft-stor.jpg" aria-label="Se større bilde: Rumensk markløft"><img class="thumb" src="images/ukeplan-markloft-hjemme.jpg" width="120" height="100" loading="lazy" alt="Rumensk markløft hjemme: illustrasjon med silhuetter."></a><span>Rumensk markløft med manualer<span class="how">For mer: markløft på ett bein.</span></span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-bryst-stor.jpg" aria-label="Se større bilde: Brystpress og push-ups"><img class="thumb" src="images/ukeplan-bryst-hjemme.jpg" width="120" height="100" loading="lazy" alt="Brystpress og push-ups hjemme: illustrasjon med silhuetter."></a><span>Brystpress med manualer<span class="how">Liggende på gulvet eller en benk. Eller push-ups.</span></span><span class="sets">8–12 rep</span></li>
+        <li class="plain"><span>Nedtrekk med strikk</span><span class="sets">10–15 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-roing-stor.jpg" aria-label="Se større bilde: Roing"><img class="thumb" src="images/ukeplan-roing-hjemme.jpg" width="120" height="100" loading="lazy" alt="Roing hjemme: illustrasjon med silhuetter."></a><span>Roing med manual eller strikk</span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link" href="images/ukeplan-skulderpress-stor.jpg" aria-label="Se større bilde: Skulderpress"><img class="thumb" src="images/ukeplan-skulderpress-hjemme.jpg" width="120" height="100" loading="lazy" alt="Skulderpress hjemme: illustrasjon med silhuetter."></a><span>Sidehev eller skulderpress<span class="how">Med lette manualer eller strikk.</span></span><span class="sets">10–15 rep</span></li>
+        <li class="plain"><span>Kjerne<span class="how">For eksempel sideplanke eller dead bug.</span></span><span class="sets">20–30 sek</span></li>
+      </ul>
+
+      <h3>Når vektene blir for lette</h3>
+      <ul class="plain-list">
+        <li><strong>Bytt til ett bein eller én arm.</strong> Da blir samme vekt nesten dobbelt så tung.</li>
+        <li><strong>Senk sakte.</strong> Bruk 3 sekunder på vei ned, og hold en kort pause i bunnen.</li>
+        <li><strong>Ta flere repetisjoner.</strong> 12–15 repetisjoner virker også, så lenge de siste kjennes tunge.</li>
+        <li><strong>Kjøp neste vekt</strong> når alt dette blir lett.</li>
+      </ul>
+    </div>
+
+    <h3>Hvor tungt?</h3>
+    <p>Velg en belastning som kjennes utfordrende, men der du fortsatt har god teknikk. Stopp mens du kunne tatt 1–3 repetisjoner til. Du trenger ikke trene til utmattelse for å få fremgang.</p>
+
+    <h3>Slik øker du</h3>
+    <p>Når du klarer øvre del av repetisjonsområdet med god teknikk, øker du vekten litt. Litt fremgang over tid er målet, ikke store hopp fra uke til uke.</p>
+    <p class="source">Forskning: <a href="https://journals.lww.com/acsm-msse/fulltext/2026/04000/american_college_of_sports_medicine_position.21.aspx" target="_blank" rel="noopener">ACSM 2026</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/34822137/" target="_blank" rel="noopener">Minimal-dose styrketrening (Fyfe mfl. 2022)</a></p>
+  </section>
+
+  <section class="card">
+    <h2>Kondisjon</h2>
+    <p class="desc">Intervalltrening er ikke et krav, og ikke noe du trenger når du er helt i startfasen. På nivå 2 og 3 kan du prøve det, gjerne en gang i uka.</p>
+
+    <h3>Kort intervalløkt</h3>
+    <ul class="plain-list">
+      <li>5–10 min oppvarming</li>
+      <li>4 × 2–3 minutter med tydelig økt intensitet</li>
+      <li>2 minutter rolig mellom dragene</li>
+      <li>5 minutter rolig avslutning</li>
+    </ul>
+
+    <h3>Enklere variant</h3>
+    <p><strong>6 × 1 minutt raskt + 1–2 minutter rolig.</strong></p>
+    <p>Raskt betyr at du blir tydelig andpusten og bare kan si noen få ord. Det kan være rask gange i motbakke, sykling, løping, svømming eller annet du liker.</p>
+    <p class="source">Forskning: <a href="https://www.who.int/publications/i/item/9789240015128" target="_blank" rel="noopener">WHO-retningslinjene 2020</a></p>
+  </section>
+
+  <section class="card message-card">
+    <h2>Hva med menstruasjonssyklusen?</h2>
+    <p>Noen kvinner merker tydelige forskjeller i energi, styrke, smerter eller motivasjon gjennom menstruasjonssyklusen, mens andre merker lite. Det er derfor ikke nødvendig å planlegge all trening etter syklus.</p>
+    <p>Bruk heller dagsform, symptomer og egen erfaring som veiledning. På gode dager kan du trene som planlagt. På dager med sterke smerter, dårlig søvn eller lav energi kan du redusere belastningen eller velge lettere aktivitet.</p>
+    <p class="source">Forskning: <a href="https://pubmed.ncbi.nlm.nih.gov/32661839/" target="_blank" rel="noopener">Menstruasjonssyklus og prestasjon (McNulty mfl. 2020)</a></p>
+  </section>
+
+  <section class="card message-card">
+    <h2>Husk</h2>
+    <p><strong>Treningen tilpasses utgangspunktet ditt, ikke bare alderen.</strong> Det beste programmet er det du faktisk klarer å følge over tid, og en plan som kan tilpasses livet, er lettere å holde fast ved.</p>
+    <p>Treningen bør alltid tilpasses individuell helse, treningsbakgrunn, eventuelle skader og egne mål.</p>
+  </section>
+
+  <section class="card caution-card">
+    <h2>Viktige forholdsregler</h2>
+    <ul class="plain-list">
+      <li>Ingen øvelser skal gjøre vondt i ledd. Gjør bevegelsen mindre, velg en annen variant, eller hopp over øvelsen hvis noe kjennes feil.</li>
+      <li>Er du gravid eller nylig har født, eller har du helseplager, snakk med lege eller fysioterapeut om hvordan du kan tilpasse treningen.</li>
+      <li>Stopp og ta kontakt med lege hvis du får brystsmerter, uvanlig tungpust eller blir svimmel.</li>
+    </ul>
+  </section>
+
+  <details class="about-box">
+    <summary>Kilder <span class="chevron" aria-hidden="true">▸</span></summary>
+    <div class="about-body">
+      <ul class="sources">
+        <li>American College of Sports Medicine (2026). Resistance training prescription for muscle function, hypertrophy, and physical performance in healthy adults. <em>Medicine &amp; Science in Sports &amp; Exercise.</em> <a href="https://journals.lww.com/acsm-msse/fulltext/2026/04000/american_college_of_sports_medicine_position.21.aspx" target="_blank" rel="noopener">Les artikkelen</a></li>
+        <li>Verdens helseorganisasjon (2020). <em>WHO guidelines on physical activity and sedentary behaviour.</em> <a href="https://www.who.int/publications/i/item/9789240015128" target="_blank" rel="noopener">Les retningslinjene</a></li>
+        <li>Fyfe, J.J., Hamilton, D.L. og Daly, R.M. (2022). Minimal-dose resistance training for improving muscle mass, strength, and function. <em>Sports Medicine.</em> <a href="https://pubmed.ncbi.nlm.nih.gov/34822137/" target="_blank" rel="noopener">Les sammendraget</a></li>
+        <li>McNulty, K.L. mfl. (2020). The effects of menstrual cycle phase on exercise performance in eumenorrheic women. <em>Sports Medicine.</em> <a href="https://pubmed.ncbi.nlm.nih.gov/32661839/" target="_blank" rel="noopener">Les sammendraget</a></li>
+      </ul>
+    </div>
+  </details>
+
+  <a class="home-link" href="index.html">Se hjemmesiden min →</a>
+
+</div>
+
+<footer class="closing">
+  Små skritt. Dine mål, ditt tempo.<br>
+  <strong>Du trenger ikke gjøre det alene.</strong>
+</footer>
+
+<script>
+  (function () {
+    document.querySelectorAll('.place-switch:not(.level-switch) button').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var key = btn.getAttribute('data-place');
+        document.querySelectorAll('.place-switch:not(.level-switch) button').forEach(function (b) {
+          b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+        });
+        document.querySelectorAll('[data-place-panel]').forEach(function (panel) {
+          panel.hidden = panel.getAttribute('data-place-panel') !== key;
+        });
+      });
+    });
+  })();
+  (function () {
+    var btns = document.querySelectorAll('.level-switch button');
+    btns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var key = btn.getAttribute('data-level');
+        btns.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+        document.querySelectorAll('[data-level-panel]').forEach(function (panel) {
+          panel.hidden = panel.getAttribute('data-level-panel') !== key;
+        });
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
