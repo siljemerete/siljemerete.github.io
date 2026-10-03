@@ -331,9 +331,40 @@
 
   .about-body .source a { color: var(--accent-dark); font-weight: 600; }
 
+  .about-box.equipment { margin: 1.5rem 0 0; box-shadow: none; }
+
+  .about-body h4 {
+    margin: 1.1rem 0 0.4rem;
+    color: var(--accent-dark);
+    font-size: 0.98rem;
+  }
+
+  .weights {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin: 0 0 0.75rem;
+  }
+
+  .weights th,
+  .weights td {
+    text-align: left;
+    padding: 0.45rem 0.4rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .weights th { color: var(--accent-dark); font-size: 0.85rem; }
+  .weights td:not(:first-child), .weights th:not(:first-child) { white-space: nowrap; }
+
   [hidden] { display: none !important; }
 
   @media (max-width: 420px) {
+    .about-box.equipment summary { padding: 0.9rem 0.9rem; }
+    .about-box.equipment .about-body { padding: 0 0.9rem 1rem; }
+    .weights { font-size: 0.82rem; }
+    .weights th, .weights td { padding: 0.4rem 0.25rem; }
+    .weights td:not(:first-child), .weights th:not(:first-child) { white-space: normal; }
     .exercises li { grid-template-columns: 64px 1fr; }
     .exercises .thumb { width: 64px; height: 54px; }
     .exercises .thumb-link { grid-row: span 2; }
@@ -402,7 +433,7 @@
 
     <div data-place-panel="home" hidden>
       <div class="meta">
-        <strong>Utstyr som holder lenge:</strong> et par manualer eller en kettlebell (gjerne justerbare manualer, så du kan øke vekten), et par treningsstrikk med ulik motstand, en stødig stol og en trapp. Har du ikke vekter ennå, fungerer en ryggsekk med bøker eller vannflasker.
+        <strong>Utstyr:</strong> manualer (helst justerbare), et par treningsstrikk og en stødig stol. Se <a href="#utstyrsliste">utstyrslisten</a> under for hvilke vekter du trenger.
       </div>
       <ul class="exercises">
         <li><a class="thumb-link" href="images/ukeplan-kneboy-stor.jpg" aria-label="Se større bilde: Knebøy"><img class="thumb" src="images/ukeplan-kneboy-hjemme.jpg" width="120" height="100" loading="lazy" alt="Knebøy hjemme: illustrasjon med silhuetter."></a><span>Knebøy med manual eller kettlebell<span class="how">Hold vekten foran brystet (goblet-knebøy). For mer: bulgarsk utfall med bakre fot på en stol.</span></span><span class="sets">3 × 6–8</span></li>
@@ -422,6 +453,40 @@
         <li><strong>Ta flere repetisjoner i mellomtiden.</strong> Klarer du mer enn 8 med vektene du har, virker det fortsatt å gå opp mot 12–15 repetisjoner, så lenge de siste kjennes virkelig tunge. Målet er likevel å komme dit at 6–8 repetisjoner er det du klarer.</li>
         <li><strong>Kjøp neste vekt.</strong> Når alt dette blir lett, er det tid for tyngre manualer.</li>
       </ul>
+
+      <details class="about-box equipment" id="utstyrsliste">
+        <summary>Utstyrsliste: hvilke vekter trenger jeg? <span class="chevron" aria-hidden="true">▸</span></summary>
+        <div class="about-body">
+          <p>Beina og hoftene trenger mye tyngre vekter enn armene og skuldrene. Derfor holder ett par lette manualer bare en kort stund. Tallene er omtrentlige for en kvinne 40+ med litt treningserfaring.</p>
+
+          <h4>Anbefalt</h4>
+          <ul class="plain-list">
+            <li><strong>Justerbare manualer, et par på 2–20 kg</strong> (gjerne opp til 24 kg). Den beste enkeltinvesteringen: dekker alle øvelsene, tar lite plass, og du kan øke 1–2 kg av gangen. Velg gjerne en type med hurtigbytte, så det går raskt å bytte vekt mellom øvelsene.</li>
+            <li><strong>Et par treningsstrikk</strong> med middels og tung motstand, til roing, oppvarming og ekstra motstand.</li>
+            <li><strong>En stødig stol eller lav benk.</strong></li>
+            <li><strong>Kjekt å ha:</strong> én kettlebell på 12 eller 16 kg til knebøy og markløft.</li>
+          </ul>
+
+          <h4>Billigere start</h4>
+          <p>To par faste manualer, for eksempel 2 × 5 kg og 2 × 10 kg, og én kettlebell på 12–16 kg. Det dekker overkroppen og de første ukene for beina. Etter hvert trenger du tyngre vekter til bein og hofter.</p>
+
+          <h4>Omtrent hvor tungt</h4>
+          <table class="weights">
+            <thead><tr><th>Øvelse</th><th>Start</th><th>Etter hvert</th></tr></thead>
+            <tbody>
+              <tr><td>Knebøy</td><td>10–14 kg</td><td>16–24 kg</td></tr>
+              <tr><td>Rumensk markløft</td><td>2 × 8–12 kg</td><td>2 × 14–20 kg</td></tr>
+              <tr><td>Roing, én arm</td><td>8–12 kg</td><td>12–18 kg</td></tr>
+              <tr><td>Brystpress på gulvet</td><td>2 × 6–10 kg</td><td>2 × 10–14 kg</td></tr>
+              <tr><td>Skulderpress</td><td>2 × 4–6 kg</td><td>2 × 6–10 kg</td></tr>
+              <tr><td>Step-up / utfall</td><td>2 × 4–8 kg</td><td>2 × 8–12 kg</td></tr>
+            </tbody>
+          </table>
+
+          <h4>Slik finner du startvekten</h4>
+          <p>Velg en vekt der 10–12 repetisjoner kjennes tungt mens du lærer teknikken, og øk gradvis til 6–8 tunge repetisjoner. Teknikken kommer alltid før kiloene.</p>
+        </div>
+      </details>
     </div>
 
     <h3>Hvor tungt?</h3>
