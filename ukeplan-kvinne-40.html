@@ -357,6 +357,21 @@
   .weights th { color: var(--accent-dark); font-size: 0.85rem; }
   .weights td:not(:first-child), .weights th:not(:first-child) { white-space: nowrap; }
 
+  .equip-button {
+    display: inline-block;
+    margin-top: 0.7rem;
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+  }
+
+  .equip-button:hover { background: var(--accent-dark); }
+  .equip-button:focus-visible { outline: 2px solid var(--accent-dark); outline-offset: 2px; }
+
   [hidden] { display: none !important; }
 
   @media (max-width: 420px) {
@@ -433,7 +448,8 @@
 
     <div data-place-panel="home" hidden>
       <div class="meta">
-        <strong>Utstyr:</strong> to manualer (helst justerbare), en kettlebell, et par treningsstrikk og en stødig stol. Se <a href="#utstyrsliste">utstyrslisten</a> under for hvilke vekter du trenger.
+        <strong>Utstyr:</strong> to manualer (helst justerbare), en kettlebell, et par treningsstrikk og en stødig stol.
+        <a class="equip-button" href="#utstyrsliste">Se forslag til utstyrsliste</a>
       </div>
       <ul class="exercises">
         <li><a class="thumb-link" href="images/ukeplan-kneboy-stor.jpg" aria-label="Se større bilde: Knebøy"><img class="thumb" src="images/ukeplan-kneboy-hjemme.jpg" width="120" height="100" loading="lazy" alt="Knebøy hjemme: illustrasjon med silhuetter."></a><span>Knebøy med manual eller kettlebell<span class="how">Hold vekten foran brystet (goblet-knebøy). For mer: bulgarsk utfall med bakre fot på en stol.</span></span><span class="sets">3 × 6–8</span></li>
@@ -455,7 +471,7 @@
       </ul>
 
       <details class="about-box equipment" id="utstyrsliste">
-        <summary>Utstyrsliste: hvilke vekter trenger jeg? <span class="chevron" aria-hidden="true">▸</span></summary>
+        <summary>Forslag til utstyrsliste: hvilke vekter trenger jeg? <span class="chevron" aria-hidden="true">▸</span></summary>
         <div class="about-body">
           <p>Beina og hoftene trenger mye tyngre vekter enn armene og skuldrene. Derfor holder ett par lette manualer bare en kort stund. Tallene er omtrentlige for en kvinne 40+ med litt treningserfaring.</p>
 
@@ -576,6 +592,16 @@
           panel.hidden = panel.getAttribute('data-place-panel') !== key;
         });
       });
+    });
+  })();
+  (function () {
+    var btn = document.querySelector('.equip-button');
+    var box = document.getElementById('utstyrsliste');
+    if (!btn || !box) return;
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      box.open = true;
+      box.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   })();
 </script>
