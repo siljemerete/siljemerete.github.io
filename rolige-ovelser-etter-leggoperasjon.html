@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rolige øvelser etter leggoperasjon | Silje Merete SMART Helseveiledning</title>
+<link rel="icon" href="images/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<meta name="robots" content="noindex">
+<meta name="description" content="Et lite, skånsomt program med rolige bevegelser de første ukene etter lipødemkirurgi i leggene.">
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --warn: #c9823f;
+    --warn-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--accent-soft), var(--bg));
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .hero h1 {
+    margin: 0 0 0.75rem;
+    font-size: 1.8rem;
+    color: var(--accent-dark);
+  }
+
+  .hero p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 46ch;
+    margin-inline: auto;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem 2rem;
+    margin: 2rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .card h2 {
+    margin: 0 0 0.6rem;
+    color: var(--accent-dark);
+    font-size: 1.3rem;
+  }
+
+  .card p {
+    margin: 0 0 0.9rem;
+  }
+
+  .card p:last-child {
+    margin-bottom: 0;
+  }
+
+  .plain-list {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+
+  .plain-list li {
+    margin: 0 0 0.6rem;
+  }
+
+  .plain-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .exercise {
+    border-top: 1px solid var(--border);
+    padding: 1.25rem 0 0;
+    margin-top: 1.25rem;
+  }
+
+  .exercise:first-of-type {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0.5rem;
+  }
+
+  .exercise-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .exercise-num {
+    flex: 0 0 auto;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(0.35rem);
+  }
+
+  .exercise h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--accent-dark);
+  }
+
+  .exercise p {
+    margin: 0 0 0.6rem;
+  }
+
+  .dose {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    background: var(--accent-soft);
+    border-radius: 999px;
+    padding: 0.25rem 0.8rem;
+  }
+
+  .exercise.locked .exercise-num {
+    background: var(--warn);
+  }
+
+  .exercise.locked .dose {
+    background: var(--warn-soft);
+    color: #8a5a25;
+  }
+
+  .check-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .check-list li {
+    margin: 0 0 0.5rem;
+  }
+
+  .check-list label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .check-list input {
+    width: 1.25rem;
+    height: 1.25rem;
+    accent-color: var(--accent);
+    flex: 0 0 auto;
+  }
+
+  .check-list input:checked + span {
+    color: var(--muted);
+    text-decoration: line-through;
+  }
+
+  .session-count {
+    margin: 1rem 0 0;
+    text-align: center;
+    color: var(--muted);
+  }
+
+  .session-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1rem;
+  }
+
+  .session-buttons button {
+    font-size: 0.95rem;
+    padding: 0.65rem 1.3rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .session-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .session-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .session-buttons button.secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .caution-card {
+    background: var(--warn-soft);
+    border: 1px solid #ecd3ac;
+    border-left: 4px solid var(--warn);
+  }
+
+  .caution-card h2 {
+    color: #8a5a25;
+  }
+
+  .note {
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+
+  .home-link {
+    display: block;
+    text-align: center;
+    margin: 1rem 0 3rem;
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .home-link:hover { text-decoration: underline; }
+
+  footer.closing {
+    margin: 2rem 0 1rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong { color: var(--accent-dark); }
+
+  .page-logo {
+    display: block;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 0.75rem;
+    padding: 5px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(22, 40, 58, 0.12);
+  }
+
+  .page-logo img {
+    display: block;
+    width: 46px;
+    height: 46px;
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
+    <h1>Rolige øvelser etter leggoperasjon</h1>
+    <p>Et lite, skånsomt program for de første ukene etter lipødemkirurgi i leggene. Rolige bevegelser som kan støtte sirkulasjon og lymfeflyt.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section class="card">
+    <h2>Slik bruker du programmet</h2>
+    <ul class="plain-list">
+      <li>Gjør øvelse 1 til 3 gjerne <strong>2 til 3 ganger om dagen</strong>, for eksempel morgen, midt på dagen og ettermiddag.</li>
+      <li>Alt gjøres <strong>rolig og uten kraft</strong>. Det skal kjennes lett, ikke anstrengende.</li>
+      <li>Bruk kompresjon slik behandlingsstedet har anbefalt.</li>
+      <li>Antall gjentakelser er bare forslag. Gjør heller litt for lite enn for mye nå.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Programmet</h2>
+
+    <div class="exercise">
+      <div class="exercise-head">
+        <span class="exercise-num">1</span>
+        <h3>Dyp magepust</h3>
+      </div>
+      <p>Ligg eller sitt godt støttet. Legg en hånd på magen. Pust rolig inn gjennom nesen slik at magen løfter seg, og pust langsomt ut. Pustebevegelsene kan støtte lymfeflyten og virker samtidig avslappende.</p>
+      <span class="dose">Ca. 5 rolige pust</span>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-head">
+        <span class="exercise-num">2</span>
+        <h3>Ankelpumpe</h3>
+      </div>
+      <p>Sitt eller ligg. Trekk tærne rolig mot deg, og pek dem deretter forsiktig fra deg. Ingen kraft. Dette aktiverer leggmuskelpumpen uten at du belaster beina.</p>
+      <span class="dose">Ca. 10 rolige ganger</span>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-head">
+        <span class="exercise-num">3</span>
+        <h3>Rolige ankelsirkler</h3>
+      </div>
+      <p>Sitt eller ligg og tegn små, rolige sirkler med føttene. Stopp hvis det trekker eller gjør vondt i operasjonsområdet.</p>
+      <span class="dose">Ca. 5 sirkler hver vei</span>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-head">
+        <span class="exercise-num">4</span>
+        <h3>Korte, rolige gåturer</h3>
+      </div>
+      <p>Det å komme seg opp fra sofaen og bevege seg litt er noe av det viktigste du gjør nå. Gå rolig rundt inne, gjerne flere ganger om dagen, og øk litt etter hvert som kroppen tåler det.</p>
+      <span class="dose">Korte runder, flere ganger daglig</span>
+    </div>
+
+    <div class="exercise locked">
+      <div class="exercise-head">
+        <span class="exercise-num">5</span>
+        <h3>Rolig hælløft (senere)</h3>
+      </div>
+      <p>Ikke start med denne nå. Når du står komfortabelt og behandlingsstedet har sagt at det er greit: hold i en stol eller kjøkkenbenk, løft hælene forsiktig noen centimeter og senk rolig ned igjen.</p>
+      <span class="dose">Først når det er godkjent</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Dagens økt</h2>
+    <p class="note">Huk av mens du gjør øvelsene. Når du er ferdig, trykker du «Økt fullført».</p>
+    <ul class="check-list">
+      <li><label><input type="checkbox" class="session-check"><span>Dyp magepust</span></label></li>
+      <li><label><input type="checkbox" class="session-check"><span>Ankelpumpe</span></label></li>
+      <li><label><input type="checkbox" class="session-check"><span>Rolige ankelsirkler</span></label></li>
+      <li><label><input type="checkbox" class="session-check"><span>En kort, rolig gåtur</span></label></li>
+    </ul>
+    <p class="session-count" id="sessionCount">Ingen økter registrert i dag ennå.</p>
+    <div class="session-buttons">
+      <button type="button" id="sessionDone">Økt fullført</button>
+      <button type="button" id="sessionReset" class="secondary">Nullstill i dag</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Lytt til kroppen</h2>
+    <p>Får du mer smerter eller hevelse om kvelden etter en dag med mye aktivitet, er det et tydelig signal om at doseringen foreløpig bør være lavere. Skru da ned neste dag: færre gjentakelser, kortere gåturer og flere pauser med beina hevet.</p>
+    <p>Det er helt normalt at det går i små steg. Øk gradvis, og bare så lenge kroppen svarer godt.</p>
+  </section>
+
+  <section class="card caution-card">
+    <h2>Vent med dette foreløpig</h2>
+    <ul class="plain-list">
+      <li>Massasje av leggene</li>
+      <li>Kraftig tøying</li>
+      <li>Hopping, Tabata eller annen intens trening</li>
+      <li>Gjentatte tåhev</li>
+    </ul>
+    <p style="margin-top: 1rem;">Manuell lymfedrenasje og mer spesifikk lymfebehandling bør læres av en kvalifisert lymfeterapeut.</p>
+    <p>Ta kontakt med behandlingsstedet ved økende smerte, rødme, varme, feber, ny eller ensidig hevelse, eller hvis du er usikker.</p>
+  </section>
+
+  <p class="note" style="text-align: center;">Dette er generelle råd og erstatter ikke oppfølging fra behandlingsstedet ditt.</p>
+
+  <a class="home-link" href="index.html">Se hjemmesiden min →</a>
+
+</div>
+
+<footer class="closing">
+  Små skritt. Dine mål, ditt tempo.<br>
+  <strong>Du trenger ikke gjøre det alene.</strong>
+</footer>
+
+<script>
+  (function () {
+    var storageKey = 'leggoperasjon-okter';
+    var checks = document.querySelectorAll('.session-check');
+    var countEl = document.getElementById('sessionCount');
+    var doneBtn = document.getElementById('sessionDone');
+    var resetBtn = document.getElementById('sessionReset');
+
+    function today() {
+      var d = new Date();
+      return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+    }
+
+    function load() {
+      try {
+        var data = JSON.parse(localStorage.getItem(storageKey) || '{}');
+        return data.date === today() ? data.count || 0 : 0;
+      } catch (e) {
+        return 0;
+      }
+    }
+
+    function save(count) {
+      try {
+        localStorage.setItem(storageKey, JSON.stringify({ date: today(), count: count }));
+      } catch (e) { /* ignore if storage unavailable */ }
+    }
+
+    var count = load();
+
+    function render() {
+      if (count === 0) {
+        countEl.textContent = 'Ingen økter registrert i dag ennå.';
+      } else if (count === 1) {
+        countEl.textContent = '1 økt fullført i dag. Godt jobbet!';
+      } else {
+        countEl.textContent = count + ' økter fullført i dag. Godt jobbet!';
+      }
+    }
+
+    function clearChecks() {
+      checks.forEach(function (c) { c.checked = false; });
+    }
+
+    doneBtn.addEventListener('click', function () {
+      count = load() + 1;
+      save(count);
+      clearChecks();
+      render();
+    });
+
+    resetBtn.addEventListener('click', function () {
+      count = 0;
+      save(count);
+      clearChecks();
+      render();
+    });
+
+    render();
+  })();
+</script>
+
+</body>
+</html>
