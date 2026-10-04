@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trening 60+ – sterk videre | Silje Merete SMART Helseveiledning</title>
+<link rel="icon" href="images/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<meta name="description" content="Treningsuke for kvinner og menn fra 60 år og oppover, i tre trinn: 60+ sterk videre, 70+ styrke, balanse og trygghet, og 80+ bevegelse, funksjon og selvstendighet.">
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --warn: #c9823f;
+    --warn-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--accent-soft), var(--bg));
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .hero h1 {
+    margin: 0 0 0.75rem;
+    font-size: 1.8rem;
+    color: var(--accent-dark);
+  }
+
+  .hero p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 46ch;
+    margin-inline: auto;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem 2rem;
+    margin: 2rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .card h2 {
+    margin: 0 0 0.6rem;
+    color: var(--accent-dark);
+    font-size: 1.3rem;
+  }
+
+  .card h3 {
+    margin: 1.25rem 0 0.4rem;
+    color: var(--accent-dark);
+    font-size: 1.05rem;
+  }
+
+  .card p { margin: 0 0 0.75rem; }
+  .card p:last-child { margin-bottom: 0; }
+
+  .card > p.desc {
+    margin: 0 0 1.25rem;
+    color: var(--muted);
+  }
+
+  .message-card {
+    border-left: 4px solid var(--accent);
+  }
+
+  .week {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .week li {
+    display: grid;
+    grid-template-columns: 5.5rem 1fr;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .week li:last-child { border-bottom: 0; }
+
+  .week .day {
+    font-weight: 700;
+    color: var(--accent-dark);
+  }
+
+  .week .tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    margin-left: 0.3rem;
+    vertical-align: 0.1em;
+  }
+
+  .tag.strength { background: var(--accent); color: #fff; }
+  .tag.hard { background: var(--warn); color: #fff; }
+  .tag.easy { background: var(--accent-soft); color: var(--accent-dark); }
+
+  .week .detail {
+    display: block;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .exercises {
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+  }
+
+  .exercises li {
+    display: grid;
+    grid-template-columns: 72px 1fr auto;
+    align-items: center;
+    gap: 0.4rem 0.9rem;
+    padding: 0.55rem 0.9rem 0.55rem 0.55rem;
+    border-radius: 8px;
+  }
+
+  .exercises .thumb {
+    display: block;
+    width: 72px;
+    height: 60px;
+    border-radius: 6px;
+    object-fit: cover;
+  }
+
+  .thumb-link { display: block; border-radius: 6px; }
+  .thumb-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .exercises li:nth-child(odd) { background: var(--accent-soft); }
+
+  .exercises .sets {
+    white-space: nowrap;
+    font-weight: 600;
+    color: var(--accent-dark);
+  }
+
+  .meta {
+    margin: 0 0 1.25rem;
+    padding: 0.75rem 1rem;
+    background: var(--accent-soft);
+    border-radius: 8px;
+    color: var(--ink);
+    font-size: 0.95rem;
+  }
+
+  .formula {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+    margin: 0.5rem 0 1rem;
+  }
+
+  .formula.not {
+    color: var(--muted);
+    background: #f4f6f7;
+    font-weight: 600;
+    text-decoration: line-through;
+    text-decoration-color: rgba(79, 112, 128, 0.5);
+  }
+
+  .plain-list {
+    margin: 0 0 0.75rem;
+    padding-left: 1.25rem;
+  }
+
+  .plain-list li { margin: 0 0 0.5rem; }
+
+  .caution-card {
+    background: var(--warn-soft);
+    border: 1px solid #ecd3ac;
+    border-left: 4px solid var(--warn);
+  }
+
+  .caution-card h2 { color: #8a5a25; }
+
+  .home-link {
+    display: block;
+    text-align: center;
+    margin: 1rem 0 3rem;
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .home-link:hover { text-decoration: underline; }
+
+  footer.closing {
+    margin: 2rem 0 1rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong { color: var(--accent-dark); }
+
+  .page-logo {
+    display: block;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 0.75rem;
+    padding: 5px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(22, 40, 58, 0.12);
+  }
+
+  .page-logo img {
+    display: block;
+    width: 46px;
+    height: 46px;
+  }
+
+  .place-switch {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0 0 1.25rem;
+  }
+
+  .place-switch button {
+    flex: 1;
+    font-size: 0.98rem;
+    padding: 0.7rem 0.75rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .place-switch button span {
+    display: block;
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .place-switch button[aria-pressed="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .place-switch button[aria-pressed="true"] span { color: var(--accent-soft); }
+
+  .exercises .how {
+    display: block;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  .about-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+    margin: 2rem 0 0;
+    box-shadow: var(--shadow);
+  }
+
+  .about-box summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+  }
+
+  .about-box summary::-webkit-details-marker { display: none; }
+
+  .about-box summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 10px;
+  }
+
+  .about-box .chevron { transition: transform 0.2s; }
+  .about-box[open] .chevron { transform: rotate(90deg); }
+
+  .about-body { padding: 0 1.25rem 1.25rem; }
+  .about-body p { margin: 0 0 0.75rem; }
+  .about-body p:last-child { margin-bottom: 0; }
+
+  .about-body .source {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .about-body .source a { color: var(--accent-dark); font-weight: 600; }
+
+  .about-box.equipment { margin: 1.5rem 0 0; box-shadow: none; }
+
+  .about-body h4 {
+    margin: 1.1rem 0 0.4rem;
+    color: var(--accent-dark);
+    font-size: 0.98rem;
+  }
+
+  .weights {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin: 0 0 0.75rem;
+  }
+
+  .weights th,
+  .weights td {
+    text-align: left;
+    padding: 0.45rem 0.4rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .weights th { color: var(--accent-dark); font-size: 0.85rem; }
+  .weights td:not(:first-child), .weights th:not(:first-child) { white-space: nowrap; }
+
+  .equip-button {
+    display: inline-block;
+    margin-top: 0.7rem;
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+  }
+
+  .equip-button:hover { background: var(--accent-dark); }
+  .equip-button:focus-visible { outline: 2px solid var(--accent-dark); outline-offset: 2px; }
+
+  .card .source {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-top: 0.75rem;
+  }
+
+  .card .source a, .sources a { color: var(--accent-dark); font-weight: 600; }
+
+  .level-switch button { font-size: 0.92rem; padding: 0.65rem 0.4rem; }
+
+  .sources { margin: 0; padding-left: 1.1rem; font-size: 0.9rem; }
+  .sources li { margin: 0 0 0.6rem; }
+
+  .card a:not([class]) { color: var(--accent-dark); font-weight: 600; }
+
+  .level-note {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 0.9rem 1rem 1rem;
+    margin: 0 0 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .level-note p { margin: 0 0 0.5rem; }
+
+  .bank-box {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 1rem 1.1rem 1.2rem;
+    margin: 0 0 1.5rem;
+  }
+
+  .bank-box h3 { margin-top: 0; }
+  .bank-box p { margin: 0 0 0.75rem; }
+  .bank-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: 100%;
+    margin: 0.5rem 0 0;
+    padding: 0.95rem 1.2rem;
+    border-radius: 12px;
+    background: #a35a1f;
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(18, 49, 61, 0.18);
+  }
+
+  .bank-button small {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 400;
+    opacity: 0.9;
+  }
+
+  .bank-button .arrow { font-size: 1.4rem; line-height: 1; }
+  .bank-button:hover { background: #87491a; }
+  .bank-button:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 2px; }
+
+  [hidden] { display: none !important; }
+
+  @media (max-width: 420px) {
+    .about-box.equipment summary { padding: 0.9rem 0.9rem; }
+    .about-box.equipment .about-body { padding: 0 0.9rem 1rem; }
+    .weights { font-size: 0.82rem; }
+    .weights th, .weights td { padding: 0.4rem 0.25rem; }
+    .weights td:not(:first-child), .weights th:not(:first-child) { white-space: normal; }
+    .exercises li { grid-template-columns: 64px 1fr; }
+    .exercises .thumb { width: 64px; height: 54px; }
+    .exercises .thumb-link { grid-row: span 2; }
+    .exercises .sets { grid-column: 2; }
+    .week li { grid-template-columns: 1fr; gap: 0.15rem; }
+  }
+
+  .exercises.plain li { grid-template-columns: 1fr auto; padding: 0.6rem 0.9rem; }
+  .exercises.plain .sets { grid-column: auto; }
+
+  @media (max-width: 420px) {
+    .age-switch button { font-size: 0.88rem; padding: 0.6rem 0.3rem; }
+  }
+
+  .age-intro {
+    margin: 0 0 1.25rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
+    <h1>Trening 60+ – sterk videre</h1>
+    <p>For kvinner og menn. Det er aldri for sent å bli sterkere. Muskler, balanse og kondisjon kan trenes i 60-, 70-, 80- og 90-årene, og fremgangen gjør hverdagen lettere og tryggere.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section class="card">
+    <h2>Velg det som passer deg</h2>
+    <p class="desc">Alderen er bare et utgangspunkt. Velg det som passer best med hvordan kroppen din fungerer i dag, ikke bare med tallet på fødselsattesten.</p>
+    <div class="place-switch level-switch age-switch" role="group" aria-label="Velg trinn">
+      <button type="button" data-level="60" aria-pressed="true">60+<span>Sterk videre</span></button>
+      <button type="button" data-level="70" aria-pressed="false">70+<span>Styrke, balanse og trygghet</span></button>
+      <button type="button" data-level="80" aria-pressed="false">80+<span>Bevegelse, funksjon og selvstendighet</span></button>
+    </div>
+
+    <div data-level-panel="60">
+      <p class="age-intro">Trening 60+ – sterk videre</p>
+      <p>Du er kanskje i full aktivitet, eller du har nettopp sluttet å jobbe og har mer tid. Nå er et godt tidspunkt å bygge opp musklene. Det du bygger nå, har du glede av i mange år.</p>
+      <div class="meta">
+        <strong>Uka i korte trekk:</strong> 2–3 styrkeøkter, 1–2 kondisjonsøkter (gjerne én med intervaller), litt balanse flere dager i uka og mye hverdagsaktivitet.
+      </div>
+      <ul class="week">
+        <li><span class="day">Mandag</span><span>Styrke 40–50 min <span class="tag strength">Styrke</span><span class="detail">Økt A, 2 sett per øvelse</span></span></li>
+        <li><span class="day">Tirsdag</span><span>Rask gange <span class="tag easy">Rolig</span><span class="detail">30–45 min, gjerne i kupert terreng</span></span></li>
+        <li><span class="day">Onsdag</span><span>Kondisjon <span class="tag hard">Kondisjon</span><span class="detail">Intervaller 4 × 4 min, eller 30–40 min jevnt moderat tempo</span></span></li>
+        <li><span class="day">Torsdag</span><span>Styrke 40–50 min <span class="tag strength">Styrke</span><span class="detail">Økt B, 2 sett per øvelse</span></span></li>
+        <li><span class="day">Fredag</span><span>Rolig aktivitet og balanse <span class="tag easy">Rolig</span><span class="detail">Gåtur og 10 min balanseøvelser</span></span></li>
+        <li><span class="day">Lørdag</span><span>Aktivitet du liker <span class="tag easy">Lyst</span><span class="detail">Tur, sykling, ski, svømming, dans, padel eller hagearbeid</span></span></li>
+        <li><span class="day">Søndag</span><span>Hvile <span class="tag easy">Rolig</span><span class="detail">Eller en tredje kort styrkeøkt hvis du restituerer godt</span></span></li>
+      </ul>
+
+      <h3>Økt A – mandag</h3>
+      <ul class="exercises plain">
+        <li><span>Knebøy<span class="how">Med manual foran brystet, eller ned til en stol eller benk.</span></span><span class="sets">8–12 rep</span></li>
+        <li><span>Rumensk markløft med manualer<span class="how">Bøy i hoftene med rett rygg, og skyv hoftene frem på vei opp.</span></span><span class="sets">8–12 rep</span></li>
+        <li><span>Roing<span class="how">I apparat, med manual og støtte på benk, eller med strikk.</span></span><span class="sets">8–12 rep</span></li>
+        <li><span>Push-ups mot benk eller brystpress<span class="how">Jo lavere hendene er, jo tyngre blir det.</span></span><span class="sets">8–12 rep</span></li>
+        <li><span>Farmer’s walk<span class="how">Gå rolig med en tung vekt i hver hånd, rak rygg. Godt for grep, hofter og balanse.</span></span><span class="sets">30–40 m</span></li>
+      </ul>
+      <h3>Økt B – torsdag</h3>
+      <ul class="exercises plain">
+        <li><span>Step-up på trinn eller kasse<span class="how">Gjerne med manualer. Hold i et rekkverk om du trenger det.</span></span><span class="sets">8–10 per bein</span></li>
+        <li><span>Seteløft eller hip thrust</span><span class="sets">10–15 rep</span></li>
+        <li><span>Nedtrekk i apparat eller med strikk</span><span class="sets">8–12 rep</span></li>
+        <li><span>Skulderpress med manualer<span class="how">Sittende eller stående.</span></span><span class="sets">8–12 rep</span></li>
+        <li><span>Tåhev<span class="how">På en trappekant, med støtte for balansen.</span></span><span class="sets">12–15 rep</span></li>
+        <li><span>Sideplanke eller dead bug</span><span class="sets">20–30 sek</span></li>
+      </ul>
+      <p><strong>Tren kraft også.</strong> Løft raskt og kontrollert opp, og senk rolig. Evnen til å bruke kraft raskt svekkes enda tidligere enn styrken, og det er den du trenger når du skal ta deg for et snubletrinn.</p>
+      <p><strong>Skjelettet liker støt.</strong> Er du frisk og uten skader, kan du legge inn noen små hopp eller hælslipp: stå på tærne og slipp deg ned på hælene, 10–20 ganger, et par dager i uka.</p>
+      <a class="bank-button" href="ovelsesbank.html"><span>Gå til øvelsesbanken<small>Flere øvelser i hver gruppe, for senter og hjemme</small></span><span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+
+    <div data-level-panel="70" hidden>
+      <p class="age-intro">Trening 70+ – styrke, balanse og trygghet</p>
+      <p>Nå blir balansen like viktig som styrken. Trening som kombinerer styrke og balanse er det som best forebygger fall, og den gjør deg tryggere i hverdagen: i trapper, på glatt føre og når du bærer noe.</p>
+      <div class="meta">
+        <strong>Uka i korte trekk:</strong> 2 styrkeøkter, balanse minst 3 dager i uka, en gåtur de fleste dager og så lite stillesitting som mulig.
+      </div>
+      <ul class="week">
+        <li><span class="day">Mandag</span><span>Styrke og balanse 30–40 min <span class="tag strength">Styrke</span><span class="detail">Styrkeøkta under, og 10 min balanse</span></span></li>
+        <li><span class="day">Tirsdag</span><span>Gåtur <span class="tag easy">Rolig</span><span class="detail">20–40 min i et tempo der du blir litt andpusten</span></span></li>
+        <li><span class="day">Onsdag</span><span>Balanse og gåtur <span class="tag easy">Balanse</span><span class="detail">15 min balanseøvelser, og en kort tur</span></span></li>
+        <li><span class="day">Torsdag</span><span>Styrke og balanse 30–40 min <span class="tag strength">Styrke</span><span class="detail">Styrkeøkta under, og 10 min balanse</span></span></li>
+        <li><span class="day">Fredag</span><span>Gåtur <span class="tag easy">Rolig</span><span class="detail">20–40 min, gjerne med noen bakker</span></span></li>
+        <li><span class="day">Lørdag</span><span>Aktivitet du liker <span class="tag easy">Lyst</span><span class="detail">Seniordans, svømming, trimgruppe, sykling eller hagearbeid</span></span></li>
+        <li><span class="day">Søndag</span><span>Rolig dag <span class="tag easy">Rolig</span><span class="detail">Hvile eller en rolig tur</span></span></li>
+      </ul>
+
+      <h3>Styrkeøkta</h3>
+      <p>2 sett per øvelse. Velg en vekt eller variant der de siste repetisjonene kjennes tunge, men teknikken fortsatt er god.</p>
+      <ul class="exercises plain">
+        <li><span>Reis deg fra stol<span class="how">Uten å bruke armene hvis du kan. For mer: hold en vekt, eller bruk en lavere stol.</span></span><span class="sets">8–12 rep</span></li>
+        <li><span>Step-up på trappetrinn<span class="how">Hold i rekkverket.</span></span><span class="sets">8–10 per bein</span></li>
+        <li><span>Seteløft liggende</span><span class="sets">10–15 rep</span></li>
+        <li><span>Roing med strikk<span class="how">Strikk festet i døra, eller manual med støtte på en stol.</span></span><span class="sets">10–15 rep</span></li>
+        <li><span>Push-ups mot vegg eller kjøkkenbenk</span><span class="sets">8–12 rep</span></li>
+        <li><span>Skulderpress med lette manualer<span class="how">Sittende eller stående.</span></span><span class="sets">8–12 rep</span></li>
+        <li><span>Tåhev med støtte</span><span class="sets">12–15 rep</span></li>
+        <li><span>Bær handleposer eller vekter<span class="how">Gå rolig med lik vekt i hver hånd.</span></span><span class="sets">30 m</span></li>
+      </ul>
+
+      <h3>Balanseøvelsene</h3>
+      <p>Stå ved en kjøkkenbenk eller en stødig stol, slik at du alltid har noe å ta tak i. Balansen må utfordres litt for å bli bedre, men trygt.</p>
+      <ul class="plain-list">
+        <li><strong>Stå på ett bein</strong> i 10–30 sekunder. Slipp taket litt når det går greit.</li>
+        <li><strong>Stå med den ene foten rett foran den andre,</strong> hæl mot tå, i 10–30 sekunder.</li>
+        <li><strong>Gå hæl mot tå</strong> langs benken, 10 skritt frem og tilbake.</li>
+        <li><strong>Gå sidelengs og baklengs</strong> langs benken.</li>
+        <li><strong>Snu deg, stopp og gå videre.</strong> Øv på bevegelsene som ofte fører til fall.</li>
+      </ul>
+      <p>Når dette blir lett: lukk øynene et øyeblikk, stå på en pute, eller snu hodet mens du står.</p>
+    </div>
+
+    <div data-level-panel="80" hidden>
+      <p class="age-intro">Trening 80+ – bevegelse, funksjon og selvstendighet</p>
+      <p>Målet er å klare hverdagen selv: reise seg, gå i trapper, handle, bære og komme seg opp fra gulvet. Musklene svarer på trening også nå. Selv i 90-årene kan styrketrening gi tydelig fremgang i løpet av få uker.</p>
+      <div class="meta">
+        <strong>Uka i korte trekk:</strong> litt hver dag. Korte styrkeøkter på 10–20 minutter tre ganger i uka, balanse ved kjøkkenbenken og en gåtur hver dag, gjerne flere korte.
+      </div>
+      <ul class="week">
+        <li><span class="day">Mandag</span><span>Stolstyrke 15–20 min <span class="tag strength">Styrke</span><span class="detail">Øvelsene under</span></span></li>
+        <li><span class="day">Tirsdag</span><span>Gåtur og balanse <span class="tag easy">Balanse</span><span class="detail">En kort tur, og 5–10 min balanse ved benken</span></span></li>
+        <li><span class="day">Onsdag</span><span>Stolstyrke 15–20 min <span class="tag strength">Styrke</span><span class="detail">Øvelsene under</span></span></li>
+        <li><span class="day">Torsdag</span><span>Gåtur og balanse <span class="tag easy">Balanse</span><span class="detail">En kort tur, og 5–10 min balanse ved benken</span></span></li>
+        <li><span class="day">Fredag</span><span>Stolstyrke 15–20 min <span class="tag strength">Styrke</span><span class="detail">Øvelsene under</span></span></li>
+        <li><span class="day">Lørdag</span><span>Noe sosialt og aktivt <span class="tag easy">Lyst</span><span class="detail">Trimgruppe, tur med noen, dans eller hagearbeid</span></span></li>
+        <li><span class="day">Søndag</span><span>Rolig dag <span class="tag easy">Rolig</span><span class="detail">Men reis deg og gå litt omtrent hver time</span></span></li>
+      </ul>
+
+      <h3>Stolstyrke</h3>
+      <p>1–2 sett per øvelse. Bruk en stødig stol uten hjul, gjerne med armlener, og ha kjøkkenbenken i nærheten.</p>
+      <ul class="exercises plain">
+        <li><span>Reis deg fra stol<span class="how">Bruk armlenene så lite som mulig. Den viktigste øvelsen av alle.</span></span><span class="sets">5–10 rep</span></li>
+        <li><span>Strekk kneet sittende<span class="how">Strekk ett bein frem, hold litt, senk rolig. Vektmansjett for mer.</span></span><span class="sets">10 per bein</span></li>
+        <li><span>Marsj sittende<span class="how">Løft knærne vekselvis.</span></span><span class="sets">20–30 sek</span></li>
+        <li><span>Tåhev og hælhev ved benken</span><span class="sets">10–15 rep</span></li>
+        <li><span>Roing med strikk sittende</span><span class="sets">10–15 rep</span></li>
+        <li><span>Push-ups mot kjøkkenbenken</span><span class="sets">8–12 rep</span></li>
+        <li><span>Armhev med lette vekter<span class="how">Melkekartonger eller vannflasker fungerer fint.</span></span><span class="sets">8–12 rep</span></li>
+      </ul>
+
+      <h3>Balanse ved benken</h3>
+      <ul class="plain-list">
+        <li><strong>Stå med føttene samlet,</strong> og deretter hæl mot tå, i 10–30 sekunder.</li>
+        <li><strong>Stå på ett bein</strong> med en hånd på benken.</li>
+        <li><strong>Gå hæl mot tå</strong> langs benken.</li>
+      </ul>
+      <p><strong>Øv på å komme deg opp fra gulvet</strong> mens du har noen hos deg: over på siden, opp på knærne, og opp ved hjelp av en stol. Det gir trygghet å vite at du klarer det.</p>
+      <p>Mange kommuner har hverdagsrehabilitering, trimgrupper eller programmet <em>Sterk og stødig</em>. Spør fastlegen, fysioterapeut eller kommunen. Det er lettere å holde det gående sammen med andre.</p>
+    </div>
+  </section>
+
+  <section class="card message-card">
+    <h2>Hva sier anbefalingene?</h2>
+    <p>Helsedirektoratet og Verdens helseorganisasjon (WHO) anbefaler at eldre voksne er i aktivitet minst 150 minutter i uka, trener styrke minst to dager i uka, og trener balanse og styrke sammen minst tre dager i uka for å forebygge fall.</p>
+    <p>Klarer du ikke så mye, er litt alltid bedre enn ingenting. Den største gevinsten får de som går fra nesten ingen aktivitet til litt.</p>
+    <p class="source">Forskning: <a href="https://www.who.int/publications/i/item/9789240015128" target="_blank" rel="noopener">WHO-retningslinjene 2020</a> · <a href="https://www.helsedirektoratet.no/faglige-rad/fysisk-aktivitet-for-barn-unge-voksne-eldre-og-gravide" target="_blank" rel="noopener">Helsedirektoratet</a></p>
+  </section>
+
+  <section class="card">
+    <h2>Kvinner og menn</h2>
+    <p class="desc">Etter 60 er rådene om trening nesten like for kvinner og menn. Begge mister muskelmasse, styrke og kraft hvis de ikke trener, og begge får bedre funksjon av å trene.</p>
+    <h3>Kvinner</h3>
+    <p>Etter overgangsalderen faller beintettheten raskere. Tung styrketrening og støt, som hopp og hælslipp, er det som best styrker skjelettet. I LIFTMOR-studien trente kvinner med lav beintetthet tung styrke under veiledning, og de fikk både sterkere skjelett og bedre funksjon uten flere skader.</p>
+    <h3>Menn</h3>
+    <p>Menn får også benskjørhet, bare noe senere. Omtrent én av fem menn over 50 vil få et brudd på grunn av benskjørhet. Menn mister også mer muskelmasse i absolutte tall, og trenger derfor styrketrening like mye.</p>
+    <p class="source">Forskning: <a href="https://pubmed.ncbi.nlm.nih.gov/28975661/" target="_blank" rel="noopener">LIFTMOR (Watson mfl. 2018)</a></p>
+  </section>
+
+  <section class="card">
+    <h2>Kondisjon</h2>
+    <p class="desc">God kondisjon gjør hverdagen lettere og henger sterkt sammen med god helse og lang levetid.</p>
+    <p><strong>Rask gange</strong> er den enkleste kondisjonstreningen. Gå i et tempo der du blir litt andpusten, men fortsatt kan snakke.</p>
+    <p><strong>Intervaller passer også senere i livet.</strong> I den norske Generasjon 100-studien trente 70–77-åringer blant annet 4 × 4 minutter, med 3 minutter rolig mellom dragene. Det var trygt, og de som trente intervaller hadde best kondisjon etter fem år.</p>
+    <p>Start rolig hvis du er utrent, og øk gradvis.</p>
+    <p class="source">Forskning: <a href="https://www.bmj.com/content/371/bmj.m3485" target="_blank" rel="noopener">Generasjon 100 (Stensvold mfl., BMJ 2020)</a></p>
+  </section>
+
+  <section class="card">
+    <h2>Test deg selv</h2>
+    <p class="desc">Tester gir deg et utgangspunkt, og gjør det lettere å se at du blir bedre. Ta dem igjen etter 8–12 uker.</p>
+    <ul class="plain-list">
+      <li><a href="sit-to-stand-test.html">Sit-to-stand-test (30 sekunder)</a>: Hvor mange ganger du reiser deg fra stolen. Passer for alle trinnene.</li>
+      <li><a href="6mwt.html">6-minutters gangtest</a>: Hvor langt du går på seks minutter.</li>
+      <li><a href="ymca-step-test.html">YMCA step-test</a>: Kondisjonstest for deg som er sprek, mest for trinnet 60+.</li>
+    </ul>
+  </section>
+
+  <section class="card message-card">
+    <h2>Husk</h2>
+    <p><strong>Det er aldri for sent, og det er aldri for lite.</strong> Et par korte økter i uka kan gi tydelig fremgang. Det viktigste er å holde det gående, også i perioder da du gjør mindre.</p>
+    <p>Etter sykdom eller sykehusopphold går musklene raskt tilbake. Kom i gang igjen så snart det er trygt, og start gjerne et trinn ned.</p>
+  </section>
+
+  <section class="card caution-card">
+    <h2>Viktige forholdsregler</h2>
+    <ul class="plain-list">
+      <li>Har du hjerte- eller karsykdom, høyt blodtrykk, benskjørhet eller andre helseplager, snakk med legen eller en fysioterapeut før du starter med tung styrke, hopp eller harde intervaller.</li>
+      <li>Ingen øvelser skal gjøre vondt i ledd. Gjør bevegelsen mindre, velg en annen variant, eller hopp over øvelsen.</li>
+      <li>Ha alltid noe å holde i når du trener balanse.</li>
+      <li>Pust jevnt og ikke hold pusten når du løfter.</li>
+      <li>Stopp og ta kontakt med lege hvis du får brystsmerter, uvanlig tungpust eller blir svimmel.</li>
+    </ul>
+  </section>
+
+  <details class="about-box">
+    <summary>Kilder <span class="chevron" aria-hidden="true">▸</span></summary>
+    <div class="about-body">
+      <ul class="sources">
+        <li>Verdens helseorganisasjon (2020). <em>WHO guidelines on physical activity and sedentary behaviour.</em> <a href="https://www.who.int/publications/i/item/9789240015128" target="_blank" rel="noopener">Les retningslinjene</a></li>
+        <li>Helsedirektoratet. <em>Fysisk aktivitet for barn, unge, voksne, eldre og gravide.</em> <a href="https://www.helsedirektoratet.no/faglige-rad/fysisk-aktivitet-for-barn-unge-voksne-eldre-og-gravide" target="_blank" rel="noopener">Les rådene</a></li>
+        <li>Sherrington, C. mfl. (2019). Exercise for preventing falls in older people living in the community. <em>Cochrane Database of Systematic Reviews.</em> <a href="https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD012424.pub2/full" target="_blank" rel="noopener">Les oversikten</a></li>
+        <li>Stensvold, D. mfl. (2020). Effect of exercise training for five years on all cause mortality in older adults – the Generation 100 study. <em>BMJ.</em> <a href="https://www.bmj.com/content/371/bmj.m3485" target="_blank" rel="noopener">Les artikkelen</a></li>
+        <li>Watson, S.L. mfl. (2018). High-intensity resistance and impact training improves bone mineral density and physical function in postmenopausal women with osteopenia and osteoporosis: the LIFTMOR randomized controlled trial. <em>Journal of Bone and Mineral Research.</em> <a href="https://pubmed.ncbi.nlm.nih.gov/28975661/" target="_blank" rel="noopener">Les sammendraget</a></li>
+        <li>Fiatarone, M.A. mfl. (1994). Exercise training and nutritional supplementation for physical frailty in very elderly people. <em>New England Journal of Medicine.</em> <a href="https://www.nejm.org/doi/full/10.1056/NEJM199406233302501" target="_blank" rel="noopener">Les artikkelen</a></li>
+      </ul>
+    </div>
+  </details>
+
+  <a class="home-link" href="index.html">Se hjemmesiden min →</a>
+
+</div>
+
+<footer class="closing">
+  Små skritt. Dine mål, ditt tempo.<br>
+  <strong>Du trenger ikke gjøre det alene.</strong>
+</footer>
+
+<script>
+  (function () {
+    var btns = document.querySelectorAll('.level-switch button');
+    function show(key) {
+      btns.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-level') === key ? 'true' : 'false'); });
+      document.querySelectorAll('[data-level-panel]').forEach(function (panel) {
+        panel.hidden = panel.getAttribute('data-level-panel') !== key;
+      });
+    }
+    btns.forEach(function (btn) {
+      btn.addEventListener('click', function () { show(btn.getAttribute('data-level')); });
+    });
+    var m = /[?&]alder=(60|70|80)/.exec(location.search);
+    if (m) show(m[1]);
+  })();
+</script>
+
+</body>
+</html>
