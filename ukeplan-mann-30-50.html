@@ -389,10 +389,13 @@
 
   .level-note {
     background: var(--accent-soft);
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    padding: 0.9rem 1rem 1rem;
+    margin: 0 0 1.25rem;
     font-size: 0.95rem;
   }
+
+  .level-note p { margin: 0 0 0.5rem; }
 
   .bank-box {
     background: var(--accent-soft);
@@ -403,7 +406,33 @@
 
   .bank-box h3 { margin-top: 0; }
   .bank-box p { margin: 0 0 0.75rem; }
-  .bank-button { margin: 0.25rem 0 0; }
+  .bank-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: 100%;
+    margin: 0.5rem 0 0;
+    padding: 0.95rem 1.2rem;
+    border-radius: 12px;
+    background: #a35a1f;
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(18, 49, 61, 0.18);
+  }
+
+  .bank-button small {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 400;
+    opacity: 0.9;
+  }
+
+  .bank-button .arrow { font-size: 1.4rem; line-height: 1; }
+  .bank-button:hover { background: #87491a; }
+  .bank-button:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 2px; }
 
   [hidden] { display: none !important; }
 
@@ -513,7 +542,10 @@
     </div>
     <div data-level-show="1 2">
       <p>Økt A og økt B trener de samme grunnbevegelsene med ulike varianter, så kroppen får litt variasjon gjennom uka.</p>
-      <p class="level-note" data-level-show="2" hidden><strong>Økt A og B er et utgangspunkt.</strong> Vil du variere, kan du bytte en øvelse med en annen fra samme gruppe i <a href="ovelsesbank.html">øvelsesbanken</a>.</p>
+      <div class="level-note" data-level-show="2" hidden>
+        <p><strong>Økt A og B er et utgangspunkt.</strong> Vil du variere, kan du bytte en øvelse med en annen fra samme gruppe i øvelsesbanken.</p>
+        <a class="bank-button" href="ovelsesbank.html"><span>Gå til øvelsesbanken<small>20 øvelser i 7 grupper, for senter og hjemme</small></span><span class="arrow" aria-hidden="true">→</span></a>
+      </div>
       <div class="place-switch" role="group" aria-label="Velg hvor du trener">
         <button type="button" data-place="gym" aria-pressed="true">Treningssenter<span>Stang, apparater og manualer</span></button>
         <button type="button" data-place="home" aria-pressed="false">Hjemme<span>Manualer, strikk og en stol</span></button>
@@ -598,7 +630,7 @@
       <h3>Bygg dine egne økter</h3>
       <p>Trener du jevnlig, trenger du ikke et fast program herfra. Fortsett med det som fungerer for deg, og sjekk at øktene dine til sammen dekker de sju bevegelsesgruppene: knebøy, hofte, press fremover, press opp, trekk mot deg, trekk ned og kjerne.</p>
       <p>I øvelsesbanken finner du flere øvelser i hver gruppe, for både treningssenter og hjemme.</p>
-      <a class="equip-button bank-button" href="ovelsesbank.html">Gå til øvelsesbanken</a>
+      <a class="bank-button" href="ovelsesbank.html"><span>Gå til øvelsesbanken<small>20 øvelser i 7 grupper, for senter og hjemme</small></span><span class="arrow" aria-hidden="true">→</span></a>
     </div>
 
     <h3>Hvor tungt?</h3>
