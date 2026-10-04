@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rolige øvelser etter leggoperasjon | Silje Merete SMART Helseveiledning</title>
+<title>Rolige øvelser etter operasjon | Silje Merete SMART Helseveiledning</title>
 <link rel="icon" href="images/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-<meta name="description" content="Et lite, skånsomt program med rolige bevegelser de første ukene etter lipødemkirurgi i leggene.">
+<meta name="description" content="Et lite, skånsomt program med rolige bevegelser de første ukene etter en operasjon, for eksempel i beina eller etter lipødemkirurgi.">
 <style>
   :root {
     --bg: #f0f7f9;
@@ -368,8 +368,8 @@
 <section class="hero">
   <div class="wrap">
     <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
-    <h1>Rolige øvelser etter leggoperasjon</h1>
-    <p>Et lite, skånsomt program for de første ukene etter lipødemkirurgi i leggene. Rolige bevegelser som kan støtte sirkulasjon og lymfeflyt.</p>
+    <h1>Rolige øvelser etter operasjon</h1>
+    <p>Et lite, skånsomt program for de første ukene etter en operasjon, for eksempel i beina eller etter lipødemkirurgi. Rolige bevegelser som kan støtte sirkulasjon og lymfeflyt.</p>
   </div>
 </section>
 
@@ -380,7 +380,7 @@
     <ul class="plain-list">
       <li>Gjør øvelse 1 til 3 gjerne <strong>2 til 3 ganger om dagen</strong>, for eksempel morgen, midt på dagen og ettermiddag.</li>
       <li>Alt gjøres <strong>rolig og uten kraft</strong>. Det skal kjennes lett, ikke anstrengende.</li>
-      <li>Bruk kompresjon slik behandlingsstedet har anbefalt.</li>
+      <li>Bruk kompresjon hvis behandlingsstedet har anbefalt det.</li>
       <li>Antall gjentakelser er bare forslag. Gjør heller litt for lite enn for mye nå.</li>
     </ul>
   </section>
@@ -429,7 +429,7 @@
         <span class="exercise-num">5</span>
         <h3>Rolig hælløft (senere)</h3>
       </div>
-      <p>Ikke start med denne nå. Når du står komfortabelt og behandlingsstedet har sagt at det er greit: hold i en stol eller kjøkkenbenk, løft hælene forsiktig noen centimeter og senk rolig ned igjen.</p>
+      <p>Ikke start med denne de første dagene, særlig ikke etter operasjon i beina. Når du står komfortabelt og behandlingsstedet har sagt at det er greit: hold i en stol eller kjøkkenbenk, løft hælene forsiktig noen centimeter og senk rolig ned igjen.</p>
       <span class="dose">Først når det er godkjent</span>
     </div>
   </section>
@@ -475,7 +475,7 @@
   <section class="card caution-card">
     <h2>Vent med dette foreløpig</h2>
     <ul class="plain-list">
-      <li>Massasje av leggene</li>
+      <li>Massasje av operasjonsområdet</li>
       <li>Kraftig tøying</li>
       <li>Hopping, Tabata eller annen intens trening</li>
       <li>Gjentatte tåhev</li>
@@ -497,7 +497,7 @@
 
 <script>
   (function () {
-    var STORAGE_KEY = 'leggoperasjon-logg';
+    var STORAGE_KEY = 'operasjon-logg';
     var RECIPIENT = 'silje.merete.binder@gmail.com';
     var SWELLING = ['', 'Mindre enn dagen før', 'Omtrent som dagen før', 'Mer enn dagen før'];
 
@@ -579,7 +579,7 @@
         save();
       });
       var painField = el('div', { 'class': 'field' }, [
-        el('label', { 'for': prefix + 'pain', text: 'Smerte i leggene (0 til 10)' }),
+        el('label', { 'for': prefix + 'pain', text: 'Smerte i operasjonsområdet (0 til 10)' }),
         el('div', { 'class': 'range-row' }, [painInput, painValue]),
         el('div', { 'class': 'range-hint' }, [el('span', { text: 'Ingen' }), el('span', { text: 'Verst tenkelig' })])
       ]);
@@ -625,7 +625,7 @@
     }
 
     function buildSummaryText() {
-      var lines = ['Logg: rolige øvelser etter leggoperasjon', ''];
+      var lines = ['Logg: rolige øvelser etter operasjon', ''];
       var sorted = state.entries.slice().sort(function (a, b) {
         return (a.date || '').localeCompare(b.date || '');
       });
@@ -646,7 +646,7 @@
     }
 
     function sendEmail() {
-      var subject = encodeURIComponent('Logg: rolige øvelser etter leggoperasjon');
+      var subject = encodeURIComponent('Logg: rolige øvelser etter operasjon');
       var body = encodeURIComponent(buildSummaryText());
       window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
     }
@@ -656,7 +656,7 @@
       var url = URL.createObjectURL(blob);
       var a = document.createElement('a');
       a.href = url;
-      a.download = 'logg-leggoperasjon.txt';
+      a.download = 'logg-operasjon.txt';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
