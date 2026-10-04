@@ -300,6 +300,37 @@
     .product img { max-width: 240px; margin: 0 auto; }
   }
 
+  .recipe-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.5rem 0 1rem;
+  }
+
+  .recipe-meta span {
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    border-radius: 999px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .ingredients {
+    margin: 0.5rem 0;
+    padding-left: 1.2rem;
+  }
+
+  .ingredients li { padding: 0.2rem 0; }
+
+  .steps {
+    margin: 0.5rem 0;
+    padding-left: 1.4rem;
+  }
+
+  .steps li { padding: 0.35rem 0; }
+  .steps li::marker { color: var(--accent); font-weight: 700; }
+
   @media (max-width: 560px) {
     .hero h1 { font-size: 1.5rem; }
   }
@@ -371,7 +402,50 @@
     <h3>3. Taco uten at tacoen forsvinner</h3>
     <p>Lag vanlig taco til familien. Prøv selv en tacosalat eller bolle med kjøttdeig eller kylling, salat, tomat, paprika, avokado, salsa, ost og litt rømme. Du kan også bare spise færre lefser enn vanlig.</p>
     <h3>4. Kylling eller kjøtt + grønnsaker</h3>
-    <p>Kylling, kjøttkaker eller annet kjøtt sammen med en stor porsjon grønnsaker. Prøv blomkålmos, ovnsbakte grønnsaker eller salat i stedet for, eller sammen med en mindre porsjon, ris eller poteter.</p>
+    <p>Kylling, kjøttkaker eller annet kjøtt sammen med en stor porsjon grønnsaker. Prøv grønnsaksmos (se oppskriften under), ovnsbakte grønnsaker eller salat i stedet for, eller sammen med en mindre porsjon, ris eller poteter.</p>
+  </section>
+
+  <section class="card-section" id="gronnsaksmos">
+    <h2>🥦 Oppskrift: grønnsaksmos</h2>
+    <p>Et godt alternativ til potetmos, ris eller pasta, som passer til de fleste middagsretter: fisk, kjøttkaker, kylling, kjøtt i saus og gryteretter. Lag gjerne dobbel porsjon med en gang, så har du tilbehør til to middager.</p>
+    <div class="recipe-meta">
+      <span>Ca. 500 g</span>
+      <span>Tilbehør til 2 middager</span>
+      <span>Ca. 30 min</span>
+    </div>
+
+    <h3>Dette trenger du</h3>
+    <ul class="ingredients">
+      <li>1 løk</li>
+      <li>200 g brokkoli</li>
+      <li>200 g blomkål</li>
+      <li>100 g sellerirot</li>
+      <li>4 ss crème fraîche (laktosefri eller vanlig)</li>
+      <li>2 buljongterninger, eller litt hjemmelaget buljong</li>
+      <li>Litt smør eller olje til steking</li>
+    </ul>
+    <p class="small-note">Merk: 2 buljongterninger holder også til dobbel porsjon. Smak heller til med mer på slutten om du trenger det.</p>
+
+    <h3>Slik gjør du</h3>
+    <ol class="steps">
+      <li><strong>Stek løken:</strong> Kutt løken i små terninger og stek den gyllen i litt smør eller olje på svak varme. Beregn god tid (ca. 10–15 minutter), og pass på at løken ikke blir svidd.</li>
+      <li><strong>Kok grønnsakene:</strong> Skrell sellerirota og kutt den i små terninger. Del brokkoli og blomkål i buketter. Kok alt i usaltet vann (buljongen gir nok salt) til grønnsakene er helt myke, ca. 10–15 minutter. Sellerirota trenger lengst tid, så legg den gjerne i først.</li>
+      <li><strong>Hell av vannet:</strong> La grønnsakene renne godt av, så mosen ikke blir vassen.</li>
+      <li><strong>Kjør til mos:</strong> Ha løk, grønnsaker, crème fraîche og buljongterninger i en foodprosessor (eller bruk stavmikser) og kjør til alt er blitt en jevn, fin mos.</li>
+      <li><strong>Smak til</strong> med pepper. Smak før du eventuelt tilsetter mer salt eller buljong.</li>
+    </ol>
+
+    <h3>Oppbevaring</h3>
+    <p>Mosen holder seg 3–4 dager i kjøleskapet i en tett boks. Varm den opp i kjele eller mikro, og rør gjerne inn en skvett vann eller en klatt crème fraîche om den har blitt litt tykk.</p>
+
+    <h3>Varianter</h3>
+    <p>Bruk oppskriften som et utgangspunkt og varier etter hva du har og hva du skal servere den til:</p>
+    <ul class="ingredients">
+      <li>Bare blomkål og sellerirot gir en lys, mild mos som ligner potetmos.</li>
+      <li>Tilsett et fedd hvitløk sammen med løken, eller litt revet parmesan til slutt.</li>
+      <li>Bytt ut deler av grønnsakene med det du har, for eksempel squash, kålrot eller gulrot.</li>
+      <li>Rør inn hakket persille eller gressløk for mer smak og farge.</li>
+    </ul>
   </section>
 
   <section class="card-section">
