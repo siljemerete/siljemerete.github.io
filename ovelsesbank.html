@@ -387,6 +387,53 @@
 
   .card a:not([class]) { color: var(--accent-dark); font-weight: 600; }
 
+  .level-note {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 0.9rem 1rem 1rem;
+    margin: 0 0 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .level-note p { margin: 0 0 0.5rem; }
+
+  .bank-box {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 1rem 1.1rem 1.2rem;
+    margin: 0 0 1.5rem;
+  }
+
+  .bank-box h3 { margin-top: 0; }
+  .bank-box p { margin: 0 0 0.75rem; }
+  .bank-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: 100%;
+    margin: 0.5rem 0 0;
+    padding: 0.95rem 1.2rem;
+    border-radius: 12px;
+    background: #a35a1f;
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(18, 49, 61, 0.18);
+  }
+
+  .bank-button small {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 400;
+    opacity: 0.9;
+  }
+
+  .bank-button .arrow { font-size: 1.4rem; line-height: 1; }
+  .bank-button:hover { background: #87491a; }
+  .bank-button:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 2px; }
+
 
   .bank-intro ol { margin: 0 0 0.75rem; padding-left: 1.25rem; }
   .bank-intro ol li { margin: 0 0 0.5rem; }
@@ -396,6 +443,7 @@
   .group summary .count { display: block; font-weight: 400; color: var(--muted); font-size: 0.85rem; margin-top: 0.1rem; }
   .group .about-body > p.muscles { margin: 0 0 0.75rem; color: var(--muted); font-size: 0.92rem; }
   .group .exercises { margin-bottom: 0; }
+  .group-note { margin: 0.9rem 0 0; padding: 0.75rem 1rem; border-radius: 8px; background: var(--warn-soft); font-size: 0.92rem; }
 
   .exercises li.no-img,
   .bank[data-show="gym"] .exercises li.no-img-gym,
@@ -440,7 +488,7 @@
   <div class="wrap">
     <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
     <h1>Øvelsesbank</h1>
-    <p>Styrkeøvelser sortert i sju bevegelsesgrupper. Dekker du alle gruppene i løpet av uka, har du trent hele kroppen.</p>
+    <p>Styrkeøvelser sortert i sju bevegelsesgrupper, pluss hopp for skjelettet. Dekker du de sju gruppene i løpet av uka, har du trent hele kroppen.</p>
   </div>
 </section>
 
@@ -451,6 +499,7 @@
     <ol>
       <li><strong>Lag din egen økt:</strong> velg én øvelse fra hver gruppe. Er sju øvelser mye, start med gruppe 1, 2, 3 og 5, og legg til resten når du har tid.</li>
       <li><strong>Har du allerede et program?</strong> Sjekk at det dekker alle gruppene i løpet av uka, og bruk banken til å finne alternativer.</li>
+      <li><strong>Hopp er et valgfritt tillegg</strong> (gruppe 8), som styrker skjelettet. Det er særlig nyttig rundt og etter overgangsalderen.</li>
       <li><strong>Varier med måte:</strong> bytt gjerne noen øvelser hver 4.–8. uke, men behold noen faste, så du ser fremgangen.</li>
     </ol>
     <div class="meta">
@@ -540,6 +589,19 @@
           <li><a class="thumb-link" href="images/styrke-mini-4-birddog.jpg" aria-label="Se større bilde: Bird dog"><img class="thumb" src="images/bank-birddog.jpg" width="120" height="100" loading="lazy" alt="Bird dog: illustrasjon med silhuetter."></a><span>Bird dog<span class="how">På alle fire: strekk ut motsatt arm og bein, og hold hoften stabil.</span></span></li>
           <li><a class="thumb-link v-gym" href="images/ukeplan-mann-farmerswalk-stor.jpg" aria-label="Se større bilde: Farmer’s walk på treningssenter"><img class="thumb" src="images/ukeplan-mann-farmerswalk-senter.jpg" width="120" height="100" loading="lazy" alt="Farmer’s walk på treningssenter: illustrasjon med silhuetter."></a><a class="thumb-link v-home" href="images/ukeplan-mann-farmerswalk-stor.jpg" aria-label="Se større bilde: Farmer’s walk hjemme"><img class="thumb" src="images/ukeplan-mann-farmerswalk-hjemme.jpg" width="120" height="100" loading="lazy" alt="Farmer’s walk hjemme: illustrasjon med silhuetter."></a><span class="v-gym">Farmer’s walk<span class="how">Gå rolig med en tung manual eller kettlebell i hver hånd, med rak rygg.</span></span><span class="v-home">Farmer’s walk<span class="how">Med kettlebells, manualer eller tunge handleposer.</span></span></li>
           </ul>
+        </div>
+      </details>
+      <details class="about-box group">
+        <summary><span>8. Hopp for skjelettet <span class="count">4 øvelser</span></span><span class="chevron" aria-hidden="true">▸</span></summary>
+        <div class="about-body">
+          <p class="muscles">Valgfritt. Korte, raske støt styrker skjelettet, noe Stacy Sims anbefaler særlig rundt og etter overgangsalderen.</p>
+          <ul class="exercises">
+          <li class="no-img"><span>Små hopp på stedet<span class="how">Hopp lett opp og ned på tærne, med myke knær i landingen. Start med 10–20 hopp.</span></span></li>
+          <li class="no-img"><span>Knebøyhopp<span class="how">Gå ned i en kort knebøy og hopp rett opp. Land mykt og kontrollert.</span></span></li>
+          <li class="no-img"><span class="v-gym">Hopp opp på kasse<span class="how">Velg en lav kasse, hopp opp med begge bein, og gå rolig ned igjen.</span></span><span class="v-home">Hopp opp på trappetrinn<span class="how">Hopp opp på nederste trinn med begge bein, og gå rolig ned igjen.</span></span></li>
+          <li class="no-img"><span class="v-gym">Sjipping<span class="how">Korte runder på 20–30 sekunder.</span></span><span class="v-home">Sjipping<span class="how">Korte runder på 20–30 sekunder, gjerne ute eller på et mykt underlag.</span></span></li>
+          </ul>
+          <p class="group-note">Start med noen få hopp 2–3 ganger i uka, gjerne etter oppvarmingen. Kjenner du lekkasje eller tyngdefølelse i bekkenet, ta det roligere, styrk bekkenbunnen først, og snakk gjerne med en fysioterapeut. Har du benskjørhet eller vonde knær, avklar hopping med lege eller fysioterapeut.</p>
         </div>
       </details>
   </section>

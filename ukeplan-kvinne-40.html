@@ -372,6 +372,46 @@
   .equip-button:hover { background: var(--accent-dark); }
   .equip-button:focus-visible { outline: 2px solid var(--accent-dark); outline-offset: 2px; }
 
+  .card a:not([class]) { color: var(--accent-dark); font-weight: 600; }
+
+  .bank-box {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 1rem 1.1rem 1.2rem;
+    margin: 1.5rem 0 0;
+  }
+
+  .bank-box h3 { margin-top: 0; }
+  .bank-box p { margin: 0 0 0.75rem; }
+
+  .bank-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: 100%;
+    margin: 0.5rem 0 0;
+    padding: 0.95rem 1.2rem;
+    border-radius: 12px;
+    background: #a35a1f;
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(18, 49, 61, 0.18);
+  }
+
+  .bank-button small {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 400;
+    opacity: 0.9;
+  }
+
+  .bank-button .arrow { font-size: 1.4rem; line-height: 1; }
+  .bank-button:hover { background: #87491a; }
+  .bank-button:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 2px; }
+
   [hidden] { display: none !important; }
 
   @media (max-width: 420px) {
@@ -520,6 +560,17 @@
 
     <h3>Ny med styrketrening?</h3>
     <p>Begynn med lettere vekter (eller bare kroppsvekten hjemme), 2 sett og 10–12 repetisjoner de første ukene, og bruk tiden på å lære teknikken. Når bevegelsene sitter, øker du vekten gradvis til du er nede på 6–8 tunge repetisjoner.</p>
+
+    <div class="bank-box">
+      <h3>Vil du bytte øvelser?</h3>
+      <p>Programmet over er et forslag. Vil du variere, finner du flere øvelser i øvelsesbanken. Ut fra Stacy Sims sine råd:</p>
+      <ul class="plain-list">
+        <li><strong>Prioriter de store grunnøvelsene:</strong> én fra hver av gruppene knebøy, hofte, press fremover og trekk mot deg i hver økt. Press opp, trekk ned og kjerne kommer i tillegg.</li>
+        <li><strong>Løft tungt:</strong> 6–8 repetisjoner på de store øvelsene. Sidehev og kjerneøvelser kan ha flere repetisjoner.</li>
+        <li><strong>Legg gjerne til litt hopp</strong> for skjelettet (gruppe 8), og start forsiktig.</li>
+      </ul>
+      <a class="bank-button" href="ovelsesbank.html"><span>Gå til øvelsesbanken<small>Flere øvelser for senter og hjemme, og hopp for skjelettet</small></span><span class="arrow" aria-hidden="true">→</span></a>
+    </div>
   </section>
 
   <section class="card">
