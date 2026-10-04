@@ -265,6 +265,41 @@
 
   .refs .ref-desc a { color: var(--accent); word-break: break-word; }
 
+  .product {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 1.4rem;
+    align-items: start;
+  }
+
+  .product img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+  }
+
+  .facts {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.75rem 0;
+    font-size: 0.95rem;
+  }
+
+  .facts th, .facts td {
+    text-align: left;
+    padding: 0.4rem 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .facts th { color: var(--muted); font-weight: 600; font-size: 0.85rem; }
+  .facts td:not(:first-child), .facts th:not(:first-child) { text-align: right; white-space: nowrap; }
+
+  @media (max-width: 560px) {
+    .product { grid-template-columns: 1fr; }
+    .product img { max-width: 240px; margin: 0 auto; }
+  }
+
   @media (max-width: 560px) {
     .hero h1 { font-size: 1.5rem; }
   }
@@ -299,6 +334,30 @@
     <p>Cottage cheese eller naturell gresk yoghurt med noen bær, valnøtter og chia- eller linfrø.</p>
     <h3>4. Omelett</h3>
     <p>Egg med rester av grønnsaker, sopp, spinat, paprika og litt ost. En fin måte å bruke det du allerede har i kjøleskapet.</p>
+  </section>
+
+  <section class="card-section">
+    <h2>Tips: frøknekkebrød i stedet for brød</h2>
+    <div class="product">
+      <img src="images/froknekkebrod.jpg" width="700" height="933" loading="lazy" alt="Pose med Coop frøknekkebrød med gresskarkjerner og havsalt, merket med 84 % redusert innhold av karbohydrater, bakt uten korn og høyt kostfiberinnhold">
+      <div>
+        <p>Et godt frøknekkebrød er et enkelt bytte som gjør stor forskjell. Dette er bakt uten korn, hovedsakelig av frø og egg, og har svært lite karbohydrater, men mye fiber og protein.</p>
+        <table class="facts">
+          <tr><th></th><th>Per 100 g</th><th>Per stk. (ca. 20 g)</th></tr>
+          <tr><td>Karbohydrat</td><td>5,2 g</td><td>ca. 1 g</td></tr>
+          <tr><td>– hvorav sukker</td><td>1,1 g</td><td>ca. 0,2 g</td></tr>
+          <tr><td>Kostfiber</td><td>18 g</td><td>ca. 3,6 g</td></tr>
+          <tr><td>Protein</td><td>22 g</td><td>ca. 4,4 g</td></tr>
+          <tr><td>Fett</td><td>35 g</td><td>ca. 7 g</td></tr>
+          <tr><td>Energi</td><td>452 kcal</td><td>ca. 90 kcal</td></tr>
+        </table>
+      </div>
+    </div>
+    <h3>Hvorfor er dette gunstig?</h3>
+    <p><strong>Lite karbohydrater:</strong> Ett knekkebrød har rundt 1 g karbohydrater. Til sammenligning har en vanlig skive grovbrød gjerne 15–20 g. Det gir en jevnere blodsukkerkurve etter måltidet.</p>
+    <p><strong>Mye fiber:</strong> Med rundt 3,6 g kostfiber per knekkebrød får du et godt bidrag mot anbefalingen på minst 25–35 g fiber om dagen. Fiber er bra for fordøyelsen og tarmfloraen, og bidrar til metthet.</p>
+    <p><strong>Protein og gode fettsyrer:</strong> Frø og egg gir protein og hovedsakelig umettet fett. Sammen med fiberen gjør dette at du holder deg mett lenger.</p>
+    <p class="small-note">Frøknekkebrød er ganske energitett, så 1–2 stykker per måltid er en fin mengde. Det finnes mange lignende produkter: se etter frøknekkebrød med lite karbohydrater og mye fiber på næringsdeklarasjonen. Tallene over er hentet fra pakningen.</p>
   </section>
 
   <section class="card-section">
