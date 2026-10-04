@@ -452,6 +452,25 @@
   .exercises.plain li { grid-template-columns: 1fr auto; padding: 0.6rem 0.9rem; }
   .exercises.plain .sets { grid-column: auto; }
 
+  .exercises li.no-img { grid-template-columns: 1fr auto; padding-left: 0.9rem; }
+  .exercises li.no-img .sets { grid-column: auto; }
+
+  .plan[data-kjonn="kvinne"] .k-mann,
+  .plan[data-kjonn="mann"] .k-kvinne { display: none; }
+
+  .figure-switch { display: flex; align-items: center; gap: 0.5rem; margin: -0.4rem 0 1.25rem; font-size: 0.9rem; color: var(--muted); }
+  .figure-switch button {
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    font-weight: 600;
+    font-size: 0.88rem;
+    cursor: pointer;
+  }
+  .figure-switch button[aria-pressed="true"] { background: var(--accent-dark); border-color: var(--accent-dark); color: #fff; }
+
   @media (max-width: 420px) {
     .age-switch button { font-size: 0.88rem; padding: 0.6rem 0.3rem; }
   }
@@ -476,13 +495,18 @@
 
 <div class="wrap">
 
-  <section class="card">
+  <section class="card plan" data-kjonn="kvinne">
     <h2>Velg det som passer deg</h2>
     <p class="desc">Alderen er bare et utgangspunkt. Velg det som passer best med hvordan kroppen din fungerer i dag, ikke bare med tallet på fødselsattesten.</p>
     <div class="place-switch level-switch age-switch" role="group" aria-label="Velg trinn">
       <button type="button" data-level="60" aria-pressed="true">60+<span>Sterk videre</span></button>
       <button type="button" data-level="70" aria-pressed="false">70+<span>Styrke, balanse og trygghet</span></button>
       <button type="button" data-level="80" aria-pressed="false">80+<span>Bevegelse, funksjon og selvstendighet</span></button>
+    </div>
+    <div class="figure-switch" role="group" aria-label="Velg figurer i bildene">
+      <span>Figurer:</span>
+      <button type="button" data-kjonn="kvinne" aria-pressed="true">Kvinne</button>
+      <button type="button" data-kjonn="mann" aria-pressed="false">Mann</button>
     </div>
 
     <div data-level-panel="60">
@@ -502,24 +526,27 @@
       </ul>
 
       <h3>Økt A – mandag</h3>
-      <ul class="exercises plain">
-        <li><span>Knebøy<span class="how">Med manual foran brystet, eller ned til en stol eller benk.</span></span><span class="sets">8–12 rep</span></li>
-        <li><span>Rumensk markløft med manualer<span class="how">Bøy i hoftene med rett rygg, og skyv hoftene frem på vei opp.</span></span><span class="sets">8–12 rep</span></li>
-        <li><span>Roing<span class="how">I apparat, med manual og støtte på benk, eller med strikk.</span></span><span class="sets">8–12 rep</span></li>
-        <li><span>Push-ups mot benk eller brystpress<span class="how">Jo lavere hendene er, jo tyngre blir det.</span></span><span class="sets">8–12 rep</span></li>
-        <li><span>Farmer’s walk<span class="how">Gå rolig med en tung vekt i hver hånd, rak rygg. Godt for grep, hofter og balanse.</span></span><span class="sets">30–40 m</span></li>
+      <ul class="exercises">
+        <li><a class="thumb-link k-kvinne" href="images/60-kneboy-goblet-stor.jpg" aria-label="Se større bilde: Knebøy med manual"><img class="thumb" src="images/60-kneboy-goblet-k.jpg" width="120" height="100" loading="lazy" alt="Knebøy med manual: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-kneboy-goblet-stor.jpg" aria-label="Se større bilde: Knebøy med manual"><img class="thumb" src="images/60-kneboy-goblet-m.jpg" width="120" height="100" loading="lazy" alt="Knebøy med manual: illustrasjon med silhuetter."></a><span>Knebøy<span class="how">Med manual foran brystet, eller ned til en stol eller benk.</span></span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-markloft-stor.jpg" aria-label="Se større bilde: Rumensk markløft med manualer"><img class="thumb" src="images/60-markloft-k.jpg" width="120" height="100" loading="lazy" alt="Rumensk markløft med manualer: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-markloft-stor.jpg" aria-label="Se større bilde: Rumensk markløft med manualer"><img class="thumb" src="images/60-markloft-m.jpg" width="120" height="100" loading="lazy" alt="Rumensk markløft med manualer: illustrasjon med silhuetter."></a><span>Rumensk markløft med manualer<span class="how">Bøy i hoftene med rett rygg, og skyv hoftene frem på vei opp.</span></span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-roing-manual-stor.jpg" aria-label="Se større bilde: Roing med manual eller i apparat"><img class="thumb" src="images/60-roing-manual-k.jpg" width="120" height="100" loading="lazy" alt="Roing med manual eller i apparat: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-roing-manual-stor.jpg" aria-label="Se større bilde: Roing med manual eller i apparat"><img class="thumb" src="images/60-roing-manual-m.jpg" width="120" height="100" loading="lazy" alt="Roing med manual eller i apparat: illustrasjon med silhuetter."></a><span>Roing<span class="how">I apparat, med manual og støtte på benk, eller med strikk.</span></span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-pushup-vegg-stor.jpg" aria-label="Se større bilde: Push-ups mot vegg eller benk"><img class="thumb" src="images/60-pushup-vegg-k.jpg" width="120" height="100" loading="lazy" alt="Push-ups mot vegg eller benk: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-pushup-vegg-stor.jpg" aria-label="Se større bilde: Push-ups mot vegg eller benk"><img class="thumb" src="images/60-pushup-vegg-m.jpg" width="120" height="100" loading="lazy" alt="Push-ups mot vegg eller benk: illustrasjon med silhuetter."></a><span>Push-ups mot benk eller brystpress<span class="how">Jo lavere hendene er, jo tyngre blir det.</span></span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-farmers-walk-stor.jpg" aria-label="Se større bilde: Farmer’s walk"><img class="thumb" src="images/60-farmers-walk-k.jpg" width="120" height="100" loading="lazy" alt="Farmer’s walk: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-farmers-walk-stor.jpg" aria-label="Se større bilde: Farmer’s walk"><img class="thumb" src="images/60-farmers-walk-m.jpg" width="120" height="100" loading="lazy" alt="Farmer’s walk: illustrasjon med silhuetter."></a><span>Farmer’s walk<span class="how">Gå rolig med en tung vekt i hver hånd, rak rygg. Godt for grep, hofter og balanse.</span></span><span class="sets">30–40 m</span></li>
       </ul>
       <h3>Økt B – torsdag</h3>
-      <ul class="exercises plain">
-        <li><span>Step-up på trinn eller kasse<span class="how">Gjerne med manualer. Hold i et rekkverk om du trenger det.</span></span><span class="sets">8–10 per bein</span></li>
-        <li><span>Seteløft eller hip thrust</span><span class="sets">10–15 rep</span></li>
-        <li><span>Nedtrekk i apparat eller med strikk</span><span class="sets">8–12 rep</span></li>
-        <li><span>Skulderpress med manualer<span class="how">Sittende eller stående.</span></span><span class="sets">8–12 rep</span></li>
-        <li><span>Tåhev<span class="how">På en trappekant, med støtte for balansen.</span></span><span class="sets">12–15 rep</span></li>
-        <li><span>Sideplanke eller dead bug</span><span class="sets">20–30 sek</span></li>
+      <ul class="exercises">
+        <li><a class="thumb-link k-kvinne" href="images/60-stepup-rekkverk-stor.jpg" aria-label="Se større bilde: Step-up med rekkverk"><img class="thumb" src="images/60-stepup-rekkverk-k.jpg" width="120" height="100" loading="lazy" alt="Step-up med rekkverk: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-stepup-rekkverk-stor.jpg" aria-label="Se større bilde: Step-up med rekkverk"><img class="thumb" src="images/60-stepup-rekkverk-m.jpg" width="120" height="100" loading="lazy" alt="Step-up med rekkverk: illustrasjon med silhuetter."></a><span>Step-up på trinn eller kasse<span class="how">Gjerne med manualer. Hold i et rekkverk om du trenger det.</span></span><span class="sets">8–10 per bein</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-setelopt-stor.jpg" aria-label="Se større bilde: Seteløft"><img class="thumb" src="images/60-setelopt-k.jpg" width="120" height="100" loading="lazy" alt="Seteløft: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-setelopt-stor.jpg" aria-label="Se større bilde: Seteløft"><img class="thumb" src="images/60-setelopt-m.jpg" width="120" height="100" loading="lazy" alt="Seteløft: illustrasjon med silhuetter."></a><span>Seteløft eller hip thrust</span><span class="sets">10–15 rep</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-nedtrekk-stor.jpg" aria-label="Se større bilde: Nedtrekk"><img class="thumb" src="images/60-nedtrekk-k.jpg" width="120" height="100" loading="lazy" alt="Nedtrekk: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-nedtrekk-stor.jpg" aria-label="Se større bilde: Nedtrekk"><img class="thumb" src="images/60-nedtrekk-m.jpg" width="120" height="100" loading="lazy" alt="Nedtrekk: illustrasjon med silhuetter."></a><span>Nedtrekk i apparat eller med strikk</span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-skulderpress-stor.jpg" aria-label="Se større bilde: Skulderpress med manualer"><img class="thumb" src="images/60-skulderpress-k.jpg" width="120" height="100" loading="lazy" alt="Skulderpress med manualer: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-skulderpress-stor.jpg" aria-label="Se større bilde: Skulderpress med manualer"><img class="thumb" src="images/60-skulderpress-m.jpg" width="120" height="100" loading="lazy" alt="Skulderpress med manualer: illustrasjon med silhuetter."></a><span>Skulderpress med manualer<span class="how">Sittende eller stående.</span></span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-tahev-benk-stor.jpg" aria-label="Se større bilde: Tåhev med støtte"><img class="thumb" src="images/60-tahev-benk-k.jpg" width="120" height="100" loading="lazy" alt="Tåhev med støtte: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-tahev-benk-stor.jpg" aria-label="Se større bilde: Tåhev med støtte"><img class="thumb" src="images/60-tahev-benk-m.jpg" width="120" height="100" loading="lazy" alt="Tåhev med støtte: illustrasjon med silhuetter."></a><span>Tåhev<span class="how">På en trappekant, med støtte for balansen.</span></span><span class="sets">12–15 rep</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-sideplanke-deadbug-stor.jpg" aria-label="Se større bilde: Sideplanke og dead bug"><img class="thumb" src="images/60-sideplanke-deadbug-k.jpg" width="120" height="100" loading="lazy" alt="Sideplanke og dead bug: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-sideplanke-deadbug-stor.jpg" aria-label="Se større bilde: Sideplanke og dead bug"><img class="thumb" src="images/60-sideplanke-deadbug-m.jpg" width="120" height="100" loading="lazy" alt="Sideplanke og dead bug: illustrasjon med silhuetter."></a><span>Sideplanke eller dead bug</span><span class="sets">20–30 sek</span></li>
       </ul>
       <p><strong>Tren kraft også.</strong> Løft raskt og kontrollert opp, og senk rolig. Evnen til å bruke kraft raskt svekkes enda tidligere enn styrken, og det er den du trenger når du skal ta deg for et snubletrinn.</p>
       <p><strong>Skjelettet liker støt.</strong> Er du frisk og uten skader, kan du legge inn noen små hopp eller hælslipp: stå på tærne og slipp deg ned på hælene, 10–20 ganger, et par dager i uka.</p>
+      <ul class="exercises">
+        <li><a class="thumb-link k-kvinne" href="images/60-haelslipp-stor.jpg" aria-label="Se større bilde: Hælslipp"><img class="thumb" src="images/60-haelslipp-k.jpg" width="120" height="100" loading="lazy" alt="Hælslipp: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-haelslipp-stor.jpg" aria-label="Se større bilde: Hælslipp"><img class="thumb" src="images/60-haelslipp-m.jpg" width="120" height="100" loading="lazy" alt="Hælslipp: illustrasjon med silhuetter."></a><span>Hælslipp<span class="how">Gå opp på tærne og slipp deg ned på hælene med et lite dunk.</span></span><span class="sets">10–20 rep</span></li>
+      </ul>
       <a class="bank-button" href="ovelsesbank.html"><span>Gå til øvelsesbanken<small>Flere øvelser i hver gruppe, for senter og hjemme</small></span><span class="arrow" aria-hidden="true">→</span></a>
     </div>
 
@@ -541,24 +568,26 @@
 
       <h3>Styrkeøkta</h3>
       <p>2 sett per øvelse. Velg en vekt eller variant der de siste repetisjonene kjennes tunge, men teknikken fortsatt er god.</p>
-      <ul class="exercises plain">
-        <li><span>Reis deg fra stol<span class="how">Uten å bruke armene hvis du kan. For mer: hold en vekt, eller bruk en lavere stol.</span></span><span class="sets">8–12 rep</span></li>
-        <li><span>Step-up på trappetrinn<span class="how">Hold i rekkverket.</span></span><span class="sets">8–10 per bein</span></li>
-        <li><span>Seteløft liggende</span><span class="sets">10–15 rep</span></li>
-        <li><span>Roing med strikk<span class="how">Strikk festet i døra, eller manual med støtte på en stol.</span></span><span class="sets">10–15 rep</span></li>
-        <li><span>Push-ups mot vegg eller kjøkkenbenk</span><span class="sets">8–12 rep</span></li>
-        <li><span>Skulderpress med lette manualer<span class="how">Sittende eller stående.</span></span><span class="sets">8–12 rep</span></li>
-        <li><span>Tåhev med støtte</span><span class="sets">12–15 rep</span></li>
-        <li><span>Bær handleposer eller vekter<span class="how">Gå rolig med lik vekt i hver hånd.</span></span><span class="sets">30 m</span></li>
+      <ul class="exercises">
+        <li><a class="thumb-link k-kvinne" href="images/60-reise-fra-stol-stor.jpg" aria-label="Se større bilde: Reise seg fra stol"><img class="thumb" src="images/60-reise-fra-stol-k.jpg" width="120" height="100" loading="lazy" alt="Reise seg fra stol: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-reise-fra-stol-stor.jpg" aria-label="Se større bilde: Reise seg fra stol"><img class="thumb" src="images/60-reise-fra-stol-m.jpg" width="120" height="100" loading="lazy" alt="Reise seg fra stol: illustrasjon med silhuetter."></a><span>Reis deg fra stol<span class="how">Uten å bruke armene hvis du kan. For mer: hold en vekt, eller bruk en lavere stol.</span></span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-stepup-rekkverk-stor.jpg" aria-label="Se større bilde: Step-up på trappetrinn med rekkverk"><img class="thumb" src="images/60-stepup-rekkverk-k.jpg" width="120" height="100" loading="lazy" alt="Step-up på trappetrinn med rekkverk: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-stepup-rekkverk-stor.jpg" aria-label="Se større bilde: Step-up på trappetrinn med rekkverk"><img class="thumb" src="images/60-stepup-rekkverk-m.jpg" width="120" height="100" loading="lazy" alt="Step-up på trappetrinn med rekkverk: illustrasjon med silhuetter."></a><span>Step-up på trappetrinn<span class="how">Hold i rekkverket.</span></span><span class="sets">8–10 per bein</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-setelopt-stor.jpg" aria-label="Se større bilde: Seteløft liggende"><img class="thumb" src="images/60-setelopt-k.jpg" width="120" height="100" loading="lazy" alt="Seteløft liggende: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-setelopt-stor.jpg" aria-label="Se større bilde: Seteløft liggende"><img class="thumb" src="images/60-setelopt-m.jpg" width="120" height="100" loading="lazy" alt="Seteløft liggende: illustrasjon med silhuetter."></a><span>Seteløft liggende</span><span class="sets">10–15 rep</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-roing-strikk-stor.jpg" aria-label="Se større bilde: Roing med strikk"><img class="thumb" src="images/60-roing-strikk-k.jpg" width="120" height="100" loading="lazy" alt="Roing med strikk: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-roing-strikk-stor.jpg" aria-label="Se større bilde: Roing med strikk"><img class="thumb" src="images/60-roing-strikk-m.jpg" width="120" height="100" loading="lazy" alt="Roing med strikk: illustrasjon med silhuetter."></a><span>Roing med strikk<span class="how">Strikk festet i døra, eller manual med støtte på en stol.</span></span><span class="sets">10–15 rep</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-pushup-vegg-stor.jpg" aria-label="Se større bilde: Push-ups mot vegg eller kjøkkenbenk"><img class="thumb" src="images/60-pushup-vegg-k.jpg" width="120" height="100" loading="lazy" alt="Push-ups mot vegg eller kjøkkenbenk: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-pushup-vegg-stor.jpg" aria-label="Se større bilde: Push-ups mot vegg eller kjøkkenbenk"><img class="thumb" src="images/60-pushup-vegg-m.jpg" width="120" height="100" loading="lazy" alt="Push-ups mot vegg eller kjøkkenbenk: illustrasjon med silhuetter."></a><span>Push-ups mot vegg eller kjøkkenbenk</span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-skulderpress-stor.jpg" aria-label="Se større bilde: Skulderpress med manualer"><img class="thumb" src="images/60-skulderpress-k.jpg" width="120" height="100" loading="lazy" alt="Skulderpress med manualer: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-skulderpress-stor.jpg" aria-label="Se større bilde: Skulderpress med manualer"><img class="thumb" src="images/60-skulderpress-m.jpg" width="120" height="100" loading="lazy" alt="Skulderpress med manualer: illustrasjon med silhuetter."></a><span>Skulderpress med lette manualer<span class="how">Sittende eller stående.</span></span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-tahev-benk-stor.jpg" aria-label="Se større bilde: Tåhev med støtte ved benken"><img class="thumb" src="images/60-tahev-benk-k.jpg" width="120" height="100" loading="lazy" alt="Tåhev med støtte ved benken: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-tahev-benk-stor.jpg" aria-label="Se større bilde: Tåhev med støtte ved benken"><img class="thumb" src="images/60-tahev-benk-m.jpg" width="120" height="100" loading="lazy" alt="Tåhev med støtte ved benken: illustrasjon med silhuetter."></a><span>Tåhev med støtte</span><span class="sets">12–15 rep</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-handleposer-stor.jpg" aria-label="Se større bilde: Bære handleposer"><img class="thumb" src="images/60-handleposer-k.jpg" width="120" height="100" loading="lazy" alt="Bære handleposer: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-handleposer-stor.jpg" aria-label="Se større bilde: Bære handleposer"><img class="thumb" src="images/60-handleposer-m.jpg" width="120" height="100" loading="lazy" alt="Bære handleposer: illustrasjon med silhuetter."></a><span>Bær handleposer eller vekter<span class="how">Gå rolig med lik vekt i hver hånd.</span></span><span class="sets">30 m</span></li>
       </ul>
 
       <h3>Balanseøvelsene</h3>
       <p>Stå ved en kjøkkenbenk eller en stødig stol, slik at du alltid har noe å ta tak i. Balansen må utfordres litt for å bli bedre, men trygt.</p>
+      <ul class="exercises">
+        <li><a class="thumb-link k-kvinne" href="images/60-ett-bein-stor.jpg" aria-label="Se større bilde: Stå på ett bein med hånd på benken"><img class="thumb" src="images/60-ett-bein-k.jpg" width="120" height="100" loading="lazy" alt="Stå på ett bein med hånd på benken: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-ett-bein-stor.jpg" aria-label="Se større bilde: Stå på ett bein med hånd på benken"><img class="thumb" src="images/60-ett-bein-m.jpg" width="120" height="100" loading="lazy" alt="Stå på ett bein med hånd på benken: illustrasjon med silhuetter."></a><span>Stå på ett bein<span class="how">Med en hånd på benken. Slipp taket litt når det går greit.</span></span><span class="sets">10–30 sek</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-sidelengs-baklengs-stor.jpg" aria-label="Se større bilde: Gå sidelengs og baklengs langs benken"><img class="thumb" src="images/60-sidelengs-baklengs-k.jpg" width="120" height="100" loading="lazy" alt="Gå sidelengs og baklengs langs benken: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-sidelengs-baklengs-stor.jpg" aria-label="Se større bilde: Gå sidelengs og baklengs langs benken"><img class="thumb" src="images/60-sidelengs-baklengs-m.jpg" width="120" height="100" loading="lazy" alt="Gå sidelengs og baklengs langs benken: illustrasjon med silhuetter."></a><span>Gå sidelengs og baklengs<span class="how">Langs benken, med en hånd på benkeplata.</span></span><span class="sets">10 skritt hver vei</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-sta-hael-ta-stor.jpg" aria-label="Se større bilde: Stå hæl mot tå"><img class="thumb" src="images/60-sta-hael-ta-k.jpg" width="120" height="100" loading="lazy" alt="Stå hæl mot tå: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-sta-hael-ta-stor.jpg" aria-label="Se større bilde: Stå hæl mot tå"><img class="thumb" src="images/60-sta-hael-ta-m.jpg" width="120" height="100" loading="lazy" alt="Stå hæl mot tå: illustrasjon med silhuetter."></a><span>Stå hæl mot tå<span class="how">Den ene foten rett foran den andre, med en hånd på benken.</span></span><span class="sets">10–30 sek</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-ga-hael-ta-stor.jpg" aria-label="Se større bilde: Gå hæl mot tå"><img class="thumb" src="images/60-ga-hael-ta-k.jpg" width="120" height="100" loading="lazy" alt="Gå hæl mot tå: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-ga-hael-ta-stor.jpg" aria-label="Se større bilde: Gå hæl mot tå"><img class="thumb" src="images/60-ga-hael-ta-m.jpg" width="120" height="100" loading="lazy" alt="Gå hæl mot tå: illustrasjon med silhuetter."></a><span>Gå hæl mot tå<span class="how">Sett hælen rett foran tærne for hvert skritt, langs benken.</span></span><span class="sets">10 skritt frem og tilbake</span></li>
+      </ul>
       <ul class="plain-list">
-        <li><strong>Stå på ett bein</strong> i 10–30 sekunder. Slipp taket litt når det går greit.</li>
-        <li><strong>Stå med den ene foten rett foran den andre,</strong> hæl mot tå, i 10–30 sekunder.</li>
-        <li><strong>Gå hæl mot tå</strong> langs benken, 10 skritt frem og tilbake.</li>
-        <li><strong>Gå sidelengs og baklengs</strong> langs benken.</li>
         <li><strong>Snu deg, stopp og gå videre.</strong> Øv på bevegelsene som ofte fører til fall.</li>
       </ul>
       <p>Når dette blir lett: lukk øynene et øyeblikk, stå på en pute, eller snu hodet mens du står.</p>
@@ -582,23 +611,26 @@
 
       <h3>Stolstyrke</h3>
       <p>1–2 sett per øvelse. Bruk en stødig stol uten hjul, gjerne med armlener, og ha kjøkkenbenken i nærheten.</p>
-      <ul class="exercises plain">
-        <li><span>Reis deg fra stol<span class="how">Bruk armlenene så lite som mulig. Den viktigste øvelsen av alle.</span></span><span class="sets">5–10 rep</span></li>
-        <li><span>Strekk kneet sittende<span class="how">Strekk ett bein frem, hold litt, senk rolig. Vektmansjett for mer.</span></span><span class="sets">10 per bein</span></li>
-        <li><span>Marsj sittende<span class="how">Løft knærne vekselvis.</span></span><span class="sets">20–30 sek</span></li>
-        <li><span>Tåhev og hælhev ved benken</span><span class="sets">10–15 rep</span></li>
-        <li><span>Roing med strikk sittende</span><span class="sets">10–15 rep</span></li>
-        <li><span>Push-ups mot kjøkkenbenken</span><span class="sets">8–12 rep</span></li>
-        <li><span>Armhev med lette vekter<span class="how">Melkekartonger eller vannflasker fungerer fint.</span></span><span class="sets">8–12 rep</span></li>
+      <ul class="exercises">
+        <li><a class="thumb-link k-kvinne" href="images/60-reise-fra-stol-stor.jpg" aria-label="Se større bilde: Reise seg fra stol"><img class="thumb" src="images/60-reise-fra-stol-k.jpg" width="120" height="100" loading="lazy" alt="Reise seg fra stol: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-reise-fra-stol-stor.jpg" aria-label="Se større bilde: Reise seg fra stol"><img class="thumb" src="images/60-reise-fra-stol-m.jpg" width="120" height="100" loading="lazy" alt="Reise seg fra stol: illustrasjon med silhuetter."></a><span>Reis deg fra stol<span class="how">Bruk armlenene så lite som mulig. Den viktigste øvelsen av alle.</span></span><span class="sets">5–10 rep</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-strekk-kne-stor.jpg" aria-label="Se større bilde: Strekke kneet sittende"><img class="thumb" src="images/60-strekk-kne-k.jpg" width="120" height="100" loading="lazy" alt="Strekke kneet sittende: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-strekk-kne-stor.jpg" aria-label="Se større bilde: Strekke kneet sittende"><img class="thumb" src="images/60-strekk-kne-m.jpg" width="120" height="100" loading="lazy" alt="Strekke kneet sittende: illustrasjon med silhuetter."></a><span>Strekk kneet sittende<span class="how">Strekk ett bein frem, hold litt, senk rolig. Vektmansjett for mer.</span></span><span class="sets">10 per bein</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-marsj-sittende-stor.jpg" aria-label="Se større bilde: Marsj sittende"><img class="thumb" src="images/60-marsj-sittende-k.jpg" width="120" height="100" loading="lazy" alt="Marsj sittende: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-marsj-sittende-stor.jpg" aria-label="Se større bilde: Marsj sittende"><img class="thumb" src="images/60-marsj-sittende-m.jpg" width="120" height="100" loading="lazy" alt="Marsj sittende: illustrasjon med silhuetter."></a><span>Marsj sittende<span class="how">Løft knærne vekselvis.</span></span><span class="sets">20–30 sek</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-tahev-benk-stor.jpg" aria-label="Se større bilde: Tåhev med støtte ved benken"><img class="thumb" src="images/60-tahev-benk-k.jpg" width="120" height="100" loading="lazy" alt="Tåhev med støtte ved benken: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-tahev-benk-stor.jpg" aria-label="Se større bilde: Tåhev med støtte ved benken"><img class="thumb" src="images/60-tahev-benk-m.jpg" width="120" height="100" loading="lazy" alt="Tåhev med støtte ved benken: illustrasjon med silhuetter."></a><span>Tåhev og hælhev ved benken</span><span class="sets">10–15 rep</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-roing-strikk-stor.jpg" aria-label="Se større bilde: Roing med strikk"><img class="thumb" src="images/60-roing-strikk-k.jpg" width="120" height="100" loading="lazy" alt="Roing med strikk: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-roing-strikk-stor.jpg" aria-label="Se større bilde: Roing med strikk"><img class="thumb" src="images/60-roing-strikk-m.jpg" width="120" height="100" loading="lazy" alt="Roing med strikk: illustrasjon med silhuetter."></a><span>Roing med strikk<span class="how">Sittende på en stødig stol, eller stående hvis du står trygt.</span></span><span class="sets">10–15 rep</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-pushup-vegg-stor.jpg" aria-label="Se større bilde: Push-ups mot vegg eller kjøkkenbenk"><img class="thumb" src="images/60-pushup-vegg-k.jpg" width="120" height="100" loading="lazy" alt="Push-ups mot vegg eller kjøkkenbenk: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-pushup-vegg-stor.jpg" aria-label="Se større bilde: Push-ups mot vegg eller kjøkkenbenk"><img class="thumb" src="images/60-pushup-vegg-m.jpg" width="120" height="100" loading="lazy" alt="Push-ups mot vegg eller kjøkkenbenk: illustrasjon med silhuetter."></a><span>Push-ups mot kjøkkenbenken</span><span class="sets">8–12 rep</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-armhev-stor.jpg" aria-label="Se større bilde: Armhev med vannflasker eller melkekartonger"><img class="thumb" src="images/60-armhev-k.jpg" width="120" height="100" loading="lazy" alt="Armhev med vannflasker eller melkekartonger: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-armhev-stor.jpg" aria-label="Se større bilde: Armhev med vannflasker eller melkekartonger"><img class="thumb" src="images/60-armhev-m.jpg" width="120" height="100" loading="lazy" alt="Armhev med vannflasker eller melkekartonger: illustrasjon med silhuetter."></a><span>Armhev med lette vekter<span class="how">Melkekartonger eller vannflasker fungerer fint.</span></span><span class="sets">8–12 rep</span></li>
       </ul>
 
       <h3>Balanse ved benken</h3>
-      <ul class="plain-list">
-        <li><strong>Stå med føttene samlet,</strong> og deretter hæl mot tå, i 10–30 sekunder.</li>
-        <li><strong>Stå på ett bein</strong> med en hånd på benken.</li>
-        <li><strong>Gå hæl mot tå</strong> langs benken.</li>
+      <ul class="exercises">
+        <li><a class="thumb-link k-kvinne" href="images/60-ett-bein-stor.jpg" aria-label="Se større bilde: Stå på ett bein med hånd på benken"><img class="thumb" src="images/60-ett-bein-k.jpg" width="120" height="100" loading="lazy" alt="Stå på ett bein med hånd på benken: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-ett-bein-stor.jpg" aria-label="Se større bilde: Stå på ett bein med hånd på benken"><img class="thumb" src="images/60-ett-bein-m.jpg" width="120" height="100" loading="lazy" alt="Stå på ett bein med hånd på benken: illustrasjon med silhuetter."></a><span>Stå på ett bein<span class="how">Med en hånd på benken.</span></span><span class="sets">10–30 sek</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-sta-hael-ta-stor.jpg" aria-label="Se større bilde: Stå hæl mot tå"><img class="thumb" src="images/60-sta-hael-ta-k.jpg" width="120" height="100" loading="lazy" alt="Stå hæl mot tå: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-sta-hael-ta-stor.jpg" aria-label="Se større bilde: Stå hæl mot tå"><img class="thumb" src="images/60-sta-hael-ta-m.jpg" width="120" height="100" loading="lazy" alt="Stå hæl mot tå: illustrasjon med silhuetter."></a><span>Stå hæl mot tå<span class="how">Først med føttene samlet, så med den ene foten rett foran den andre.</span></span><span class="sets">10–30 sek</span></li>
+        <li><a class="thumb-link k-kvinne" href="images/60-ga-hael-ta-stor.jpg" aria-label="Se større bilde: Gå hæl mot tå"><img class="thumb" src="images/60-ga-hael-ta-k.jpg" width="120" height="100" loading="lazy" alt="Gå hæl mot tå: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-ga-hael-ta-stor.jpg" aria-label="Se større bilde: Gå hæl mot tå"><img class="thumb" src="images/60-ga-hael-ta-m.jpg" width="120" height="100" loading="lazy" alt="Gå hæl mot tå: illustrasjon med silhuetter."></a><span>Gå hæl mot tå<span class="how">Langs benken, med en hånd på benkeplata.</span></span><span class="sets">10 skritt</span></li>
       </ul>
       <p><strong>Øv på å komme deg opp fra gulvet</strong> mens du har noen hos deg: over på siden, opp på knærne, og opp ved hjelp av en stol. Det gir trygghet å vite at du klarer det.</p>
+      <ul class="exercises">
+        <li><a class="thumb-link k-kvinne" href="images/60-opp-fra-gulvet-stor.jpg" aria-label="Se større bilde: Komme seg opp fra gulvet"><img class="thumb" src="images/60-opp-fra-gulvet-k.jpg" width="120" height="100" loading="lazy" alt="Komme seg opp fra gulvet: illustrasjon med silhuetter."></a><a class="thumb-link k-mann" href="images/60-opp-fra-gulvet-stor.jpg" aria-label="Se større bilde: Komme seg opp fra gulvet"><img class="thumb" src="images/60-opp-fra-gulvet-m.jpg" width="120" height="100" loading="lazy" alt="Komme seg opp fra gulvet: illustrasjon med silhuetter."></a><span>Komme seg opp fra gulvet<span class="how">Fra sittende, opp på ett kne med støtte i stolen, og opp til stående.</span></span><span class="sets">Øv av og til</span></li>
+      </ul>
       <p>Mange kommuner har hverdagsrehabilitering, trimgrupper eller programmet <em>Sterk og stødig</em>. Spør fastlegen, fysioterapeut eller kommunen. Det er lettere å holde det gående sammen med andre.</p>
     </div>
   </section>
@@ -687,12 +719,26 @@
       document.querySelectorAll('[data-level-panel]').forEach(function (panel) {
         panel.hidden = panel.getAttribute('data-level-panel') !== key;
       });
+      document.querySelectorAll('[data-level-show]').forEach(function (el) {
+        el.hidden = el.getAttribute('data-level-show').split(' ').indexOf(key) === -1;
+      });
     }
     btns.forEach(function (btn) {
       btn.addEventListener('click', function () { show(btn.getAttribute('data-level')); });
     });
     var m = /[?&]alder=(60|70|80)/.exec(location.search);
     if (m) show(m[1]);
+  })();
+  (function () {
+    var plan = document.querySelector('.plan');
+    var fig = plan.querySelectorAll('.figure-switch button');
+    function setFig(k) {
+      plan.setAttribute('data-kjonn', k);
+      fig.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-kjonn') === k ? 'true' : 'false'); });
+    }
+    fig.forEach(function (b) { b.addEventListener('click', function () { setFig(b.getAttribute('data-kjonn')); }); });
+    var m = /[?&]vis=(kvinne|mann)/.exec(location.search);
+    if (m) setFig(m[1]);
   })();
 </script>
 
