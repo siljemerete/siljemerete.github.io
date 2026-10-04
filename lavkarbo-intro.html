@@ -362,6 +362,12 @@
     margin: 0.25rem 0 1rem;
   }
 
+  .nova td:first-child { width: 38%; vertical-align: top; }
+  .nova td:not(:first-child) { text-align: left !important; white-space: normal !important; }
+  .nova th:not(:first-child) { text-align: left !important; }
+  .swaps li > .from, .swaps li > .to, .swaps li > .arrow { display: inline; }
+  .swaps li:not(:has(label)) { padding: 0.6rem 0; }
+
   @media (max-width: 560px) {
     .hero h1 { font-size: 1.5rem; }
   }
@@ -384,6 +390,17 @@
     <p>For mange kan det være mer realistisk å starte med ett eller to små bytter og kjenne etter hvordan det fungerer. Kanskje du ønsker å spise mindre brød, pasta, ris og sukker, få inn mer grønnsaker og protein, eller finne måltider som holder deg mett lenger.</p>
     <p>Fokuset her er ikke at karbohydrater i seg selv er noe du bør unngå, men <strong>mindre sukker og raffinerte karbohydrater</strong>, og <strong>mer grønnsaker, protein, fiber og mat som metter</strong>.</p>
     <p>Her er noen enkle forslag du kan teste.</p>
+    <div class="callout">
+      <p>Min grunnfilosofi</p>
+      <ul>
+        <li>Råvarer fremfor regler.</li>
+        <li>Fettkvalitet fremfor fettfrykt.</li>
+        <li>Karbohydratkvalitet fremfor karbohydratfrykt.</li>
+        <li>Individuell tilpasning fremfor én løsning for alle.</li>
+        <li>Varige vaner fremfor perfeksjon.</li>
+      </ul>
+    </div>
+    <p class="small-note" style="margin-top:0.9rem">Les mer om <a href="kosthold-tilnaerming.html">min tilnærming til kosthold</a>.</p>
   </section>
 
   <section class="card-section">
@@ -585,6 +602,47 @@
     <p>Poenget er ikke at du aldri skal spise andre søtsaker, men at du kan finne alternativer du liker og som gjør det lettere å redusere mengden sukker i hverdagen. Planlagt kos er noe helt annet enn forbud.</p>
   </section>
 
+  <section class="card-section" id="ultraprosessert">
+    <h2>🛒 Mer ekte mat, mindre ultraprosessert</h2>
+    <p>Mye av maten i butikken i dag er <strong>ultraprosessert</strong>. Det betyr industrielt fremstilte produkter laget av deler av matvarer (som raffinert stivelse, sukker, oljer og proteinisolater) satt sammen med tilsetningsstoffer som gir smak, farge og konsistens. Typiske eksempler er brus, godteri, kjeks, chips, mange frokostblandinger, ferdigretter, pølser, nuggets og mye av det ferdige brødet og bakevarene.</p>
+    <p>Slike produkter er ofte laget for å smake så godt at det er lett å spise mye. I et kontrollert forsøk spiste deltakerne rundt 500 kcal mer per dag når kostholdet var ultraprosessert, sammenlignet med et kosthold av lite bearbeidet mat, selv om de kunne spise så mye de ville av begge. Et høyt inntak av ultraprosessert mat er også knyttet til økt risiko for blant annet overvekt, type 2-diabetes og hjerte- og karsykdom.</p>
+
+    <h3>Fire grupper: fra råvare til ultraprosessert</h3>
+    <p>Forskere bruker ofte NOVA-systemet, som deler maten inn i fire grupper:</p>
+    <table class="facts nova">
+      <tr><th>Gruppe</th><th>Eksempler</th></tr>
+      <tr><td><strong>1. Ubearbeidet eller lite bearbeidet</strong></td><td>Grønnsaker, frukt, bær, egg, fisk, kjøtt, melk, naturell yoghurt, nøtter, frø, havregryn, belgvekster, frosne grønnsaker</td></tr>
+      <tr><td><strong>2. Matlagingsingredienser</strong></td><td>Olivenolje, rapsolje, smør, salt, krydder, eddik</td></tr>
+      <tr><td><strong>3. Bearbeidet mat</strong></td><td>Ost, hermetisk fisk og tomater, bakeribrød med få ingredienser, røkelaks</td></tr>
+      <tr><td><strong>4. Ultraprosessert</strong></td><td>Brus, godteri, chips, kjeks, mange frokostblandinger, ferdigretter, pølser og nuggets, smakstilsatt yoghurt, mange ferdige sauser og dressinger</td></tr>
+    </table>
+    <p>Målet er å la det meste av maten komme fra gruppe 1–3, og la gruppe 4 være mindre og mer bevisste valg.</p>
+
+    <h3>Slik kjenner du igjen ultraprosessert mat</h3>
+    <ul class="questions">
+      <li><strong>Les ingredienslisten, ikke bare forsiden.</strong> Ord som «sukkerfri», «protein» eller «naturlig» sier lite om hvor bearbeidet produktet er.</li>
+      <li><strong>Kort liste er ofte et godt tegn.</strong> Kjenner du igjen alle ingrediensene som noe du kunne hatt på ditt eget kjøkken, er produktet sannsynligvis lite bearbeidet.</li>
+      <li><strong>Se etter ingredienser du ikke ville brukt hjemme,</strong> for eksempel glukose- eller fruktosesirup, modifisert stivelse, proteinisolat, aroma, smaksforsterkere, emulgatorer, fortykningsmidler, fargestoffer og søtstoffer. Jo flere av disse, desto mer prosessert.</li>
+      <li><strong>Handle mest langs «yttersiden» i butikken:</strong> frukt og grønt, fisk, kjøtt, egg og meieri. De ferdige produktene står gjerne i hyllene i midten.</li>
+      <li><strong>Lag mer fra bunnen av.</strong> Det trenger ikke være avansert: kjøttsaus, en fiskemiddag eller grønnsaksmos er enkle måltider av ekte råvarer.</li>
+    </ul>
+
+    <h3>Enkle bytter</h3>
+    <ul class="swaps">
+      <li><span class="from">frokostblanding</span><span class="arrow">→</span><span class="to">kjøleskapsgrøt, egg eller naturell yoghurt med bær og nøtter</span></li>
+      <li><span class="from">smakstilsatt yoghurt</span><span class="arrow">→</span><span class="to">naturell yoghurt eller gresk yoghurt med bær</span></li>
+      <li><span class="from">pølser og ferdige kjøttboller</span><span class="arrow">→</span><span class="to">hjemmelagde kjøttkaker, kylling eller fisk</span></li>
+      <li><span class="from">ferdigdressing</span><span class="arrow">→</span><span class="to">olivenolje, sitron, salt og pepper</span></li>
+      <li><span class="from">chips og kjeks</span><span class="arrow">→</span><span class="to">en neve nøtter, grønnsaksstaver eller litt mørk sjokolade</span></li>
+      <li><span class="from">ferdigpizza</span><span class="arrow">→</span><span class="to">hjemmelaget pizza eller en taco-bolle</span></li>
+    </ul>
+
+    <div class="feature">
+      <p class="feature-kicker">Ikke alt eller ingenting</p>
+      <p>Ikke all bearbeidet mat er dårlig, og du trenger ikke kutte ut alt. Noen av forslagene på denne siden, som sukkerfri saft, sukkerfri brus og proteinyoghurt med søtstoff, regnes faktisk som ultraprosessert. De kan likevel være nyttige bytter hvis de erstatter noe med mye sukker. Det er helheten over tid som teller.</p>
+    </div>
+  </section>
+
   <section class="card-section">
     <h2>Start med ett bytte</h2>
     <p>Du trenger ikke gjøre alt samtidig. Velg ett eller to bytter du vil teste de neste 1–2 ukene:</p>
@@ -661,6 +719,18 @@
       <li>
         <span class="ref-title">Sesso H.D. mfl., COSMOS-studien (2022)</span>
         <span class="ref-desc"><em>American Journal of Clinical Nutrition</em> 115(6):1490–1500. Stor studie med kakaoflavanoler som kosttilskudd: ingen sikker reduksjon i hjerte- og karsykdom totalt, men færre dødsfall av hjerte- og karsykdom. Viser at kakao kan ha noe positivt, men ikke er en «medisin».</span>
+      </li>
+      <li>
+        <span class="ref-title">Monteiro C.A. mfl., Ultra-processed foods: what they are and how to identify them (2019)</span>
+        <span class="ref-desc"><em>Public Health Nutrition</em> 22(5):936–941. Beskriver NOVA-systemet, som deler mat inn i fire grupper etter hvor bearbeidet den er, og hvordan man kjenner igjen ultraprosessert mat.</span>
+      </li>
+      <li>
+        <span class="ref-title">Hall K.D. mfl., Ultra-processed diets cause excess calorie intake and weight gain (2019)</span>
+        <span class="ref-desc"><em>Cell Metabolism</em> 30(1):67–77. Kontrollert forsøk der deltakerne spiste rundt 500 kcal mer per dag og gikk opp i vekt på et ultraprosessert kosthold, sammenlignet med et lite bearbeidet kosthold.</span>
+      </li>
+      <li>
+        <span class="ref-title">Lane M.M. mfl., Ultra-processed food exposure and adverse health outcomes (2024)</span>
+        <span class="ref-desc"><em>BMJ</em> 384:e077310. Paraplyoversikt der høyt inntak av ultraprosessert mat var knyttet til økt risiko for blant annet hjerte- og karsykdom, type 2-diabetes, overvekt og psykiske plager.</span>
       </li>
       <li>
         <span class="ref-title">Evert A.B. mfl., Nutrition Therapy for Adults With Diabetes or Prediabetes: A Consensus Report (2019)</span>
