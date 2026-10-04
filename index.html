@@ -743,10 +743,6 @@
     box-shadow: var(--shadow);
   }
 
-  .method-samtale-link {
-    margin-top: 1.1rem;
-  }
-
   .resource-toggle {
     margin-top: 1.1rem;
     border: 1px solid var(--border);
@@ -1176,7 +1172,29 @@
         <p>Denne tilnærmingen bygger på metodikken fra <a class="inline-link" href="https://abel.no/" target="_blank" rel="noopener">Abel</a>, som utdanner helseveiledere i Norge.</p>
       </div>
     </details>
-    <p class="method-samtale-link"><a class="cta-button" href="#samtaler">Slik foregår en veiledningssamtale →</a></p>
+    <details id="samtaler" class="resource-toggle">
+      <summary>Slik foregår en veiledningssamtale <span class="chevron">▸</span></summary>
+      <div class="resource-toggle-body">
+        <div class="service-grid">
+          <div class="service-card">
+            <svg class="card-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+            <h3>Oppstartssamtale (ca. 45 min)</h3>
+            <p>Vi blir kjent, og kartlegger sammen hvordan hverdagen din ser ut i dag og hva du ønsker å jobbe med.</p>
+          </div>
+          <div class="service-card">
+            <svg class="card-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15-6.7V3.5M18 5.3H15"/><path d="M21 12a9 9 0 0 1-15 6.7v1.8M6 18.7H9"/></svg>
+            <h3>Ukentlig oppfølging</h3>
+            <p>Første oppfølgingssamtale tar ca. 30 min, deretter korte, faste samtaler på ca. 15 min der vi følger opp målene dine og justerer kursen underveis.</p>
+          </div>
+          <div class="service-card">
+            <svg class="card-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5Z"/></svg>
+            <h3>Digital kontakt underveis</h3>
+            <p>Ved behov er det også mulig med kontakt mellom samtalene.</p>
+          </div>
+        </div>
+        <p>Samtalene foregår først og fremst digitalt, men det er også mulig å møtes fysisk i Drammen.</p>
+      </div>
+    </details>
   </section>
 
   <div id="livsfaser" class="life-phases">
@@ -1230,34 +1248,6 @@
         <p>Foredrag, kurs og oppfølging tilpasset arbeidsplassen, med fokus på bærekraftige helsevaner for ansatte.</p>
       </div>
     </div>
-  </section>
-
-  <section id="samtaler" class="card-section">
-    <p class="kicker">Praktisk info</p>
-    <h2>Slik foregår en samtale</h2>
-    <details class="resource-toggle">
-      <summary>Se detaljer <span class="chevron">▸</span></summary>
-      <div class="resource-toggle-body">
-        <div class="service-grid">
-          <div class="service-card">
-            <svg class="card-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
-            <h3>Oppstartssamtale (ca. 45 min)</h3>
-            <p>Vi blir kjent, og kartlegger sammen hvordan hverdagen din ser ut i dag og hva du ønsker å jobbe med.</p>
-          </div>
-          <div class="service-card">
-            <svg class="card-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15-6.7V3.5M18 5.3H15"/><path d="M21 12a9 9 0 0 1-15 6.7v1.8M6 18.7H9"/></svg>
-            <h3>Ukentlig oppfølging</h3>
-            <p>Første oppfølgingssamtale tar ca. 30 min, deretter korte, faste samtaler på ca. 15 min der vi følger opp målene dine og justerer kursen underveis.</p>
-          </div>
-          <div class="service-card">
-            <svg class="card-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dark)" stroke-width="1.8" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5Z"/></svg>
-            <h3>Digital kontakt underveis</h3>
-            <p>Ved behov er det også mulig med kontakt mellom samtalene.</p>
-          </div>
-        </div>
-        <p>Samtalene foregår først og fremst digitalt, men det er også mulig å møtes fysisk i Drammen.</p>
-      </div>
-    </details>
   </section>
 
   <section id="ressurser" class="card-section">
