@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Øvelsesbank | Silje Merete SMART Helseveiledning</title>
+<link rel="icon" href="images/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<meta name="description" content="Styrkeøvelser sortert i sju bevegelsesgrupper, for treningssenter og hjemme. Velg én øvelse fra hver gruppe, eller sjekk at ditt eget program dekker hele kroppen.">
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --warn: #c9823f;
+    --warn-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--accent-soft), var(--bg));
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .hero h1 {
+    margin: 0 0 0.75rem;
+    font-size: 1.8rem;
+    color: var(--accent-dark);
+  }
+
+  .hero p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 46ch;
+    margin-inline: auto;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem 2rem;
+    margin: 2rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .card h2 {
+    margin: 0 0 0.6rem;
+    color: var(--accent-dark);
+    font-size: 1.3rem;
+  }
+
+  .card h3 {
+    margin: 1.25rem 0 0.4rem;
+    color: var(--accent-dark);
+    font-size: 1.05rem;
+  }
+
+  .card p { margin: 0 0 0.75rem; }
+  .card p:last-child { margin-bottom: 0; }
+
+  .card > p.desc {
+    margin: 0 0 1.25rem;
+    color: var(--muted);
+  }
+
+  .message-card {
+    border-left: 4px solid var(--accent);
+  }
+
+  .week {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .week li {
+    display: grid;
+    grid-template-columns: 5.5rem 1fr;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .week li:last-child { border-bottom: 0; }
+
+  .week .day {
+    font-weight: 700;
+    color: var(--accent-dark);
+  }
+
+  .week .tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    margin-left: 0.3rem;
+    vertical-align: 0.1em;
+  }
+
+  .tag.strength { background: var(--accent); color: #fff; }
+  .tag.hard { background: var(--warn); color: #fff; }
+  .tag.easy { background: var(--accent-soft); color: var(--accent-dark); }
+
+  .week .detail {
+    display: block;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .exercises {
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+  }
+
+  .exercises li {
+    display: grid;
+    grid-template-columns: 72px 1fr auto;
+    align-items: center;
+    gap: 0.4rem 0.9rem;
+    padding: 0.55rem 0.9rem 0.55rem 0.55rem;
+    border-radius: 8px;
+  }
+
+  .exercises .thumb {
+    display: block;
+    width: 72px;
+    height: 60px;
+    border-radius: 6px;
+    object-fit: cover;
+  }
+
+  .thumb-link { display: block; border-radius: 6px; }
+  .thumb-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .exercises li:nth-child(odd) { background: var(--accent-soft); }
+
+  .exercises .sets {
+    white-space: nowrap;
+    font-weight: 600;
+    color: var(--accent-dark);
+  }
+
+  .meta {
+    margin: 0 0 1.25rem;
+    padding: 0.75rem 1rem;
+    background: var(--accent-soft);
+    border-radius: 8px;
+    color: var(--ink);
+    font-size: 0.95rem;
+  }
+
+  .formula {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+    margin: 0.5rem 0 1rem;
+  }
+
+  .formula.not {
+    color: var(--muted);
+    background: #f4f6f7;
+    font-weight: 600;
+    text-decoration: line-through;
+    text-decoration-color: rgba(79, 112, 128, 0.5);
+  }
+
+  .plain-list {
+    margin: 0 0 0.75rem;
+    padding-left: 1.25rem;
+  }
+
+  .plain-list li { margin: 0 0 0.5rem; }
+
+  .caution-card {
+    background: var(--warn-soft);
+    border: 1px solid #ecd3ac;
+    border-left: 4px solid var(--warn);
+  }
+
+  .caution-card h2 { color: #8a5a25; }
+
+  .home-link {
+    display: block;
+    text-align: center;
+    margin: 1rem 0 3rem;
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .home-link:hover { text-decoration: underline; }
+
+  footer.closing {
+    margin: 2rem 0 1rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong { color: var(--accent-dark); }
+
+  .page-logo {
+    display: block;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 0.75rem;
+    padding: 5px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(22, 40, 58, 0.12);
+  }
+
+  .page-logo img {
+    display: block;
+    width: 46px;
+    height: 46px;
+  }
+
+  .place-switch {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0 0 1.25rem;
+  }
+
+  .place-switch button {
+    flex: 1;
+    font-size: 0.98rem;
+    padding: 0.7rem 0.75rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .place-switch button span {
+    display: block;
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .place-switch button[aria-pressed="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .place-switch button[aria-pressed="true"] span { color: var(--accent-soft); }
+
+  .exercises .how {
+    display: block;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  .about-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+    margin: 2rem 0 0;
+    box-shadow: var(--shadow);
+  }
+
+  .about-box summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+  }
+
+  .about-box summary::-webkit-details-marker { display: none; }
+
+  .about-box summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 10px;
+  }
+
+  .about-box .chevron { transition: transform 0.2s; }
+  .about-box[open] .chevron { transform: rotate(90deg); }
+
+  .about-body { padding: 0 1.25rem 1.25rem; }
+  .about-body p { margin: 0 0 0.75rem; }
+  .about-body p:last-child { margin-bottom: 0; }
+
+  .about-body .source {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .about-body .source a { color: var(--accent-dark); font-weight: 600; }
+
+  .about-box.equipment { margin: 1.5rem 0 0; box-shadow: none; }
+
+  .about-body h4 {
+    margin: 1.1rem 0 0.4rem;
+    color: var(--accent-dark);
+    font-size: 0.98rem;
+  }
+
+  .weights {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin: 0 0 0.75rem;
+  }
+
+  .weights th,
+  .weights td {
+    text-align: left;
+    padding: 0.45rem 0.4rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .weights th { color: var(--accent-dark); font-size: 0.85rem; }
+  .weights td:not(:first-child), .weights th:not(:first-child) { white-space: nowrap; }
+
+  .equip-button {
+    display: inline-block;
+    margin-top: 0.7rem;
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+  }
+
+  .equip-button:hover { background: var(--accent-dark); }
+  .equip-button:focus-visible { outline: 2px solid var(--accent-dark); outline-offset: 2px; }
+
+  .card .source {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-top: 0.75rem;
+  }
+
+  .card .source a, .sources a { color: var(--accent-dark); font-weight: 600; }
+
+  .level-switch button { font-size: 0.92rem; padding: 0.65rem 0.4rem; }
+
+  .sources { margin: 0; padding-left: 1.1rem; font-size: 0.9rem; }
+  .sources li { margin: 0 0 0.6rem; }
+
+
+  .bank-intro ol { margin: 0 0 0.75rem; padding-left: 1.25rem; }
+  .bank-intro ol li { margin: 0 0 0.5rem; }
+
+  .group { margin: 0 0 0.9rem; box-shadow: none; }
+  .group:first-of-type { margin-top: 0; }
+  .group summary .count { display: block; font-weight: 400; color: var(--muted); font-size: 0.85rem; margin-top: 0.1rem; }
+  .group .about-body > p.muscles { margin: 0 0 0.75rem; color: var(--muted); font-size: 0.92rem; }
+  .group .exercises { margin-bottom: 0; }
+
+  .exercises li.no-img { grid-template-columns: 1fr; padding-left: 0.9rem; }
+
+  .bank[data-show="gym"] .v-home,
+  .bank[data-show="home"] .v-gym { display: none; }
+
+  .plan-links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.25rem 0 0; padding: 0; list-style: none; }
+  .plan-links a {
+    display: inline-block;
+    padding: 0.5rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--accent-dark);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    background: var(--card);
+  }
+  .plan-links a:hover { background: var(--accent-soft); }
+
+  [hidden] { display: none !important; }
+
+  @media (max-width: 420px) {
+    .about-box.equipment summary { padding: 0.9rem 0.9rem; }
+    .about-box.equipment .about-body { padding: 0 0.9rem 1rem; }
+    .weights { font-size: 0.82rem; }
+    .weights th, .weights td { padding: 0.4rem 0.25rem; }
+    .weights td:not(:first-child), .weights th:not(:first-child) { white-space: normal; }
+    .exercises li { grid-template-columns: 64px 1fr; }
+    .exercises .thumb { width: 64px; height: 54px; }
+    .exercises .thumb-link { grid-row: span 2; }
+    .exercises .sets { grid-column: 2; }
+    .week li { grid-template-columns: 1fr; gap: 0.15rem; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
+    <h1>Øvelsesbank</h1>
+    <p>Styrkeøvelser sortert i sju bevegelsesgrupper. Dekker du alle gruppene i løpet av uka, har du trent hele kroppen.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section class="card message-card bank-intro">
+    <h2>Slik bruker du øvelsesbanken</h2>
+    <ol>
+      <li><strong>Lag din egen økt:</strong> velg én øvelse fra hver gruppe. Er sju øvelser mye, start med gruppe 1, 2, 3 og 5, og legg til resten når du har tid.</li>
+      <li><strong>Har du allerede et program?</strong> Sjekk at det dekker alle gruppene i løpet av uka, og bruk banken til å finne alternativer.</li>
+      <li><strong>Varier med måte:</strong> bytt gjerne noen øvelser hver 4.–8. uke, men behold noen faste, så du ser fremgangen.</li>
+    </ol>
+    <div class="meta">
+      <strong>Sett og repetisjoner:</strong> 2–3 sett og 6–12 repetisjoner for de fleste øvelsene. Stopp mens du kunne tatt 1–3 repetisjoner til. Kjerneøvelser: 20–40 sekunder.
+    </div>
+  </section>
+
+  <section class="card bank" data-show="gym">
+    <h2>Øvelsene</h2>
+    <p class="desc">Trykk på en gruppe for å se øvelsene, og på et bilde for å se det større.</p>
+    <div class="place-switch" role="group" aria-label="Velg hvor du trener">
+      <button type="button" data-place="gym" aria-pressed="true">Treningssenter<span>Stang, apparater og manualer</span></button>
+      <button type="button" data-place="home" aria-pressed="false">Hjemme<span>Manualer, strikk og en stol</span></button>
+    </div>
+
+      <details class="about-box group">
+        <summary><span>1. Knebøy-bevegelser <span class="count">4 øvelser</span></span><span class="chevron" aria-hidden="true">▸</span></summary>
+        <div class="about-body">
+          <p class="muscles">Forside lår og sete</p>
+          <ul class="exercises">
+          <li><a class="thumb-link" href="images/ukeplan-kneboy-stor.jpg" aria-label="Se større bilde: Knebøy"><img class="thumb v-gym" src="images/ukeplan-kneboy-senter.jpg" width="120" height="100" loading="lazy" alt="Knebøy på treningssenter: illustrasjon med silhuetter."><img class="thumb v-home" src="images/ukeplan-kneboy-hjemme.jpg" width="120" height="100" loading="lazy" alt="Knebøy hjemme: illustrasjon med silhuetter."></a><span class="v-gym">Knebøy med stang<span class="how">Stanga på øvre del av ryggen. Sett deg ned og litt bakover, knærne følger tærne.</span></span><span class="v-home">Knebøy med manual eller kettlebell<span class="how">Hold vekten foran brystet (goblet-knebøy), gjerne ned mot en stol.</span></span></li>
+          <li><a class="thumb-link" href="images/ukeplan-mann-beinpress-stor.jpg" aria-label="Se større bilde: Beinpress"><img class="thumb v-gym" src="images/ukeplan-mann-beinpress-senter.jpg" width="120" height="100" loading="lazy" alt="Beinpress på treningssenter: illustrasjon med silhuetter."><img class="thumb v-home" src="images/ukeplan-mann-beinpress-hjemme.jpg" width="120" height="100" loading="lazy" alt="Beinpress hjemme: illustrasjon med silhuetter."></a><span class="v-gym">Beinpress<span class="how">Senk kontrollert til knærne er rundt 90 grader, og press opp uten å låse knærne.</span></span><span class="v-home">Knebøy til stol på ett bein<span class="how">Sett deg rolig ned på stolen og reis deg på ett bein. Start på to bein med en kettlebell, som på bildet.</span></span></li>
+          <li><a class="thumb-link" href="images/ukeplan-enbens-stor.jpg" aria-label="Se større bilde: Utfall og step-up"><img class="thumb v-gym" src="images/ukeplan-enbens-senter.jpg" width="120" height="100" loading="lazy" alt="Utfall og step-up på treningssenter: illustrasjon med silhuetter."><img class="thumb v-home" src="images/ukeplan-enbens-hjemme.jpg" width="120" height="100" loading="lazy" alt="Utfall og step-up hjemme: illustrasjon med silhuetter."></a><span class="v-gym">Utfall med manualer<span class="how">Ta et steg fram eller bak, og senk bakre kne rolig mot gulvet.</span></span><span class="v-home">Step-up eller utfall bakover<span class="how">På et trappetrinn eller en stødig stol, gjerne med manualer.</span></span></li>
+          <li class="no-img"><span class="v-gym">Bulgarsk utfall<span class="how">Bakre fot på en benk, senk deg rett ned. Krevende, og gir mye effekt med lette vekter.</span></span><span class="v-home">Bulgarsk utfall<span class="how">Bakre fot på en stol, senk deg rett ned. Krevende, og gir mye effekt med lette vekter.</span></span></li>
+          </ul>
+        </div>
+      </details>
+      <details class="about-box group">
+        <summary><span>2. Hofte-bevegelser <span class="count">3 øvelser</span></span><span class="chevron" aria-hidden="true">▸</span></summary>
+        <div class="about-body">
+          <p class="muscles">Bakside lår og sete</p>
+          <ul class="exercises">
+          <li><a class="thumb-link" href="images/ukeplan-markloft-stor.jpg" aria-label="Se større bilde: Rumensk markløft"><img class="thumb v-gym" src="images/ukeplan-markloft-senter.jpg" width="120" height="100" loading="lazy" alt="Rumensk markløft på treningssenter: illustrasjon med silhuetter."><img class="thumb v-home" src="images/ukeplan-markloft-hjemme.jpg" width="120" height="100" loading="lazy" alt="Rumensk markløft hjemme: illustrasjon med silhuetter."></a><span class="v-gym">Rumensk markløft med stang<span class="how">Skyv hoftene bakover med nesten strake bein og rett rygg. Hold stanga tett inntil beina.</span></span><span class="v-home">Rumensk markløft med manualer<span class="how">For mer: markløft på ett bein.</span></span></li>
+          <li><a class="thumb-link" href="images/ukeplan-hipthrust-stor.jpg" aria-label="Se større bilde: Hip thrust og seteløft"><img class="thumb v-gym" src="images/ukeplan-hipthrust-senter.jpg" width="120" height="100" loading="lazy" alt="Hip thrust og seteløft på treningssenter: illustrasjon med silhuetter."><img class="thumb v-home" src="images/ukeplan-hipthrust-hjemme.jpg" width="120" height="100" loading="lazy" alt="Hip thrust og seteløft hjemme: illustrasjon med silhuetter."></a><span class="v-gym">Hip thrust<span class="how">Ryggen mot en benk og stang over hoftene. Klem setet på toppen.</span></span><span class="v-home">Seteløft<span class="how">På gulvet eller med skuldrene mot sofaen, gjerne med en manual på hoftene.</span></span></li>
+          <li class="no-img"><span class="v-gym">Leg curl i apparat<span class="how">Bøy knærne kontrollert, og senk sakte.</span></span><span class="v-home">Leg curl på håndkle<span class="how">Ligg på ryggen med hælene på et håndkle på glatt gulv. Løft hoftene og dra hælene inn mot setet.</span></span></li>
+          </ul>
+        </div>
+      </details>
+      <details class="about-box group">
+        <summary><span>3. Press fremover <span class="count">2 øvelser</span></span><span class="chevron" aria-hidden="true">▸</span></summary>
+        <div class="about-body">
+          <p class="muscles">Bryst, forside skuldre og bakside armer</p>
+          <ul class="exercises">
+          <li><a class="thumb-link" href="images/ukeplan-bryst-stor.jpg" aria-label="Se større bilde: Brystpress og push-ups"><img class="thumb v-gym" src="images/ukeplan-bryst-senter.jpg" width="120" height="100" loading="lazy" alt="Brystpress og push-ups på treningssenter: illustrasjon med silhuetter."><img class="thumb v-home" src="images/ukeplan-bryst-hjemme.jpg" width="120" height="100" loading="lazy" alt="Brystpress og push-ups hjemme: illustrasjon med silhuetter."></a><span class="v-gym">Benkpress eller brystpress med manualer<span class="how">Senk kontrollert mot brystet, med albuene litt inn mot kroppen.</span></span><span class="v-home">Push-ups<span class="how">Mot kjøkkenbenken, på knærne eller på gulvet. Eller brystpress med manualer liggende på gulvet.</span></span></li>
+          <li class="no-img"><span class="v-gym">Skrå brystpress med manualer<span class="how">Benken på 30–45 grader.</span></span><span class="v-home">Push-ups med føttene på en stol<span class="how">En tyngre variant når vanlige push-ups blir lette.</span></span></li>
+          </ul>
+        </div>
+      </details>
+      <details class="about-box group">
+        <summary><span>4. Press opp <span class="count">2 øvelser</span></span><span class="chevron" aria-hidden="true">▸</span></summary>
+        <div class="about-body">
+          <p class="muscles">Skuldre</p>
+          <ul class="exercises">
+          <li><a class="thumb-link" href="images/ukeplan-skulderpress-stor.jpg" aria-label="Se større bilde: Skulderpress"><img class="thumb v-gym" src="images/ukeplan-skulderpress-senter.jpg" width="120" height="100" loading="lazy" alt="Skulderpress på treningssenter: illustrasjon med silhuetter."><img class="thumb v-home" src="images/ukeplan-skulderpress-hjemme.jpg" width="120" height="100" loading="lazy" alt="Skulderpress hjemme: illustrasjon med silhuetter."></a><span class="v-gym">Skulderpress med manualer<span class="how">Sittende eller stående. Hold magen lett aktiv og unngå å svaie i korsryggen.</span></span><span class="v-home">Skulderpress med manualer eller strikk<span class="how">Stående eller sittende.</span></span></li>
+          <li class="no-img"><span class="v-gym">Sidehev<span class="how">Med lette manualer eller i kabel. Løft armene ut til siden til skulderhøyde.</span></span><span class="v-home">Sidehev<span class="how">Med lette manualer eller strikk. Løft armene ut til siden til skulderhøyde.</span></span></li>
+          </ul>
+        </div>
+      </details>
+      <details class="about-box group">
+        <summary><span>5. Trekk mot deg <span class="count">2 øvelser</span></span><span class="chevron" aria-hidden="true">▸</span></summary>
+        <div class="about-body">
+          <p class="muscles">Øvre del av ryggen</p>
+          <ul class="exercises">
+          <li><a class="thumb-link" href="images/ukeplan-roing-stor.jpg" aria-label="Se større bilde: Roing"><img class="thumb v-gym" src="images/ukeplan-roing-senter.jpg" width="120" height="100" loading="lazy" alt="Roing på treningssenter: illustrasjon med silhuetter."><img class="thumb v-home" src="images/ukeplan-roing-hjemme.jpg" width="120" height="100" loading="lazy" alt="Roing hjemme: illustrasjon med silhuetter."></a><span class="v-gym">Sittende roing i kabel<span class="how">Trekk albuene bakover og skulderbladene mot hverandre.</span></span><span class="v-home">Roing med manual<span class="how">Én arm av gangen med støtte på en stol.</span></span></li>
+          <li class="no-img"><span class="v-gym">Foroverbøyd roing med stang<span class="how">Bøy i hoftene med rett rygg, og trekk stanga mot navlen.</span></span><span class="v-home">Roing med strikk<span class="how">Strikket festet i døra eller rundt føttene.</span></span></li>
+          </ul>
+        </div>
+      </details>
+      <details class="about-box group">
+        <summary><span>6. Trekk ned <span class="count">2 øvelser</span></span><span class="chevron" aria-hidden="true">▸</span></summary>
+        <div class="about-body">
+          <p class="muscles">Rygg og forside armer</p>
+          <ul class="exercises">
+          <li><a class="thumb-link" href="images/ukeplan-nedtrekk-stor.jpg" aria-label="Se større bilde: Nedtrekk"><img class="thumb v-gym" src="images/ukeplan-nedtrekk-senter.jpg" width="120" height="100" loading="lazy" alt="Nedtrekk på treningssenter: illustrasjon med silhuetter."><img class="thumb v-home" src="images/ukeplan-nedtrekk-hjemme.jpg" width="120" height="100" loading="lazy" alt="Nedtrekk hjemme: illustrasjon med silhuetter."></a><span class="v-gym">Nedtrekk<span class="how">Trekk stanga ned mot øvre del av brystet.</span></span><span class="v-home">Nedtrekk med strikk<span class="how">Strikket festet øverst i døra.</span></span></li>
+          <li><a class="thumb-link" href="images/ukeplan-mann-pullups-stor.jpg" aria-label="Se større bilde: Pull-ups"><img class="thumb v-gym" src="images/ukeplan-mann-pullups-senter.jpg" width="120" height="100" loading="lazy" alt="Pull-ups på treningssenter: illustrasjon med silhuetter."><img class="thumb v-home" src="images/ukeplan-mann-pullups-hjemme.jpg" width="120" height="100" loading="lazy" alt="Pull-ups hjemme: illustrasjon med silhuetter."></a><span class="v-gym">Pull-ups<span class="how">Med strikk eller i apparat for hjelp hvis det er for tungt.</span></span><span class="v-home">Pull-ups i dørstang<span class="how">Start med å henge, eller senk deg sakte ned fra toppen.</span></span></li>
+          </ul>
+        </div>
+      </details>
+      <details class="about-box group">
+        <summary><span>7. Kjerne og bæring <span class="count">5 øvelser</span></span><span class="chevron" aria-hidden="true">▸</span></summary>
+        <div class="about-body">
+          <p class="muscles">Mage, rygg og grep</p>
+          <ul class="exercises">
+          <li><a class="thumb-link" href="images/ukeplan-planke-stor.jpg" aria-label="Se større bilde: Planke"><img class="thumb v-gym" src="images/ukeplan-planke-senter.jpg" width="120" height="100" loading="lazy" alt="Planke på treningssenter: illustrasjon med silhuetter."><img class="thumb v-home" src="images/ukeplan-planke-hjemme.jpg" width="120" height="100" loading="lazy" alt="Planke hjemme: illustrasjon med silhuetter."></a><span>Planke<span class="how">På knærne eller med strake bein. Rett linje fra hode til knær eller hæler.</span></span></li>
+          <li><a class="thumb-link" href="images/ukeplan-sideplanke-stor.jpg" aria-label="Se større bilde: Sideplanke"><img class="thumb v-gym" src="images/ukeplan-sideplanke-senter.jpg" width="120" height="100" loading="lazy" alt="Sideplanke på treningssenter: illustrasjon med silhuetter."><img class="thumb v-home" src="images/ukeplan-sideplanke-hjemme.jpg" width="120" height="100" loading="lazy" alt="Sideplanke hjemme: illustrasjon med silhuetter."></a><span>Sideplanke<span class="how">Start på knærne. For mer: strake bein.</span></span></li>
+          <li><a class="thumb-link" href="images/styrke-15-5-deadbug.jpg" aria-label="Se større bilde: Dead bug"><img class="thumb" src="images/bank-deadbug.jpg" width="120" height="100" loading="lazy" alt="Dead bug: illustrasjon med silhuetter."></a><span>Dead bug<span class="how">Ligg på ryggen og senk motsatt arm og bein rolig. Korsryggen skal ligge mot gulvet.</span></span></li>
+          <li><a class="thumb-link" href="images/styrke-mini-4-birddog.jpg" aria-label="Se større bilde: Bird dog"><img class="thumb" src="images/bank-birddog.jpg" width="120" height="100" loading="lazy" alt="Bird dog: illustrasjon med silhuetter."></a><span>Bird dog<span class="how">På alle fire: strekk ut motsatt arm og bein, og hold hoften stabil.</span></span></li>
+          <li><a class="thumb-link" href="images/ukeplan-mann-farmerswalk-stor.jpg" aria-label="Se større bilde: Farmer’s walk"><img class="thumb v-gym" src="images/ukeplan-mann-farmerswalk-senter.jpg" width="120" height="100" loading="lazy" alt="Farmer’s walk på treningssenter: illustrasjon med silhuetter."><img class="thumb v-home" src="images/ukeplan-mann-farmerswalk-hjemme.jpg" width="120" height="100" loading="lazy" alt="Farmer’s walk hjemme: illustrasjon med silhuetter."></a><span class="v-gym">Farmer’s walk<span class="how">Gå rolig med en tung manual eller kettlebell i hver hånd, med rak rygg.</span></span><span class="v-home">Farmer’s walk<span class="how">Med kettlebells, manualer eller tunge handleposer.</span></span></li>
+          </ul>
+        </div>
+      </details>
+  </section>
+
+  <section class="card">
+    <h2>Ukeplanene</h2>
+    <p class="desc">Hvor ofte du bør trene, og et ferdig opplegg hvis du er ny eller vil ha et utgangspunkt.</p>
+    <ul class="plan-links">
+      <li><a href="trening-kvinner-for-40.html">Kvinner før 40</a></li>
+      <li><a href="ukeplan-kvinne-40.html">Kvinner 40+</a></li>
+      <li><a href="ukeplan-mann-30-50.html">Menn 30–50+</a></li>
+    </ul>
+  </section>
+
+  <section class="card caution-card">
+    <h2>Viktige forholdsregler</h2>
+    <ul class="plain-list">
+      <li>Ingen øvelser skal gjøre vondt i ledd. Gjør bevegelsen mindre, velg en annen variant, eller hopp over øvelsen hvis noe kjennes feil.</li>
+      <li>Har du helseplager eller skader, snakk med lege eller fysioterapeut om hvordan du kan tilpasse treningen.</li>
+      <li>Stopp og ta kontakt med lege hvis du får brystsmerter, uvanlig tungpust eller blir svimmel.</li>
+    </ul>
+  </section>
+
+  <a class="home-link" href="index.html">Se hjemmesiden min →</a>
+
+</div>
+
+<footer class="closing">
+  Små skritt. Dine mål, ditt tempo.<br>
+  <strong>Du trenger ikke gjøre det alene.</strong>
+</footer>
+
+<script>
+  (function () {
+    var bank = document.querySelector('.bank');
+    var btns = bank.querySelectorAll('.place-switch button');
+    btns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var key = btn.getAttribute('data-place');
+        bank.setAttribute('data-show', key);
+        btns.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
