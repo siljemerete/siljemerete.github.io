@@ -6,7 +6,6 @@
 <title>Rolige øvelser etter leggoperasjon | Silje Merete SMART Helseveiledning</title>
 <link rel="icon" href="images/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-<meta name="robots" content="noindex">
 <meta name="description" content="Et lite, skånsomt program med rolige bevegelser de første ukene etter lipødemkirurgi i leggene.">
 <style>
   :root {
@@ -158,53 +157,123 @@
     color: #8a5a25;
   }
 
-  .check-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .log-intro {
+    color: var(--muted);
   }
 
-  .check-list li {
-    margin: 0 0 0.5rem;
+  .log-entry {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1rem 1.1rem;
+    margin: 1rem 0 0;
+    background: #fbfdfe;
   }
 
-  .check-list label {
+  .log-entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .log-entry-head strong {
+    color: var(--accent-dark);
+  }
+
+  .remove-entry {
+    font-size: 0.85rem;
+    background: none;
+    border: none;
+    color: var(--muted);
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0.25rem;
+  }
+
+  .field {
+    margin: 0 0 0.85rem;
+  }
+
+  .field:last-child {
+    margin-bottom: 0;
+  }
+
+  .field label,
+  .field .field-label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .field input[type="date"],
+  .field input[type="text"],
+  .field select,
+  .field textarea {
+    width: 100%;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--ink);
+    padding: 0.55rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  .field textarea {
+    min-height: 4.5rem;
+    resize: vertical;
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .range-row {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.7rem 0.9rem;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    cursor: pointer;
   }
 
-  .check-list input {
-    width: 1.25rem;
-    height: 1.25rem;
+  .range-row input[type="range"] {
+    flex: 1;
     accent-color: var(--accent);
-    flex: 0 0 auto;
   }
 
-  .check-list input:checked + span {
+  .range-value {
+    min-width: 2.2rem;
+    text-align: center;
+    font-weight: 700;
+    color: var(--accent-dark);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .range-hint {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
     color: var(--muted);
-    text-decoration: line-through;
   }
 
-  .session-count {
+  .empty-log {
     margin: 1rem 0 0;
     text-align: center;
     color: var(--muted);
   }
 
-  .session-buttons {
+  .btn-row {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 0.6rem;
-    margin-top: 1rem;
+    margin-top: 1.25rem;
   }
 
-  .session-buttons button {
+  .btn-row button {
     font-size: 0.95rem;
     padding: 0.65rem 1.3rem;
     border-radius: 999px;
@@ -215,18 +284,29 @@
     font-weight: 600;
   }
 
-  .session-buttons button:hover {
+  .btn-row button:hover {
     background: var(--accent-dark);
     border-color: var(--accent-dark);
   }
 
-  .session-buttons button.secondary {
+  .btn-row button.secondary {
     background: var(--card);
     color: var(--accent-dark);
   }
 
-  .session-buttons button.secondary:hover {
+  .btn-row button.secondary:hover {
     background: var(--accent-soft);
+  }
+
+  .reset-link {
+    display: block;
+    margin: 1.25rem auto 0;
+    font-size: 0.85rem;
+    background: none;
+    border: none;
+    color: var(--muted);
+    text-decoration: underline;
+    cursor: pointer;
   }
 
   .caution-card {
@@ -355,19 +435,35 @@
   </section>
 
   <section class="card">
-    <h2>Dagens økt</h2>
-    <p class="note">Huk av mens du gjør øvelsene. Når du er ferdig, trykker du «Økt fullført».</p>
-    <ul class="check-list">
-      <li><label><input type="checkbox" class="session-check"><span>Dyp magepust</span></label></li>
-      <li><label><input type="checkbox" class="session-check"><span>Ankelpumpe</span></label></li>
-      <li><label><input type="checkbox" class="session-check"><span>Rolige ankelsirkler</span></label></li>
-      <li><label><input type="checkbox" class="session-check"><span>En kort, rolig gåtur</span></label></li>
-    </ul>
-    <p class="session-count" id="sessionCount">Ingen økter registrert i dag ennå.</p>
-    <div class="session-buttons">
-      <button type="button" id="sessionDone">Økt fullført</button>
-      <button type="button" id="sessionReset" class="secondary">Nullstill i dag</button>
+    <h2>Min logg</h2>
+    <p class="log-intro">Fyll inn litt hver dag, eller når det passer. Det du skriver lagres bare på denne enheten. Før neste samtale kan du sende loggen til meg på e-post hvis du vil.</p>
+    <div id="logEntries"></div>
+    <p class="empty-log" id="emptyLog">Ingen dager registrert ennå.</p>
+    <div class="btn-row">
+      <button type="button" id="addEntry">+ Legg til dag</button>
     </div>
+  </section>
+
+  <section class="card">
+    <h2>Før neste samtale</h2>
+    <div class="field">
+      <label for="progress">Hva har gått bra så langt?</label>
+      <textarea id="progress" data-key="progress" placeholder="Skriv gjerne fritt her..."></textarea>
+    </div>
+    <div class="field">
+      <label for="questions">Er det noe du lurer på, eller vil snakke om?</label>
+      <textarea id="questions" data-key="questions" placeholder="Spørsmål, bekymringer eller ting du har lagt merke til..."></textarea>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Send loggen til meg</h2>
+    <p class="log-intro">Helt frivillig. «Send på e-post» åpner e-postappen din med loggen ferdig utfylt, så kan du lese gjennom før du sender. Hvis det ikke åpner riktig på mobilen, kan du laste ned loggen som tekstfil i stedet.</p>
+    <div class="btn-row">
+      <button type="button" id="sendEmail">Send på e-post</button>
+      <button type="button" id="downloadText" class="secondary">Last ned som tekstfil</button>
+    </div>
+    <button type="button" class="reset-link" id="resetAll">Slett hele loggen</button>
   </section>
 
   <section class="card">
@@ -401,59 +497,194 @@
 
 <script>
   (function () {
-    var storageKey = 'leggoperasjon-okter';
-    var checks = document.querySelectorAll('.session-check');
-    var countEl = document.getElementById('sessionCount');
-    var doneBtn = document.getElementById('sessionDone');
-    var resetBtn = document.getElementById('sessionReset');
+    var STORAGE_KEY = 'leggoperasjon-logg';
+    var RECIPIENT = 'silje.merete.binder@gmail.com';
+    var SWELLING = ['', 'Mindre enn dagen før', 'Omtrent som dagen før', 'Mer enn dagen før'];
 
-    function today() {
-      var d = new Date();
-      return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
-    }
+    var entriesEl = document.getElementById('logEntries');
+    var emptyEl = document.getElementById('emptyLog');
+    var state = load();
 
     function load() {
       try {
-        var data = JSON.parse(localStorage.getItem(storageKey) || '{}');
-        return data.date === today() ? data.count || 0 : 0;
+        var data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+        if (!Array.isArray(data.entries)) data.entries = [];
+        return data;
       } catch (e) {
-        return 0;
+        return { entries: [] };
       }
     }
 
-    function save(count) {
+    function save() {
       try {
-        localStorage.setItem(storageKey, JSON.stringify({ date: today(), count: count }));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       } catch (e) { /* ignore if storage unavailable */ }
     }
 
-    var count = load();
+    function todayIso() {
+      var d = new Date();
+      var m = d.getMonth() + 1;
+      var day = d.getDate();
+      return d.getFullYear() + '-' + (m < 10 ? '0' : '') + m + '-' + (day < 10 ? '0' : '') + day;
+    }
+
+    function formatDate(iso) {
+      if (!iso) return 'Uten dato';
+      var parts = iso.split('-');
+      return parts[2] + '.' + parts[1] + '.' + parts[0];
+    }
+
+    function el(tag, attrs, children) {
+      var node = document.createElement(tag);
+      Object.keys(attrs || {}).forEach(function (k) {
+        if (k === 'text') node.textContent = attrs[k];
+        else node.setAttribute(k, attrs[k]);
+      });
+      (children || []).forEach(function (c) { node.appendChild(c); });
+      return node;
+    }
+
+    function field(labelText, id, input) {
+      return el('div', { 'class': 'field' }, [el('label', { 'for': id, text: labelText }), input]);
+    }
+
+    function renderEntry(entry, index) {
+      var prefix = 'e' + index + '-';
+
+      var dateInput = el('input', { type: 'date', id: prefix + 'date' });
+      dateInput.value = entry.date || '';
+      dateInput.addEventListener('change', function () {
+        entry.date = dateInput.value;
+        title.textContent = formatDate(entry.date);
+        save();
+      });
+
+      var sessionsSelect = el('select', { id: prefix + 'sessions' });
+      ['', '0', '1', '2', '3', 'Flere enn 3'].forEach(function (v) {
+        sessionsSelect.appendChild(el('option', { value: v, text: v === '' ? 'Velg' : v }));
+      });
+      sessionsSelect.value = entry.sessions || '';
+      sessionsSelect.addEventListener('change', function () { entry.sessions = sessionsSelect.value; save(); });
+
+      var walkInput = el('input', { type: 'text', id: prefix + 'walk', placeholder: 'F.eks. 3 korte runder inne, ca. 5 min' });
+      walkInput.value = entry.walk || '';
+      walkInput.addEventListener('input', function () { entry.walk = walkInput.value; save(); });
+
+      var painValue = el('span', { 'class': 'range-value', text: entry.pain !== undefined && entry.pain !== '' ? entry.pain : '-' });
+      var painInput = el('input', { type: 'range', min: '0', max: '10', step: '1', id: prefix + 'pain' });
+      painInput.value = entry.pain !== undefined && entry.pain !== '' ? entry.pain : '0';
+      painInput.addEventListener('input', function () {
+        entry.pain = painInput.value;
+        painValue.textContent = painInput.value;
+        save();
+      });
+      var painField = el('div', { 'class': 'field' }, [
+        el('label', { 'for': prefix + 'pain', text: 'Smerte i leggene (0 til 10)' }),
+        el('div', { 'class': 'range-row' }, [painInput, painValue]),
+        el('div', { 'class': 'range-hint' }, [el('span', { text: 'Ingen' }), el('span', { text: 'Verst tenkelig' })])
+      ]);
+
+      var swellingSelect = el('select', { id: prefix + 'swelling' });
+      SWELLING.forEach(function (v) {
+        swellingSelect.appendChild(el('option', { value: v, text: v === '' ? 'Velg' : v }));
+      });
+      swellingSelect.value = entry.swelling || '';
+      swellingSelect.addEventListener('change', function () { entry.swelling = swellingSelect.value; save(); });
+
+      var noteInput = el('textarea', { id: prefix + 'note', placeholder: 'Hvordan kjentes det? Noe som trakk, gjorde vondt eller gikk lettere?' });
+      noteInput.value = entry.note || '';
+      noteInput.addEventListener('input', function () { entry.note = noteInput.value; save(); });
+
+      var removeBtn = el('button', { type: 'button', 'class': 'remove-entry', text: 'Fjern' });
+      removeBtn.addEventListener('click', function () {
+        if (!confirm('Fjerne denne dagen fra loggen?')) return;
+        state.entries.splice(index, 1);
+        save();
+        render();
+      });
+
+      var title = el('strong', { text: formatDate(entry.date) });
+
+      return el('div', { 'class': 'log-entry' }, [
+        el('div', { 'class': 'log-entry-head' }, [title, removeBtn]),
+        field('Dato', prefix + 'date', dateInput),
+        field('Antall økter med øvelse 1 til 3', prefix + 'sessions', sessionsSelect),
+        field('Gåturer', prefix + 'walk', walkInput),
+        painField,
+        field('Hevelse om kvelden', prefix + 'swelling', swellingSelect),
+        field('Kommentar', prefix + 'note', noteInput)
+      ]);
+    }
 
     function render() {
-      if (count === 0) {
-        countEl.textContent = 'Ingen økter registrert i dag ennå.';
-      } else if (count === 1) {
-        countEl.textContent = '1 økt fullført i dag. Godt jobbet!';
-      } else {
-        countEl.textContent = count + ' økter fullført i dag. Godt jobbet!';
-      }
+      entriesEl.innerHTML = '';
+      state.entries.forEach(function (entry, i) {
+        entriesEl.appendChild(renderEntry(entry, i));
+      });
+      emptyEl.style.display = state.entries.length ? 'none' : 'block';
     }
 
-    function clearChecks() {
-      checks.forEach(function (c) { c.checked = false; });
+    function buildSummaryText() {
+      var lines = ['Logg: rolige øvelser etter leggoperasjon', ''];
+      var sorted = state.entries.slice().sort(function (a, b) {
+        return (a.date || '').localeCompare(b.date || '');
+      });
+      if (!sorted.length) lines.push('(Ingen dager registrert)', '');
+      sorted.forEach(function (e) {
+        lines.push(formatDate(e.date));
+        lines.push('  Økter med øvelse 1 til 3: ' + (e.sessions || '-'));
+        lines.push('  Gåturer: ' + (e.walk || '-'));
+        lines.push('  Smerte (0-10): ' + (e.pain !== undefined && e.pain !== '' ? e.pain : '-'));
+        lines.push('  Hevelse om kvelden: ' + (e.swelling || '-'));
+        lines.push('  Kommentar: ' + (e.note || '-'));
+        lines.push('');
+      });
+      lines.push('Hva har gått bra så langt: ' + (state.progress || '-'));
+      lines.push('');
+      lines.push('Spørsmål til neste samtale: ' + (state.questions || '-'));
+      return lines.join('\n');
     }
 
-    doneBtn.addEventListener('click', function () {
-      count = load() + 1;
-      save(count);
-      clearChecks();
+    function sendEmail() {
+      var subject = encodeURIComponent('Logg: rolige øvelser etter leggoperasjon');
+      var body = encodeURIComponent(buildSummaryText());
+      window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
+    }
+
+    function downloadText() {
+      var blob = new Blob([buildSummaryText()], { type: 'text/plain;charset=utf-8' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'logg-leggoperasjon.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById('addEntry').addEventListener('click', function () {
+      state.entries.push({ date: todayIso() });
+      save();
       render();
+      var last = entriesEl.lastElementChild;
+      if (last) last.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
-    resetBtn.addEventListener('click', function () {
-      count = 0;
-      save(count);
-      clearChecks();
+    ['progress', 'questions'].forEach(function (key) {
+      var input = document.getElementById(key);
+      input.value = state[key] || '';
+      input.addEventListener('input', function () { state[key] = input.value; save(); });
+    });
+
+    document.getElementById('sendEmail').addEventListener('click', sendEmail);
+    document.getElementById('downloadText').addEventListener('click', downloadText);
+    document.getElementById('resetAll').addEventListener('click', function () {
+      if (!confirm('Slette hele loggen? Dette kan ikke angres.')) return;
+      state = { entries: [] };
+      save();
+      document.getElementById('progress').value = '';
+      document.getElementById('questions').value = '';
       render();
     });
 
