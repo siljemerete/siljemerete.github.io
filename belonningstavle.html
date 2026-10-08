@@ -339,12 +339,6 @@
     overflow-wrap: anywhere;
   }
 
-  table.grid th .date {
-    display: block;
-    font-weight: 400;
-    font-size: 0.75rem;
-  }
-
   /* Én uke: dagene nedover, stor og luftig */
   .is-1 table.grid th.rowhead {
     font-family: "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive;
@@ -440,6 +434,8 @@
 
   .print-only, .head-reward { display: none; }
 
+  .date-line { text-align: center; margin: -2mm 0 4mm; font-size: 10pt; color: var(--muted); }
+
   footer.closing {
     margin-top: 1.75rem;
     text-align: center;
@@ -454,7 +450,6 @@
     .is-4 table.grid th.rowhead { width: 34%; }
     table.grid th, table.grid td { padding: 0.25rem 0.1rem; }
     .dot-btn { width: 1.45rem; height: 1.45rem; }
-    .is-4 table.grid th .date { display: none; }
   }
 
   /* Utskrift: bare tavla, tilpasset ett A4-ark */
@@ -525,8 +520,8 @@
       <ul>
         <li><strong>Start smått.</strong> Begynn gjerne med én vane, og ikke flere enn tre. Det er bedre å lykkes med én vane enn å gi opp fem.</li>
         <li><strong>Gjør vanen konkret.</strong> «Gå 20 minutter» eller «legge meg før 23» er lettere å krysse av for enn «være sunn».</li>
-        <li><strong>Lag en hvis-så-plan.</strong> Knytt vanen til en fast situasjon i hverdagen: «Når jeg har satt på kaffen om morgenen, drikker jeg et glass vann.» Da er det situasjonen som minner deg på vanen, og du trenger mindre viljestyrke. Slike handlingsregler er godt undersøkt i forskning på vaneendring. Les mer i <a href="https://tidsskrift.kognitiv.no/bruk-av-handlingsregler-i-vaneendring/" target="_blank" rel="noopener">Tidsskrift for Kognitiv terapi: Bruk av handlingsregler i vaneendring</a>.</li>
-        <li><strong>Gjenta, gjenta, gjenta.</strong> At det tar 21 dager å lage en vane, er en myte. Det som teller, er hvor ofte du gjentar vanen i samme situasjon. I en kjent studie tok det i snitt rundt to måneder før en ny vane gikk av seg selv, men med stor variasjon fra person til person. Fire uker er derfor en fin start, og du kan bare starte en ny periode når tavla er full.</li>
+        <li><strong>Bestem når og hvor.</strong> Knytt vanen til noe du allerede gjør hver dag: «Når jeg har satt på kaffen om morgenen, drikker jeg et glass vann.» Dette kalles en hvis-så-plan eller handlingsregel. Da er det situasjonen som minner deg på vanen, og du trenger mindre viljestyrke. Slike handlingsregler er godt undersøkt i forskning på vaneendring. Les mer i <a href="https://tidsskrift.kognitiv.no/bruk-av-handlingsregler-i-vaneendring/" target="_blank" rel="noopener">Tidsskrift for Kognitiv terapi: Bruk av handlingsregler i vaneendring</a>.</li>
+        <li><strong>Gjenta, gjenta, gjenta.</strong> At det tar 21 dager å lage en vane, er en myte. Det som teller, er hvor ofte du gjentar vanen i samme situasjon. I en kjent studie tok det i snitt rundt to måneder før en ny vane gikk av seg selv, men med stor variasjon fra person til person. Fire uker er derfor en fin start, og når tavla er full, kan du fjerne prikkene og begynne på en ny runde.</li>
         <li><strong>Prikken er også en belønning.</strong> Sett den med en gang, og kjenn litt på at du klarte det.</li>
         <li><strong>Velg belønninger du gleder deg til</strong>, og som trekker i samme retning som målet ditt: et bad, en bok, blomster, en kinotur, tid alene, et nytt treningsplagg.</li>
         <li><strong>Gå glipp av én dag? Helt greit.</strong> Én dag her og der ødelegger ikke vanen. Prøv bare å ikke gå glipp av to på rad. Tavla handler om retning, ikke perfeksjon.</li>
@@ -546,19 +541,13 @@
       </div>
     </div>
 
-    <div class="two-col field">
-      <div>
-        <label for="title">Overskrift</label>
-        <input type="text" id="title" maxlength="50" placeholder="Min belønningstavle">
-      </div>
-      <div>
-        <label for="startDate">Startdato <span class="hint">Valgfritt. Gir datoer under dagene.</span></label>
-        <input type="date" id="startDate">
-      </div>
+    <div class="field">
+      <label for="title">Overskrift</label>
+      <input type="text" id="title" maxlength="50" placeholder="Min belønningstavle">
     </div>
 
     <div class="field">
-      <span class="label">Vanene mine <span class="hint">Opptil fem. Med bare én vane får du én prikk per dag, slik som på en lapp. Under hver vane kan du skrive en hvis-så-plan: når og hvor skal du gjøre den?</span></span>
+      <span class="label">Vanene mine <span class="hint">Opptil fem. Med bare én vane får du én prikk per dag, slik som på en lapp. Under hver vane kan du skrive når og hvor du skal gjøre den, for eksempel «Når jeg har spist middag, går jeg en tur». Det gjør det lettere å huske vanen.</span></span>
       <div class="habit-list" id="habitList"></div>
       <button type="button" class="small-btn" id="addHabit">+ Legg til vane</button>
     </div>
@@ -592,7 +581,6 @@
 
   <div class="controls no-print">
     <button type="button" class="danger" id="clearDots">Fjern alle prikker</button>
-    <button type="button" id="newPeriod">Start ny periode</button>
     <button type="button" id="printBlank">Skriv ut tom tavle</button>
     <button type="button" class="primary" id="printFilled">Skriv ut med prikker</button>
   </div>
@@ -627,7 +615,6 @@
       return {
         weeks: 1,
         title: '',
-        startDate: '',
         habits: ['Gode vaner'],
         plans: [''],
         weekGoal: 5,
@@ -673,28 +660,6 @@
       return list.length ? list : [{ name: '', idx: 0 }];
     }
 
-    function startMonday() {
-      if (!state.startDate) return null;
-      var d = new Date(state.startDate + 'T12:00:00');
-      if (isNaN(d)) return null;
-      return d;
-    }
-
-    function dateFor(w, d) {
-      var s = startMonday();
-      if (!s) return '';
-      var x = new Date(s);
-      x.setDate(s.getDate() + w * 7 + d);
-      return x.getDate() + '.' + (x.getMonth() + 1) + '.';
-    }
-
-    // Ukedagsnavn følger startdatoen, slik at uka kan starte på en hvilken som helst dag
-    function dayIndex(d) {
-      var s = startMonday();
-      if (!s) return d;
-      return ((s.getDay() + 6) % 7 + d) % 7;
-    }
-
     function weekCount(w, habits) {
       var n = 0;
       for (var d = 0; d < 7; d++) habits.forEach(function (h) { if (state.marks[key(w, d, h.idx)]) n++; });
@@ -713,7 +678,7 @@
       var on = !!state.marks[key(w, d, h.idx)];
       if (on) b.classList.add('on');
       b.setAttribute('aria-pressed', on ? 'true' : 'false');
-      b.setAttribute('aria-label', (habitName ? habitName + ', ' : '') + DAYS[dayIndex(d)] + (state.weeks > 1 ? ', uke ' + (w + 1) : ''));
+      b.setAttribute('aria-label', (habitName ? habitName + ', ' : '') + DAYS[d] + (state.weeks > 1 ? ', uke ' + (w + 1) : ''));
       b.addEventListener('click', function () {
         var k = key(w, d, h.idx);
         if (state.marks[k]) delete state.marks[k]; else state.marks[k] = true;
@@ -728,9 +693,7 @@
 
     function dayHead(w, d, short) {
       var th = el('th', short ? '' : 'rowhead');
-      th.appendChild(document.createTextNode(short ? DAYS_SHORT[dayIndex(d)] : DAYS[dayIndex(d)]));
-      var dt = dateFor(w, d);
-      if (dt) th.appendChild(el('span', 'date', dt));
+      th.appendChild(document.createTextNode(short ? DAYS_SHORT[d] : DAYS[d]));
       return th;
     }
 
@@ -813,6 +776,7 @@
       board.appendChild(el('h2', 'board-title', state.title.trim() || 'Min belønningstavle'));
       var sub = state.weeks === 1 ? 'Én prikk for hver gang jeg holder fast ved vanen' : 'Fire uker, én prikk om gangen';
       board.appendChild(el('p', 'board-sub', sub));
+      board.appendChild(el('p', 'print-only date-line', state.weeks === 1 ? 'Uke: ____________________' : 'Startdato: ____________________'));
 
       var weeksReached = 0;
       for (var w = 0; w < state.weeks; w++) {
@@ -856,7 +820,7 @@
       var plans = currentPlans();
       if (plans.length) {
         var pl = el('div', 'plans');
-        pl.appendChild(el('h3', '', plans.length === 1 ? 'Min hvis-så-plan' : 'Mine hvis-så-planer'));
+        pl.appendChild(el('h3', '', 'Når og hvor gjør jeg det?'));
         var ul = el('ul');
         plans.forEach(function (t) { ul.appendChild(el('li', '', t)); });
         pl.appendChild(ul);
@@ -873,7 +837,7 @@
     }
 
     // Juster radhøyden slik at hele tavla får plass på ett A4-ark.
-    // Hvis-så-planene (to spalter, ofte to linjer hver) og «hvorfor» tar litt av plassen.
+    // «Når og hvor»-planene (to spalter, ofte to linjer hver) og «hvorfor» tar litt av plassen.
     function setPrintRowHeight(nHabits, nPlans) {
       var mm;
       var extras;
@@ -918,8 +882,8 @@
         plan.type = 'text';
         plan.maxLength = 90;
         plan.value = state.plans[i] || '';
-        plan.placeholder = 'Hvis-så-plan, f.eks. Når jeg har spist middag, går jeg en tur';
-        plan.setAttribute('aria-label', 'Hvis-så-plan for vane ' + (i + 1));
+        plan.placeholder = 'Når og hvor? F.eks. Når jeg har spist middag, går jeg en tur';
+        plan.setAttribute('aria-label', 'Når og hvor for vane ' + (i + 1));
         plan.addEventListener('input', function () {
           state.plans[i] = plan.value;
           save();
@@ -1011,21 +975,6 @@
       renderBoard();
     });
 
-    document.getElementById('newPeriod').addEventListener('click', function () {
-      if (!confirm('Starte en ny periode? Prikkene fjernes, og startdatoen flyttes fram til dagen etter perioden.')) return;
-      state.marks = {};
-      var s = startMonday();
-      if (s) {
-        s.setDate(s.getDate() + state.weeks * 7);
-        var mm = String(s.getMonth() + 1).padStart(2, '0');
-        var dd = String(s.getDate()).padStart(2, '0');
-        state.startDate = s.getFullYear() + '-' + mm + '-' + dd;
-        document.getElementById('startDate').value = state.startDate;
-      }
-      save();
-      renderBoard();
-    });
-
     document.getElementById('printBlank').addEventListener('click', function () {
       document.body.classList.add('print-blank');
       if (document.activeElement) document.activeElement.blur();
@@ -1051,14 +1000,6 @@
     goalInput.value = state.weekGoal;
     goalInput.addEventListener('input', function () {
       state.weekGoal = goalInput.value;
-      save();
-      renderBoard();
-    });
-
-    var dateInput = document.getElementById('startDate');
-    dateInput.value = state.startDate;
-    dateInput.addEventListener('change', function () {
-      state.startDate = dateInput.value;
       save();
       renderBoard();
     });
