@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Min belønningstavle</title>
+<title>Min nye vaner-tavle</title>
 <link rel="icon" href="images/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-<meta name="description" content="Lag din egen belønningstavle for gode vaner, for én eller fire uker. Kryss av på skjermen, eller skriv den ut og heng den på kjøleskapet.">
+<meta name="description" content="Lag din egen tavle for nye vaner, for én eller fire uker. Kryss av på skjermen, eller skriv den ut og heng den på kjøleskapet.">
 <style>
   :root {
     --bg: #f0f7f9;
@@ -643,7 +643,7 @@
     <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
     <button type="button" id="gateSubmit">Lås opp</button>
     <p class="gate-error" id="gateError">Feil kode, prøv igjen.</p>
-    <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20bel%C3%B8nningstavla">Kontakt meg for å få kode →</a></p>
+    <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20Min%20nye%20vaner-tavle">Kontakt meg for å få kode →</a></p>
   </div>
 </div>
 
@@ -684,7 +684,7 @@
   <header class="page-header no-print">
     <a class="back-link" href="index.html">← Til forsiden</a>
     <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
-    <h1>Min belønningstavle</h1>
+    <h1>Min nye vaner-tavle</h1>
     <p class="tagline">En grønn prikk for hver dag du holder fast ved de gode vanene dine</p>
     <div class="reminder">
       Først må du finne den nye vanen du ønsker inn i livet ditt. Velg så om
@@ -696,7 +696,7 @@
 
   <section class="card no-print">
     <details class="tips">
-      <summary>Tips til en belønningstavle som virker</summary>
+      <summary>Tips til en tavle som virker</summary>
       <ul>
         <li><strong>Start smått.</strong> Begynn gjerne med én vane, og ikke flere enn tre. Det er bedre å lykkes med én vane enn å gi opp fem.</li>
         <li><strong>Gjør vanen konkret.</strong> «Gå 20 minutter» eller «legge meg før 23» er lettere å krysse av for enn «være sunn».</li>
@@ -734,7 +734,7 @@
 
     <div class="field">
       <label for="title">Overskrift</label>
-      <input type="text" id="title" maxlength="50" placeholder="Min belønningstavle">
+      <input type="text" id="title" maxlength="50" placeholder="Min nye vaner-tavle">
     </div>
 
     <div class="field">
@@ -987,7 +987,7 @@
       var habits = habitsShown();
       var g = goal(habits);
 
-      board.appendChild(el('h2', 'board-title', state.title.trim() || 'Min belønningstavle'));
+      board.appendChild(el('h2', 'board-title', state.title.trim() || 'Min nye vaner-tavle'));
       var sub = state.weeks === 1 ? 'Én prikk for hver gang jeg holder fast ved vanen' : 'Fire uker, én prikk om gangen';
       board.appendChild(el('p', 'board-sub', sub));
       var end = dayDate(state.weeks - 1, 6);
