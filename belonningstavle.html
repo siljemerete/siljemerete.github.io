@@ -1,0 +1,992 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Min belønningstavle</title>
+<link rel="icon" href="images/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<meta name="description" content="Lag din egen belønningstavle for gode vaner, for én eller fire uker. Kryss av på skjermen, eller skriv den ut og heng den på kjøleskapet.">
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --push: #c9823f;
+    --push-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+    --dot: #3a9d5d;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  header.page-header { margin-bottom: 1.75rem; }
+
+  header.page-header a.back-link {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    margin-bottom: 0.75rem;
+  }
+
+  header.page-header a.back-link:hover { color: var(--accent-dark); }
+
+  header.page-header h1 {
+    font-size: 1.7rem;
+    margin: 0 0 0.35rem;
+    color: var(--accent-dark);
+  }
+
+  header.page-header p.tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  .reminder {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    color: var(--accent-dark);
+  }
+
+  .page-logo {
+    display: block;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 0.75rem;
+    padding: 5px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(22, 40, 58, 0.12);
+  }
+
+  .page-logo img { display: block; width: 46px; height: 46px; }
+
+  section.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem 1.35rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  section.card h2 {
+    margin: 0 0 0.75rem;
+    font-size: 1.1rem;
+    color: var(--accent-dark);
+  }
+
+  section.card p { margin: 0.6rem 0 0; }
+
+  details.tips summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--accent-dark);
+  }
+
+  details.tips ul { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+  details.tips li { margin-bottom: 0.35rem; }
+
+  /* Innstillinger */
+  .field { margin-top: 1rem; }
+  .field:first-of-type { margin-top: 0; }
+
+  .field > label,
+  .field > .label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .field .hint {
+    display: block;
+    font-weight: 400;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="number"] {
+    width: 100%;
+    font: inherit;
+    font-size: 0.98rem;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  input:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .segmented {
+    display: inline-flex;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .segmented button {
+    font: inherit;
+    font-size: 0.92rem;
+    padding: 0.45rem 1.1rem;
+    border: 0;
+    background: transparent;
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .segmented button[aria-pressed="true"] {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .habit-list { display: grid; gap: 0.45rem; }
+
+  .habit-row { display: flex; gap: 0.45rem; }
+
+  .habit-row button {
+    flex: 0 0 auto;
+    width: 2.4rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--muted);
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+
+  .habit-row button:hover { background: var(--push-soft); color: var(--push); }
+
+  .small-btn {
+    margin-top: 0.5rem;
+    font: inherit;
+    font-size: 0.88rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    border: 1px dashed var(--accent);
+    background: transparent;
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .small-btn:disabled { opacity: 0.45; cursor: default; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.9rem;
+  }
+
+  .colors { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+
+  .colors button {
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 1px var(--border);
+    cursor: pointer;
+  }
+
+  .colors button[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--ink); }
+
+  .reward-only-4 { display: none; }
+  .is-4 .reward-only-4 { display: block; }
+
+  /* Knapper */
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .controls button {
+    font: inherit;
+    font-size: 0.88rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .controls button:hover { background: var(--accent-soft); }
+
+  .controls button.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .controls button.primary:hover { background: var(--accent-dark); }
+
+  .controls button.danger { color: var(--push); }
+  .controls button.danger:hover { background: var(--push-soft); }
+
+  /* Tavla */
+  .board {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+  }
+
+  .board-title {
+    text-align: center;
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--accent-dark);
+  }
+
+  .board-sub {
+    text-align: center;
+    margin: 0.2rem 0 1rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .week { margin-top: 1.1rem; }
+  .week:first-of-type { margin-top: 0; }
+
+  .week-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .week-head h3 { margin: 0; font-size: 1rem; color: var(--accent-dark); }
+  .week-head .count { font-size: 0.88rem; color: var(--muted); white-space: nowrap; }
+
+  .table-scroll { overflow-x: auto; }
+
+  table.grid {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  table.grid th,
+  table.grid td {
+    border-bottom: 2px solid #f3c99b;
+    padding: 0.3rem 0.35rem;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  table.grid th {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--muted);
+    line-height: 1.2;
+  }
+
+  table.grid th.rowhead {
+    text-align: left;
+    color: var(--ink);
+    font-size: 0.92rem;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
+
+  table.grid th .date {
+    display: block;
+    font-weight: 400;
+    font-size: 0.75rem;
+  }
+
+  /* Én uke: dagene nedover, stor og luftig */
+  .is-1 table.grid th.rowhead {
+    font-family: "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive;
+    font-size: 1.15rem;
+    font-weight: 400;
+    width: 30%;
+  }
+
+  .is-1 table.grid td { height: 3.4rem; }
+  .is-1 .dot-btn { width: 2.4rem; height: 2.4rem; }
+
+  .is-4 table.grid th.rowhead { width: 28%; }
+  .is-4 table.grid td { height: 2.4rem; }
+
+  .dot-btn {
+    display: block;
+    margin: 0 auto;
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: 50%;
+    border: 2px dashed #b9cfd6;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.12s ease;
+  }
+
+  .dot-btn:hover { border-color: var(--dot); }
+
+  .dot-btn.on {
+    background: var(--dot);
+    border: 2px solid var(--dot);
+  }
+
+  .dot-btn.on:active { transform: scale(0.9); }
+
+  .reward-line {
+    margin-top: 0.55rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--push-soft);
+    border-radius: 8px;
+    padding: 0.45rem 0.7rem;
+    font-size: 0.92rem;
+  }
+
+  .reward-line.earned { background: #e3f4e8; }
+
+  .reward-line .star { font-size: 1.1rem; }
+  .reward-line .text { flex: 1; }
+  .reward-line .blank { display: inline-block; min-width: 10rem; border-bottom: 1px solid var(--muted); }
+
+  .big-reward {
+    margin-top: 1.1rem;
+    border: 2px dashed var(--push);
+    border-radius: 12px;
+    padding: 0.8rem 1rem;
+    text-align: center;
+  }
+
+  .big-reward.earned { border-style: solid; border-color: var(--dot); background: #e3f4e8; }
+
+  .big-reward .label { font-size: 0.85rem; color: var(--muted); }
+  .big-reward .text { font-size: 1.1rem; font-weight: 600; color: var(--accent-dark); }
+
+  .why-line {
+    margin-top: 1rem;
+    font-size: 0.92rem;
+    color: var(--muted);
+    text-align: center;
+    font-style: italic;
+  }
+
+  .print-only { display: none; }
+
+  footer.closing {
+    margin-top: 1.75rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong { color: var(--accent-dark); }
+
+  @media (max-width: 520px) {
+    .is-4 table.grid th.rowhead { width: 34%; }
+    table.grid th, table.grid td { padding: 0.25rem 0.1rem; }
+    .dot-btn { width: 1.45rem; height: 1.45rem; }
+    .is-4 table.grid th .date { display: none; }
+  }
+
+  /* Utskrift: bare tavla, tilpasset ett A4-ark */
+  @page { size: A4 portrait; margin: 12mm; }
+
+  @media print {
+    body { background: #fff; }
+    .wrap { max-width: none; padding: 0; }
+    .no-print { display: none !important; }
+    .print-only { display: block; }
+    .board { border: 0; box-shadow: none; padding: 0; }
+    .board-title { font-size: 22pt; }
+    .table-scroll { overflow: visible; }
+    .is-4 table.grid td { height: var(--print-row, 10mm); }
+    .is-1 table.grid td { height: var(--print-row, 24mm); }
+    .is-1 table.grid th.rowhead { font-size: 18pt; }
+    .is-1 .dot-btn { width: 12mm; height: 12mm; }
+    .dot-btn { border-color: #c9d6da; }
+    .is-4 .dot-btn { width: calc(var(--print-row, 10mm) - 1.2mm); height: calc(var(--print-row, 10mm) - 1.2mm); }
+    .is-4 .week { margin-top: 4mm; }
+    .is-4 table.grid th { padding: 0.5mm 1mm; }
+    .is-4 table.grid td { padding: 0 1mm; }
+    .is-4 .board-title { font-size: 18pt; }
+    .is-4 table.grid th { line-height: 1.1; }
+    .is-4 .big-reward .text { font-size: 12pt; }
+    .is-4 .reward-line { margin-top: 1.5mm; padding: 1mm 3mm; font-size: 9pt; line-height: 1.2; }
+    .is-4 .reward-line .star { font-size: 10pt; }
+    .is-4 .week-head h3 { font-size: 11pt; }
+    .is-4 .big-reward { margin-top: 4mm; padding: 2mm 4mm; }
+    .board-sub { margin-bottom: 4mm; }
+    .week, .big-reward { break-inside: avoid; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body.print-blank .dot-btn.on { background: transparent; border: 2px dashed #c9d6da; }
+    body.print-blank .reward-line.earned { background: var(--push-soft); }
+    body.print-blank .big-reward.earned { border: 2px dashed var(--push); background: transparent; }
+    body.print-blank .count-num { visibility: hidden; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="page-header no-print">
+    <a class="back-link" href="index.html">← Til forsiden</a>
+    <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
+    <h1>Min belønningstavle</h1>
+    <p class="tagline">En grønn prikk for hver dag du holder fast ved de gode vanene dine</p>
+    <div class="reminder">
+      Velg om tavla skal gå over én uke eller fire uker, skriv inn vanene du
+      vil holde fast ved og hva du skal belønne deg med. Trykk på rundingene
+      for å sette en prikk, eller skriv ut tavla og heng den på kjøleskapet.
+      Alt du legger inn lagres bare i denne nettleseren.
+    </div>
+  </header>
+
+  <section class="card no-print">
+    <details class="tips">
+      <summary>Tips til en belønningstavle som virker</summary>
+      <ul>
+        <li><strong>Start smått.</strong> Én til tre vaner er nok. Det er bedre å lykkes med én vane enn å gi opp fem.</li>
+        <li><strong>Gjør vanen konkret.</strong> «Gå 20 minutter» eller «legge meg før 23» er lettere å krysse av for enn «være sunn».</li>
+        <li><strong>Prikken er også en belønning.</strong> Sett den med en gang, og kjenn litt på at du klarte det.</li>
+        <li><strong>Velg belønninger du gleder deg til</strong>, og som trekker i samme retning som målet ditt: et bad, en bok, blomster, en kinotur, tid alene, et nytt treningsplagg.</li>
+        <li><strong>Gå glipp av én dag? Helt greit.</strong> Prøv bare å ikke gå glipp av to på rad. Tavla handler om retning, ikke perfeksjon.</li>
+        <li><strong>Heng den der du ser den</strong>, for eksempel på kjøleskapet, badespeilet eller ved inngangsdøra.</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="card no-print" id="settings">
+    <h2>Lag din tavle</h2>
+
+    <div class="field">
+      <span class="label">Periode</span>
+      <div class="segmented" role="group" aria-label="Periode">
+        <button type="button" data-weeks="1" aria-pressed="true">1 uke</button>
+        <button type="button" data-weeks="4" aria-pressed="false">4 uker</button>
+      </div>
+    </div>
+
+    <div class="two-col field">
+      <div>
+        <label for="title">Overskrift</label>
+        <input type="text" id="title" maxlength="50" placeholder="Min belønningstavle">
+      </div>
+      <div>
+        <label for="startDate">Startdato <span class="hint">Valgfritt. Gir datoer under dagene.</span></label>
+        <input type="date" id="startDate">
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="label">Vanene mine <span class="hint">Opptil fem. Med bare én vane får du én prikk per dag, slik som på en lapp.</span></span>
+      <div class="habit-list" id="habitList"></div>
+      <button type="button" class="small-btn" id="addHabit">+ Legg til vane</button>
+    </div>
+
+    <div class="two-col field">
+      <div>
+        <label for="weekGoal">Ukemål: antall prikker <span class="hint">Hvor mange prikker gir ukebelønning?</span></label>
+        <input type="number" id="weekGoal" min="1" max="35" inputmode="numeric">
+      </div>
+      <div>
+        <label for="weekReward">Ukebelønning</label>
+        <input type="text" id="weekReward" maxlength="80" placeholder="F.eks. et langt bad med god musikk">
+      </div>
+    </div>
+
+    <div class="field reward-only-4">
+      <label for="bigReward">Stor belønning etter fire uker <span class="hint">Når du har nådd ukemålet alle fire ukene</span></label>
+      <input type="text" id="bigReward" maxlength="80" placeholder="F.eks. kinotur eller nytt treningsplagg">
+    </div>
+
+    <div class="field">
+      <label for="why">Hvorfor gjør jeg dette? <span class="hint">Valgfritt. Skrives nederst på tavla.</span></label>
+      <input type="text" id="why" maxlength="100" placeholder="F.eks. For å ha mer energi til det som betyr noe for meg">
+    </div>
+
+    <div class="field">
+      <span class="label">Farge på prikkene</span>
+      <div class="colors" id="colors" role="group" aria-label="Farge på prikkene"></div>
+    </div>
+  </section>
+
+  <div class="controls no-print">
+    <button type="button" class="danger" id="clearDots">Fjern alle prikker</button>
+    <button type="button" id="newPeriod">Start ny periode</button>
+    <button type="button" id="printBlank">Skriv ut tom tavle</button>
+    <button type="button" class="primary" id="printFilled">Skriv ut med prikker</button>
+  </div>
+
+  <div class="board" id="board"></div>
+
+  <footer class="closing no-print">
+    Små steg, hver dag.<br>
+    <strong>Du trenger ikke være perfekt for å komme videre.</strong>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var STORAGE_KEY = 'belonningstavle-data';
+    var DAYS = ['Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag', 'Søndag'];
+    var DAYS_SHORT = ['Man', 'Tir', 'Ons', 'Tor', 'Fre', 'Lør', 'Søn'];
+    var COLORS = [
+      { name: 'Grønn', value: '#3a9d5d' },
+      { name: 'Blågrønn', value: '#1f7a8c' },
+      { name: 'Oransje', value: '#e08a2e' },
+      { name: 'Rosa', value: '#d1577f' },
+      { name: 'Lilla', value: '#7a5bb5' },
+      { name: 'Gul', value: '#e2b714' }
+    ];
+    var MAX_HABITS = 5;
+
+    var state = load();
+
+    function defaults() {
+      return {
+        weeks: 1,
+        title: '',
+        startDate: '',
+        habits: ['Gode vaner'],
+        weekGoal: 5,
+        weekReward: '',
+        bigReward: '',
+        why: '',
+        color: COLORS[0].value,
+        marks: {}
+      };
+    }
+
+    function load() {
+      var d = defaults();
+      try {
+        var raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          var saved = JSON.parse(raw);
+          for (var k in d) if (saved[k] !== undefined) d[k] = saved[k];
+        }
+      } catch (e) { /* ingen lagring tilgjengelig */ }
+      if (!d.habits.length) d.habits = [''];
+      return d;
+    }
+
+    function save() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { /* ignorer */ }
+    }
+
+    function el(tag, cls, text) {
+      var n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text !== undefined) n.textContent = text;
+      return n;
+    }
+
+    // Markeringer lagres per vane-indeks: "uke-dag-vane"
+    function key(w, d, h) { return w + '-' + d + '-' + h; }
+
+    function habitsShown() {
+      var list = state.habits.map(function (h, i) { return { name: h.trim(), idx: i }; })
+        .filter(function (h) { return h.name; });
+      return list.length ? list : [{ name: '', idx: 0 }];
+    }
+
+    function startMonday() {
+      if (!state.startDate) return null;
+      var d = new Date(state.startDate + 'T12:00:00');
+      if (isNaN(d)) return null;
+      return d;
+    }
+
+    function dateFor(w, d) {
+      var s = startMonday();
+      if (!s) return '';
+      var x = new Date(s);
+      x.setDate(s.getDate() + w * 7 + d);
+      return x.getDate() + '.' + (x.getMonth() + 1) + '.';
+    }
+
+    // Ukedagsnavn følger startdatoen, slik at uka kan starte på en hvilken som helst dag
+    function dayIndex(d) {
+      var s = startMonday();
+      if (!s) return d;
+      return ((s.getDay() + 6) % 7 + d) % 7;
+    }
+
+    function weekCount(w, habits) {
+      var n = 0;
+      for (var d = 0; d < 7; d++) habits.forEach(function (h) { if (state.marks[key(w, d, h.idx)]) n++; });
+      return n;
+    }
+
+    function goal(habits) {
+      var g = parseInt(state.weekGoal, 10);
+      if (!g || g < 1) g = 5;
+      return Math.min(g, 7 * habits.length);
+    }
+
+    function dotButton(w, d, h, habitName) {
+      var b = el('button', 'dot-btn');
+      b.type = 'button';
+      var on = !!state.marks[key(w, d, h.idx)];
+      if (on) b.classList.add('on');
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.setAttribute('aria-label', (habitName ? habitName + ', ' : '') + DAYS[dayIndex(d)] + (state.weeks > 1 ? ', uke ' + (w + 1) : ''));
+      b.addEventListener('click', function () {
+        var k = key(w, d, h.idx);
+        if (state.marks[k]) delete state.marks[k]; else state.marks[k] = true;
+        save();
+        renderBoard();
+        var again = document.querySelector('[data-k="' + k + '"]');
+        if (again) again.focus();
+      });
+      b.setAttribute('data-k', key(w, d, h.idx));
+      return b;
+    }
+
+    function dayHead(w, d, short) {
+      var th = el('th', short ? '' : 'rowhead');
+      th.appendChild(document.createTextNode(short ? DAYS_SHORT[dayIndex(d)] : DAYS[dayIndex(d)]));
+      var dt = dateFor(w, d);
+      if (dt) th.appendChild(el('span', 'date', dt));
+      return th;
+    }
+
+    // Én uke: dagene nedover (som en lapp på veggen), vanene bortover
+    function tableDaysAsRows(w, habits) {
+      var t = el('table', 'grid');
+      var single = habits.length === 1 && !habits[0].name;
+      if (!single) {
+        var hr = el('tr');
+        hr.appendChild(el('th', '', ''));
+        habits.forEach(function (h) { hr.appendChild(el('th', '', h.name)); });
+        var thead = el('thead');
+        thead.appendChild(hr);
+        t.appendChild(thead);
+      }
+      var tb = el('tbody');
+      for (var d = 0; d < 7; d++) {
+        var tr = el('tr');
+        tr.appendChild(dayHead(w, d, false));
+        habits.forEach(function (h) {
+          var td = el('td');
+          td.appendChild(dotButton(w, d, h, h.name));
+          tr.appendChild(td);
+        });
+        tb.appendChild(tr);
+      }
+      t.appendChild(tb);
+      return t;
+    }
+
+    // Fire uker: vanene nedover, dagene bortover
+    function tableDaysAsCols(w, habits) {
+      var t = el('table', 'grid');
+      var thead = el('thead');
+      var hr = el('tr');
+      hr.appendChild(el('th', 'rowhead', ''));
+      for (var d = 0; d < 7; d++) hr.appendChild(dayHead(w, d, true));
+      thead.appendChild(hr);
+      t.appendChild(thead);
+      var tb = el('tbody');
+      habits.forEach(function (h) {
+        var tr = el('tr');
+        tr.appendChild(el('th', 'rowhead', h.name || 'Gode vaner'));
+        for (var d = 0; d < 7; d++) {
+          var td = el('td');
+          td.appendChild(dotButton(w, d, h, h.name));
+          tr.appendChild(td);
+        }
+        tb.appendChild(tr);
+      });
+      t.appendChild(tb);
+      return t;
+    }
+
+    function rewardLine(text, earned, prefix) {
+      var line = el('div', 'reward-line' + (earned ? ' earned' : ''));
+      line.appendChild(el('span', 'star', earned ? '🎉' : '⭐'));
+      var span = el('span', 'text');
+      span.appendChild(document.createTextNode(prefix));
+      if (text) {
+        var s = el('strong', '', text);
+        span.appendChild(s);
+      } else {
+        span.appendChild(el('span', 'blank', ''));
+      }
+      line.appendChild(span);
+      return line;
+    }
+
+    function renderBoard() {
+      var board = document.getElementById('board');
+      board.innerHTML = '';
+      board.className = 'board is-' + state.weeks;
+      document.getElementById('settings').className = 'card no-print is-' + state.weeks;
+      document.documentElement.style.setProperty('--dot', state.color);
+
+      var habits = habitsShown();
+      var g = goal(habits);
+
+      board.appendChild(el('h2', 'board-title', state.title.trim() || 'Min belønningstavle'));
+      var sub = state.weeks === 1 ? 'Én prikk for hver gang jeg holder fast ved vanen' : 'Fire uker, én prikk om gangen';
+      board.appendChild(el('p', 'board-sub', sub));
+
+      var weeksReached = 0;
+      for (var w = 0; w < state.weeks; w++) {
+        var wrap = el('div', 'week');
+        var count = weekCount(w, habits);
+        var reached = count >= g;
+        if (reached) weeksReached++;
+
+        if (state.weeks > 1 || habits.length > 1 || habits[0].name) {
+          var head = el('div', 'week-head');
+          head.appendChild(el('h3', '', state.weeks > 1 ? 'Uke ' + (w + 1) : 'Denne uka'));
+          var c = el('span', 'count');
+          var num = el('span', 'count-num', String(count));
+          c.appendChild(num);
+          c.appendChild(document.createTextNode(' av ' + g + ' prikker'));
+          head.appendChild(c);
+          wrap.appendChild(head);
+        }
+
+        var scroll = el('div', 'table-scroll');
+        scroll.appendChild(state.weeks === 1 ? tableDaysAsRows(w, habits) : tableDaysAsCols(w, habits));
+        wrap.appendChild(scroll);
+        wrap.appendChild(rewardLine(state.weekReward.trim(), reached, g + ' prikker = '));
+        board.appendChild(wrap);
+      }
+
+      if (state.weeks === 4) {
+        var big = el('div', 'big-reward' + (weeksReached === 4 ? ' earned' : ''));
+        big.appendChild(el('div', 'label', 'Når jeg har nådd ukemålet alle fire ukene, belønner jeg meg med'));
+        var bt = state.bigReward.trim();
+        big.appendChild(el('div', 'text', bt || ' '));
+        if (!bt) big.querySelector('.text').style.borderBottom = '1px solid #4f7080';
+        board.appendChild(big);
+      }
+
+      if (state.why.trim()) board.appendChild(el('p', 'why-line', 'Hvorfor: ' + state.why.trim()));
+
+      setPrintRowHeight(habits.length);
+    }
+
+    // Juster radhøyden slik at hele tavla får plass på ett A4-ark
+    function setPrintRowHeight(nHabits) {
+      var mm;
+      if (state.weeks === 1) {
+        mm = 24;
+      } else {
+        // ca. 115 mm til vanerader fordelt på 4 uker; resten går til overskrifter og belønninger
+        mm = Math.max(5.5, Math.min(11, Math.floor(2 * 115 / (4 * nHabits)) / 2));
+      }
+      document.getElementById('board').style.setProperty('--print-row', mm + 'mm');
+    }
+
+    function renderHabits() {
+      var list = document.getElementById('habitList');
+      list.innerHTML = '';
+      state.habits.forEach(function (h, i) {
+        var row = el('div', 'habit-row');
+        var input = el('input');
+        input.type = 'text';
+        input.maxLength = 40;
+        input.value = h;
+        input.placeholder = ['F.eks. Gå en tur', 'F.eks. Legge meg før 23', 'F.eks. Drikke vann', 'F.eks. Mobilfri kveld', 'F.eks. Strekke ut'][i];
+        input.setAttribute('aria-label', 'Vane ' + (i + 1));
+        input.addEventListener('input', function () {
+          state.habits[i] = input.value;
+          save();
+          renderBoard();
+        });
+        row.appendChild(input);
+        if (state.habits.length > 1) {
+          var rm = el('button', '', '×');
+          rm.type = 'button';
+          rm.setAttribute('aria-label', 'Fjern vane ' + (i + 1));
+          rm.addEventListener('click', function () { removeHabit(i); });
+          row.appendChild(rm);
+        }
+        list.appendChild(row);
+      });
+      document.getElementById('addHabit').disabled = state.habits.length >= MAX_HABITS;
+    }
+
+    // Flytt prikkene til vanene som ligger under den som fjernes
+    function removeHabit(i) {
+      var n = state.habits.length;
+      var marks = {};
+      Object.keys(state.marks).forEach(function (k) {
+        var p = k.split('-').map(Number);
+        if (p[2] === i) return;
+        var h = p[2] > i ? p[2] - 1 : p[2];
+        marks[key(p[0], p[1], h)] = true;
+      });
+      state.marks = marks;
+      state.habits.splice(i, 1);
+      if (!state.habits.length || n === 1) state.habits = [''];
+      save();
+      renderHabits();
+      renderBoard();
+    }
+
+    function renderColors() {
+      var box = document.getElementById('colors');
+      box.innerHTML = '';
+      COLORS.forEach(function (c) {
+        var b = el('button');
+        b.type = 'button';
+        b.style.background = c.value;
+        b.setAttribute('aria-label', c.name);
+        b.setAttribute('aria-pressed', state.color === c.value ? 'true' : 'false');
+        b.addEventListener('click', function () {
+          state.color = c.value;
+          save();
+          renderColors();
+          renderBoard();
+        });
+        box.appendChild(b);
+      });
+    }
+
+    function renderWeeks() {
+      document.querySelectorAll('[data-weeks]').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(Number(b.getAttribute('data-weeks')) === state.weeks));
+      });
+    }
+
+    function bindText(id, prop) {
+      var input = document.getElementById(id);
+      input.value = state[prop];
+      input.addEventListener('input', function () {
+        state[prop] = input.value;
+        save();
+        renderBoard();
+      });
+    }
+
+    document.querySelectorAll('[data-weeks]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        state.weeks = Number(b.getAttribute('data-weeks'));
+        save();
+        renderWeeks();
+        renderBoard();
+      });
+    });
+
+    document.getElementById('addHabit').addEventListener('click', function () {
+      if (state.habits.length >= MAX_HABITS) return;
+      state.habits.push('');
+      save();
+      renderHabits();
+      var inputs = document.querySelectorAll('#habitList input');
+      inputs[inputs.length - 1].focus();
+    });
+
+    document.getElementById('clearDots').addEventListener('click', function () {
+      if (!confirm('Fjerne alle prikkene på tavla? Vanene og belønningene blir stående.')) return;
+      state.marks = {};
+      save();
+      renderBoard();
+    });
+
+    document.getElementById('newPeriod').addEventListener('click', function () {
+      if (!confirm('Starte en ny periode? Prikkene fjernes, og startdatoen flyttes fram til dagen etter perioden.')) return;
+      state.marks = {};
+      var s = startMonday();
+      if (s) {
+        s.setDate(s.getDate() + state.weeks * 7);
+        var mm = String(s.getMonth() + 1).padStart(2, '0');
+        var dd = String(s.getDate()).padStart(2, '0');
+        state.startDate = s.getFullYear() + '-' + mm + '-' + dd;
+        document.getElementById('startDate').value = state.startDate;
+      }
+      save();
+      renderBoard();
+    });
+
+    document.getElementById('printBlank').addEventListener('click', function () {
+      document.body.classList.add('print-blank');
+      if (document.activeElement) document.activeElement.blur();
+      window.print();
+    });
+
+    document.getElementById('printFilled').addEventListener('click', function () {
+      document.body.classList.remove('print-blank');
+      if (document.activeElement) document.activeElement.blur();
+      window.print();
+    });
+
+    window.addEventListener('afterprint', function () {
+      document.body.classList.remove('print-blank');
+    });
+
+    bindText('title', 'title');
+    bindText('weekReward', 'weekReward');
+    bindText('bigReward', 'bigReward');
+    bindText('why', 'why');
+
+    var goalInput = document.getElementById('weekGoal');
+    goalInput.value = state.weekGoal;
+    goalInput.addEventListener('input', function () {
+      state.weekGoal = goalInput.value;
+      save();
+      renderBoard();
+    });
+
+    var dateInput = document.getElementById('startDate');
+    dateInput.value = state.startDate;
+    dateInput.addEventListener('change', function () {
+      state.startDate = dateInput.value;
+      save();
+      renderBoard();
+    });
+
+    renderWeeks();
+    renderHabits();
+    renderColors();
+    renderBoard();
+  })();
+</script>
+
+</body>
+</html>
