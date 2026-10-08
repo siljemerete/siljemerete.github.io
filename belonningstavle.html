@@ -446,7 +446,7 @@
 
   .plans li { margin-bottom: 0.2rem; break-inside: avoid; }
 
-  .plans h3 .example { font-weight: 400; font-style: italic; color: var(--muted); font-size: 0.85rem; }
+  .plans h3 .example { font-weight: 400; font-style: normal; color: var(--muted); font-size: 0.85rem; }
 
   .plans ul.blank-lines { columns: auto; list-style: none; padding-left: 0; }
   .plans ul.blank-lines li { border-bottom: 1px solid var(--muted); height: 1.9rem; margin-bottom: 0; }
@@ -560,7 +560,7 @@
     text-decoration: underline;
   }
 
-  .print-only, .print-only-inline, .head-reward { display: none; }
+  .print-only, .head-reward { display: none; }
 
   .date-line { text-align: center; margin: -2mm 0 4mm; font-size: 10pt; color: var(--muted); }
 
@@ -592,7 +592,6 @@
     table.grid th.today { color: var(--muted); }
     table.grid th.rowhead.today { color: var(--ink); }
     .print-only { display: block; }
-    .print-only-inline { display: inline; }
     .plans h3 .example { font-style: normal; }
     .board { border: 0; box-shadow: none; padding: 0; }
     .board-title { font-size: 22pt; }
@@ -1042,8 +1041,7 @@
       var planLines = plans.length || habits.length;
       var pl = el('div', 'plans');
       var h = el('h3', '', 'Når og hvor gjør jeg det? ');
-      h.appendChild(el('span', 'example no-print', '(Når jeg har kommet hjem fra jobb, går jeg en tur på 30 minutter med en gang)'));
-      h.appendChild(el('span', 'example print-only-inline', '(Skriv inn din nye vane)'));
+      h.appendChild(el('span', 'example', '(Skriv inn din nye vane)'));
       pl.appendChild(h);
       var ul = el('ul', plans.length ? '' : 'blank-lines');
       for (var i = 0; i < planLines; i++) ul.appendChild(el('li', '', plans[i] || '\u00a0'));
