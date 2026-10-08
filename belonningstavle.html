@@ -109,7 +109,9 @@
     color: var(--accent-dark);
   }
 
-  details.tips ul { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+  details.tips ul,
+  .find-habit ul { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+  .find-habit li { margin-bottom: 0.35rem; }
   details.tips li { margin-bottom: 0.35rem; }
 
   /* Innstillinger */
@@ -539,8 +541,8 @@
     <h1>Min belønningstavle</h1>
     <p class="tagline">En grønn prikk for hver dag du holder fast ved de gode vanene dine</p>
     <div class="reminder">
-      Velg om tavla skal gå over én uke eller fire uker, skriv inn vanene du
-      vil holde fast ved og hva du skal belønne deg med. Trykk på rundingene
+      Først må du finne den nye vanen du ønsker inn i livet ditt. Velg så om
+      tavla skal gå over én uke eller fire uker, og hva du skal belønne deg med. Trykk på rundingene
       for å sette en prikk, eller skriv ut tavla og heng den på kjøleskapet.
       Alt du legger inn lagres bare i denne nettleseren.
     </div>
@@ -562,8 +564,19 @@
     </details>
   </section>
 
+  <section class="card no-print find-habit">
+    <h2>1. Finn den nye vanen du ønsker inn i livet ditt</h2>
+    <p>Ta deg litt tid før du lager tavla. Disse spørsmålene kan hjelpe deg på vei:</p>
+    <ul>
+      <li><strong>Hva ønsker du mer av i hverdagen?</strong> Mer energi, bedre søvn, mer ro, mer bevegelse eller mer tid med de du er glad i?</li>
+      <li><strong>Hvilken liten ting kan bringe deg dit?</strong> For eksempel en daglig gåtur, et glass vann til frokost eller å legge bort mobilen en time før leggetid.</li>
+      <li><strong>Er vanen liten nok?</strong> Den bør være så enkel at du klarer den også en travel dag. Du kan alltid bygge på senere.</li>
+      <li><strong>Hvorfor er den viktig for deg?</strong> Skriv det i feltet «Hvorfor gjør jeg dette?», så står det på tavla.</li>
+    </ul>
+  </section>
+
   <section class="card no-print" id="settings">
-    <h2>Lag din tavle</h2>
+    <h2>2. Lag din tavle</h2>
 
     <div class="field">
       <span class="label">Periode</span>
@@ -579,7 +592,7 @@
     </div>
 
     <div class="field">
-      <span class="label">Vanene mine <span class="hint">Opptil fem. Med bare én vane får du én prikk per dag, slik som på en lapp. Under hver vane kan du skrive når og hvor du skal gjøre den (for eksempel: «Når jeg har kommet hjem fra jobb, går jeg en tur på 30 minutter med en gang» eller «Når jeg har spist middag, går jeg en tur på 15 minutter tirsdager og torsdager»). Det gjør det lettere å huske vanen.</span></span>
+      <span class="label">Den nye vanen jeg ønsker inn i livet mitt <span class="hint">Start gjerne med én. Du kan ha opptil fem. Med bare én vane får du én prikk per dag, slik som på en lapp. Under hver vane kan du skrive når og hvor du skal gjøre den (for eksempel: «Når jeg har kommet hjem fra jobb, går jeg en tur på 30 minutter med en gang» eller «Når jeg har spist middag, går jeg en tur på 15 minutter tirsdager og torsdager»). Det gjør det lettere å huske vanen.</span></span>
       <div class="habit-list" id="habitList"></div>
       <button type="button" class="small-btn" id="addHabit">+ Legg til vane</button>
     </div>
