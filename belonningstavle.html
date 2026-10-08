@@ -173,7 +173,19 @@
     color: #fff;
   }
 
-  .habit-list { display: grid; gap: 0.45rem; }
+  .habit-list { display: grid; gap: 0.6rem; }
+
+  .habit-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.55rem;
+    background: var(--bg);
+  }
+
+  .habit-item .plan {
+    margin-top: 0.4rem;
+    font-size: 0.9rem;
+  }
 
   .habit-row { display: flex; gap: 0.45rem; }
 
@@ -398,6 +410,25 @@
 
   .big-reward .label { font-size: 0.85rem; color: var(--muted); }
   .big-reward .text { font-size: 1.1rem; font-weight: 600; color: var(--accent-dark); }
+  .big-reward .text.blank { display: inline-block !important; min-width: 12rem; border-bottom: 1px solid var(--muted); }
+
+  .plans {
+    margin-top: 1rem;
+    border-top: 1px solid var(--border);
+    padding-top: 0.6rem;
+  }
+
+  .plans h3 { margin: 0 0 0.3rem; font-size: 0.95rem; color: var(--accent-dark); }
+
+  .plans ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: 0.9rem;
+    columns: 2 16rem;
+    column-gap: 1.5rem;
+  }
+
+  .plans li { margin-bottom: 0.2rem; break-inside: avoid; }
 
   .why-line {
     margin-top: 1rem;
@@ -407,7 +438,7 @@
     font-style: italic;
   }
 
-  .print-only { display: none; }
+  .print-only, .head-reward { display: none; }
 
   footer.closing {
     margin-top: 1.75rem;
@@ -440,19 +471,27 @@
     .is-4 table.grid td { height: var(--print-row, 10mm); }
     .is-1 table.grid td { height: var(--print-row, 24mm); }
     .is-1 table.grid th.rowhead { font-size: 18pt; }
-    .is-1 .dot-btn { width: 12mm; height: 12mm; }
+    .is-1 .dot-btn { width: calc(var(--print-row, 24mm) / 2); height: calc(var(--print-row, 24mm) / 2); }
     .dot-btn { border-color: #c9d6da; }
     .is-4 .dot-btn { width: calc(var(--print-row, 10mm) - 1.2mm); height: calc(var(--print-row, 10mm) - 1.2mm); }
-    .is-4 .week { margin-top: 4mm; }
+    .is-4 .week { margin-top: 3mm; }
     .is-4 table.grid th { padding: 0.5mm 1mm; }
     .is-4 table.grid td { padding: 0 1mm; }
     .is-4 .board-title { font-size: 18pt; }
     .is-4 table.grid th { line-height: 1.1; }
     .is-4 .big-reward .text { font-size: 12pt; }
-    .is-4 .reward-line { margin-top: 1.5mm; padding: 1mm 3mm; font-size: 9pt; line-height: 1.2; }
-    .is-4 .reward-line .star { font-size: 10pt; }
+    .is-4 .reward-line { display: none; }
+    .is-4 .head-reward { display: inline; flex: 1; font-size: 9pt; color: var(--ink); }
+    .is-4 .week-head { gap: 4mm; justify-content: flex-start; }
     .is-4 .week-head h3 { font-size: 11pt; }
-    .is-4 .big-reward { margin-top: 4mm; padding: 2mm 4mm; }
+    .is-4 .big-reward { margin-top: 3mm; padding: 1.5mm 4mm; }
+    .is-4 .big-reward .label, .is-4 .big-reward .text { display: inline; }
+    .is-4 .big-reward .label::after { content: ": "; }
+    .is-4 .plans { margin-top: 3mm; padding-top: 2mm; }
+    .is-4 .plans h3 { font-size: 10pt; margin-bottom: 1mm; }
+    .is-4 .plans ul { font-size: 8.5pt; line-height: 1.3; columns: 2; }
+    .is-4 .plans li { margin-bottom: 0.5mm; }
+    .is-4 .why-line { margin-top: 2mm; font-size: 9pt; }
     .board-sub { margin-bottom: 4mm; }
     .week, .big-reward { break-inside: avoid; }
     * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -484,12 +523,14 @@
     <details class="tips">
       <summary>Tips til en belønningstavle som virker</summary>
       <ul>
-        <li><strong>Start smått.</strong> Én til tre vaner er nok. Det er bedre å lykkes med én vane enn å gi opp fem.</li>
+        <li><strong>Start smått.</strong> Begynn gjerne med én vane, og ikke flere enn tre. Det er bedre å lykkes med én vane enn å gi opp fem.</li>
         <li><strong>Gjør vanen konkret.</strong> «Gå 20 minutter» eller «legge meg før 23» er lettere å krysse av for enn «være sunn».</li>
+        <li><strong>Lag en hvis-så-plan.</strong> Knytt vanen til en fast situasjon i hverdagen: «Når jeg har satt på kaffen om morgenen, drikker jeg et glass vann.» Da er det situasjonen som minner deg på vanen, og du trenger mindre viljestyrke. Slike handlingsregler er godt undersøkt i forskning på vaneendring. Les mer i <a href="https://tidsskrift.kognitiv.no/bruk-av-handlingsregler-i-vaneendring/" target="_blank" rel="noopener">Tidsskrift for Kognitiv terapi: Bruk av handlingsregler i vaneendring</a>.</li>
+        <li><strong>Gjenta, gjenta, gjenta.</strong> At det tar 21 dager å lage en vane, er en myte. Det som teller, er hvor ofte du gjentar vanen i samme situasjon. I en kjent studie tok det i snitt rundt to måneder før en ny vane gikk av seg selv, men med stor variasjon fra person til person. Fire uker er derfor en fin start, og du kan bare starte en ny periode når tavla er full.</li>
         <li><strong>Prikken er også en belønning.</strong> Sett den med en gang, og kjenn litt på at du klarte det.</li>
         <li><strong>Velg belønninger du gleder deg til</strong>, og som trekker i samme retning som målet ditt: et bad, en bok, blomster, en kinotur, tid alene, et nytt treningsplagg.</li>
-        <li><strong>Gå glipp av én dag? Helt greit.</strong> Prøv bare å ikke gå glipp av to på rad. Tavla handler om retning, ikke perfeksjon.</li>
-        <li><strong>Heng den der du ser den</strong>, for eksempel på kjøleskapet, badespeilet eller ved inngangsdøra.</li>
+        <li><strong>Gå glipp av én dag? Helt greit.</strong> Én dag her og der ødelegger ikke vanen. Prøv bare å ikke gå glipp av to på rad. Tavla handler om retning, ikke perfeksjon.</li>
+        <li><strong>Lag synlige påminnelser.</strong> Heng tavla der du ser den, for eksempel på kjøleskapet, badespeilet eller ved inngangsdøra.</li>
       </ul>
     </details>
   </section>
@@ -517,7 +558,7 @@
     </div>
 
     <div class="field">
-      <span class="label">Vanene mine <span class="hint">Opptil fem. Med bare én vane får du én prikk per dag, slik som på en lapp.</span></span>
+      <span class="label">Vanene mine <span class="hint">Opptil fem. Med bare én vane får du én prikk per dag, slik som på en lapp. Under hver vane kan du skrive en hvis-så-plan: når og hvor skal du gjøre den?</span></span>
       <div class="habit-list" id="habitList"></div>
       <button type="button" class="small-btn" id="addHabit">+ Legg til vane</button>
     </div>
@@ -588,6 +629,7 @@
         title: '',
         startDate: '',
         habits: ['Gode vaner'],
+        plans: [''],
         weekGoal: 5,
         weekReward: '',
         bigReward: '',
@@ -607,6 +649,7 @@
         }
       } catch (e) { /* ingen lagring tilgjengelig */ }
       if (!d.habits.length) d.habits = [''];
+      while (d.plans.length < d.habits.length) d.plans.push('');
       return d;
     }
 
@@ -781,6 +824,11 @@
         if (state.weeks > 1 || habits.length > 1 || habits[0].name) {
           var head = el('div', 'week-head');
           head.appendChild(el('h3', '', state.weeks > 1 ? 'Uke ' + (w + 1) : 'Denne uka'));
+          if (state.weeks > 1) {
+            var hr = el('span', 'head-reward', '⭐ ' + g + ' prikker = ');
+            hr.appendChild(el('strong', '', state.weekReward.trim() || '________________'));
+            head.appendChild(hr);
+          }
           var c = el('span', 'count');
           var num = el('span', 'count-num', String(count));
           c.appendChild(num);
@@ -801,23 +849,41 @@
         big.appendChild(el('div', 'label', 'Når jeg har nådd ukemålet alle fire ukene, belønner jeg meg med'));
         var bt = state.bigReward.trim();
         big.appendChild(el('div', 'text', bt || ' '));
-        if (!bt) big.querySelector('.text').style.borderBottom = '1px solid #4f7080';
+        if (!bt) big.querySelector('.text').classList.add('blank');
         board.appendChild(big);
+      }
+
+      var plans = currentPlans();
+      if (plans.length) {
+        var pl = el('div', 'plans');
+        pl.appendChild(el('h3', '', plans.length === 1 ? 'Min hvis-så-plan' : 'Mine hvis-så-planer'));
+        var ul = el('ul');
+        plans.forEach(function (t) { ul.appendChild(el('li', '', t)); });
+        pl.appendChild(ul);
+        board.appendChild(pl);
       }
 
       if (state.why.trim()) board.appendChild(el('p', 'why-line', 'Hvorfor: ' + state.why.trim()));
 
-      setPrintRowHeight(habits.length);
+      setPrintRowHeight(habits.length, plans.length);
     }
 
-    // Juster radhøyden slik at hele tavla får plass på ett A4-ark
-    function setPrintRowHeight(nHabits) {
+    function currentPlans() {
+      return state.plans.map(function (p) { return (p || '').trim(); }).filter(Boolean);
+    }
+
+    // Juster radhøyden slik at hele tavla får plass på ett A4-ark.
+    // Hvis-så-planene (to spalter, ofte to linjer hver) og «hvorfor» tar litt av plassen.
+    function setPrintRowHeight(nHabits, nPlans) {
       var mm;
+      var extras;
       if (state.weeks === 1) {
-        mm = 24;
+        extras = (nPlans ? 8 + Math.ceil(nPlans / 2) * 13 : 0) + (state.why.trim() ? 7 : 0);
+        mm = Math.max(12, Math.min(24, Math.floor((205 - extras) / 7)));
       } else {
-        // ca. 115 mm til vanerader fordelt på 4 uker; resten går til overskrifter og belønninger
-        mm = Math.max(5.5, Math.min(11, Math.floor(2 * 115 / (4 * nHabits)) / 2));
+        // ca. 140 mm til vanerader fordelt på 4 uker; resten går til overskrifter og belønninger
+        extras = (nPlans ? 6 + Math.ceil(nPlans / 2) * 6 : 0) + (state.why.trim() ? 5 : 0);
+        mm = Math.max(4, Math.min(11, Math.floor(2 * (140 - extras) / (4 * nHabits)) / 2));
       }
       document.getElementById('board').style.setProperty('--print-row', mm + 'mm');
     }
@@ -826,6 +892,7 @@
       var list = document.getElementById('habitList');
       list.innerHTML = '';
       state.habits.forEach(function (h, i) {
+        var item = el('div', 'habit-item');
         var row = el('div', 'habit-row');
         var input = el('input');
         input.type = 'text';
@@ -846,7 +913,20 @@
           rm.addEventListener('click', function () { removeHabit(i); });
           row.appendChild(rm);
         }
-        list.appendChild(row);
+        item.appendChild(row);
+        var plan = el('input', 'plan');
+        plan.type = 'text';
+        plan.maxLength = 90;
+        plan.value = state.plans[i] || '';
+        plan.placeholder = 'Hvis-så-plan, f.eks. Når jeg har spist middag, går jeg en tur';
+        plan.setAttribute('aria-label', 'Hvis-så-plan for vane ' + (i + 1));
+        plan.addEventListener('input', function () {
+          state.plans[i] = plan.value;
+          save();
+          renderBoard();
+        });
+        item.appendChild(plan);
+        list.appendChild(item);
       });
       document.getElementById('addHabit').disabled = state.habits.length >= MAX_HABITS;
     }
@@ -863,7 +943,8 @@
       });
       state.marks = marks;
       state.habits.splice(i, 1);
-      if (!state.habits.length || n === 1) state.habits = [''];
+      state.plans.splice(i, 1);
+      if (!state.habits.length || n === 1) { state.habits = ['']; state.plans = ['']; }
       save();
       renderHabits();
       renderBoard();
@@ -916,9 +997,10 @@
     document.getElementById('addHabit').addEventListener('click', function () {
       if (state.habits.length >= MAX_HABITS) return;
       state.habits.push('');
+      state.plans.push('');
       save();
       renderHabits();
-      var inputs = document.querySelectorAll('#habitList input');
+      var inputs = document.querySelectorAll('#habitList input:not(.plan)');
       inputs[inputs.length - 1].focus();
     });
 
