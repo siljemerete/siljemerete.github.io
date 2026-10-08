@@ -340,6 +340,26 @@
   }
 
   /* Én uke: dagene nedover, stor og luftig */
+  table.grid th .date {
+    display: block;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  table.grid th.today { color: var(--accent); }
+  table.grid th.today .date { color: var(--accent); font-weight: 600; }
+
+  .period-over {
+    text-align: center;
+    background: var(--push-soft);
+    border-radius: 8px;
+    padding: 0.5rem 0.8rem;
+    margin: 0 0 1rem;
+    font-size: 0.92rem;
+  }
+
   .is-1 table.grid th.rowhead {
     font-family: "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive;
     font-size: 1.15rem;
@@ -450,6 +470,7 @@
     .is-4 table.grid th.rowhead { width: 34%; }
     table.grid th, table.grid td { padding: 0.25rem 0.1rem; }
     .dot-btn { width: 1.45rem; height: 1.45rem; }
+    .is-4 table.grid th .date { font-size: 0.6rem; letter-spacing: -0.02em; }
   }
 
   /* Utskrift: bare tavla, tilpasset ett A4-ark */
@@ -459,6 +480,8 @@
     body { background: #fff; }
     .wrap { max-width: none; padding: 0; }
     .no-print { display: none !important; }
+    table.grid th .date { display: none !important; }
+    table.grid th.today { color: inherit; }
     .print-only { display: block; }
     .board { border: 0; box-shadow: none; padding: 0; }
     .board-title { font-size: 22pt; }
@@ -622,8 +645,25 @@
         bigReward: '',
         why: '',
         color: COLORS[0].value,
-        marks: {}
+        marks: {},
+        start: ''
       };
+    }
+
+    // Datoene på skjermen regnes fra mandagen i uka tavla ble startet
+    function mondayISO(date) {
+      var x = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12);
+      x.setDate(x.getDate() - (x.getDay() + 6) % 7);
+      return x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0');
+    }
+
+    function dayDate(w, d) {
+      var p = state.start.split('-').map(Number);
+      return new Date(p[0], p[1] - 1, p[2] + w * 7 + d, 12);
+    }
+
+    function sameDay(a, b) {
+      return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
     }
 
     function load() {
@@ -636,6 +676,7 @@
         }
       } catch (e) { /* ingen lagring tilgjengelig */ }
       if (!d.habits.length) d.habits = [''];
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(d.start)) d.start = mondayISO(new Date());
       while (d.plans.length < d.habits.length) d.plans.push('');
       return d;
     }
@@ -694,6 +735,9 @@
     function dayHead(w, d, short) {
       var th = el('th', short ? '' : 'rowhead');
       th.appendChild(document.createTextNode(short ? DAYS_SHORT[d] : DAYS[d]));
+      var date = dayDate(w, d);
+      th.appendChild(el('span', 'date', date.getDate() + '.' + (date.getMonth() + 1) + '.'));
+      if (sameDay(date, new Date())) th.classList.add('today');
       return th;
     }
 
@@ -776,6 +820,11 @@
       board.appendChild(el('h2', 'board-title', state.title.trim() || 'Min belønningstavle'));
       var sub = state.weeks === 1 ? 'Én prikk for hver gang jeg holder fast ved vanen' : 'Fire uker, én prikk om gangen';
       board.appendChild(el('p', 'board-sub', sub));
+      var end = dayDate(state.weeks - 1, 6);
+      end.setHours(23, 59);
+      if (new Date() > end) {
+        board.appendChild(el('p', 'period-over no-print', 'Perioden er over. Trykk «Fjern alle prikker» for å starte en ny runde fra denne uka.'));
+      }
       board.appendChild(el('p', 'print-only date-line', state.weeks === 1 ? 'Uke: ____________________' : 'Startdato: ____________________'));
 
       var weeksReached = 0;
@@ -971,6 +1020,7 @@
     document.getElementById('clearDots').addEventListener('click', function () {
       if (!confirm('Fjerne alle prikkene på tavla? Vanene og belønningene blir stående.')) return;
       state.marks = {};
+      state.start = mondayISO(new Date());
       save();
       renderBoard();
     });
