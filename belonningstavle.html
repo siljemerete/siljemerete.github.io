@@ -224,21 +224,47 @@
     gap: 0.9rem;
   }
 
-  .colors { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .reward-only-4 { display: none; }
+  .is-4 .reward-only-4 { display: block; }
 
-  .colors button {
-    width: 2.1rem;
-    height: 2.1rem;
-    border-radius: 50%;
-    border: 3px solid #fff;
-    box-shadow: 0 0 0 1px var(--border);
+  /* Sende-del */
+  .send-card { margin-top: 1.5rem; }
+  .send-card .field { margin-top: 0.9rem; }
+
+  .send-steps { margin: 0.9rem 0 0; padding-left: 1.2rem; font-size: 0.93rem; }
+  .send-steps li { margin-bottom: 0.35rem; }
+  .send-steps .addr { font-weight: 600; color: var(--accent-dark); overflow-wrap: anywhere; }
+
+  .send-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1rem;
+  }
+
+  .send-buttons button {
+    font: inherit;
+    font-size: 0.95rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
     cursor: pointer;
   }
 
-  .colors button[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--ink); }
+  .send-buttons button:hover { background: var(--accent-dark); }
 
-  .reward-only-4 { display: none; }
-  .is-4 .reward-only-4 { display: block; }
+  .send-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary:hover { background: var(--accent-soft); }
+
+  .send-buttons button:disabled { opacity: 0.6; cursor: default; }
+
+  .send-status { min-height: 1.2rem; font-size: 0.9rem; color: var(--muted); }
 
   /* Knapper */
   .controls {
@@ -763,11 +789,6 @@
       <label for="why">Hvorfor gjør jeg dette? <span class="hint">Valgfritt. Skrives nederst på tavla.</span></label>
       <input type="text" id="why" maxlength="100" placeholder="F.eks. For å ha mer energi til det som betyr noe for meg">
     </div>
-
-    <div class="field">
-      <span class="label">Farge på prikkene</span>
-      <div class="colors" id="colors" role="group" aria-label="Farge på prikkene"></div>
-    </div>
   </section>
 
   <div class="controls no-print">
@@ -777,6 +798,24 @@
   </div>
 
   <div class="board" id="board"></div>
+
+  <section class="card no-print send-card" id="sendCard">
+    <h2>Send tavla til Silje Merete</h2>
+    <p>Når uka eller de fire ukene er over, kan du sende tavla di til meg som PDF. Da kan vi se på den sammen i neste samtale.</p>
+    <div class="field">
+      <label for="clientName">Navnet ditt</label>
+      <input type="text" id="clientName" maxlength="60" autocomplete="name" placeholder="Fornavn og etternavn">
+    </div>
+    <ul class="send-steps">
+      <li><strong>På mobil</strong> åpnes delingsmenyen. Velg e-post, og skriv inn <span class="addr">silje.merete.binder@gmail.com</span> som mottaker.</li>
+      <li><strong>På PC</strong> lastes PDF-en ned, og e-postprogrammet ditt åpnes med adressen min fylt inn. Husk å legge ved PDF-en før du sender.</li>
+    </ul>
+    <div class="send-buttons">
+      <button type="button" id="sendPdf">Send som PDF</button>
+      <button type="button" id="downloadPdf" class="secondary">Last ned PDF</button>
+    </div>
+    <p class="send-status" id="sendStatus" role="status"></p>
+  </section>
 
   <footer class="closing no-print">
     Små steg, hver dag.<br>
@@ -790,14 +829,6 @@
     var STORAGE_KEY = 'belonningstavle-data';
     var DAYS = ['Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag', 'Søndag'];
     var DAYS_SHORT = ['Man', 'Tir', 'Ons', 'Tor', 'Fre', 'Lør', 'Søn'];
-    var COLORS = [
-      { name: 'Grønn', value: '#3a9d5d' },
-      { name: 'Blågrønn', value: '#1f7a8c' },
-      { name: 'Oransje', value: '#e08a2e' },
-      { name: 'Rosa', value: '#d1577f' },
-      { name: 'Lilla', value: '#7a5bb5' },
-      { name: 'Gul', value: '#e2b714' }
-    ];
     var MAX_HABITS = 5;
 
     var state = load();
@@ -812,7 +843,7 @@
         weekReward: '',
         bigReward: '',
         why: '',
-        color: COLORS[0].value,
+        name: '',
         marks: {},
         start: ''
       };
@@ -982,7 +1013,6 @@
       board.innerHTML = '';
       board.className = 'board is-' + state.weeks;
       document.getElementById('settings').className = 'card no-print is-' + state.weeks;
-      document.documentElement.style.setProperty('--dot', state.color);
 
       var habits = habitsShown();
       var g = goal(habits);
@@ -1135,25 +1165,6 @@
       renderBoard();
     }
 
-    function renderColors() {
-      var box = document.getElementById('colors');
-      box.innerHTML = '';
-      COLORS.forEach(function (c) {
-        var b = el('button');
-        b.type = 'button';
-        b.style.background = c.value;
-        b.setAttribute('aria-label', c.name);
-        b.setAttribute('aria-pressed', state.color === c.value ? 'true' : 'false');
-        b.addEventListener('click', function () {
-          state.color = c.value;
-          save();
-          renderColors();
-          renderBoard();
-        });
-        box.appendChild(b);
-      });
-    }
-
     function renderWeeks() {
       document.querySelectorAll('[data-weeks]').forEach(function (b) {
         b.setAttribute('aria-pressed', String(Number(b.getAttribute('data-weeks')) === state.weeks));
@@ -1213,10 +1224,268 @@
       document.body.classList.remove('print-blank');
     });
 
+    // ---- PDF og sending ----
+    var RECIPIENT = 'silje.merete.binder@gmail.com';
+    var JSPDF_URL = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+
+    function loadJsPDF() {
+      if (window.jspdf) return Promise.resolve(window.jspdf.jsPDF);
+      return new Promise(function (resolve, reject) {
+        var sc = document.createElement('script');
+        sc.src = JSPDF_URL;
+        sc.onload = function () { window.jspdf ? resolve(window.jspdf.jsPDF) : reject(new Error('jsPDF mangler')); };
+        sc.onerror = function () { reject(new Error('Kunne ikke laste jsPDF')); };
+        document.head.appendChild(sc);
+      });
+    }
+
+    function fmtDate(d) { return d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear(); }
+    function fmtShort(d) { return d.getDate() + '.' + (d.getMonth() + 1) + '.'; }
+
+    function periodText() {
+      return fmtDate(dayDate(0, 0)) + ' – ' + fmtDate(dayDate(state.weeks - 1, 6));
+    }
+
+    function habitLabel(h) { return h.name || 'Gode vaner'; }
+
+    function buildPdf(JsPDF) {
+      var doc = new JsPDF({ unit: 'mm', format: 'a4' });
+      var W = 210, M = 15, y = 18;
+      var INK = [18, 49, 61], MUTED = [79, 112, 128], ACCENT = [20, 88, 104];
+      var GREEN = [58, 157, 93], LINE = [243, 201, 155], EMPTY = [185, 207, 214];
+      var habits = habitsShown();
+      var g = goal(habits);
+
+      function ensure(h) {
+        if (y + h > 285) { doc.addPage(); y = 18; }
+      }
+      function text(t, x, size, color, style, align) {
+        doc.setFont('helvetica', style || 'normal');
+        doc.setFontSize(size);
+        doc.setTextColor.apply(doc, color);
+        doc.text(t, x, y, align ? { align: align } : undefined);
+      }
+      function wrapped(t, size, color, style, indent) {
+        doc.setFont('helvetica', style || 'normal');
+        doc.setFontSize(size);
+        var lines = doc.splitTextToSize(t, W - 2 * M - (indent || 0));
+        lines.forEach(function (line) {
+          ensure(size * 0.45);
+          doc.setTextColor.apply(doc, color);
+          doc.text(line, M + (indent || 0), y);
+          y += size * 0.45;
+        });
+      }
+
+      text(state.title.trim() || 'Min nye vaner-tavle', W / 2, 20, ACCENT, 'bold', 'center');
+      y += 7;
+      var who = state.name.trim();
+      text((who ? who + '  ·  ' : '') + (state.weeks === 1 ? '1 uke' : '4 uker') + ': ' + periodText(), W / 2, 10, MUTED, 'normal', 'center');
+      y += 5;
+      text('Ukemål: ' + g + (g === 1 ? ' gang' : ' ganger') + ' i uka' + (state.weekReward.trim() ? '  ·  Ukebelønning: ' + state.weekReward.trim() : ''), W / 2, 10, MUTED, 'normal', 'center');
+      y += 9;
+
+      var nameW = 55;
+      var colW = (W - 2 * M - nameW) / 7;
+      var rowH = state.weeks === 1 ? 12 : Math.max(7, Math.min(10, 150 / (4 * habits.length)));
+      var r = Math.min(3.6, rowH / 2 - 1.2);
+      var weeksReached = 0;
+
+      for (var w = 0; w < state.weeks; w++) {
+        var count = weekCount(w, habits);
+        if (count >= g) weeksReached++;
+        ensure(16 + rowH * habits.length);
+
+        text((state.weeks > 1 ? 'Uke ' + (w + 1) : 'Uka') + '  (' + fmtShort(dayDate(w, 0)) + ' – ' + fmtShort(dayDate(w, 6)) + ')', M, 11, ACCENT, 'bold');
+        text(count + ' av ' + dots(g) + (count >= g ? '  – mål nådd!' : ''), W - M, 10, count >= g ? GREEN : MUTED, count >= g ? 'bold' : 'normal', 'right');
+        y += 6;
+
+        for (var d = 0; d < 7; d++) {
+          var cx = M + nameW + colW * d + colW / 2;
+          text(DAYS_SHORT[d], cx, 9, MUTED, 'bold', 'center');
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(7);
+          doc.text(fmtShort(dayDate(w, d)), cx, y + 3.2, { align: 'center' });
+        }
+        y += 5;
+        doc.setDrawColor.apply(doc, LINE);
+        doc.setLineWidth(0.5);
+        doc.line(M, y, W - M, y);
+
+        habits.forEach(function (h) {
+          var mid = y + rowH / 2;
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(10);
+          doc.setTextColor.apply(doc, INK);
+          var label = doc.splitTextToSize(habitLabel(h), nameW - 3)[0];
+          doc.text(label, M + 1, mid + 1.3);
+          for (var d = 0; d < 7; d++) {
+            var cx = M + nameW + colW * d + colW / 2;
+            if (state.marks[key(w, d, h.idx)]) {
+              doc.setFillColor.apply(doc, GREEN);
+              doc.circle(cx, mid, r, 'F');
+            } else {
+              doc.setDrawColor.apply(doc, EMPTY);
+              doc.setLineWidth(0.3);
+              doc.circle(cx, mid, r, 'S');
+            }
+          }
+          y += rowH;
+          doc.setDrawColor.apply(doc, LINE);
+          doc.setLineWidth(0.5);
+          doc.line(M, y, W - M, y);
+        });
+        y += 8;
+      }
+
+      if (state.weeks === 4) {
+        ensure(12);
+        var bt = state.bigReward.trim();
+        text('Stor belønning etter fire uker' + (bt ? ': ' + bt : '') + '  –  ' + weeksReached + ' av 4 uker med mål nådd', M, 10.5, weeksReached === 4 ? GREEN : INK, 'bold');
+        y += 9;
+      }
+
+      var planLines = [];
+      habits.forEach(function (h) {
+        var pl = (state.plans[h.idx] || '').trim();
+        if (pl) planLines.push(habitLabel(h) + ': ' + pl);
+      });
+      if (planLines.length) {
+        ensure(12);
+        text('Når og hvor gjør jeg det?', M, 11, ACCENT, 'bold');
+        y += 5.5;
+        planLines.forEach(function (t) { wrapped('•  ' + t, 10, INK, 'normal'); y += 1; });
+        y += 4;
+      }
+
+      if (state.why.trim()) {
+        ensure(12);
+        text('Hvorfor gjør jeg dette?', M, 11, ACCENT, 'bold');
+        y += 5.5;
+        wrapped(state.why.trim(), 10, INK, 'italic');
+      }
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor.apply(doc, MUTED);
+      doc.text('Laget ' + fmtDate(new Date()) + ' med Min nye vaner-tavle', W / 2, 292, { align: 'center' });
+      return doc;
+    }
+
+    function pdfFileName() {
+      var who = state.name.trim().toLowerCase()
+        .replace(/æ/g, 'ae').replace(/ø/g, 'o').replace(/å/g, 'a')
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      return 'nye-vaner-tavle' + (who ? '-' + who : '') + '-' + state.start + '.pdf';
+    }
+
+    function summaryText() {
+      var habits = habitsShown();
+      var g = goal(habits);
+      var lines = [];
+      lines.push((state.title.trim() || 'Min nye vaner-tavle') + (state.name.trim() ? ' – ' + state.name.trim() : ''));
+      lines.push('Periode: ' + periodText());
+      lines.push('Ukemål: ' + g + (g === 1 ? ' gang' : ' ganger') + ' i uka');
+      lines.push('');
+      for (var w = 0; w < state.weeks; w++) {
+        if (state.weeks > 1) lines.push('Uke ' + (w + 1) + ': ' + weekCount(w, habits) + ' av ' + dots(g));
+        habits.forEach(function (h) {
+          var days = [];
+          for (var d = 0; d < 7; d++) if (state.marks[key(w, d, h.idx)]) days.push(DAYS_SHORT[d].toLowerCase());
+          lines.push((state.weeks > 1 ? '  ' : '') + habitLabel(h) + ': ' + (days.length ? days.join(', ') : 'ingen prikker'));
+        });
+      }
+      return lines.join('\n');
+    }
+
+    function setStatus(t) { document.getElementById('sendStatus').textContent = t; }
+
+    function downloadBlob(blob, name) {
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = name;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+    }
+
+    function makePdf() {
+      setStatus('Lager PDF …');
+      return loadJsPDF().then(function (JsPDF) {
+        var blob = buildPdf(JsPDF).output('blob');
+        setStatus('');
+        return blob;
+      }).catch(function () {
+        setStatus('Klarte ikke å lage PDF. Sjekk at du er koblet til internett, og prøv igjen.');
+        throw new Error('pdf');
+      });
+    }
+
+    function withButtons(fn) {
+      var btns = document.querySelectorAll('.send-buttons button');
+      btns.forEach(function (b) { b.disabled = true; });
+      return fn().catch(function () {}).then(function () {
+        btns.forEach(function (b) { b.disabled = false; });
+      });
+    }
+
+    document.getElementById('downloadPdf').addEventListener('click', function () {
+      withButtons(function () {
+        return makePdf().then(function (blob) {
+          downloadBlob(blob, pdfFileName());
+          setStatus('PDF-en er lastet ned.');
+        });
+      });
+    });
+
+    document.getElementById('sendPdf').addEventListener('click', function () {
+      if (!state.name.trim() && !confirm('Du har ikke skrevet inn navnet ditt. Vil du sende likevel?')) {
+        document.getElementById('clientName').focus();
+        return;
+      }
+      withButtons(function () {
+        return makePdf().then(function (blob) {
+          var name = pdfFileName();
+          var subject = 'Min nye vaner-tavle' + (state.name.trim() ? ' – ' + state.name.trim() : '');
+          var file = null;
+          try { file = new File([blob], name, { type: 'application/pdf' }); } catch (e) { /* eldre nettleser */ }
+
+          // Mobil: del PDF-en direkte via delingsmenyen
+          if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
+            return navigator.share({
+              files: [file],
+              title: subject,
+              text: 'Til Silje Merete (' + RECIPIENT + ')\n\n' + summaryText()
+            }).then(function () {
+              setStatus('Takk! Husk å sende til ' + RECIPIENT + '.');
+            }).catch(function (err) {
+              if (err && err.name === 'AbortError') { setStatus(''); return; }
+              downloadBlob(blob, name);
+              openMail(subject);
+            });
+          }
+
+          // PC: last ned PDF-en og åpne e-post med adressen fylt inn
+          downloadBlob(blob, name);
+          openMail(subject);
+        });
+      });
+    });
+
+    function openMail(subject) {
+      var body = 'Hei Silje Merete!\n\nHer er tavla mi. PDF-en ligger vedlagt.\n\n' + summaryText() +
+        '\n\n(Husk å legge ved PDF-en «' + pdfFileName() + '» som ble lastet ned.)';
+      setStatus('PDF-en er lastet ned. Legg den ved e-posten som åpnes nå.');
+      window.location.href = 'mailto:' + RECIPIENT + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    }
+
     bindText('title', 'title');
     bindText('weekReward', 'weekReward');
     bindText('bigReward', 'bigReward');
     bindText('why', 'why');
+    bindText('clientName', 'name');
 
     var goalInput = document.getElementById('weekGoal');
     goalInput.value = state.weekGoal;
@@ -1228,7 +1497,6 @@
 
     renderWeeks();
     renderHabits();
-    renderColors();
     renderBoard();
   })();
 </script>
