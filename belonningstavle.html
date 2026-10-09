@@ -227,6 +227,12 @@
   .reward-only-4 { display: none; }
   .is-4 .reward-only-4 { display: block; }
 
+  /* Del som lenke */
+  .share-box { border-top: 1px solid var(--border); padding-top: 1rem; }
+  .share-result { margin-top: 0.6rem; }
+  .share-result input { font-size: 0.85rem; color: var(--muted); }
+  .share-status { margin: 0.35rem 0 0; font-size: 0.88rem; color: var(--accent-dark); min-height: 1.1rem; }
+
   /* Sende-del */
   .send-card { margin-top: 1.5rem; }
   .send-card .field { margin-top: 0.9rem; }
@@ -789,6 +795,16 @@
       <label for="why">Hvorfor gjør jeg dette? <span class="hint">Valgfritt. Skrives nederst på tavla.</span></label>
       <input type="text" id="why" maxlength="100" placeholder="F.eks. For å ha mer energi til det som betyr noe for meg">
     </div>
+
+    <div class="field share-box">
+      <span class="label">Del tavla som lenke <span class="hint">Lager en lenke med vanene, «Når og hvor», ukemål, belønninger og «Hvorfor». Den som åpner lenken, får tavla ferdig utfylt og setter prikkene selv. Prikker og navn blir ikke med. Alt du har skrevet, står i selve lenken, så ikke skriv sensitive opplysninger.</span></span>
+      <button type="button" class="small-btn" id="makeLink">Lag lenke med tavla</button>
+      <div class="share-result" id="shareResult" hidden>
+        <input type="text" id="shareUrl" readonly aria-label="Lenke med tavla">
+        <button type="button" class="small-btn" id="copyLink">Kopier lenken</button>
+        <p class="share-status" id="shareStatus" role="status"></p>
+      </div>
+    </div>
   </section>
 
   <div class="controls no-print">
@@ -831,7 +847,11 @@
     var DAYS_SHORT = ['Man', 'Tir', 'Ons', 'Tor', 'Fre', 'Lør', 'Søn'];
     var MAX_HABITS = 5;
 
+    // Innstillingene som følger med når tavla deles som lenke (ikke prikker eller navn)
+    var SHARE_FIELDS = ['weeks', 'title', 'habits', 'plans', 'weekGoal', 'weekReward', 'bigReward', 'why'];
+
     var state = load();
+    applySharedLink();
 
     function defaults() {
       return {
@@ -1222,6 +1242,93 @@
 
     window.addEventListener('afterprint', function () {
       document.body.classList.remove('print-blank');
+    });
+
+    // ---- Del tavla som lenke ----
+    // Innstillingene pakkes inn i lenken etter #tavle=
+
+    function encodeShare() {
+      var data = {};
+      SHARE_FIELDS.forEach(function (k) { data[k] = state[k]; });
+      var b64 = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+      return b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    }
+
+    function decodeShare(str) {
+      var b64 = str.replace(/-/g, '+').replace(/_/g, '/');
+      while (b64.length % 4) b64 += '=';
+      return JSON.parse(decodeURIComponent(escape(atob(b64))));
+    }
+
+    function cleanShared(raw) {
+      function txt(v, max) { return typeof v === 'string' ? v.slice(0, max) : ''; }
+      var habits = Array.isArray(raw.habits) ? raw.habits.slice(0, MAX_HABITS).map(function (h) { return txt(h, 40); }) : [];
+      if (!habits.length) habits = [''];
+      var plans = habits.map(function (h, i) { return Array.isArray(raw.plans) ? txt(raw.plans[i], 90) : ''; });
+      var goalN = parseInt(raw.weekGoal, 10);
+      return {
+        weeks: raw.weeks === 4 ? 4 : 1,
+        title: txt(raw.title, 50),
+        habits: habits,
+        plans: plans,
+        weekGoal: goalN >= 1 && goalN <= 35 ? goalN : 2,
+        weekReward: txt(raw.weekReward, 80),
+        bigReward: txt(raw.bigReward, 80),
+        why: txt(raw.why, 100)
+      };
+    }
+
+    function hasOwnBoard() {
+      return Object.keys(state.marks).length > 0 ||
+        state.habits.some(function (h) { return h.trim() && h.trim() !== 'Gode vaner'; });
+    }
+
+    function applySharedLink() {
+      var m = location.hash.match(/^#tavle=([A-Za-z0-9_-]+)$/);
+      if (!m) return;
+      var shared;
+      try { shared = cleanShared(decodeShare(m[1])); } catch (e) { shared = null; }
+      try { history.replaceState(null, '', location.pathname + location.search); } catch (e) { /* ignorer */ }
+      if (!shared) return;
+      if (hasOwnBoard() && !confirm('Du har fått en ferdig utfylt tavle. Vil du bruke den? Tavla du har fra før, med prikkene, blir da erstattet.')) return;
+      SHARE_FIELDS.forEach(function (k) { state[k] = shared[k]; });
+      state.marks = {};
+      state.start = mondayISO(new Date());
+      save();
+    }
+
+    // Lenken åpnet i en fane der siden allerede står: last inn på nytt så tavla tas i bruk
+    window.addEventListener('hashchange', function () {
+      if (/^#tavle=/.test(location.hash)) location.reload();
+    });
+
+    document.getElementById('makeLink').addEventListener('click', function () {
+      var url = location.origin + location.pathname + '#tavle=' + encodeShare();
+      var input = document.getElementById('shareUrl');
+      input.value = url;
+      document.getElementById('shareResult').hidden = false;
+      document.getElementById('shareStatus').textContent = 'Lenken er klar. Kopier den og send den på e-post eller melding.';
+      input.focus();
+      input.select();
+    });
+
+    document.getElementById('copyLink').addEventListener('click', function () {
+      var input = document.getElementById('shareUrl');
+      var status = document.getElementById('shareStatus');
+      function fallback() {
+        input.focus();
+        input.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) { /* ignorer */ }
+        status.textContent = ok ? 'Lenken er kopiert.' : 'Merk lenken og kopier den selv.';
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(input.value).then(function () {
+          status.textContent = 'Lenken er kopiert. Lim den inn i en e-post eller melding.';
+        }, fallback);
+      } else {
+        fallback();
+      }
     });
 
     // ---- PDF og sending ----
