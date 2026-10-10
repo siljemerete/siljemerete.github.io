@@ -636,6 +636,107 @@
     height: 46px;
   }
 
+  body.gate-locked .wrap,
+  body.gate-locked footer.closing {
+    display: none;
+  }
+
+  .gate-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 100;
+  }
+
+  body.gate-locked .gate-overlay {
+    display: flex;
+  }
+
+  .gate-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 2rem 1.75rem;
+    max-width: 340px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .gate-box h1 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    color: var(--accent-dark);
+  }
+
+  .gate-box p {
+    margin: 0 0 1rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .gate-box input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    font-family: inherit;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  .gate-box input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .gate-box button {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .gate-box button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .gate-error {
+    display: none;
+    color: var(--push);
+    font-size: 0.85rem;
+    margin: 0.7rem 0 0;
+  }
+
+  .gate-contact {
+    margin-top: 0.9rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .gate-contact a {
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .gate-contact a:hover {
+    text-decoration: underline;
+  }
+
   @media (max-width: 480px) {
     .wrap { padding: 1.5rem 1rem 3rem; }
     section.primer { padding: 1rem 1rem 1.2rem; }
@@ -649,7 +750,51 @@
   }
 </style>
 </head>
-<body>
+<body class="gate-locked">
+
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box">
+    <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
+    <h1>Tilgang til verktøyet</h1>
+    <p>Skriv inn koden du har fått for å åpne dette verktøyet.</p>
+    <input type="text" id="gateCode" placeholder="Kode" autocomplete="off">
+    <button type="button" id="gateSubmit">Lås opp</button>
+    <p class="gate-error" id="gateError">Feil kode, prøv igjen.</p>
+    <p class="gate-contact">Har du ikke fått kode? <a href="mailto:silje.merete.binder@gmail.com?subject=Kode%20til%20S%C3%B8vn%20og%20stress-verkt%C3%B8yene">Kontakt meg for å få kode →</a></p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var GATE_KEY = 'gate-sovn-stress-unlocked';
+    var CODE = 'nyevaner';
+
+    function unlock() {
+      localStorage.setItem(GATE_KEY, 'true');
+      document.body.classList.remove('gate-locked');
+    }
+
+    if (localStorage.getItem(GATE_KEY) === 'true') {
+      unlock();
+    }
+
+    function trySubmit() {
+      var input = document.getElementById('gateCode');
+      var error = document.getElementById('gateError');
+      if (input.value.trim().toLowerCase() === CODE) {
+        error.style.display = 'none';
+        unlock();
+      } else {
+        error.style.display = 'block';
+      }
+    }
+
+    document.getElementById('gateSubmit').addEventListener('click', trySubmit);
+    document.getElementById('gateCode').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') trySubmit();
+    });
+  })();
+</script>
 
 <div class="wrap">
 
