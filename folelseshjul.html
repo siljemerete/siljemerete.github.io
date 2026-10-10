@@ -1,0 +1,1515 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Følelseshjulet | stopp opp og sett ord på det</title>
+<link rel="icon" href="images/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --push: #c9823f;
+    --push-soft: #faf1e2;
+    --border: #cfe3e8;
+    --center: #fbf8f2;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  header.page-header { margin-bottom: 1.75rem; }
+
+  header.page-header a.back-link {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    margin-bottom: 0.75rem;
+  }
+
+  header.page-header a.back-link:hover { color: var(--accent-dark); }
+
+  header.page-header h1 {
+    font-size: 1.7rem;
+    margin: 0 0 0.35rem;
+    color: var(--accent-dark);
+    text-wrap: balance;
+  }
+
+  header.page-header p.tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  .reminder {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    color: var(--accent-dark);
+  }
+
+  .reminder p { margin: 0; }
+  .reminder p + p { margin-top: 0.5rem; }
+
+  .pause-box {
+    display: flex;
+    gap: 0.9rem;
+    align-items: center;
+    background: var(--push-soft);
+    border: 1px solid #efdcc0;
+    border-radius: 12px;
+    padding: 0.9rem 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .pause-box .breath {
+    flex: 0 0 auto;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--push);
+    opacity: 0.85;
+    animation: breathe 10s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { transform: scale(0.6); }
+    40% { transform: scale(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pause-box .breath { animation: none; transform: scale(0.85); }
+  }
+
+  .pause-box p { margin: 0; font-size: 0.95rem; min-width: 0; }
+  .pause-box strong { color: #8a5320; }
+  .pause-box a { color: #8a5320; }
+
+  section.primer {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem 1.35rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  section.primer h2 {
+    margin-top: 0;
+    margin-bottom: 0.35rem;
+    font-size: 1.1rem;
+    color: var(--accent-dark);
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
+  }
+
+  .step-no {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transform: translateY(-1px);
+  }
+
+  section.primer p { margin: 0.5rem 0 0; }
+
+  .question {
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .controls button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent-dark);
+    cursor: pointer;
+  }
+
+  .controls button:hover { background: var(--accent-soft); }
+  .controls button.danger { color: var(--push); }
+  .controls button.danger:hover { background: var(--push-soft); }
+
+  /* Wheel */
+  .wheel-holder {
+    max-width: 520px;
+    margin: 0.75rem auto 0;
+  }
+
+  .wheel-holder svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .seg { cursor: pointer; }
+  .seg path { transition: filter 0.15s; }
+  .seg:hover path { filter: brightness(0.94); }
+  .seg:focus { outline: none; }
+  .seg:focus-visible path { stroke: var(--ink); stroke-width: 3; }
+  .seg text { pointer-events: none; user-select: none; }
+
+  .wheel-hint {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 0.5rem 0 0;
+  }
+
+  .levels {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 0.6rem;
+    margin-top: 0.9rem;
+    font-size: 0.88rem;
+  }
+
+  .levels div {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.55rem 0.75rem;
+  }
+
+  .levels strong { color: var(--accent-dark); display: block; }
+
+  /* Selected feelings */
+  .selected-list {
+    display: grid;
+    gap: 0.6rem;
+    margin-top: 0.9rem;
+  }
+
+  .empty-note {
+    font-size: 0.9rem;
+    color: var(--muted);
+    background: var(--bg);
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    margin: 0;
+  }
+
+  .feel-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: 0.35rem 0.7rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .feel-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+  }
+
+  .feel-name {
+    font-weight: 600;
+    color: var(--accent-dark);
+    min-width: 0;
+  }
+
+  .feel-name small {
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .feel-val {
+    font-weight: 700;
+    color: var(--accent-dark);
+    font-variant-numeric: tabular-nums;
+    min-width: 3.2em;
+    text-align: right;
+  }
+
+  .feel-remove {
+    border: none;
+    background: none;
+    color: var(--muted);
+    font-size: 1.15rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0.2rem 0.35rem;
+    border-radius: 6px;
+  }
+
+  .feel-remove:hover { color: var(--push); background: var(--push-soft); }
+
+  .feel-item input[type="range"] {
+    grid-column: 2 / 5;
+    width: 100%;
+    accent-color: var(--accent);
+  }
+
+  .scale-ends {
+    grid-column: 2 / 5;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: -0.25rem;
+  }
+
+  /* Chips */
+  .chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 0.75rem;
+  }
+
+  .chip {
+    font: inherit;
+    font-size: 0.88rem;
+    padding: 0.38rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  .chip:hover { background: var(--accent-soft); }
+  .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .chip.suggested {
+    border-color: var(--push);
+    border-style: dashed;
+  }
+
+  .chip[aria-pressed="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    border-style: solid;
+    color: #fff;
+  }
+
+  .chip-legend {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.5rem !important;
+  }
+
+  .chip-legend span {
+    display: inline-block;
+    width: 1.6em;
+    height: 0.9em;
+    border: 1px dashed var(--push);
+    border-radius: 999px;
+    vertical-align: -0.1em;
+    margin-right: 0.25em;
+  }
+
+  .sub-label {
+    font-weight: 600;
+    color: var(--accent-dark);
+    font-size: 0.92rem;
+    margin-top: 1.1rem !important;
+  }
+
+  /* Insight cards */
+  .insights {
+    display: grid;
+    gap: 0.7rem;
+    margin-top: 0.9rem;
+  }
+
+  .insight {
+    border: 1px solid var(--border);
+    border-left: 6px solid var(--c, var(--accent));
+    border-radius: 10px;
+    padding: 0.7rem 0.9rem;
+    background: var(--card);
+  }
+
+  .insight h3 {
+    margin: 0;
+    font-size: 0.98rem;
+    color: var(--accent-dark);
+  }
+
+  .insight p { margin: 0.3rem 0 0; font-size: 0.92rem; }
+  .insight .ask { color: var(--muted); font-style: italic; }
+
+  /* Fields */
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 0.9rem;
+    margin-top: 0.75rem;
+  }
+
+  .field-wide { grid-column: 1 / -1; }
+
+  .field label {
+    display: block;
+    font-weight: 600;
+    color: var(--accent-dark);
+    margin-bottom: 0.3rem;
+    font-size: 0.88rem;
+  }
+
+  .field textarea {
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--ink);
+    min-height: 64px;
+    resize: vertical;
+  }
+
+  .field textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .confidence {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.3rem 0.8rem;
+    align-items: center;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.7rem 0.9rem;
+    margin-top: 1rem;
+  }
+
+  .confidence label {
+    font-weight: 600;
+    color: var(--accent-dark);
+    font-size: 0.92rem;
+  }
+
+  .confidence output {
+    font-weight: 700;
+    color: var(--accent-dark);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .confidence input { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); }
+
+  .confidence p {
+    grid-column: 1 / -1;
+    margin: 0 !important;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  /* Buttons */
+  .send-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .send-buttons button {
+    font-size: 0.92rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .send-buttons button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary {
+    background: var(--card);
+    color: var(--accent-dark);
+  }
+
+  .send-buttons button.secondary:hover { background: var(--accent-soft); }
+
+  .muted-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .toast {
+    font-size: 0.88rem;
+    color: var(--accent-dark);
+    min-height: 1.3em;
+    margin: 0.25rem 0 0 !important;
+  }
+
+  /* Log */
+  .pattern {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.6rem;
+  }
+
+  .pattern span {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+  }
+
+  .log-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.9rem 0 0;
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .log-list li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.2rem 0.6rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .log-list .log-date {
+    font-weight: 600;
+    color: var(--accent-dark);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .log-list .log-body { grid-column: 1 / -1; min-width: 0; }
+
+  /* Guide for the health coach */
+  details.guide {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  details.guide summary {
+    cursor: pointer;
+    padding: 1rem 1.25rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    font-size: 1.05rem;
+    list-style: none;
+  }
+
+  details.guide summary::-webkit-details-marker { display: none; }
+  details.guide summary::after { content: " ▸"; color: var(--muted); }
+  details.guide[open] summary::after { content: " ▾"; }
+
+  .guide-body {
+    padding: 0 1.25rem 1.25rem;
+  }
+
+  .guide-body h3 {
+    font-size: 1rem;
+    color: var(--accent-dark);
+    margin: 1.2rem 0 0.3rem;
+  }
+
+  .guide-body h3:first-child { margin-top: 0; }
+  .guide-body p, .guide-body li { font-size: 0.95rem; }
+  .guide-body p { margin: 0.4rem 0 0; }
+  .guide-body ol, .guide-body ul { margin: 0.4rem 0 0; padding-left: 1.3rem; }
+  .guide-body li + li { margin-top: 0.35rem; }
+
+  .mi-example {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.7rem 0.9rem;
+    margin-top: 0.6rem;
+  }
+
+  .mi-example p { margin: 0.25rem 0 0; }
+  .mi-example p:first-child { margin-top: 0; }
+  .mi-example .who {
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--muted);
+    display: block;
+  }
+
+  .compare {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.6rem;
+    margin-top: 0.6rem;
+  }
+
+  .compare div {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.92rem;
+  }
+
+  .compare strong { color: var(--accent-dark); }
+
+  .guide-body a { color: var(--accent-dark); }
+
+  footer.closing {
+    margin-top: 1.75rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong { color: var(--accent-dark); }
+
+  .page-logo {
+    display: block;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 0.75rem;
+    padding: 5px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(22, 40, 58, 0.12);
+  }
+
+  .page-logo img {
+    display: block;
+    width: 46px;
+    height: 46px;
+  }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 1.5rem 1rem 3rem; }
+    section.primer { padding: 1rem 1rem 1.2rem; }
+  }
+
+  @media print {
+    body { background: #fff; }
+    .controls, .send-buttons, .muted-note, .toast, .pause-box, .feel-remove,
+    header.page-header a.back-link, #logSection, details.guide { display: none; }
+    section.primer, .feel-item, .insight { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="page-header">
+    <a class="back-link" href="index.html">← Til forsiden</a>
+    <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
+    <h1>Følelseshjulet: stopp opp og sett ord på det</h1>
+    <p class="tagline">Et verktøy for stressmestring: kjenn etter, forstå hva du trenger, og velg ett lite grep</p>
+    <div class="reminder">
+      <p>Ikke alle følelser er gode, men alle har en funksjon. Målet er ikke å
+      fjerne de ubehagelige følelsene, men å legge merke til dem, forstå dem
+      litt bedre og finne ut hva du trenger.</p>
+      <p>Ingen følelser er feil, og det finnes ingen fasit på hva en følelse
+      betyr. Det du legger inn lagres bare i denne nettleseren.</p>
+    </div>
+  </header>
+
+  <div class="pause-box">
+    <div class="breath" aria-hidden="true"></div>
+    <p><strong>Stopp opp før du starter.</strong> Pust rolig inn gjennom nesen,
+    og pust lenger ut enn du pustet inn. Gjør det tre ganger. Kjenn etter:
+    hva skjer i meg akkurat nå? <a href="pusteovelser.html">Flere pusteøvelser</a></p>
+  </div>
+
+  <div class="controls">
+    <button type="button" id="resetAll" class="danger">Nullstill skjemaet</button>
+  </div>
+
+  <section class="primer" aria-labelledby="h-step1">
+    <h2 id="h-step1"><span class="step-no">1</span>Hva kjenner du på?</h2>
+    <p class="question">Når du ser på hjulet, er det noen følelser du kjenner deg igjen i akkurat nå, eller for tiden?</p>
+    <div class="levels">
+      <div><strong>Start i midten</strong>Er det mest behagelig eller ubehagelig?</div>
+      <div><strong>Så midtringen</strong>Hvilken hovedfølelse ligner det mest på?</div>
+      <div><strong>Til slutt ytterst</strong>Finn ordet som treffer best.</div>
+    </div>
+    <div class="wheel-holder">
+      <svg id="wheelSvg" viewBox="-262 -262 524 524" role="group" aria-label="Følelseshjul. Trykk på en følelse for å velge den."></svg>
+    </div>
+    <p class="wheel-hint">Trykk på én eller flere følelser. Det er vanlig å kjenne flere ting samtidig.</p>
+
+    <p class="sub-label">Dine følelser og hvor sterke de er</p>
+    <div class="selected-list" id="selectedList"></div>
+  </section>
+
+  <section class="primer" aria-labelledby="h-step2">
+    <h2 id="h-step2"><span class="step-no">2</span>Når og hvor kjenner du det?</h2>
+    <p class="question">I hvilke situasjoner legger du særlig merke til denne følelsen?</p>
+    <div class="field-grid">
+      <div class="field field-wide">
+        <label for="situasjon">Situasjon</label>
+        <textarea id="situasjon" data-key="situasjon" placeholder="For eksempel: på jobb etter et møte, når barna skal legge seg, søndag kveld..."></textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="primer" aria-labelledby="h-step3">
+    <h2 id="h-step3"><span class="step-no">3</span>Kropp og tanker</h2>
+    <p class="question">Hvordan merker du følelsen i kroppen? Hva tenker du da?</p>
+    <p class="sub-label">I kroppen</p>
+    <div class="chip-group" data-group="kropp"></div>
+    <div class="field-grid">
+      <div class="field field-wide">
+        <label for="tanker">Tanker som dukker opp</label>
+        <textarea id="tanker" data-key="tanker" placeholder="For eksempel: «Jeg rekker aldri noe», «Jeg må ta meg sammen»..."></textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="primer" aria-labelledby="h-step4">
+    <h2 id="h-step4"><span class="step-no">4</span>Hva skjer med levevanene?</h2>
+    <p class="question">Hva skjer gjerne med søvnen, matvanene eller aktivitetsnivået ditt når du har det slik?</p>
+    <div class="chip-group" data-group="vaner"></div>
+    <div class="field-grid">
+      <div class="field field-wide">
+        <label for="vaner-tekst">Noe annet du legger merke til?</label>
+        <textarea id="vaner-tekst" data-key="vaner-tekst" placeholder="Skriv gjerne fritt her..."></textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="primer" aria-labelledby="h-step5">
+    <h2 id="h-step5"><span class="step-no">5</span>Hva prøver følelsen å fortelle deg?</h2>
+    <p class="question">Følelser kan gi informasjon om behov. Her er noen mulige tolkninger. Bare du vet hva som stemmer for deg.</p>
+    <div class="insights" id="insights"></div>
+
+    <p class="sub-label">Hva tror du at du trenger mest akkurat nå?</p>
+    <div class="chip-group" data-group="behov"></div>
+    <p class="chip-legend"><span></span>Stiplet kant: kan passe med følelsene du har valgt</p>
+    <div class="field-grid">
+      <div class="field field-wide">
+        <label for="tidligere">Hva har hjulpet deg tidligere i slike situasjoner?</label>
+        <textarea id="tidligere" data-key="tidligere" placeholder="Skriv gjerne fritt her..."></textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="primer" aria-labelledby="h-step6">
+    <h2 id="h-step6"><span class="step-no">6</span>Ett lite, realistisk grep</h2>
+    <p class="question">Hva kunne vært et lite grep som ville gjort hverdagen litt lettere? Velg gjerne ett av forslagene, eller skriv ditt eget.</p>
+    <div class="chip-group" data-group="grep"></div>
+    <div class="field-grid">
+      <div class="field field-wide">
+        <label for="mitt-grep">Mitt grep (hva, når og hvor)</label>
+        <textarea id="mitt-grep" data-key="mitt-grep" placeholder="For eksempel: I morgen etter lunsj går jeg en tur på ti minutter uten mobil."></textarea>
+      </div>
+    </div>
+    <div class="confidence">
+      <label for="tro">Hvor sikker er du på at du får det til? (0 til 10)</label>
+      <output id="troVal" for="tro">5</output>
+      <input type="range" id="tro" min="0" max="10" step="1" value="5">
+      <p id="troHint"></p>
+    </div>
+  </section>
+
+  <section class="primer" aria-labelledby="h-save">
+    <h2 id="h-save">Lagre og send</h2>
+    <p class="muted-note">
+      Lagre i loggen hver gang du bruker hjulet. Over tid kan du se hvilke
+      følelser som går igjen, og ta det med til neste time. Du kan også sende
+      alt på e-post eller laste det ned som en tekstfil.
+    </p>
+    <div class="send-buttons">
+      <button type="button" id="saveLog">Lagre i loggen og start på nytt</button>
+      <button type="button" id="sendEmail" class="secondary">Send på e-post</button>
+      <button type="button" id="downloadText" class="secondary">Last ned som tekstfil</button>
+    </div>
+    <p class="toast" id="toast" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="primer" id="logSection" aria-labelledby="h-log">
+    <h2 id="h-log">Min følelseslogg</h2>
+    <div id="logContent"></div>
+  </section>
+
+  <details class="guide">
+    <summary>For helseveilederen: slik bruker du hjulet i samtalen</summary>
+    <div class="guide-body">
+      <h3>Hvorfor følelser hører hjemme i helseveiledning</h3>
+      <ul>
+        <li><strong>Følelser påvirker atferd.</strong> Stress kan føre til at vi spiser mer, sover dårligere eller nedprioriterer trening. Glede og mestring gjør det lettere å holde på gode vaner.</li>
+        <li><strong>Følelser kan gi informasjon om behov.</strong> Irritasjon kan henge sammen med belastning eller behov for grenser. Tristhet kan handle om behov for støtte, nærhet eller hvile. Men det finnes ingen fasit.</li>
+        <li><strong>Følelsesbevissthet støtter endring.</strong> Når klienten legger merke til følelser og reaksjonsmønstre, blir det lettere å finne andre måter å håndtere utfordringer på.</li>
+        <li><strong>Alle følelser får plass.</strong> Målet er ikke å være positiv hele tiden. Redsel, sinne, skam og sorg er naturlige menneskelige opplevelser.</li>
+      </ul>
+
+      <h3>Samtalemal (5 til 10 minutter)</h3>
+      <p>Passer godt under kartlegging av stress, mestring eller livskvalitet. Stegene i skjemaet over følger samme rekkefølge.</p>
+      <ol>
+        <li><strong>Utforske følelsen:</strong> «Når du ser på dette følelseshjulet, er det noen følelser du kjenner deg spesielt igjen i for tiden?»</li>
+        <li><strong>Forstå sammenhengen:</strong> «I hvilke situasjoner legger du særlig merke til denne følelsen?» «Hvordan merker du den i kroppen eller tankene?»</li>
+        <li><strong>Se på konsekvenser for levevanene:</strong> «Hva skjer gjerne med søvnen, matvanene eller aktivitetsnivået ditt når du har det slik?»</li>
+        <li><strong>Utforske behov og ressurser:</strong> «Hva tror du at du trenger mest i slike situasjoner?» «Hva har tidligere hjulpet deg?»</li>
+        <li><strong>Finne et lite tiltak:</strong> «Hva kunne vært et lite, realistisk grep som ville gjort hverdagen litt lettere?»</li>
+      </ol>
+
+      <h3>Samme atferd, ulike følelser</h3>
+      <p>To personer med samme utfordring kan ha helt ulikt følelsesmessig utgangspunkt, og trenger derfor ulik tilnærming.</p>
+      <div class="compare">
+        <div><strong>Trener ikke, kjenner dårlig samvittighet.</strong> Hun opplever at hun ikke får det til. Her kan det være nyttig å utforske skyld og krav, og senke terskelen for hva som «teller».</div>
+        <div><strong>Trener ikke, kjenner lettelse.</strong> Hun har endelig gitt seg selv lov til å hvile. Her kan hvilen være en viktig ressurs, og samtalen kan handle om hva som gir overskudd.</div>
+      </div>
+
+      <h3>Motiverende intervju (MI): refleksjoner før spørsmål</h3>
+      <p>Møt klienten med aksept, nysgjerrighet og respekt for autonomi. Legg vekt på refleksjoner før spørsmål, slik at samtalen ikke blir et intervju der klienten stadig må forklare seg.</p>
+
+      <div class="mi-example">
+        <p><span class="who">Klienten sier</span>«Jeg vet at jeg burde trene, men jeg blir bare stresset av å tenke på det.»</p>
+        <p><span class="who">Refleksjon</span>«Trening har blitt enda et krav på en lang liste, og det gjør det tungt å komme i gang.»</p>
+        <p><span class="who">Mulig oppfølging</span>«Hvordan måtte bevegelse sett ut for at den skulle gi deg litt overskudd, i stedet for å ta?»</p>
+      </div>
+      <div class="mi-example">
+        <p><span class="who">Klienten sier</span>«Når jeg kommer hjem fra jobb, ender jeg bare i sofaen med sjokolade.»</p>
+        <p><span class="who">Refleksjon</span>«Etter en lang dag er det sofaen og sjokoladen som gir deg en pause. Den har en funksjon for deg.»</p>
+        <p><span class="who">Mulig oppfølging</span>«Hva annet kunne gitt deg noe av den samme pausen?»</p>
+      </div>
+      <div class="mi-example">
+        <p><span class="who">Klienten sier</span>«Jeg ligger og tenker på alt jeg ikke rakk i dag.»</p>
+        <p><span class="who">Refleksjon</span>«Kvelden har blitt stedet der dagens uro endelig får plass.»</p>
+        <p><span class="who">Mulig oppfølging</span>«Hvor ellers i dagen kunne uroen fått litt plass?»</p>
+      </div>
+
+      <h3>Gode tommelfingerregler</h3>
+      <ul>
+        <li>La klienten selv sette ord på følelsen. Unngå å tolke for dem.</li>
+        <li>Normaliser: «Mange kjenner på det samme når hverdagen er full.»</li>
+        <li>Spør om lov før du gir råd, og bruk gjerne utforske, informere, utforske.</li>
+        <li>Bruk tallet for hvor sikker klienten er (steg 6): «Hvorfor 5 og ikke 2?» får frem ressursene.</li>
+        <li>Gjenta øvelsen over tid. Loggen kan vise mønstre som er vanskelige å se i øyeblikket.</li>
+      </ul>
+      <p>Les mer om <a href="motiverende-intervju.html">motiverende intervju</a>, eller kombiner med <a href="dagbok-stresskoppen.html">dagbok for stresskoppen</a>.</p>
+    </div>
+  </details>
+
+  <footer class="closing">
+    Ingen følelser er feil. De prøver å fortelle oss noe.<br>
+    <strong>Du trenger ikke gjøre det alene.</strong>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var STORAGE_KEY = 'folelseshjul-data';
+  var LOG_KEY = 'folelseshjul-logg';
+  var RECIPIENT = 'silje.merete.binder@gmail.com';
+
+  // Pleasant feelings run clockwise across the top half (left to right),
+  // unpleasant ones clockwise across the bottom half (right to left).
+  var CORES = [
+    { key: 'aksept', label: 'Aksept', side: 'pos', color: '#b83a6e', ink: '#fff',
+      words: ['Ro', 'Fred', 'Balanse'],
+      tells: 'At noe får være som det er. Ofte et tegn på at det er balanse mellom krav og ressurser akkurat nå.',
+      ask: 'Hva bidro til at du kjente dette, og hvordan kan du få mer av det?',
+      needs: ['Ro', 'Pause'],
+      steps: ['Skriv ned hva som ga deg ro i dag', 'Planlegg et lite pusterom i morgen også'] },
+    { key: 'kjaerlighet', label: 'Kjærlighet', side: 'pos', color: '#d0445f', ink: '#fff',
+      words: ['Nærhet', 'Trygghet', 'Ømhet', 'Tilhørighet'],
+      tells: 'Kontakt med andre og følelsen av å høre til. Gode relasjoner er en av de viktigste bufferne mot stress.',
+      ask: 'Hvem eller hva ga deg denne følelsen?',
+      needs: ['Nærhet', 'Fellesskap'],
+      steps: ['Send en melding til noen du bryr deg om', 'Avtal en tur eller en kaffe med noen'] },
+    { key: 'interesse', label: 'Interesse', side: 'pos', color: '#d95a36', ink: '#fff',
+      words: ['Nysgjerrighet', 'Engasjement', 'Inspirasjon'],
+      tells: 'Energi og driv mot noe som betyr noe for deg.',
+      ask: 'Hva var det som fanget interessen din?',
+      needs: ['Mening', 'Glede og lek'],
+      steps: ['Sett av 15 minutter til noe du er nysgjerrig på'] },
+    { key: 'takknemlighet', label: 'Takknemlighet', side: 'pos', color: '#e0782c', ink: '#fff',
+      words: ['Verdsettelse', 'Raushet', 'Ydmykhet'],
+      tells: 'At du legger merke til det som er godt, også i en travel hverdag.',
+      ask: 'Hva er du takknemlig for akkurat nå?',
+      needs: ['Mening', 'Fellesskap'],
+      steps: ['Skriv ned tre ting som gikk bra i dag'] },
+    { key: 'optimisme', label: 'Optimisme', side: 'pos', color: '#eda233', ink: '#3b2600',
+      words: ['Håp', 'Glede', 'Letthet'],
+      tells: 'Tro på at ting kan gå bra, og overskudd til å prøve noe nytt.',
+      ask: 'Hva kan du bruke dette overskuddet til?',
+      needs: ['Glede og lek', 'Bevegelse'],
+      steps: ['Bruk overskuddet på ett lite steg mot noe du ønsker deg'] },
+    { key: 'mestring', label: 'Mestring', side: 'pos', color: '#d9b42a', ink: '#352a00',
+      words: ['Selvtillit', 'Stolthet', 'Tilfredshet'],
+      tells: 'Opplevelsen av å få til noe. Mestring gjør det lettere å holde på gode vaner.',
+      ask: 'Hva fikk du til, og hvordan klarte du det?',
+      needs: ['Mening'],
+      steps: ['Legg merke til hva du fikk til i dag, uansett hvor lite'] },
+
+    { key: 'misliker', label: 'Misliker', side: 'neg', color: '#2b8a78', ink: '#fff',
+      words: ['Kritikk', 'Forakt', 'Oppgitthet'],
+      tells: 'At noe bryter med verdiene dine eller det du synes er greit.',
+      ask: 'Hva er det konkret du ikke vil ha, eller ikke synes er greit?',
+      needs: ['Grenser', 'Si ifra'],
+      steps: ['Ta en liten pause før du reagerer', 'Skriv ned hva du ønsker deg i stedet'] },
+    { key: 'sinne', label: 'Sinne', side: 'neg', color: '#267a93', ink: '#fff',
+      words: ['Irritasjon', 'Frustrasjon', 'Avmakt'],
+      tells: 'At en grense er tråkket over, at noe står i veien for deg, eller at belastningen er for høy.',
+      ask: 'Hvilken grense kan ha blitt tråkket over?',
+      needs: ['Grenser', 'Pause', 'Bevegelse'],
+      steps: ['Gå en rask tur, eller rist løs kroppen i ett minutt', 'Si nei til eller utsett én ting denne uka', 'Vent med å svare til pulsen har roet seg'] },
+    { key: 'sorg', label: 'Sorg', side: 'neg', color: '#2c64a3', ink: '#fff',
+      words: ['Tap', 'Tristhet', 'Ensomhet'],
+      tells: 'At du har mistet noe eller noen som betyr noe, eller at du savner kontakt.',
+      ask: 'Hva savner du, eller hva har du mistet?',
+      needs: ['Støtte', 'Nærhet', 'Hvile'],
+      steps: ['Fortell én person hvordan du har det', 'Senk kravene til deg selv i en periode', 'Gå en rolig tur ute i dagslys'] },
+    { key: 'skam', label: 'Skam', side: 'neg', color: '#4b4a9e', ink: '#fff',
+      words: ['Skyld', 'Flauhet', 'Verdiløshet'],
+      tells: 'Frykt for å ikke strekke til eller bli avvist. Skyld handler ofte om noe du har gjort, skam om hvordan du ser på deg selv.',
+      ask: 'Hva ville du sagt til en god venn som kjente det samme?',
+      needs: ['Selvmedfølelse', 'Støtte'],
+      steps: ['Snakk til deg selv slik du ville snakket til en god venn', 'Del det med én person du stoler på'] },
+    { key: 'redsel', label: 'Redsel', side: 'neg', color: '#6744a6', ink: '#fff',
+      words: ['Uro', 'Bekymring', 'Usikkerhet'],
+      tells: 'At noe kjennes truende eller uforutsigbart. Kroppen gjør seg klar til å beskytte deg.',
+      ask: 'Hva er det du er redd for skal skje?',
+      needs: ['Trygghet', 'Oversikt', 'Ro'],
+      steps: ['Rolig pust: pust lenger ut enn inn i to minutter', 'Sett av en fast bekymringstid på 15 minutter', 'Skriv ned hva du kan påvirke, og hva du ikke kan påvirke'] },
+    { key: 'overveldelse', label: 'Overveldelse', side: 'neg', color: '#8752ad', ink: '#fff',
+      words: ['Stress', 'Kraftløshet', 'Utmattelse'],
+      tells: 'At kravene er større enn ressursene akkurat nå. Et signal om å prioritere, ikke om å yte mer.',
+      ask: 'Hva kan vente, og hva kan noen andre gjøre?',
+      needs: ['Hvile', 'Søvn', 'Oversikt', 'Hjelp'],
+      steps: ['Skriv ned alt du har på lista, og velg de tre viktigste', 'Be om hjelp med én konkret ting', 'Legg inn en pause på fem minutter uten skjerm', 'Prioriter søvn i kveld'] }
+  ];
+
+  var CHIPS = {
+    kropp: ['Hjertebank', 'Rask eller grunn pust', 'Anspent i nakke og skuldre', 'Uro i magen', 'Klump i halsen',
+      'Hodepine', 'Tung i kroppen', 'Sliten', 'Rastløs', 'Varm eller rød', 'Kjeven biter sammen', 'Lett og avslappet'],
+    vaner: ['Sover dårligere', 'Sover mer', 'Spiser mer eller småspiser', 'Spiser mindre eller hopper over måltider',
+      'Mer kaffe eller sukker', 'Mer alkohol', 'Hopper over trening', 'Trener hardere', 'Mer skjermtid',
+      'Trekker meg unna andre', 'Utsetter ting', 'Gjør mer av det som er bra for meg'],
+    behov: ['Hvile', 'Søvn', 'Pause', 'Ro', 'Trygghet', 'Oversikt', 'Grenser', 'Si ifra', 'Støtte', 'Nærhet',
+      'Fellesskap', 'Hjelp', 'Bevegelse', 'Frisk luft', 'Mat og drikke', 'Selvmedfølelse', 'Mening', 'Glede og lek']
+  };
+
+  var state = { feelings: [], chips: { kropp: [], vaner: [], behov: [], grep: [] }, tro: 5, text: {} };
+
+  // ---------- storage ----------
+  function readJSON(key, fallback) {
+    try {
+      var raw = localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : fallback;
+    } catch (e) { return fallback; }
+  }
+
+  function writeJSON(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
+  }
+
+  function saveState() {
+    document.querySelectorAll('textarea[data-key]').forEach(function (el) {
+      state.text[el.getAttribute('data-key')] = el.value;
+    });
+    writeJSON(STORAGE_KEY, state);
+  }
+
+  function loadState() {
+    var data = readJSON(STORAGE_KEY, null);
+    if (!data) return;
+    if (Array.isArray(data.feelings)) state.feelings = data.feelings.filter(function (f) { return coreByKey(f.core); });
+    if (data.chips) Object.keys(state.chips).forEach(function (g) {
+      if (Array.isArray(data.chips[g])) state.chips[g] = data.chips[g];
+    });
+    if (typeof data.tro === 'number') state.tro = data.tro;
+    if (data.text) state.text = data.text;
+    document.querySelectorAll('textarea[data-key]').forEach(function (el) {
+      var k = el.getAttribute('data-key');
+      if (state.text[k] !== undefined) el.value = state.text[k];
+    });
+  }
+
+  function coreByKey(key) {
+    for (var i = 0; i < CORES.length; i++) if (CORES[i].key === key) return CORES[i];
+    return null;
+  }
+
+  function findFeeling(core, word) {
+    for (var i = 0; i < state.feelings.length; i++) {
+      if (state.feelings[i].core === core && state.feelings[i].word === word) return i;
+    }
+    return -1;
+  }
+
+  function selectedCores() {
+    var seen = {}, list = [];
+    state.feelings.forEach(function (f) {
+      if (!seen[f.core]) { seen[f.core] = true; list.push(coreByKey(f.core)); }
+    });
+    return list;
+  }
+
+  // ---------- wheel ----------
+  var R0 = 64, R1 = 160, R2 = 255;
+  var NS = 'http://www.w3.org/2000/svg';
+
+  function el(name, attrs) {
+    var n = document.createElementNS(NS, name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    return n;
+  }
+
+  function pt(r, a) {
+    var t = a * Math.PI / 180;
+    return (r * Math.cos(t)).toFixed(2) + ' ' + (r * Math.sin(t)).toFixed(2);
+  }
+
+  function ringPath(r1, r2, a1, a2) {
+    var large = a2 - a1 > 180 ? 1 : 0;
+    return 'M' + pt(r2, a1) + ' A' + r2 + ' ' + r2 + ' 0 ' + large + ' 1 ' + pt(r2, a2) +
+      ' L' + pt(r1, a2) + ' A' + r1 + ' ' + r1 + ' 0 ' + large + ' 0 ' + pt(r1, a1) + ' Z';
+  }
+
+  function tint(hex, amount) {
+    var n = parseInt(hex.slice(1), 16);
+    var r = n >> 16, g = (n >> 8) & 255, b = n & 255;
+    function mix(c) { return Math.round(c + (255 - c) * amount); }
+    return 'rgb(' + mix(r) + ',' + mix(g) + ',' + mix(b) + ')';
+  }
+
+  function radialText(label, rMid, aMid, size, weight, fill) {
+    var a = ((aMid % 360) + 360) % 360;
+    var flip = a > 90 && a < 270;
+    var t = el('text', {
+      transform: 'rotate(' + aMid.toFixed(2) + ') translate(' + rMid + ' 0)' + (flip ? ' rotate(180)' : ''),
+      'text-anchor': 'middle',
+      'dominant-baseline': 'central',
+      'font-size': size,
+      'font-weight': weight,
+      fill: fill
+    });
+    t.textContent = label;
+    return t;
+  }
+
+  function makeSeg(g, core, word, a1, a2) {
+    var isCore = word === null;
+    var name = isCore ? core.label : word;
+    var seg = el('g', { 'class': 'seg', tabindex: '0', role: 'button' });
+    var title = el('title', {});
+    title.textContent = isCore ? core.label : word + ' (' + core.label + ')';
+    seg.appendChild(title);
+    var path = el('path', { d: ringPath(isCore ? R0 : R1, isCore ? R1 : R2, a1, a2), stroke: '#fff', 'stroke-width': 1.5 });
+    seg.appendChild(path);
+    var rMid = isCore ? (R0 + R1) / 2 + 4 : (R1 + R2) / 2;
+    var size = isCore ? (name.length > 11 ? 11.5 : 13) : 11.5;
+    var txt = radialText(name, rMid, (a1 + a2) / 2, size, isCore ? 700 : 500, '#000');
+    seg.appendChild(txt);
+
+    seg._paint = function () {
+      var on = findFeeling(core.key, name) > -1;
+      seg.setAttribute('aria-pressed', on ? 'true' : 'false');
+      if (isCore) {
+        path.setAttribute('fill', on ? core.color : tint(core.color, 0.12));
+        path.setAttribute('stroke', on ? '#12313d' : '#fff');
+        path.setAttribute('stroke-width', on ? 3 : 1.5);
+        txt.setAttribute('fill', core.ink);
+        txt.textContent = (on ? '✓ ' : '') + name;
+      } else {
+        path.setAttribute('fill', on ? core.color : tint(core.color, 0.62));
+        path.setAttribute('stroke', on ? '#12313d' : '#fff');
+        path.setAttribute('stroke-width', on ? 2.5 : 1.5);
+        txt.setAttribute('fill', on ? core.ink : '#1d2b33');
+        txt.setAttribute('font-weight', on ? 700 : 500);
+      }
+    };
+
+    function toggle() {
+      var i = findFeeling(core.key, name);
+      if (i > -1) state.feelings.splice(i, 1);
+      else state.feelings.push({ core: core.key, word: name, intensity: 5 });
+      saveState();
+      renderAll();
+    }
+
+    seg.addEventListener('click', toggle);
+    seg.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+    g.appendChild(seg);
+    segs.push(seg);
+  }
+
+  var segs = [];
+  var outlineG = null;
+
+  function buildWheel() {
+    var svg = document.getElementById('wheelSvg');
+    var span = 180 / 6;
+    var outerG = el('g', {});
+    var coreG = el('g', {});
+    var pos = CORES.filter(function (c) { return c.side === 'pos'; });
+    var neg = CORES.filter(function (c) { return c.side === 'neg'; });
+
+    function place(list, start) {
+      list.forEach(function (core, i) {
+        var a1 = start + i * span, a2 = a1 + span;
+        makeSeg(coreG, core, null, a1, a2);
+        var w = span / core.words.length;
+        core.words.forEach(function (word, j) {
+          makeSeg(outerG, core, word, a1 + j * w, a1 + (j + 1) * w);
+        });
+      });
+    }
+
+    place(pos, 180);
+    place(neg, 0);
+    svg.appendChild(outerG);
+    svg.appendChild(coreG);
+    outlineG = el('g', { 'pointer-events': 'none' });
+    svg.appendChild(outlineG);
+
+    // Center
+    svg.appendChild(el('circle', { r: R0, fill: '#fbf8f2', stroke: '#fff', 'stroke-width': 2 }));
+    svg.appendChild(el('line', { x1: -R0 + 6, y1: 0, x2: R0 - 6, y2: 0, stroke: '#d8d2c4', 'stroke-width': 1.2 }));
+    [['BEHAGELIGE', -24, '#9a5a12'], ['FØLELSER', -11, '#9a5a12'], ['UBEHAGELIGE', 14, '#3d3f8c'], ['FØLELSER', 27, '#3d3f8c']]
+      .forEach(function (l) {
+        var t = el('text', { x: 0, y: l[1], 'text-anchor': 'middle', 'dominant-baseline': 'central', 'font-size': 9.5, 'font-weight': 800, fill: l[2], 'letter-spacing': '0.04em' });
+        t.textContent = l[0];
+        svg.appendChild(t);
+      });
+  }
+
+  function paintWheel() {
+    segs.forEach(function (s) { s._paint(); });
+    // Outlines of selected segments sit in their own layer so neighbours never cover them.
+    outlineG.innerHTML = '';
+    segs.forEach(function (s) {
+      if (s.getAttribute('aria-pressed') !== 'true') return;
+      var d = s.querySelector('path').getAttribute('d');
+      outlineG.appendChild(el('path', { d: d, fill: 'none', stroke: '#12313d', 'stroke-width': 2.5, 'stroke-linejoin': 'round' }));
+    });
+  }
+
+  // ---------- selected list ----------
+  function intensityWord(v) {
+    if (v <= 2) return 'svak';
+    if (v <= 4) return 'merkbar';
+    if (v <= 6) return 'tydelig';
+    if (v <= 8) return 'sterk';
+    return 'svært sterk';
+  }
+
+  function renderSelected() {
+    var box = document.getElementById('selectedList');
+    box.innerHTML = '';
+    if (!state.feelings.length) {
+      var p = document.createElement('p');
+      p.className = 'empty-note';
+      p.textContent = 'Ingen følelser valgt ennå. Trykk på hjulet over for å velge.';
+      box.appendChild(p);
+      return;
+    }
+    state.feelings.forEach(function (f, idx) {
+      var core = coreByKey(f.core);
+      var item = document.createElement('div');
+      item.className = 'feel-item';
+      var id = 'int-' + idx;
+
+      var dot = document.createElement('span');
+      dot.className = 'feel-dot';
+      dot.style.background = core.color;
+
+      var name = document.createElement('label');
+      name.className = 'feel-name';
+      name.setAttribute('for', id);
+      name.textContent = f.word + ' ';
+      if (f.word !== core.label) {
+        var sm = document.createElement('small');
+        sm.textContent = '· ' + core.label;
+        name.appendChild(sm);
+      }
+
+      var val = document.createElement('span');
+      val.className = 'feel-val';
+      val.textContent = f.intensity + '/10';
+
+      var rm = document.createElement('button');
+      rm.type = 'button';
+      rm.className = 'feel-remove';
+      rm.setAttribute('aria-label', 'Fjern ' + f.word);
+      rm.textContent = '×';
+      rm.addEventListener('click', function () {
+        state.feelings.splice(idx, 1);
+        saveState();
+        renderAll();
+      });
+
+      var range = document.createElement('input');
+      range.type = 'range';
+      range.id = id;
+      range.min = 1; range.max = 10; range.step = 1;
+      range.value = f.intensity;
+      range.setAttribute('aria-valuetext', f.intensity + ' av 10, ' + intensityWord(f.intensity));
+      range.addEventListener('input', function () {
+        f.intensity = parseInt(range.value, 10);
+        val.textContent = f.intensity + '/10';
+        range.setAttribute('aria-valuetext', f.intensity + ' av 10, ' + intensityWord(f.intensity));
+        saveState();
+      });
+
+      var ends = document.createElement('div');
+      ends.className = 'scale-ends';
+      ends.innerHTML = '<span>1 svak</span><span>10 svært sterk</span>';
+
+      item.appendChild(dot);
+      item.appendChild(name);
+      item.appendChild(val);
+      item.appendChild(rm);
+      item.appendChild(range);
+      item.appendChild(ends);
+      box.appendChild(item);
+    });
+  }
+
+  // ---------- insights ----------
+  function renderInsights() {
+    var box = document.getElementById('insights');
+    box.innerHTML = '';
+    var cores = selectedCores();
+    if (!cores.length) {
+      var p = document.createElement('p');
+      p.className = 'empty-note';
+      p.textContent = 'Velg en eller flere følelser i steg 1, så dukker det opp noen tanker om hva de kan handle om.';
+      box.appendChild(p);
+      return;
+    }
+    cores.forEach(function (core) {
+      var card = document.createElement('div');
+      card.className = 'insight';
+      card.style.setProperty('--c', core.color);
+      var h = document.createElement('h3');
+      h.textContent = core.label + (core.side === 'pos' ? ' (behagelig)' : ' (ubehagelig)');
+      var t = document.createElement('p');
+      t.textContent = 'Kan handle om: ' + core.tells;
+      var a = document.createElement('p');
+      a.className = 'ask';
+      a.textContent = core.ask;
+      card.appendChild(h);
+      card.appendChild(t);
+      card.appendChild(a);
+      box.appendChild(card);
+    });
+  }
+
+  // ---------- chips ----------
+  function chipOptions(group) {
+    if (group !== 'grep') return CHIPS[group];
+    var list = [];
+    selectedCores().forEach(function (c) {
+      c.steps.forEach(function (s) { if (list.indexOf(s) < 0) list.push(s); });
+    });
+    // Keep earlier picks visible even if their feeling was removed.
+    state.chips.grep.forEach(function (s) { if (list.indexOf(s) < 0) list.push(s); });
+    if (!list.length) list = ['Ta en pause på fem minutter uten skjerm', 'Gå en kort tur ute', 'Legg deg en halvtime tidligere i kveld', 'Snakk med noen du stoler på'];
+    return list;
+  }
+
+  function suggestedNeeds() {
+    var s = {};
+    selectedCores().forEach(function (c) { c.needs.forEach(function (n) { s[n] = true; }); });
+    return s;
+  }
+
+  function renderChips() {
+    var sugg = suggestedNeeds();
+    document.querySelectorAll('.chip-group[data-group]').forEach(function (wrap) {
+      var group = wrap.getAttribute('data-group');
+      wrap.innerHTML = '';
+      chipOptions(group).forEach(function (label) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'chip' + (group === 'behov' && sugg[label] ? ' suggested' : '');
+        b.textContent = label;
+        var on = state.chips[group].indexOf(label) > -1;
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        b.addEventListener('click', function () {
+          var arr = state.chips[group];
+          var i = arr.indexOf(label);
+          if (i > -1) arr.splice(i, 1); else arr.push(label);
+          b.setAttribute('aria-pressed', i > -1 ? 'false' : 'true');
+          if (group === 'grep' && i < 0) {
+            var ta = document.getElementById('mitt-grep');
+            if (!ta.value.trim()) ta.value = label;
+          }
+          saveState();
+        });
+        wrap.appendChild(b);
+      });
+    });
+  }
+
+  // ---------- confidence ----------
+  function renderTro() {
+    var r = document.getElementById('tro');
+    r.value = state.tro;
+    document.getElementById('troVal').textContent = state.tro;
+    var hint;
+    if (state.tro <= 3) hint = 'Kanskje grepet kan gjøres enda mindre? Hva skal til for at tallet blir ett eller to høyere?';
+    else if (state.tro <= 6) hint = 'Hvorfor ' + state.tro + ' og ikke lavere? Hva skal til for å komme ett tall høyere?';
+    else hint = 'Godt utgangspunkt. Hva kan stå i veien, og hva gjør du da?';
+    document.getElementById('troHint').textContent = hint;
+  }
+
+  // ---------- text summary ----------
+  function formatDate(d) {
+    return d.toLocaleDateString('no-NO', { day: 'numeric', month: 'short', year: 'numeric' }) +
+      ' kl. ' + d.toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function feelingsText(list) {
+    return list.map(function (f) {
+      var core = coreByKey(f.core);
+      return f.word + (core && f.word !== core.label ? ' (' + core.label + ')' : '') + ' ' + f.intensity + '/10';
+    }).join(', ');
+  }
+
+  function val(id) { return document.getElementById(id).value.trim() || '-'; }
+
+  function buildEntryText() {
+    var lines = [];
+    lines.push('Følelser: ' + (feelingsText(state.feelings) || '-'));
+    lines.push('Situasjon: ' + val('situasjon'));
+    lines.push('I kroppen: ' + (state.chips.kropp.join(', ') || '-'));
+    lines.push('Tanker: ' + val('tanker'));
+    lines.push('Levevaner: ' + ([].concat(state.chips.vaner, document.getElementById('vaner-tekst').value.trim() ? [document.getElementById('vaner-tekst').value.trim()] : []).join(', ') || '-'));
+    lines.push('Det jeg trenger: ' + (state.chips.behov.join(', ') || '-'));
+    lines.push('Har hjulpet tidligere: ' + val('tidligere'));
+    lines.push('Mitt grep: ' + val('mitt-grep'));
+    lines.push('Hvor sikker jeg er på å få det til: ' + state.tro + '/10');
+    return lines.join('\n');
+  }
+
+  function buildSummaryText() {
+    var lines = ['Følelseshjulet', formatDate(new Date()), '', buildEntryText()];
+    var log = readJSON(LOG_KEY, []);
+    if (log.length) {
+      lines.push('', '--- Min følelseslogg (' + log.length + ' registreringer) ---');
+      var top = topFeelings(log, 6);
+      if (top.length) lines.push('Går oftest igjen: ' + top.map(function (t) { return t[0] + ' (' + t[1] + ')'; }).join(', '));
+      log.forEach(function (e) {
+        lines.push('', formatDate(new Date(e.date)));
+        lines.push(e.text);
+      });
+    }
+    return lines.join('\n');
+  }
+
+  // ---------- log ----------
+  function topFeelings(log, n) {
+    var count = {};
+    log.forEach(function (e) {
+      (e.feelings || []).forEach(function (f) { count[f.word] = (count[f.word] || 0) + 1; });
+    });
+    return Object.keys(count).map(function (k) { return [k, count[k]]; })
+      .sort(function (a, b) { return b[1] - a[1]; }).slice(0, n);
+  }
+
+  function renderLog() {
+    var box = document.getElementById('logContent');
+    var log = readJSON(LOG_KEY, []);
+    box.innerHTML = '';
+    if (!log.length) {
+      var p = document.createElement('p');
+      p.className = 'empty-note';
+      p.textContent = 'Loggen er tom. Når du trykker «Lagre i loggen», havner registreringen her med dato, slik at du kan se mønstre over tid.';
+      box.appendChild(p);
+      return;
+    }
+    var top = topFeelings(log, 6);
+    if (top.length) {
+      var lead = document.createElement('p');
+      lead.textContent = 'Følelser som går oftest igjen:';
+      box.appendChild(lead);
+      var pat = document.createElement('div');
+      pat.className = 'pattern';
+      top.forEach(function (t) {
+        var s = document.createElement('span');
+        s.textContent = t[0] + ' × ' + t[1];
+        pat.appendChild(s);
+      });
+      box.appendChild(pat);
+    }
+    var ul = document.createElement('ul');
+    ul.className = 'log-list';
+    log.slice().reverse().forEach(function (e) {
+      var li = document.createElement('li');
+      var d = document.createElement('span');
+      d.className = 'log-date';
+      d.textContent = formatDate(new Date(e.date));
+      var del = document.createElement('button');
+      del.type = 'button';
+      del.className = 'feel-remove';
+      del.setAttribute('aria-label', 'Slett registreringen');
+      del.textContent = '×';
+      del.addEventListener('click', function () {
+        if (!confirm('Slette denne registreringen fra loggen?')) return;
+        var cur = readJSON(LOG_KEY, []).filter(function (x) { return x.date !== e.date; });
+        writeJSON(LOG_KEY, cur);
+        renderLog();
+      });
+      var body = document.createElement('div');
+      body.className = 'log-body';
+      body.textContent = 'Følelser: ' + (feelingsText(e.feelings || []) || '-') + '. Grep: ' + (e.grep || '-');
+      li.appendChild(d);
+      li.appendChild(del);
+      li.appendChild(body);
+      ul.appendChild(li);
+    });
+    box.appendChild(ul);
+  }
+
+  function clearForm() {
+    state = { feelings: [], chips: { kropp: [], vaner: [], behov: [], grep: [] }, tro: 5, text: {} };
+    document.querySelectorAll('textarea[data-key]').forEach(function (t) { t.value = ''; });
+    try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    renderAll();
+  }
+
+  function toast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { t.textContent = ''; }, 5000);
+  }
+
+  function saveToLog() {
+    saveState();
+    if (!state.feelings.length && val('situasjon') === '-' && val('mitt-grep') === '-') {
+      toast('Velg minst én følelse eller skriv noe før du lagrer.');
+      return;
+    }
+    var log = readJSON(LOG_KEY, []);
+    log.push({
+      date: new Date().toISOString(),
+      feelings: state.feelings.slice(),
+      grep: document.getElementById('mitt-grep').value.trim(),
+      text: buildEntryText()
+    });
+    writeJSON(LOG_KEY, log);
+    clearForm();
+    renderLog();
+    toast('Lagret i loggen. Skjemaet er klart for neste gang.');
+    document.getElementById('logSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function sendEmail() {
+    saveState();
+    var subject = encodeURIComponent('Følelseshjulet');
+    var body = encodeURIComponent(buildSummaryText());
+    window.location.href = 'mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body;
+  }
+
+  function downloadText() {
+    saveState();
+    var blob = new Blob([buildSummaryText()], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'folelseshjulet.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function renderAll() {
+    paintWheel();
+    renderSelected();
+    renderInsights();
+    renderChips();
+    renderTro();
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    buildWheel();
+    loadState();
+    renderAll();
+    renderLog();
+
+    document.body.addEventListener('input', function (e) {
+      if (e.target.tagName === 'TEXTAREA' && e.target.hasAttribute('data-key')) saveState();
+    });
+
+    document.getElementById('tro').addEventListener('input', function (e) {
+      state.tro = parseInt(e.target.value, 10);
+      renderTro();
+      saveState();
+    });
+
+    document.getElementById('resetAll').addEventListener('click', function () {
+      if (!confirm('Nullstille skjemaet? Loggen din blir ikke slettet.')) return;
+      clearForm();
+    });
+
+    document.getElementById('saveLog').addEventListener('click', saveToLog);
+    document.getElementById('sendEmail').addEventListener('click', sendEmail);
+    document.getElementById('downloadText').addEventListener('click', downloadText);
+  });
+})();
+</script>
+
+</body>
+</html>
