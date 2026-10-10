@@ -6,7 +6,7 @@
 <title>Skulder- og nakkeøvelser | Silje Merete SMART Helseveiledning</title>
 <link rel="icon" href="images/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-<meta name="description" content="Kort øvelsesserie for skuldre og nakke du kan gjøre rett fra stolen, med styrt tidtaker gjennom hver øvelse.">
+<meta name="description" content="Øvelser for stiv nakke, stressnakke og stive skuldre: en kort pauseserie fra stolen med tidtaker, og styrkeøvelser med strikk og antall repetisjoner.">
 <style>
   :root {
     --bg: #f0f7f9;
@@ -251,6 +251,111 @@
     width: 46px;
     height: 46px;
   }
+
+  .plain-list {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+
+  .plain-list li {
+    margin: 0 0 0.5rem;
+  }
+
+  .plain-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .part-label {
+    display: inline-block;
+    margin: 0 0 0.5rem;
+    padding: 0.15rem 0.7rem;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  .exercise {
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .exercise h3 {
+    margin: 0 0 0.4rem;
+    font-size: 1.12rem;
+    color: var(--ink);
+  }
+
+  .exercise img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin: 0.75rem 0;
+  }
+
+  .exercise img.portrait {
+    max-width: 420px;
+    margin-inline: auto;
+  }
+
+  .dose {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.5rem 0 0.25rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .dose li {
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    border-radius: 999px;
+    padding: 0.2rem 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .exercise p {
+    margin: 0.5rem 0 0;
+  }
+
+  .exercise .helps {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .extra-images summary {
+    cursor: pointer;
+    color: var(--accent-dark);
+    font-weight: 600;
+    margin-top: 0.75rem;
+  }
+
+  .week-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+
+  .week-table th,
+  .week-table td {
+    text-align: left;
+    padding: 0.5rem 0.4rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .week-table th {
+    color: var(--accent-dark);
+    white-space: nowrap;
+  }
 </style>
 </head>
 <body>
@@ -259,15 +364,26 @@
   <div class="wrap">
     <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
     <h1>Skulder- og nakkeøvelser</h1>
-    <p>En kort serie du kan gjøre rett fra stolen. Fin å bruke som en pause i løpet av en arbeidsdag med mye stillesitting.</p>
+    <p>For deg med stiv nakke, stressnakke eller stive skuldre: en kort pauseserie du kan gjøre rett fra stolen, og styrkeøvelser med strikk som gjør skuldre og øvre rygg sterkere over tid.</p>
   </div>
 </section>
 
 <div class="wrap">
 
   <section class="card">
-    <h2>Øvelsene i sekvensen</h2>
-    <p class="desc">Sitt godt i stolen med rak rygg. Timeren under leder deg gjennom alle øvelsene etter tur, totalt ca. 3 minutter.</p>
+    <h2>Hvorfor blir nakken og skuldrene stive?</h2>
+    <ul class="plain-list">
+      <li><strong>Stress:</strong> når vi er anspente, trekker vi ofte skuldrene opp mot ørene og puster høyt oppe i brystet. Musklene øverst på skuldrene og i nakken jobber da hele dagen uten pause.</li>
+      <li><strong>Lange perioder i samme stilling:</strong> foran PC eller mobil glir hodet fremover og skuldrene ruller frem. Det gir mer belastning på nakken og mindre bevegelse.</li>
+      <li><strong>Svake muskler rundt skulderbladene:</strong> da tar nakken og musklene øverst på skuldrene en større del av jobben.</li>
+    </ul>
+    <p style="margin: 1rem 0 0;"><strong>Dette hjelper mest:</strong> bevegelse ofte (små pauser i løpet av dagen), styrketrening for skuldre og øvre rygg 2–3 ganger i uka, og rolig pust for å senke skuldrene når du er stresset. Prøv gjerne <a href="pusteovelser.html">pusteøvelsene</a> sammen med pauseserien.</p>
+  </section>
+
+  <section class="card">
+    <span class="part-label">Del 1 · Hver dag</span>
+    <h2>Pauseserie fra stolen</h2>
+    <p class="desc">Sitt godt i stolen med rak rygg. Timeren under leder deg gjennom alle øvelsene etter tur, totalt ca. 3 minutter. Gjør serien 1–3 ganger om dagen, gjerne når du kjenner at skuldrene kryper opp.</p>
     <ol class="step-list" id="stepList"></ol>
   </section>
 
@@ -288,6 +404,81 @@
       <button type="button" id="timerNext" class="secondary">Neste</button>
       <button type="button" id="timerReset" class="secondary">Nullstill</button>
     </div>
+  </section>
+
+  <section class="card">
+    <span class="part-label">Del 2 · 2–3 ganger i uka</span>
+    <h2>Styrkeøvelser for skuldre og nakke</h2>
+    <p class="desc">Sterke muskler rundt skulderbladene og i øvre rygg avlaster nakken. Du trenger bare en treningsstrikk og et feste, for eksempel et dørfeste hjemme eller et stativ på treningssenteret.</p>
+    <ul class="plain-list">
+      <li><strong>Hvor ofte:</strong> 2–3 ganger i uka, med minst én hviledag imellom.</li>
+      <li><strong>Hvor tungt:</strong> velg en strikk der de siste 2–3 repetisjonene kjennes tunge, men du fortsatt har god teknikk.</li>
+      <li><strong>Slik gjør du det:</strong> ta øvelse 1–5 etter hverandre, med repetisjonene som står under hver øvelse. Det tar ca. 6–7 minutter. Ekstraøvelsen til slutt er valgfri.</li>
+    </ul>
+
+    <div class="exercise">
+      <h3>1. Roing med strikk</h3>
+      <ul class="dose"><li>10–15 repetisjoner</li></ul>
+      <img src="images/skulder-roing-strikk.jpg" width="1200" height="900" loading="lazy" alt="Roing med strikk på treningssenter og hjemme: start med armene strake fremover, trekk deretter hendene inn mot brystet.">
+      <p>Fest strikken i brysthøyde. Stå med armene strake fremover, og trekk hendene inn mot brystkassen mens albuene går bakover langs kroppen. Klem skulderbladene sammen og ned, hold et lite øyeblikk, og slipp rolig tilbake.</p>
+      <p class="helps">Styrker musklene mellom skulderbladene og gir bedre holdning. Hold skuldrene langt fra ørene hele veien.</p>
+    </div>
+
+    <div class="exercise">
+      <h3>2. Face pull / strikkdrag mot ansiktet</h3>
+      <ul class="dose"><li>12–15 repetisjoner</li></ul>
+      <img src="images/skulder-facepull.jpg" width="1200" height="900" loading="lazy" alt="Face pull i kabelapparat på treningssenter og med strikk i dørfeste hjemme: hendene trekkes mot ansiktet med albuene høyt.">
+      <p>Fest strikken (eller tauet i kabelen) litt over hodehøyde. Trekk hendene mot ansiktet, med albuene høyt og ut til siden, til hendene er ved ørene. Før hendene litt bakover til slutt, og gå rolig tilbake.</p>
+      <p class="helps">Trener bakside skulder og musklene som holder skulderbladene på plass. En av de beste øvelsene for deg som sitter mye foroverbøyd.</p>
+    </div>
+
+    <div class="exercise">
+      <h3>3. Stående skulderrotasjon ut med strikk</h3>
+      <ul class="dose"><li>12–15 repetisjoner per arm</li></ul>
+      <img src="images/skulder-rotasjon-ut.jpg" width="1200" height="900" loading="lazy" alt="Stående skulderrotasjon ut med strikk: strikken går på tvers foran magen, og hånden dreies ut til siden, bort fra festet, med albuen inntil kroppen.">
+      <p>Fest strikken i albuehøyde og stå med siden til festet. Hold strikken i hånden lengst unna festet, slik at strikken går på tvers foran magen. Hold albuen inntil siden med 90 grader bøy. Drei hånden rolig ut til siden, bort fra festet, og slipp kontrollert tilbake. Bytt side.</p>
+      <p class="helps">Styrker de små musklene bak på skulderen (rotatormansjetten), som holder skulderleddet stabilt og trekker skuldrene tilbake. Bruk en lett strikk. Rull gjerne et lite håndkle mellom albuen og kroppen så albuen holder seg på plass.</p>
+    </div>
+
+    <div class="exercise">
+      <h3>4. Skuldertrekk med manualer eller strikk</h3>
+      <ul class="dose"><li>10–12 repetisjoner</li></ul>
+      <img src="images/skulder-skuldertrekk.jpg" width="1200" height="900" loading="lazy" alt="Skuldertrekk med manualer på treningssenter og med strikk under føttene hjemme: skuldrene løftes rett opp mot ørene.">
+      <p>Stå med en manual i hver hånd, eller stå på strikken og hold én ende i hver hånd. Løft skuldrene rett opp mot ørene, hold et lite øyeblikk, og senk dem rolig helt ned. Armene er strake hele tiden, og du ruller ikke skuldrene.</p>
+      <p class="helps">Styrker musklene øverst på skuldrene, de som ofte er stive og vonde ved stressnakke. Når de blir sterkere, tåler de belastningen gjennom dagen bedre. Senk skuldrene ekstra langsomt.</p>
+    </div>
+
+    <div class="exercise">
+      <h3>5. Hakeinntrekk</h3>
+      <ul class="dose"><li>10 repetisjoner</li><li>hold 3–5 sek</li></ul>
+      <img src="images/skulder-hakeinntrekk.jpg" width="1200" height="900" loading="lazy" alt="Hakeinntrekk sett fra siden: haken trekkes rett bakover som om du lager en dobbelthake, uten å nikke opp eller ned.">
+      <p>Sitt eller stå med rett rygg og avslappede skuldre, og se rett frem. Trekk haken rolig rett bakover, som om du lager en dobbelthake. Hold 3–5 sekunder og slipp rolig av. Ikke nikk opp eller ned, bevegelsen går rett bakover.</p>
+      <p class="helps">Styrker de dype musklene foran i nakken og motvirker at hodet glir fremover. Du kan også gjøre den liggende på ryggen med hodet mot gulvet, eller flere ganger i løpet av dagen.</p>
+    </div>
+
+    <h3 style="margin: 2rem 0 0.25rem; color: var(--accent-dark);">Ekstra, for deg som vil</h3>
+    <p class="desc" style="margin: 0;">Har du tid og overskudd, kan du avslutte med denne. Den trener armene og gir bedre kontroll når du løfter over hodet.</p>
+
+    <div class="exercise">
+      <h3>Enarms tricepspress over hodet med strikk</h3>
+      <ul class="dose"><li>10–12 repetisjoner per arm</li></ul>
+      <img class="portrait" src="images/skulder-triceps-strikk.jpg" width="900" height="1125" loading="lazy" alt="Enarms tricepspress over hodet med strikk: start med hånden bak hodet og press rett opp, med trinnvis forklaring og tips.">
+      <p>Stå på strikken med den ene foten og hold den andre enden i hånden på samme side. Før hånden opp bak hodet med albuen pekende opp. Press hånden rett opp til armen er nesten strak, og senk rolig ned igjen. Gjør like mange på hver side.</p>
+      <p class="helps">Trener baksiden av armen. Kjenner du at det klemmer i skulderen eller nakken, bruk lettere strikk eller hopp over øvelsen.</p>
+      <details class="extra-images">
+        <summary>Se hva øvelsen trener</summary>
+        <img class="portrait" src="images/skulder-triceps-muskler.jpg" width="900" height="1125" loading="lazy" alt="Hva tricepspress over hodet trener: triceps som hovedmuskel, bakside skulder, skulderstabilisatorer og kjerne.">
+      </details>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Forslag til uke</h2>
+    <table class="week-table">
+      <tr><th>Hver dag</th><td>Pauseserien fra stolen 1–3 ganger, og et par minutter med rolig pust når du er stresset.</td></tr>
+      <tr><th>2–3 dager</th><td>Styrkeøvelsene i del 2. Tar ca. 6–7 minutter, og passer fint etter en gåtur eller i en vanlig treningsøkt.</td></tr>
+      <tr><th>Etter 4–6 uker</th><td>Bytt til en litt tyngre strikk når 15 repetisjoner kjennes lett.</td></tr>
+    </table>
   </section>
 
   <section class="card caution-card">
