@@ -369,6 +369,30 @@
   .swaps li > .from, .swaps li > .to, .swaps li > .arrow { display: inline; }
   .swaps li:not(:has(label)) { padding: 0.6rem 0; }
 
+  .recipe-more { margin-top: 0.75rem; }
+  .recipe-more > summary {
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+  }
+  .recipe-more > summary::-webkit-details-marker { display: none; }
+  .recipe-more > summary::after { content: "▾"; }
+  .recipe-more[open] > summary::after { content: "▴"; }
+  .recipe-more > summary:hover { background: var(--accent-dark); }
+  .recipe-more .hide { display: none; }
+  .recipe-more[open] .show { display: none; }
+  .recipe-more[open] .hide { display: inline; }
+  .recipe-more[open] > summary { margin-bottom: 0.5rem; }
+  .recipe-card-toggle { cursor: pointer; }
+
   @media (max-width: 560px) {
     .hero h1 { font-size: 1.5rem; }
   }
@@ -430,6 +454,9 @@
       <span>1 porsjon</span>
       <span>2 min + natten over</span>
     </div>
+    <details class="recipe-more">
+      <summary><span class="show">Vis hele oppskriften</span><span class="hide">Skjul oppskriften</span></summary>
+      <div class="recipe-body">
 
     <h3>Dette trenger du</h3>
     <ul class="ingredients">
@@ -473,6 +500,8 @@
     <p><strong>Valget av drikk utgjør den største forskjellen.</strong> Havredrikk inneholder naturlig sukker fra havren, rundt 15–17 g karbohydrater i 2,5 dl. Usøtet mandeldrikk har nesten ingen karbohydrater. Vil du spise mindre karbohydrater, kan du bruke usøtet mandeldrikk eller en blanding av de to.</p>
     <p class="small-note">Tallene er anslag basert på 2,5 ss chiafrø, 1 ss linfrø, 1 ss loppefrøskall, 3,5 ss naturell skyr eller proteinyoghurt, 2,5 dl drikk og 2,5 ss blåbær, og varierer med produktene du bruker. Har du ikke spist så mye fiber før, kan det være lurt å starte med litt mindre loppefrø og chia, og å drikke godt med vann gjennom dagen.</p>
     <p class="small-note"><strong>Bruker du medisiner?</strong> Loppefrøskall kan påvirke opptaket av medisiner og kosttilskudd. Ta dem derfor med minst 2 timers avstand fra grøten, eller snakk med lege eller apotek. Produsenten anbefaler ikke loppefrøskall som kosttilskudd til gravide eller barn under 11 år. Følg rådene på pakningen du bruker.</p>
+      </div>
+    </details>
   </section>
 
   <section class="card-section">
@@ -507,6 +536,9 @@
       <span>2 små brød</span>
       <span>Ca. 15 min + 50–65 min i ovnen</span>
     </div>
+    <details class="recipe-more">
+      <summary><span class="show">Vis hele oppskriften</span><span class="hide">Skjul oppskriften</span></summary>
+      <div class="recipe-body">
 
     <h3>Nøtter og frø</h3>
     <ul class="ingredients">
@@ -582,6 +614,8 @@
     <p class="small-note">Fenalår, spekemat og røkt fisk inneholder en del salt, så varier gjerne med fersk fisk, egg og grønt.</p>
 
     <p class="small-note">Oppskriften er inspirert av et frøbrød fra Thor Foseid, og tilpasset med cottage cheese i stedet for revet ost, lett crème fraîche, hasselnøtter, andre mengder nøtter og frø, og valgfri søtning.</p>
+      </div>
+    </details>
   </section>
 
   <section class="card-section">
@@ -611,6 +645,9 @@
       <span>Tilbehør til 2 middager</span>
       <span>Ca. 30 min</span>
     </div>
+    <details class="recipe-more">
+      <summary><span class="show">Vis hele oppskriften</span><span class="hide">Skjul oppskriften</span></summary>
+      <div class="recipe-body">
 
     <h3>Dette trenger du</h3>
     <ul class="ingredients">
@@ -659,6 +696,8 @@
       <li>Bytt ut deler av grønnsakene med det du har, for eksempel squash, kålrot eller gulrot.</li>
       <li>Rør inn hakket persille eller gressløk for mer smak og farge.</li>
     </ul>
+      </div>
+    </details>
   </section>
 
   <section class="card-section">
@@ -840,6 +879,26 @@
   <strong>Du trenger ikke gjøre det alene.</strong>
 </footer>
 
+<script>
+  (function () {
+    // Gjør overskrift og bilde klikkbare, og åpne oppskriften når man følger en lenke til den
+    document.querySelectorAll('details.recipe-more').forEach(function (d) {
+      var section = d.closest('section');
+      section.querySelectorAll(':scope > h2, :scope > img').forEach(function (el) {
+        el.classList.add('recipe-card-toggle');
+        el.addEventListener('click', function () { d.open = !d.open; });
+      });
+    });
+    function openFromHash() {
+      if (!location.hash) return;
+      var target = document.getElementById(location.hash.slice(1));
+      var d = target && target.querySelector('details.recipe-more');
+      if (d) d.open = true;
+    }
+    window.addEventListener('hashchange', openFromHash);
+    openFromHash();
+  })();
+</script>
 <script>
   (function () {
     var KEY = 'lavkarbo-intro-bytter';
