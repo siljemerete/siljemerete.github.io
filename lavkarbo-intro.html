@@ -393,6 +393,20 @@
   .recipe-more[open] > summary { margin-bottom: 0.5rem; }
   .recipe-card-toggle { cursor: pointer; }
 
+  .img-pair {
+    display: grid;
+    grid-template-columns: 16fr 9fr;
+    gap: 0.6rem;
+    margin: 0.25rem 0 1rem;
+    align-items: start;
+  }
+  .img-pair img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+  }
+
   @media (max-width: 560px) {
     .hero h1 { font-size: 1.5rem; }
   }
@@ -536,11 +550,14 @@
 
   <section class="card-section" id="lavkarbobrod">
     <h2>🍞 Siljes lavkarbobrød</h2>
-    <img class="wide-img" src="images/siljes-lavkarbobrod.jpg" width="750" height="1000" loading="lazy" alt="Hjemmebakt lavkarbobrød med sesamfrø på toppen og en skive som viser nøtter og frø inni, på et skjærebrett">
+    <div class="img-pair">
+      <img src="images/siljes-lavkarbobrod-helt.jpg" width="1000" height="750" loading="lazy" alt="Helt, hjemmebakt lavkarbobrød med sesamfrø på toppen, på et skjærebrett">
+      <img src="images/siljes-lavkarbobrod.jpg" width="750" height="1000" loading="lazy" alt="Lavkarbobrødet skåret opp, med en skive som viser nøtter og frø inni">
+    </div>
     <p>Et fiberrikt nøtte- og frøbrød med cottage cheese, uten mel og korn. Det metter godt, har svært lite karbohydrater og er like godt til frokost som til kveldsmat. Brødet trenger verken elting eller heving: du bare blander og steker.</p>
     <div class="recipe-meta">
-      <span>2 små brød</span>
-      <span>Ca. 15 min + 50–65 min i ovnen</span>
+      <span>1 brød</span>
+      <span>Ca. 15 min + 60–75 min i ovnen</span>
     </div>
     <details class="recipe-more">
       <summary><span class="show">Vis hele oppskriften</span><span class="hide">Skjul oppskriften</span></summary>
@@ -572,18 +589,18 @@
 
     <h3>Slik gjør du</h3>
     <ol class="steps">
-      <li><strong>Forbered:</strong> Sett ovnen på 190 °C over- og undervarme. Kle to små brødformer med bakepapir.</li>
+      <li><strong>Forbered:</strong> Sett ovnen på 190 °C over- og undervarme. Kle en brødform (ca. 1,5 liter) med bakepapir.</li>
       <li><strong>Hakk nøtter og frø:</strong> Grovhakk nøttene, og kjør eventuelt deler av frøene kort i foodprosessor. La noe være grovt for mer tyggemotstand.</li>
       <li><strong>Bland det tørre:</strong> Bland nøtter og frø med mandelmel, psylliumfrøskall, bakepulver, salt og eventuelt Natreen.</li>
       <li><strong>Tilsett det våte:</strong> Rør inn egg, cottage cheese og lett crème fraîche til en tykk grøt. Spe med litt vann bare hvis røren er for tørr.</li>
       <li><strong>La røren hvile</strong> i 10 minutter, slik at chia, linfrø og psyllium får trukket til seg væske.</li>
-      <li><strong>Fordel i formene:</strong> Press røren lett ned i hjørnene og glatt toppen. Dryss eventuelt over sesamfrø og noen få flak havsalt.</li>
-      <li><strong>Stek</strong> på midterste rille i omtrent 50–65 minutter. Sjekk fra 45–50 minutter. Brødene skal være gjennomstekte i midten, og ca. 94–96 °C i kjernen kan være en pekepinn.</li>
-      <li><strong>Avkjøl helt</strong> på rist, gjerne 1–2 timer, før du skjærer i brødene.</li>
+      <li><strong>Ha røren i formen:</strong> Press den lett ned i hjørnene og glatt toppen. Dryss eventuelt over sesamfrø og noen få flak havsalt.</li>
+      <li><strong>Stek</strong> på midterste rille i omtrent 60–75 minutter. Sjekk fra ca. 55 minutter. Brødet skal være gjennomstekt i midten, og ca. 94–96 °C i kjernen kan være en pekepinn.</li>
+      <li><strong>Avkjøl helt</strong> på rist, gjerne 1–2 timer, før du skjærer i brødet.</li>
     </ol>
 
     <h3>Oppbevaring</h3>
-    <p>Oppbevar brødene i kjøleskapet i 3–4 dager, eller skjær dem i skiver og frys dem ned. Da kan du ta opp én og én skive og riste den. Steketiden avhenger av ovnen og størrelsen på formene.</p>
+    <p>Oppbevar brødet i kjøleskapet i 3–4 dager, eller skjær det i skiver og frys dem ned. Da kan du ta opp én og én skive og riste den. Steketiden avhenger av ovnen og størrelsen på formen. Blir toppen for mørk før brødet er ferdig, kan du legge et ark bakepapir eller aluminiumsfolie løst over.</p>
 
     <h3>Omtrentlig næringsinnhold</h3>
     <table class="facts wrap">
@@ -595,7 +612,7 @@
       <tr><td>Fett</td><td>ca. 28–32 g</td><td>ca. 10–11 g</td></tr>
     </table>
     <p>Til sammenligning har en skive vanlig grovbrød rundt 14–15 g karbohydrater. Fettet kommer i hovedsak fra nøtter og frø, og er for det meste umettet fett, inkludert plantebasert omega-3 fra valnøtter, chia og linfrø.</p>
-    <p class="small-note">Grovt estimat ut fra råvarene og en samlet ferdigvekt på ca. 750 g. Verdiene varierer med produktene og hvor mye fuktighet som fordamper. Vei de ferdigstekte brødene for en mer presis beregning.</p>
+    <p class="small-note">Grovt estimat ut fra råvarene og en ferdigvekt på ca. 750 g. Verdiene varierer med produktene og hvor mye fuktighet som fordamper. Vei det ferdigstekte brødet for en mer presis beregning.</p>
 
     <h3>Forslag til pålegg</h3>
     <p>Brødet har en mild, nøtteaktig smak og passer til det meste. Kombiner gjerne et proteinpålegg med noe grønt:</p>
@@ -905,7 +922,7 @@
     // Gjør overskrift og bilde klikkbare, og åpne oppskriften når man følger en lenke til den
     document.querySelectorAll('details.recipe-more:not([data-inline])').forEach(function (d) {
       var section = d.closest('section');
-      section.querySelectorAll(':scope > h2, :scope > img').forEach(function (el) {
+      section.querySelectorAll(':scope > h2, :scope > img, :scope > .img-pair img').forEach(function (el) {
         el.classList.add('recipe-card-toggle');
         el.addEventListener('click', function () { d.open = !d.open; });
       });
