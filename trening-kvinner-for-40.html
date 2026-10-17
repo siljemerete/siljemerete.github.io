@@ -430,6 +430,54 @@
   .bank-button:hover { background: #87491a; }
   .bank-button:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 2px; }
 
+  .print-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem 1rem;
+    margin: 1.5rem 0 0;
+    padding: 0.9rem 1.1rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .print-box p { margin: 0; flex: 1 1 220px; font-size: 0.9rem; color: var(--muted); }
+  .print-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent-dark);
+    background: var(--card);
+    color: var(--accent-dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+  .print-button:hover { background: var(--accent-soft); }
+  .print-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .print-only { display: none; }
+
+  @media print {
+    @page { margin: 14mm; }
+    body { background: #fff; font-size: 11pt; }
+    .hero { background: none; padding: 0 0 0.5rem; border: 0; text-align: left; }
+    .hero h1 { font-size: 18pt; margin: 0 0 0.25rem; }
+    .hero p { margin: 0; max-width: none; }
+    .page-logo, .print-box, .place-switch, .figure-switch, .equip-button, .bank-button,
+    .home-link, footer.closing, .about-box .chevron { display: none !important; }
+    .print-only { display: block; margin: 0.4rem 0 0; font-size: 10pt; color: #444; }
+    .wrap { max-width: none; padding: 0; }
+    .card, .about-box { box-shadow: none !important; margin: 0.8rem 0 !important; padding: 0.8rem 1rem !important; break-inside: auto; }
+    .card h2, .card h3, .about-box summary { break-after: avoid; }
+    .exercises li, .week li, .meta, .bank-box, .level-note { break-inside: avoid; }
+    .exercises li:nth-child(odd), .meta, .bank-box, .level-note { background: #f3f6f7 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .thumb { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    a { color: inherit !important; text-decoration: none !important; }
+  }
+
   [hidden] { display: none !important; }
 
   @media (max-width: 420px) {
@@ -453,10 +501,16 @@
     <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
     <h1>Trening for kvinner før 40</h1>
     <p>I 20- og 30-årene er det et godt tidspunkt å bygge opp styrke, muskelmasse, kondisjon og gode treningsvaner som kroppen kan ha nytte av senere i livet. Du trenger ikke trene hver dag eller følge et avansert program. Det viktigste er å finne et nivå du kan gjennomføre jevnlig og utvikle gradvis.</p>
+    <p class="print-only"></p>
   </div>
 </section>
 
 <div class="wrap">
+
+  <div class="print-box">
+    <p>Vil du ha opplegget på papir? Velg først det som passer deg på siden, så skrives det ut slik du har valgt.</p>
+    <button type="button" class="print-button" onclick="window.print()"><span aria-hidden="true">🖨</span> Skriv ut</button>
+  </div>
 
   <section class="card message-card">
     <h2>Hvilket nivå skal jeg velge?</h2>
@@ -779,6 +833,38 @@
       e.preventDefault();
       box.open = true;
       box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  })();
+</script>
+
+<script>
+  (function () {
+    var opened = [];
+    function selection() {
+      var parts = [];
+      document.querySelectorAll('.place-switch button[aria-pressed="true"], .figure-switch button[aria-pressed="true"]').forEach(function (b) {
+        var t = b.cloneNode(true);
+        var sub = t.querySelector('span');
+        if (sub) sub.remove();
+        parts.push(t.textContent.trim());
+      });
+      return parts.join(' · ');
+    }
+    window.addEventListener('beforeprint', function () {
+      var el = document.querySelector('.hero .print-only');
+      if (el) {
+        var sel = selection();
+        el.textContent = (sel ? 'Utskrift: ' + sel + ' · ' : '') + location.hostname + location.pathname;
+      }
+      opened = [];
+      document.querySelectorAll('details:not([open])').forEach(function (d) {
+        d.open = true;
+        opened.push(d);
+      });
+    });
+    window.addEventListener('afterprint', function () {
+      opened.forEach(function (d) { d.open = false; });
+      opened = [];
     });
   })();
 </script>
