@@ -271,6 +271,29 @@
     text-align: center;
     margin: 0 0 1rem;
   }
+
+  .read-more { margin: 0.75rem 0 1.5rem; }
+  .read-more > summary {
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+  }
+  .read-more > summary::-webkit-details-marker { display: none; }
+  .read-more > summary::after { content: "▾"; }
+  .read-more[open] > summary::after { content: "▴"; }
+  .read-more > summary:hover { background: var(--accent-dark); }
+  .read-more .hide { display: none; }
+  .read-more[open] .show { display: none; }
+  .read-more[open] .hide { display: inline; }
+  .read-more[open] > summary { margin-bottom: 0.5rem; }
 </style>
 </head>
 <body>
@@ -286,37 +309,40 @@
 <div class="wrap">
 
   <section class="card">
+    <h2>De fem ritene</h2>
+    <p class="desc">Ritene gjøres i rekkefølge, fra Spiralen til Spiret. Følg pusten gjennom hver bevegelse.</p>
+    <img class="sun-wheel-image" src="images/fem-tibetanske-riter.jpg?v=5" alt="De fem ritene illustrert i sirkel rundt en sol: 1 Spiralen, 2 Foldekniven, 3 Buen, 4 Bordet og 5 Spiret.">
+  </section>
+
+  <section class="card">
     <h2>En gammel tradisjon</h2>
     <p>De fem tibetanske ritene er en serie enkle bevegelser som tradisjonelt forbindes med tibetansk kultur og munkenes arbeid med å styrke både kropp og sinn. Ifølge gamle fortellinger skal ritene ha vært praktisert i tibetanske klostre gjennom flere tusen år, men det finnes ingen sikre historiske kilder som bekrefter hvor gamle de egentlig er.</p>
     <p>Tibet har gjennom historien vært preget av et krevende klima og tøffe leveforhold. Her utviklet det seg tradisjoner der fysisk styrke, mental utholdenhet, meditasjon og åndelig utvikling sto sentralt. Helse handlet ikke bare om fravær av sykdom, men også om å skape balanse mellom kropp og sinn og utvikle evnen til å møte livets utfordringer.</p>
 
-    <h3>Jakten på ungdomskilden</h3>
-    <p>De tibetanske ritene ble kjent i Vesten gjennom Peter Kelders bok <em>The Eye of Revelation</em> fra 1939. Her fortelles historien om en eldre britisk offiser som reiser til Tibet på jakt etter hemmeligheten bak munkenes helse og ungdommelighet.</p>
-    <p>Ifølge fortellingen oppdager han fem bestemte bevegelser som skal bidra til å bevare kroppens vitalitet og motvirke aldring.</p>
-    <p>I den tradisjonelle forståelsen handler dette om kroppens energisystem og såkalte virvelstrømmer. Tanken er at disse energiene gradvis svekkes med alderen, og at ritene kan bidra til å opprettholde balansen.</p>
-    <p>Dette er imidlertid en tradisjonell forklaringsmodell, ikke en vitenskapelig dokumentert mekanisme. Likevel er det interessant å se på hvilke fordeler selve bevegelsene kan ha.</p>
+    <details class="read-more">
+      <summary><span class="show">Les mer om historien</span><span class="hide">Vis mindre</span></summary>
+      <h3>Jakten på ungdomskilden</h3>
+      <p>De tibetanske ritene ble kjent i Vesten gjennom Peter Kelders bok <em>The Eye of Revelation</em> fra 1939. Her fortelles historien om en eldre britisk offiser som reiser til Tibet på jakt etter hemmeligheten bak munkenes helse og ungdommelighet.</p>
+      <p>Ifølge fortellingen oppdager han fem bestemte bevegelser som skal bidra til å bevare kroppens vitalitet og motvirke aldring.</p>
+      <p>I den tradisjonelle forståelsen handler dette om kroppens energisystem og såkalte virvelstrømmer. Tanken er at disse energiene gradvis svekkes med alderen, og at ritene kan bidra til å opprettholde balansen.</p>
+      <p>Dette er imidlertid en tradisjonell forklaringsmodell, ikke en vitenskapelig dokumentert mekanisme. Likevel er det interessant å se på hvilke fordeler selve bevegelsene kan ha.</p>
 
-    <h3>Fem bevegelser for kropp og sinn</h3>
-    <p>Ritene består av fem øvelser som kombinerer rotasjon, styrke, tøyning, bevegelighet og kroppskontroll.</p>
-    <p>Øvelsene kan bidra til å styrke muskulaturen, opprettholde bevegeligheten og gi økt kroppsbevissthet. Når bevegelsene utføres rolig og med oppmerksomhet på pusten, kan de også oppleves som en form for aktiv meditasjon.</p>
-    <p>Selv om det ikke finnes solid forskning som dokumenterer at akkurat disse fem øvelsene bremser aldringsprosessen, vet vi at regelmessig fysisk aktivitet har stor betydning for hvordan vi fungerer og har det gjennom livet.</p>
+      <h3>Fem bevegelser for kropp og sinn</h3>
+      <p>Ritene består av fem øvelser som kombinerer rotasjon, styrke, tøyning, bevegelighet og kroppskontroll.</p>
+      <p>Øvelsene kan bidra til å styrke muskulaturen, opprettholde bevegeligheten og gi økt kroppsbevissthet. Når bevegelsene utføres rolig og med oppmerksomhet på pusten, kan de også oppleves som en form for aktiv meditasjon.</p>
+      <p>Selv om det ikke finnes solid forskning som dokumenterer at akkurat disse fem øvelsene bremser aldringsprosessen, vet vi at regelmessig fysisk aktivitet har stor betydning for hvordan vi fungerer og har det gjennom livet.</p>
 
-    <h3>En gammel tradisjon i en moderne hverdag</h3>
-    <p>Det jeg synes er særlig interessant med de tibetanske ritene, er hvor godt tankegangen kan passe inn i vår moderne hverdag.</p>
-    <p>Vi lever i en tid med høyt tempo, mye informasjon, stillesitting og mange krav til både kropp og hode. Kanskje trenger vi nettopp enkle rutiner som gir oss anledning til å bevege oss, kjenne etter og være mer til stede.</p>
-    <p>Ritene handler derfor ikke nødvendigvis om å finne en mystisk ungdomskilde, men om å ta vare på kroppen og skape gode vaner over tid.</p>
-    <p>Tradisjonelt utføres hver øvelse opptil 21 ganger, men det viktigste er å begynne forsiktig og tilpasse bevegelsene til egne forutsetninger.</p>
+      <h3>En gammel tradisjon i en moderne hverdag</h3>
+      <p>Det jeg synes er særlig interessant med de tibetanske ritene, er hvor godt tankegangen kan passe inn i vår moderne hverdag.</p>
+      <p>Vi lever i en tid med høyt tempo, mye informasjon, stillesitting og mange krav til både kropp og hode. Kanskje trenger vi nettopp enkle rutiner som gir oss anledning til å bevege oss, kjenne etter og være mer til stede.</p>
+      <p>Ritene handler derfor ikke nødvendigvis om å finne en mystisk ungdomskilde, men om å ta vare på kroppen og skape gode vaner over tid.</p>
+      <p>Tradisjonelt utføres hver øvelse opptil 21 ganger, men det viktigste er å begynne forsiktig og tilpasse bevegelsene til egne forutsetninger.</p>
+    </details>
 
     <div class="personal-note">
       <p>For meg er kanskje det mest verdifulle ved de fem tibetanske ritene nettopp enkelheten. Noen få minutter hver dag, der vi gir kroppen bevegelse og sinnet oppmerksomhet, kan være en fin investering i egen helse. Ikke fordi vi kan stoppe aldringen, men fordi vi kan gjøre mye for å bevare styrke, bevegelighet og livskvalitet etter hvert som vi blir eldre.</p>
       <span class="signature">Silje Merete</span>
     </div>
-  </section>
-
-  <section class="card">
-    <h2>De fem ritene</h2>
-    <p class="desc">Ritene gjøres i rekkefølge, fra Spiralen til Spiret. Følg pusten gjennom hver bevegelse.</p>
-    <img class="sun-wheel-image" src="images/fem-tibetanske-riter.jpg?v=5" alt="De fem ritene illustrert i sirkel rundt en sol: 1 Spiralen, 2 Foldekniven, 3 Buen, 4 Bordet og 5 Spiret.">
   </section>
 
   <section class="card">
