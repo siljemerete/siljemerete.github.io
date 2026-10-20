@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De fem tibetanske ritene | Silje Merete SMART Helseveiledning</title>
+<link rel="icon" href="images/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<meta name="description" content="De fem tibetanske ritene: fem enkle bevegelser for styrke, bevegelighet og ro, med historikk, illustrasjon, beskrivelse av hver rite og plan for opptrapping.">
+<style>
+  :root {
+    --bg: #f0f7f9;
+    --card: #ffffff;
+    --ink: #12313d;
+    --muted: #4f7080;
+    --accent: #1f7a8c;
+    --accent-dark: #145868;
+    --accent-soft: #dff1f5;
+    --warn: #c9823f;
+    --warn-soft: #faf1e2;
+    --border: #cfe3e8;
+    --shadow: 0 1px 3px rgba(18, 49, 61, 0.08), 0 1px 2px rgba(18, 49, 61, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--accent-soft), var(--bg));
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .hero h1 {
+    margin: 0 0 0.75rem;
+    font-size: 1.8rem;
+    color: var(--accent-dark);
+  }
+
+  .hero p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 46ch;
+    margin-inline: auto;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem 2rem;
+    margin: 2rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .card h2 {
+    margin: 0 0 0.6rem;
+    color: var(--accent-dark);
+    font-size: 1.3rem;
+  }
+
+  .card > p.desc {
+    margin: 0 0 1.25rem;
+    color: var(--muted);
+  }
+
+  .card p {
+    margin: 0 0 0.9rem;
+  }
+
+  .card p:last-child {
+    margin-bottom: 0;
+  }
+
+  .benefit-list {
+    margin: 0.9rem 0 0;
+    padding-left: 1.25rem;
+    color: var(--ink);
+  }
+
+  .benefit-list li {
+    margin: 0 0 0.5rem;
+  }
+
+  .benefit-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .personal-note {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin: 0 0 1.5rem;
+    font-style: italic;
+    color: var(--accent-dark);
+  }
+
+  .personal-note p {
+    margin: 0;
+  }
+
+  .personal-note .signature {
+    display: block;
+    margin-top: 0.6rem;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .sun-wheel-image {
+    display: block;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+  }
+
+  .caution-card {
+    background: var(--warn-soft);
+    border: 1px solid #ecd3ac;
+    border-left: 4px solid var(--warn);
+  }
+
+  .caution-card h2 {
+    color: #8a5a25;
+  }
+
+  .caution-list {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: var(--ink);
+  }
+
+  .caution-list li {
+    margin: 0 0 0.6rem;
+  }
+
+  .caution-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .home-link {
+    display: block;
+    text-align: center;
+    margin: 1rem 0 3rem;
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .home-link:hover { text-decoration: underline; }
+
+  footer.closing {
+    margin: 2rem 0 1rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong { color: var(--accent-dark); }
+
+  .page-logo {
+    display: block;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 0.75rem;
+    padding: 5px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(22, 40, 58, 0.12);
+  }
+
+  .page-logo img {
+    display: block;
+    width: 46px;
+    height: 46px;
+  }
+
+  .card h3 {
+    margin: 1.4rem 0 0.4rem;
+    color: var(--accent-dark);
+    font-size: 1.05rem;
+  }
+
+  .rite {
+    border-top: 1px solid var(--border);
+    padding-top: 1.1rem;
+    margin-top: 1.1rem;
+  }
+
+  .rite:first-of-type {
+    border-top: 0;
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+  .rite h3 {
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .rite-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  .rite-num.r1 { background: #d2533c; }
+  .rite-num.r2 { background: #2a6fb5; }
+  .rite-num.r3 { background: #c4505e; }
+  .rite-num.r4 { background: #3e8a5f; }
+  .rite-num.r5 { background: #8a68b8; }
+
+  .breath {
+    font-size: 0.92rem;
+    color: var(--muted);
+    margin: 0 !important;
+  }
+
+  .breath strong { color: var(--accent-dark); }
+
+  .plan-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.4rem 0 1rem;
+    font-size: 0.95rem;
+  }
+
+  .plan-table th,
+  .plan-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+  }
+
+  .plan-table th {
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .plan-table td:last-child { font-weight: 600; color: var(--accent-dark); }
+
+  .source {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+    text-align: center;
+    margin: 0 0 1rem;
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <a class="page-logo" href="index.html" aria-label="Til forsiden"><img src="images/logo.png" width="48" height="48" alt=""></a>
+    <h1>De fem tibetanske ritene</h1>
+    <p>En gammel tradisjon med relevans i vår tid: fem enkle bevegelser for styrke, bevegelighet og ro, noen få minutter hver dag.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section class="card">
+    <h2>En gammel tradisjon</h2>
+    <p>De fem tibetanske ritene er en serie enkle bevegelser som tradisjonelt forbindes med tibetansk kultur og munkenes arbeid med å styrke både kropp og sinn. Ifølge gamle fortellinger skal ritene ha vært praktisert i tibetanske klostre gjennom flere tusen år, men det finnes ingen sikre historiske kilder som bekrefter hvor gamle de egentlig er.</p>
+    <p>Tibet har gjennom historien vært preget av et krevende klima og tøffe leveforhold. Her utviklet det seg tradisjoner der fysisk styrke, mental utholdenhet, meditasjon og åndelig utvikling sto sentralt. Helse handlet ikke bare om fravær av sykdom, men også om å skape balanse mellom kropp og sinn og utvikle evnen til å møte livets utfordringer.</p>
+
+    <h3>Jakten på ungdomskilden</h3>
+    <p>De tibetanske ritene ble kjent i Vesten gjennom Peter Kelders bok <em>The Eye of Revelation</em> fra 1939. Her fortelles historien om en eldre britisk offiser som reiser til Tibet på jakt etter hemmeligheten bak munkenes helse og ungdommelighet.</p>
+    <p>Ifølge fortellingen oppdager han fem bestemte bevegelser som skal bidra til å bevare kroppens vitalitet og motvirke aldring.</p>
+    <p>I den tradisjonelle forståelsen handler dette om kroppens energisystem og såkalte virvelstrømmer. Tanken er at disse energiene gradvis svekkes med alderen, og at ritene kan bidra til å opprettholde balansen.</p>
+    <p>Dette er imidlertid en tradisjonell forklaringsmodell, ikke en vitenskapelig dokumentert mekanisme. Likevel er det interessant å se på hvilke fordeler selve bevegelsene kan ha.</p>
+
+    <h3>Fem bevegelser for kropp og sinn</h3>
+    <p>Ritene består av fem øvelser som kombinerer rotasjon, styrke, tøyning, bevegelighet og kroppskontroll.</p>
+    <p>Øvelsene kan bidra til å styrke muskulaturen, opprettholde bevegeligheten og gi økt kroppsbevissthet. Når bevegelsene utføres rolig og med oppmerksomhet på pusten, kan de også oppleves som en form for aktiv meditasjon.</p>
+    <p>Selv om det ikke finnes solid forskning som dokumenterer at akkurat disse fem øvelsene bremser aldringsprosessen, vet vi at regelmessig fysisk aktivitet har stor betydning for hvordan vi fungerer og har det gjennom livet.</p>
+
+    <h3>En gammel tradisjon i en moderne hverdag</h3>
+    <p>Det jeg synes er særlig interessant med de tibetanske ritene, er hvor godt tankegangen kan passe inn i vår moderne hverdag.</p>
+    <p>Vi lever i en tid med høyt tempo, mye informasjon, stillesitting og mange krav til både kropp og hode. Kanskje trenger vi nettopp enkle rutiner som gir oss anledning til å bevege oss, kjenne etter og være mer til stede.</p>
+    <p>Ritene handler derfor ikke nødvendigvis om å finne en mystisk ungdomskilde, men om å ta vare på kroppen og skape gode vaner over tid.</p>
+    <p>Tradisjonelt utføres hver øvelse opptil 21 ganger, men det viktigste er å begynne forsiktig og tilpasse bevegelsene til egne forutsetninger.</p>
+
+    <div class="personal-note">
+      <p>For meg er kanskje det mest verdifulle ved de fem tibetanske ritene nettopp enkelheten. Noen få minutter hver dag, der vi gir kroppen bevegelse og sinnet oppmerksomhet, kan være en fin investering i egen helse. Ikke fordi vi kan stoppe aldringen, men fordi vi kan gjøre mye for å bevare styrke, bevegelighet og livskvalitet etter hvert som vi blir eldre.</p>
+      <span class="signature">Silje Merete</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>De fem ritene</h2>
+    <p class="desc">Ritene gjøres i rekkefølge, fra Spiralen til Spiret. Følg pusten gjennom hver bevegelse.</p>
+    <img class="sun-wheel-image" src="images/fem-tibetanske-riter.jpg" alt="De fem ritene illustrert i sirkel rundt en sol: 1 Spiralen, 2 Foldekniven, 3 Buen, 4 Bordet og 5 Spiret.">
+  </section>
+
+  <section class="card">
+    <h2>Slik gjør du øvelsene</h2>
+
+    <div class="rite">
+      <h3><span class="rite-num r1">1</span>Spiralen</h3>
+      <p>Stå oppreist og avslappet, med armene løftet rett ut til sidene og strukket ut i skulderhøyde. La kroppen dreie mot høyre, så raskt som det føles naturlig. Hold høyre hæl i bakken under dreiebevegelsen, mens venstre fot styrer bevegelsen rundt med små skritt.</p>
+      <p class="breath"><strong>Tips:</strong> Start rolig. Stopp hvis du blir svimmel.</p>
+    </div>
+
+    <div class="rite">
+      <h3><span class="rite-num r2">2</span>Foldekniven</h3>
+      <p>Ligg på ryggen, avslappet i utstrakt stilling, med hendene langs sidene. Løft hodet mot brystet samtidig som du løfter beina opp i loddrett stilling. Senk beina og hodet langsomt tilbake til utgangsstilling.</p>
+      <p class="breath"><strong>Inn</strong> (gjennom nesen) når du løfter, <strong>ut</strong> (gjennom nese og munn) når du senker.</p>
+    </div>
+
+    <div class="rite">
+      <h3><span class="rite-num r3">3</span>Buen</h3>
+      <p>Sitt på knærne med tærne i bakken og rank kropp fra knærne og opp. Hold hendene øverst på baksiden av lårene. Hold lår og hofter stabile under bevegelsen, som skal foregå fra hoftene og opp, med fokus på nakke, skuldre og bryst. La hodet, nakken og skuldrene strekke seg så langt bakover som mulig. Beveg deg så motsatt vei, slik at nakke og skuldre uanstrengt bøyer seg framover så langt du rekker.</p>
+      <p class="breath"><strong>Inn</strong> når du bøyer bakover, <strong>ut</strong> når du bøyer framover.</p>
+    </div>
+
+    <div class="rite">
+      <h3><span class="rite-num r4">4</span>Bordet</h3>
+      <p>Sitt med rak overkropp, hendene i bakken og beina strake. Ha bekkenet og beina lett løftet, hvis du klarer det. Løft bekken, overkropp og knær opp, slik at overkroppen fra hofter til skuldre blir horisontal, som en bordplate. Armene skal være strake, med håndflatene i bakken som ved utgangspunktet. Gå tilbake til utgangsstillingen.</p>
+      <p class="breath"><strong>Inn</strong> når du løfter, <strong>ut</strong> når du går tilbake.</p>
+    </div>
+
+    <div class="rite">
+      <h3><span class="rite-num r5">5</span>Spiret</h3>
+      <p>Vend deg rundt og vipp bekkenet ned mot gulvet, mens overkropp og hode holdes opp og bakover. Ha bøyde tær og håndflatene i gulvet, med omtrent en skulderbreddes avstand både mellom føttene og mellom hendene. Vipp rumpe og bekken opp, slik at hodet peker ned og beina er strake. Gå tilbake i utgangsstillingen.</p>
+      <p class="breath"><strong>Inn</strong> når du vipper opp, <strong>ut</strong> når du går tilbake.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Hvor mange repetisjoner?</h2>
+    <p>Øvelsene gjøres daglig. Start med tre repetisjoner av hver rite, og øk med to hver uke til du er oppe i 21 repetisjoner.</p>
+    <table class="plan-table">
+      <thead>
+        <tr><th>Uke</th><th>Repetisjoner per rite</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Uke 1</td><td>3</td></tr>
+        <tr><td>Uke 2</td><td>5</td></tr>
+        <tr><td>Uke 3</td><td>7</td></tr>
+        <tr><td>Uke 4</td><td>9</td></tr>
+        <tr><td>Uke 5</td><td>11</td></tr>
+        <tr><td>Uke 6</td><td>13</td></tr>
+        <tr><td>Uke 7</td><td>15</td></tr>
+        <tr><td>Uke 8</td><td>17</td></tr>
+        <tr><td>Uke 9</td><td>19</td></tr>
+        <tr><td>Uke 10</td><td>21</td></tr>
+      </tbody>
+    </table>
+    <p>Det er helt greit å bli værende på et lavere antall lenger hvis kroppen trenger det. Jevnlighet betyr mer enn antall.</p>
+  </section>
+
+  <section class="card caution-card">
+    <h2>Viktige forholdsregler</h2>
+    <ul class="caution-list">
+      <li>Begynn forsiktig og beveg deg innenfor det som er smertefritt. Tilpass bevegelsene til egne forutsetninger.</li>
+      <li>Spiralen kan gi svimmelhet. Start med få og rolige omdreininger, fest blikket på et punkt, og stopp hvis du blir uvel.</li>
+      <li>Bøy gjerne knærne i Foldekniven og Spiret hvis korsryggen eller baksiden av lårene protesterer.</li>
+      <li>Vær forsiktig med å bøye nakken langt bakover i Buen og Bordet hvis du har nakkeplager.</li>
+      <li>Ta kontakt med lege først ved høyt blodtrykk, svimmelhet, graviditet, nylig operasjon eller skader i rygg, nakke, håndledd eller skuldre.</li>
+    </ul>
+  </section>
+
+  <p class="source">Inspirert av Audun Myskjas bok «De tibetanske riter», med egne refleksjoner og et moderne helseperspektiv.</p>
+
+  <a class="home-link" href="index.html">Se hjemmesiden min →</a>
+
+</div>
+
+<footer class="closing">
+  Små skritt. Dine mål, ditt tempo.<br>
+  <strong>Du trenger ikke gjøre det alene.</strong>
+</footer>
+
+</body>
+</html>
