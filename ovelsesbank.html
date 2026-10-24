@@ -434,6 +434,54 @@
   .bank-button:hover { background: #87491a; }
   .bank-button:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 2px; }
 
+  .print-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem 1rem;
+    margin: 1.5rem 0 0;
+    padding: 0.9rem 1.1rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .print-box p { margin: 0; flex: 1 1 220px; font-size: 0.9rem; color: var(--muted); }
+  .print-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent-dark);
+    background: var(--card);
+    color: var(--accent-dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+  .print-button:hover { background: var(--accent-soft); }
+  .print-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .print-only { display: none; }
+
+  @media print {
+    @page { margin: 14mm; }
+    body { background: #fff; font-size: 11pt; }
+    .hero { background: none; padding: 0 0 0.5rem; border: 0; text-align: left; }
+    .hero h1 { font-size: 18pt; margin: 0 0 0.25rem; }
+    .hero p { margin: 0; max-width: none; }
+    .page-logo, .print-box, .place-switch, .figure-switch, .equip-button, .bank-button,
+    .home-link, footer.closing, .about-box .chevron { display: none !important; }
+    .print-only { display: block; margin: 0.4rem 0 0; font-size: 10pt; color: #444; }
+    .wrap { max-width: none; padding: 0; }
+    .card, .about-box { box-shadow: none !important; margin: 0.8rem 0 !important; padding: 0.8rem 1rem !important; break-inside: auto; }
+    .card h2, .card h3, .about-box summary { break-after: avoid; }
+    .exercises li, .week li, .meta, .bank-box, .level-note { break-inside: avoid; }
+    .exercises li:nth-child(odd), .meta, .bank-box, .level-note { background: #f3f6f7 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .thumb { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    a { color: inherit !important; text-decoration: none !important; }
+  }
+
 
   .bank-intro ol { margin: 0 0 0.75rem; padding-left: 1.25rem; }
   .bank-intro ol li { margin: 0 0 0.5rem; }
@@ -596,7 +644,7 @@
           <ul class="exercises">
           <li><a class="thumb-link v-gym k-kvinne" href="images/ukeplan-kneboy-stor.jpg?v=2" aria-label="Se større bilde: Knebøy på treningssenter"><img class="thumb" src="images/ukeplan-kneboy-senter.jpg" width="120" height="100" loading="lazy" alt="Knebøy på treningssenter: illustrasjon med silhuetter."></a><a class="thumb-link v-gym k-mann" href="images/ukeplan-mann-kneboy-stor.jpg" aria-label="Se større bilde: Knebøy på treningssenter"><img class="thumb" src="images/ukeplan-mann-kneboy-senter.jpg" width="120" height="100" loading="lazy" alt="Knebøy på treningssenter: illustrasjon med silhuetter."></a><a class="thumb-link v-home k-kvinne" href="images/ukeplan-kneboy-stor.jpg?v=2" aria-label="Se større bilde: Knebøy hjemme"><img class="thumb" src="images/ukeplan-kneboy-hjemme.jpg?v=2" width="120" height="100" loading="lazy" alt="Knebøy hjemme: illustrasjon med silhuetter."></a><a class="thumb-link v-home k-mann" href="images/ukeplan-mann-kneboy-stor.jpg" aria-label="Se større bilde: Knebøy hjemme"><img class="thumb" src="images/ukeplan-mann-kneboy-hjemme.jpg" width="120" height="100" loading="lazy" alt="Knebøy hjemme: illustrasjon med silhuetter."></a><span class="v-gym">Knebøy med stang<span class="how">Stanga på øvre del av ryggen. Sett deg ned og litt bakover, knærne følger tærne.</span></span><span class="v-home">Knebøy med manual eller kettlebell<span class="how">Hold vekten foran brystet (goblet-knebøy), gjerne ned mot en stol.</span></span></li>
           <li><a class="thumb-link v-gym k-kvinne" href="images/bank-beinpress-k-stor.jpg" aria-label="Se større bilde: Beinpress på treningssenter"><img class="thumb" src="images/bank-beinpress-k-senter.jpg" width="120" height="100" loading="lazy" alt="Beinpress på treningssenter: illustrasjon med silhuetter."></a><a class="thumb-link v-gym k-mann" href="images/bank-beinpress-stor.jpg" aria-label="Se større bilde: Beinpress på treningssenter"><img class="thumb" src="images/bank-beinpress.jpg" width="120" height="100" loading="lazy" alt="Beinpress på treningssenter: illustrasjon med silhuetter."></a><a class="thumb-link v-home k-kvinne" href="images/bank-beinpress-k-stor.jpg" aria-label="Se større bilde: Beinpress hjemme"><img class="thumb" src="images/bank-beinpress-k-hjemme.jpg" width="120" height="100" loading="lazy" alt="Beinpress hjemme: illustrasjon med silhuetter."></a><a class="thumb-link v-home k-mann" href="images/ukeplan-mann-beinpress-stor.jpg" aria-label="Se større bilde: Beinpress hjemme"><img class="thumb" src="images/ukeplan-mann-beinpress-hjemme.jpg" width="120" height="100" loading="lazy" alt="Beinpress hjemme: illustrasjon med silhuetter."></a><span class="v-gym">Beinpress<span class="how">Senk kontrollert til knærne er rundt 90 grader, og press opp uten å låse knærne.</span></span><span class="v-home">Knebøy til stol på ett bein<span class="how">Sett deg rolig ned på stolen og reis deg på ett bein. Start på to bein med en kettlebell, som på bildet.</span></span></li>
-          <li><a class="thumb-link v-gym k-kvinne" href="images/ukeplan-enbens-stor.jpg" aria-label="Se større bilde: Utfall og step-up på treningssenter"><img class="thumb" src="images/ukeplan-enbens-senter.jpg" width="120" height="100" loading="lazy" alt="Utfall og step-up på treningssenter: illustrasjon med silhuetter."></a><a class="thumb-link v-gym k-mann" href="images/ukeplan-mann-enbens-stor.jpg" aria-label="Se større bilde: Utfall og step-up på treningssenter"><img class="thumb" src="images/ukeplan-mann-enbens-senter.jpg" width="120" height="100" loading="lazy" alt="Utfall og step-up på treningssenter: illustrasjon med silhuetter."></a><a class="thumb-link v-home k-kvinne" href="images/ukeplan-enbens-stor.jpg" aria-label="Se større bilde: Utfall og step-up hjemme"><img class="thumb" src="images/ukeplan-enbens-hjemme.jpg" width="120" height="100" loading="lazy" alt="Utfall og step-up hjemme: illustrasjon med silhuetter."></a><a class="thumb-link v-home k-mann" href="images/ukeplan-mann-enbens-stor.jpg" aria-label="Se større bilde: Utfall og step-up hjemme"><img class="thumb" src="images/ukeplan-mann-enbens-hjemme.jpg" width="120" height="100" loading="lazy" alt="Utfall og step-up hjemme: illustrasjon med silhuetter."></a><span class="v-gym">Utfall med manualer<span class="how">Ta et steg fram eller bak, og senk bakre kne rolig mot gulvet.</span></span><span class="v-home">Step-up på stol<span class="how">Gå opp på en stødig stol eller et trappetrinn med ett bein, og ned igjen kontrollert. Hold gjerne manualer i hendene for mer.</span></span></li>
+          <li><a class="thumb-link v-gym k-kvinne" href="images/ukeplan-enbens-stor.jpg?v=2" aria-label="Se større bilde: Utfall og step-up på treningssenter"><img class="thumb" src="images/ukeplan-enbens-senter.jpg" width="120" height="100" loading="lazy" alt="Utfall og step-up på treningssenter: illustrasjon med silhuetter."></a><a class="thumb-link v-gym k-mann" href="images/ukeplan-mann-enbens-stor.jpg?v=2" aria-label="Se større bilde: Utfall og step-up på treningssenter"><img class="thumb" src="images/ukeplan-mann-enbens-senter.jpg" width="120" height="100" loading="lazy" alt="Utfall og step-up på treningssenter: illustrasjon med silhuetter."></a><a class="thumb-link v-home k-kvinne" href="images/ukeplan-enbens-stor.jpg?v=2" aria-label="Se større bilde: Utfall og step-up hjemme"><img class="thumb" src="images/ukeplan-enbens-hjemme.jpg" width="120" height="100" loading="lazy" alt="Utfall og step-up hjemme: illustrasjon med silhuetter."></a><a class="thumb-link v-home k-mann" href="images/ukeplan-mann-enbens-stor.jpg?v=2" aria-label="Se større bilde: Utfall og step-up hjemme"><img class="thumb" src="images/ukeplan-mann-enbens-hjemme.jpg" width="120" height="100" loading="lazy" alt="Utfall og step-up hjemme: illustrasjon med silhuetter."></a><span class="v-gym">Utfall med manualer<span class="how">Ta et steg fram eller bak, og senk bakre kne rolig mot gulvet.</span></span><span class="v-home">Step-up på stol<span class="how">Gå opp på en stødig stol eller et trappetrinn med ett bein, og ned igjen kontrollert. Hold gjerne manualer i hendene for mer.</span></span></li>
           <li><a class="thumb-link v-gym k-kvinne" href="images/bank-bulgarsk-k-stor.jpg" aria-label="Se større bilde: Bulgarsk utfall på treningssenter"><img class="thumb" src="images/bank-bulgarsk-k-senter.jpg" width="120" height="100" loading="lazy" alt="Bulgarsk utfall på treningssenter: illustrasjon med silhuetter."></a><a class="thumb-link v-gym k-mann" href="images/bank-bulgarsk-stor.jpg" aria-label="Se større bilde: Bulgarsk utfall på treningssenter"><img class="thumb" src="images/bank-bulgarsk-senter.jpg" width="120" height="100" loading="lazy" alt="Bulgarsk utfall på treningssenter: illustrasjon med silhuetter."></a><a class="thumb-link v-home k-kvinne" href="images/bank-bulgarsk-k-stor.jpg" aria-label="Se større bilde: Bulgarsk utfall hjemme"><img class="thumb" src="images/bank-bulgarsk-k-hjemme.jpg" width="120" height="100" loading="lazy" alt="Bulgarsk utfall hjemme: illustrasjon med silhuetter."></a><a class="thumb-link v-home k-mann" href="images/bank-bulgarsk-stor.jpg" aria-label="Se større bilde: Bulgarsk utfall hjemme"><img class="thumb" src="images/bank-bulgarsk-hjemme.jpg" width="120" height="100" loading="lazy" alt="Bulgarsk utfall hjemme: illustrasjon med silhuetter."></a><span class="v-gym">Bulgarsk utfall<span class="how">Bakre fot på en benk, senk deg rett ned. Krevende, og gir mye effekt med lette vekter.</span></span><span class="v-home">Bulgarsk utfall<span class="how">Bakre fot på en stol eller sofa, senk deg rett ned. Krevende, og gir mye effekt med lette vekter.</span></span></li>
           </ul>
         </div>
