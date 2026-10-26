@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mine oppskrifter | Silje Merete SMART Helseveiledning</title>
+<meta name="description" content="Siljes oppskrifter samlet på ett sted: kjøleskapsgrøt med chia og blåbær, lavkarbobrød og grønnsaksmos. Hver oppskrift kan skrives ut.">
+<meta property="og:title" content="Mine oppskrifter | Silje Merete SMART Helseveiledning">
+<meta property="og:description" content="Enkle, mettende hverdagsoppskrifter. Klar til å skrives ut.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#1f3c5c">
+<link rel="icon" href="images/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<style>
+  :root {
+    --bg: #f4f8fb;
+    --card: #ffffff;
+    --ink: #16283a;
+    --muted: #55697c;
+    --accent: #386ba0;
+    --accent-dark: #1f3c5c;
+    --accent-soft: #e7f0f8;
+    --border: #d6e3ee;
+    --shadow: 0 1px 3px rgba(22, 40, 58, 0.08), 0 1px 2px rgba(22, 40, 58, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+    padding: 3rem 0 3.5rem;
+    text-align: center;
+  }
+
+  .hero .kicker {
+    margin: 0 0 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .hero h1 {
+    margin: 0 0 0.75rem;
+    font-size: 1.9rem;
+    line-height: 1.25;
+    color: #fff;
+  }
+
+  .hero p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1.05rem;
+    max-width: 46ch;
+    margin-inline: auto;
+  }
+
+  .card-section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.85rem 1.85rem 2.1rem;
+    margin: 2.25rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .card-section h2 {
+    margin: 0 0 0.9rem;
+    color: var(--accent-dark);
+    font-size: 1.35rem;
+    line-height: 1.3;
+  }
+
+  .card-section p {
+    margin: 0.75rem 0;
+  }
+
+  .card-section p:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout {
+    background: var(--accent-dark);
+    color: #fff;
+    border-radius: 10px;
+    padding: 1.3rem 1.5rem;
+    margin: 1.4rem 0 0;
+  }
+
+  .callout p {
+    margin: 0 0 0.6rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+
+  .callout ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .callout li {
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 0.4rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .callout li:first-child {
+    border-top: none;
+  }
+
+  .quote-card {
+    background: var(--accent-soft);
+    border-radius: 12px;
+    padding: 1.75rem;
+    margin: 2.25rem 0;
+    text-align: center;
+  }
+
+  .quote-card blockquote {
+    margin: 0;
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--accent-dark);
+    max-width: 48ch;
+    margin-inline: auto;
+  }
+
+  .refs {
+    margin: 0.5rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .refs li {
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--border);
+    font-size: 0.92rem;
+  }
+
+  .refs li:first-child {
+    border-top: none;
+    padding-top: 0.25rem;
+  }
+
+  .refs .ref-title {
+    display: block;
+    font-weight: 700;
+    color: var(--accent-dark);
+    margin-bottom: 0.2rem;
+  }
+
+  .refs .ref-desc {
+    color: var(--muted);
+  }
+
+  .note-section p {
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .home-link {
+    display: block;
+    text-align: center;
+    margin: 0 0 3rem;
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .home-link:hover { text-decoration: underline; }
+
+  footer.closing {
+    margin: 2rem 0 1rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong { color: var(--accent-dark); }
+
+
+  .card-section h3 {
+    margin: 1.4rem 0 0.35rem;
+    color: var(--accent-dark);
+    font-size: 1.05rem;
+  }
+
+  .card-section h3:first-of-type { margin-top: 0.6rem; }
+
+  .formula {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    text-align: center;
+  }
+
+  .swaps {
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .swaps li {
+    border-top: 1px solid var(--border);
+  }
+
+  .swaps li:first-child { border-top: none; }
+
+  .swaps label {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 0.65rem 0;
+    cursor: pointer;
+  }
+
+  .swaps input {
+    width: 1.15rem;
+    height: 1.15rem;
+    margin-top: 0.25rem;
+    accent-color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .swaps .from { color: var(--muted); }
+  .swaps .arrow { color: var(--accent); font-weight: 700; padding: 0 0.3rem; }
+  .swaps .to { font-weight: 600; }
+
+  .small-note {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .questions {
+    margin: 0.75rem 0;
+    padding-left: 1.2rem;
+  }
+
+  .questions li { padding: 0.25rem 0; }
+
+  .refs .ref-desc a { color: var(--accent); word-break: break-word; }
+
+  .product {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 1.4rem;
+    align-items: start;
+  }
+
+  .product img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+  }
+
+  .facts {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.75rem 0;
+    font-size: 0.95rem;
+  }
+
+  .facts th, .facts td {
+    text-align: left;
+    padding: 0.4rem 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .facts th { color: var(--muted); font-weight: 600; font-size: 0.85rem; }
+  .facts td:not(:first-child), .facts th:not(:first-child) { text-align: right; white-space: nowrap; }
+  .facts th { white-space: normal !important; vertical-align: bottom; }
+
+  @media (max-width: 560px) {
+    .product { grid-template-columns: 1fr; }
+    .product img { max-width: 240px; margin: 0 auto; }
+  }
+
+  .recipe-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.5rem 0 1rem;
+  }
+
+  .recipe-meta span {
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    border-radius: 999px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .ingredients {
+    margin: 0.5rem 0;
+    padding-left: 1.2rem;
+  }
+
+  .ingredients li { padding: 0.2rem 0; }
+
+  .steps {
+    margin: 0.5rem 0;
+    padding-left: 1.4rem;
+  }
+
+  .steps li { padding: 0.35rem 0; }
+  .steps li::marker { color: var(--accent); font-weight: 700; }
+
+  .feature {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 10px;
+    padding: 1.1rem 1.3rem;
+    margin: 1.25rem 0 0.5rem;
+  }
+
+  .feature p { margin: 0.5rem 0; }
+  .feature p:first-child { margin-top: 0; }
+  .feature p:last-child { margin-bottom: 0; }
+
+  .feature-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .feature a, .card-section p a { color: var(--accent); font-weight: 600; }
+
+  .wide-img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+    margin: 0.25rem 0 1rem;
+  }
+
+  .facts.wrap td { white-space: normal !important; }
+  .nova td:first-child { width: 38%; vertical-align: top; }
+  .nova td:not(:first-child) { text-align: left !important; white-space: normal !important; }
+  .nova th:not(:first-child) { text-align: left !important; }
+  .swaps li > .from, .swaps li > .to, .swaps li > .arrow { display: inline; }
+  .swaps li:not(:has(label)) { padding: 0.6rem 0; }
+
+  .recipe-more { margin-top: 0.75rem; }
+  .recipe-more > summary {
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+  }
+  .recipe-more > summary::-webkit-details-marker { display: none; }
+  .recipe-more > summary::after { content: "▾"; }
+  .recipe-more[open] > summary::after { content: "▴"; }
+  .recipe-more > summary:hover { background: var(--accent-dark); }
+  .recipe-more .hide { display: none; }
+  .recipe-more[open] .show { display: none; }
+  .recipe-more[open] .hide { display: inline; }
+  .recipe-more[open] > summary { margin-bottom: 0.5rem; }
+  .recipe-card-toggle { cursor: pointer; }
+
+  .img-pair {
+    display: grid;
+    grid-template-columns: 16fr 9fr;
+    gap: 0.6rem;
+    margin: 0.25rem 0 1rem;
+    align-items: start;
+  }
+  .img-pair img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+  }
+
+  @media (max-width: 560px) {
+    .hero h1 { font-size: 1.5rem; }
+  }
+
+  .toc {
+    list-style: none;
+    margin: 0.5rem 0 0;
+    padding: 0;
+  }
+  .toc li { border-top: 1px solid var(--border); }
+  .toc li:first-child { border-top: none; }
+  .toc a {
+    display: flex;
+    flex-direction: column;
+    padding: 0.7rem 0;
+    color: var(--accent-dark);
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-decoration: none;
+  }
+  .toc a:hover { color: var(--accent); }
+  .toc-cat {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    font-weight: 700;
+  }
+
+  .recipe-tools {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .print-btn {
+    font: inherit;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--accent);
+    border: none;
+    border-radius: 999px;
+    padding: 0.55rem 1.05rem;
+    cursor: pointer;
+  }
+  .print-btn:hover { background: var(--accent-dark); }
+  .print-btn.secondary {
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+  }
+  .print-btn.secondary:hover { background: var(--border); }
+
+  .toc-actions { margin-top: 1.1rem; }
+
+  .recipe .recipe-tools + h2 { margin-top: 0; }
+
+  @media print {
+    @page { margin: 15mm; }
+    body { background: #fff; font-size: 11pt; line-height: 1.45; }
+    .hero { background: none; padding: 0 0 0.5rem; text-align: left; }
+    .hero .kicker, .hero p { color: var(--muted); }
+    .hero h1 { color: var(--accent-dark); font-size: 20pt; }
+    .wrap { max-width: none; padding: 0; }
+    .toc-section, .print-btn, .home-link, .intro-section, footer.closing { display: none; }
+    .card-section { box-shadow: none; border: none; padding: 0; margin: 0; }
+    .recipe + .recipe { break-before: page; }
+    .recipe h2 { font-size: 17pt; }
+    .recipe h3, .recipe .facts, .recipe .steps li, .recipe .ingredients { break-inside: avoid; }
+    .recipe h3 { break-after: avoid; }
+    .wide-img { max-height: 70mm; width: auto; max-width: 100%; }
+    .img-pair { grid-template-columns: auto auto; justify-content: start; }
+    .img-pair img { max-height: 60mm; width: auto; }
+    .recipe-meta span { border: 1px solid var(--border); }
+    a { color: inherit; text-decoration: none; }
+    body[data-print-one] .recipe:not(.print-this) { display: none; }
+    body[data-print-one] .hero { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">Kosthold</p>
+    <h1>Mine oppskrifter</h1>
+    <p>Enkle, mettende hverdagsoppskrifter</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section class="card-section toc-section">
+    <h2>Oppskrifter</h2>
+    <ul class="toc">
+      <li><a href="#kjoleskapsgrot"><span class="toc-cat">Frokost</span>Kjøleskapsgrøt med chia og blåbær</a></li>
+      <li><a href="#lavkarbobrod"><span class="toc-cat">Frokost og kveldsmat</span>Siljes lavkarbobrød</a></li>
+      <li><a href="#gronnsaksmos"><span class="toc-cat">Middag: tilbehør</span>Grønnsaksmos</a></li>
+    </ul>
+    <div class="toc-actions">
+      <button type="button" class="print-btn secondary" data-print="alle">🖨️ Skriv ut alle oppskriftene</button>
+    </div>
+  </section>
+
+  <section class="card-section recipe" id="kjoleskapsgrot">
+    <div class="recipe-tools">
+      <span class="feature-kicker">Frokost</span>
+      <button type="button" class="print-btn" data-print="kjoleskapsgrot">🖨️ Skriv ut oppskriften</button>
+    </div>
+    <h2>🫐 Kjøleskapsgrøt med chia og blåbær</h2>
+    <img class="wide-img" src="images/kjoleskapsgrot.jpg" width="900" height="675" loading="lazy" alt="Glasskrukke med kjøleskapsgrøt av chiafrø, yoghurt og blåbær, med en boks Ceylon-kanel ved siden av">
+    <p>En god og mettende start på dagen, som tar to minutter å lage kvelden før. Grøten er full av fiber og gode fettsyrer, og holder deg mett lenge.</p>
+    <div class="recipe-meta">
+      <span>1 porsjon</span>
+      <span>2 min + natten over</span>
+    </div>
+
+    <h3>Dette trenger du</h3>
+    <ul class="ingredients">
+      <li>2–3 ss chiafrø</li>
+      <li>1 ss knuste linfrø</li>
+      <li>1 ss loppefrøskall (psyllium), ca. 4 g</li>
+      <li>3–4 ss naturell skyr eller kesam, eller proteinyoghurt med vanilje (uten tilsatt sukker)</li>
+      <li>Ca. 2,5 dl havredrikk eller mandeldrikk, eller en blanding</li>
+      <li>2–3 ss blåbær (gjerne norske, ferske eller frosne)</li>
+      <li>Kanel til servering (gjerne Ceylon-kanel)</li>
+    </ul>
+
+    <h3>Slik gjør du</h3>
+    <ol class="steps">
+      <li><strong>Kvelden før:</strong> Ha chiafrø, knuste linfrø og loppefrøskall i et glass eller en boks med lokk.</li>
+      <li><strong>Tilsett yoghurt og drikk:</strong> Ha i skyren eller yoghurten og havre- eller mandeldrikken. Bruker du naturell skyr, kan du gjerne tilsette litt vaniljefrø eller ekte vaniljepulver for smak.</li>
+      <li><strong>Rør godt:</strong> Rør godt rundt, så frøene ikke klumper seg. Rør gjerne en gang til etter 5 minutter.</li>
+      <li><strong>Sett i kjøleskapet</strong> natten over. Frøene suger opp væsken, og grøten blir tykk og fin.</li>
+      <li><strong>Neste morgen:</strong> Rør inn blåbærene, dryss over kanel og nyt.</li>
+    </ol>
+    <p class="small-note">Blir grøten for tykk, rører du inn en skvett drikke til. Du kan gjerne lage 2–3 glass på en gang. De holder seg fint i kjøleskapet i 2–3 dager.</p>
+
+    <h3>Hvorfor er dette en god start på dagen?</h3>
+    <p><strong>Mye fiber:</strong> Chiafrø, linfrø og loppefrøskall gir til sammen rundt 15 g kostfiber, altså omtrent halvparten av det du trenger på en hel dag. Fiber gir god metthet, en jevnere blodsukkerkurve og er bra for fordøyelsen og tarmfloraen.</p>
+    <p><strong>Loppefrøskall</strong> består nesten bare av løselig fiber: 1 ss (ca. 4 g) gir rundt 3,5 g kostfiber. Fiberen danner en gel som gjør grøten tykk, bidrar til en normal tarmfunksjon og kan bidra til å holde kolesterolnivået i blodet normalt.</p>
+    <p><strong>Plantebasert omega-3:</strong> Chiafrø og linfrø er blant de rikeste kildene til plantebasert omega-3 (alfa-linolensyre). En porsjon gir rundt 5–6 g, mer enn det anbefalte daglige inntaket. Linfrøene bør være knuste, ellers passerer de ofte ufordøyd gjennom tarmen.</p>
+    <p><strong>Protein:</strong> Skyren eller proteinyoghurten og frøene gir rundt 13–14 g protein. Vil du ha enda mer, kan du øke mengden.</p>
+    <p><strong>Skyr eller proteinyoghurt?</strong> Naturell skyr og kesam har omtrent like mye protein som proteinyoghurt, men består bare av melk og kultur. Proteinyoghurt med søtstoff og tilsatt fiber regnes som ultraprosessert. Den er likevel et godt valg med lite sukker, så velg det du liker best. Naturell skyr med vaniljefrø er alternativet som er minst bearbeidet.</p>
+    <p><strong>Blåbær og kanel</strong> gir smak, farge og antioksidanter. Ceylon-kanel inneholder mye mindre kumarin enn vanlig kassiakanel, og passer derfor godt når du bruker kanel hver dag.</p>
+
+    <h3>Omtrentlig næringsinnhold per porsjon</h3>
+    <table class="facts">
+      <tr><th></th><th>Med mandeldrikk (usøtet)</th><th>Med havredrikk</th></tr>
+      <tr><td>Energi</td><td>ca. 270 kcal</td><td>ca. 350 kcal</td></tr>
+      <tr><td>Karbohydrat</td><td>ca. 8 g</td><td>ca. 25 g</td></tr>
+      <tr><td>Kostfiber</td><td>ca. 16 g</td><td>ca. 17 g</td></tr>
+      <tr><td>Protein</td><td>ca. 13 g</td><td>ca. 14 g</td></tr>
+      <tr><td>Fett</td><td>ca. 15 g</td><td>ca. 16 g</td></tr>
+      <tr><td>– hvorav omega-3</td><td>ca. 5–6 g</td><td>ca. 5–6 g</td></tr>
+    </table>
+    <p><strong>Valget av drikk utgjør den største forskjellen.</strong> Havredrikk inneholder naturlig sukker fra havren, rundt 15–17 g karbohydrater i 2,5 dl. Usøtet mandeldrikk har nesten ingen karbohydrater. Vil du spise mindre karbohydrater, kan du bruke usøtet mandeldrikk eller en blanding av de to.</p>
+    <p class="small-note">Tallene er anslag basert på 2,5 ss chiafrø, 1 ss linfrø, 1 ss loppefrøskall, 3,5 ss naturell skyr eller proteinyoghurt, 2,5 dl drikk og 2,5 ss blåbær, og varierer med produktene du bruker. Har du ikke spist så mye fiber før, kan det være lurt å starte med litt mindre loppefrø og chia, og å drikke godt med vann gjennom dagen.</p>
+    <p class="small-note"><strong>Bruker du medisiner?</strong> Loppefrøskall kan påvirke opptaket av medisiner og kosttilskudd. Ta dem derfor med minst 2 timers avstand fra grøten, eller snakk med lege eller apotek. Produsenten anbefaler ikke loppefrøskall som kosttilskudd til gravide eller barn under 11 år. Følg rådene på pakningen du bruker.</p>
+  </section>
+  <section class="card-section recipe" id="lavkarbobrod">
+    <div class="recipe-tools">
+      <span class="feature-kicker">Frokost og kveldsmat</span>
+      <button type="button" class="print-btn" data-print="lavkarbobrod">🖨️ Skriv ut oppskriften</button>
+    </div>
+    <h2>🍞 Siljes lavkarbobrød</h2>
+    <div class="img-pair">
+      <img src="images/siljes-lavkarbobrod-helt.jpg" width="1000" height="750" loading="lazy" alt="Helt, hjemmebakt lavkarbobrød med sesamfrø på toppen, på et skjærebrett">
+      <img src="images/siljes-lavkarbobrod.jpg" width="750" height="1000" loading="lazy" alt="Lavkarbobrødet skåret opp, med en skive som viser nøtter og frø inni">
+    </div>
+    <p>Et fiberrikt nøtte- og frøbrød med cottage cheese, uten mel og korn. Det metter godt, har svært lite karbohydrater og er like godt til frokost som til kveldsmat. Brødet trenger verken elting eller heving: du bare blander og steker.</p>
+    <div class="recipe-meta">
+      <span>1 brød</span>
+      <span>Ca. 15 min + 50–60 min i ovnen</span>
+    </div>
+
+    <h3>Nøtter og frø</h3>
+    <ul class="ingredients">
+      <li>50 g mandelmel (ikke fettredusert)</li>
+      <li>65 g gresskarkjerner</li>
+      <li>40 g solsikkekjerner</li>
+      <li>30 g sesamfrø</li>
+      <li>35 g knuste linfrø</li>
+      <li>35 g chiafrø</li>
+      <li>65 g valnøtter</li>
+      <li>30 g hasselnøtter</li>
+    </ul>
+    <h3>Øvrige ingredienser</h3>
+    <ul class="ingredients">
+      <li>5 egg</li>
+      <li>150 g cottage cheese</li>
+      <li>75 g lett crème fraîche</li>
+      <li>2 ss psylliumfrøskall (HUSK)</li>
+      <li>2 ts bakepulver</li>
+      <li>1 ts salt</li>
+      <li>Natreen Classic, valgfritt*</li>
+      <li>Litt vann ved behov</li>
+    </ul>
+    <p class="small-note">* Natreen er svært søtt. Start med en liten mengde og følg doseringen på pakken. Søtningen kan godt sløyfes.</p>
+
+    <h3>Slik gjør du</h3>
+    <ol class="steps">
+      <li><strong>Forbered:</strong> Sett ovnen på 190 °C over- og undervarme. Kle en brødform (ca. 1,5 liter) med bakepapir.</li>
+      <li><strong>Hakk nøtter og frø:</strong> Grovhakk nøttene, og kjør eventuelt deler av frøene kort i foodprosessor. La noe være grovt for mer tyggemotstand.</li>
+      <li><strong>Bland det tørre:</strong> Bland nøtter og frø med mandelmel, psylliumfrøskall, bakepulver, salt og eventuelt Natreen.</li>
+      <li><strong>Tilsett det våte:</strong> Rør inn egg, cottage cheese og lett crème fraîche til en tykk grøt. Spe med litt vann bare hvis røren er for tørr.</li>
+      <li><strong>La røren hvile</strong> i 10 minutter, slik at chia, linfrø og psyllium får trukket til seg væske.</li>
+      <li><strong>Ha røren i formen:</strong> Press den lett ned i hjørnene og glatt toppen. Dryss eventuelt over sesamfrø og noen få flak havsalt.</li>
+      <li><strong>Stek</strong> på midterste rille i omtrent 50–60 minutter. Sjekk fra ca. 45 minutter. Brødet skal være gjennomstekt i midten, og ca. 90 °C i kjernen kan være en pekepinn.</li>
+      <li><strong>Avkjøl helt</strong> på rist, gjerne 1–2 timer, før du skjærer i brødet.</li>
+    </ol>
+
+    <h3>Oppbevaring</h3>
+    <p>Oppbevar brødet i kjøleskapet i 3–4 dager, eller skjær det i skiver og frys dem ned. Da kan du ta opp én og én skive og riste den. Steketiden avhenger av ovnen og størrelsen på formen. Blir toppen for mørk før brødet er ferdig, kan du legge et ark bakepapir eller aluminiumsfolie løst over.</p>
+
+    <h3>Omtrentlig næringsinnhold</h3>
+    <table class="facts wrap">
+      <tr><th></th><th>Per 100 g</th><th>Per skive (ca. 35 g)</th></tr>
+      <tr><td>Energi</td><td>ca. 350–380 kcal</td><td>ca. 125–135 kcal</td></tr>
+      <tr><td>Karbohydrat</td><td>ca. 4–7 g</td><td>ca. 1,5–2,5 g</td></tr>
+      <tr><td>Kostfiber</td><td>ca. 7–9 g</td><td>ca. 2,5–3 g</td></tr>
+      <tr><td>Protein</td><td>ca. 16–18 g</td><td>ca. 6 g</td></tr>
+      <tr><td>Fett</td><td>ca. 28–32 g</td><td>ca. 10–11 g</td></tr>
+    </table>
+    <p>Til sammenligning har en skive vanlig grovbrød rundt 14–15 g karbohydrater. Fettet kommer i hovedsak fra nøtter og frø, og er for det meste umettet fett, inkludert plantebasert omega-3 fra valnøtter, chia og linfrø.</p>
+    <p class="small-note">Grovt estimat ut fra råvarene og en ferdigvekt på ca. 750 g. Verdiene varierer med produktene og hvor mye fuktighet som fordamper. Vei det ferdigstekte brødet for en mer presis beregning.</p>
+
+    <h3>Forslag til pålegg</h3>
+    <p>Brødet har en mild, nøtteaktig smak og passer til det meste. Kombiner gjerne et proteinpålegg med noe grønt:</p>
+    <ul class="questions">
+      <li><strong>Fisk og sjømat:</strong> røkelaks, gravlaks, makrell i tomat, sardiner, reker med litt majones eller rømme og dill, tunfisk- eller eggerøre, kaviar på egg</li>
+      <li><strong>Egg:</strong> kokt egg i skiver, eggerøre, eller egg og avokado</li>
+      <li><strong>Kjøtt:</strong> fenalår, kalkun- eller kyllingpålegg, kokt skinke, roastbiff med remulade og ristet løk</li>
+      <li><strong>Ost og meieri:</strong> cottage cheese, Philadelphia light eller annen kremost, hvitost, mozzarella med tomat og basilikum, brie med noen valnøtter</li>
+      <li><strong>Grønt og plantebasert:</strong> avokado med sitron og chiliflak, pesto, hummus, mandelsmør eller peanøttsmør uten tilsatt sukker</li>
+      <li><strong>Til toppen:</strong> paprika, agurk, tomat, reddiker, rødløk, ruccola, spinat, karse, gressløk eller dill</li>
+      <li><strong>Litt søtt:</strong> cottage cheese eller kremost med friske bringebær eller blåbær og et dryss kanel</li>
+    </ul>
+    <p><strong>Gode kombinasjoner å teste:</strong></p>
+    <ul class="questions">
+      <li>Avokado, kokt egg, chiliflak og litt havsalt</li>
+      <li>Philadelphia light, røkelaks, agurk og dill</li>
+      <li>Pesto, mozzarella og tomat, gjerne varmet i ovnen</li>
+      <li>Makrell i tomat med rødløk og karse</li>
+      <li>Cottage cheese, paprika og sort pepper</li>
+      <li>Fenalår, kremost og ruccola</li>
+    </ul>
+    <p class="small-note">Fenalår, spekemat og røkt fisk inneholder en del salt, så varier gjerne med fersk fisk, egg og grønt.</p>
+
+    <p class="small-note">Oppskriften er inspirert av et frøbrød fra Thor Foseid, og tilpasset med cottage cheese i stedet for revet ost, lett crème fraîche, hasselnøtter, andre mengder nøtter og frø, og valgfri søtning.</p>
+  </section>
+  <section class="card-section recipe" id="gronnsaksmos">
+    <div class="recipe-tools">
+      <span class="feature-kicker">Middag: tilbehør</span>
+      <button type="button" class="print-btn" data-print="gronnsaksmos">🖨️ Skriv ut oppskriften</button>
+    </div>
+    <h2>🥦 Grønnsaksmos</h2>
+    <p>Et godt alternativ til potetmos, ris eller pasta, som passer til de fleste middagsretter: fisk, kjøttkaker, kylling, kjøtt i saus og gryteretter. Lag gjerne dobbel porsjon med en gang, så har du tilbehør til to middager.</p>
+    <div class="recipe-meta">
+      <span>Ca. 500 g</span>
+      <span>Tilbehør til 2 middager</span>
+      <span>Ca. 30 min</span>
+    </div>
+
+    <h3>Dette trenger du</h3>
+    <ul class="ingredients">
+      <li>1 løk</li>
+      <li>200 g brokkoli</li>
+      <li>200 g blomkål</li>
+      <li>100 g sellerirot</li>
+      <li>4 ss crème fraîche (laktosefri eller vanlig)</li>
+      <li>2 buljongterninger, eller litt hjemmelaget buljong</li>
+      <li>Litt smør eller olje til steking</li>
+    </ul>
+    <p class="small-note">Merk: 2 buljongterninger holder også til dobbel porsjon. Smak heller til med mer på slutten om du trenger det.</p>
+
+    <h3>Slik gjør du</h3>
+    <ol class="steps">
+      <li><strong>Stek løken:</strong> Kutt løken i små terninger og stek den gyllen i litt smør eller olje på svak varme. Beregn god tid (ca. 10–15 minutter), og pass på at løken ikke blir svidd.</li>
+      <li><strong>Kok grønnsakene:</strong> Skrell sellerirota og kutt den i små terninger. Del brokkoli og blomkål i buketter. Kok alt i usaltet vann (buljongen gir nok salt) til grønnsakene er helt myke, ca. 10–15 minutter. Sellerirota trenger lengst tid, så legg den gjerne i først.</li>
+      <li><strong>Hell av vannet:</strong> La grønnsakene renne godt av, så mosen ikke blir vassen.</li>
+      <li><strong>Kjør til mos:</strong> Ha løk, grønnsaker, crème fraîche og buljongterninger i en foodprosessor (eller bruk stavmikser) og kjør til alt er blitt en jevn, fin mos.</li>
+      <li><strong>Smak til</strong> med pepper. Smak før du eventuelt tilsetter mer salt eller buljong.</li>
+    </ol>
+
+    <h3>Næringsinnhold</h3>
+    <p>Omtrentlig næringsinnhold for hele den doble porsjonen (ca. 500 g), fordelt på 4 porsjoner à ca. 125 g (for eksempel 2 middager for 2 personer):</p>
+    <table class="facts">
+      <tr><th></th><th>Per porsjon (125 g)</th><th>Per 100 g</th></tr>
+      <tr><td>Energi</td><td>ca. 120 kcal</td><td>ca. 95 kcal</td></tr>
+      <tr><td>Karbohydrat</td><td>ca. 6 g</td><td>ca. 5 g</td></tr>
+      <tr><td>Kostfiber</td><td>ca. 4 g</td><td>ca. 3 g</td></tr>
+      <tr><td>Protein</td><td>ca. 4 g</td><td>ca. 3 g</td></tr>
+      <tr><td>Fett</td><td>ca. 8 g</td><td>ca. 6 g</td></tr>
+    </table>
+    <p><strong>Til sammenligning</strong> har en tilsvarende porsjon potetmos eller kokte poteter rundt 18–20 g karbohydrater, altså omtrent tre ganger så mye. Grønnsaksmosen gir i tillegg mer fiber, og brokkoli og blomkål er gode kilder til vitamin C, folat og vitamin K.</p>
+    <p><strong>Fettet</strong> kommer i hovedsak fra crème fraîche og smør. Det gjør mosen god og mettende. Vil du ha den lettere, kan du bruke lett crème fraîche eller litt mindre.</p>
+    <p><strong>Salt:</strong> Buljongterninger inneholder mye salt. Med 2 terninger i en dobbel porsjon blir det rundt 2 g salt per porsjon, mens anbefalingen er maks 5 g salt om dagen. Velg gjerne buljong med redusert saltinnhold, eller bruk hjemmelaget buljong.</p>
+    <p class="small-note">Tallene er anslag basert på vanlige næringsverdier for råvarene (blant annet Matvaretabellen), med crème fraîche 35 % og 10 g smør. De varierer med produktene du bruker.</p>
+
+    <h3>Oppbevaring</h3>
+    <p>Mosen holder seg 3–4 dager i kjøleskapet i en tett boks. Varm den opp i kjele eller mikro, og rør gjerne inn en skvett vann eller en klatt crème fraîche om den har blitt litt tykk.</p>
+
+    <h3>Varianter</h3>
+    <p>Bruk oppskriften som et utgangspunkt og varier etter hva du har og hva du skal servere den til:</p>
+    <ul class="ingredients">
+      <li>Bare blomkål og sellerirot gir en lys, mild mos som ligner potetmos.</li>
+      <li>Tilsett et fedd hvitløk sammen med løken, eller litt revet parmesan til slutt.</li>
+      <li>Bytt ut deler av grønnsakene med det du har, for eksempel squash, kålrot eller gulrot.</li>
+      <li>Rør inn hakket persille eller gressløk for mer smak og farge.</li>
+    </ul>
+  </section>
+
+  <section class="card-section intro-section note-section">
+    <p>Vil du ha flere forslag til frokost, middag og kveldsmat? Les <a href="lavkarbo-intro.html">Nysgjerrig på lavkarbo?</a></p>
+  </section>
+
+  <a class="home-link" href="index.html">← Tilbake til forsiden</a>
+
+</div>
+
+<footer class="closing">
+  Små skritt. Dine mål, ditt tempo.<br>
+  <strong>Du trenger ikke gjøre det alene.</strong>
+</footer>
+
+<script>
+  (function () {
+    // Skriv ut én oppskrift (eller alle) ved å skjule de andre mens utskriften lages
+    function clear() {
+      delete document.body.dataset.printOne;
+      document.querySelectorAll('.recipe.print-this').forEach(function (el) { el.classList.remove('print-this'); });
+    }
+    document.querySelectorAll('.print-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        clear();
+        var id = btn.dataset.print;
+        if (id !== 'alle') {
+          document.body.dataset.printOne = id;
+          document.getElementById(id).classList.add('print-this');
+        }
+        window.print();
+      });
+    });
+    window.addEventListener('afterprint', clear);
+  })();
+</script>
+
+</body>
+</html>
