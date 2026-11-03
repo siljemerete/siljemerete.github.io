@@ -421,6 +421,25 @@
     border-color: var(--accent-soft);
   }
 
+  .card-section.offer-banner.christmas {
+    background: linear-gradient(120deg, #1c4632, #2f6d4f);
+    border-color: #1c4632;
+  }
+
+  .offer-banner.christmas .offer-chip {
+    background: #b23a3a;
+    border-color: #b23a3a;
+  }
+
+  .offer-banner.christmas .cta-button {
+    color: #1c4632;
+  }
+
+  .offer-banner.christmas .cta-button:hover {
+    background: #e7f3ea;
+    border-color: #e7f3ea;
+  }
+
   @media (max-width: 560px) {
     .offer-banner { justify-content: center; text-align: center; }
     .offer-content { flex-direction: column; gap: 0.5rem; }
@@ -926,6 +945,17 @@
       </div>
     </div>
     <a class="cta-button" href="helsesjekk.html">Meld deg på →</a>
+  </section>
+
+  <section id="julekalender-banner" class="card-section offer-banner christmas">
+    <div class="offer-content">
+      <span class="offer-chip">🎄 Nytt</span>
+      <div class="offer-text">
+        <h2>Julekalender: styrke og tilstedeværelse</h2>
+        <p>24 luker frem mot jul, med én styrkeøvelse og én tilstedeværelsesøvelse hver dag.</p>
+      </div>
+    </div>
+    <a class="cta-button" href="julekalender.html">Åpne kalenderen →</a>
   </section>
 
   <section id="om-meg" class="card-section">
