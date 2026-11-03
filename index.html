@@ -436,6 +436,25 @@
     border-color: var(--accent-soft);
   }
 
+  .card-section.offer-banner.christmas {
+    background: linear-gradient(120deg, #1c4632, #2f6d4f);
+    border-color: #1c4632;
+  }
+
+  .offer-banner.christmas .offer-chip {
+    background: #b23a3a;
+    border-color: #b23a3a;
+  }
+
+  .offer-banner.christmas .cta-button {
+    color: #1c4632;
+  }
+
+  .offer-banner.christmas .cta-button:hover {
+    background: #e7f3ea;
+    border-color: #e7f3ea;
+  }
+
   @media (max-width: 560px) {
     .offer-banner { justify-content: center; text-align: center; }
     .offer-content { flex-direction: column; gap: 0.5rem; }
@@ -1103,6 +1122,17 @@
     <a class="cta-button" href="helsesjekk.html">Meld deg på →</a>
   </section>
 
+  <section id="julekalender-banner" class="card-section offer-banner christmas">
+    <div class="offer-content">
+      <span class="offer-chip">🎄 Nytt</span>
+      <div class="offer-text">
+        <h2>Julekalender: styrke og tilstedeværelse</h2>
+        <p>24 luker frem mot jul, med én styrkeøvelse og én tilstedeværelsesøvelse hver dag.</p>
+      </div>
+    </div>
+    <a class="cta-button" href="julekalender.html">Åpne kalenderen →</a>
+  </section>
+
   <section id="om-meg" class="card-section">
     <p class="kicker">Din veileder</p>
     <h2>Om meg</h2>
@@ -1273,6 +1303,18 @@
         <p class="note">Krever kode fra Silje Merete</p>
       </a>
     </div>
+
+    <details class="resource-toggle" open>
+      <summary>🎄 Julekalender <span class="chevron">▸</span></summary>
+      <div class="resource-toggle-body">
+        <div class="resource-grid">
+          <a class="resource-card" href="julekalender.html">
+            <h3>Julekalender: styrke og tilstedeværelse</h3>
+            <p>24 luker frem mot jul, med én styrkeøvelse og én tilstedeværelses- eller meditasjonsøvelse hver dag. Hver luke åpner fra og med sin egen dato i desember.</p>
+          </a>
+        </div>
+      </div>
+    </details>
 
     <details class="resource-toggle">
       <summary>Stressmestring og søvn <span class="chevron">▸</span></summary>

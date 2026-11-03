@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Julekalender | Silje Merete SMART Helseveiledning</title>
+<meta name="description" content="Julekalender med 24 luker: én styrkeøvelse og én tilstedeværelses-/meditasjonsøvelse hver dag. Hver luke åpnes kun fra og med sin egen dato i desember.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f6efdd;
+    --paper-deep: #efe4c8;
+    --card: #fbf6e9;
+    --ink: #2b2318;
+    --muted: #6d5f47;
+    --rose: #b23a3a;
+    --rose-deep: #7a1414;
+    --rose-soft: #f1e0cc;
+    --charcoal: #3f3b2f;
+    --border: #ddcda3;
+    --shadow: 0 2px 8px rgba(43, 35, 24, 0.10);
+    --frame-w: 30px;
+  }
+
+  @media (max-width: 480px) {
+    :root { --frame-w: 16px; }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: "EB Garamond", Georgia, "Times New Roman", serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 1.08rem;
+  }
+
+  h1, h2 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+  }
+
+  .wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  /* Enkel dobbel border rundt hele kalenderen, med rose-illustrasjoner i hjørnene */
+  .page-frame {
+    position: relative;
+    margin: 0 auto;
+    max-width: calc(900px + 2 * var(--frame-w) + 2rem);
+    padding: var(--frame-w);
+    border: 5px double var(--rose);
+    border-radius: 6px;
+  }
+
+  .frame-corner {
+    position: absolute;
+    width: clamp(56px, 8vw, 120px);
+    height: clamp(56px, 8vw, 120px);
+    object-fit: contain;
+    pointer-events: none;
+  }
+
+  .frame-corner.tl { top: -10px; left: -10px; }
+  .frame-corner.tr { top: -10px; right: -10px; transform: scaleX(-1); }
+  .frame-corner.bl { bottom: -10px; left: -10px; transform: scaleY(-1); }
+  .frame-corner.br { bottom: -10px; right: -10px; transform: scale(-1, -1); }
+
+  .angel-image {
+    display: block;
+    width: clamp(140px, 22vw, 220px);
+    margin: 1.5rem auto 0.5rem;
+  }
+
+  .heart-image {
+    display: block;
+    width: clamp(60px, 9vw, 92px);
+    margin: 0.4rem auto 0;
+  }
+
+  .title-plaque {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0 1rem;
+  }
+
+  .title-flourish {
+    width: clamp(70px, 10vw, 130px);
+    flex-shrink: 0;
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+    margin: 0 -6px;
+  }
+
+  .title-flourish.right { transform: scaleX(-1); }
+
+  .title-plaque h1 {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    background: var(--paper);
+    border: 4px double var(--rose);
+    border-radius: 2px;
+    padding: 0.65rem 1.75rem;
+    font-size: clamp(1.3rem, 3.4vw, 1.9rem);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--rose-deep);
+  }
+
+  .lede {
+    text-align: center;
+    color: var(--muted);
+    max-width: 52ch;
+    margin: 0 auto 0.7rem;
+    font-size: 1.08rem;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin: 2.25rem 0;
+    color: var(--rose);
+  }
+
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .divider span {
+    font-size: 1.2rem;
+  }
+
+  .status-banner {
+    margin: 1.5rem auto 0;
+    background: var(--card);
+    border: 3px double var(--rose);
+    border-radius: 999px;
+    padding: 0.9rem 1.5rem;
+    box-shadow: var(--shadow);
+    text-align: center;
+    color: var(--muted);
+  }
+
+  .status-banner strong {
+    color: var(--rose-deep);
+  }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    margin: 2rem 0;
+  }
+
+  @media (min-width: 560px) {
+    .calendar-grid { grid-template-columns: repeat(6, 1fr); }
+  }
+
+  .door {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    background: var(--card);
+    color: var(--ink);
+    box-shadow: var(--shadow);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .door .icon {
+    font-size: 1.1rem;
+    margin-top: 0.15rem;
+    letter-spacing: 0.1rem;
+  }
+
+  .door:not(:disabled):hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 4px 10px rgba(43, 35, 24, 0.18);
+  }
+
+  .door.today {
+    background: var(--rose);
+    border-color: var(--rose-deep);
+    color: #fbf6e9;
+    box-shadow: 0 0 0 3px var(--rose-soft), var(--shadow);
+    animation: glow 1.8s ease-in-out infinite;
+  }
+
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 0 3px var(--rose-soft), 0 0 0px rgba(182,80,47,0.5); }
+    50% { box-shadow: 0 0 0 3px var(--rose-soft), 0 0 14px rgba(182,80,47,0.65); }
+  }
+
+  .door.opened {
+    background: var(--paper-deep);
+    color: var(--rose-deep);
+  }
+
+  .door.locked {
+    background: #e7ddc4;
+    border-color: var(--border);
+    color: #a1937a;
+    cursor: not-allowed;
+  }
+
+  .door.locked .icon { opacity: 0.6; }
+
+  .door.big {
+    font-size: 2.2rem;
+    border-radius: 6px;
+  }
+
+  .door.big .icon { font-size: 2rem; }
+
+  .door.big .label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: 0.2rem;
+    font-family: "EB Garamond", Georgia, serif;
+    font-style: italic;
+  }
+
+  .door.bonus {
+    aspect-ratio: auto;
+    border-style: dashed;
+    font-size: 2rem;
+    justify-self: center;
+    align-self: center;
+    width: 62%;
+    height: 62%;
+  }
+
+  .door.bonus .label {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 0.25rem;
+    font-family: "EB Garamond", Georgia, serif;
+    font-style: italic;
+  }
+
+  /* Desktop: 6-kolonners grid. Bonusluke 25 fyller resten av raden ved
+     siden av luke 24, i samme høyde, men avlang i stedet for kvadratisk. */
+  @media (min-width: 560px) {
+    .door.big { grid-column: 1 / 3; grid-row: 5 / 7; }
+    .door.bonus { grid-column: 3 / 7; grid-row: 5 / 7; }
+  }
+
+  /* Mobil: 4-kolonners grid. Bonusluken får sin egen avlange rad
+     under den store luke 24. */
+  @media (max-width: 559px) {
+    .door.big { grid-column: 1 / 3; grid-row: 7 / 9; }
+    .door.bonus { grid-column: 1 / 5; grid-row: 9 / 11; height: 112px; }
+  }
+
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(43, 35, 24, 0.55);
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    z-index: 50;
+  }
+
+  .modal-overlay.show {
+    display: flex;
+  }
+
+  .modal {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    max-width: 440px;
+    width: 100%;
+    padding: 2rem 1.75rem 1.75rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    text-align: center;
+    position: relative;
+  }
+
+  .modal .modal-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.9rem;
+    border: none;
+    background: none;
+    font-size: 1.3rem;
+    color: var(--muted);
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .modal .modal-number {
+    display: inline-block;
+    background: var(--paper-deep);
+    color: var(--rose-deep);
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border-radius: 999px;
+    padding: 0.25rem 0.9rem;
+    margin-bottom: 1.1rem;
+    font-size: 0.95rem;
+  }
+
+  .modal .modal-icon {
+    font-size: 2.4rem;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .modal .modal-tag {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+
+  .modal .modal-tag.styrke { color: var(--rose-deep); }
+  .modal .modal-tag.tilstedevaerelse { color: var(--rose); }
+
+  .modal h2 {
+    margin: 0 0 0.75rem;
+    color: var(--ink);
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+
+  .modal p.desc {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .modal p.desc + p.desc {
+    margin-top: 0.85rem;
+  }
+
+  .modal .affirmation-quote {
+    margin: 1rem 0;
+    text-align: left;
+  }
+
+  .modal.locked-modal .modal-icon { font-size: 2rem; }
+
+  .modal-section {
+    text-align: center;
+  }
+
+  .modal-section + .modal-section {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    position: relative;
+    border-top: 1px solid var(--border);
+  }
+
+  .modal-section + .modal-section::before {
+    content: "❦";
+    position: absolute;
+    top: -0.85rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--card);
+    padding: 0 0.6rem;
+    color: var(--rose);
+    font-size: 1.1rem;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem 1.5rem 1.75rem;
+    margin: 2rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .card h2 {
+    margin: 0 0 0.6rem;
+    color: var(--rose-deep);
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .card p {
+    margin: 0 0 0.6rem;
+    color: var(--muted);
+  }
+
+  .card p:last-child { margin-bottom: 0; }
+
+  .bonus-card {
+    background: var(--paper-deep);
+    border-color: var(--border);
+  }
+
+  .bonus-card h2 {
+    color: var(--rose-deep);
+  }
+
+  .affirmation-quote {
+    margin: 1rem 0;
+    padding: 1rem 1.25rem;
+    background: var(--card);
+    border: 1px dashed var(--rose);
+    border-radius: 4px;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--ink);
+  }
+
+  .affirmation-quote .affirmation-example {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    font-style: normal;
+    font-family: "EB Garamond", Georgia, serif;
+    color: var(--muted);
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.75rem;
+  }
+
+  .legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+
+  .legend .dot {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .legend .dot.strength { background: var(--rose); }
+  .legend .dot.care { background: var(--rose-deep); opacity: 0.7; }
+  .legend .dot.locked { background: #e7ddc4; }
+
+  .home-link {
+    display: block;
+    text-align: center;
+    margin: 1rem 0 3rem;
+    color: var(--rose-deep);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .home-link:hover { text-decoration: underline; }
+
+  footer.closing {
+    margin: 0 0 1rem;
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  footer.closing strong {
+    color: var(--rose-deep);
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 1.1rem;
+  }
+</style>
+<!--
+  Statistikk: anonym, personvernvennlig sporing via GoatCounter (ingen
+  cookies, ingen personopplysninger, ingen samtykkebanner nødvendig).
+  Bytt ut "silje-julekalender" under med din egen site-kode fra
+  https://www.goatcounter.com/ (gratis) før 1. desember, så vises
+  besøk og luke-åpninger live på https://DIN-KODE.goatcounter.com
+-->
+<script data-goatcounter="https://silje-julekalender.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+<div class="page-frame">
+  <img class="frame-corner tl" src="images/julekalender-rose-hjorne.png" alt="">
+  <img class="frame-corner tr" src="images/julekalender-rose-hjorne.png" alt="">
+  <img class="frame-corner bl" src="images/julekalender-rose-hjorne.png" alt="">
+  <img class="frame-corner br" src="images/julekalender-rose-hjorne.png" alt="">
+
+<section class="manuscript-top">
+  <div class="title-plaque">
+    <img class="title-flourish left" src="images/julekalender-rose-tittel.png" alt="">
+    <h1>Julekalender</h1>
+    <img class="title-flourish right" src="images/julekalender-rose-tittel.png" alt="">
+  </div>
+  <div class="wrap">
+    <p class="lede">24 luker frem mot jul. Bak hver luke venter to øvelser, velg én eller gjør begge to. Gjør det for din egen skyld, og kjenn etter hvordan kroppen føles underveis og etterpå.</p>
+    <p class="lede">Passer ikke en øvelse, eller er du usikker på teknikken? Bytt den gjerne ut med et annet alternativ i samme kategori som føles trygt og godt for deg.</p>
+    <p class="lede">Heia deg!</p>
+    <img class="heart-image" src="images/julekalender-hjerte-ranke.png" alt="Illustrert hjerte omkranset av roser">
+  </div>
+</section>
+
+<div class="wrap">
+
+  <div class="status-banner" id="status-banner"></div>
+
+  <div class="calendar-grid" id="calendar-grid"></div>
+
+  <section class="card">
+    <h2>Slik virker kalenderen</h2>
+    <p>Hver luke inneholder én styrkeøvelse og én tilstedeværelses- eller meditasjonsøvelse. Luken låses opp på sin egen dato i desember, og blir værende åpen resten av måneden. Du kan altså gå tilbake og åpne tidligere luker igjen når du vil, men de dagene som ikke har vært ennå, er fortsatt låst.</p>
+    <p>Luke 24 er litt større enn de andre. Det er tross alt julaften! Nederst finner du også en avlang bonusluke som åpner 25. desember, med en liten oppgave om å lage din egen affirmasjon for 2027.</p>
+    <div class="legend">
+      <span><span class="dot strength"></span> Styrketrening</span>
+      <span><span class="dot care"></span> Tilstedeværelse / meditasjon</span>
+      <span><span class="dot locked"></span> Låst luke</span>
+    </div>
+  </section>
+
+  <a class="home-link" href="index.html">Se hjemmesiden min →</a>
+
+  <img class="angel-image" src="images/julekalender-engel-ranke.png" alt="Tegnet engel omkranset av blader, med en rose og sløyfe nederst">
+
+</div>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="modal"></div>
+</div>
+
+<footer class="closing">
+  Små skritt. Dine mål, ditt tempo.<br>
+  <strong>God adventstid, og god jul!</strong>
+</footer>
+
+</div>
+
+<script>
+  // Send en anonym telling til GoatCounter for en luke-åpning, uten å
+  // knekke kalenderen hvis skriptet ikke er lastet ennå (f.eks. tregt
+  // nett) eller sporing er blokkert av nettleseren.
+  function trackEvent(path, title) {
+    try {
+      if (window.goatcounter && window.goatcounter.count) {
+        window.goatcounter.count({ path: path, title: title, event: true });
+      }
+    } catch (e) { /* ignore */ }
+  }
+
+  var DOORS = [
+    { n: 1,
+      strength: { icon: "🦵", title: "10 knebøy", desc: "Stå med føttene i hoftebredde. Bøy knærne som om du skal sette deg ned, og reis deg opp igjen. 10 repetisjoner, i eget tempo." },
+      presence: { icon: "🕯️", title: "Tenn et lys", desc: "Tenn et lys og bli sittende stille i 2 minutter. Ikke gjør noe annet, bare vær." } },
+    { n: 2,
+      strength: { icon: "🧍", title: "Planke, 20 sekunder", desc: "Hold en planke-posisjon i 20 sekunder. Gjerne på knærne hvis det kjennes bedre for deg i dag." },
+      presence: { icon: "👂", title: "Lytt innover", desc: "Kjenn etter hvordan kroppen og humøret ditt egentlig er akkurat nå, uten å prøve å endre noe. Bare legg merke til det." } },
+    { n: 3,
+      strength: { icon: "🚶", title: "10 utfall per bein", desc: "Ta et langt steg frem og bøy begge knær til en utfallsposisjon. 10 repetisjoner på hvert bein." },
+      presence: { icon: "🌬️", title: "Boksepust i ett minutt", desc: "Pust inn på 4 sekunder, hold i 4, pust ut på 4, hold i 4. Gjenta rolig i ett minutt." } },
+    { n: 4,
+      strength: { icon: "🪑", title: "Reis deg fra stolen, 10 ganger", desc: "Sitt på en stol og reis deg opp uten å bruke hendene. Sett deg rolig ned igjen. Gjenta 10 ganger." },
+      presence: { icon: "🧘", title: "Kroppsskanning", desc: "Legg merke til kroppen din, del for del, fra tær til isse. Bare kjenn etter, uten å endre noe. 3–5 minutter." } },
+    { n: 5,
+      strength: { icon: "🦶", title: "12 tåhev", desc: "Stå og løft deg opp på tærne, senk deg rolig ned igjen. 12 repetisjoner. Hold gjerne i noe for balanse." },
+      presence: { icon: "⏳", title: "7 minutter for deg selv", desc: "Sett en tidtaker på 7 minutter. Lukk øynene, pust rolig, og la tankene komme og gå uten å henge deg opp i dem." } },
+    { n: 6,
+      strength: { icon: "🌉", title: "Hoftehev, 12 repetisjoner", desc: "Ligg på ryggen med bøyde knær. Løft hoftene opp mot taket og senk dem rolig ned igjen. 12 repetisjoner." },
+      presence: { icon: "☀️", title: "Nyt dagslyset", desc: "Gå ut, eller sett deg nær et vindu, i noen minutter. La dagslyset falle på ansiktet og huden. Dagslys er naturlig lykkehormon-påfyll, selv på en grå desemberdag." } },
+    { n: 7,
+      strength: { icon: "↔️", title: "Sideplanke, 15 sek per side", desc: "Hold en sideplanke i 15 sekunder på hver side. Støtt deg gjerne på underarmen og et bøyd underben." },
+      presence: { icon: "🌍", title: "Kjenn bakken under deg", desc: "Stå stille i ett minutt og kjenn hvordan føttene dine hviler mot gulvet. Legg merke til kontakten, punkt for punkt." } },
+    { n: 8,
+      strength: { icon: "🧱", title: "Vegghold, 20–30 sekunder", desc: "Len ryggen mot en vegg og gli ned til en sittende stilling med bøyde knær, som om du satt på en usynlig stol. Hold i 20–30 sekunder." },
+      presence: { icon: "🤗", title: "Gi noen en klem", desc: "Gi noen du er glad i en god klem, eller gi deg selv en klem med armene rundt kroppen. Klem er en enkel snarvei til oksytocin, kroppens eget \"knytningshormon\"." } },
+    { n: 9,
+      strength: { icon: "💪", title: "10 armhevninger", desc: "Gjør 10 armhevninger, gjerne på knærne om det kjennes bedre. Kvalitet fremfor fart." },
+      presence: { icon: "☕", title: "En kopp i ro", desc: "Lag deg en kopp te eller kakao. Drikk den sakte, uten skjerm, og kjenn smaken og varmen." } },
+    { n: 10,
+      strength: { icon: "🦸", title: "\"Superman\", 10 repetisjoner", desc: "Ligg på magen og løft armer og bein samtidig, som om du flyr. Senk rolig ned igjen. 10 repetisjoner." },
+      presence: { icon: "👀", title: "To minutter uten telefon", desc: "Se ut av vinduet eller rundt deg i rommet i 2 minutter. Bare observer, uten å ta opp telefonen." } },
+    { n: 11,
+      strength: { icon: "🐦", title: "\"Fugl-hund\", 8 per side", desc: "Stå på alle fire. Strekk motsatt arm og bein rett ut samtidig, hold litt, og senk rolig ned. 8 repetisjoner per side." },
+      presence: { icon: "🌬️", title: "Følg pusten din", desc: "Legg en hånd på magen. Legg merke til pusten din i 2 minutter, uten å prøve å endre den." } },
+    { n: 12,
+      strength: { icon: "🍑", title: "Sumo-knebøy, 10 repetisjoner", desc: "Stå med bena bredere enn hoftebredde og tærne litt utover. Bøy knærne rett over tærne og reis deg opp igjen. 10 repetisjoner." },
+      presence: { icon: "🦋", title: "Din egen julehilsen", desc: "Lag din egen affirmasjon for jula, en bekreftende setning du gir deg selv. Fullfør «Jeg er ______» eller «Jeg har ______», og gjenta den for deg selv resten av måneden." } },
+    { n: 13,
+      strength: { icon: "🪑", title: "Tricepsdips i stolkant, 10 stk", desc: "Sett hendene i kanten av en stol med bena foran deg. Bøy og strekk albuene rolig. 10 repetisjoner." },
+      presence: { icon: "🥶", title: "En kald overraskelse", desc: "Avslutt dusjen med 20–30 sekunder kaldt vann, eller prøv en kort isbading om du har mulighet. Kulde kan gi et raskt løft for humør, søvn og immunforsvar." } },
+    { n: 14,
+      strength: { icon: "🪜", title: "Step-up, 10 per bein", desc: "Bruk et nederste trappetrinn eller en solid krakk. Trå opp og ned, kontrollert. 10 repetisjoner per bein." },
+      presence: { icon: "🍵", title: "Bevisst slurk", desc: "Hold en varm kopp i hendene. Kjenn varmen mot håndflatene i ett minutt før du tar den første slurken." } },
+    { n: 15,
+      strength: { icon: "🌀", title: "Sittende vridning, 10 per side", desc: "Sitt med rak rygg og vri overkroppen rolig fra side til side. 10 repetisjoner per side." },
+      presence: { icon: "💛", title: "Legg merke til følelsen", desc: "Sett ord på én følelse du kjenner akkurat nå, uten å dømme den som riktig eller feil. Bare legg merke til den." } },
+    { n: 16,
+      strength: { icon: "👐", title: "Planke med skuldertrykk, 10 per side", desc: "I planke-posisjon, løft én hånd og trykk kort på motsatt skulder. Bytt side. 10 repetisjoner per side." },
+      presence: { icon: "🍊", title: "Nyt en julaktig duft", desc: "Kjenn på duften av kanel, appelsin, gran eller noe annet som minner deg om jula. Pust den rolig inn, og legg merke til hvilke minner eller følelser den vekker." } },
+    { n: 17,
+      strength: { icon: "🔙", title: "Baklengs utfall, 10 per bein", desc: "Ta et steg bakover og bøy begge knær til en utfallsposisjon. 10 repetisjoner per bein." },
+      presence: { icon: "🪑", title: "Kjenn vekten din", desc: "Sitt stille og legg merke til hvor kroppen din hviler mot stolen eller gulvet. Ett minutt." } },
+    { n: 18,
+      strength: { icon: "🦿", title: "Beinløft liggende, 10 per side", desc: "Ligg på siden med bena rett. Løft det øverste beinet rolig opp og ned. 10 repetisjoner per side." },
+      presence: { icon: "😂", title: "Le sammen med noen", desc: "Se noe morsomt sammen med noen, eller gjør noe du blir i godt humør av. Le høyt alene for deg selv eller sammen med andre, det senker skuldrene og løfter humøret." } },
+    { n: 19,
+      strength: { icon: "🧎", title: "Armhevninger mot vegg, 10 stk", desc: "Stå med hendene mot en vegg litt bredere enn skulderbredde. Bøy og strekk albuene. 10 repetisjoner." },
+      presence: { icon: "🏡", title: "Et trygt sted", desc: "Lukk øynene og se for deg et sted du kjenner deg helt trygg og rolig. Bli der i 2 minutter." } },
+    { n: 20,
+      strength: { icon: "🦵", title: "Ettbeint tåhev, 8 per bein", desc: "Stå på ett bein og løft deg opp på tå, senk rolig ned. 8 repetisjoner per bein. Hold i noe for balanse." },
+      presence: { icon: "🙌", title: "Strekk og pust", desc: "Strekk armene opp mot taket. Pust dypt inn og ut, tre ganger, og kjenn strekket gjennom hele kroppen." } },
+    { n: 21,
+      strength: { icon: "🪑", title: "Sittende beinstrekk, 10 per bein", desc: "Sitt på en stol og strekk det ene kneet rett ut, senk rolig ned igjen. 10 repetisjoner per bein." },
+      presence: { icon: "🍫", title: "En bit mørk sjokolade", desc: "Ta deg en liten bit mørk sjokolade og nyt den helt sakte. Legg merke til smak og tekstur, og kjenn at du unner deg selv noe godt." } },
+    { n: 22,
+      strength: { icon: "🍼", title: "Skulderpress med flasker, 10 stk", desc: "Hold en vannflaske i hver hånd. Press dem opp over hodet og senk rolig ned igjen. 10 repetisjoner." },
+      presence: { icon: "🙆", title: "Skulder og nakke i ro", desc: "Rull skuldrene rolig bakover 10 ganger, og strekk nakken forsiktig til hver side. La pusten følge bevegelsen." } },
+    { n: 23,
+      strength: { icon: "🐌", title: "Sakte knebøy, 8 repetisjoner", desc: "Gjør 8 knebøy i sakte tempo, tell til 4 ned og 4 opp. Legg merke til musklene som jobber." },
+      presence: { icon: "✉️", title: "Et lite ord til deg selv", desc: "Tenk gjennom, eller skriv ned, én ting du vil huske fra året som har gått. La deg selv kjenne stolthet." } },
+    { n: 24,
+      strength: { icon: "💃", title: "Fri bevegelse, 3 minutter", desc: "Sett på favorittjulesangen din og beveg deg fritt i 3 minutter. Ingen regler, bare kroppen og musikken." },
+      presence: { icon: "🎄", title: "Juleaften-ro", desc: "Tenn alle lysene. Ta deg 10 minutter helt for deg selv, pust dypt, og kjenn stoltheten over hver eneste dag gjennom året som har gått. Du er fantastisk, og jeg ønsker deg en riktig god jul! ❤️" } }
+  ];
+
+  function todayInfo() {
+    var now = new Date();
+    return { isDecember: now.getMonth() === 11, date: now.getDate(), month: now.getMonth(), year: now.getFullYear() };
+  }
+
+  // En luke er tilgjengelig fra og med sin egen dato, ut desember.
+  function isUnlocked(door, t) {
+    if (!t.isDecember) return false;
+    return door.n <= t.date;
+  }
+
+  function renderStatus() {
+    var t = todayInfo();
+    var banner = document.getElementById("status-banner");
+    if (t.isDecember && t.date >= 1 && t.date <= 24) {
+      banner.innerHTML = "I dag er det <strong>" + t.date + ". desember</strong>. Luke " + t.date + " er åpen for deg i dag, og alle lukene før den kan også åpnes igjen.";
+    } else if (t.isDecember && t.date > 24) {
+      banner.innerHTML = "God jul! Alle lukene, inkludert bonusluken med din affirmasjon for 2027, er åpne. <strong>Riktig godt nytt år!</strong>";
+    } else {
+      banner.innerHTML = "Kalenderen våkner <strong>1. desember</strong>. Kom tilbake da for å åpne den første luken!";
+    }
+  }
+
+  var BONUS_DOOR = { n: 25 };
+
+  function renderGrid() {
+    var t = todayInfo();
+    var grid = document.getElementById("calendar-grid");
+    grid.innerHTML = "";
+
+    DOORS.concat([BONUS_DOOR]).forEach(function (door) {
+      var isBonus = door.n === 25;
+      var unlocked = isUnlocked(door, t);
+      var isToday = t.isDecember && t.date === door.n;
+
+      var btn = document.createElement("button");
+      btn.className = "door" + (door.n === 24 ? " big" : "") + (isBonus ? " bonus" : "");
+      if (isToday) btn.className += " today";
+      else if (unlocked) btn.className += " opened";
+      else btn.className += " locked";
+
+      var numberHtml = "<span>" + door.n + "</span>";
+      var iconHtml = unlocked ? "" : "<span class=\"icon\">🔒</span>";
+      var labelHtml = "";
+      if (door.n === 24) labelHtml = "<span class=\"label\">Julaften</span>";
+      if (isBonus) labelHtml = "<span class=\"label\">Bonus for 2027!</span>";
+      btn.innerHTML = numberHtml + iconHtml + labelHtml;
+
+      btn.setAttribute("aria-label", isBonus ? "Bonusluke 25: Din affirmasjon for 2027" : "Luke " + door.n);
+      btn.addEventListener("click", function () {
+        if (unlocked) {
+          if (isBonus) openBonusModal(); else openModal(door);
+        } else {
+          openLockedModal(door, t);
+        }
+      });
+
+      grid.appendChild(btn);
+    });
+  }
+
+  function renderSection(type, tagLabel, item) {
+    return "<div class=\"modal-section\">" +
+      "<span class=\"modal-icon\">" + item.icon + "</span>" +
+      "<div class=\"modal-tag " + type + "\">" + tagLabel + "</div>" +
+      "<h2>" + item.title + "</h2>" +
+      "<p class=\"desc\">" + item.desc + "</p>" +
+      "</div>";
+  }
+
+  function openModal(door) {
+    trackEvent("/luke-" + door.n, "Luke " + door.n + " åpnet");
+    var modal = document.getElementById("modal");
+    modal.className = "modal";
+    modal.innerHTML =
+      "<button class=\"modal-close\" id=\"modal-close\" aria-label=\"Lukk\">✕</button>" +
+      "<span class=\"modal-number\">Luke " + door.n + "</span>" +
+      renderSection("styrke", "Styrketrening", door.strength) +
+      renderSection("tilstedevaerelse", "Tilstedeværelse", door.presence);
+    showOverlay();
+  }
+
+  function openBonusModal() {
+    trackEvent("/luke-25-bonus", "Luke 25 (bonus) åpnet");
+    var modal = document.getElementById("modal");
+    modal.className = "modal";
+    modal.innerHTML =
+      "<button class=\"modal-close\" id=\"modal-close\" aria-label=\"Lukk\">✕</button>" +
+      "<span class=\"modal-number\">Luke 25</span>" +
+      "<div class=\"modal-section\">" +
+        "<span class=\"modal-icon\">🦋</span>" +
+        "<div class=\"modal-tag tilstedevaerelse\">Bonus</div>" +
+        "<h2>La 2027 bli ditt år</h2>" +
+        "<p class=\"desc\">En affirmasjon er en kort, bekreftende setning du gir deg selv, ord du velger å tro på igjen og igjen, til de blir sanne for deg. Det er mental trening: du bestemmer selv hvilke tanker som skal få plass, og dermed også hvordan du skal ha det. Ord er mektige. De setter spor.</p>" +
+        "<p class=\"desc\">Romjula, de rolige dagene mellom jul og nyttår, er en fin anledning til å lage din egen affirmasjon for året som kommer. Ikke et nyttårsforsett du skal presse deg selv til å huske, men en påminnelse om hvem du allerede er, eller hvem du er på vei til å bli:</p>" +
+        "<blockquote class=\"affirmation-quote\">«Jeg er ________________, og i 2027 vil jeg ________________.»<span class=\"affirmation-example\">Et eksempel: «Jeg er god nok som jeg er, og i 2027 vil jeg fortsette å velge meg selv.»</span></blockquote>" +
+        "<p class=\"desc\">Skriv den ned et sted du ser den ofte, si den høyt, eller gjenta den for deg selv. Gjør det som føles riktig for deg, og la 2027 bli ditt år.</p>" +
+      "</div>";
+    showOverlay();
+  }
+
+  function openLockedModal(door, t) {
+    var modal = document.getElementById("modal");
+    modal.className = "modal locked-modal";
+    var message;
+    if (!t.isDecember) {
+      message = "Denne luken åpner først " + door.n + ". desember.";
+    } else {
+      message = "Denne luken åpner " + door.n + ". desember. Bare " + (door.n - t.date) + " dag" + (door.n - t.date === 1 ? "" : "er") + " igjen!";
+    }
+    modal.innerHTML =
+      "<button class=\"modal-close\" id=\"modal-close\" aria-label=\"Lukk\">✕</button>" +
+      "<span class=\"modal-icon\">🔒</span>" +
+      "<h2>Luke " + door.n + " er låst</h2>" +
+      "<p class=\"desc\">" + message + "</p>";
+    showOverlay();
+  }
+
+  function showOverlay() {
+    var overlay = document.getElementById("modal-overlay");
+    overlay.className = "modal-overlay show";
+    document.getElementById("modal-close").addEventListener("click", closeModal);
+  }
+
+  function closeModal() {
+    document.getElementById("modal-overlay").className = "modal-overlay";
+  }
+
+  document.getElementById("modal-overlay").addEventListener("click", function (e) {
+    if (e.target === this) closeModal();
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeModal();
+  });
+
+  renderStatus();
+  renderGrid();
+</script>
+
+</body>
+</html>
