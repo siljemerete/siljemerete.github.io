@@ -679,8 +679,9 @@
   }
 
   function renderSection(type, tagLabel, item) {
+    var iconHtml = type === "styrke" ? "" : "<span class=\"modal-icon\">" + item.icon + "</span>";
     return "<div class=\"modal-section\">" +
-      "<span class=\"modal-icon\">" + item.icon + "</span>" +
+      iconHtml +
       "<div class=\"modal-tag " + type + "\">" + tagLabel + "</div>" +
       "<h2>" + item.title + "</h2>" +
       "<p class=\"desc\">" + item.desc + "</p>" +
