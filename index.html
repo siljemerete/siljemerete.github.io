@@ -17,6 +17,9 @@
 <meta name="theme-color" content="#1f3c5c">
 <link rel="icon" href="images/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f4f8fb;
@@ -436,28 +439,54 @@
     border-color: var(--accent-soft);
   }
 
-  .card-section.offer-banner.christmas {
-    background: linear-gradient(120deg, #1c4632, #2f6d4f);
-    border-color: #1c4632;
-  }
-
-  .offer-banner.christmas .offer-chip {
-    background: #b23a3a;
-    border-color: #b23a3a;
-  }
-
-  .offer-banner.christmas .cta-button {
-    color: #1c4632;
-  }
-
-  .offer-banner.christmas .cta-button:hover {
-    background: #e7f3ea;
-    border-color: #e7f3ea;
-  }
-
   @media (max-width: 560px) {
     .offer-banner { justify-content: center; text-align: center; }
     .offer-content { flex-direction: column; gap: 0.5rem; }
+  }
+
+  .julekalender-cta {
+    margin: 2.25rem 0;
+    text-align: center;
+  }
+
+  .julekalender-cta-link {
+    display: inline-block;
+    max-width: 100%;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    background: #f6efdd;
+    border: 4px double #b23a3a;
+    border-radius: 4px;
+    color: #7a1414;
+    padding: 1.6rem 3.25rem;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(43, 35, 24, 0.10);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .julekalender-cta-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(43, 35, 24, 0.18);
+  }
+
+  .julekalender-cta-title {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .julekalender-cta-sub {
+    display: block;
+    margin-top: 0.45rem;
+    font-family: "EB Garamond", Georgia, serif;
+    font-size: 1.02rem;
+    color: #6d5f47;
+  }
+
+  @media (max-width: 560px) {
+    .julekalender-cta-link { padding: 1.3rem 1.6rem; }
+    .julekalender-cta-title { font-size: 1.55rem; }
+    .julekalender-cta-sub { font-size: 0.92rem; }
   }
 
   /* Om meg */
@@ -1122,15 +1151,11 @@
     <a class="cta-button" href="helsesjekk.html">Meld deg på →</a>
   </section>
 
-  <section id="julekalender-banner" class="card-section offer-banner christmas">
-    <div class="offer-content">
-      <span class="offer-chip">🎄 Nytt</span>
-      <div class="offer-text">
-        <h2>Julekalender: styrke og tilstedeværelse</h2>
-        <p>24 luker frem mot jul, med én styrkeøvelse og én tilstedeværelsesøvelse hver dag.</p>
-      </div>
-    </div>
-    <a class="cta-button" href="julekalender.html">Åpne kalenderen →</a>
+  <section id="julekalender-banner" class="julekalender-cta">
+    <a class="julekalender-cta-link" href="julekalender.html">
+      <span class="julekalender-cta-title">🎄 Julekalender 2026</span>
+      <span class="julekalender-cta-sub">24 luker med styrke og tilstedeværelse frem mot jul</span>
+    </a>
   </section>
 
   <section id="om-meg" class="card-section">
