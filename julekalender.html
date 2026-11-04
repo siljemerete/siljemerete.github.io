@@ -175,7 +175,7 @@
     position: relative;
     aspect-ratio: 1 / 1;
     border-radius: 4px;
-    border: 1px solid var(--border);
+    border: 3px double var(--border);
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -216,12 +216,13 @@
 
   .door.opened {
     background: var(--paper-deep);
+    border-color: var(--rose-soft);
     color: var(--rose-deep);
   }
 
   .door.locked {
     background: #e7ddc4;
-    border-color: var(--border);
+    border-color: #d8c79e;
     color: #a1937a;
     cursor: not-allowed;
   }
