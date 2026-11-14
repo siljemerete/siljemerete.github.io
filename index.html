@@ -1172,8 +1172,36 @@
 
   .brand-name span { color: var(--blue); font-style: italic; font-weight: 400; }
 
+  /* Logo over bildet */
+  .logo-row {
+    padding-top: 1.5rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .page-logo {
+    display: block;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(22, 40, 58, 0.15);
+  }
+
+  /* Mobil/nettbrett: teksten i himmelen, Silje Merete synlig under */
   .hero {
-    padding: 3rem 0 4.5rem;
+    display: block;
+    min-height: 0;
+    padding: 2.25rem 0 0;
+    background-color: rgb(60, 126, 210);
+    background-image:
+      linear-gradient(180deg, rgba(15, 28, 45, 0.42) 0%, rgba(15, 28, 45, 0.28) 50%, rgba(15, 28, 45, 0) 72%),
+      url('images/hero-havet.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%, 140% auto;
+    background-position: center, left 75% bottom -46vw;
+  }
+
+  .hero-spacer {
+    height: 82vw;
   }
 
   .hero-content {
@@ -1183,13 +1211,24 @@
 
   .hero h1 { max-width: 18ch; }
 
-  .page-logo {
-    display: block;
-    width: 84px;
-    height: 84px;
-    margin: 0 0 1.25rem;
-    border-radius: 50%;
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6), 0 2px 10px rgba(10, 22, 36, 0.3);
+  /* PC: teksten til venstre, Silje Merete til høyre */
+  @media (min-width: 900px) {
+    .hero {
+      display: flex;
+      align-items: center;
+      min-height: 66vw;
+      max-height: none;
+      padding: 3rem 0 4.5rem;
+      background-image:
+        linear-gradient(90deg, rgba(15, 28, 45, 0.55) 0%, rgba(15, 28, 45, 0.3) 45%, rgba(15, 28, 45, 0) 62%),
+        url('images/hero-havet.jpg');
+      background-size: 100% 100%, 120% auto;
+      background-position: center, left 0 top -43vw;
+    }
+
+    .hero-content { width: 100%; }
+    .hero-content > *, .hero h1 { max-width: 440px; }
+    .hero-spacer { display: none; }
   }
 
   .hero .kicker {
@@ -1318,10 +1357,13 @@
   </div>
 </header>
 
+<div class="wrap logo-row">
+    <img class="page-logo" src="images/logo-sm-v3.png" width="84" height="84" alt="Silje Merete Helseveileder">
+</div>
+
 <section class="hero">
   <div class="hero-shine" aria-hidden="true"></div>
   <div class="wrap hero-content">
-    <img class="page-logo" src="images/logo-sm-v3.png" width="84" height="84" alt="Silje Merete Helseveileder">
     <p class="kicker">Personlig helseveiledning</p>
     <h1>Små skritt. Bedre hverdag. <em>Hele deg</em> i fokus.</h1>
     <ul class="chips">
@@ -1331,6 +1373,7 @@
     <a class="cta-button hero-cta" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post <span aria-hidden="true">→</span></a>
     <p class="hero-note">20 år med å se mennesker gjennom endring. Nå er blikket mitt rettet mot hele deg.</p>
   </div>
+  <div class="hero-spacer" aria-hidden="true"></div>
   <div class="hero-wave" aria-hidden="true">
     <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <path style="fill:var(--accent-soft)" opacity="0.7" d="M0,45 C240,95 480,5 720,35 C960,65 1200,15 1440,55 L1440,100 L0,100 Z"></path>
