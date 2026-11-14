@@ -444,6 +444,27 @@
     .offer-content { flex-direction: column; gap: 0.5rem; }
   }
 
+  section.card-section.offer-banner.offer-calm {
+    background: #fbf8f3;
+    border: 1px solid #e6dccd;
+    box-shadow: none;
+  }
+
+  .offer-calm .offer-text h2 { color: var(--accent-dark); }
+  .offer-calm .offer-text p { color: var(--muted); }
+
+  .offer-banner.offer-calm .cta-button {
+    background: transparent;
+    color: var(--accent-dark);
+    border: 1.5px solid var(--accent-dark);
+  }
+
+  .offer-banner.offer-calm .cta-button:hover {
+    background: var(--accent-dark);
+    color: #fff;
+    border-color: var(--accent-dark);
+  }
+
   section.card-section.offer-banner.offer-12 {
     background: var(--accent-soft);
     border: 2px solid var(--accent);
@@ -1611,7 +1632,7 @@
     <a class="cta-button" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post</a>
   </section>
 
-  <section id="gratis-samtale" class="card-section offer-banner">
+  <section id="gratis-samtale" class="card-section offer-banner offer-calm">
     <div class="offer-content">
       <span class="offer-chip">Gratis</span>
       <div class="offer-text">
