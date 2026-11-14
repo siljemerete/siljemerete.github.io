@@ -14,12 +14,12 @@
 <meta name="twitter:title" content="Silje Merete SMART Helseveiledning">
 <meta name="twitter:description" content="Personlig helseveiledning for privatpersoner og bedrifter, med fokus på søvn, stress, kosthold og fysisk aktivitet.">
 <meta name="twitter:image" content="https://siljemerete.github.io/images/apple-touch-icon-sm-v3.png">
-<meta name="theme-color" content="#1f3c5c">
+<meta name="theme-color" content="#f7f9fc">
 <link rel="icon" href="images/favicon-sm-v3-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="images/apple-touch-icon-sm-v3.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=EB+Garamond:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f4f8fb;
@@ -1138,6 +1138,173 @@
     .nav-wrap { justify-content: center; text-align: center; }
     .hero h1 { font-size: 1.6rem; }
   }
+  /* ---- Rolig, lys stil med serif-overskrifter (som 12-ukers-siden) ---- */
+  :root {
+    --bg: #f7f9fc;
+    --ink: #111827;
+    --muted: #5b6575;
+    --blue: #1f5fd1;
+    --border: #e4e8ef;
+  }
+
+  body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  h1, h2, h3:not(.resource-subhead), .quote-card blockquote {
+    font-family: "Newsreader", Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  .site-header {
+    background: rgba(247, 249, 252, 0.92);
+  }
+
+  .brand-logo { display: none; }
+
+  .brand {
+    font-family: "Newsreader", Georgia, serif;
+    font-weight: 500;
+    font-size: 1.15rem;
+    color: var(--ink);
+  }
+
+  .brand-name span { color: var(--blue); font-style: italic; font-weight: 400; }
+
+  .hero {
+    display: block;
+    min-height: 0;
+    background: var(--bg);
+    color: var(--ink);
+    padding: 2.5rem 0 1rem;
+    overflow: visible;
+  }
+
+  .hero-content {
+    max-width: 860px;
+    text-align: left;
+  }
+
+  .hero h1 { max-width: 18ch; }
+
+  .page-logo {
+    display: block;
+    width: 84px;
+    height: 84px;
+    margin: 0 0 1.25rem;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(22, 40, 58, 0.15);
+  }
+
+  .hero .kicker {
+    margin: 0 0 0.75rem;
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    font-size: 0.78rem;
+  }
+
+  .hero h1 {
+    margin: 0 0 1.25rem;
+    color: var(--ink);
+    text-shadow: none;
+    font-size: 2.9rem;
+    line-height: 1.08;
+  }
+
+  .hero h1 em {
+    color: var(--blue);
+    font-style: italic;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0 0 1.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .chips li {
+    background: #eceff4;
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  .cta-button {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .cta-button:hover {
+    background: var(--blue);
+    border-color: var(--blue);
+  }
+
+  .hero .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1rem;
+    padding: 0.85rem 1.6rem;
+  }
+
+  .hero-note {
+    margin: 0.9rem 0 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  .hero-photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: center 62%;
+    border-radius: 18px;
+    margin: 1.75rem 0 0;
+  }
+
+  .card-section {
+    border-radius: 18px;
+    border-color: var(--border);
+    box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
+  }
+
+  .card-section h2 {
+    font-size: 1.85rem;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+
+  .kicker { letter-spacing: 0.14em; }
+
+  @media (max-width: 640px) {
+    .hero-content { text-align: left; }
+    nav.site-nav {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      width: 100%;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    nav.site-nav::-webkit-scrollbar { display: none; }
+    nav.site-nav a { white-space: nowrap; }
+  }
+
+  @media (max-width: 560px) {
+    .nav-wrap { justify-content: flex-start; text-align: left; padding: 0.7rem 1.25rem; }
+    .hero { padding-top: 2rem; }
+    .hero h1 { font-size: 2.35rem; }
+    .hero .hero-cta { width: 100%; justify-content: center; }
+    .hero-photo { aspect-ratio: 4 / 5; object-position: center 70%; }
+    .card-section h2 { font-size: 1.6rem; }
+  }
 </style>
 </head>
 <body>
@@ -1158,24 +1325,17 @@
 </header>
 
 <section class="hero">
-  <div class="hero-shine" aria-hidden="true"></div>
   <div class="wrap hero-content">
-    <h1>Silje Merete SMART Helseveiledning</h1>
-    <p class="tagline">Helseveiledning for små, gjennomførbare skritt mot bedre helse og hverdag.</p>
-    <p class="value-prop">20 år med å se mennesker gjennom endring. Nå er blikket mitt rettet mot hele deg.</p>
-    <div class="hero-cta-row">
-      <a class="cta-button" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post</a>
-      <div class="stat-badge">
-        <p class="stat-number">20+</p>
-        <p class="stat-label">års erfaring</p>
-      </div>
-    </div>
-  </div>
-  <div class="hero-wave" aria-hidden="true">
-    <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path style="fill:var(--accent-soft)" opacity="0.7" d="M0,45 C240,95 480,5 720,35 C960,65 1200,15 1440,55 L1440,100 L0,100 Z"></path>
-      <path style="fill:var(--bg)" d="M0,65 C240,25 480,90 720,55 C960,20 1200,80 1440,40 L1440,100 L0,100 Z"></path>
-    </svg>
+    <img class="page-logo" src="images/logo-sm-v3.png" width="84" height="84" alt="Silje Merete Helseveileder">
+    <p class="kicker">Personlig helseveiledning</p>
+    <h1>Små skritt. Bedre hverdag. <em>Hele deg</em> i fokus.</h1>
+    <ul class="chips">
+      <li>20+ års erfaring</li>
+      <li>Digitalt · eller i Drammen</li>
+    </ul>
+    <a class="cta-button hero-cta" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post <span aria-hidden="true">→</span></a>
+    <p class="hero-note">20 år med å se mennesker gjennom endring. Nå er blikket mitt rettet mot hele deg.</p>
+    <img class="hero-photo" src="images/hero-havet.jpg" width="825" height="1100" alt="Silje Merete står på svaberget ved havet en sommerdag">
   </div>
 </section>
 
