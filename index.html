@@ -19,7 +19,7 @@
 <link rel="apple-touch-icon" href="images/apple-touch-icon-sm-v3.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=EB+Garamond:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f4f8fb;
@@ -1138,6 +1138,197 @@
     .nav-wrap { justify-content: center; text-align: center; }
     .hero h1 { font-size: 1.6rem; }
   }
+  /* ---- Rolig, lys stil med serif-overskrifter (som 12-ukers-siden) ---- */
+  :root {
+    --bg: #f7f9fc;
+    --ink: #111827;
+    --muted: #5b6575;
+    --blue: #1f5fd1;
+    --border: #e4e8ef;
+  }
+
+  body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  h1, h2, h3:not(.resource-subhead), .quote-card blockquote {
+    font-family: "Newsreader", Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  .site-header {
+    background: rgba(247, 249, 252, 0.92);
+  }
+
+  .brand-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    box-shadow: 0 1px 6px rgba(22, 40, 58, 0.15);
+  }
+
+  .brand { gap: 0.7rem; }
+
+  .brand {
+    font-family: "Newsreader", Georgia, serif;
+    font-weight: 500;
+    font-size: 1.15rem;
+    color: var(--ink);
+  }
+
+  .brand-name span { color: var(--blue); font-style: italic; font-weight: 400; }
+
+  /* Mobil/nettbrett: teksten nederst på bildet, ansikt og overkropp synlig */
+  .hero {
+    display: flex;
+    align-items: flex-end;
+    min-height: 153vw;
+    padding: 2rem 0 4.25rem;
+    background-color: #5b6470;
+    background-image:
+      linear-gradient(180deg, rgba(15, 28, 45, 0) 30%, rgba(15, 28, 45, 0.45) 55%, rgba(15, 28, 45, 0.8) 100%),
+      url('images/hero-havet.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%, 150% auto;
+    background-position: center, left 71% top -46vw;
+  }
+
+  .hero-content {
+    max-width: 860px;
+    text-align: left;
+  }
+
+  .hero h1 { max-width: 18ch; }
+
+  /* PC: teksten til venstre, Silje Merete til høyre */
+  @media (min-width: 900px) {
+    .hero {
+      display: flex;
+      align-items: center;
+      min-height: 66vw;
+      max-height: none;
+      padding: 3rem 0 4.5rem;
+      background-image:
+        linear-gradient(90deg, rgba(15, 28, 45, 0.55) 0%, rgba(15, 28, 45, 0.3) 45%, rgba(15, 28, 45, 0) 62%),
+        url('images/hero-havet.jpg');
+      background-size: 100% 100%, 120% auto;
+      background-position: center, left 0 top -43vw;
+    }
+
+    .hero-content { width: 100%; }
+    .hero-content > *, .hero h1 { max-width: 440px; }
+  }
+
+  .hero .kicker {
+    margin: 0 0 0.75rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 1px 8px rgba(10, 22, 36, 0.5);
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    font-size: 0.78rem;
+  }
+
+  .hero h1 {
+    margin: 0 0 1.25rem;
+    color: #fff;
+    text-shadow: 0 2px 16px rgba(10, 22, 36, 0.5);
+    font-size: 2.9rem;
+    line-height: 1.08;
+  }
+
+  .hero h1 em {
+    color: #cfe0ff;
+    font-style: italic;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0 0 1.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .chips li {
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(4px);
+    color: #fff;
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  .cta-button {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .cta-button:hover {
+    background: var(--blue);
+    border-color: var(--blue);
+  }
+
+  .hero .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.5rem 1.1rem;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(4px);
+  }
+
+  .hero .hero-cta:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #fff;
+  }
+
+  .hero-note {
+    margin: 0.9rem 0 0;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 1px 10px rgba(10, 22, 36, 0.5);
+  }
+
+  .card-section {
+    border-radius: 18px;
+    border-color: var(--border);
+    box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
+  }
+
+  .card-section h2 {
+    font-size: 1.85rem;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+
+  .kicker { letter-spacing: 0.14em; }
+
+  @media (max-width: 640px) {
+    .hero-content { text-align: left; }
+    nav.site-nav {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      width: 100%;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    nav.site-nav::-webkit-scrollbar { display: none; }
+    nav.site-nav a { white-space: nowrap; }
+  }
+
+  @media (max-width: 560px) {
+    .nav-wrap { justify-content: flex-start; text-align: left; padding: 0.7rem 1.25rem; }
+    .hero h1 { font-size: 2.15rem; margin-bottom: 1rem; }
+    .chips { margin-bottom: 1.1rem; }
+    .card-section h2 { font-size: 1.6rem; }
+  }
 </style>
 </head>
 <body>
@@ -1160,16 +1351,14 @@
 <section class="hero">
   <div class="hero-shine" aria-hidden="true"></div>
   <div class="wrap hero-content">
-    <h1>Silje Merete SMART Helseveiledning</h1>
-    <p class="tagline">Helseveiledning for små, gjennomførbare skritt mot bedre helse og hverdag.</p>
-    <p class="value-prop">20 år med å se mennesker gjennom endring. Nå er blikket mitt rettet mot hele deg.</p>
-    <div class="hero-cta-row">
-      <a class="cta-button" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post</a>
-      <div class="stat-badge">
-        <p class="stat-number">20+</p>
-        <p class="stat-label">års erfaring</p>
-      </div>
-    </div>
+    <p class="kicker">Personlig helseveiledning</p>
+    <h1>Små skritt. Bedre hverdag. <em>Hele deg</em> i fokus.</h1>
+    <ul class="chips">
+      <li>20+ års erfaring</li>
+      <li>Digitalt · eller i Drammen</li>
+    </ul>
+    <a class="cta-button hero-cta" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post <span aria-hidden="true">→</span></a>
+    <p class="hero-note">20 år med å se mennesker gjennom endring. Nå er blikket mitt rettet mot hele deg.</p>
   </div>
   <div class="hero-wave" aria-hidden="true">
     <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
