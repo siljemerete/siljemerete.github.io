@@ -1179,22 +1179,19 @@
 
   .brand-name span { color: var(--blue); font-style: italic; font-weight: 400; }
 
-  /* Mobil/nettbrett: teksten i himmelen, Silje Merete synlig under */
+  /* Mobil/nettbrett: teksten nederst på bildet, ansikt og overkropp synlig */
   .hero {
-    display: block;
-    min-height: 0;
-    padding: 2.25rem 0 0;
-    background-color: rgb(60, 126, 210);
+    display: flex;
+    align-items: flex-end;
+    min-height: 153vw;
+    padding: 2rem 0 4.25rem;
+    background-color: #5b6470;
     background-image:
-      linear-gradient(180deg, rgba(15, 28, 45, 0.42) 0%, rgba(15, 28, 45, 0.28) 50%, rgba(15, 28, 45, 0) 72%),
+      linear-gradient(180deg, rgba(15, 28, 45, 0) 30%, rgba(15, 28, 45, 0.45) 55%, rgba(15, 28, 45, 0.8) 100%),
       url('images/hero-havet.jpg');
     background-repeat: no-repeat;
-    background-size: 100% 100%, 140% auto;
-    background-position: center, left 75% bottom -46vw;
-  }
-
-  .hero-spacer {
-    height: 82vw;
+    background-size: 100% 100%, 150% auto;
+    background-position: center, left 71% top -46vw;
   }
 
   .hero-content {
@@ -1221,7 +1218,6 @@
 
     .hero-content { width: 100%; }
     .hero-content > *, .hero h1 { max-width: 440px; }
-    .hero-spacer { display: none; }
   }
 
   .hero .kicker {
@@ -1278,17 +1274,19 @@
   .hero .hero-cta {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
-    font-size: 1rem;
-    padding: 0.85rem 1.6rem;
-    background: #fff;
-    color: var(--accent-dark);
-    border-color: #fff;
+    gap: 0.45rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.5rem 1.1rem;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(4px);
   }
 
   .hero .hero-cta:hover {
-    background: var(--accent-soft);
-    border-color: var(--accent-soft);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #fff;
   }
 
   .hero-note {
@@ -1327,8 +1325,8 @@
 
   @media (max-width: 560px) {
     .nav-wrap { justify-content: flex-start; text-align: left; padding: 0.7rem 1.25rem; }
-    .hero h1 { font-size: 2.35rem; }
-    .hero .hero-cta { width: 100%; justify-content: center; }
+    .hero h1 { font-size: 2.15rem; margin-bottom: 1rem; }
+    .chips { margin-bottom: 1.1rem; }
     .card-section h2 { font-size: 1.6rem; }
   }
 </style>
@@ -1362,7 +1360,6 @@
     <a class="cta-button hero-cta" href="mailto:silje.merete.binder@gmail.com?subject=Henvendelse%20om%20helseveiledning">Send meg en e-post <span aria-hidden="true">→</span></a>
     <p class="hero-note">20 år med å se mennesker gjennom endring. Nå er blikket mitt rettet mot hele deg.</p>
   </div>
-  <div class="hero-spacer" aria-hidden="true"></div>
   <div class="hero-wave" aria-hidden="true">
     <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <path style="fill:var(--accent-soft)" opacity="0.7" d="M0,45 C240,95 480,5 720,35 C960,65 1200,15 1440,55 L1440,100 L0,100 Z"></path>
