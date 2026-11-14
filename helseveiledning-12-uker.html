@@ -591,7 +591,43 @@
     color: var(--blue);
   }
 
+  .hero-photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 18px;
+    margin: 1.75rem 0 0;
+  }
+
+  .meet {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin: 0.5rem 0 1rem;
+  }
+
+  .meet h2 { margin: 0 0 0.4rem; }
+
+  .meet p { margin: 0; }
+
+  .meet-photo {
+    flex: 0 0 auto;
+    width: 132px;
+    height: 132px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 2px 10px rgba(17, 24, 39, 0.12);
+  }
+
+  .inline-link {
+    color: var(--accent-dark);
+    font-weight: 600;
+  }
+
   @media (max-width: 560px) {
+    .meet { flex-direction: column; align-items: flex-start; }
     .hero h1 { font-size: 2.35rem; }
     .lead { font-size: 1.5rem; }
     .card-section h2 { font-size: 1.6rem; }
@@ -611,6 +647,7 @@
     </ul>
     <a class="cta-button" href="helsesjekk.html">Book en uforpliktende samtale <span aria-hidden="true">→</span></a>
     <p class="hero-note">Nye plasser fra februar.</p>
+    <img class="hero-photo" src="images/12uker-havet.jpg" width="1200" height="900" alt="Silje Merete sitter på en benk på svaberg og ser utover havet">
   </div>
 </section>
 
@@ -695,9 +732,16 @@
   </section>
 
   <section class="card-section abel">
-    <p class="kicker">Faglig grunnlag</p>
-    <h2>Under utdanning ved Abel</h2>
-    <p>Jeg er under utdanning som helseveileder ved Abel, som utdanner helseveiledere i Norge. Veiledningen bygger på Abels metodikk: kartlegging, samtale og motivasjon, konkrete mål og oppfølging over tid.</p>
+    <p class="kicker">Hvem du møter</p>
+    <div class="meet">
+      <img class="meet-photo" src="images/silje-merete-portrett.jpg" width="600" height="600" alt="Silje Merete smiler, utendørs ved vannet">
+      <div>
+        <h2>Hei, jeg er <em>Silje Merete</em></h2>
+        <p>Jeg er utdannet pedagog og leder, og har i over 20 år veiledet mennesker gjennom endring. Nå er jeg under utdanning som helseveileder ved Abel.</p>
+      </div>
+    </div>
+    <p>Veiledningen bygger på Abels metodikk: kartlegging, samtale og motivasjon, konkrete mål og oppfølging over tid. Jeg har også selv stått i det å endre vaner midt i livet, og vet hvordan det kjennes å stå helt i starten.</p>
+    <p><a class="inline-link" href="min-historie.html">Les min historie →</a></p>
   </section>
 
   <section class="card-section soft">
