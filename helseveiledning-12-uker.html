@@ -6,12 +6,15 @@
 <title>Helseveiledning over 12 uker | Silje Merete SMART Helseveiledning</title>
 <link rel="icon" href="images/favicon-sm-v2-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="images/apple-touch-icon-sm-v2.png">
-<meta name="description" content="Et individuelt, digitalt veiledningsforløp over 12 uker: oppstartssamtale, korte ukentlige samtaler og kontakt i Abel-appen underveis. For deg som vil skape vaner som varer.">
+<meta name="description" content="Et individuelt, digitalt veiledningsforløp over 12 uker: oppstartssamtale og korte ukentlige oppfølgingssamtaler. For deg som vil skape vaner som varer.">
 <meta property="og:title" content="Helseveiledning over 12 uker | Silje Merete SMART Helseveiledning">
 <meta property="og:description" content="12 uker. Én-til-én. Ditt liv som utgangspunkt. Et individuelt, digitalt veiledningsforløp for vaner som varer.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://siljemerete.github.io/images/apple-touch-icon-sm-v2.png">
-<meta name="theme-color" content="#1f3c5c">
+<meta name="theme-color" content="#f7f9fc">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f4f8fb;
@@ -478,6 +481,121 @@
     .cta-button { width: 100%; justify-content: center; text-align: center; }
     .fact { flex-direction: column; gap: 0.4rem; }
   }
+
+  /* ---- Rolig, lys stil med serif-overskrifter ---- */
+  :root {
+    --bg: #f7f9fc;
+    --ink: #111827;
+    --muted: #5b6575;
+    --blue: #1f5fd1;
+    --border: #e4e8ef;
+  }
+
+  body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  h1, h2, h3, .lead, .quote-card blockquote, .price-now, .fact-number {
+    font-family: "Newsreader", Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  .hero {
+    background: var(--bg);
+    color: var(--ink);
+    padding: 2.5rem 0 2.75rem;
+  }
+
+  .page-logo {
+    box-shadow: 0 2px 10px rgba(22, 40, 58, 0.15);
+  }
+
+  .hero .kicker {
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.18em;
+  }
+
+  .hero h1 {
+    color: var(--ink);
+    font-size: 2.9rem;
+    line-height: 1.08;
+  }
+
+  .hero h1 em {
+    color: var(--blue);
+    font-style: italic;
+  }
+
+  .chips li {
+    background: #eceff4;
+    border: 0;
+    color: var(--ink);
+  }
+
+  .hero .cta-button {
+    background: var(--accent-dark);
+    color: #fff;
+    border-color: var(--accent-dark);
+  }
+
+  .hero .cta-button:hover {
+    background: var(--blue);
+    border-color: var(--blue);
+  }
+
+  .hero-note {
+    color: var(--muted);
+  }
+
+  .lead {
+    font-size: 1.7rem;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-top: 1rem;
+  }
+
+  .card-section {
+    border-radius: 18px;
+    border-color: var(--border);
+    box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
+  }
+
+  .card-section h2 {
+    font-size: 1.85rem;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+
+  .invest h2 { color: #fff; }
+
+  .timeline h3 {
+    font-size: 1.3rem;
+    color: var(--ink);
+  }
+
+  .kicker {
+    letter-spacing: 0.14em;
+  }
+
+  .price-now {
+    font-weight: 500;
+  }
+
+  .fact-number {
+    font-weight: 500;
+  }
+
+  .card-section.abel h2 em {
+    color: var(--blue);
+  }
+
+  @media (max-width: 560px) {
+    .hero h1 { font-size: 2.35rem; }
+    .lead { font-size: 1.5rem; }
+    .card-section h2 { font-size: 1.6rem; }
+  }
 </style>
 </head>
 <body>
@@ -490,7 +608,6 @@
     <ul class="chips">
       <li>12 uker · digitalt</li>
       <li>Ukentlig oppfølging</li>
-      <li>Kontakt i Abel-appen</li>
     </ul>
     <a class="cta-button" href="helsesjekk.html">Book en uforpliktende samtale <span aria-hidden="true">→</span></a>
     <p class="hero-note">Nye plasser fra februar.</p>
@@ -537,14 +654,6 @@
         <span class="duration">ca. 15 minutter</span>
         <p>Første oppfølgingssamtale tar ca. 30 minutter. Deretter har vi faste, korte samtaler der vi ser på hvordan det har gått siden sist, hva som fungerte og hva som var vanskelig, og justerer kursen. Korte samtaler gjør det lett å holde rytmen, også i travle uker.</p>
       </li>
-      <li>
-        <span class="step-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg>
-        </span>
-        <p class="step-when">Underveis</p>
-        <h3>Kontakt i Abel-appen ved behov</h3>
-        <p>Mellom samtalene kan du ta kontakt med meg i Abel-appen når du trenger det, enten du har et spørsmål, står fast, vil dele en seier eller trenger en liten påminnelse. Du står ikke alene mellom samtalene.</p>
-      </li>
     </ol>
   </section>
 
@@ -556,7 +665,6 @@
       <li>Kartlegging av hverdagen din, blant annet med livsstilshjulet</li>
       <li>Egne, realistiske mål for perioden</li>
       <li>Ukentlige digitale oppfølgingssamtaler: den første på ca. 30 minutter, deretter ca. 15 minutter</li>
-      <li>Kontakt i Abel-appen mellom samtalene ved behov</li>
       <li>Tilgang til verktøy og skjema som passer det du jobber med</li>
       <li>Løpende justering etter dine behov og din livssituasjon</li>
     </ul>
@@ -584,6 +692,12 @@
     <a class="cta-button" href="helsesjekk.html">Book en uforpliktende samtale <span aria-hidden="true">→</span></a>
     <p class="small-note">Samtalen er gratis og gir oss mulighet til å finne ut om vi ønsker å gå videre sammen.</p>
     <p class="small-note">Eller send en e-post direkte til <a class="mail-link" href="mailto:silje.merete.binder@gmail.com?subject=Uforpliktende%20samtale%20om%2012%20ukers%20helseveiledning">silje.merete.binder@gmail.com</a></p>
+  </section>
+
+  <section class="card-section abel">
+    <p class="kicker">Faglig grunnlag</p>
+    <h2>Under utdanning ved Abel</h2>
+    <p>Jeg er under utdanning som helseveileder ved Abel, som utdanner helseveiledere i Norge. Veiledningen bygger på Abels metodikk: kartlegging, samtale og motivasjon, konkrete mål og oppfølging over tid.</p>
   </section>
 
   <section class="card-section soft">
