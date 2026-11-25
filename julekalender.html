@@ -313,6 +313,32 @@
     .modal-overlay, .modal { transition: none !important; }
   }
 
+  .confetti-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 60;
+    overflow: hidden;
+  }
+
+  .confetti-piece {
+    position: absolute;
+    top: -10vh;
+    font-size: 1.4rem;
+    opacity: 0;
+    animation-name: confetti-fall;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+    will-change: transform, opacity;
+  }
+
+  @keyframes confetti-fall {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+    8% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translate(var(--drift), 120vh) rotate(var(--spin)); opacity: 0; }
+  }
+
   .modal .modal-close {
     position: absolute;
     top: 0.75rem;
@@ -534,6 +560,8 @@
   <div class="modal" id="modal"></div>
 </div>
 
+<div class="confetti-layer" id="confetti-layer" aria-hidden="true"></div>
+
 <footer class="closing">
   Små skritt. Dine mål, ditt tempo.<br>
   <strong>God adventstid, og god jul!</strong>
@@ -681,6 +709,7 @@
       btn.addEventListener("click", function () {
         lastDoorEl = btn;
         if (unlocked) {
+          spawnConfetti();
           if (isBonus) openBonusModal(); else openModal(door);
         } else {
           openLockedModal(door, t);
@@ -747,6 +776,31 @@
       "<h2>Luke " + door.n + " er låst</h2>" +
       "<p class=\"desc\">" + message + "</p>";
     showOverlay();
+  }
+
+  var CONFETTI_EMOJI = ["❤️", "🎁", "✨", "🌟", "🎄"];
+  var prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function spawnConfetti() {
+    if (prefersReducedMotion) return;
+    var layer = document.getElementById("confetti-layer");
+    var count = 18;
+    for (var i = 0; i < count; i++) {
+      var piece = document.createElement("span");
+      piece.className = "confetti-piece";
+      piece.textContent = CONFETTI_EMOJI[Math.floor(Math.random() * CONFETTI_EMOJI.length)];
+      piece.style.left = (Math.random() * 100) + "vw";
+      piece.style.fontSize = (1 + Math.random() * 0.9) + "rem";
+      piece.style.setProperty("--drift", (Math.random() * 140 - 70) + "px");
+      piece.style.setProperty("--spin", (Math.random() * 360 - 180) + "deg");
+      var duration = 2.4 + Math.random() * 1.6;
+      piece.style.animationDuration = duration + "s";
+      piece.style.animationDelay = (Math.random() * 0.4) + "s";
+      layer.appendChild(piece);
+      (function (el, totalDelay) {
+        setTimeout(function () { el.remove(); }, totalDelay);
+      })(piece, (duration + 0.4) * 1000 + 100);
+    }
   }
 
   function flipTransform(fromRect, toRect) {
