@@ -277,7 +277,7 @@
   }
 
   .modal-overlay {
-    display: none;
+    display: flex;
     position: fixed;
     inset: 0;
     background: rgba(43, 35, 24, 0.55);
@@ -285,10 +285,14 @@
     justify-content: center;
     padding: 1.25rem;
     z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
   }
 
   .modal-overlay.show {
-    display: flex;
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .modal {
@@ -301,6 +305,12 @@
     box-shadow: 0 10px 30px rgba(0,0,0,0.25);
     text-align: center;
     position: relative;
+    max-height: calc(100dvh - 2.5rem);
+    overflow-y: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .modal-overlay, .modal { transition: none !important; }
   }
 
   .modal .modal-close {
@@ -642,6 +652,7 @@
   }
 
   var BONUS_DOOR = { n: 25 };
+  var lastDoorEl = null;
 
   function renderGrid() {
     var t = todayInfo();
@@ -668,6 +679,7 @@
 
       btn.setAttribute("aria-label", isBonus ? "Bonusluke 25: Din affirmasjon for 2027" : "Luke " + door.n);
       btn.addEventListener("click", function () {
+        lastDoorEl = btn;
         if (unlocked) {
           if (isBonus) openBonusModal(); else openModal(door);
         } else {
@@ -737,14 +749,52 @@
     showOverlay();
   }
 
+  function flipTransform(fromRect, toRect) {
+    var scaleX = fromRect.width / toRect.width;
+    var scaleY = fromRect.height / toRect.height;
+    var dx = (fromRect.left + fromRect.width / 2) - (toRect.left + toRect.width / 2);
+    var dy = (fromRect.top + fromRect.height / 2) - (toRect.top + toRect.height / 2);
+    return "translate(" + dx + "px, " + dy + "px) scale(" + scaleX + ", " + scaleY + ")";
+  }
+
   function showOverlay() {
     var overlay = document.getElementById("modal-overlay");
+    var modal = document.getElementById("modal");
     overlay.className = "modal-overlay show";
     document.getElementById("modal-close").addEventListener("click", closeModal);
+
+    if (lastDoorEl) {
+      var doorRect = lastDoorEl.getBoundingClientRect();
+      var modalRect = modal.getBoundingClientRect();
+      modal.style.transition = "none";
+      modal.style.transform = flipTransform(doorRect, modalRect);
+      modal.style.opacity = "0.5";
+      modal.offsetHeight; // force reflow
+      modal.style.transition = "transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease";
+      modal.style.transform = "none";
+      modal.style.opacity = "1";
+    }
   }
 
   function closeModal() {
-    document.getElementById("modal-overlay").className = "modal-overlay";
+    var overlay = document.getElementById("modal-overlay");
+    var modal = document.getElementById("modal");
+
+    if (lastDoorEl) {
+      var doorRect = lastDoorEl.getBoundingClientRect();
+      var modalRect = modal.getBoundingClientRect();
+      overlay.classList.remove("show");
+      modal.style.transition = "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease";
+      modal.style.transform = flipTransform(doorRect, modalRect);
+      modal.style.opacity = "0";
+      setTimeout(function () {
+        modal.style.transition = "none";
+        modal.style.transform = "none";
+        modal.style.opacity = "1";
+      }, 300);
+    } else {
+      overlay.classList.remove("show");
+    }
   }
 
   document.getElementById("modal-overlay").addEventListener("click", function (e) {
