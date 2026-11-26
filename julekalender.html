@@ -796,11 +796,11 @@
     overtone.frequency.value = freq * 2.01;
 
     gainMain.gain.setValueAtTime(0, startTime);
-    gainMain.gain.linearRampToValueAtTime(0.22, startTime + 0.012);
+    gainMain.gain.linearRampToValueAtTime(0.15, startTime + 0.05);
     gainMain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
 
     gainOvertone.gain.setValueAtTime(0, startTime);
-    gainOvertone.gain.linearRampToValueAtTime(0.07, startTime + 0.012);
+    gainOvertone.gain.linearRampToValueAtTime(0.035, startTime + 0.05);
     gainOvertone.gain.exponentialRampToValueAtTime(0.0001, startTime + duration * 0.6);
 
     fundamental.connect(gainMain).connect(ctx.destination);
@@ -821,9 +821,9 @@
       }
       if (chimeAudioCtx.state === "suspended") chimeAudioCtx.resume();
       var now = chimeAudioCtx.currentTime;
-      var notes = [783.99, 987.77, 1174.66]; // G5, B5, D6 - lys bjelleklang
+      var notes = [392.00, 493.88, 587.33]; // G4, B4, D5 - myk, rolig bjelleklang
       notes.forEach(function (freq, i) {
-        playBellNote(chimeAudioCtx, freq, now + i * 0.1, 0.5);
+        playBellNote(chimeAudioCtx, freq, now + i * 0.22, 0.9);
       });
     } catch (e) { /* lyd er en bonus, ikke kritisk */ }
   }
