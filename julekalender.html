@@ -710,6 +710,7 @@
         lastDoorEl = btn;
         if (unlocked) {
           spawnConfetti();
+          playChime();
           if (isBonus) openBonusModal(); else openModal(door);
         } else {
           openLockedModal(door, t);
@@ -780,6 +781,52 @@
 
   var CONFETTI_EMOJI = ["❤️", "🎁", "✨", "🌟", "🎄"];
   var prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var chimeAudioCtx = null;
+
+  function playBellNote(ctx, freq, startTime, duration) {
+    var fundamental = ctx.createOscillator();
+    var overtone = ctx.createOscillator();
+    var gainMain = ctx.createGain();
+    var gainOvertone = ctx.createGain();
+
+    fundamental.type = "sine";
+    fundamental.frequency.value = freq;
+    overtone.type = "sine";
+    overtone.frequency.value = freq * 2.01;
+
+    gainMain.gain.setValueAtTime(0, startTime);
+    gainMain.gain.linearRampToValueAtTime(0.22, startTime + 0.012);
+    gainMain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+    gainOvertone.gain.setValueAtTime(0, startTime);
+    gainOvertone.gain.linearRampToValueAtTime(0.07, startTime + 0.012);
+    gainOvertone.gain.exponentialRampToValueAtTime(0.0001, startTime + duration * 0.6);
+
+    fundamental.connect(gainMain).connect(ctx.destination);
+    overtone.connect(gainOvertone).connect(ctx.destination);
+
+    fundamental.start(startTime);
+    fundamental.stop(startTime + duration + 0.05);
+    overtone.start(startTime);
+    overtone.stop(startTime + duration + 0.05);
+  }
+
+  function playChime() {
+    try {
+      if (!chimeAudioCtx) {
+        var AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return;
+        chimeAudioCtx = new AC();
+      }
+      if (chimeAudioCtx.state === "suspended") chimeAudioCtx.resume();
+      var now = chimeAudioCtx.currentTime;
+      var notes = [783.99, 987.77, 1174.66]; // G5, B5, D6 - lys bjelleklang
+      notes.forEach(function (freq, i) {
+        playBellNote(chimeAudioCtx, freq, now + i * 0.1, 0.5);
+      });
+    } catch (e) { /* lyd er en bonus, ikke kritisk */ }
+  }
 
   function spawnConfetti() {
     if (prefersReducedMotion) return;
